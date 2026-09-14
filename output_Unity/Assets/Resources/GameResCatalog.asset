@@ -1,0 +1,2440 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db8db5dd4be44147b8ee07a1f438c59, type: 3}
+  m_Name: GameResCatalog
+  m_EditorClassIdentifier: 
+  entries:
+  - key: res/local/boxreward/anim/levelboxreward_close
+    asset: {fileID: 7400000, guid: 7c943c36c64e03c4db3822708a58ef8a, type: 2}
+  - key: res/local/boxreward/anim/levelboxreward_idle
+    asset: {fileID: 7400000, guid: 12fb389cfc27fb847ac35bdc5261cc72, type: 2}
+  - key: res/local/boxreward/anim/levelboxreward_open
+    asset: {fileID: 7400000, guid: c9fc118a6b1f382468d6fa013b5449c3, type: 2}
+  - key: res/local/boxreward/levelboxreward
+    asset: {fileID: 1709254077376921, guid: a789b3462f1e05c449a679f75d6c5dec, type: 3}
+  - key: res/local/boxreward/rewarditem
+    asset: {fileID: 1709254077376921, guid: d57c0a7cee9b45246a0a95b766871896, type: 3}
+  - key: res/local/boxreward/sprite/box
+    asset: {fileID: 21300000, guid: 8abdde1359468814e8c4100061c3d070, type: 2}
+  - key: res/local/boxreward/sprite/box#box
+    asset: {fileID: 21300000, guid: f225f795b73e0e44cbc3e61791825be0, type: 3}
+  - key: res/local/boxreward/sprite/box_1
+    asset: {fileID: 21300000, guid: dcb47251a70cfab44a158e57f1a17422, type: 2}
+  - key: res/local/boxreward/sprite/box_1#box_1
+    asset: {fileID: 21300000, guid: 2e58e3c971d11a3489cc7928c29ce80a, type: 3}
+  - key: res/local/boxreward/sprite/box_1f
+    asset: {fileID: 21300000, guid: d9f23b92ce2b64342857983680f53647, type: 2}
+  - key: res/local/boxreward/sprite/box_1f#box_1f
+    asset: {fileID: 21300000, guid: 71f8e2b7daaed944b957427dd0f2eee5, type: 3}
+  - key: res/local/boxreward/sprite/box_2
+    asset: {fileID: 21300000, guid: bec766faa81364d4eb50cba031ebf4da, type: 2}
+  - key: res/local/boxreward/sprite/box_2#box_2
+    asset: {fileID: 21300000, guid: 550694406ec333a478a9ddc0b9821121, type: 3}
+  - key: res/local/boxreward/sprite/box_2_maskadd
+    asset: {fileID: 21300000, guid: 5cc7802e9cf47844389a82eda49dd9a2, type: 2}
+  - key: res/local/boxreward/sprite/box_2_maskadd#box_2_maskadd
+    asset: {fileID: 21300000, guid: 369516f26a2ae354a9163560be4a7c32, type: 3}
+  - key: res/local/boxreward/sprite/box_3
+    asset: {fileID: 21300000, guid: da7d78c1c624d03418d38f1c9d10bc1b, type: 2}
+  - key: res/local/boxreward/sprite/box_3#box_3
+    asset: {fileID: 21300000, guid: 5d4730d71f860e64d9a251840662cd58, type: 3}
+  - key: res/local/boxreward/sprite/box_4
+    asset: {fileID: 21300000, guid: 6a373d1cd6270264fa6ae9dabc74af55, type: 2}
+  - key: res/local/boxreward/sprite/box_4#box_4
+    asset: {fileID: 21300000, guid: a47999226fd7b794cb35293ac22de3ca, type: 3}
+  - key: res/local/boxreward/sprite/coin
+    asset: {fileID: 21300000, guid: bd83c1a3eec74a04e9f15e67aa8a65e6, type: 2}
+  - key: res/local/boxreward/sprite/coin#coin
+    asset: {fileID: 21300000, guid: abf8bbdab5fa88f4c8f30f6471b1cf4e, type: 3}
+  - key: res/local/boxreward/sprite/magic
+    asset: {fileID: 21300000, guid: 6a34f46e77b15144999634df1289c645, type: 2}
+  - key: res/local/boxreward/sprite/magic#magic
+    asset: {fileID: 21300000, guid: c27fe8e3463d9fc47b6975c0efce6d1a, type: 3}
+  - key: res/local/boxreward/sprite/shuffle
+    asset: {fileID: 21300000, guid: a6a6c789d50f0d449808c29f314db499, type: 2}
+  - key: res/local/boxreward/sprite/shuffle#shuffle
+    asset: {fileID: 21300000, guid: a247e63e8a64a1c44bde63be5027306c, type: 3}
+  - key: res/local/boxreward/sprite/undo
+    asset: {fileID: 21300000, guid: 626fd4ca3fbbc4149a988650f5e47dd5, type: 2}
+  - key: res/local/boxreward/sprite/undo#undo
+    asset: {fileID: 21300000, guid: 98a3d8360f852334c98fd5988ab4d0d3, type: 3}
+  - key: res/local/common/onclickani/biguistuffdown
+    asset: {fileID: 7400000, guid: 97c785c159506bd4b8366cf4ba694af1, type: 2}
+  - key: res/local/common/onclickani/biguistuffdown_close
+    asset: {fileID: 7400000, guid: 6f2fb6a8f3c77ea4ba360d1688b29377, type: 2}
+  - key: res/local/common/onclickani/biguistuffdown_home
+    asset: {fileID: 7400000, guid: a29eed8e72e0ea04e82aaa7a62715d8a, type: 2}
+  - key: res/local/common/onclickani/biguistuffdown_setting
+    asset: {fileID: 7400000, guid: 1722fbaad74dd6949b9ec15e740a39b3, type: 2}
+  - key: res/local/common/onclickani/biguistuffup
+    asset: {fileID: 7400000, guid: cdb8007b487eb734eb70fb2e6a1ad637, type: 2}
+  - key: res/local/common/onclickani/biguistuffup_close
+    asset: {fileID: 7400000, guid: e56de4fe2625918418bfde6da2923f07, type: 2}
+  - key: res/local/common/onclickani/biguistuffup_home
+    asset: {fileID: 7400000, guid: b7b39ac900b742443bc044b8d101cbaa, type: 2}
+  - key: res/local/common/onclickani/biguistuffup_setting
+    asset: {fileID: 7400000, guid: 57ce864eece985743b36e967370b1930, type: 2}
+  - key: res/local/common/panelani/popclose
+    asset: {fileID: 7400000, guid: f35ed7e34b87f5942a302dea30b9c8ae, type: 2}
+  - key: res/local/common/panelani/popopen
+    asset: {fileID: 7400000, guid: 684310b6cd8bbce40b75b369078ce556, type: 2}
+  - key: res/local/common/panelani/settingpopclose
+    asset: {fileID: 7400000, guid: faa45506ec7c601439d1e0c6cd3e0319, type: 2}
+  - key: res/local/common/panelani/settingpopopen
+    asset: {fileID: 7400000, guid: 2151880883e41564b87ca73c58e3c6fb, type: 2}
+  - key: res/local/common/prefab/commoncoinbtn
+    asset: {fileID: 1709254077376921, guid: e7136eaa09b0462418a2d38b19a8178c, type: 3}
+  - key: res/local/common/sprite/btn/ad_icon
+    asset: {fileID: 21300000, guid: 29a11854024e5b145bf375c6845c80cb, type: 2}
+  - key: res/local/common/sprite/btn/ad_icon#ad_icon
+    asset: {fileID: 21300000, guid: 76c88213de5273a41ad2e43f0d7d4dd3, type: 3}
+  - key: res/local/common/sprite/btn/ad_icon2
+    asset: {fileID: 21300000, guid: 64d1101679f4ee844ad2fe291942bea6, type: 2}
+  - key: res/local/common/sprite/btn/ad_icon2#ad_icon2
+    asset: {fileID: 21300000, guid: 749f121b8ec4cfd478f88808dfc6f972, type: 3}
+  - key: res/local/common/sprite/btn/ad_icongray
+    asset: {fileID: 21300000, guid: edb7caad8bca06b45afcdfb8c8a7eadc, type: 2}
+  - key: res/local/common/sprite/btn/ad_icongray#ad_icongray
+    asset: {fileID: 21300000, guid: b83bfc060379a0640bc9b0a7b21864dc, type: 3}
+  - key: res/local/common/sprite/btn/btn_bg
+    asset: {fileID: 21300000, guid: 6686487c15290af4da4f2307d0ab748b, type: 2}
+  - key: res/local/common/sprite/btn/btn_bg#btn_bg
+    asset: {fileID: 21300000, guid: 3e80be5352d708c4597244822b8c0fcb, type: 3}
+  - key: res/local/common/sprite/btn/btn_bggray
+    asset: {fileID: 21300000, guid: bc6464b17abb06140ac814baceefa4a5, type: 2}
+  - key: res/local/common/sprite/btn/btn_bggray#btn_bggray
+    asset: {fileID: 21300000, guid: c122b38191fb39747b0ebf77903d6535, type: 3}
+  - key: res/local/common/sprite/btn/btn_gray
+    asset: {fileID: 21300000, guid: 0d7f68ce6a418494892960037fbd4c62, type: 2}
+  - key: res/local/common/sprite/btn/btn_gray#btn_gray
+    asset: {fileID: 21300000, guid: 93e73263868f133478c02c1fae630625, type: 3}
+  - key: res/local/common/sprite/btn/btn_hard
+    asset: {fileID: 21300000, guid: bd81493ab244e6a4e9e920bc81641d88, type: 2}
+  - key: res/local/common/sprite/btn/btn_hard#btn_hard
+    asset: {fileID: 21300000, guid: 7afe40857d7ee0c488f57b31a43390eb, type: 3}
+  - key: res/local/common/sprite/btn/btn_normal
+    asset: {fileID: 21300000, guid: 9141073668d650a4786a5cecb0c27e72, type: 2}
+  - key: res/local/common/sprite/btn/btn_normal#btn_normal
+    asset: {fileID: 21300000, guid: 83600cd986dbbc740997a3a293a5c1fe, type: 3}
+  - key: res/local/common/sprite/btn/btn_orange
+    asset: {fileID: 21300000, guid: f4afa9f2c29e4504eb27ddae17e22080, type: 2}
+  - key: res/local/common/sprite/btn/btn_orange#btn_orange
+    asset: {fileID: 21300000, guid: 44f44f4866cff13478f97a036dd75788, type: 3}
+  - key: res/local/common/sprite/btn/btn_superhard
+    asset: {fileID: 21300000, guid: 10711051c60405346925ba1f869172b6, type: 2}
+  - key: res/local/common/sprite/btn/btn_superhard#btn_superhard
+    asset: {fileID: 21300000, guid: 7b2622b304cd83e448807a4df6e90737, type: 3}
+  - key: res/local/common/sprite/btn/midbtn_gray
+    asset: {fileID: 21300000, guid: 09ccde736f5e5a04994df7f52d44b143, type: 2}
+  - key: res/local/common/sprite/btn/midbtn_gray#midbtn_gray
+    asset: {fileID: 21300000, guid: 96b8356648314304792af182bb6e967d, type: 3}
+  - key: res/local/common/sprite/btn/midbtn_green
+    asset: {fileID: 21300000, guid: b0840c35316e2d14bb63fa0e6b8b06d4, type: 2}
+  - key: res/local/common/sprite/btn/midbtn_green#midbtn_green
+    asset: {fileID: 21300000, guid: 71389e9a6f48daa4c9fe7dfd38d15186, type: 3}
+  - key: res/local/common/sprite/btn/midbtn_red
+    asset: {fileID: 21300000, guid: 5be83a96827294245a43bdc0ac19532a, type: 2}
+  - key: res/local/common/sprite/btn/midbtn_red#midbtn_red
+    asset: {fileID: 21300000, guid: 35d6bcac297cec74fac127cd41a60807, type: 3}
+  - key: res/local/common/sprite/btn/settingbtn_blue
+    asset: {fileID: 21300000, guid: ecb00083a189aa44187232ebd207fcab, type: 2}
+  - key: res/local/common/sprite/btn/settingbtn_blue#settingbtn_blue
+    asset: {fileID: 21300000, guid: 7e336ad4a47d95349ab7c7b79e870fde, type: 3}
+  - key: res/local/common/sprite/btn/settingbtn_green
+    asset: {fileID: 21300000, guid: 7bfbc66c32590ab4e9bffd72738b2b86, type: 2}
+  - key: res/local/common/sprite/btn/settingbtn_green#settingbtn_green
+    asset: {fileID: 21300000, guid: a302024b0617fbc4b9fee409d2e228e9, type: 3}
+  - key: res/local/common/sprite/btn/settingbtn_purple
+    asset: {fileID: 21300000, guid: 64fc43c41bc3539438e23deff3c82fb5, type: 2}
+  - key: res/local/common/sprite/btn/settingbtn_purple#settingbtn_purple
+    asset: {fileID: 21300000, guid: d8be6fb528736aa4383efe2caf64c7b2, type: 3}
+  - key: res/local/common/sprite/coin/bigcoin
+    asset: {fileID: 21300000, guid: 8bcd1414763b0d9418dd3cc3b0b2e0e2, type: 2}
+  - key: res/local/common/sprite/coin/bigcoin#bigcoin
+    asset: {fileID: 21300000, guid: cbf3d3a2a77a23f41aba426ebbf5e9cc, type: 3}
+  - key: res/local/common/sprite/coin/bigcoingray
+    asset: {fileID: 21300000, guid: 3ee1827e4ee2d83498562930bc02b881, type: 2}
+  - key: res/local/common/sprite/coin/bigcoingray#bigcoingray
+    asset: {fileID: 21300000, guid: b607e2192a07660438bd4b819dd32f9d, type: 3}
+  - key: res/local/common/sprite/coin/coin
+    asset: {fileID: 21300000, guid: 5c064004e5b1d8e44bf5d5a96733e237, type: 2}
+  - key: res/local/common/sprite/coin/coin#coin
+    asset: {fileID: 21300000, guid: a092b4d2cd2df594d93cae73ad8db3ca, type: 3}
+  - key: res/local/common/sprite/coin/coinadd
+    asset: {fileID: 21300000, guid: 70f0ff675108b294f970794f400ada14, type: 2}
+  - key: res/local/common/sprite/coin/coinadd#coinadd
+    asset: {fileID: 21300000, guid: 8375899665a4abc4cbd40240b4824ec4, type: 3}
+  - key: res/local/common/sprite/coin/coinbg
+    asset: {fileID: 21300000, guid: 698db22b9a02c364b8d5e0bfb449f860, type: 2}
+  - key: res/local/common/sprite/coin/coinbg#coinbg
+    asset: {fileID: 21300000, guid: 8402645ffa3eb4f4582868e072c90244, type: 3}
+  - key: res/local/common/sprite/coin/commoncoinbtn
+    asset: {fileID: 21300000, guid: bb407bec4af2d9e49a34099e18868349, type: 2}
+  - key: res/local/common/sprite/coin/commoncoinbtn#commoncoinbtn
+    asset: {fileID: 21300000, guid: fd51d3f2735ac46439477370e836f7c1, type: 3}
+  - key: res/local/common/sprite/filler
+    asset: {fileID: 21300000, guid: 842ddba0b5bf92e488b499278758fdbb, type: 2}
+  - key: res/local/common/sprite/filler#filler
+    asset: {fileID: 21300000, guid: 7ad3bb0316fe74a4e82adbac8f04ca09, type: 3}
+  - key: res/local/common/sprite/hardicon
+    asset: {fileID: 21300000, guid: 2f7b9d27c63d97a4aa646ac62bdd95f3, type: 2}
+  - key: res/local/common/sprite/hardicon#hardicon
+    asset: {fileID: 21300000, guid: b90f8399f3409d04bbc73f79de4d7b71, type: 3}
+  - key: res/local/common/sprite/pop/popbg
+    asset: {fileID: 21300000, guid: e81dff5b5e57d9d4fbd384eaba562e00, type: 2}
+  - key: res/local/common/sprite/pop/popbg#popbg
+    asset: {fileID: 21300000, guid: d6be919be85907943b02345df5403892, type: 3}
+  - key: res/local/common/sprite/pop/popbg2
+    asset: {fileID: 21300000, guid: 7d351979c70bb4e4984a6eba1c4096bf, type: 2}
+  - key: res/local/common/sprite/pop/popbg2#popbg2
+    asset: {fileID: 21300000, guid: 34e27c0c9a0e37743a6d6460ab38db60, type: 3}
+  - key: res/local/common/sprite/pop/popclose_top
+    asset: {fileID: 21300000, guid: 187a8211c4ceea444893dfd9c94a4204, type: 2}
+  - key: res/local/common/sprite/pop/popclose_top#popclose_top
+    asset: {fileID: 21300000, guid: f4571d2044c69094098a4c0dd04c1e8e, type: 3}
+  - key: res/local/common/sprite/pop/popclosebg
+    asset: {fileID: 21300000, guid: bf6584eaaed2bb24e8dde7b70ba1b5e1, type: 2}
+  - key: res/local/common/sprite/pop/popclosebg#popclosebg
+    asset: {fileID: 21300000, guid: 3875bd7d68dab914da5382c9116a53cc, type: 3}
+  - key: res/local/common/sprite/pop/poptitle
+    asset: {fileID: 21300000, guid: 20e933ce125e175428a9d82b81671e34, type: 2}
+  - key: res/local/common/sprite/pop/poptitle#poptitle
+    asset: {fileID: 21300000, guid: 5ed5ad0be64362145a8b067aa976b11e, type: 3}
+  - key: res/local/common/sprite/progressbg
+    asset: {fileID: 21300000, guid: 902d92227858c354ab9e640e73df6fea, type: 2}
+  - key: res/local/common/sprite/progressbg#progressbg
+    asset: {fileID: 21300000, guid: 6a8518451d5f45d48a466ee7dacc266f, type: 3}
+  - key: res/local/common/sprite/setting_bg
+    asset: {fileID: 21300000, guid: 3f27ca626f316004185f342d195f2670, type: 2}
+  - key: res/local/common/sprite/setting_bg#setting_bg
+    asset: {fileID: 21300000, guid: 13cfc80133d48904da196c75fb2e8dad, type: 3}
+  - key: res/local/common/sprite/setting_hard_1
+    asset: {fileID: 21300000, guid: 7e07b78ea07c872409f6d9274832f9e2, type: 2}
+  - key: res/local/common/sprite/setting_hard_1#setting_hard_1
+    asset: {fileID: 21300000, guid: 7d1247b501a9f784785fbfab981f13cb, type: 3}
+  - key: res/local/common/sprite/setting_normal_1
+    asset: {fileID: 21300000, guid: 2a2e0b6314534984e995c15445bb9e20, type: 2}
+  - key: res/local/common/sprite/setting_normal_1#setting_normal_1
+    asset: {fileID: 21300000, guid: 619504aae858f99458e464f3946eb053, type: 3}
+  - key: res/local/common/sprite/setting_superhard_1
+    asset: {fileID: 21300000, guid: 2889537a77539bc42916fcf119b88034, type: 2}
+  - key: res/local/common/sprite/setting_superhard_1#setting_superhard_1
+    asset: {fileID: 21300000, guid: d079dc65415911e40ab5251636d43219, type: 3}
+  - key: res/local/common/sprite/superhardicon
+    asset: {fileID: 21300000, guid: ab9229f91ac208b4697152d7a3e323a9, type: 2}
+  - key: res/local/common/sprite/superhardicon#superhardicon
+    asset: {fileID: 21300000, guid: 6b9e2407784e20b4b83491d645d83551, type: 3}
+  - key: res/local/configs/commonconfigs
+    asset: {fileID: 4900000, guid: a2e6264198a392546ae443495f3eadde, type: 3}
+  - key: res/local/configs/iapconfigs
+    asset: {fileID: 4900000, guid: 6b11f3439dac6c141af4ea8f33f63f0c, type: 3}
+  - key: res/local/configs/levelboxrewardconfig
+    asset: {fileID: 4900000, guid: cdf8d820b694bed44beb3aa4fdcc8279, type: 3}
+  - key: res/local/configs/res_server_assets_local
+    asset: {fileID: 4900000, guid: 1be7c941e0aee484f8954e90ccfdc043, type: 3}
+  - key: res/local/configs/text
+    asset: {fileID: 4900000, guid: 0d367b24c7f674b438ac94aaeebf6f5a, type: 3}
+  - key: res/local/coreplay/coreplayui
+    asset: {fileID: 1709254077376921, guid: 893be27559e25f14695da59d3dd0346c, type: 3}
+  - key: res/local/coreplay/effct/anim/anim_addone_lock
+    asset: {fileID: 7400000, guid: 67e7de5507f12f4488e7fed8f3a074cf, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_addone_locked
+    asset: {fileID: 7400000, guid: 05ffb54266ec18e42932996ff83bc863, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_addone_unlock
+    asset: {fileID: 7400000, guid: e794d2c5097d69c4ca2b52d828c107fd, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_anilayer_press
+    asset: {fileID: 7400000, guid: 8a4d36d0519830d498d2464f54a91fb0, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_anilayer_up
+    asset: {fileID: 7400000, guid: 0052b6f14909ac64bb61741a5df8e330, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_anim_unlockmapui_continuebtn_loop
+    asset: {fileID: 7400000, guid: d54ee92b68174824baa7b5b04e03cbb2, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_basket
+    asset: {fileID: 9100000, guid: 9b6dfe27fe1674445b7ae9099f3725e8, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_basket_hit
+    asset: {fileID: 7400000, guid: c9674c36db8728f418ddd4d05c50d71b, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_basket_idle
+    asset: {fileID: 7400000, guid: 7b48e732f0714e047b6dd882b2b2c61f, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_boxreward_open
+    asset: {fileID: 7400000, guid: ae7dfa10ca52e1541bc5d000ea815d01, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_dangeroustip_close
+    asset: {fileID: 7400000, guid: db27856b003bb8b46809c45e039d5c35, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_dangeroustip_loop
+    asset: {fileID: 7400000, guid: 4018a7ce6b81d8c42a5da0f2824517c6, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_dangeroustip_open
+    asset: {fileID: 7400000, guid: 88582f449891a824398cc4ebd9ca2678, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_birth
+    asset: {fileID: 7400000, guid: 565715f7fb45ac441b8f2d44ff3affc3, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_birth2
+    asset: {fileID: 7400000, guid: e166f495c033a1b46a2b939c0916106a, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_birthdefault
+    asset: {fileID: 7400000, guid: 7c9fa5b95f7211f4aa7f01e376054022, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_default
+    asset: {fileID: 7400000, guid: c84e830ba3727c645882912b31970a6b, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_disappear
+    asset: {fileID: 7400000, guid: 17c73be433738f44a8a43febf37913e4, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_disappear2
+    asset: {fileID: 7400000, guid: cf231539e1ab9fe4594bf3b55486d01b, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_fly
+    asset: {fileID: 7400000, guid: afb1644bc8b5d7a4baf645a3fa2dbe2e, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_flystop
+    asset: {fileID: 7400000, guid: c0aebc0de75ef164495fa42c3757484a, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_gatherltor
+    asset: {fileID: 7400000, guid: c21302fb8db1d484b8cd5a7c0c7d2f9f, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_gatherrtol
+    asset: {fileID: 7400000, guid: 266fe7a60e9b2f0419bb21226e85f435, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_goal
+    asset: {fileID: 7400000, guid: 4d38a6a4633980a4b9cd3595f46a413a, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_goalfor3
+    asset: {fileID: 7400000, guid: d91883142933e414190641d75b684d0f, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_goalidle
+    asset: {fileID: 7400000, guid: eaa2c7fcc3cdff540b1d575ea56cb2db, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_idle0
+    asset: {fileID: 7400000, guid: 166ca5a6961d76845b1f75c8898c6cdb, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_idle1
+    asset: {fileID: 7400000, guid: acfc42d9c5cbafa4184d7100106cebd3, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_idle2
+    asset: {fileID: 7400000, guid: 025cfe0418f56f744affe01fea794757, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_pitch
+    asset: {fileID: 7400000, guid: e47bf48fa2b60574f9d999b8793d6efe, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_pitchloop
+    asset: {fileID: 7400000, guid: 1528598226813dc4ea993e8cec29696d, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_pitchoff
+    asset: {fileID: 7400000, guid: c25ab5c2c7569b14fba9b7e57a054797, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_refreshfly
+    asset: {fileID: 7400000, guid: 763cb83051c7bab40bf2faa4b22e1272, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_return
+    asset: {fileID: 7400000, guid: 62e9be28aec4e2e4689b8eab4ea8b0e7, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_fruits_returnfly
+    asset: {fileID: 7400000, guid: 50cc76ed83e11624a8e8c9a4575e350d, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_gameloading_close
+    asset: {fileID: 7400000, guid: e770460ce1adcb641bfb41a5c9db2710, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_gameloading_idle
+    asset: {fileID: 7400000, guid: 9734977ed16209740b0150b87fbd4de6, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_gameloading_open
+    asset: {fileID: 7400000, guid: 3352475e31c48814c82a0da50a4269be, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_guidetext
+    asset: {fileID: 7400000, guid: db6e53d172089e3478c0a22c8d6a6191, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_hardleveltipui
+    asset: {fileID: 7400000, guid: ea4b0a7a0fb1c6840b1d093b1d8ad0f5, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_skill_magicwand
+    asset: {fileID: 7400000, guid: d565128ac637b23479e5bfeda32f011d, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_skill_refresh
+    asset: {fileID: 7400000, guid: d5f63f0a765f1b94c9d103798d5cd6a7, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_switchbgloading_idle
+    asset: {fileID: 7400000, guid: 773ed0439d40cc3419a139eac46b0e6b, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_switchbgloading_in
+    asset: {fileID: 7400000, guid: 5db5376e4937a9846b0cec3bf726b046, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_switchbgloading_out
+    asset: {fileID: 7400000, guid: c26f4384fefc4c1449995db83625d7f4, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_winui_close
+    asset: {fileID: 7400000, guid: 1b67094aead87754eb0fd2df95485ba3, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_winui_loop
+    asset: {fileID: 7400000, guid: b7dff220dba6f0e45b4530c6523683e1, type: 2}
+  - key: res/local/coreplay/effct/anim/anim_winui_open
+    asset: {fileID: 7400000, guid: b184687dc03d1af4a9139a10dd28fffd, type: 2}
+  - key: res/local/coreplay/effct/anim/coreplayui_close
+    asset: {fileID: 7400000, guid: d3b84a03908cc51429a161a0ae0c3b99, type: 2}
+  - key: res/local/coreplay/effct/anim/coreplayui_open
+    asset: {fileID: 7400000, guid: 076f7b0583c57964db74b1852231cd1c, type: 2}
+  - key: res/local/coreplay/effct/anim/finger
+    asset: {fileID: 7400000, guid: 7cf9b8d7509767d4eb8f55e344da6f4d, type: 2}
+  - key: res/local/coreplay/effct/material/encourage_start
+    asset: {fileID: 2100000, guid: 08680c69760449a41a0ee44c26539b2b, type: 2}
+  - key: res/local/coreplay/effct/material/fruit_ourlineglow
+    asset: {fileID: 2100000, guid: 2c308ed0a3fe063459953a9814ae077f, type: 2}
+  - key: res/local/coreplay/effct/material/glow3
+    asset: {fileID: 2100000, guid: c35f5c1cde058554a81a5e9be0235d8d, type: 2}
+  - key: res/local/coreplay/effct/material/glow_add
+    asset: {fileID: 2100000, guid: 7e0deedf70948494ebe710581ee20470, type: 2}
+  - key: res/local/coreplay/effct/material/glow_add2
+    asset: {fileID: 2100000, guid: f8d5d647cc400a04eb0155445e7ee4df, type: 2}
+  - key: res/local/coreplay/effct/material/glow_alpha
+    asset: {fileID: 2100000, guid: 777af8606a59c794681fe05b01be135c, type: 2}
+  - key: res/local/coreplay/effct/material/liz_b
+    asset: {fileID: 2100000, guid: 22a69e764c38aaf449db17a6fad01239, type: 2}
+  - key: res/local/coreplay/effct/material/m_fuilts_pitch
+    asset: {fileID: 2100000, guid: f070b389f9125ac47861564a6018481d, type: 2}
+  - key: res/local/coreplay/effct/material/m_glow_line
+    asset: {fileID: 2100000, guid: cd5a23fc9fe98f747b8cd2d3eea2d16e, type: 2}
+  - key: res/local/coreplay/effct/material/m_glow_line2
+    asset: {fileID: 2100000, guid: 02007547d3215a04789f07399581787d, type: 2}
+  - key: res/local/coreplay/effct/material/m_glow_line2_a
+    asset: {fileID: 2100000, guid: 82900a42a88a0564dba06b8a68f69374, type: 2}
+  - key: res/local/coreplay/effct/material/m_huocai
+    asset: {fileID: 2100000, guid: f8f35c115106d184aba115a19e6aba05, type: 2}
+  - key: res/local/coreplay/effct/material/m_item_bg
+    asset: {fileID: 2100000, guid: da6ecc7dbf07af443802774afd784de2, type: 2}
+  - key: res/local/coreplay/effct/material/m_item_bk
+    asset: {fileID: 2100000, guid: 2be775d40060bc1478d222b96f093360, type: 2}
+  - key: res/local/coreplay/effct/material/m_lock_suipian
+    asset: {fileID: 2100000, guid: c53e9171ae145674ea643facb945da7a, type: 2}
+  - key: res/local/coreplay/effct/material/m_refresh_fangshe1
+    asset: {fileID: 2100000, guid: e72565e07891a3d49aba6f069acb38d3, type: 2}
+  - key: res/local/coreplay/effct/material/m_refresh_fangshe2
+    asset: {fileID: 2100000, guid: 90a22f7b324089241bdd8adf978dddbe, type: 2}
+  - key: res/local/coreplay/effct/material/m_refresh_fangshe3
+    asset: {fileID: 2100000, guid: 1a3522ebc9f6f824abecbc0c11e02ae6, type: 2}
+  - key: res/local/coreplay/effct/material/m_refresh_glowq
+    asset: {fileID: 2100000, guid: b5d906381d3ba0a4eb012b9a03fb5d41, type: 2}
+  - key: res/local/coreplay/effct/material/m_refresh_teng01 glow1
+    asset: {fileID: 2100000, guid: 047c681a30f400f4db1d6868a9dcd52d, type: 2}
+  - key: res/local/coreplay/effct/material/m_refresh_teng01 line1
+    asset: {fileID: 2100000, guid: c56ef7343315c8940b32fbecb1cb2b4b, type: 2}
+  - key: res/local/coreplay/effct/material/m_refresh_teng01 xuanwo1
+    asset: {fileID: 2100000, guid: 7435a8c2af9a154468791615ba85dc1c, type: 2}
+  - key: res/local/coreplay/effct/material/m_refresh_teng01 xuanwo2
+    asset: {fileID: 2100000, guid: bb501b03427895b46b21aff9d9a89ad4, type: 2}
+  - key: res/local/coreplay/effct/material/m_refresh_teng01 yezi
+    asset: {fileID: 2100000, guid: 6b3758916d7aa34469972a336ad0b32e, type: 2}
+  - key: res/local/coreplay/effct/material/m_refresh_teng01
+    asset: {fileID: 2100000, guid: 1cddca75e35526c4a899af7564a4025f, type: 2}
+  - key: res/local/coreplay/effct/material/m_ribbon_glow
+    asset: {fileID: 2100000, guid: 40272a2b412e37b49b604699da5352b8, type: 2}
+  - key: res/local/coreplay/effct/material/m_ribbon_glow_alpha
+    asset: {fileID: 2100000, guid: 35f84bc3433dc704eb9b24f369d022f2, type: 2}
+  - key: res/local/coreplay/effct/material/m_starts526
+    asset: {fileID: 2100000, guid: 4b3db80f54886f84bafe34d2e9d54a33, type: 2}
+  - key: res/local/coreplay/effct/material/m_starts_blended
+    asset: {fileID: 2100000, guid: 17fcfb5074af16449a00ded98512fc03, type: 2}
+  - key: res/local/coreplay/effct/material/mz_glow_di
+    asset: {fileID: 2100000, guid: 19f3c56c80d832c4f8453ac34d9d432e, type: 2}
+  - key: res/local/coreplay/effct/material/stars
+    asset: {fileID: 2100000, guid: 6d419a14ef0fa9748a7cd8b647fbb19d, type: 2}
+  - key: res/local/coreplay/effct/material/unlock_addone
+    asset: {fileID: 2100000, guid: 4305fd8167643824fa8a731170e9ab97, type: 2}
+  - key: res/local/coreplay/effct/prefab/effct_itembtn
+    asset: {fileID: 1709254077376921, guid: 5d62dace5ae24ff44ac39d1fb300028c, type: 3}
+  - key: res/local/coreplay/effct/prefab/effct_unlock
+    asset: {fileID: 1709254077376921, guid: 3b513468519a4264bb24db14cc09b1e6, type: 3}
+  - key: res/local/coreplay/effct/prefab/effct_unlock_blue
+    asset: {fileID: 1709254077376921, guid: 64dad0e087b93274baf00684ede8d7c1, type: 3}
+  - key: res/local/coreplay/effct/prefab/effect_fuilts_disappear
+    asset: {fileID: 1709254077376921, guid: 730d68a5f1f0af0418b29c876969580f, type: 3}
+  - key: res/local/coreplay/effct/prefab/effect_fuilts_goal
+    asset: {fileID: 1709254077376921, guid: d7b543877a8053048b6cd8d157de47be, type: 3}
+  - key: res/local/coreplay/effct/prefab/effect_fuilts_pitch
+    asset: {fileID: 1709254077376921, guid: d2e6b100ddbd9194fb60af044349907a, type: 3}
+  - key: res/local/coreplay/effct/prefab/effect_loseprogress
+    asset: {fileID: 1709254077376921, guid: 1733a2313ff068f4f8f9731e606bf30f, type: 3}
+  - key: res/local/coreplay/effct/prefab/effect_shoppack_item
+    asset: {fileID: 1709254077376921, guid: fc4fb2a6fd7110f498fb6f86699ba615, type: 3}
+  - key: res/local/coreplay/effct/prefab/effect_skill_magicwand
+    asset: {fileID: 1709254077376921, guid: dd1aab86229e09745b5d02f3dfff0de3, type: 3}
+  - key: res/local/coreplay/effct/prefab/effect_skill_refresh
+    asset: {fileID: 1709254077376921, guid: e0b9142e57f39474fa1ba308bd5268e1, type: 3}
+  - key: res/local/coreplay/effct/prefab/effect_unlockmapui_continuebtn
+    asset: {fileID: 1709254077376921, guid: a8fcc51efb5523d488228e28d0a54aa9, type: 3}
+  - key: res/local/coreplay/effct/prefab/flycoin_glod
+    asset: {fileID: 1709254077376921, guid: 704f6f09b6dff684c9fc2029748bd59e, type: 3}
+  - key: res/local/coreplay/effct/texres/addonelock_2
+    asset: {fileID: 21300000, guid: 324c0f30f24408b449d31442103d90ed, type: 2}
+  - key: res/local/coreplay/effct/texres/addonelock_2#addonelock_2
+    asset: {fileID: 21300000, guid: 8d31b239a23400440b2914e2b639085f, type: 3}
+  - key: res/local/coreplay/effct/texres/btn_orange_alpha
+    asset: {fileID: 21300000, guid: a03ae6ee35c61594bb0ab36be85552c8, type: 2}
+  - key: res/local/coreplay/effct/texres/btn_orange_alpha#btn_orange_alpha
+    asset: {fileID: 21300000, guid: 334ffca14e8c0a349abcc30cfc08a37c, type: 3}
+  - key: res/local/coreplay/effct/texres/circle0
+    asset: {fileID: 21300000, guid: 66f3a744cf2ca704b8b7c14e85dda338, type: 2}
+  - key: res/local/coreplay/effct/texres/circle0#circle0
+    asset: {fileID: 21300000, guid: cacdea5dc6c8ae248b91c191bfc3bebc, type: 3}
+  - key: res/local/coreplay/effct/texres/fruits_1
+    asset: {fileID: 21300000, guid: 21f545d6e181cb846aafc9faf5a228a5, type: 2}
+  - key: res/local/coreplay/effct/texres/fruits_1#fruits_1
+    asset: {fileID: 21300000, guid: 289ebf3df55c2f1419ed90f3c78c5c9f, type: 3}
+  - key: res/local/coreplay/effct/texres/glow_cpgt_hyy_01712_1
+    asset: {fileID: 21300000, guid: 77c9e715ca61431439420fccd3b6449f, type: 2}
+  - key: res/local/coreplay/effct/texres/glow_cpgt_hyy_01712_1#glow_cpgt_hyy_01712_1
+    asset: {fileID: 21300000, guid: 2aa11c8718e28e0448e4fd4ff8f18e8b, type: 3}
+  - key: res/local/coreplay/effct/texres/glow_line_01
+    asset: {fileID: 21300000, guid: ae27a8846df4b9049ae73a74d43bab7f, type: 2}
+  - key: res/local/coreplay/effct/texres/glow_line_01#glow_line_01
+    asset: {fileID: 21300000, guid: 47264901d9fa2844ca64c14ff2c40990, type: 3}
+  - key: res/local/coreplay/effct/texres/item_bg
+    asset: {fileID: 21300000, guid: 5ed34e39f4b05724f95f27daf557086b, type: 2}
+  - key: res/local/coreplay/effct/texres/item_bg#item_bg
+    asset: {fileID: 21300000, guid: 92f2c015884f0d643b88f5a80209daf0, type: 3}
+  - key: res/local/coreplay/effct/texres/item_bk
+    asset: {fileID: 21300000, guid: 88de3ef72dec22842937a95d8d2ab9f5, type: 2}
+  - key: res/local/coreplay/effct/texres/item_bk#item_bk
+    asset: {fileID: 21300000, guid: ca72d501915f33042af4f690dd472e11, type: 3}
+  - key: res/local/coreplay/effct/texres/item_bk2
+    asset: {fileID: 21300000, guid: bdc4907a58b70ad43a302ab20196bb57, type: 2}
+  - key: res/local/coreplay/effct/texres/item_bk2#item_bk2
+    asset: {fileID: 21300000, guid: ac6ede570ca528b4aabe2cc0c3ca0060, type: 3}
+  - key: res/local/coreplay/effct/texres/light _01
+    asset: {fileID: 21300000, guid: 65a6751a6a1b970418f023cfbc740803, type: 2}
+  - key: res/local/coreplay/effct/texres/light _01#light _01
+    asset: {fileID: 21300000, guid: 312479c19bb174a4d83d5983c10692ef, type: 3}
+  - key: res/local/coreplay/effct/texres/light_02
+    asset: {fileID: 21300000, guid: e89f9cefb77b3ed44be01e23038670d9, type: 2}
+  - key: res/local/coreplay/effct/texres/light_02#light_02
+    asset: {fileID: 21300000, guid: 4364a7281fd5c4941b18899945f0569c, type: 3}
+  - key: res/local/coreplay/effct/texres/line_02
+    asset: {fileID: 21300000, guid: 9aada77644a3e3a49a03263c1445acfd, type: 2}
+  - key: res/local/coreplay/effct/texres/line_02#line_02
+    asset: {fileID: 21300000, guid: 276dc3d637ad71f479f6fa3aaf392bbb, type: 3}
+  - key: res/local/coreplay/effct/texres/mobang1_bar
+    asset: {fileID: 21300000, guid: 47c6234ae831e754e9e0aa0b6b03d0b1, type: 2}
+  - key: res/local/coreplay/effct/texres/mobang1_bar#mobang1_bar
+    asset: {fileID: 21300000, guid: 57c216f10ef29fa44942c25ba7ae1552, type: 3}
+  - key: res/local/coreplay/effct/texres/mobang1_shodw
+    asset: {fileID: 21300000, guid: 4ee91b5578afd6d4c88ec4d427ef3f94, type: 2}
+  - key: res/local/coreplay/effct/texres/mobang1_shodw#mobang1_shodw
+    asset: {fileID: 21300000, guid: 9333a42fda4bdde4fa67379967dc707f, type: 3}
+  - key: res/local/coreplay/effct/texres/mobang_bar
+    asset: {fileID: 21300000, guid: 4c7ede32e442e8144b543b03e2cad588, type: 2}
+  - key: res/local/coreplay/effct/texres/mobang_bar#mobang_bar
+    asset: {fileID: 21300000, guid: 073fd5a19551cbf439fe2584816c1cdb, type: 3}
+  - key: res/local/coreplay/effct/texres/mobang_baradd
+    asset: {fileID: 21300000, guid: 93213f919277a8e48ac4ce96a86034f3, type: 2}
+  - key: res/local/coreplay/effct/texres/mobang_baradd#mobang_baradd
+    asset: {fileID: 21300000, guid: af805b4d7db133f4bb0bf1355e19a375, type: 3}
+  - key: res/local/coreplay/effct/texres/mobang_shodw
+    asset: {fileID: 21300000, guid: 9161ed6ca9398d44aaeb73647b889627, type: 2}
+  - key: res/local/coreplay/effct/texres/mobang_shodw#mobang_shodw
+    asset: {fileID: 21300000, guid: d3722a9195381734ab4ab5fd167240f1, type: 3}
+  - key: res/local/coreplay/effct/texres/mobang_startbk
+    asset: {fileID: 21300000, guid: d1a971635a746ce48a0a9c76973cc6f9, type: 2}
+  - key: res/local/coreplay/effct/texres/mobang_startbk#mobang_startbk
+    asset: {fileID: 21300000, guid: 97e5361914021d24b828e12f362ddaf1, type: 3}
+  - key: res/local/coreplay/effct/texres/mobang_startglow
+    asset: {fileID: 21300000, guid: 7a24383c37e6f174e9c66475cfc9e3d4, type: 2}
+  - key: res/local/coreplay/effct/texres/mobang_startglow#mobang_startglow
+    asset: {fileID: 21300000, guid: 7fec041ad9859f543bd32b749f74535d, type: 3}
+  - key: res/local/coreplay/effct/texres/t_caihong
+    asset: {fileID: 21300000, guid: c8dd2f4a685160948b9f0490266c4589, type: 2}
+  - key: res/local/coreplay/effct/texres/t_caihong#t_caihong
+    asset: {fileID: 21300000, guid: 3832edd2825d89342b6acaec7cc41924, type: 3}
+  - key: res/local/coreplay/effct/texres/t_huocai_2
+    asset: {fileID: 2800000, guid: 361728991f8977c42bf848ddbf4c047a, type: 3}
+  - key: res/local/coreplay/effct/texres/t_star_01
+    asset: {fileID: 21300000, guid: 40d89ea8a9673c04f8b77cf52ed34f8e, type: 2}
+  - key: res/local/coreplay/effct/texres/t_star_01#t_star_01
+    asset: {fileID: 21300000, guid: ea056233b2758cd47892fa1aa57fd7e7, type: 3}
+  - key: res/local/coreplay/effct/texres/tz_starts0526
+    asset: {fileID: 21300000, guid: 982bf4cbeb0279d4782a5320fe6035f9, type: 2}
+  - key: res/local/coreplay/effct/texres/tz_starts0526#tz_starts0526
+    asset: {fileID: 21300000, guid: 45cc7ac58125ff54b98172e4fe344f6f, type: 3}
+  - key: res/local/coreplay/effct/texres/tz_tengman_01
+    asset: {fileID: 21300000, guid: 74ee350a07a0952448533a1e28eb0a5c, type: 2}
+  - key: res/local/coreplay/effct/texres/tz_tengman_01#tz_tengman_01
+    asset: {fileID: 21300000, guid: 9dda34ecbad9c9743b21cb76be5c6e32, type: 3}
+  - key: res/local/coreplay/effct/texres/tz_tengman_02
+    asset: {fileID: 21300000, guid: 4df4e766f0d6be447886ea0a413a20a8, type: 2}
+  - key: res/local/coreplay/effct/texres/tz_tengman_02#tz_tengman_02
+    asset: {fileID: 21300000, guid: 6834bf79b4963444186015c95da4475b, type: 3}
+  - key: res/local/coreplay/effct/texres/tz_tengman_03
+    asset: {fileID: 21300000, guid: 083db95485f4d4340ab3e202379667f9, type: 2}
+  - key: res/local/coreplay/effct/texres/tz_tengman_03#tz_tengman_03
+    asset: {fileID: 21300000, guid: a5021f535de49e74f9c961fd370b0c84, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/flycoin_glod_appear
+    asset: {fileID: 7400000, guid: 6a939df3fb7403546ac3174f79fef4e5, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/flycoin_glod_loop
+    asset: {fileID: 7400000, guid: fefee65700038284684fe15e853ebeea, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_01
+    asset: {fileID: 21300000, guid: f6f292f8f651c2e458326aa6fcd38bc4, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_01#glod_01
+    asset: {fileID: 21300000, guid: b24560583708d344e8ef09d7f31b8854, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_02
+    asset: {fileID: 21300000, guid: 41b5b20882003f740b9c04b7ace5dfa8, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_02#glod_02
+    asset: {fileID: 21300000, guid: 6629f1788186b744f82f614d8c6fd6f5, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_03
+    asset: {fileID: 21300000, guid: ec043e42d7a00364b8c394f75ace7d23, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_03#glod_03
+    asset: {fileID: 21300000, guid: e5b11fde9de33fb42acfc776a96e7403, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_04
+    asset: {fileID: 21300000, guid: ebe13f8fb052f1d46bc13f9962b74ee8, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_04#glod_04
+    asset: {fileID: 21300000, guid: bfa6f5338bb3416498cc9a033453ae6c, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_05
+    asset: {fileID: 21300000, guid: a0b3d31a293509c44bf293967efe69ae, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_05#glod_05
+    asset: {fileID: 21300000, guid: 01da1360e045e8c438449bedbbc34c26, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_06
+    asset: {fileID: 21300000, guid: 873a753711bb60c4b8d2f1f5877855ba, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_06#glod_06
+    asset: {fileID: 21300000, guid: f665098351be869459c8663f95d141f3, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_07
+    asset: {fileID: 21300000, guid: c2fb757b3c81f884c966c9f768e6dd13, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_07#glod_07
+    asset: {fileID: 21300000, guid: c5da2e404d76a2a468ac785151699c6d, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_08
+    asset: {fileID: 21300000, guid: 9028d11d78091e749b9a3af983159433, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_08#glod_08
+    asset: {fileID: 21300000, guid: 8e4f6c4d3126bd6468439c51f10a582f, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_09
+    asset: {fileID: 21300000, guid: 0a393773dc3cbf14391c89c4f1f586d4, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_09#glod_09
+    asset: {fileID: 21300000, guid: c0f0b03f283801142b536e28b0196c66, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_10
+    asset: {fileID: 21300000, guid: 4f8629a3dcf060541b53ac96344aba92, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_10#glod_10
+    asset: {fileID: 21300000, guid: 4e7daa57cfa712447a122492ab0a7a1c, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_11
+    asset: {fileID: 21300000, guid: ee4c58ce6029bed46b5f2eb6f8c5b7d7, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_11#glod_11
+    asset: {fileID: 21300000, guid: 3c06054457e8163448782539c324bab4, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_12
+    asset: {fileID: 21300000, guid: 261e766a9fec79049bf156ae3cc5d0d8, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_12#glod_12
+    asset: {fileID: 21300000, guid: d7a60de22ce004148943328edfff1693, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_13
+    asset: {fileID: 21300000, guid: cef75dd6439ba76469b1b1a8aff49ca6, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_13#glod_13
+    asset: {fileID: 21300000, guid: e28413c912828b0469bafbdf1a6acc65, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_14
+    asset: {fileID: 21300000, guid: e68a2ac60ffbcaf49b039322c6b1bf70, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_14#glod_14
+    asset: {fileID: 21300000, guid: 73ff58e50d5857643a7c8ab3567625a5, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_15
+    asset: {fileID: 21300000, guid: 0cc0f7882da12fc4883d004ba2c3de59, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_15#glod_15
+    asset: {fileID: 21300000, guid: 8495e4bbe198e9e4ea657484f30ac67c, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_16
+    asset: {fileID: 21300000, guid: b585324fa3e957748be8790b364c6ff6, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_16#glod_16
+    asset: {fileID: 21300000, guid: 2d869c34410417742b744202aeeee4be, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_17
+    asset: {fileID: 21300000, guid: fecb74f686144384e902cc673d24c992, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_17#glod_17
+    asset: {fileID: 21300000, guid: 8eac7e7df310e094ba1479328c9e53db, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_18
+    asset: {fileID: 21300000, guid: 92dc7e7884ec8fc47a0a3c75ef604fe8, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/glod_512xp/glod_18#glod_18
+    asset: {fileID: 21300000, guid: bed420dc78f3e244a865323a1855d066, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/itembg_superhard_bg
+    asset: {fileID: 21300000, guid: 1c1a39ca4f6a72a41ae55d52aab7039d, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/itembg_superhard_bg#itembg_superhard_bg
+    asset: {fileID: 21300000, guid: a80c8b7b446f7e64181c81143b7e6f83, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/itembg_superhard_top
+    asset: {fileID: 21300000, guid: e2ae54f48c6fcb445b35872df90cca6a, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/itembg_superhard_top#itembg_superhard_top
+    asset: {fileID: 21300000, guid: 687e85e4f60504744a5b0996abd20ab4, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/t_start_unbelinevable
+    asset: {fileID: 21300000, guid: 3b6c3cb6e5078ed45bde6c180f722e40, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/t_start_unbelinevable#t_start_unbelinevable
+    asset: {fileID: 21300000, guid: 90d2d9f94d430c447877d6dc685a2740, type: 3}
+  - key: res/local/coreplay/effct/texres/ui/tab_yx_mask
+    asset: {fileID: 21300000, guid: e0494d8f7912f6f468f1b330e1d89dc1, type: 2}
+  - key: res/local/coreplay/effct/texres/ui/tab_yx_mask#tab_yx_mask
+    asset: {fileID: 21300000, guid: ae530299e80168749aa31f4bc1f62b9e, type: 3}
+  - key: res/local/coreplay/prefab/addone
+    asset: {fileID: 1709254077376921, guid: ec46c78b653a1ea48b92cc4fbe1cfb4e, type: 3}
+  - key: res/local/coreplay/prefab/collectitem
+    asset: {fileID: 1709254077376921, guid: 5ac56abe23fe1754f92b61a6bc7bde58, type: 3}
+  - key: res/local/coreplay/prefab/dangeroustip
+    asset: {fileID: 1709254077376921, guid: cb924d9f8831d6a41b46c5ed79758c41, type: 3}
+  - key: res/local/coreplay/prefab/guidefinger
+    asset: {fileID: 1709254077376921, guid: f1f442213f0d9c846ab5009b8c8721cd, type: 3}
+  - key: res/local/coreplay/prefab/itembtn
+    asset: {fileID: 1709254077376921, guid: c2dcf472bb1439d47b7820a31c43f977, type: 3}
+  - key: res/local/coreplay/prefab/newplayerguider
+    asset: {fileID: 1709254077376921, guid: fbd4a03146a6ef945bb9f783bc2c0a71, type: 3}
+  - key: res/local/coreplay/sprite/basket_01
+    asset: {fileID: 21300000, guid: 9e4eeb35e1e296245ac4b4a1f8612980, type: 2}
+  - key: res/local/coreplay/sprite/basket_01#basket_01
+    asset: {fileID: 21300000, guid: 092fff856eada7c4089cd88d20057500, type: 3}
+  - key: res/local/coreplay/sprite/basket_02
+    asset: {fileID: 21300000, guid: 79a418b231ac0e44397115fa39c35a55, type: 2}
+  - key: res/local/coreplay/sprite/basket_02#basket_02
+    asset: {fileID: 21300000, guid: cfdae5e2bf6e7554abf381df267afe56, type: 3}
+  - key: res/local/coreplay/sprite/basket_shadow
+    asset: {fileID: 21300000, guid: ff34bf462bd892f44bb0f15031ddfcd6, type: 2}
+  - key: res/local/coreplay/sprite/basket_shadow#basket_shadow
+    asset: {fileID: 21300000, guid: 0bd6e50893f632041aaf121c96b544a8, type: 3}
+  - key: res/local/coreplay/sprite/dangerous/fruit
+    asset: {fileID: 21300000, guid: eec881ca8cdf2924a88ecd73fca1f7cf, type: 2}
+  - key: res/local/coreplay/sprite/dangerous/fruit#fruit
+    asset: {fileID: 21300000, guid: c564e0f86a59f7d4b93552939fdeacc6, type: 3}
+  - key: res/local/coreplay/sprite/dangerous/tip1
+    asset: {fileID: 21300000, guid: 589f89b1522512b4c9561435d7810f5e, type: 2}
+  - key: res/local/coreplay/sprite/dangerous/tip1#tip1
+    asset: {fileID: 21300000, guid: 9ffef76160c2c7643b1dcdc2e8bdd962, type: 3}
+  - key: res/local/coreplay/sprite/dangerous/tip2
+    asset: {fileID: 21300000, guid: 1348b60d53f330f49b551871e9ce6d38, type: 2}
+  - key: res/local/coreplay/sprite/dangerous/tip2#tip2
+    asset: {fileID: 21300000, guid: 02b2f44ad81ee14488fd7392b7443a79, type: 3}
+  - key: res/local/coreplay/sprite/dangerous/tiparea
+    asset: {fileID: 21300000, guid: f2f9ac7681795d44992b00ccaf62321a, type: 2}
+  - key: res/local/coreplay/sprite/dangerous/tiparea#tiparea
+    asset: {fileID: 21300000, guid: bbe109c95252a994eb9afe12f86c30b2, type: 3}
+  - key: res/local/coreplay/sprite/item/adbg
+    asset: {fileID: 21300000, guid: e0c58b1c4d5b69e448d1ded4d9ddd7fe, type: 2}
+  - key: res/local/coreplay/sprite/item/adbg#adbg
+    asset: {fileID: 21300000, guid: 0760f5a1684b8104883eec3f7c763fef, type: 3}
+  - key: res/local/coreplay/sprite/item/coinbg
+    asset: {fileID: 21300000, guid: cc32c9cade6f9304381a9f2979d31b00, type: 2}
+  - key: res/local/coreplay/sprite/item/coinbg#coinbg
+    asset: {fileID: 21300000, guid: 3cb3f5a3471038744995ade805d1b003, type: 3}
+  - key: res/local/coreplay/sprite/item/extra_ad_bg
+    asset: {fileID: 21300000, guid: 5370a8099a532854a83bc50622caf458, type: 2}
+  - key: res/local/coreplay/sprite/item/extra_ad_bg#extra_ad_bg
+    asset: {fileID: 21300000, guid: 5871301f33df7074993355d4590c17c5, type: 3}
+  - key: res/local/coreplay/sprite/item/extra_ad_icon
+    asset: {fileID: 21300000, guid: d0ba4bdb7561a874899c6f724ab93fd2, type: 2}
+  - key: res/local/coreplay/sprite/item/extra_ad_icon#extra_ad_icon
+    asset: {fileID: 21300000, guid: dd4c4da3660907e46a9990aecc57b7d8, type: 3}
+  - key: res/local/coreplay/sprite/item/extra_coin_bg
+    asset: {fileID: 21300000, guid: 1a128d4fff8fe9240b6f47f24ebd846a, type: 2}
+  - key: res/local/coreplay/sprite/item/extra_coin_bg#extra_coin_bg
+    asset: {fileID: 21300000, guid: 237987e85d38c5644a9f19e7a40cbdf3, type: 3}
+  - key: res/local/coreplay/sprite/item/extra_icon
+    asset: {fileID: 21300000, guid: 8939da34c68b5774381e1ee557dcf8f8, type: 2}
+  - key: res/local/coreplay/sprite/item/extra_icon#extra_icon
+    asset: {fileID: 21300000, guid: a1498c8ad2e169a41988eb3d3cd53e32, type: 3}
+  - key: res/local/coreplay/sprite/item/extra_lock
+    asset: {fileID: 21300000, guid: 08b55ab1375e34c4492f540ddc888d9b, type: 2}
+  - key: res/local/coreplay/sprite/item/extra_lock#extra_lock
+    asset: {fileID: 21300000, guid: 07ef6a38ad0bc2b44b76193a801d7ab0, type: 3}
+  - key: res/local/coreplay/sprite/item/extrabutton
+    asset: {fileID: 21300000, guid: ccb41d00782eee746a8f3e4a7f1df646, type: 2}
+  - key: res/local/coreplay/sprite/item/extrabutton#extrabutton
+    asset: {fileID: 21300000, guid: 8fef80dee7f48f648b4a773c83cf0a7f, type: 3}
+  - key: res/local/coreplay/sprite/item/item_lock
+    asset: {fileID: 21300000, guid: 93f757bfd5137814ea3a9e8a435b0f91, type: 2}
+  - key: res/local/coreplay/sprite/item/item_lock#item_lock
+    asset: {fileID: 21300000, guid: d50b72d34a3861a4bb998a4330504119, type: 3}
+  - key: res/local/coreplay/sprite/item/itembg_gray
+    asset: {fileID: 21300000, guid: b5ee8581194680643ae1d53fe50befc0, type: 2}
+  - key: res/local/coreplay/sprite/item/itembg_gray#itembg_gray
+    asset: {fileID: 21300000, guid: 9baacf65b81378947bba62bf4e2d162d, type: 3}
+  - key: res/local/coreplay/sprite/item/itembg_hard
+    asset: {fileID: 21300000, guid: 49cda73c96157b54789dc128a8204e16, type: 2}
+  - key: res/local/coreplay/sprite/item/itembg_hard#itembg_hard
+    asset: {fileID: 21300000, guid: 39847dd78d6769a469583a2af37f6e8b, type: 3}
+  - key: res/local/coreplay/sprite/item/itembg_lock
+    asset: {fileID: 21300000, guid: 10217e85d9e5cca42ba1ac7275a65ac8, type: 2}
+  - key: res/local/coreplay/sprite/item/itembg_lock#itembg_lock
+    asset: {fileID: 21300000, guid: b56ef468dae9ba444972390d5a2e71fb, type: 3}
+  - key: res/local/coreplay/sprite/item/itembg_normal
+    asset: {fileID: 21300000, guid: af79964b5036fe2478e31d20f7eedfda, type: 2}
+  - key: res/local/coreplay/sprite/item/itembg_normal#itembg_normal
+    asset: {fileID: 21300000, guid: f6f7c5236c7d5db41b8e1bf68137988a, type: 3}
+  - key: res/local/coreplay/sprite/item/itembg_superhard
+    asset: {fileID: 21300000, guid: 4859b1f31a9a14d40b898d9bd1149a14, type: 2}
+  - key: res/local/coreplay/sprite/item/itembg_superhard#itembg_superhard
+    asset: {fileID: 21300000, guid: 1083eea88a2b37a4da6a7bdd3182df55, type: 3}
+  - key: res/local/coreplay/sprite/item/magic_gray
+    asset: {fileID: 21300000, guid: c9b03bb7c75bef54f898f3c08db7f4a3, type: 2}
+  - key: res/local/coreplay/sprite/item/magic_gray#magic_gray
+    asset: {fileID: 21300000, guid: a8ffcea5efc0f8a44a5e6fd528f4162f, type: 3}
+  - key: res/local/coreplay/sprite/item/magic_hard
+    asset: {fileID: 21300000, guid: f97209f042b3df84f943caef19147ad5, type: 2}
+  - key: res/local/coreplay/sprite/item/magic_hard#magic_hard
+    asset: {fileID: 21300000, guid: 7dfa8a73953eab240ba288a480482db4, type: 3}
+  - key: res/local/coreplay/sprite/item/magic_lock
+    asset: {fileID: 21300000, guid: a52c5d7876038bf41953d3c657a8599a, type: 2}
+  - key: res/local/coreplay/sprite/item/magic_lock#magic_lock
+    asset: {fileID: 21300000, guid: 987a83194d04a8c4f858fd8e517f6728, type: 3}
+  - key: res/local/coreplay/sprite/item/magic_normal
+    asset: {fileID: 21300000, guid: 36bbcfbff1828284190bf2c9f6a11fcc, type: 2}
+  - key: res/local/coreplay/sprite/item/magic_normal#magic_normal
+    asset: {fileID: 21300000, guid: 7e98f8a2a2818934892c9002eb75b9b0, type: 3}
+  - key: res/local/coreplay/sprite/item/magic_superhard
+    asset: {fileID: 21300000, guid: 47757961d72e2b0409b75e21ded33a3c, type: 2}
+  - key: res/local/coreplay/sprite/item/magic_superhard#magic_superhard
+    asset: {fileID: 21300000, guid: de7cf812b82632b48bec858fe1075ead, type: 3}
+  - key: res/local/coreplay/sprite/item/numbg
+    asset: {fileID: 21300000, guid: b4aa5a5d0751cfa47a1fd2ace643b0cd, type: 2}
+  - key: res/local/coreplay/sprite/item/numbg#numbg
+    asset: {fileID: 21300000, guid: 032f3f0b2fd53c84baa8423b29f14947, type: 3}
+  - key: res/local/coreplay/sprite/item/play
+    asset: {fileID: 21300000, guid: 6429865286ac1464a995826f22726f23, type: 2}
+  - key: res/local/coreplay/sprite/item/play#play
+    asset: {fileID: 21300000, guid: 547289a7641bf354a9563aaed73e7902, type: 3}
+  - key: res/local/coreplay/sprite/item/setting_hard
+    asset: {fileID: 21300000, guid: 2ac583e15766fe74aab13bd43a9439c6, type: 2}
+  - key: res/local/coreplay/sprite/item/setting_hard#setting_hard
+    asset: {fileID: 21300000, guid: 775f881f27cdf7745a0578510e6ef23b, type: 3}
+  - key: res/local/coreplay/sprite/item/setting_normal
+    asset: {fileID: 21300000, guid: 567d301bc102da341b4fd3633a9b24ce, type: 2}
+  - key: res/local/coreplay/sprite/item/setting_normal#setting_normal
+    asset: {fileID: 21300000, guid: a51997945ac3ddf46899fce14aa043be, type: 3}
+  - key: res/local/coreplay/sprite/item/setting_superhard
+    asset: {fileID: 21300000, guid: bc9513d28a949004abe0a197ab4a7e0d, type: 2}
+  - key: res/local/coreplay/sprite/item/setting_superhard#setting_superhard
+    asset: {fileID: 21300000, guid: 3648a85f0c10ff346bbd820f36a7b8eb, type: 3}
+  - key: res/local/coreplay/sprite/item/shuffle_gray
+    asset: {fileID: 21300000, guid: a033ac7a18ffd3043b3e4be1dc07d293, type: 2}
+  - key: res/local/coreplay/sprite/item/shuffle_gray#shuffle_gray
+    asset: {fileID: 21300000, guid: d1957e3ddb04b2d46ab613c26dec71a2, type: 3}
+  - key: res/local/coreplay/sprite/item/shuffle_hard
+    asset: {fileID: 21300000, guid: 7c575bd4dac333b4d8c2ffa5b43c282b, type: 2}
+  - key: res/local/coreplay/sprite/item/shuffle_hard#shuffle_hard
+    asset: {fileID: 21300000, guid: 9a2677043350c2d43ab9fc1a1a6dcda8, type: 3}
+  - key: res/local/coreplay/sprite/item/shuffle_lock
+    asset: {fileID: 21300000, guid: 31cc76d45d63cd742b5cf410da1bddf1, type: 2}
+  - key: res/local/coreplay/sprite/item/shuffle_lock#shuffle_lock
+    asset: {fileID: 21300000, guid: 1336f9f81f26cf44eb1e7c1e5d964f90, type: 3}
+  - key: res/local/coreplay/sprite/item/shuffle_normal
+    asset: {fileID: 21300000, guid: 7c5e19269112ef04d859586ac4c672b1, type: 2}
+  - key: res/local/coreplay/sprite/item/shuffle_normal#shuffle_normal
+    asset: {fileID: 21300000, guid: e448fb8e4242f1a478ece166b2dfba12, type: 3}
+  - key: res/local/coreplay/sprite/item/shuffle_superhard
+    asset: {fileID: 21300000, guid: f6d0f7a5641f38749a5fffc4522fc561, type: 2}
+  - key: res/local/coreplay/sprite/item/shuffle_superhard#shuffle_superhard
+    asset: {fileID: 21300000, guid: 1cf56bcd60d33fb4281d64e8fdb73031, type: 3}
+  - key: res/local/coreplay/sprite/item/undo_gray
+    asset: {fileID: 21300000, guid: 2f2c40b9ff012d841b22e9384ab23a29, type: 2}
+  - key: res/local/coreplay/sprite/item/undo_gray#undo_gray
+    asset: {fileID: 21300000, guid: db8f55eed87092b4697df2807ad06f41, type: 3}
+  - key: res/local/coreplay/sprite/item/undo_hard
+    asset: {fileID: 21300000, guid: 1fdbacca8d2caa74fa0f3322cdcddaf8, type: 2}
+  - key: res/local/coreplay/sprite/item/undo_hard#undo_hard
+    asset: {fileID: 21300000, guid: 84f68f39b643aa54889bb15cd49e5fc9, type: 3}
+  - key: res/local/coreplay/sprite/item/undo_lock
+    asset: {fileID: 21300000, guid: fefa874b3d8466140ac3d6340b051ebc, type: 2}
+  - key: res/local/coreplay/sprite/item/undo_lock#undo_lock
+    asset: {fileID: 21300000, guid: e0fe869db5f24364e9d529487720c41f, type: 3}
+  - key: res/local/coreplay/sprite/item/undo_normal
+    asset: {fileID: 21300000, guid: aefbdb467867b0d4b8610ec34ba72232, type: 2}
+  - key: res/local/coreplay/sprite/item/undo_normal#undo_normal
+    asset: {fileID: 21300000, guid: 225628d70c837d94987427d833a83c56, type: 3}
+  - key: res/local/coreplay/sprite/item/undo_superhard
+    asset: {fileID: 21300000, guid: 77a4595528fc24b42b1fb0708f920054, type: 2}
+  - key: res/local/coreplay/sprite/item/undo_superhard#undo_superhard
+    asset: {fileID: 21300000, guid: 043ea854b04513a4c80eb78d9a0c7047, type: 3}
+  - key: res/local/coreplay/sprite/levelbg
+    asset: {fileID: 21300000, guid: 25ab7e09d534d0641b7f29878fa139eb, type: 2}
+  - key: res/local/coreplay/sprite/levelbg#levelbg
+    asset: {fileID: 21300000, guid: 64d27bade758bb44eb6dc81af0709471, type: 3}
+  - key: res/local/coreplay/sprite/newguider/fingerring
+    asset: {fileID: 21300000, guid: 3bec552955005d148ba34ed660f09755, type: 2}
+  - key: res/local/coreplay/sprite/newguider/fingerring#fingerring
+    asset: {fileID: 21300000, guid: 868eb12e4db42a64d81a2490655d2612, type: 3}
+  - key: res/local/coreplay/sprite/newguider/guidefinger
+    asset: {fileID: 21300000, guid: b7c1906b3531e3e4e974f5b549f00a90, type: 2}
+  - key: res/local/coreplay/sprite/newguider/guidefinger#guidefinger
+    asset: {fileID: 21300000, guid: 7f864095943248e4793082810fd5c973, type: 3}
+  - key: res/local/coreplay/sprite/newguider/tipfield
+    asset: {fileID: 21300000, guid: e2e20305f23a0cc4bb15d007485729ef, type: 2}
+  - key: res/local/coreplay/sprite/newguider/tipfield#tipfield
+    asset: {fileID: 21300000, guid: 2ba05024ffcffdb478af74179a1ccd04, type: 3}
+  - key: res/local/coreplayeff/edgeeff/prefab/effect_sideedge_ribbon
+    asset: {fileID: 1709254077376921, guid: bc38d671587488e4480fc11c4ecf4231, type: 3}
+  - key: res/local/coreplayeff/encourage/anim/anim_encourage_style1
+    asset: {fileID: 7400000, guid: a31185ee1a30e5e4e93a787fba4f57ba, type: 2}
+  - key: res/local/coreplayeff/encourage/anim/anim_encourage_style2
+    asset: {fileID: 7400000, guid: ead22753c2f1fca419b90a24edf75118, type: 2}
+  - key: res/local/coreplayeff/encourage/anim/anim_encourage_style3
+    asset: {fileID: 7400000, guid: 4300c80ae6ceff043a934ae02eedf68d, type: 2}
+  - key: res/local/coreplayeff/encourage/prefab/amazing
+    asset: {fileID: 1709254077376921, guid: f293943fac507db4aa125736435b7133, type: 3}
+  - key: res/local/coreplayeff/encourage/prefab/clear
+    asset: {fileID: 1709254077376921, guid: b26d00a772daed84eb7d58770ae808a2, type: 3}
+  - key: res/local/coreplayeff/encourage/prefab/clutchsave
+    asset: {fileID: 1709254077376921, guid: b0c798a490c0b8047be406d7328e3908, type: 3}
+  - key: res/local/coreplayeff/encourage/prefab/epicmoment
+    asset: {fileID: 1709254077376921, guid: 7d58ac116a067ca49af43b3f8c92c417, type: 3}
+  - key: res/local/coreplayeff/encourage/prefab/excellent
+    asset: {fileID: 1709254077376921, guid: 9bbcb9cb46f957e49bd7cab86dd93055, type: 3}
+  - key: res/local/coreplayeff/encourage/prefab/good
+    asset: {fileID: 1709254077376921, guid: f43b2abc2f4cfc748b479595361f8dea, type: 3}
+  - key: res/local/coreplayeff/encourage/prefab/great
+    asset: {fileID: 1709254077376921, guid: 959fa3bdc2768314ab952c062efe6bb6, type: 3}
+  - key: res/local/coreplayeff/encourage/prefab/perfectflow
+    asset: {fileID: 1709254077376921, guid: 89ddaf67254a0f54c8c11f1429ae11eb, type: 3}
+  - key: res/local/coreplayeff/encourage/prefab/unbelievable
+    asset: {fileID: 1709254077376921, guid: 85aca0c9c4fda3c41bc53fef61b755ef, type: 3}
+  - key: res/local/coreplayeff/encourage/prefab/unbelievables
+    asset: {fileID: 1709254077376921, guid: 4f7ce8a1a340cb44db0ddf2219811d39, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/num/x2
+    asset: {fileID: 21300000, guid: bd1dbb018629e8944864e74ef38ce8c4, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/num/x2#x2
+    asset: {fileID: 21300000, guid: 172e049a066aeb74b90d6d7d326a2e3b, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/num/x3
+    asset: {fileID: 21300000, guid: 67f50863050fd234f8ee423766c98bca, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/num/x3#x3
+    asset: {fileID: 21300000, guid: 1a4ea8726d3d3f345b5d80f9daf97ced, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/num/x4
+    asset: {fileID: 21300000, guid: 59075230aa98cf34b9b3b558c24fd7f3, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/num/x4#x4
+    asset: {fileID: 21300000, guid: fbe0c2160399d604c91578fd4544d714, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/num/x5
+    asset: {fileID: 21300000, guid: ec561424271369446973968e4c8fd235, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/num/x5#x5
+    asset: {fileID: 21300000, guid: 5682c7564ea57e043a78cab87c075e57, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/num/x6
+    asset: {fileID: 21300000, guid: 5606012e338dd164a96f5be6cf796346, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/num/x6#x6
+    asset: {fileID: 21300000, guid: efdeba19c57739a488024c96ff69daa5, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/num/x7
+    asset: {fileID: 21300000, guid: d5b0093185a580e449564b21832fd904, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/num/x7#x7
+    asset: {fileID: 21300000, guid: c01afac6dff04264ea2c717e4b96db9b, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/num/x8
+    asset: {fileID: 21300000, guid: 7dafb4e3cc27dd84183a9253c8bf616d, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/num/x8#x8
+    asset: {fileID: 21300000, guid: 521f126d62e455d43888946d2c960e2f, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/num/x9
+    asset: {fileID: 21300000, guid: 03ee8d430e4a5ff41b25306609e7de6f, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/num/x9#x9
+    asset: {fileID: 21300000, guid: 0684356ffeef7d74ba66e7ca3317ac03, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/num/x10
+    asset: {fileID: 21300000, guid: 81f4a53767381bf4693bdebb4ca301d0, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/num/x10#x10
+    asset: {fileID: 21300000, guid: 10dff4beb73ec47438998d024c6c9ff0, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/num/x11
+    asset: {fileID: 21300000, guid: 8ebd20333f83404488b335536446edcd, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/num/x11#x11
+    asset: {fileID: 21300000, guid: 76c574e0acf896b4985333e5a8b73928, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/num/x12
+    asset: {fileID: 21300000, guid: 5f92cbb78e17ab4418b74604ff6ff56b, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/num/x12#x12
+    asset: {fileID: 21300000, guid: c71ade4acf1e03e49b089faff8af2af2, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/num/x13
+    asset: {fileID: 21300000, guid: 86628f8f181933b49a4b1ff55a7367b0, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/num/x13#x13
+    asset: {fileID: 21300000, guid: 480d4bc3b5eaf224baccd55526e92bf2, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/num/x14
+    asset: {fileID: 21300000, guid: 41b575c34e77f194a8a4639acf344445, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/num/x14#x14
+    asset: {fileID: 21300000, guid: 323170533aa3d5b4183e25ee59749cd8, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/num/x15
+    asset: {fileID: 21300000, guid: ba61025da6b61fe49a25addb2362ecf2, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/num/x15#x15
+    asset: {fileID: 21300000, guid: a4883bc3a2c3c7743a8d1cd433cf40f4, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/word/amazing
+    asset: {fileID: 21300000, guid: ccfc7968e97ebe049902736168adefd4, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/word/amazing#amazing
+    asset: {fileID: 21300000, guid: d22d705f1015e8e41b1cc2f4f0ea0706, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/word/clear
+    asset: {fileID: 21300000, guid: 4d9a9233f2db06747a2a1e16e9023f12, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/word/clear#clear
+    asset: {fileID: 21300000, guid: 8ab60337eb8703f44b928f72c35e88ab, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/word/clutchsave
+    asset: {fileID: 21300000, guid: 7fa4158479cde824a97a8007fb76b262, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/word/clutchsave#clutchsave
+    asset: {fileID: 21300000, guid: cbd66e646a6fe8744ab102c5c4164508, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/word/epicmoment
+    asset: {fileID: 21300000, guid: e00a416d61dce3c42b41868b8b825046, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/word/epicmoment#epicmoment
+    asset: {fileID: 21300000, guid: ff5550a3f03e33640bbed57d72830987, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/word/excellent
+    asset: {fileID: 21300000, guid: 4e2e53ed72873a34b9f12358dd8a49a9, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/word/excellent#excellent
+    asset: {fileID: 21300000, guid: 697d5df20b3fbd749bf0a67be40be2b4, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/word/good
+    asset: {fileID: 21300000, guid: 7e12ba5260fa1954bbca2217982e525c, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/word/good#good
+    asset: {fileID: 21300000, guid: e0314e4265f56fd4289ee77dadd0e2ea, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/word/great
+    asset: {fileID: 21300000, guid: 213db971e8e14f94288ccadeb620a068, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/word/great#great
+    asset: {fileID: 21300000, guid: f570c9b3701c4184da2a005dc045d561, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/word/prefectflow
+    asset: {fileID: 21300000, guid: 19982cf2cd0ae8e48aef1bf58af4c1d8, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/word/prefectflow#prefectflow
+    asset: {fileID: 21300000, guid: 27b4b5645428a554190b27762966bd82, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/word/unbelievable
+    asset: {fileID: 21300000, guid: a4ba1584b624ece43959dda1d4720b28, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/word/unbelievable#unbelievable
+    asset: {fileID: 21300000, guid: 53b549cf7a763034fb8b8402f1cd0707, type: 3}
+  - key: res/local/coreplayeff/encourage/sprite/word/unbelievables
+    asset: {fileID: 21300000, guid: 7b4799ad00537d248a066d7e81d1c756, type: 2}
+  - key: res/local/coreplayeff/encourage/sprite/word/unbelievables#unbelievables
+    asset: {fileID: 21300000, guid: 773e45074bd13a74a91ddab4e14ec0d4, type: 3}
+  - key: res/local/coreplaywin/cycleprogress
+    asset: {fileID: 1709254077376921, guid: c6d688c8a8c19a84ea916a281cc87260, type: 3}
+  - key: res/local/coreplaywin/losesprite/anim/anim_loseui_close
+    asset: {fileID: 7400000, guid: 0d24a5a57a14a634385d6ac2f73f835e, type: 2}
+  - key: res/local/coreplaywin/losesprite/anim/anim_loseui_closefirst
+    asset: {fileID: 7400000, guid: 325db7e129911294b8b189b28c598964, type: 2}
+  - key: res/local/coreplaywin/losesprite/anim/anim_loseui_idle
+    asset: {fileID: 7400000, guid: b3dc5d2f188bc2f49b045c78ae18dd01, type: 2}
+  - key: res/local/coreplaywin/losesprite/anim/anim_loseui_idlefirst
+    asset: {fileID: 7400000, guid: e221e677ef5bdf042a06926bdd34ce01, type: 2}
+  - key: res/local/coreplaywin/losesprite/anim/anim_loseui_open
+    asset: {fileID: 7400000, guid: 8dc20dd161185de42aa858f8fd49cf20, type: 2}
+  - key: res/local/coreplaywin/losesprite/anim/anim_loseui_openfirst
+    asset: {fileID: 7400000, guid: d851c4c44f93e7542b842b3d383843d7, type: 2}
+  - key: res/local/coreplaywin/losesprite/bg
+    asset: {fileID: 21300000, guid: 0984bdb7312f2114eb6856dc344ce529, type: 2}
+  - key: res/local/coreplaywin/losesprite/bg#bg
+    asset: {fileID: 21300000, guid: ede230c70789abf4a8416e49e835c2bb, type: 3}
+  - key: res/local/coreplaywin/losesprite/guidetip
+    asset: {fileID: 21300000, guid: 21dc0df97d585b340a34dfff8f10dc63, type: 2}
+  - key: res/local/coreplaywin/losesprite/guidetip#guidetip
+    asset: {fileID: 21300000, guid: c7f90c7711afa19448b83931b12b80da, type: 3}
+  - key: res/local/coreplaywin/losesprite/loseprogressbg
+    asset: {fileID: 21300000, guid: 135324f6a5a7fe841acce53904054002, type: 2}
+  - key: res/local/coreplaywin/losesprite/loseprogressbg#loseprogressbg
+    asset: {fileID: 21300000, guid: 2a7b2cea1d8262148939deedc45b9386, type: 3}
+  - key: res/local/coreplaywin/losesprite/loseprogressfiller
+    asset: {fileID: 21300000, guid: 1f3e7655a0d5e204ca3d0aaa855a9657, type: 2}
+  - key: res/local/coreplaywin/losesprite/loseprogressfiller#loseprogressfiller
+    asset: {fileID: 21300000, guid: 69c1a073e28ce6e40826ccef0f190e99, type: 3}
+  - key: res/local/coreplaywin/losesprite/loseprogressmask
+    asset: {fileID: 21300000, guid: 547d315e06791644bacdf3ff761c59b1, type: 2}
+  - key: res/local/coreplaywin/losesprite/loseprogressmask#loseprogressmask
+    asset: {fileID: 21300000, guid: 8fba95e0de9f3a549af73efcc51daeb4, type: 3}
+  - key: res/local/coreplaywin/loseui
+    asset: {fileID: 1709254077376921, guid: 53b61c15c2d36e7488cc395c286fcd6b, type: 3}
+  - key: res/local/coreplaywin/sprite/d
+    asset: {fileID: 21300000, guid: 599c0d646d8effb458094fc386782436, type: 2}
+  - key: res/local/coreplaywin/sprite/d#d
+    asset: {fileID: 21300000, guid: a4fb0fb4350e7134190db148e7cb9a68, type: 3}
+  - key: res/local/coreplaywin/sprite/done
+    asset: {fileID: 21300000, guid: 64253f315ac953540813d143bdfe89c8, type: 2}
+  - key: res/local/coreplaywin/sprite/done#done
+    asset: {fileID: 21300000, guid: ec2f72d5b9e352644ab9226377b6ea35, type: 3}
+  - key: res/local/coreplaywin/sprite/e
+    asset: {fileID: 21300000, guid: 0727d4904a47b2443a523b9189edfb00, type: 2}
+  - key: res/local/coreplaywin/sprite/e#e
+    asset: {fileID: 21300000, guid: 750fd65243c58d947b3ec6ff7809137b, type: 3}
+  - key: res/local/coreplaywin/sprite/e2
+    asset: {fileID: 21300000, guid: 15396a664e0ff644494e810d3b5f43f5, type: 2}
+  - key: res/local/coreplaywin/sprite/e2#e2
+    asset: {fileID: 21300000, guid: f16f84515566156408b0813c231f3190, type: 3}
+  - key: res/local/coreplaywin/sprite/l1
+    asset: {fileID: 21300000, guid: 428124d4e92f74b46a15435f8f75f416, type: 2}
+  - key: res/local/coreplaywin/sprite/l1#l1
+    asset: {fileID: 21300000, guid: a88295a85eed7f049b69f1213f6ff8f4, type: 3}
+  - key: res/local/coreplaywin/sprite/l2
+    asset: {fileID: 21300000, guid: f1d5981613beff941add4d3f8ea5b344, type: 2}
+  - key: res/local/coreplaywin/sprite/l2#l2
+    asset: {fileID: 21300000, guid: 06ea5988448ff0c429985a5de770ba85, type: 3}
+  - key: res/local/coreplaywin/sprite/n
+    asset: {fileID: 21300000, guid: 5a4824acb668000458d08ae0722a266f, type: 2}
+  - key: res/local/coreplaywin/sprite/n#n
+    asset: {fileID: 21300000, guid: 692de3c460d621647aad48e70705538d, type: 3}
+  - key: res/local/coreplaywin/sprite/o
+    asset: {fileID: 21300000, guid: 9beecb907c88f274d9ece7ad5c5e10a8, type: 2}
+  - key: res/local/coreplaywin/sprite/o#o
+    asset: {fileID: 21300000, guid: 58ae2924ad06d5b4d950a3c82ec8f2c5, type: 3}
+  - key: res/local/coreplaywin/sprite/shuye01
+    asset: {fileID: 21300000, guid: 79ff4b51b800fef48a52881da48ab984, type: 2}
+  - key: res/local/coreplaywin/sprite/shuye01#shuye01
+    asset: {fileID: 21300000, guid: 4cb0b8fc345f9ad4ea88087d9d6a6deb, type: 3}
+  - key: res/local/coreplaywin/sprite/shuye02
+    asset: {fileID: 21300000, guid: c180666d7a61ab64e9e9c055e82b30e3, type: 2}
+  - key: res/local/coreplaywin/sprite/shuye02#shuye02
+    asset: {fileID: 21300000, guid: ee5acc3f9dd4ac2468e6f75d6a84c364, type: 3}
+  - key: res/local/coreplaywin/sprite/shuye03
+    asset: {fileID: 21300000, guid: de97e8be077955349a18c54bf3937289, type: 2}
+  - key: res/local/coreplaywin/sprite/shuye03#shuye03
+    asset: {fileID: 21300000, guid: 1cdda6739a99f9e4d84a14d263f8b5d8, type: 3}
+  - key: res/local/coreplaywin/sprite/shuye04
+    asset: {fileID: 21300000, guid: 07aaf0764e5aa8a4084aff6356f4871c, type: 2}
+  - key: res/local/coreplaywin/sprite/shuye04#shuye04
+    asset: {fileID: 21300000, guid: 4f71c87ecdc19ea40bf0eb14a9457e86, type: 3}
+  - key: res/local/coreplaywin/sprite/start01
+    asset: {fileID: 21300000, guid: 0700e2ac3d3b674498dec2c4c73731c7, type: 2}
+  - key: res/local/coreplaywin/sprite/start01#start01
+    asset: {fileID: 21300000, guid: 8db613ae021cce649b58b2e2bdc036e5, type: 3}
+  - key: res/local/coreplaywin/sprite/start01_add
+    asset: {fileID: 21300000, guid: fb604b24bb22b674ab41a88c1c8e370b, type: 2}
+  - key: res/local/coreplaywin/sprite/start01_add#start01_add
+    asset: {fileID: 21300000, guid: fbd973ab5b7d7514c87469e840281593, type: 3}
+  - key: res/local/coreplaywin/sprite/tiaofu_00
+    asset: {fileID: 21300000, guid: 27d42f66132c7084fbab791b8e3aae5a, type: 2}
+  - key: res/local/coreplaywin/sprite/tiaofu_00#tiaofu_00
+    asset: {fileID: 21300000, guid: c98187e56ded1c54c9dcb8ed81a9d014, type: 3}
+  - key: res/local/coreplaywin/sprite/w
+    asset: {fileID: 21300000, guid: 582745843bcb13d409312efcd4bdd4e7, type: 2}
+  - key: res/local/coreplaywin/sprite/w#w
+    asset: {fileID: 21300000, guid: 82fe9f666bb4c584da380cd2ad9957ca, type: 3}
+  - key: res/local/coreplaywin/sprite/weel
+    asset: {fileID: 21300000, guid: 0226c664469f19b45998580b5503a3ec, type: 2}
+  - key: res/local/coreplaywin/sprite/weel#weel
+    asset: {fileID: 21300000, guid: bd902b8b01825d3478709bd8725f5bff, type: 3}
+  - key: res/local/coreplaywin/sprite/welldone2
+    asset: {fileID: 21300000, guid: fb411266218b7be4394dc465210ca65f, type: 2}
+  - key: res/local/coreplaywin/sprite/welldone2#welldone2
+    asset: {fileID: 21300000, guid: a21b725d02d8b4240a1758ae8db052b0, type: 3}
+  - key: res/local/coreplaywin/sprite/win1
+    asset: {fileID: 21300000, guid: 788e8995425c05a4b861e7b0c543a402, type: 2}
+  - key: res/local/coreplaywin/sprite/win1#win1
+    asset: {fileID: 21300000, guid: 5124582db5b2b1f4b9943eb933f49267, type: 3}
+  - key: res/local/coreplaywin/sprite/win2
+    asset: {fileID: 21300000, guid: 2ef4894369ea6ac489faf03f8b0abda8, type: 2}
+  - key: res/local/coreplaywin/sprite/win2#win2
+    asset: {fileID: 21300000, guid: 05c38764bf7d0f84392e2a85df4bc733, type: 3}
+  - key: res/local/coreplaywin/sprite/winbox
+    asset: {fileID: 21300000, guid: 1d8854c68412e8540806415046102bb1, type: 2}
+  - key: res/local/coreplaywin/sprite/winbox#winbox
+    asset: {fileID: 21300000, guid: 967de4b239d602e46abebca965981f29, type: 3}
+  - key: res/local/coreplaywin/sprite/winbox_lockadd
+    asset: {fileID: 21300000, guid: 2edbbdcd0bb100a4dbe21512c4b68a2d, type: 2}
+  - key: res/local/coreplaywin/sprite/winbox_lockadd#winbox_lockadd
+    asset: {fileID: 21300000, guid: 547e4df1982cdec44afbdf1f745a4e32, type: 3}
+  - key: "res/local/coreplaywin/sprite/\uFF01"
+    asset: {fileID: 21300000, guid: cf3136f060d888d468dfb433b170a5e7, type: 2}
+  - key: "res/local/coreplaywin/sprite/\uFF01#\uFF01"
+    asset: {fileID: 21300000, guid: 2ac90d0662c1ab24ab414f5a3d7a5771, type: 3}
+  - key: res/local/coreplaywin/winui
+    asset: {fileID: 1709254077376921, guid: 334ae0fbe8cb72049a8c368906887ba7, type: 3}
+  - key: res/local/gameloading/gameloading
+    asset: {fileID: 1709254077376921, guid: 56d177fc3c8bd5f4e9bc8a9c35f205b9, type: 3}
+  - key: res/local/gameloading/sprite/loadingbg
+    asset: {fileID: 21300000, guid: 7e636825c0b89504596297435face2dc, type: 2}
+  - key: res/local/gameloading/sprite/loadingbg#loadingbg
+    asset: {fileID: 21300000, guid: 3d0562af2c7d1f740a065a6bc537795e, type: 3}
+  - key: res/local/gameloading/sprite/loadinglogo
+    asset: {fileID: 21300000, guid: 36b26bbf2d1c4324a932f7cc9e6c101a, type: 2}
+  - key: res/local/gameloading/sprite/loadinglogo#loadinglogo
+    asset: {fileID: 21300000, guid: 80353eead2128ab40a69902899a01db4, type: 3}
+  - key: res/local/globalui/globaltext
+    asset: {fileID: 1709254077376921, guid: 9ba3b92784c16d94899a9c63c92d028e, type: 3}
+  - key: res/local/globalui/hotstartadloading
+    asset: {fileID: 1709254077376921, guid: 73e58508450a90e4ba4a3a5f3e5c3d66, type: 3}
+  - key: res/local/globalui/iapbg
+    asset: {fileID: 1709254077376921, guid: 0ca242d737b8d9e408f6009da303190d, type: 3}
+  - key: res/local/globalui/sprite/globaltext_in
+    asset: {fileID: 7400000, guid: f8abe8314634c094d8722ca0b9340a20, type: 2}
+  - key: res/local/globalui/sprite/hotstartbg
+    asset: {fileID: 21300000, guid: 49dfcaa7f252736458393af058323832, type: 2}
+  - key: res/local/globalui/sprite/hotstartbg#hotstartbg
+    asset: {fileID: 21300000, guid: acb9bb89a830e2e4199df1095e7a00c3, type: 3}
+  - key: res/local/globalui/sprite/hotstarticon
+    asset: {fileID: 21300000, guid: 671d7269e5b03fe40937d09c9d9a3565, type: 2}
+  - key: res/local/globalui/sprite/hotstarticon#hotstarticon
+    asset: {fileID: 21300000, guid: 1f25ee79a3aa72b42b10ae37b366a35e, type: 3}
+  - key: res/local/globalui/sprite/iap_loading
+    asset: {fileID: 21300000, guid: a3c5d15d07fd55746a676e85f6b0377a, type: 2}
+  - key: res/local/globalui/sprite/iap_loading#iap_loading
+    asset: {fileID: 21300000, guid: 451e92653b34aec47b41d934fa1082ce, type: 3}
+  - key: res/local/globalui/sprite/iapbg_idle
+    asset: {fileID: 7400000, guid: ff3ed1b8e9523084ca3f0ce178a0efb7, type: 2}
+  - key: res/local/globalui/sprite/toast_bg
+    asset: {fileID: 21300000, guid: 82e5cba4ca4650647b0b32b824d32a59, type: 2}
+  - key: res/local/globalui/sprite/toast_bg#toast_bg
+    asset: {fileID: 21300000, guid: efcba9d397aeb3a4aa22d5bec025f4da, type: 3}
+  - key: res/local/globalui/switchbgloading
+    asset: {fileID: 1709254077376921, guid: 4466a617b3196f642b7292a67d0fb0a2, type: 3}
+  - key: res/local/haptics/hp_anim_game_fruit_clear
+    asset: {fileID: 11400000, guid: 670c68d0870e2664ebab9fe794aa8af1, type: 2}
+  - key: res/local/haptics/hp_notice_game_start
+    asset: {fileID: 11400000, guid: 80eaaea90e72ce54c928d82d6724c714, type: 2}
+  - key: res/local/haptics/hp_notice_prop_magicwand
+    asset: {fileID: 11400000, guid: 1e73165fd2cc442448ae44e0f2c73289, type: 2}
+  - key: res/local/home/ani/home_close
+    asset: {fileID: 7400000, guid: 36e0ece585e4e1244baf22e6e2d80d95, type: 2}
+  - key: res/local/home/ani/home_open
+    asset: {fileID: 7400000, guid: 04e9819dd4a171e4d8d66ac7a37a8367, type: 2}
+  - key: res/local/home/home
+    asset: {fileID: 1709254077376921, guid: 266c5f795a54b034c9757a8656c2fd44, type: 3}
+  - key: res/local/home/image/homebg
+    asset: {fileID: 21300000, guid: 30fc56ba8b934d747869f862c19e34c3, type: 2}
+  - key: res/local/home/image/homebg#homebg
+    asset: {fileID: 21300000, guid: c2342673465fb1c49988b4fdd7ee5f9f, type: 3}
+  - key: res/local/home/image/noadbtn
+    asset: {fileID: 21300000, guid: b2b7c61b52145df439e539ff45cc0bba, type: 2}
+  - key: res/local/home/image/noadbtn#noadbtn
+    asset: {fileID: 21300000, guid: 16b5c3ea7f4c1764ba9129f88fc7eb3f, type: 3}
+  - key: res/local/pops/feedback/feedbackui
+    asset: {fileID: 1709254077376921, guid: 6ad74933b29e6404a9dc67d1a5587d4b, type: 3}
+  - key: res/local/pops/freecoin/freecoinui
+    asset: {fileID: 1709254077376921, guid: b55510d6b7c0fa24e817b26d5194b67a, type: 3}
+  - key: res/local/pops/freecoin/sprite/coinicon
+    asset: {fileID: 21300000, guid: 6bc92236b4ac5064c951392ac102e6ef, type: 2}
+  - key: res/local/pops/freecoin/sprite/coinicon#coinicon
+    asset: {fileID: 21300000, guid: 564cd9e0957128540b171cda93309234, type: 3}
+  - key: res/local/pops/hardleveltip/hardleveltipui
+    asset: {fileID: 1709254077376921, guid: 6dde48b84f4215e41a7575ba7dc94ab4, type: 3}
+  - key: res/local/pops/hardleveltip/sprite/bg_hard
+    asset: {fileID: 21300000, guid: 416e2aef999920146a0957ddeac41370, type: 2}
+  - key: res/local/pops/hardleveltip/sprite/bg_hard#bg_hard
+    asset: {fileID: 21300000, guid: baaa6fb8cd4343d4fa1fdd7f6c6d467f, type: 3}
+  - key: res/local/pops/hardleveltip/sprite/bg_superhard
+    asset: {fileID: 21300000, guid: cec96df19a49c03468c7bca61d00477b, type: 2}
+  - key: res/local/pops/hardleveltip/sprite/bg_superhard#bg_superhard
+    asset: {fileID: 21300000, guid: 25e4497bbec93f147a757625a9cfa677, type: 3}
+  - key: res/local/pops/hardleveltip/sprite/grass1
+    asset: {fileID: 21300000, guid: 1a38046a2e31e404baa4a29d3b6c1e79, type: 2}
+  - key: res/local/pops/hardleveltip/sprite/grass1#grass1
+    asset: {fileID: 21300000, guid: f01c7e001642b88489e95f13d6e0a095, type: 3}
+  - key: res/local/pops/hardleveltip/sprite/grass2
+    asset: {fileID: 21300000, guid: 68ad2eb8e9280774ba1a294f0e4fa9b8, type: 2}
+  - key: res/local/pops/hardleveltip/sprite/grass2#grass2
+    asset: {fileID: 21300000, guid: b8705fb9503c51646912335557fac492, type: 3}
+  - key: res/local/pops/hardleveltip/sprite/icon_hard
+    asset: {fileID: 21300000, guid: d7156a0788c93e1438a2d8b98dbdc17b, type: 2}
+  - key: res/local/pops/hardleveltip/sprite/icon_hard#icon_hard
+    asset: {fileID: 21300000, guid: 58e8113d0d5fcf94b9de2c98e572ba78, type: 3}
+  - key: res/local/pops/hardleveltip/sprite/icon_superhard
+    asset: {fileID: 21300000, guid: 18c337e7181794b49b390733dc0c71d3, type: 2}
+  - key: res/local/pops/hardleveltip/sprite/icon_superhard#icon_superhard
+    asset: {fileID: 21300000, guid: 1af6b5320fc1de347a733f5faf04fc8e, type: 3}
+  - key: res/local/pops/hardleveltip/sprite/superhardredlight
+    asset: {fileID: 21300000, guid: f1b5ee35ecbff3c4ca25b842548d0d4e, type: 2}
+  - key: res/local/pops/hardleveltip/sprite/superhardredlight#superhardredlight
+    asset: {fileID: 21300000, guid: 44a9c568992017f41a2461af4a2dfe56, type: 3}
+  - key: res/local/pops/hardleveltip/superhardleveltipui
+    asset: {fileID: 1709254077376921, guid: 5fee3cd4189e75946893d014c5ead4dd, type: 3}
+  - key: res/local/pops/language/languageui
+    asset: {fileID: 1709254077376921, guid: a5e8fbf6e1c6d7a458054a6db3764da2, type: 3}
+  - key: res/local/pops/language/sprite/languagemask
+    asset: {fileID: 21300000, guid: acad29787327e6b47a48f21071a01d51, type: 2}
+  - key: res/local/pops/language/sprite/languagemask#languagemask
+    asset: {fileID: 21300000, guid: bcd8163cedfdfc342ae7d08b4d84ffc9, type: 3}
+  - key: res/local/pops/leveltip/anim/leveltipclose
+    asset: {fileID: 7400000, guid: bfe9b3ad9c24aa340909d90cdb37b375, type: 2}
+  - key: res/local/pops/leveltip/anim/leveltipopen
+    asset: {fileID: 7400000, guid: 03bf3f3a0edd47d4f85c4e8f2c5388bb, type: 2}
+  - key: res/local/pops/leveltip/leveltipui
+    asset: {fileID: 1709254077376921, guid: 67e3f1e9f4ab6224fb198841e2f25211, type: 3}
+  - key: res/local/pops/leveltip/sprite/flags
+    asset: {fileID: 21300000, guid: 70d6607858b25c54cb46a5cc7e63cc1d, type: 2}
+  - key: res/local/pops/leveltip/sprite/flags#flags
+    asset: {fileID: 21300000, guid: 035ec20c1b04705438265475228e875c, type: 3}
+  - key: res/local/pops/leveltip/sprite/normalbg
+    asset: {fileID: 21300000, guid: fe0800e41549cfb4dac319bb7912a375, type: 2}
+  - key: res/local/pops/leveltip/sprite/normalbg#normalbg
+    asset: {fileID: 21300000, guid: 33ace4dc068a5f943a25ce629ac99fec, type: 3}
+  - key: res/local/pops/leveltip/sprite/toybg
+    asset: {fileID: 21300000, guid: 070b3ecdbfcdbc94584d5efec8ae2844, type: 2}
+  - key: res/local/pops/leveltip/sprite/toybg#toybg
+    asset: {fileID: 21300000, guid: 663883b6b2356c74ea52dc1f5221bb40, type: 3}
+  - key: res/local/pops/leveltip/sprite/toybgtitle
+    asset: {fileID: 21300000, guid: da68adf7a064ccc48a2c62833bc99ed3, type: 2}
+  - key: res/local/pops/leveltip/sprite/toybgtitle#toybgtitle
+    asset: {fileID: 21300000, guid: 2000f8b808103be48a6f3da56b1612f3, type: 3}
+  - key: res/local/pops/needdownload/needdownloadui
+    asset: {fileID: 1709254077376921, guid: 18e111d06466cf547a0992c9d895f926, type: 3}
+  - key: res/local/pops/needdownload/sprite/unkowntree
+    asset: {fileID: 21300000, guid: 479e0bcfcc2f6c548a7bce74a4d7dd76, type: 2}
+  - key: res/local/pops/needdownload/sprite/unkowntree#unkowntree
+    asset: {fileID: 21300000, guid: 2dc627ad743ce724d99d974b757fe0fa, type: 3}
+  - key: res/local/pops/newitempop/anim/anim_newitempop_disappear
+    asset: {fileID: 7400000, guid: 376f06c1a3a5d354993a343a2d278cbd, type: 2}
+  - key: res/local/pops/newitempop/anim/anim_newitempop_in
+    asset: {fileID: 7400000, guid: 8091e5339f6b2c9499bba9a93509411c, type: 2}
+  - key: res/local/pops/newitempop/anim/anim_newitempop_loop
+    asset: {fileID: 7400000, guid: ba4ead9909ea7594b8893f9d01bf8cdc, type: 2}
+  - key: res/local/pops/newitempop/newitempop
+    asset: {fileID: 1709254077376921, guid: f86e13d6532a50f42977b704dc12a10d, type: 3}
+  - key: res/local/pops/newitempop/sprite/iconextra
+    asset: {fileID: 21300000, guid: 15f6f39b36460fd49accd1f315e472f1, type: 2}
+  - key: res/local/pops/newitempop/sprite/iconextra#iconextra
+    asset: {fileID: 21300000, guid: d6db95eab0c9c3c418d3fca1cee59281, type: 3}
+  - key: res/local/pops/newitempop/sprite/iconmagic
+    asset: {fileID: 21300000, guid: a529d930287da134681ab4b7bbc64e15, type: 2}
+  - key: res/local/pops/newitempop/sprite/iconmagic#iconmagic
+    asset: {fileID: 21300000, guid: 4afdcf9de8a1ef44b976e764a2086ed7, type: 3}
+  - key: res/local/pops/newitempop/sprite/iconshuffle
+    asset: {fileID: 21300000, guid: 0c81fd1714a3ef140ad5eb06025df60a, type: 2}
+  - key: res/local/pops/newitempop/sprite/iconshuffle#iconshuffle
+    asset: {fileID: 21300000, guid: 9a0da87826056354daf65bfdfa28df1f, type: 3}
+  - key: res/local/pops/newitempop/sprite/iconundo
+    asset: {fileID: 21300000, guid: 00801e242bffec84da63a9872eea273f, type: 2}
+  - key: res/local/pops/newitempop/sprite/iconundo#iconundo
+    asset: {fileID: 21300000, guid: 471077aa3bff27342ba1c87c4249e735, type: 3}
+  - key: res/local/pops/newitempop/sprite/newitempoptitle
+    asset: {fileID: 21300000, guid: 6164c08afb70aa04e9115b3c10bf740d, type: 2}
+  - key: res/local/pops/newitempop/sprite/newitempoptitle#newitempoptitle
+    asset: {fileID: 21300000, guid: 54ca0e5326b707f42a9d15831e749453, type: 3}
+  - key: res/local/pops/newitempop/sprite/newitempoptitle_add
+    asset: {fileID: 21300000, guid: 279b8c93b4ecdda41a140d942aa1c0b2, type: 2}
+  - key: res/local/pops/newitempop/sprite/newitempoptitle_add#newitempoptitle_add
+    asset: {fileID: 21300000, guid: e6f9e4e9827c1c84787ec9152b3b2426, type: 3}
+  - key: res/local/pops/notification/notificationsauthui
+    asset: {fileID: 1709254077376921, guid: 73fa96994de856441943b451040d860e, type: 3}
+  - key: res/local/pops/notification/sprite/tz_bg
+    asset: {fileID: 21300000, guid: f8770f52993d6c04f8eba6ce9e4d1c97, type: 2}
+  - key: res/local/pops/notification/sprite/tz_bg#tz_bg
+    asset: {fileID: 21300000, guid: a5198b2b933b45d4ca9542cc6bd8edf1, type: 3}
+  - key: res/local/pops/privacypolicy/privacypolicyui
+    asset: {fileID: 1709254077376921, guid: 279b929379fa4a34d80d2240a0985c0b, type: 3}
+  - key: res/local/pops/quit/quitui
+    asset: {fileID: 1709254077376921, guid: 917be8d181b270741821eb5ffa097c13, type: 3}
+  - key: res/local/pops/rate/rateui
+    asset: {fileID: 1709254077376921, guid: 8511eca3357dd454086096967af4010d, type: 3}
+  - key: res/local/pops/rate/sprite/star
+    asset: {fileID: 21300000, guid: 6f306989bd900b74a9540bd0f4fecdaa, type: 2}
+  - key: res/local/pops/rate/sprite/star#star
+    asset: {fileID: 21300000, guid: 66ca54962e69040438d519c5ed145010, type: 3}
+  - key: res/local/pops/referenceprefab/midcontent
+    asset: {fileID: 1709254077376921, guid: d28191c00a4103e46901e68379cd36ea, type: 3}
+  - key: res/local/pops/referenceprefab/settingmidbtn
+    asset: {fileID: 1709254077376921, guid: b5a775a658670a940b3807b894efdca9, type: 3}
+  - key: res/local/pops/referenceprefab/settingsmallbtn
+    asset: {fileID: 1709254077376921, guid: 212799bcca1b9174eb3ad326a2ffe089, type: 3}
+  - key: res/local/pops/removead/iapcancelui
+    asset: {fileID: 1709254077376921, guid: 9f6fb045f4fc86c448d611de92a7f10c, type: 3}
+  - key: res/local/pops/removead/iapnetworkfailedui
+    asset: {fileID: 1709254077376921, guid: 139652e274298954487c7702cb9b4d8d, type: 3}
+  - key: res/local/pops/removead/iapunknowfailedui
+    asset: {fileID: 1709254077376921, guid: 22e872f2cdb66314e983027d3c12a76a, type: 3}
+  - key: res/local/pops/removead/removeadui
+    asset: {fileID: 1709254077376921, guid: 487c887bc977dab40877856ecaad2fe1, type: 3}
+  - key: res/local/pops/removead/sprite/bg
+    asset: {fileID: 21300000, guid: ec0aeff4f3df4a849a7c7a876e3a6077, type: 2}
+  - key: res/local/pops/removead/sprite/bg#bg
+    asset: {fileID: 21300000, guid: 4bc731ad38ef335449f1e9c21260291e, type: 3}
+  - key: res/local/pops/removead/sprite/datubiao
+    asset: {fileID: 21300000, guid: 270277a2f5d54544d87db8893caa7339, type: 2}
+  - key: res/local/pops/removead/sprite/datubiao#datubiao
+    asset: {fileID: 21300000, guid: fd14322fda537b142a3a8441bbd5ebd1, type: 3}
+  - key: res/local/pops/removead/sprite/meiwang
+    asset: {fileID: 21300000, guid: 938fb2eafff22314abb3c21a4133c2a4, type: 2}
+  - key: res/local/pops/removead/sprite/meiwang#meiwang
+    asset: {fileID: 21300000, guid: 3acc083d565281e4aa13e953face51a3, type: 3}
+  - key: res/local/pops/removead/sprite/quxiao
+    asset: {fileID: 21300000, guid: 9d0a2ed0baa70bd40a2ac5d6668ed5ac, type: 2}
+  - key: res/local/pops/removead/sprite/quxiao#quxiao
+    asset: {fileID: 21300000, guid: b7660fff6976c684d826804d8f5ecfd5, type: 3}
+  - key: res/local/pops/setting/gamesettingui
+    asset: {fileID: 1709254077376921, guid: 323ffe6b73a3ada44bb8b106aa14538f, type: 3}
+  - key: res/local/pops/setting/homesettingui
+    asset: {fileID: 1709254077376921, guid: 1bf4435201e3df5489e2e065e42c6edd, type: 3}
+  - key: res/local/pops/setting/sprite/icon_home
+    asset: {fileID: 21300000, guid: 3cb75364156181d4183a2c192256a3e0, type: 2}
+  - key: res/local/pops/setting/sprite/icon_home#icon_home
+    asset: {fileID: 21300000, guid: 01203fc88fb5e964f9f0b60bcdb531a1, type: 3}
+  - key: res/local/pops/setting/sprite/icon_language
+    asset: {fileID: 21300000, guid: 9f9822024c3ddef42a0544a089902d26, type: 2}
+  - key: res/local/pops/setting/sprite/icon_language#icon_language
+    asset: {fileID: 21300000, guid: cfab517c10dabd6488adf5eaa695f336, type: 3}
+  - key: res/local/pops/setting/sprite/icon_play
+    asset: {fileID: 21300000, guid: 1660b2161c8d29f4ea46fb140e7cba33, type: 2}
+  - key: res/local/pops/setting/sprite/icon_play#icon_play
+    asset: {fileID: 21300000, guid: 9b4dc7a8aa5834a46b613631c8807026, type: 3}
+  - key: res/local/pops/setting/sprite/icon_rate
+    asset: {fileID: 21300000, guid: 32d318aa16195024dbc57c46dfa41745, type: 2}
+  - key: res/local/pops/setting/sprite/icon_rate#icon_rate
+    asset: {fileID: 21300000, guid: c62d21aadc1abdd479aa13fe9214521c, type: 3}
+  - key: res/local/pops/setting/sprite/icon_replay
+    asset: {fileID: 21300000, guid: c71efa5c7aecbb54a9046c82ba233bf8, type: 2}
+  - key: res/local/pops/setting/sprite/icon_replay#icon_replay
+    asset: {fileID: 21300000, guid: 67624c5fb00236a46a9e5ea27a6eb94e, type: 3}
+  - key: res/local/pops/setting/sprite/setmusic
+    asset: {fileID: 21300000, guid: 514caea3cfda01d419d4dce498bc92d5, type: 2}
+  - key: res/local/pops/setting/sprite/setmusic#setmusic
+    asset: {fileID: 21300000, guid: be21abf8e69cb784dbde7ea5c3cf4ec1, type: 3}
+  - key: res/local/pops/setting/sprite/setmusic_close
+    asset: {fileID: 21300000, guid: 1837170c6a1a3144293edd292ff86461, type: 2}
+  - key: res/local/pops/setting/sprite/setmusic_close#setmusic_close
+    asset: {fileID: 21300000, guid: a150043fa1fc46748bf97421bc6c7fe0, type: 3}
+  - key: res/local/pops/setting/sprite/setshock
+    asset: {fileID: 21300000, guid: fa6f91d368efb0045a18591a1c808785, type: 2}
+  - key: res/local/pops/setting/sprite/setshock#setshock
+    asset: {fileID: 21300000, guid: 2ff3a60a02ff26346984880df5583c7d, type: 3}
+  - key: res/local/pops/setting/sprite/setshock_close
+    asset: {fileID: 21300000, guid: d7b2215f82e03d34388bd8d8fdad975b, type: 2}
+  - key: res/local/pops/setting/sprite/setshock_close#setshock_close
+    asset: {fileID: 21300000, guid: 9a574bb2f209e3c478a19a9cd308261f, type: 3}
+  - key: res/local/pops/setting/sprite/setsound
+    asset: {fileID: 21300000, guid: 04d9befe74e3089498c48f8b50d36fce, type: 2}
+  - key: res/local/pops/setting/sprite/setsound#setsound
+    asset: {fileID: 21300000, guid: b729da5450137154586ec01698d111cb, type: 3}
+  - key: res/local/pops/setting/sprite/setsound_close
+    asset: {fileID: 21300000, guid: 09fe54aa315bc524482ff562bc52e2a3, type: 2}
+  - key: res/local/pops/setting/sprite/setsound_close#setsound_close
+    asset: {fileID: 21300000, guid: 763dfca027b945449b9888f93e8819d5, type: 3}
+  - key: res/local/pops/setting/sprite/switchbtn_open
+    asset: {fileID: 21300000, guid: 7187825484b249e4a8d45b5a4e84aa54, type: 2}
+  - key: res/local/pops/setting/sprite/switchbtn_open#switchbtn_open
+    asset: {fileID: 21300000, guid: 82542f6bb74e003488902bcd60484d1a, type: 3}
+  - key: res/local/pops/setting/sprite/switchbtnbg_close
+    asset: {fileID: 21300000, guid: d2960461b1678104fa46f2037dda3c21, type: 2}
+  - key: res/local/pops/setting/sprite/switchbtnbg_close#switchbtnbg_close
+    asset: {fileID: 21300000, guid: 2700ebc3031d2864c87ae13b0042ffed, type: 3}
+  - key: res/local/pops/setting/sprite/switchbtnbg_open
+    asset: {fileID: 21300000, guid: 4099975697419ce41b8afea22b1f73e4, type: 2}
+  - key: res/local/pops/setting/sprite/switchbtnbg_open#switchbtnbg_open
+    asset: {fileID: 21300000, guid: cad066d118377204b9efa599126d21d7, type: 3}
+  - key: res/local/pops/userright/userrightui
+    asset: {fileID: 1709254077376921, guid: 76925c22167b98d4582a1da139a541e9, type: 3}
+  - key: res/local/shop/anim/anim_shoprewarditem_fly
+    asset: {fileID: 7400000, guid: 346177cf29c69414db89652f41eee5cb, type: 2}
+  - key: res/local/shop/anim/anim_shoprewarditem_in
+    asset: {fileID: 7400000, guid: bb7971caa5253dc4991e923831993026, type: 2}
+  - key: res/local/shop/anim/anim_shoprewarditem_loop
+    asset: {fileID: 7400000, guid: 1180bfdaf53735e4c9c7f0b5966e6081, type: 2}
+  - key: res/local/shop/anim/anim_shoprewardui_disappear
+    asset: {fileID: 7400000, guid: 66d935a84438e5b46b8e3ad158b970b7, type: 2}
+  - key: res/local/shop/anim/anim_shoprewardui_in
+    asset: {fileID: 7400000, guid: b36e78d84325069429c29d0803f7ebdd, type: 2}
+  - key: res/local/shop/anim/anim_shoprewardui_loop
+    asset: {fileID: 7400000, guid: b4d36840a26fb8245b045ab5816a2987, type: 2}
+  - key: res/local/shop/anim/anim_shoptransform_in
+    asset: {fileID: 7400000, guid: 9e4fa66a49ecf95499f64e11a920bcc6, type: 2}
+  - key: res/local/shop/anim/anim_shoptransform_initial
+    asset: {fileID: 7400000, guid: 2ff875138b751a34f8d7261a9b12616d, type: 2}
+  - key: res/local/shop/anim/anim_shoptransform_spread
+    asset: {fileID: 7400000, guid: 3e6d7d0cca074ee4db763a33308215be, type: 2}
+  - key: res/local/shop/anim/anim_shopui_close
+    asset: {fileID: 7400000, guid: 1d2fc3feac6c3a940b013c146953208e, type: 2}
+  - key: res/local/shop/anim/anim_shopui_in
+    asset: {fileID: 7400000, guid: 840d668125a73954b9ad7752232cdc11, type: 2}
+  - key: res/local/shop/prefab/coinpack
+    asset: {fileID: 1709254077376921, guid: b5f1630618053a445a72d2765768e4ed, type: 3}
+  - key: res/local/shop/prefab/giftpack
+    asset: {fileID: 1709254077376921, guid: bfafc19aba2ae4844859b83784d50132, type: 3}
+  - key: res/local/shop/prefab/shoprewarditem
+    asset: {fileID: 1709254077376921, guid: 2f74ed69d758bf743a6f495dd61b30f5, type: 3}
+  - key: res/local/shop/prefab/shoprewardui
+    asset: {fileID: 1709254077376921, guid: 1f4ee917246c7b34e847d272f8f078c8, type: 3}
+  - key: res/local/shop/prefab/shopui
+    asset: {fileID: 1709254077376921, guid: f5c4727829265a740a22b8583c8eae8b, type: 3}
+  - key: res/local/shop/sprite44/bar_lanse_9s
+    asset: {fileID: 21300000, guid: 9f51fd23d1dd445459e8a688fce2f9d2, type: 2}
+  - key: res/local/shop/sprite44/bar_zise_9s
+    asset: {fileID: 21300000, guid: 57b054a950a1aec4597b80fd0537282a, type: 2}
+  - key: res/local/shop/sprite44/bg_ddb_9s
+    asset: {fileID: 21300000, guid: cd67c66350806b14daef8ab3a3d8e112, type: 2}
+  - key: res/local/shop/sprite44/btn_fh
+    asset: {fileID: 21300000, guid: b6ae57502df4dae448c262015abad695, type: 2}
+  - key: res/local/shop/sprite44/btn_lv_9s
+    asset: {fileID: 21300000, guid: 65eddc2ec7939dc4db6ddb1b2625e16a, type: 2}
+  - key: res/local/shop/sprite44/btn_xiangxiajiantou
+    asset: {fileID: 21300000, guid: ca4e21786127b3344824682fa7fe05d9, type: 2}
+  - key: res/local/shop/sprite44/icon_add
+    asset: {fileID: 21300000, guid: 64f7cce787672844f8212bce40ed475a, type: 2}
+  - key: res/local/shop/sprite44/icon_jb01
+    asset: {fileID: 21300000, guid: e2f8f754f3509134091afdd346436a8e, type: 2}
+  - key: res/local/shop/sprite44/icon_jb02
+    asset: {fileID: 21300000, guid: dbde1c6d918e5ee438a7c720aa868218, type: 2}
+  - key: res/local/shop/sprite44/icon_jb03
+    asset: {fileID: 21300000, guid: e47c6a022ad0dee46b4c8efb8668185e, type: 2}
+  - key: res/local/shop/sprite44/icon_jb04
+    asset: {fileID: 21300000, guid: 5edded34db395e24cbb512a5c6abb451, type: 2}
+  - key: res/local/shop/sprite44/icon_jbtb1
+    asset: {fileID: 21300000, guid: 2b92b3f714d42ea4b909030fa2d118c6, type: 2}
+  - key: res/local/shop/sprite44/icon_jbtb2
+    asset: {fileID: 21300000, guid: 34b313ae48a71f64697bca8e1b216367, type: 2}
+  - key: res/local/shop/sprite44/icon_jbtb3
+    asset: {fileID: 21300000, guid: 7de5eb4cbbbdc0c4882e8f47ee6db8ee, type: 2}
+  - key: res/local/shop/sprite44/icon_jbtb4
+    asset: {fileID: 21300000, guid: 6400f40c7b5725847876482ca1693720, type: 2}
+  - key: res/local/shop/sprite44/icon_jbtb5
+    asset: {fileID: 21300000, guid: d07e7548a15a5154fa82ac6e32c84ee9, type: 2}
+  - key: res/local/shop/sprite44/icon_jbtb6
+    asset: {fileID: 21300000, guid: fab0333868528c84dba65fb3a1d86270, type: 2}
+  - key: res/local/shop/sprite44/icon_jbtb7
+    asset: {fileID: 21300000, guid: 68cfa25270a51fa45a9ac2aeb66ab2f2, type: 2}
+  - key: res/local/shop/sprite44/icon_qgg
+    asset: {fileID: 21300000, guid: 63cb1bf80c90bba4d9bf4e87bd1b0ef7, type: 2}
+  - key: res/local/shop/sprite44/icon_qgghuise
+    asset: {fileID: 21300000, guid: f3601eab821b9cf4d9860d186a020e72, type: 2}
+  - key: res/local/shop/sprite44/icon_shop
+    asset: {fileID: 21300000, guid: 920569b40bd9de84088122e7d271d2a7, type: 2}
+  - key: res/local/shop/sprite44/icon_xjc
+    asset: {fileID: 21300000, guid: 52689817dfacb63418c70d6480691c74, type: 2}
+  - key: res/local/shop/sprite44/icon_xjinb
+    asset: {fileID: 21300000, guid: 3568a6570cb132845a21278ade37f489, type: 2}
+  - key: res/local/shop/sprite44/icon_xjt
+    asset: {fileID: 21300000, guid: bee1e4fb878f02545afe951edccb33ea, type: 2}
+  - key: res/local/shop/sprite44/icon_xmfb
+    asset: {fileID: 21300000, guid: e9394aba660fc6744831f1dede9f2edc, type: 2}
+  - key: res/local/shop/sprite44/icon_zjc
+    asset: {fileID: 21300000, guid: 06e6377da175ab243a2acf06b3a76189, type: 2}
+  - key: res/local/shop/sprite44/icon_zjt
+    asset: {fileID: 21300000, guid: 58e27878ef0f53f44847cdd08e8d4209, type: 2}
+  - key: res/local/shop/sprite44/icon_zmfb
+    asset: {fileID: 21300000, guid: ae5739293f9a5d848977a71a7ebd688b, type: 2}
+  - key: res/local/shop/sprite44/tab_bt_9s
+    asset: {fileID: 21300000, guid: c179f97abcef5c947867897a424e3939, type: 2}
+  - key: res/local/shop/sprite44/tab_hsq
+    asset: {fileID: 21300000, guid: 4d440d574e7b7d247860faa08eb4bc94, type: 2}
+  - key: res/local/shop/sprite44/tab_yx
+    asset: {fileID: 21300000, guid: a343faaf1277c96419ac26dcc5cce5b9, type: 2}
+  - key: res/local/shop/sprite66/bar_mutou
+    asset: {fileID: 21300000, guid: cc47ae526a1e4634b8745e73e3df74b2, type: 2}
+  - key: res/local/shop/sprite66/bar_mutou#bar_mutou
+    asset: {fileID: 21300000, guid: 9fa07dd93b27d974ebcb8bca7da0a54e, type: 3}
+  - key: res/local/shop/sprite66/bg_scdk
+    asset: {fileID: 21300000, guid: ef8805986b980ab4294e09f3867b27de, type: 2}
+  - key: res/local/shop/sprite66/bg_scdk#bg_scdk
+    asset: {fileID: 21300000, guid: 58248debb51dd9b48862a78ea586786d, type: 3}
+  - key: res/local/shop/sprite66/btn_hui_9s
+    asset: {fileID: 21300000, guid: 63b59a93e8c1246449eb6bcdb2caa4ab, type: 2}
+  - key: res/local/shop/sprite66/btn_hui_9s#btn_hui_9s
+    asset: {fileID: 21300000, guid: a8f9fb5cb7cd5fe4a982f2a50bee7b1c, type: 3}
+  - key: res/local/shop/sprite66/rewardtitle
+    asset: {fileID: 21300000, guid: e79b41459d9a5a3459d0d26ffd1b39c0, type: 2}
+  - key: res/local/shop/sprite66/rewardtitle#rewardtitle
+    asset: {fileID: 21300000, guid: fdcaafed8af161144807c3ada9685651, type: 3}
+  - key: res/local/shop/sprite66/rewardtitle_add
+    asset: {fileID: 21300000, guid: 76aa9440774c80f449463c79e6b66512, type: 2}
+  - key: res/local/shop/sprite66/rewardtitle_add#rewardtitle_add
+    asset: {fileID: 21300000, guid: def995efac2fc5b4d8e842ac316ad056, type: 3}
+  - key: res/local/shop/sprite66/tab_dtbgsc
+    asset: {fileID: 21300000, guid: 85e300a028a410045942e114a1d19fe3, type: 2}
+  - key: res/local/shop/sprite66/tab_dtbgsc#tab_dtbgsc
+    asset: {fileID: 21300000, guid: 3b21d69cbedacef4abe760ca41ba943c, type: 3}
+  - key: res/local/sound/master
+    asset: {fileID: 24100000, guid: de8c81d983d0f7b41bf030b1d05879f0, type: 2}
+  - key: res/local/sound/master#ambience
+    asset: {fileID: 24300000, guid: de8c81d983d0f7b41bf030b1d05879f0, type: 2}
+  - key: res/local/sound/master#master
+    asset: {fileID: 24300030, guid: de8c81d983d0f7b41bf030b1d05879f0, type: 2}
+  - key: res/local/sound/master#music
+    asset: {fileID: 24300020, guid: de8c81d983d0f7b41bf030b1d05879f0, type: 2}
+  - key: res/local/sound/master#regular
+    asset: {fileID: 24300014, guid: de8c81d983d0f7b41bf030b1d05879f0, type: 2}
+  - key: res/local/sound/master#sfx
+    asset: {fileID: 24300026, guid: de8c81d983d0f7b41bf030b1d05879f0, type: 2}
+  - key: res/local/sound/master#sfx_accent
+    asset: {fileID: 24300034, guid: de8c81d983d0f7b41bf030b1d05879f0, type: 2}
+  - key: res/local/sound/master#voice
+    asset: {fileID: 24300006, guid: de8c81d983d0f7b41bf030b1d05879f0, type: 2}
+  - key: res/local/sound/master#lowpassall
+    asset: {fileID: 24500040, guid: de8c81d983d0f7b41bf030b1d05879f0, type: 2}
+  - key: res/local/sound/master#snapshot
+    asset: {fileID: 24500038, guid: de8c81d983d0f7b41bf030b1d05879f0, type: 2}
+  - key: res/local/sound/music
+    asset: {fileID: 8300000, guid: 3149e9ba6d919f048883c6e763f3e70e, type: 3}
+  - key: res/local/sound/sfx_amb_desert
+    asset: {fileID: 8300000, guid: 57909c9fc410df24a8c865ed96237712, type: 3}
+  - key: res/local/sound/sfx_amb_desert_night
+    asset: {fileID: 8300000, guid: 20c8c534e0f09334185ef8694a9fb080, type: 3}
+  - key: res/local/sound/sfx_amb_farm_day
+    asset: {fileID: 8300000, guid: 4273e819cd46bf04f8b1702aa8021492, type: 3}
+  - key: res/local/sound/sfx_amb_forest_day
+    asset: {fileID: 8300000, guid: 07e3afeecd000034db04c275fb398b02, type: 3}
+  - key: res/local/sound/sfx_amb_forest_day_fall
+    asset: {fileID: 8300000, guid: 68fa1ccf24aac3e4e98e90951664057a, type: 3}
+  - key: res/local/sound/sfx_amb_forest_dusk
+    asset: {fileID: 8300000, guid: da7416f65581b2d43944f35033dfd72d, type: 3}
+  - key: res/local/sound/sfx_amb_forest_night
+    asset: {fileID: 8300000, guid: 413afea0c180bd448a48bae5e62c3cc6, type: 3}
+  - key: res/local/sound/sfx_amb_forest_rain
+    asset: {fileID: 8300000, guid: 6f20296999eaa9e47a496a6b1792fa36, type: 3}
+  - key: res/local/sound/sfx_amb_garden
+    asset: {fileID: 8300000, guid: 7709973cf44e056479f1b8c499fe91e9, type: 3}
+  - key: res/local/sound/sfx_amb_mountain
+    asset: {fileID: 8300000, guid: ccd8953bd719ca0448ad694ad1f8908f, type: 3}
+  - key: res/local/sound/sfx_amb_mountain_night
+    asset: {fileID: 8300000, guid: e692f7b0c39a82c48b0a6e1fda7cc4f0, type: 3}
+  - key: res/local/sound/sfx_amb_rainforest_day
+    asset: {fileID: 8300000, guid: 613911429ff76754b841f6d810de7732, type: 3}
+  - key: res/local/sound/sfx_amb_seashore
+    asset: {fileID: 8300000, guid: f29e761e598a9c04181cf8057ab1e309, type: 3}
+  - key: res/local/sound/sfx_amb_winter
+    asset: {fileID: 8300000, guid: b7edae0eb0b9aa441875736a1b76d2ee, type: 3}
+  - key: res/local/sound/sfx_anim_chest_idle
+    asset: {fileID: 8300000, guid: fb51f81e78979284eade031f15f4dc66, type: 3}
+  - key: res/local/sound/sfx_anim_chest_open
+    asset: {fileID: 8300000, guid: 71166460841d2844e84577a89c89e56e, type: 3}
+  - key: res/local/sound/sfx_anim_coin_fly
+    asset: {fileID: 8300000, guid: 2b0e59acbbd5f424481c8e16a12ccea7, type: 3}
+  - key: res/local/sound/sfx_anim_game_backgroundchange
+    asset: {fileID: 8300000, guid: 345fc6b02c6720143ad5bd13816ee1b5, type: 3}
+  - key: res/local/sound/sfx_anim_game_confetti
+    asset: {fileID: 8300000, guid: 09e5f98d594308b44b6bb24f123e3433, type: 3}
+  - key: res/local/sound/sfx_anim_game_fruit_clear
+    asset: {fileID: 8300000, guid: b70557be915c41d4491c3570d447c192, type: 3}
+  - key: res/local/sound/sfx_anim_game_fruit_land
+    asset: {fileID: 8300000, guid: 0bd83d5bb5d8d9e4cbc7d2196584cd25, type: 3}
+  - key: res/local/sound/sfx_anim_game_inspire
+    asset: {fileID: 8300000, guid: 16220c3c97ccca4488927ba5a4b6c2da, type: 3}
+  - key: res/local/sound/sfx_anim_game_toy_clear
+    asset: {fileID: 8300000, guid: a008cb2422252ed4ca08cb78c31502b3, type: 3}
+  - key: res/local/sound/sfx_anim_game_toy_land
+    asset: {fileID: 8300000, guid: b4241096306910f4395de27e1c7fc7bd, type: 3}
+  - key: res/local/sound/sfx_anim_reward_land
+    asset: {fileID: 8300000, guid: 347f91c9ef2e83545b04912247c152be, type: 3}
+  - key: res/local/sound/sfx_noitce_coin_land
+    asset: {fileID: 8300000, guid: 84f759148fd12cb44bdea35a6c88e3e3, type: 3}
+  - key: res/local/sound/sfx_noitce_coin_show
+    asset: {fileID: 8300000, guid: ee208864c76f8174e8dd269a51124cff, type: 3}
+  - key: res/local/sound/sfx_noitce_game_start
+    asset: {fileID: 8300000, guid: a5b21b1b1112df74ea679d6fca17e050, type: 3}
+  - key: res/local/sound/sfx_notice_common_negative
+    asset: {fileID: 8300000, guid: 95df0d6b822a6c74e912b20e445a0a53, type: 3}
+  - key: res/local/sound/sfx_notice_common_neutral
+    asset: {fileID: 8300000, guid: c3fd4ff6c6aeb3b4585ae4331f1de6d5, type: 3}
+  - key: res/local/sound/sfx_notice_common_positive
+    asset: {fileID: 8300000, guid: 6c497e4e06335dc499d24798bdc4efec, type: 3}
+  - key: res/local/sound/sfx_notice_guide
+    asset: {fileID: 8300000, guid: 4633a8ee0ad3fbd46905a67777d618fd, type: 3}
+  - key: res/local/sound/sfx_notice_negative
+    asset: {fileID: 8300000, guid: ab26215f73d6a49458f8b510945c2271, type: 3}
+  - key: res/local/sound/sfx_notice_prop_addspace
+    asset: {fileID: 8300000, guid: be3d1081d33a4ea45bc866d48f54683c, type: 3}
+  - key: res/local/sound/sfx_notice_prop_magicwand
+    asset: {fileID: 8300000, guid: 2ffd3d6c3c0c3324f83aee1746889ac8, type: 3}
+  - key: res/local/sound/sfx_notice_prop_shuffle
+    asset: {fileID: 8300000, guid: ebf8c8063191af44e93e1451fb4cb8ab, type: 3}
+  - key: res/local/sound/sfx_notice_prop_undo
+    asset: {fileID: 8300000, guid: dfd768391df0b604c8ca4df5fe898390, type: 3}
+  - key: res/local/sound/sfx_notice_purchased
+    asset: {fileID: 8300000, guid: ef44c603931993a41844232948f126fd, type: 3}
+  - key: res/local/sound/sfx_ui_button_common
+    asset: {fileID: 8300000, guid: 8f15b224d0e0693438f74e29cdb7e184, type: 3}
+  - key: res/local/sound/sfx_ui_button_game_fruit
+    asset: {fileID: 8300000, guid: fc4249b374283b14585a2ecc125c4825, type: 3}
+  - key: res/local/sound/sfx_ui_panel_common_close
+    asset: {fileID: 8300000, guid: f72f4e2089bcf0148a47f27fe07f9328, type: 3}
+  - key: res/local/sound/sfx_ui_panel_common_open
+    asset: {fileID: 8300000, guid: 72ea7b8f0058e5f4389245d7c7b2d9fc, type: 3}
+  - key: res/local/sound/sfx_ui_panel_game_lose
+    asset: {fileID: 8300000, guid: b17ea2205efaab14eb73426e8c4912fb, type: 3}
+  - key: res/local/sound/sfx_ui_panel_game_win
+    asset: {fileID: 8300000, guid: 2ddcc101b00871848bbe08b2da298223, type: 3}
+  - key: res/local/sound/sfx_ui_panel_newprop_close
+    asset: {fileID: 8300000, guid: f0d6ae2c88106e644bf8482cf3e6807b, type: 3}
+  - key: res/local/sound/sfx_ui_panel_newprop_open
+    asset: {fileID: 8300000, guid: a897d522d1e8e5646be238e55b5e182e, type: 3}
+  - key: res/local/sound/sfx_ui_panel_shop_close
+    asset: {fileID: 8300000, guid: 448c96a18beea9f499db9664065e179c, type: 3}
+  - key: res/local/sound/sfx_ui_panel_shop_open
+    asset: {fileID: 8300000, guid: 9596b41678429ed4cbbe8635a9f36bc5, type: 3}
+  - key: res/local/sound/sfx_ui_toast_level_hard
+    asset: {fileID: 8300000, guid: c556ef62d6decbf48a51cba121e0444a, type: 3}
+  - key: res/local/sound/voice_male_amazing_low
+    asset: {fileID: 8300000, guid: 4fd9df08cae601a4b9e605f780c34b0d, type: 3}
+  - key: res/local/sound/voice_male_excelent_low
+    asset: {fileID: 8300000, guid: 41491b2f977b42f48bceb668f05b47a2, type: 3}
+  - key: res/local/sound/voice_male_good_low
+    asset: {fileID: 8300000, guid: 7964dc7285b430f49b0cad9a1d101886, type: 3}
+  - key: res/local/sound/voice_male_great_low
+    asset: {fileID: 8300000, guid: 6ac58e3099dcc334dbfffc5df94f35ee, type: 3}
+  - key: res/local/sound/voice_male_unbelievable_low
+    asset: {fileID: 8300000, guid: 7c9d45e5daede3240a30dbcf6ada969a, type: 3}
+  - key: res/local/soundconfig/audiodata/ambiencepath
+    asset: {fileID: 4900000, guid: 90e32c48d71769646a67e9dc481b632b, type: 3}
+  - key: res/local/soundconfig/audiodata/ambiencetransition
+    asset: {fileID: 4900000, guid: 2961e01c2e368fb44b1fac6ffaa32075, type: 3}
+  - key: res/local/soundconfig/audiodata/audiogroup
+    asset: {fileID: 4900000, guid: 20a2bd667ef31b742a734ca4eb741beb, type: 3}
+  - key: res/local/soundconfig/audiodata/audioobject
+    asset: {fileID: 4900000, guid: 280c5b872cffcdb4a9c98d7f9ba60af4, type: 3}
+  - key: res/local/soundconfig/audiodata/musiccontainer
+    asset: {fileID: 4900000, guid: 1e007896053374a41a4c5604541a7fd7, type: 3}
+  - key: res/local/soundconfig/audiodata/musicpath
+    asset: {fileID: 4900000, guid: 64bc3afc378d01a408db1641f0c4be79, type: 3}
+  - key: res/local/soundconfig/audiodata/musicsegment
+    asset: {fileID: 4900000, guid: b630e01372b32244690133dfea59bdd2, type: 3}
+  - key: res/local/soundconfig/audiodata/musictransition
+    asset: {fileID: 4900000, guid: 6b40532ad956a964f811aa8770ce4980, type: 3}
+  - key: res/local/soundconfig/hapticdata/hapticobject
+    asset: {fileID: 4900000, guid: 6c8392c71b14f70459ff82f269ad38c3, type: 3}
+  - key: res/local/soundconfig/settings/audioextendsettings
+    asset: {fileID: 11400000, guid: fe139c24d360386439dee4c0a2468a0a, type: 2}
+  - key: res/local/soundconfig/settings/hapticsettings
+    asset: {fileID: 11400000, guid: b59a5e973406b38449aac7d360ef78e3, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/802-cai978 hide font sdf
+      atlas
+    asset: {fileID: 2800000, guid: 640480a4e0c7ff24c9305e330666a5e1, type: 3}
+  - key: res/local/textmeshpro/resources/fonts & materials/802-cai978 hide font sdf
+      material
+    asset: {fileID: 2100000, guid: 180f808d23d42e544ac96e77569b0b6e, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/802-cai978 hide font sdf
+    asset: {fileID: 11400000, guid: 872644135a3230f47b17a9b04bf2037c, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/802-cai978 sdf atlas
+    asset: {fileID: 2800000, guid: 3002ce4dc028a25499e6ece04ee65a57, type: 3}
+  - key: res/local/textmeshpro/resources/fonts & materials/802-cai978 sdf material
+    asset: {fileID: 2100000, guid: 38ec4ccf33978154091d0d1eaab0f998, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/802-cai978 sdf
+    asset: {fileID: 11400000, guid: 05f05f2053e2fef4d92a08aa0d1478de, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/arial sdf atlas
+    asset: {fileID: 2800000, guid: 3c6edba603b5c9a40812b582a8093b6b, type: 3}
+  - key: res/local/textmeshpro/resources/fonts & materials/arial sdf material
+    asset: {fileID: 2100000, guid: 017f236c60996f8499f6c24dfdde76fb, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/arial sdf
+    asset: {fileID: 11400000, guid: 064aff2ca8ed6df47813b4c37e751af8, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/dollarfont sdf atlas
+    asset: {fileID: 2800000, guid: 7aac31768ca40b2439d8ea5d781ca518, type: 3}
+  - key: res/local/textmeshpro/resources/fonts & materials/dollarfont sdf material
+    asset: {fileID: 2100000, guid: a28a5bb9c31b64d4ebf3c0002256c441, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/dollarfont sdf
+    asset: {fileID: 11400000, guid: 3f54f6c547ec5834ab8c51b557e15cc3, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/lohit-devanagari sdf atlas
+    asset: {fileID: 2800000, guid: 543d9864c90a2ea46b2514b07791fe75, type: 3}
+  - key: res/local/textmeshpro/resources/fonts & materials/lohit-devanagari sdf material
+    asset: {fileID: 2100000, guid: 023ac860d36cb1645a7dc877884cbcf9, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/lohit-devanagari sdf
+    asset: {fileID: 11400000, guid: 00ac8e13a9a4c3842adc7821201877aa, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/sourcehansanshw-bold-modified
+      sdf atlas
+    asset: {fileID: 2800000, guid: 055309c7c0d9fd64d88bb11c7073491b, type: 3}
+  - key: res/local/textmeshpro/resources/fonts & materials/sourcehansanshw-bold-modified
+      sdf material
+    asset: {fileID: 2100000, guid: 7306076154b521847875eb4caefb70fa, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/sourcehansanshw-bold-modified
+      sdf
+    asset: {fileID: 11400000, guid: 4c5229a911df521429be312b22c88139, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/tajawal-bold sdf atlas
+    asset: {fileID: 2800000, guid: b3ca6b5448fe8344e9bed4403a171f08, type: 3}
+  - key: res/local/textmeshpro/resources/fonts & materials/tajawal-bold sdf material
+    asset: {fileID: 2100000, guid: 0bb5f093a18f00f4d852e084922f56ac, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/tajawal-bold sdf
+    asset: {fileID: 11400000, guid: 3785f758a7fe7e049a7e8f7d52048e5f, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/taviraj-bold sdf atlas
+    asset: {fileID: 2800000, guid: c278405f5f000144bb4e9e9725d5598e, type: 3}
+  - key: res/local/textmeshpro/resources/fonts & materials/taviraj-bold sdf material
+    asset: {fileID: 2100000, guid: aef99314f5d77c34d9ccbc5c01192ea9, type: 2}
+  - key: res/local/textmeshpro/resources/fonts & materials/taviraj-bold sdf
+    asset: {fileID: 11400000, guid: 214ad969043a30a46abe7507c37a4f80, type: 2}
+  - key: res/local/textmeshpro/resources/linebreaking following characters
+    asset: {fileID: 4900000, guid: 2167b2b911451154597fe3e640d8bdde, type: 3}
+  - key: res/local/textmeshpro/resources/linebreaking leading characters
+    asset: {fileID: 4900000, guid: 76100866c953023488369096e6cebeb6, type: 3}
+  - key: res/local/textmeshpro/resources/sprite assets/emojione
+    asset: {fileID: 11400000, guid: 6f0cd38fa3a0f1d4e99ec98557bd3110, type: 2}
+  - key: res/local/textmeshpro/resources/style sheets/default style sheet
+    asset: {fileID: 11400000, guid: f25f5daf3b401264b8f0efc5bb90f74f, type: 2}
+  - key: res/local/textmeshpro/resources/tmp settings
+    asset: {fileID: 11400000, guid: eaabf4133865fdd4a8f7d5b372bf7e75, type: 2}
+  - key: res/local/textmeshpro/shaders/tmp_bitmap-custom-atlas
+    asset: {fileID: 4800000, guid: 00452ad9fbcaa8546bc1f9e23ff9c873, type: 3}
+  - key: res/local/textmeshpro/shaders/tmp_bitmap-mobile
+    asset: {fileID: 4800000, guid: 0fe5797d1f69b61459f5f762f04c08b5, type: 3}
+  - key: res/local/textmeshpro/shaders/tmp_bitmap
+    asset: {fileID: 4800000, guid: 0520ee4cb8e3fa14789fe296899d23b2, type: 3}
+  - key: res/local/textmeshpro/shaders/tmp_sdf overlay
+    asset: {fileID: 4800000, guid: 1b60e72c3f0763247b0f246e14f26a86, type: 3}
+  - key: res/local/textmeshpro/shaders/tmp_sdf ssd
+    asset: {fileID: 4800000, guid: 8b773b274876df3489de616ecc07517d, type: 3}
+  - key: res/local/textmeshpro/shaders/tmp_sdf-mobile masking
+    asset: {fileID: 4800000, guid: c1e1e05936b6bc24383a4529916fe42d, type: 3}
+  - key: res/local/textmeshpro/shaders/tmp_sdf-mobile overlay
+    asset: {fileID: 4800000, guid: 7af01ecd03d6f1842a456f5040974c5d, type: 3}
+  - key: res/local/textmeshpro/shaders/tmp_sdf-mobile ssd
+    asset: {fileID: 4800000, guid: 2707d2bb5b9957c4e86149ace15a2304, type: 3}
+  - key: res/local/textmeshpro/shaders/tmp_sdf-mobile
+    asset: {fileID: 4800000, guid: 68e400acb5f737b40a5aab7791370da0, type: 3}
+  - key: res/local/textmeshpro/shaders/tmp_sdf-surface-mobile
+    asset: {fileID: 4800000, guid: 4a1eaa01efc90394f9bbdd6a849c1038, type: 3}
+  - key: res/local/textmeshpro/shaders/tmp_sdf-surface
+    asset: {fileID: 4800000, guid: 9f976b124973e3e4e98d527a578fd937, type: 3}
+  - key: res/local/textmeshpro/shaders/tmp_sdf
+    asset: {fileID: 4800000, guid: b7b2c64b244bd56448cd16ef179bb9df, type: 3}
+  - key: res/local/textmeshpro/shaders/tmp_sprite
+    asset: {fileID: 4800000, guid: 5ebdd765b6f43754a85b485b7090ae7a, type: 3}
+  - key: res/local/textmeshpro/shaders/tmpro
+    asset: {fileID: 10900000, guid: 086b9479f1fe64caea4d52d9738a16ca, type: 3}
+  - key: res/local/textmeshpro/shaders/tmpro_mobile
+    asset: {fileID: 10900000, guid: 721f19a1b77574b89a7b709235d4e59e, type: 3}
+  - key: res/local/textmeshpro/shaders/tmpro_properties
+    asset: {fileID: 10900000, guid: 4262536dae3294ea4aa83caa5bb7099d, type: 3}
+  - key: res/local/textmeshpro/shaders/tmpro_surface
+    asset: {fileID: 10900000, guid: 3722da6470c17416bb1aded6c9aae582, type: 3}
+  - key: res/local/textmeshpro/sprites/emojione attribution
+    asset: {fileID: 4900000, guid: 5f123fe6d84eee54fabfa7fe151755f2, type: 3}
+  - key: res/local/textmeshpro/sprites/emojione
+    asset: {fileID: 4900000, guid: 7b8651050dfe04644b160fd01593d78b, type: 3}
+  - key: res/local/vx/material/add
+    asset: {fileID: 2100000, guid: e81ce39ca62decf4f94da108bc5da657, type: 2}
+  - key: res/local/vx/material/big_start
+    asset: {fileID: 2100000, guid: 2373bb169448a2243962e85ddf7159cb, type: 2}
+  - key: res/local/vx/material/glow_04
+    asset: {fileID: 2100000, guid: 0fafdc704b0ee2745b5026bbe3909191, type: 2}
+  - key: res/local/vx/material/glow_bomb_01
+    asset: {fileID: 2100000, guid: 39cbb30578dd4fd4f9f522ad926f61d0, type: 2}
+  - key: res/local/vx/material/glow_line_01
+    asset: {fileID: 2100000, guid: d01ab13534585dd4daad7478d3878262, type: 2}
+  - key: res/local/vx/material/glow_line_04
+    asset: {fileID: 2100000, guid: 7a48e10bab18e38439468131f9e86a9e, type: 2}
+  - key: res/local/vx/material/glow_line_05
+    asset: {fileID: 2100000, guid: f81549dafdca89e438409b9554d57145, type: 2}
+  - key: res/local/vx/material/glow_sans_02_add
+    asset: {fileID: 2100000, guid: 8a0617c71a1aea549acd52e0db19a561, type: 2}
+  - key: res/local/vx/material/glow_sans_11_add
+    asset: {fileID: 2100000, guid: 617b3461df68c4c4cbac36c17467ff87, type: 2}
+  - key: res/local/vx/material/light_01
+    asset: {fileID: 2100000, guid: 5aebf2d1cc715074a8a608219d485997, type: 2}
+  - key: res/local/vx/material/light_02
+    asset: {fileID: 2100000, guid: 21dfb3da804477344aab33f7aa651aca, type: 2}
+  - key: res/local/vx/material/line_09
+    asset: {fileID: 2100000, guid: 037b7e0c0a74c2c4ba20bef82110f4c0, type: 2}
+  - key: res/local/vx/material/mz_glow_01
+    asset: {fileID: 2100000, guid: 3896189f5470e6940a5853bb6a656c16, type: 2}
+  - key: res/local/vx/material/mz_glow_03
+    asset: {fileID: 2100000, guid: c44a71562fbba5e459ab337657bb67a0, type: 2}
+  - key: res/local/vx/material/mz_glow_16
+    asset: {fileID: 2100000, guid: 1a9d978e06002ff489d265f83596d93b, type: 2}
+  - key: res/local/vx/material/mz_glow_196
+    asset: {fileID: 2100000, guid: 70fcd92194c16384daaee6311d114b31, type: 2}
+  - key: res/local/vx/material/mz_glow_611
+    asset: {fileID: 2100000, guid: 4a2ca1ab3a1d74e419b69ce0d1ef76ff, type: 2}
+  - key: res/local/vx/material/mz_glow_1225
+    asset: {fileID: 2100000, guid: 75a1d86461932064aad7dfd8a1ff8b47, type: 2}
+  - key: res/local/vx/material/mz_glow_bg_01
+    asset: {fileID: 2100000, guid: ced833e48080de64996c12e2a728b6f2, type: 2}
+  - key: res/local/vx/material/mz_particle_001
+    asset: {fileID: 2100000, guid: 5c6db9cf22a4b204babcff1f40f6fc41, type: 2}
+  - key: res/local/vx/material/mz_ring_04
+    asset: {fileID: 2100000, guid: ff0049cbe4d00ca429b73bf426eff929, type: 2}
+  - key: res/local/vx/material/mz_star_01
+    asset: {fileID: 2100000, guid: c17d02914cb3dec4e95bda2b1ff5198f, type: 2}
+  - key: res/local/vx/material/mz_star_02
+    asset: {fileID: 2100000, guid: 2872e7ef4988d6348b552d4a0fc1f03e, type: 2}
+  - key: res/local/vx/material/mz_star_04
+    asset: {fileID: 2100000, guid: dc07432b871e010449217dbb522f2b8d, type: 2}
+  - key: res/local/vx/material/mz_star_04_blend
+    asset: {fileID: 2100000, guid: f3355ba441d463f4daa77d8ebb59e76e, type: 2}
+  - key: res/local/vx/material/ribbon_1
+    asset: {fileID: 2100000, guid: 8c15890dbdbae614fa546a5a3a063793, type: 2}
+  - key: res/local/vx/material/ribbon_1a
+    asset: {fileID: 2100000, guid: 0f1b778d52442c14a8e13533b31a1c91, type: 2}
+  - key: res/local/vx/material/ribbon_add
+    asset: {fileID: 2100000, guid: 1e29d21617e56924f967dfb640ba5890, type: 2}
+  - key: res/local/vx/material/ring_08
+    asset: {fileID: 2100000, guid: 5cd009e67e5aa6e40b1cfb9a0558148c, type: 2}
+  - key: res/local/vx/material/score_lz
+    asset: {fileID: 2100000, guid: 1a6152cafb6b9034b8690763ea0f054c, type: 2}
+  - key: res/local/vx/material/star03_add
+    asset: {fileID: 2100000, guid: 9f8b2f0d037d4184983a0fc92cdf1818, type: 2}
+  - key: res/local/vx/material/star03_blend
+    asset: {fileID: 2100000, guid: 24b3c4e04bb93b446a8cc38a07449724, type: 2}
+  - key: res/local/vx/material/star07_add
+    asset: {fileID: 2100000, guid: c9873e42b04fb6c4987c338a04388fdf, type: 2}
+  - key: res/local/vx/material/star11_add
+    asset: {fileID: 2100000, guid: e9ecce8dc9806d24db245c0480f532d9, type: 2}
+  - key: res/local/vx/material/star_04
+    asset: {fileID: 2100000, guid: e87abe54ef2b5fa45b72252414b9e527, type: 2}
+  - key: res/local/vx/material/starts_0422
+    asset: {fileID: 2100000, guid: 0772df719c45ee04497053a7b2165ae5, type: 2}
+  - key: res/local/vx/material/starts_0615
+    asset: {fileID: 2100000, guid: 888f56bcfe629f14fa22305e709bd4ca, type: 2}
+  - key: res/local/vx/material/starts_0616
+    asset: {fileID: 2100000, guid: c7ef81e6b22ae4449adb6cb1491346c8, type: 2}
+  - key: res/local/vx/material/ui_add
+    asset: {fileID: 2100000, guid: 4ee686983326ed343afe2de8398debc6, type: 2}
+  - key: res/local/vx/material/white
+    asset: {fileID: 2100000, guid: 8d42094419e48534795535f820692b36, type: 2}
+  - key: res/local/vx/prefab/effect_boxlight_loop
+    asset: {fileID: 1709254077376921, guid: 061689a853f4c3a439034c210870beec, type: 3}
+  - key: res/local/vx/prefab/effect_boxopen
+    asset: {fileID: 1709254077376921, guid: 098ad27b6bfd0114189a1424a90659ff, type: 3}
+  - key: res/local/vx/prefab/effect_encourage_1
+    asset: {fileID: 1709254077376921, guid: 5b55440dbc210574586b5aa1a777373e, type: 3}
+  - key: res/local/vx/prefab/effect_encourage_2
+    asset: {fileID: 1709254077376921, guid: 23718a0ecb3ea624ab2b188509830fe9, type: 3}
+  - key: res/local/vx/prefab/effect_encourage_3
+    asset: {fileID: 1709254077376921, guid: 2c0d03d780443884a9e20e91eedca50b, type: 3}
+  - key: res/local/vx/prefab/effect_glod_flashcontinuous
+    asset: {fileID: 1709254077376921, guid: 33a72a737807e98438e64160fbba6b2f, type: 3}
+  - key: res/local/vx/prefab/effect_glod_flashonce
+    asset: {fileID: 1709254077376921, guid: 58f2c85fa48910c458398e3040665c3b, type: 3}
+  - key: res/local/vx/prefab/effect_loseui_fruit
+    asset: {fileID: 1709254077376921, guid: cedfaa3aabf09a2459a4d9eef0930493, type: 3}
+  - key: res/local/vx/prefab/effect_newitempop_loop
+    asset: {fileID: 1709254077376921, guid: 454ca4c466a0a324cbe0ce8caed47b1b, type: 3}
+  - key: res/local/vx/prefab/effect_newitempop_open
+    asset: {fileID: 1709254077376921, guid: 0bb29d6129215424591e77ca9f48f85d, type: 3}
+  - key: res/local/vx/prefab/effect_rewardhit
+    asset: {fileID: 1709254077376921, guid: 3a59e740b3aa12641add6d06d5686920, type: 3}
+  - key: res/local/vx/prefab/effect_rewardshow
+    asset: {fileID: 1709254077376921, guid: 653ba46b7a4ff594f80c84d13a65bf39, type: 3}
+  - key: res/local/vx/prefab/effect_rewardtrail
+    asset: {fileID: 1709254077376921, guid: b093542a1bb4ef14cb660aa33b828dc1, type: 3}
+  - key: res/local/vx/prefab/effect_scorebox
+    asset: {fileID: 1709254077376921, guid: a891efad92180d441a4190f2d7eff786, type: 3}
+  - key: res/local/vx/prefab/effect_scorebox_loop
+    asset: {fileID: 1709254077376921, guid: a752e74c111f954418dd2617788fca21, type: 3}
+  - key: res/local/vx/prefab/effect_winui_start_loop
+    asset: {fileID: 1709254077376921, guid: 1c0967d8c5c94d04498a999fea6f35ed, type: 3}
+  - key: res/local/vx/prefab/effect_winui_start_open
+    asset: {fileID: 1709254077376921, guid: a2c9b27be2962cf4ca3feb6f56c3a1fa, type: 3}
+  - key: res/local/vx/res/biaoqian_bian
+    asset: {fileID: 21300000, guid: 3a0f8916c0a51ad4b8f1e02df65768f7, type: 2}
+  - key: res/local/vx/res/biaoqian_bian#biaoqian_bian
+    asset: {fileID: 21300000, guid: 785e8d8b96ff01c4f8b60b0cd16d25bc, type: 3}
+  - key: res/local/vx/res/biaoqian_mask
+    asset: {fileID: 21300000, guid: 64690b3a900074d4e8107e60340838ab, type: 2}
+  - key: res/local/vx/res/biaoqian_mask#biaoqian_mask
+    asset: {fileID: 21300000, guid: c467e188f5ea73f4eb7c6a874f7da94d, type: 3}
+  - key: res/local/vx/res/eff_buttonring01_tex
+    asset: {fileID: 21300000, guid: a08b981090610e44db7ae7a93a7dab04, type: 2}
+  - key: res/local/vx/res/eff_buttonring01_tex#eff_buttonring01_tex
+    asset: {fileID: 21300000, guid: 4d0c78e4aa3547748bc33245f711fc75, type: 3}
+  - key: res/local/vx/res/eff_glow01
+    asset: {fileID: 21300000, guid: fc8a476bcbb93b14382cb8db38ef40a9, type: 2}
+  - key: res/local/vx/res/eff_glow01#eff_glow01
+    asset: {fileID: 21300000, guid: 49a9cfda16c92c84d89611cbdcb3247f, type: 3}
+  - key: res/local/vx/res/eff_ribbon01_tex
+    asset: {fileID: 21300000, guid: 781d53c0be9ff81498d4c533b0640cc1, type: 2}
+  - key: res/local/vx/res/eff_ribbon01_tex#eff_ribbon01_tex
+    asset: {fileID: 21300000, guid: 6b37ecbf305b7e749ac5e5d9c6601652, type: 3}
+  - key: res/local/vx/res/eff_ribbon02_tex
+    asset: {fileID: 21300000, guid: 5ed65ea74034a744586f0d56918221a7, type: 2}
+  - key: res/local/vx/res/eff_ribbon02_tex#eff_ribbon02_tex
+    asset: {fileID: 21300000, guid: 22df23c757c4e56498ef2c92be3bdf21, type: 3}
+  - key: res/local/vx/res/eff_star01_tex
+    asset: {fileID: 21300000, guid: d625b6fe1f3db78419f32d60840b04f9, type: 2}
+  - key: res/local/vx/res/eff_star01_tex#eff_star01_tex
+    asset: {fileID: 21300000, guid: d01a8f184d5e50043afb5a1ed6afe3c7, type: 3}
+  - key: res/local/vx/res/eff_star021
+    asset: {fileID: 21300000, guid: 0ab803a9b764cb04989f8495842e0daa, type: 2}
+  - key: res/local/vx/res/eff_star021#eff_star021
+    asset: {fileID: 21300000, guid: adc0eecad08af6744b7f13f87efcad83, type: 3}
+  - key: res/local/vx/res/eff_ui_trail_03
+    asset: {fileID: 21300000, guid: 2e71dcb4124c70c4daa72c99623f06ef, type: 2}
+  - key: res/local/vx/res/eff_ui_trail_03#eff_ui_trail_03
+    asset: {fileID: 21300000, guid: 8f14fc82aecf8684886f310c55eae960, type: 3}
+  - key: res/local/vx/res/glow_01_add
+    asset: {fileID: 2100000, guid: 425e4bf7b7be0854c8d1364e2c15271d, type: 2}
+  - key: res/local/vx/res/glow_04
+    asset: {fileID: 21300000, guid: 3676f207dc7f00a419110dce68676066, type: 2}
+  - key: res/local/vx/res/glow_04#glow_04
+    asset: {fileID: 21300000, guid: 62a3433d5ab7db24dbef360ca062c0a1, type: 3}
+  - key: res/local/vx/res/glow_bomb_01
+    asset: {fileID: 21300000, guid: 29ce6b8acd1e9ca49a350b94c50bf8dd, type: 2}
+  - key: res/local/vx/res/glow_bomb_01#glow_bomb_01
+    asset: {fileID: 21300000, guid: c77817da9cfe11540bd5ab39e3a1f415, type: 3}
+  - key: res/local/vx/res/glow_cpgt_hyy_01712
+    asset: {fileID: 21300000, guid: 5c74bae0276b4334a849d8182fafd737, type: 2}
+  - key: res/local/vx/res/glow_cpgt_hyy_01712#glow_cpgt_hyy_01712
+    asset: {fileID: 21300000, guid: 8b8bf3a25e5247a41bb1161ecedb9059, type: 3}
+  - key: res/local/vx/res/glow_line_02
+    asset: {fileID: 21300000, guid: bc86b7d21d311244a991e13361864191, type: 2}
+  - key: res/local/vx/res/glow_line_02#glow_line_02
+    asset: {fileID: 21300000, guid: c8a500f8bb1f77946ac0f22cbc563f67, type: 3}
+  - key: res/local/vx/res/glow_sans_02
+    asset: {fileID: 21300000, guid: 795272d4ba8a7f2469077e4be34c3661, type: 2}
+  - key: res/local/vx/res/glow_sans_02#glow_sans_02
+    asset: {fileID: 21300000, guid: cc2786a2571a7b349a29c32a5a13162d, type: 3}
+  - key: res/local/vx/res/glow_sans_07
+    asset: {fileID: 21300000, guid: 21503173f2c689149a714c78cde5c74e, type: 2}
+  - key: res/local/vx/res/glow_sans_07#glow_sans_07
+    asset: {fileID: 21300000, guid: 601f06ac30356004cb819e958a25792c, type: 3}
+  - key: res/local/vx/res/glow_sans_11
+    asset: {fileID: 21300000, guid: 79c2ab5b8a23a26418fea4b53b53e996, type: 2}
+  - key: res/local/vx/res/glow_sans_11#glow_sans_11
+    asset: {fileID: 21300000, guid: 7fe9c685d8dab6c48ab34161e59ed2fa, type: 3}
+  - key: res/local/vx/res/itembg_lock_add
+    asset: {fileID: 21300000, guid: ef30a841774f26e4eabeb74da4876615, type: 2}
+  - key: res/local/vx/res/itembg_lock_add#itembg_lock_add
+    asset: {fileID: 21300000, guid: f690e021df32d57479566bc0d6112472, type: 3}
+  - key: res/local/vx/res/line_09
+    asset: {fileID: 21300000, guid: fdeeb8544dad0c740a1f47058dfb3cd7, type: 2}
+  - key: res/local/vx/res/line_09#line_09
+    asset: {fileID: 21300000, guid: 30b673e0c5c757b4795ac8c9b8fe76bd, type: 3}
+  - key: res/local/vx/res/m_start0417_2
+    asset: {fileID: 21300000, guid: 732647a9bad9dc84aa61fa8bd6137c72, type: 2}
+  - key: res/local/vx/res/m_start0417_2#m_start0417_2
+    asset: {fileID: 21300000, guid: 5900f1b915ab6884e8847dccdb073087, type: 3}
+  - key: res/local/vx/res/ribbon
+    asset: {fileID: 21300000, guid: 2941214cf0a2db34bbdda73bf95af12d, type: 2}
+  - key: res/local/vx/res/ribbon#ribbon
+    asset: {fileID: 21300000, guid: ddd4e24dc1206554dbe80a050309c045, type: 3}
+  - key: res/local/vx/res/ring_08
+    asset: {fileID: 21300000, guid: bdcaa0b76fe06334dafa7f32dc789d51, type: 2}
+  - key: res/local/vx/res/ring_08#ring_08
+    asset: {fileID: 21300000, guid: 09097adc38ddfdc4fad7d922ab655f49, type: 3}
+  - key: res/local/vx/res/star03
+    asset: {fileID: 21300000, guid: 31c716bdd536a584c9de4c5acae3ca3c, type: 2}
+  - key: res/local/vx/res/star03#star03
+    asset: {fileID: 21300000, guid: 5711e8fbdd0a3884ba4e03714c9912ea, type: 3}
+  - key: res/local/vx/res/star04
+    asset: {fileID: 21300000, guid: 3047ada77d50ef84185a783596329f55, type: 2}
+  - key: res/local/vx/res/star04#star04
+    asset: {fileID: 21300000, guid: 04116913a42cc9e4f8eb5806465339f3, type: 3}
+  - key: res/local/vx/res/star_08
+    asset: {fileID: 21300000, guid: c90c61026cfb189419520b9d9398218d, type: 2}
+  - key: res/local/vx/res/star_08#star_08
+    asset: {fileID: 21300000, guid: 7bb1d98bb675fbf4d9e708664a8150cd, type: 3}
+  - key: res/local/vx/res/star_11
+    asset: {fileID: 21300000, guid: c3bc15e585103974395c5fdb1ce22b36, type: 2}
+  - key: res/local/vx/res/star_11#star_11
+    asset: {fileID: 21300000, guid: e04b55e68af91f34cb1e4c7961fe3fb3, type: 3}
+  - key: res/local/vx/res/star_point08
+    asset: {fileID: 21300000, guid: 9846cd94544f9cc47b111c7ee88a5792, type: 2}
+  - key: res/local/vx/res/star_point08#star_point08
+    asset: {fileID: 21300000, guid: 5e89b0155e5e9774bb160643d68c1995, type: 3}
+  - key: res/local/vx/res/switch_cucoloris
+    asset: {fileID: 21300000, guid: 6216cc8dc1361c047838b5b42c7ef6b5, type: 2}
+  - key: res/local/vx/res/switch_cucoloris#switch_cucoloris
+    asset: {fileID: 21300000, guid: 1a28f3f3443aa4f4b93418cd104f82a7, type: 3}
+  - key: res/local/vx/res/t_dot_01
+    asset: {fileID: 21300000, guid: 8a64a6f2efec09f47a5018def4b484a2, type: 2}
+  - key: res/local/vx/res/t_dot_01#t_dot_01
+    asset: {fileID: 21300000, guid: 0c448dc086e69b04d89613e474c33186, type: 3}
+  - key: res/local/vx/res/t_gj_1002
+    asset: {fileID: 21300000, guid: e865f784fd2ef6c4cbbc4c3dc9234e2e, type: 2}
+  - key: res/local/vx/res/t_gj_1002#t_gj_1002
+    asset: {fileID: 21300000, guid: db747da8844397a458ac4b85985844b1, type: 3}
+  - key: res/local/vx/res/t_gj_1009
+    asset: {fileID: 21300000, guid: 0fe5f1f630eb9b345833d30b057afad7, type: 2}
+  - key: res/local/vx/res/t_gj_1009#t_gj_1009
+    asset: {fileID: 21300000, guid: 9ef633e0e399c624aaaa352a907f09c0, type: 3}
+  - key: res/local/vx/res/t_glow_023
+    asset: {fileID: 21300000, guid: e140cae1ff696e54fa6c9bc95ff2a7a6, type: 2}
+  - key: res/local/vx/res/t_glow_023#t_glow_023
+    asset: {fileID: 21300000, guid: 341b984d8627e7a47a4699892e9b7634, type: 3}
+  - key: res/local/vx/res/t_glow_023_0
+    asset: {fileID: 21300000, guid: 870777a49b2d0324685e8f8b7f16f069, type: 2}
+  - key: res/local/vx/res/t_glow_023_0#t_glow_023_0
+    asset: {fileID: 21300000, guid: 12c08be557f85ae46ad611ba8ff0176d, type: 3}
+  - key: res/local/vx/res/t_glow_0029
+    asset: {fileID: 21300000, guid: bcff45b7f64632e4eba0e46b06bf8f5a, type: 2}
+  - key: res/local/vx/res/t_glow_0029#t_glow_0029
+    asset: {fileID: 21300000, guid: a53055f284475c5419955bb586605d7a, type: 3}
+  - key: res/local/vx/res/t_glow_029_a
+    asset: {fileID: 21300000, guid: 923f8055fface7041961800a3982d2ec, type: 2}
+  - key: res/local/vx/res/t_glow_029_a#t_glow_029_a
+    asset: {fileID: 21300000, guid: 992378e1c8a66fb42894c5491cbb9eef, type: 3}
+  - key: res/local/vx/res/t_glow_082
+    asset: {fileID: 21300000, guid: b20ea018a21e6e54fa2f01adb110b3af, type: 2}
+  - key: res/local/vx/res/t_glow_082#t_glow_082
+    asset: {fileID: 21300000, guid: 089f50ca3db59f241b60810b92ea985b, type: 3}
+  - key: res/local/vx/res/t_huocai_2
+    asset: {fileID: 2800000, guid: e5ef9a318fb8fb641be88f21a48616ba, type: 3}
+  - key: res/local/vx/res/t_lock2_3x2
+    asset: {fileID: 21300000, guid: c19ecf1a54729c9408ce24041b5779cd, type: 2}
+  - key: res/local/vx/res/t_lock2_3x2#t_lock2_3x2
+    asset: {fileID: 21300000, guid: 7bf11bdfa4e6ea646963f02b6dd7162b, type: 3}
+  - key: res/local/vx/res/t_lock_3x2
+    asset: {fileID: 21300000, guid: 46783134f67731741b2b1d9ac7c409df, type: 2}
+  - key: res/local/vx/res/t_lock_3x2#t_lock_3x2
+    asset: {fileID: 21300000, guid: ac2b20aca99e8a74ebbf7461cd307b1f, type: 3}
+  - key: res/local/vx/res/t_lz_0007_blue
+    asset: {fileID: 21300000, guid: 4dcc61d9215a55d40a7b442afebacc6a, type: 2}
+  - key: res/local/vx/res/t_lz_0007_blue#t_lz_0007_blue
+    asset: {fileID: 21300000, guid: 99a3a2bbffedfec42acddec6da6452bb, type: 3}
+  - key: res/local/vx/res/t_lz_0007_g
+    asset: {fileID: 21300000, guid: 1ccd781833f79ff45ae64170fe727aec, type: 2}
+  - key: res/local/vx/res/t_lz_0007_g#t_lz_0007_g
+    asset: {fileID: 21300000, guid: 1b20a69734f06284c9c27eacdce3e255, type: 3}
+  - key: res/local/vx/res/t_lz_0007_gre
+    asset: {fileID: 21300000, guid: a90de16217098de4abf9bf95796eaace, type: 2}
+  - key: res/local/vx/res/t_lz_0007_gre#t_lz_0007_gre
+    asset: {fileID: 21300000, guid: 7a5b221eae16cc1408c4e7611c162b51, type: 3}
+  - key: res/local/vx/res/t_lz_015_1
+    asset: {fileID: 21300000, guid: 77baa64832b1201429bb4e8d2db32efb, type: 2}
+  - key: res/local/vx/res/t_lz_015_1#t_lz_015_1
+    asset: {fileID: 21300000, guid: f77b49c5619fb90418bf183c9975c89c, type: 3}
+  - key: res/local/vx/res/t_lz_015a
+    asset: {fileID: 21300000, guid: 7f53a33fc5aaead49ba1dccacf8d12cc, type: 2}
+  - key: res/local/vx/res/t_lz_015a#t_lz_015a
+    asset: {fileID: 21300000, guid: 9a07f7961533e5b4c8173fa9eda553b2, type: 3}
+  - key: res/local/vx/res/t_lz_0045
+    asset: {fileID: 21300000, guid: ad66a681451f9894186e9b93d356ffed, type: 2}
+  - key: res/local/vx/res/t_lz_0045#t_lz_0045
+    asset: {fileID: 21300000, guid: b42b76f3e9556934394b0709f0791140, type: 3}
+  - key: res/local/vx/res/t_shiny_01
+    asset: {fileID: 21300000, guid: 52310db66c049da469e8a5e91ea7cc6f, type: 2}
+  - key: res/local/vx/res/t_shiny_01#t_shiny_01
+    asset: {fileID: 21300000, guid: 7e72d03e4f5bbfd4c9a15cc14dd9f008, type: 3}
+  - key: res/local/vx/res/t_shuye_01
+    asset: {fileID: 21300000, guid: 430571c7d0e006a4daa75ce0dfc514d5, type: 2}
+  - key: res/local/vx/res/t_shuye_01#t_shuye_01
+    asset: {fileID: 21300000, guid: 59cf862bbee097f4abca109503d87e74, type: 3}
+  - key: res/local/vx/res/t_star_01
+    asset: {fileID: 21300000, guid: 217eb8f9a4906b14098c5931a11ad17c, type: 2}
+  - key: res/local/vx/res/t_star_01#t_star_01
+    asset: {fileID: 21300000, guid: e7645ee8b08041e4bb785bdc510de7a6, type: 3}
+  - key: res/local/vx/res/t_xuanwo02
+    asset: {fileID: 21300000, guid: 61dc59589d7213b428c4783cd15c4a90, type: 2}
+  - key: res/local/vx/res/t_xuanwo02#t_xuanwo02
+    asset: {fileID: 21300000, guid: 3638b8cc0995c764396cb8afaa5cd2f5, type: 3}
+  - key: res/local/vx/res/t_youqi_1
+    asset: {fileID: 21300000, guid: b67922aae90aa824a8d5fb4d0e6070ee, type: 2}
+  - key: res/local/vx/res/t_youqi_1#t_youqi_1
+    asset: {fileID: 21300000, guid: f85fa0c69049fd646a6c4ba931894480, type: 3}
+  - key: res/local/vx/res/t_youqi_2
+    asset: {fileID: 21300000, guid: f79bf2c87d355e54893db15d86bb752c, type: 2}
+  - key: res/local/vx/res/t_youqi_2#t_youqi_2
+    asset: {fileID: 21300000, guid: 2e84c7b27c01b70449204f861757ac6e, type: 3}
+  - key: res/local/vx/res/t_youqi_3
+    asset: {fileID: 21300000, guid: 3be48a0b613f67a40aa16894b4b239de, type: 2}
+  - key: res/local/vx/res/t_youqi_3#t_youqi_3
+    asset: {fileID: 21300000, guid: 9a1179f834e043f4c813266b172cfa65, type: 3}
+  - key: res/local/vx/res/t_youqi_4
+    asset: {fileID: 21300000, guid: 734d82c9de55d2740a2a7d8516281ad4, type: 2}
+  - key: res/local/vx/res/t_youqi_4#t_youqi_4
+    asset: {fileID: 21300000, guid: d380f96a9161e6d41990387dd9c4ef7f, type: 3}
+  - key: res/local/vx/res/trail02
+    asset: {fileID: 21300000, guid: 31333995b2dd0a747a283546fe58e6bd, type: 2}
+  - key: res/local/vx/res/trail02#trail02
+    asset: {fileID: 21300000, guid: f2887941b68f3474db6438597e771403, type: 3}
+  - key: res/local/vx/res/tz_fsg_0109
+    asset: {fileID: 21300000, guid: 6961b0637cbb08840aaa65efc208472f, type: 2}
+  - key: res/local/vx/res/tz_fsg_0109#tz_fsg_0109
+    asset: {fileID: 21300000, guid: d9446e432b0cf544fa13d0fcc0ccf75b, type: 3}
+  - key: res/local/vx/res/tz_fsg_1010
+    asset: {fileID: 21300000, guid: 895b6082e85cf8146a892e2c3b973d76, type: 2}
+  - key: res/local/vx/res/tz_fsg_1010#tz_fsg_1010
+    asset: {fileID: 21300000, guid: 8e71b0e0b378fec4eb8084c164ffce2d, type: 3}
+  - key: res/local/vx/res/tz_fsg_1225
+    asset: {fileID: 21300000, guid: cfed047726c9f75468db59baffe3aae4, type: 2}
+  - key: res/local/vx/res/tz_fsg_1225#tz_fsg_1225
+    asset: {fileID: 21300000, guid: 514494c671bd09e4c8c49667452c18dc, type: 3}
+  - key: res/local/vx/res/tz_glow_01
+    asset: {fileID: 21300000, guid: 1ad344c291d20d54fb8c0b609f26c119, type: 2}
+  - key: res/local/vx/res/tz_glow_01#tz_glow_01
+    asset: {fileID: 21300000, guid: 4da7ee3d4fb4bb44fa3dc3d6006f8756, type: 3}
+  - key: res/local/vx/res/tz_glow_03
+    asset: {fileID: 21300000, guid: ba3d9ab221295814f9be0a6ad936b1f4, type: 2}
+  - key: res/local/vx/res/tz_glow_03#tz_glow_03
+    asset: {fileID: 21300000, guid: ec6b4e278e8a2834a9e6f2d4c7fb6db8, type: 3}
+  - key: res/local/vx/res/tz_glow_04
+    asset: {fileID: 21300000, guid: 9d8b915b0b98c8648acf9a1414af05fa, type: 2}
+  - key: res/local/vx/res/tz_glow_04#tz_glow_04
+    asset: {fileID: 21300000, guid: b87c12c306658f4448d96a50ff750bba, type: 3}
+  - key: res/local/vx/res/tz_glow_015
+    asset: {fileID: 21300000, guid: f2ec88a936873f2449411e0e9d7de03a, type: 2}
+  - key: res/local/vx/res/tz_glow_015#tz_glow_015
+    asset: {fileID: 21300000, guid: dd76afeb94060b8489ba31a17bb383e8, type: 3}
+  - key: res/local/vx/res/tz_glow_16
+    asset: {fileID: 21300000, guid: 6ac7c1239d7e18741ba3dcd310832724, type: 2}
+  - key: res/local/vx/res/tz_glow_16#tz_glow_16
+    asset: {fileID: 21300000, guid: f40fcc4c41d57814181f521138cf37d0, type: 3}
+  - key: res/local/vx/res/tz_glow_021
+    asset: {fileID: 21300000, guid: 704d7d7f42afa0f4cbeb96cfe9366fad, type: 2}
+  - key: res/local/vx/res/tz_glow_021#tz_glow_021
+    asset: {fileID: 21300000, guid: 1274cd17c172e3142b4d0add7f33bfc0, type: 3}
+  - key: res/local/vx/res/tz_glow_022
+    asset: {fileID: 21300000, guid: f52bdcaaec3ebfc47863d4bfbc40644f, type: 2}
+  - key: res/local/vx/res/tz_glow_022#tz_glow_022
+    asset: {fileID: 21300000, guid: f7d1d8ad9a8099042870961d23ea2a14, type: 3}
+  - key: res/local/vx/res/tz_glow_0109
+    asset: {fileID: 21300000, guid: d8a9a5e784ba64248a6329ace1ccdefd, type: 2}
+  - key: res/local/vx/res/tz_glow_0109#tz_glow_0109
+    asset: {fileID: 21300000, guid: b72662034990c6645bce64af2de83719, type: 3}
+  - key: res/local/vx/res/tz_glow_196_a
+    asset: {fileID: 21300000, guid: 8019c9074cef832459a7ec713393804b, type: 2}
+  - key: res/local/vx/res/tz_glow_196_a#tz_glow_196_a
+    asset: {fileID: 21300000, guid: 35cdcc37fdd0c0b408ca9a0f8dd4a0bc, type: 3}
+  - key: res/local/vx/res/tz_glow_0626
+    asset: {fileID: 21300000, guid: 6d4c14add16ee2f43a17c88d239c9ca3, type: 2}
+  - key: res/local/vx/res/tz_glow_0626#tz_glow_0626
+    asset: {fileID: 21300000, guid: bf46fb2c3afa6b54f96ef46b4b86565a, type: 3}
+  - key: res/local/vx/res/tz_glow_1225
+    asset: {fileID: 21300000, guid: f486ea7804f8d5243baee88195987091, type: 2}
+  - key: res/local/vx/res/tz_glow_1225#tz_glow_1225
+    asset: {fileID: 21300000, guid: 3d17f3f1c167b0e4b89f00bf34f81c3e, type: 3}
+  - key: res/local/vx/res/tz_glow_bg_01
+    asset: {fileID: 21300000, guid: 3b57e2b202319ae40b21113bbc93776d, type: 2}
+  - key: res/local/vx/res/tz_glow_bg_01#tz_glow_bg_01
+    asset: {fileID: 21300000, guid: d6e5d9a4add51e94d96747dce8d8576a, type: 3}
+  - key: res/local/vx/res/tz_particle_01
+    asset: {fileID: 21300000, guid: 255b34d05259b3b4dae27dfb5716ae60, type: 2}
+  - key: res/local/vx/res/tz_particle_01#tz_particle_01
+    asset: {fileID: 21300000, guid: dc038ae10664ccd45a2dc0bcf0f92e1a, type: 3}
+  - key: res/local/vx/res/tz_star_01
+    asset: {fileID: 21300000, guid: 64cd21349d36bab4ea559593f4a97a23, type: 2}
+  - key: res/local/vx/res/tz_star_01#tz_star_01
+    asset: {fileID: 21300000, guid: 19339111880c92c43a7686b4a436b8c2, type: 3}
+  - key: res/local/vx/res/tz_star_04
+    asset: {fileID: 21300000, guid: 075dbeb332b769d4d9024cf2d8b24eac, type: 2}
+  - key: res/local/vx/res/tz_star_04#tz_star_04
+    asset: {fileID: 21300000, guid: d3276529817f32e4e8d283004efb1e36, type: 3}
+  - key: res/local/vx/res/tz_starts0526
+    asset: {fileID: 21300000, guid: 4fcfbb57ee9e6d740a83911373ca6baa, type: 2}
+  - key: res/local/vx/res/tz_starts0526#tz_starts0526
+    asset: {fileID: 21300000, guid: 44f8edf4b35ed8446b6dbe849ed3ecaa, type: 3}
+  - key: res/local/vx/res/tz_starts_0422
+    asset: {fileID: 21300000, guid: 6854fad1dc2d9b441846771454aa23d3, type: 2}
+  - key: res/local/vx/res/tz_starts_0422#tz_starts_0422
+    asset: {fileID: 21300000, guid: 7d51db1b0125a2444801ba37222cab3f, type: 3}
+  - key: res/local/vx/res/tz_starts_0615
+    asset: {fileID: 21300000, guid: cdbcf449eb376ca41a5db734dd39bd9d, type: 2}
+  - key: res/local/vx/res/tz_starts_0615#tz_starts_0615
+    asset: {fileID: 21300000, guid: bde09d38aa267f149a2f3381f3840098, type: 3}
+  - key: res/local/vx/res/tz_white
+    asset: {fileID: 21300000, guid: f3adeb4a9d5978148823d1205e522e07, type: 2}
+  - key: res/local/vx/res/tz_white#tz_white
+    asset: {fileID: 21300000, guid: be5301409a82b074d8c18842f7cbef55, type: 3}
+  - key: res/local/vx/res/white01
+    asset: {fileID: 21300000, guid: e64c045897a327242b758f174fb5373b, type: 2}
+  - key: res/local/vx/res/white01#white01
+    asset: {fileID: 21300000, guid: 898f0de070800884aabbc04022a1e430, type: 3}
+  - key: res/local/vx/res/xuanwo_001
+    asset: {fileID: 21300000, guid: 639085a3d1844a042bdd0f46f1d5909f, type: 2}
+  - key: res/local/vx/res/xuanwo_001#xuanwo_001
+    asset: {fileID: 21300000, guid: 3968076fbf7259b408ddbc723ba327c3, type: 3}
+  - key: res/local/vx/shader/hanshader_additive
+    asset: {fileID: 4800000, guid: 60f521b6df970434c91370bfd4157b02, type: 3}
+  - key: res/local/vx/shader/hanshader_blend
+    asset: {fileID: 4800000, guid: 727a2d5aba10c4a4bb25f49a4a515707, type: 3}
+  - key: res/local/vx/shader/uiadditive
+    asset: {fileID: 4800000, guid: 3e35cda61b30ed64488533ae950da206, type: 3}
+  - key: res/local/vx/shader/uioutlineglow
+    asset: {fileID: 4800000, guid: 51f5cee167e4f4b46b5a20000ed27ebb, type: 3}
+  - key: res_server/server_configs/alleleimageconfig
+    asset: {fileID: 4900000, guid: 85deb8700244c7f4183fb554fd4eb56e, type: 3}
+  - key: res_server/server_configs/configs_version
+    asset: {fileID: 4900000, guid: 8a5621653d18a6b4293b7b69bb243fd3, type: 3}
+  - key: res_server/server_configs/itemidnameconfig
+    asset: {fileID: 4900000, guid: f17844c89951ec94ea6ed1447713a9bc, type: 3}
+  - key: res_server/server_configs/mainlevelconfig
+    asset: {fileID: 4900000, guid: 449341d91f697e34dbc048324552c060, type: 3}
+  - key: res_server/server_configs/mainlevelconfigv104ex02
+    asset: {fileID: 4900000, guid: c6d32b51b99997d4f827fcffb4fdffa9, type: 3}
+  - key: res_server/server_configs/mainlevelconfigv104ex02ex03
+    asset: {fileID: 4900000, guid: 79e397b5840386c468a286bb86da8294, type: 3}
+  - key: res_server/server_configs/mainlevelconfigv104ex02ex03v105ex01
+    asset: {fileID: 4900000, guid: 1ac9fc82b0d5a5845934d9ffd1faab2c, type: 3}
+  - key: res_server/server_configs/mainlevelconfigv104ex02v105ex01
+    asset: {fileID: 4900000, guid: 63db98e38028f0e4dbd3ff60b067acbb, type: 3}
+  - key: res_server/server_configs/mainlevelconfigv104ex03
+    asset: {fileID: 4900000, guid: 63925cce299fcc74fae3ca144f7b46c6, type: 3}
+  - key: res_server/server_configs/mainlevelconfigv104ex03v105ex01
+    asset: {fileID: 4900000, guid: 52af6011c8bed8d40b6578a9be77895f, type: 3}
+  - key: res_server/server_configs/mainlevelconfigv105ex01
+    asset: {fileID: 4900000, guid: e11b1db7c34d0d149ba34dc3714c3fb2, type: 3}
+  - key: res_server/server_configs/res_server_assets
+    asset: {fileID: 4900000, guid: e30108dd1b6d09a419f914f080684c55, type: 3}
+  - key: res_server/server_images/fruit/fruit_0
+    asset: {fileID: 21300000, guid: 33797c615965d1e49bdec1bcf7f65018, type: 3}
+  - key: res_server/server_images/fruit/fruit_1
+    asset: {fileID: 21300000, guid: 64812cc45ca5bc74fae6758f448c91c1, type: 3}
+  - key: res_server/server_images/fruit/fruit_2
+    asset: {fileID: 21300000, guid: 9e7b8545c0a1ef847bee9d7e5fad31fb, type: 3}
+  - key: res_server/server_images/fruit/fruit_3
+    asset: {fileID: 21300000, guid: 030c9bea6e76e614aa189fa70bae3a8d, type: 3}
+  - key: res_server/server_images/fruit/fruit_4
+    asset: {fileID: 21300000, guid: 522603ecc233ace47b18f41d916bbdc4, type: 3}
+  - key: res_server/server_images/fruit/fruit_5
+    asset: {fileID: 21300000, guid: 506e5939815a6134fa6a843abda725b9, type: 3}
+  - key: res_server/server_images/fruit/fruit_6
+    asset: {fileID: 21300000, guid: 97a43d5f938f3854a922598403526be7, type: 3}
+  - key: res_server/server_images/fruit/fruit_7
+    asset: {fileID: 21300000, guid: 67d593d714bc07b4f922e10918c9724c, type: 3}
+  - key: res_server/server_images/fruit/fruit_8
+    asset: {fileID: 21300000, guid: 190054f43f82491479aa12b81f6914da, type: 3}
+  - key: res_server/server_images/fruit/fruit_9
+    asset: {fileID: 21300000, guid: ed5db75341b26d94a97a8a4440d87ca4, type: 3}
+  - key: res_server/server_images/fruit/fruit_10
+    asset: {fileID: 21300000, guid: 66307df21a81cbf4f9106fbde6f3e9d3, type: 3}
+  - key: res_server/server_images/fruit/fruit_11
+    asset: {fileID: 21300000, guid: cb961e4b96bcb8045b4c3bbbb51843fa, type: 3}
+  - key: res_server/server_images/fruit/fruit_12
+    asset: {fileID: 21300000, guid: deb785445e7d5af43b3145c7dcbce3a0, type: 3}
+  - key: res_server/server_images/fruit/fruit_13
+    asset: {fileID: 21300000, guid: ee2d59c2bf750ab48b77ab15fc8bbe3b, type: 3}
+  - key: res_server/server_images/fruit/fruit_14
+    asset: {fileID: 21300000, guid: bedf07c11fd9fa341a7bc929cdb2d158, type: 3}
+  - key: res_server/server_images/fruit/fruit_15
+    asset: {fileID: 21300000, guid: 845e3d90a4681e7478b373dde5b69de8, type: 3}
+  - key: res_server/server_images/fruit/fruit_16
+    asset: {fileID: 21300000, guid: 1b67099eba88a3a4498b4f606b0ac0b9, type: 3}
+  - key: res_server/server_images/fruit/fruit_17
+    asset: {fileID: 21300000, guid: 7d0c053d681c8ac47a02368995677b97, type: 3}
+  - key: res_server/server_images/fruit/fruit_18
+    asset: {fileID: 21300000, guid: e7940f4ca7627c34397ee129905ceb7b, type: 3}
+  - key: res_server/server_images/fruit/fruit_19
+    asset: {fileID: 21300000, guid: 5e631b8222a6081468f7a67a5dce69cf, type: 3}
+  - key: res_server/server_images/fruit/fruit_20
+    asset: {fileID: 21300000, guid: 57ae33636320fc1438bef03296a74155, type: 3}
+  - key: res_server/server_images/fruit/fruit_21
+    asset: {fileID: 21300000, guid: 4a1ec722551cae045adc019f94ff0cc6, type: 3}
+  - key: res_server/server_images/fruit/fruit_22
+    asset: {fileID: 21300000, guid: 1a7ccae2fcda0974cb0823a0f89bd31e, type: 3}
+  - key: res_server/server_images/fruit/fruit_23
+    asset: {fileID: 21300000, guid: 544dd140356cf804fa58f763bae88e87, type: 3}
+  - key: res_server/server_images/fruit/fruit_24
+    asset: {fileID: 21300000, guid: da672c8ed8310554fb94bcf21b15ffdf, type: 3}
+  - key: res_server/server_images/fruit/fruit_25
+    asset: {fileID: 21300000, guid: 6185a43659c3fa94e9a7fa9f404e0411, type: 3}
+  - key: res_server/server_images/fruit/fruit_26
+    asset: {fileID: 21300000, guid: 80d5748f214064e4e8102e724aaf8219, type: 3}
+  - key: res_server/server_images/fruit/fruit_27
+    asset: {fileID: 21300000, guid: 6fb86b6716b570b42aad0af44ca3fba5, type: 3}
+  - key: res_server/server_images/fruit/fruit_28
+    asset: {fileID: 21300000, guid: a08bbcaaaacdfa14ca655529a2fdb7e8, type: 3}
+  - key: res_server/server_images/fruit/fruit_29
+    asset: {fileID: 21300000, guid: 1971d8583b75c9a42b8cb87959ed633a, type: 3}
+  - key: res_server/server_images/fruit/fruit_30
+    asset: {fileID: 21300000, guid: 54d53e67f8b16fd408b231d58d00ad8b, type: 3}
+  - key: res_server/server_images/fruit/fruit_31
+    asset: {fileID: 21300000, guid: d4938eaca5412414893dcc49564a1f2c, type: 3}
+  - key: res_server/server_images/fruit/fruit_32
+    asset: {fileID: 21300000, guid: b96d40a86bb624047ac64a1104b123ae, type: 3}
+  - key: res_server/server_images/fruit/fruit_33
+    asset: {fileID: 21300000, guid: 09dcb914596898142847b5b62287c556, type: 3}
+  - key: res_server/server_images/fruit/fruit_34
+    asset: {fileID: 21300000, guid: 64d928dfabad8624ab838f7935b05d92, type: 3}
+  - key: res_server/server_images/fruit/fruit_35
+    asset: {fileID: 21300000, guid: e0824f5dfefa4d34194725c2c6e472ab, type: 3}
+  - key: res_server/server_images/fruit/fruit_36
+    asset: {fileID: 21300000, guid: e0de5e55b13832e49ad4d04420a9bc5b, type: 3}
+  - key: res_server/server_images/fruit/fruit_37
+    asset: {fileID: 21300000, guid: 6005f70959c05e64e846c35498abbf29, type: 3}
+  - key: res_server/server_images/fruit/fruit_38
+    asset: {fileID: 21300000, guid: e1c9e2be5a4210c4498624a8329ea347, type: 3}
+  - key: res_server/server_images/fruit/fruit_39
+    asset: {fileID: 21300000, guid: 9a0b7c42ea7e91f4490344f750836117, type: 3}
+  - key: res_server/server_images/fruit/fruit_40
+    asset: {fileID: 21300000, guid: 3c3de2a2bf13c1a42a7ad79c273f0845, type: 3}
+  - key: res_server/server_images/fruit/fruit_41
+    asset: {fileID: 21300000, guid: 16d3a6ca32fe5cf49ba03fc74721448d, type: 3}
+  - key: res_server/server_images/fruit/fruit_42
+    asset: {fileID: 21300000, guid: 9c2d260752f213e4e889f9da251f0a0b, type: 3}
+  - key: res_server/server_images/fruit/fruit_43
+    asset: {fileID: 21300000, guid: af475ecd857d26b46949e5ae2074ae92, type: 3}
+  - key: res_server/server_images/fruit/fruit_44
+    asset: {fileID: 21300000, guid: e189182530478b7489692030d5a8f3ca, type: 3}
+  - key: res_server/server_images/fruit/fruit_45
+    asset: {fileID: 21300000, guid: e17759a13efc723479bdd2f9c3dcfd59, type: 3}
+  - key: res_server/server_images/fruit/fruit_46
+    asset: {fileID: 21300000, guid: 043e4de3fe19b8946a84f928e785b9f0, type: 3}
+  - key: res_server/server_images/fruit/fruit_47
+    asset: {fileID: 21300000, guid: 0272f90e7adeac44ebfd95b9aff1fa99, type: 3}
+  - key: res_server/server_images/fruit/fruit_48
+    asset: {fileID: 21300000, guid: 5d37e4209948413418f82e55c10ebfc3, type: 3}
+  - key: res_server/server_images/fruit/fruit_49
+    asset: {fileID: 21300000, guid: c72664e974409bd44ac95f55db4a249d, type: 3}
+  - key: res_server/server_images/fruit/fruit_50
+    asset: {fileID: 21300000, guid: e400c30ba8513d841a8c12f3ae01034c, type: 3}
+  - key: res_server/server_images/fruit/fruit_51
+    asset: {fileID: 21300000, guid: 49555ff13496c7645acb0c93df7e1bf7, type: 3}
+  - key: res_server/server_images/fruit/fruit_52
+    asset: {fileID: 21300000, guid: 39b6e97358fa8a44192f4abb35b52f10, type: 3}
+  - key: res_server/server_images/fruit/fruit_53
+    asset: {fileID: 21300000, guid: 3685df598f0c33a439a995fb4b30d630, type: 3}
+  - key: res_server/server_images/fruit/fruit_54
+    asset: {fileID: 21300000, guid: b51aa2a0ec005984ab1a1823d14c27cd, type: 3}
+  - key: res_server/server_images/fruit/fruit_55
+    asset: {fileID: 21300000, guid: 632a6c1aafd006d498232ee509b8fd68, type: 3}
+  - key: res_server/server_images/fruit/fruit_56
+    asset: {fileID: 21300000, guid: 28df23ca0b1f95943b37dc06cf24111c, type: 3}
+  - key: res_server/server_images/fruit/fruit_57
+    asset: {fileID: 21300000, guid: 92ba67d1f3e3daf4d8a785d82e391e63, type: 3}
+  - key: res_server/server_images/fruit/fruit_58
+    asset: {fileID: 21300000, guid: 9ebb8607de453aa43b1e78fb6168c3c5, type: 3}
+  - key: res_server/server_images/fruit/fruit_59
+    asset: {fileID: 21300000, guid: 18791c302de679c4fa19fd70be630411, type: 3}
+  - key: res_server/server_images/fruit/fruit_60
+    asset: {fileID: 21300000, guid: 04e2a8e0e6318404e8d180a00b64b167, type: 3}
+  - key: res_server/server_images/fruit/fruit_61
+    asset: {fileID: 21300000, guid: 5d9e17efd16dff04b920f8e087543165, type: 3}
+  - key: res_server/server_images/fruit/fruit_62
+    asset: {fileID: 21300000, guid: f442aa7cd83be0d4c8eba4e2747db81b, type: 3}
+  - key: res_server/server_images/fruit/fruit_63
+    asset: {fileID: 21300000, guid: 445121de520ddf64db4fa322b5e919cd, type: 3}
+  - key: res_server/server_images/fruit/fruit_64
+    asset: {fileID: 21300000, guid: f731333a0731c9b4984d532c14c039a4, type: 3}
+  - key: res_server/server_images/fruit/fruit_65
+    asset: {fileID: 21300000, guid: e1dc4715996bf854ba1787bf462b5fcd, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/100/levelconfigs
+    asset: {fileID: 4900000, guid: 49b6c938ddd7e0843a69b452baf135d0, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/200/levelconfigs
+    asset: {fileID: 4900000, guid: 53c9af84cea819740bcc03118f62af1a, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/300/levelconfigs
+    asset: {fileID: 4900000, guid: 0999a1f94a385544fb0f009f37e7aa8c, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/1000/levelconfigs
+    asset: {fileID: 4900000, guid: 7308f8d495dc67e4db74c3c6d6618297, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/1001/levelconfigs
+    asset: {fileID: 4900000, guid: f0a030026f90c3c499392fcfdfa2a266, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/1002/levelconfigs
+    asset: {fileID: 4900000, guid: ac6be8a4961e4444a89745823a781535, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/1003/levelconfigs
+    asset: {fileID: 4900000, guid: 48c9d2e50e149504e9d516746698fc4d, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/1004/levelconfigs
+    asset: {fileID: 4900000, guid: 3a32f170bf1bdc642a6ccd7ecd8a71fb, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/1005/levelconfigs
+    asset: {fileID: 4900000, guid: 322d7035a0ae74c46ae0c096f2a87962, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/1006/levelconfigs
+    asset: {fileID: 4900000, guid: cf4626f7f4e4dfe42b9c1c189bd63f76, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/1007/levelconfigs
+    asset: {fileID: 4900000, guid: a6789e23fb4060a4f826a5f504ed82a3, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/1008/levelconfigs
+    asset: {fileID: 4900000, guid: f7d0a373ed4adb24c8e02426e6337903, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/1009/levelconfigs
+    asset: {fileID: 4900000, guid: f2ba69393eed6bd44975e45d0c3994a3, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/1010/levelconfigs
+    asset: {fileID: 4900000, guid: d914726e964d918489291b7a38c1cd96, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/1011/levelconfigs
+    asset: {fileID: 4900000, guid: 495a983eca61c1a40a6a96db7853613e, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/1012/levelconfigs
+    asset: {fileID: 4900000, guid: 98a8728484dac6348b7edc7be0e1008b, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/1013/levelconfigs
+    asset: {fileID: 4900000, guid: 0c4580e97b840ef4ba7d13c507af5708, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/1014/levelconfigs
+    asset: {fileID: 4900000, guid: c3e4846a41e526d4fa6cdbaa8f16abec, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/2000/levelconfigs
+    asset: {fileID: 4900000, guid: 1679ed34245b9164592886c9521c0e1a, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/2001/levelconfigs
+    asset: {fileID: 4900000, guid: 33c56a815f62ce8419cca656feaf7ca1, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/3000/levelconfigs
+    asset: {fileID: 4900000, guid: b45299ae72794c9458a95adc514b174d, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/3001/levelconfigs
+    asset: {fileID: 4900000, guid: 3795a62ced3da024aa635690cad69745, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/4000/levelconfigs
+    asset: {fileID: 4900000, guid: 5a03a54fd6d4cf44e8a531809ae7803b, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/4001/levelconfigs
+    asset: {fileID: 4900000, guid: d25c0d40e853f43438089e69c0598ab6, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/5000/levelconfigs
+    asset: {fileID: 4900000, guid: 48abac1419f5a6c42a6f647fdf3da104, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/5001/levelconfigs
+    asset: {fileID: 4900000, guid: 5160d2cba0fbf03478e0fc441f734f66, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10400000/levelconfigs
+    asset: {fileID: 4900000, guid: 023de7c4d7ea06f4d80ba750decb5f9e, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10400001/levelconfigs
+    asset: {fileID: 4900000, guid: ef6d7cdd4b175e24f8523efe24263517, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10400002/levelconfigs
+    asset: {fileID: 4900000, guid: cba9b74b711233546a24b8196ba5078c, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10400003/levelconfigs
+    asset: {fileID: 4900000, guid: 0ba8a9c30e65bc349926f596d0d1e619, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10400004/levelconfigs
+    asset: {fileID: 4900000, guid: 9f6ab1d6bc77d8d4ba1c53361aef70ac, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10400005/levelconfigs
+    asset: {fileID: 4900000, guid: 47ee50e746323a54b84021da81c34862, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10400006/levelconfigs
+    asset: {fileID: 4900000, guid: fa21e0c44e5c39540b350e31b8799c1b, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10400007/levelconfigs
+    asset: {fileID: 4900000, guid: 322acc1c49b090b4d90b67bfa1589c9f, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10400008/levelconfigs
+    asset: {fileID: 4900000, guid: 49d0bb720c512d9489f71e245aa125d6, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10400009/levelconfigs
+    asset: {fileID: 4900000, guid: dfe52df6bde7689459b287054c42d927, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10400010/levelconfigs
+    asset: {fileID: 4900000, guid: c2fcc0acbd078c247aed5a5863f4ca38, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10500000/levelconfigs
+    asset: {fileID: 4900000, guid: b9127aa53ff060f42a7426fb4a0e4cd2, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10500001/levelconfigs
+    asset: {fileID: 4900000, guid: 240adc0a86ce0084e9b3269427bf32b1, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10500002/levelconfigs
+    asset: {fileID: 4900000, guid: 9914fd079e4d4ff46af60136216e9ea8, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10500003/levelconfigs
+    asset: {fileID: 4900000, guid: 64226b191cb170a41bf32e1901292395, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10500004/levelconfigs
+    asset: {fileID: 4900000, guid: fa7c7dc3a6ee1964cad1bd1bcf5c0230, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10500005/levelconfigs
+    asset: {fileID: 4900000, guid: 7b70d31a999fadd418f3f5b607c0ff11, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10500006/levelconfigs
+    asset: {fileID: 4900000, guid: e786ab056f3384141961b581a6e62015, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10500007/levelconfigs
+    asset: {fileID: 4900000, guid: 4fbe594915b93a04a92db47204048353, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10500008/levelconfigs
+    asset: {fileID: 4900000, guid: d2e66ba33b7cb644cb325d096d6929d5, type: 3}
+  - key: res_server/server_levelconfigs/mainlevel/10500009/levelconfigs
+    asset: {fileID: 4900000, guid: d5c71a1a357c32a4391c335b52092834, type: 3}
+  - key: res_server/server_maps/map1002/map1002
+    asset: {fileID: 21300000, guid: f38abf572f121064abf97fd2d5047da2, type: 2}
+  - key: res_server/server_maps/map1002/map1002#map1002
+    asset: {fileID: 21300000, guid: 5e2565332e2329d4dba4f86c828163f5, type: 3}
+  - key: res_server/server_maps/map1008/map1008
+    asset: {fileID: 21300000, guid: 821b9c6763c99904f99018ed3455a043, type: 2}
+  - key: res_server/server_maps/map1008/map1008#map1008
+    asset: {fileID: 21300000, guid: 55ee473a1994d484cb2609e14075457b, type: 3}
+  - key: res_server/server_maps/map1010/map1010
+    asset: {fileID: 21300000, guid: d81f2c4f2e23c164b857bd8ce826a570, type: 2}
+  - key: res_server/server_maps/map1010/map1010#map1010
+    asset: {fileID: 21300000, guid: e4c33893cb74ce344a2cd812726a64d1, type: 3}
+  - key: res_server/server_maps/map1011/map1011
+    asset: {fileID: 21300000, guid: ea34c17393b1e654584b0642e6480963, type: 2}
+  - key: res_server/server_maps/map1011/map1011#map1011
+    asset: {fileID: 21300000, guid: eb6c67cbf626b0541826e8543afb0f0f, type: 3}
+  - key: res_server/server_maps/map1014/map1014
+    asset: {fileID: 21300000, guid: 4800ec15453d69646897448f09369c5f, type: 2}
+  - key: res_server/server_maps/map1014/map1014#map1014
+    asset: {fileID: 21300000, guid: 7e26a451618c940459c4c9693c80a35d, type: 3}
+  - key: res_server/server_maps/map1015/map1015
+    asset: {fileID: 21300000, guid: 4571651464762ca48b6e94f9a32f98d1, type: 2}
+  - key: res_server/server_maps/map1015/map1015#map1015
+    asset: {fileID: 21300000, guid: 109d5fb65276b4c4689e120219a2bf7e, type: 3}
+  - key: res_server/server_maps/map1016/map1016
+    asset: {fileID: 21300000, guid: 8510d55666c2db04d8fd98e9eb24f60a, type: 2}
+  - key: res_server/server_maps/map1016/map1016#map1016
+    asset: {fileID: 21300000, guid: c5aaa9e1bd5cfa44d845ce7ac1373ca0, type: 3}
+  - key: res_server/server_maps/map1017/map1017
+    asset: {fileID: 21300000, guid: ba2845af81157b942a147b735c8f178d, type: 2}
+  - key: res_server/server_maps/map1017/map1017#map1017
+    asset: {fileID: 21300000, guid: 77f2d72abd3e80140b0232a144860a37, type: 3}
+  - key: res_server/server_maps/map1018/map1018
+    asset: {fileID: 21300000, guid: a9c297d3db40f1a49af4b641a0d658ac, type: 2}
+  - key: res_server/server_maps/map1018/map1018#map1018
+    asset: {fileID: 21300000, guid: c1abed25799706341a786299e3f8d20b, type: 3}
+  - key: res_server/server_maps/map1021/map1021
+    asset: {fileID: 21300000, guid: b8c3bfd50f876eb43accd9d0514a82f5, type: 2}
+  - key: res_server/server_maps/map1021/map1021#map1021
+    asset: {fileID: 21300000, guid: 2d29da29a73fc5f4888ddf3b4adf449c, type: 3}
