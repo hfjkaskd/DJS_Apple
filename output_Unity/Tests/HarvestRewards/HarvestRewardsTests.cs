@@ -24,6 +24,7 @@ internal static class HarvestRewardsTests
         Run("Insufficient and invalid tiers cannot start an application", InvalidApplications);
         Run("Repeated triple and win events cannot pay twice", DuplicateGameplayEvents);
         Run("Tutorial gift and first free win are claimed only once", TutorialAndFirstWin);
+        Run("Ordinary main-level win base reward is available immediately", OrdinaryWinImmediateBase);
         Run("In-game first free reward and three-second base delay", InGameBaseRewards);
         Run("Last triple reserves the win flow and suppresses in-game popup", LastTripleWinPriority);
         Run("Failed rewarded ads preserve base and completed callbacks pay once", RewardedClaims);
@@ -304,10 +305,23 @@ internal static class HarvestRewardsTests
         engine.RecordWin(runId, true, Epoch + 1);
         Equal(12000L, engine.State.AvailableCents, "new tutorial run does not repeat lifetime gift");
         True(!engine.State.PendingWinReward.IsFirstFree, "first multiplier remains consumed");
-        True(!engine.ClaimWinBase(runId, Epoch + 3), "ordinary reward locked until three seconds");
-        True(engine.ClaimWinBase(runId, Epoch + 4), "ordinary reward available after three seconds");
+        True(engine.ClaimWinBase(runId, Epoch + 1), "ordinary win reward is immediately available");
         Equal(13000L, engine.State.AvailableCents, "ordinary reward ten simulated units");
         Equal(0, engine.State.WinAdSuccessCount, "free/base rewards are not ads");
+    }
+
+    private static void OrdinaryWinImmediateBase()
+    {
+        var engine = QuickOffers();
+        string runId = NewRun(engine, Epoch);
+        True(engine.RecordWin(runId, false, Epoch), "main-level victory recorded");
+        True(!engine.State.PendingWinReward.IsFirstFree, "ordinary win uses base amount");
+        True(engine.CanClaimWinBase, "ordinary win base available when offer is created");
+        long before = engine.State.AvailableCents;
+        True(engine.ClaimWinBase(runId, Epoch), "ordinary win base has no delay");
+        Equal(1000L, engine.State.AvailableCents - before, "ordinary win pays ten simulated units");
+        True(!engine.ClaimWinBase(runId, Epoch), "ordinary win still pays only once");
+        Equal(0, engine.State.WinAdSuccessCount, "immediate base is not an ad reward");
     }
 
     private static void InGameBaseRewards()
@@ -327,6 +341,8 @@ internal static class HarvestRewardsTests
         NotNull(engine.State.PendingInGameReward, "next offer created");
         True(!engine.State.PendingInGameReward.IsFirstFree, "first in-game claim consumed");
         before = engine.State.AvailableCents;
+        True(!engine.CanClaimInGameBase, "ordinary in-game offer retains its delay");
+        True(!engine.ClaimInGameBase(runId, Epoch + 2), "ordinary in-game offer cannot be claimed immediately");
         True(!engine.ClaimInGameBase(runId, Epoch + 4), "normal base blocked at two seconds");
         True(engine.ClaimInGameBase(runId, Epoch + 5), "normal base claim at three seconds");
         Equal(500L, engine.State.AvailableCents - before, "normal base five simulated units");

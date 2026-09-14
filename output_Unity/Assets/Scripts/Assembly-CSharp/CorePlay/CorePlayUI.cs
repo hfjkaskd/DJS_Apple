@@ -11,6 +11,8 @@ namespace CorePlay
 	/// <summary>局内主界面：游戏区、收集槽、道具按钮、金币、设置与引导。</summary>
 	public class CorePlayUI : BaseUI
 	{
+		[SerializeField] private Button m_HarvestRewardsButton;
+
 		public static string EntryType;
 
 		[SerializeField]
@@ -166,6 +168,10 @@ namespace CorePlay
 
 		protected override void Init()
 		{
+			if (m_HarvestRewardsButton != null)
+			{
+				m_HarvestRewardsButton.onClick.AddListener(HarvestRewardsUI.Open);
+			}
 			Instance = this;
 			if (m_CollectAreaInterval <= 0)
 			{

@@ -63,6 +63,7 @@ public class GameEntry : MonoBehaviour
 		FPFGGCMEDND.Instance.Init();
 		KDBNHIIFGLD.Instance.Init();
 		EDLHEMMBABM.Instance.Init();
+		HarvestGameplayBridge.Initialize();
 
 		// UI层
 		MgrUI mgrUI = Object.FindObjectOfType<MgrUI>();
@@ -128,6 +129,7 @@ public class GameEntry : MonoBehaviour
 
 	private void OnApplicationPause(bool pause)
 	{
+		if (InitFinish) HarvestGameplayBridge.SetPaused(pause);
 		if (pause)
 		{
 			TrySaveAll();
@@ -147,5 +149,11 @@ public class GameEntry : MonoBehaviour
 		JEFOMCDAPGK.Instance.TrySaveToDisk();
 		FPFGGCMEDND.Instance.TrySaveToDisk();
 		KDBNHIIFGLD.Instance.TrySaveToDisk();
+		HarvestRewardService.Instance.Flush();
+	}
+
+	private void Update()
+	{
+		if (InitFinish) HarvestGameplayBridge.Tick(Time.unscaledDeltaTime);
 	}
 }

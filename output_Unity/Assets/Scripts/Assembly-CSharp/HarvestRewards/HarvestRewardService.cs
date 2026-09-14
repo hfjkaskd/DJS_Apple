@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using UnityEngine;
 
-/// <summary>A real SDK adapter must report its original request ID only after a completed rewarded ad.</summary>
+/// <summary>A real SDK adapter must report its original request ID on Unity's main thread only after a completed rewarded ad.</summary>
 public interface IHarvestRewardedAdProvider
 {
     bool IsRewardedAvailable(int rewardKind);

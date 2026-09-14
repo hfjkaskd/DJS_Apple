@@ -46,7 +46,7 @@ public sealed class HarvestRewardEngine
     {
         Tick(utcNow);
         HarvestRunState run = State.ActiveRun;
-        if (run == null || run.RunId != runId || run.WinRecorded || eventIndex < 0 || eventIndex <= run.LastTripleIndex) return false;
+        if (run == null || run.RunId != runId || run.WinRecorded || run.AwaitingWin || eventIndex < 0 || eventIndex <= run.LastTripleIndex) return false;
         run.LastTripleIndex = eventIndex;
         run.AwaitingWin = isFinalGroup;
         if (!isTutorial)
@@ -305,7 +305,7 @@ public sealed class HarvestRewardEngine
 
     private bool CanClaim(HarvestRewardOffer offer)
     {
-        return offer != null && adRewardId != offer.RewardId && (offer.IsFirstFree || State.LastUtcSeconds - offer.CreatedUtcSeconds >= Config.BaseClaimDelaySeconds);
+        return offer != null && adRewardId != offer.RewardId && (offer.IsFirstFree || offer.Kind == HarvestRewardOffer.Win || State.LastUtcSeconds - offer.CreatedUtcSeconds >= Config.BaseClaimDelaySeconds);
     }
 
     private void AutoClaimPending()

@@ -177,7 +177,10 @@ public sealed class HarvestRewardSettings
             if (ThresholdCents[i] <= 0 || (i > 0 && ThresholdCents[i] <= ThresholdCents[i - 1])) throw new InvalidOperationException("Harvest thresholds must increase.");
         if (Stages == null || Stages.Length != 6) throw new InvalidOperationException("Harvest requires six disclosed stages.");
         for (int i = 0; i < Stages.Length; i++)
+        {
             if (Stages[i] == null || string.IsNullOrEmpty(Stages[i].Id) || Stages[i].Target < 1 || Stages[i].WaitSeconds < 0 || (Stages[i].TaskKind != HarvestStageSettings.Wins && Stages[i].TaskKind != HarvestStageSettings.Triples)) throw new InvalidOperationException("Invalid harvest stage.");
+            for (int j = 0; j < i; j++) if (Stages[j].Id == Stages[i].Id) throw new InvalidOperationException("Harvest stage IDs must be unique.");
+        }
         if (SettlementWaitSeconds < 0 || TutorialGiftCents < 0 || InGameBaseCents <= 0 || WinBaseCents <= 0 || FirstTripleMinCents <= 0 || FirstTripleMaxCents < FirstTripleMinCents || AfterBudgetTripleCents < 0 || AfterFirstTargetTripleCents < 0 || FirstInGameMultiplier < 1 || FirstWinMultiplier < 1 || BaseClaimDelaySeconds < 0 || SaveIntervalSeconds < 1 || MaxEffectivePlayDeltaSeconds < 1) throw new InvalidOperationException("Invalid harvest reward values.");
         if (InGameOfferTriples < 1 || InGameOfferImmediateTriples < InGameOfferTriples || InGameOfferEffectiveSeconds < 0) throw new InvalidOperationException("Invalid harvest offer thresholds.");
         if (InGameMultipliers == null || AdCountThresholds == null || InGameMultipliers.Length != AdCountThresholds.Length || InGameMultipliers.Length == 0 || AdCountThresholds[0] != 0) throw new InvalidOperationException("Invalid harvest ad brackets.");
