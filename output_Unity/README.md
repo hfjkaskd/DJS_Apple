@@ -2,7 +2,7 @@
 
 ## 丰收奖励计划
 
-适配水果入篮三消玩法的奖励与模拟提现方案见 [丰收奖励计划](Docs/HarvestRewards.md)，浏览版见 [方案 HTML](Docs/HarvestRewards.html)。文档包含六阶段任务、奖励与广告规则、页面文案及开发接入点；这是产品方案交付，尚未接入游戏运行逻辑，不代表真实现金兑付。
+已接入水果三消奖励、六档模拟提现、六阶段任务、倒计时、存档与三个页面入口。使用与验证见 [实现说明](Docs/HarvestRewardsImplementation.md)，设计规格见 [丰收奖励计划](Docs/HarvestRewards.md)／[HTML版](Docs/HarvestRewards.html)。这是明确标注的模拟奖励机制，不代表真实现金兑付；真实广告SDK与自动广告调度尚未接通。
 
 本目录是可直接作为 Unity 项目打开的开发资产库，目标编辑器版本为 `2022.3.62f3`。启动场景、核心 Prefab、AnimationClip、AnimatorController、Material、Texture、AudioClip、配置、脚本类型和依赖程序集均按 Unity 项目结构组织，并保留项目内对象引用。
 
