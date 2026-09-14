@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3659e5d2d6484f58b91a01c13fbf7002, type: 3}
+  m_Name: HarvestRewardConfig
+  m_EditorClassIdentifier:
+  settings:
+    PlanTitle: 丰收奖励
+    SimulationNotice: 模拟奖励 · 不可兑换现金
+    RulesText: 达到模拟额度后可开启六站挑战。每站任务与24小时等待同时完成后进入下一站，六站完成后等待168小时，最短13天。申请额转入冻结余额，每档完成一次，同时仅一个申请。不涉及现金兑付。
+    ThresholdCents:
+    - 100000
+    - 150000
+    - 300000
+    - 500000
+    - 800000
+    - 1000000
+    Stages:
+    - Id: harvest_01
+      DisplayName: 初次丰收
+      TaskKind: 1
+      Target: 10
+      WaitSeconds: 86400
+    - Id: harvest_02
+      DisplayName: 收获积累
+      TaskKind: 2
+      Target: 260
+      WaitSeconds: 86400
+    - Id: harvest_03
+      DisplayName: 进阶丰收
+      TaskKind: 1
+      Target: 10
+      WaitSeconds: 86400
+    - Id: harvest_04
+      DisplayName: 持续收获
+      TaskKind: 2
+      Target: 300
+      WaitSeconds: 86400
+    - Id: harvest_05
+      DisplayName: 丰收高手
+      TaskKind: 1
+      Target: 10
+      WaitSeconds: 86400
+    - Id: harvest_06
+      DisplayName: 丰收总挑战
+      TaskKind: 2
+      Target: 500
+      WaitSeconds: 86400
+    SettlementWaitSeconds: 604800
+    TutorialGiftCents: 2000
+    InGameBaseCents: 500
+    WinBaseCents: 1000
+    FirstInGameMultiplier: 2
+    FirstWinMultiplier: 10
+    BaseClaimDelaySeconds: 3
+    FirstTripleMinCents: 125
+    FirstTripleMaxCents: 300
+    AfterBudgetTripleCents: 200
+    AfterFirstTargetTripleCents: 100
+    InGameOfferTriples: 11
+    InGameOfferEffectiveSeconds: 60
+    InGameOfferImmediateTriples: 17
+    InGameMultipliers:
+    - 2
+    - 4
+    - 6
+    - 8
+    AdCountThresholds:
+    - 0
+    - 1
+    - 3
+    - 6
+    WinLowMultipliers:
+    - 2
+    - 3
+    - 4
+    - 5
+    WinHighMultipliers:
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    WinProbabilities:
+    - BalanceRatio: 0
+      NoAds: 0.82
+      OneToTwoAds: 0.986
+      ThreeToFiveAds: 0.995
+      SixOrMoreAds: 0.997
+    - BalanceRatio: 0.5
+      NoAds: 0.35
+      OneToTwoAds: 0.896
+      ThreeToFiveAds: 0.956
+      SixOrMoreAds: 0.972
+    - BalanceRatio: 0.8
+      NoAds: 0.12
+      OneToTwoAds: 0.686
+      ThreeToFiveAds: 0.845
+      SixOrMoreAds: 0.897
+    - BalanceRatio: 0.95
+      NoAds: 0.06
+      OneToTwoAds: 0.505
+      ThreeToFiveAds: 0.719
+      SixOrMoreAds: 0.803
+    Milestones:
+    - EffectiveSeconds: 300
+      CumulativeTripleBudgetCents: 8000
+      BonusCents: 3000
+    - EffectiveSeconds: 600
+      CumulativeTripleBudgetCents: 17000
+      BonusCents: 4000
+    - EffectiveSeconds: 900
+      CumulativeTripleBudgetCents: 27000
+      BonusCents: 5000
+    - EffectiveSeconds: 1200
+      CumulativeTripleBudgetCents: 37000
+      BonusCents: 6000
+    - EffectiveSeconds: 1500
+      CumulativeTripleBudgetCents: 48000
+      BonusCents: 7000
+    SaveIntervalSeconds: 15
+    MaxEffectivePlayDeltaSeconds: 5
