@@ -9,6 +9,7 @@ public sealed class HarvestRewardsHud : MonoBehaviour
     [SerializeField] private Button walletButton;
     [SerializeField] private TextMeshProUGUI balanceText;
     [SerializeField] private TextMeshProUGUI goalText;
+    [SerializeField] private TextMeshProUGUI goalFractionText;
     [SerializeField] private Slider goalProgressBar;
     [SerializeField] private GameObject stageTrackRoot;
     [SerializeField] private GameObject[] completedMarks;
@@ -56,14 +57,19 @@ public sealed class HarvestRewardsHud : MonoBehaviour
         {
             balanceText.text = "--";
             goalText.text = "Rewards unavailable";
+            if (goalFractionText != null) goalFractionText.text = "-- / --";
             goalProgressBar.SetValueWithoutNotify(0);
             stageTrackRoot.SetActive(false);
+            goalProgressBar.gameObject.SetActive(true);
+            if (goalFractionText != null) goalFractionText.gameObject.SetActive(true);
             return;
         }
         HarvestRewardState state = service.State;
         HarvestRequestState request = state.ActiveRequest;
         balanceText.text = HarvestRewardsUI.FormatAmount(state.AvailableCents);
         stageTrackRoot.SetActive(request != null);
+        goalProgressBar.gameObject.SetActive(request == null);
+        if (goalFractionText != null) goalFractionText.gameObject.SetActive(request == null);
         for (int i = 0; i < completedMarks.Length; i++)
             completedMarks[i].SetActive(request != null && (request.Status == HarvestRequestState.SettlementWait || i < request.StageIndex));
         for (int i = 0; i < currentMarks.Length; i++)
@@ -73,6 +79,8 @@ public sealed class HarvestRewardsHud : MonoBehaviour
             if (state.CompletedTierIndexes.Count >= service.Config.ThresholdCents.Length)
             {
                 goalText.text = "All harvest challenges completed";
+                if (goalFractionText != null)
+                    goalFractionText.text = state.CompletedTierIndexes.Count + " / " + service.Config.ThresholdCents.Length;
                 goalProgressBar.SetValueWithoutNotify(1);
                 return;
             }
@@ -81,18 +89,23 @@ public sealed class HarvestRewardsHud : MonoBehaviour
             long missing = Math.Max(0, target - state.AvailableCents);
             goalText.text = missing == 0 ? "Ready to withdraw " + HarvestRewardsUI.FormatAmount(target)
                 : "Earn " + HarvestRewardsUI.FormatAmount(missing) + " more to apply";
+            if (goalFractionText != null)
+                goalFractionText.text = HarvestRewardsUI.FormatAmount(state.AvailableCents) + " / " + HarvestRewardsUI.FormatTierAmount(target);
             goalProgressBar.SetValueWithoutNotify(Mathf.Clamp01((float)((double)state.AvailableCents / target)));
             return;
         }
         if (request.Status == HarvestRequestState.SettlementWait)
         {
             goalText.text = "Final wait: " + HarvestRewardsUI.FormatDuration(service.GetRemainingSeconds());
+            if (goalFractionText != null)
+                goalFractionText.text = service.Config.Stages.Length + " / " + service.Config.Stages.Length;
             goalProgressBar.SetValueWithoutNotify(1);
             return;
         }
         HarvestStageSettings stage = service.Config.Stages[request.StageIndex];
         string unit = stage.TaskKind == HarvestStageSettings.Wins ? " levels" : " triples";
         goalText.text = "Stage " + (request.StageIndex + 1) + ": " + request.StageProgress + " / " + stage.Target + unit;
+        if (goalFractionText != null) goalFractionText.text = request.StageProgress + " / " + stage.Target;
         goalProgressBar.SetValueWithoutNotify(Mathf.Clamp01((float)request.StageProgress / stage.Target));
     }
 }

@@ -7,12 +7,13 @@ from pathlib import Path
 import hashlib
 import json
 import re
+import math
 
 ROOT = Path(__file__).resolve().parents[1]
 IMAGE = "fe87c0e1cc204ed48ad3b37840f39efc"
 BUTTON = "4e29b1a8efbd4b44bb3f3716e73f07ff"
 TEXT = "3f8a1c2b9d4e5f60718293a4b5c6d7e8"
-FONT = "05f05f2053e2fef4d92a08aa0d1478de"
+FONT_BINDINGS = ROOT / "Assets/res/local/harvest/fonts/font-bindings.json"
 UI_SCRIPT = "harvest-rewards-ui"
 PREFAB = "Assets/res/local/harvest/HarvestRewardsUI.prefab"
 
@@ -53,7 +54,22 @@ def ref(n):
 def sprite_ref(path):
     meta = (ROOT / (path + '.meta')).read_text(encoding='utf-8-sig')
     asset_guid = re.search(r'^guid: ([a-f0-9]+)', meta, re.M).group(1)
-    return f'{{fileID: 21300000, guid: {asset_guid}, type: 2}}'
+    asset_type = 3 if path.lower().endswith('.png') else 2
+    return f'{{fileID: 21300000, guid: {asset_guid}, type: {asset_type}}}'
+
+
+def font_refs(role, color):
+    bindings = json.loads(FONT_BINDINGS.read_text(encoding='utf-8-sig'))
+    title = role in ('title', 'button')
+    font = bindings['titleFont' if title else 'bodyFont']
+    # Outline is only for light title lettering, never the brown body text.
+    light = sum(int(color.lstrip('#')[i:i+2], 16) for i in (0, 2, 4)) > 630
+    material = bindings['titleGreenOutlineMaterial' if role == 'button' and light else
+                        'titleOutlineMaterial' if title and light else
+                        'titlePlainMaterial' if title else 'bodyPlainMaterial']
+    def asset_ref(asset):
+        return f"{{fileID: {asset['fileID']}, guid: {asset['guid']}, type: 2}}"
+    return asset_ref(font), asset_ref(material)
 
 
 BASE = "  m_ObjectHideFlags: 0\n  m_CorrespondingSourceObject: {fileID: 0}\n  m_PrefabInstance: {fileID: 0}\n  m_PrefabAsset: {fileID: 0}\n"
@@ -68,9 +84,9 @@ class Prefab:
         self.next_id += 1
         return self.next_id
 
-    def node(self, name, parent=None, x=0, y=0, w=100, h=100, anchor=(.5, .5), stretch=False, active=True):
+    def node(self, name, parent=None, x=0, y=0, w=100, h=100, anchor=(.5, .5), stretch=False, active=True, rotation=0):
         n = dict(go=self.alloc(), rt=self.alloc(), name=name, parent=parent, x=x, y=y, w=w, h=h,
-                 anchor=anchor, stretch=stretch, active=active, children=[], extra=[])
+                 anchor=anchor, stretch=stretch, active=active, rotation=rotation, children=[], extra=[])
         self.nodes.append(n)
         if isinstance(parent, dict):
             parent["children"].append(n["rt"])
@@ -115,7 +131,7 @@ class Prefab:
     m_Bits: 4294967295
 """)
 
-    def image(self, n, color, raycast=False, sprite=None, sliced=True):
+    def image(self, n, color, raycast=False, sprite=None, sliced=True, pixels_per_unit=1):
         self.renderer(n)
         return self.component(n, IMAGE, f"""  m_Material: {{fileID: 0}}
   m_Color: {rgba(color)}
@@ -134,12 +150,13 @@ class Prefab:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 3
+  m_PixelsPerUnitMultiplier: {pixels_per_unit}
 """)
 
-    def label(self, name, parent, text, x=0, y=0, w=880, h=70, size=36, color="754221", left=False):
+    def label(self, name, parent, text, x=0, y=0, w=880, h=70, size=36, color="754221", left=False, font_role='body', vertical='middle'):
         n = self.node(name, parent, x, y, w, h)
         self.renderer(n)
+        font, material = font_refs(font_role, color)
         component = self.component(n, TEXT, f"""  m_Material: {{fileID: 0}}
   m_Color: {rgba(color)}
   m_RaycastTarget: 0
@@ -150,8 +167,8 @@ class Prefab:
       m_Calls: []
   m_text: {json.dumps(text)}
   m_isRightToLeft: 0
-  m_fontAsset: {{fileID: 11400000, guid: {FONT}, type: 2}}
-  m_sharedMaterial: {{fileID: 2100000, guid: 38ec4ccf33978154091d0d1eaab0f998, type: 2}}
+  m_fontAsset: {font}
+  m_sharedMaterial: {material}
   m_fontSharedMaterials: []
   m_fontMaterial: {{fileID: 0}}
   m_fontMaterials: []
@@ -165,11 +182,11 @@ class Prefab:
   m_fontSizeBase: {size}
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: {max(22, size-6)}
+  m_fontSizeMin: {max(18, size*.65)}
   m_fontSizeMax: {size}
   m_fontStyle: 0
   m_HorizontalAlignment: {1 if left else 2}
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: {256 if vertical == 'top' else 512}
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -197,7 +214,7 @@ class Prefab:
 """)
         return component
 
-    def button(self, name, parent, label, x=0, y=0, w=400, h=100, color="ffffff", size=36, anchor=(.5, .5), sprite="Assets/res/local/common/sprite/btn/Btn_Normal.asset"):
+    def button(self, name, parent, label, x=0, y=0, w=400, h=100, color="ffffff", size=36, anchor=(.5, .5), sprite="Assets/res/local/common/sprite/btn/Btn_Normal.asset", text_color="103d2c", label_x=0, label_y=0, label_w=None, label_h=None, font_role='title', vertical='middle'):
         n = self.node(name, parent, x, y, w, h, anchor)
         img = self.image(n, color, True, sprite)
         btn = self.component(n, BUTTON, f"""  m_Navigation:
@@ -233,7 +250,10 @@ class Prefab:
     m_PersistentCalls:
       m_Calls: []
 """)
-        text_id = self.label(name + "Label", n, label, w=w-24, h=h-14, size=size, color="103d2c")
+        text_id = self.label(name + "Label", n, label, x=label_x, y=label_y,
+                             w=w-24 if label_w is None else label_w,
+                             h=h-14 if label_h is None else label_h, size=size, color=text_color,
+                             font_role='button' if font_role == 'title' else font_role, vertical=vertical)
         return n, btn, text_id
 
     def render(self, header=True):
@@ -244,12 +264,13 @@ class Prefab:
             result += "".join(f"  - component: {ref(i)}\n" for i in comps)
             result += f"  m_Layer: 5\n  m_Name: {n['name']}\n  m_TagString: Untagged\n  m_Icon: {{fileID: 0}}\n  m_NavMeshLayer: 0\n  m_StaticEditorFlags: 0\n  m_IsActive: {int(n['active'])}\n"
             result += f"--- !u!224 &{n['rt']}\nRectTransform:\n{BASE}  m_GameObject: {ref(n['go'])}\n"
-            result += "  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}\n  m_LocalPosition: {x: 0, y: 0, z: 0}\n  m_LocalScale: {x: 1, y: 1, z: 1}\n  m_ConstrainProportionsScale: 0\n"
+            angle = math.radians(n['rotation']) / 2
+            result += f"  m_LocalRotation: {{x: 0, y: 0, z: {math.sin(angle):.8f}, w: {math.cos(angle):.8f}}}\n  m_LocalPosition: {{x: 0, y: 0, z: 0}}\n  m_LocalScale: {{x: 1, y: 1, z: 1}}\n  m_ConstrainProportionsScale: 0\n"
             result += "  m_Children:\n" + "".join(f"  - {ref(c)}\n" for c in n['children']) if n['children'] else "  m_Children: []\n"
             parent = n['parent']['rt'] if isinstance(n['parent'], dict) else n['parent'] or 0
             amin = (0, 0) if n['stretch'] else n['anchor']
             amax = (1, 1) if n['stretch'] else n['anchor']
-            result += f"  m_Father: {ref(parent)}\n  m_LocalEulerAnglesHint: {{x: 0, y: 0, z: 0}}\n  m_AnchorMin: {{x: {amin[0]}, y: {amin[1]}}}\n  m_AnchorMax: {{x: {amax[0]}, y: {amax[1]}}}\n  m_AnchoredPosition: {{x: {n['x']}, y: {n['y']}}}\n  m_SizeDelta: {{x: {n['w']}, y: {n['h']}}}\n  m_Pivot: {{x: 0.5, y: 0.5}}\n"
+            result += f"  m_Father: {ref(parent)}\n  m_LocalEulerAnglesHint: {{x: 0, y: 0, z: {n['rotation']}}}\n  m_AnchorMin: {{x: {amin[0]}, y: {amin[1]}}}\n  m_AnchorMax: {{x: {amax[0]}, y: {amax[1]}}}\n  m_AnchoredPosition: {{x: {n['x']}, y: {n['y']}}}\n  m_SizeDelta: {{x: {n['w']}, y: {n['h']}}}\n  m_Pivot: {{x: 0.5, y: 0.5}}\n"
             result += "".join(b for _, b in n["extra"])
         return result
 

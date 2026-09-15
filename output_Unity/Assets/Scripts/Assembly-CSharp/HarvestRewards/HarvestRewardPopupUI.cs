@@ -1,3 +1,4 @@
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,8 @@ public sealed class HarvestRewardPopupUI : BaseUI
     [SerializeField] private string welcomeTitle = "Welcome gift";
     [SerializeField] private string welcomeHint = "Added to your harvest balance.";
     [SerializeField] private string rewardHint = "Collect your harvest reward and keep playing.";
+    [SerializeField] private string balanceAfterClaimFormat = "Balance after claim: {0}";
+    [SerializeField] private string currentBalanceFormat = "Balance: {0}";
     [SerializeField] private string unavailableMessage = "Rewards are paused. Keep your save data and restart the game.";
 
     private static int requestedKind;
@@ -109,7 +112,7 @@ public sealed class HarvestRewardPopupUI : BaseUI
         if (!service.IsAvailable)
         {
             amountText.text = "--";
-            balanceText.text = "Balance: --";
+            balanceText.text = string.Format(CultureInfo.InvariantCulture, currentBalanceFormat, "--");
             hintText.text = unavailableMessage;
             claimButton.interactable = false;
             adButton.interactable = false;
@@ -117,12 +120,14 @@ public sealed class HarvestRewardPopupUI : BaseUI
             return;
         }
         titleText.text = kind == 0 ? welcomeTitle : kind == HarvestRewardOffer.Win ? winTitle : fruitTitle;
-        balanceText.text = "Balance: " + HarvestRewardsUI.FormatAmount(service.State.AvailableCents);
         if (kind == 0)
         {
+            // The welcome gift is already in the ledger; acknowledging it never adds it again.
+            balanceText.text = string.Format(CultureInfo.InvariantCulture, currentBalanceFormat,
+                HarvestRewardsUI.FormatAmount(service.State.AvailableCents));
             amountText.text = "+" + HarvestRewardsUI.FormatAmount(service.Config.TutorialGiftCents);
             hintText.text = welcomeHint;
-            claimText.text = "Continue";
+            claimText.text = "CONTINUE";
             claimButton.interactable = true;
             adButton.gameObject.SetActive(false);
             closeButton.interactable = true;
@@ -138,7 +143,11 @@ public sealed class HarvestRewardPopupUI : BaseUI
         bool pending = service.IsRewardedAdPending;
         bool canClaim = kind == HarvestRewardOffer.InGame ? service.CanClaimInGameBase : service.CanClaimWinBase;
         amountText.text = "+" + HarvestRewardsUI.FormatAmount(offer.DisplayCents);
-        claimText.text = canClaim ? "Collect" : "Ready in a moment";
+        decimal balanceAfterClaim = ((decimal)service.State.AvailableCents + offer.DisplayCents) / 100m;
+        balanceText.text = pending
+            ? string.Format(CultureInfo.InvariantCulture, currentBalanceFormat, HarvestRewardsUI.FormatAmount(service.State.AvailableCents))
+            : string.Format(CultureInfo.InvariantCulture, balanceAfterClaimFormat, balanceAfterClaim.ToString("N2", CultureInfo.InvariantCulture));
+        claimText.text = canClaim ? "COLLECT" : "READY IN A MOMENT";
         claimButton.interactable = canClaim && !pending;
         closeButton.interactable = !pending;
         adButton.gameObject.SetActive(!offer.IsFirstFree);

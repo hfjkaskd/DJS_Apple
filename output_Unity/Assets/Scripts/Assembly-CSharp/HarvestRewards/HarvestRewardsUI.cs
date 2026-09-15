@@ -19,13 +19,21 @@ public sealed class HarvestRewardsUI : BaseUI
     [SerializeField] private GameObject completedRoot;
     [SerializeField] private GameObject historyRoot;
     [SerializeField] private GameObject rulesRoot;
+    [SerializeField] private TextMeshProUGUI titleText;
+    [SerializeField] private string[] pageTitles;
     [SerializeField] private Button closeButton;
     [SerializeField] private Button backButton;
     [SerializeField] private Button rulesButton;
     [SerializeField] private Button historyButton;
+    [SerializeField] private Button walletRulesButton;
+    [SerializeField] private Button walletHistoryButton;
+    [SerializeField] private GameObject detailFooterRoot;
+    [SerializeField] private GameObject walletJourneyHintRoot;
     [SerializeField] private TextMeshProUGUI availableText;
     [SerializeField] private TextMeshProUGUI frozenText;
     [SerializeField] private TextMeshProUGUI walletHintText;
+    [SerializeField] private Slider walletProgressBar;
+    [SerializeField] private TextMeshProUGUI percentageText;
     [SerializeField] private TextMeshProUGUI feedbackText;
     [SerializeField] private Button[] tierButtons;
     [SerializeField] private TextMeshProUGUI[] tierLabels;
@@ -39,6 +47,10 @@ public sealed class HarvestRewardsUI : BaseUI
     [SerializeField] private Button confirmButton;
     [SerializeField] private Button cancelButton;
     [SerializeField] private TextMeshProUGUI stageTitleText;
+    [SerializeField] private TextMeshProUGUI stageRequestAmountText;
+    [SerializeField] private TextMeshProUGUI stagePercentageText;
+    [SerializeField] private GameObject stageTaskFruitsRoot;
+    [SerializeField] private GameObject stageTaskLevelsRoot;
     [SerializeField] private TextMeshProUGUI stageTaskText;
     [SerializeField] private TextMeshProUGUI stageCountText;
     [SerializeField] private TextMeshProUGUI stageTimerText;
@@ -56,6 +68,8 @@ public sealed class HarvestRewardsUI : BaseUI
     [SerializeField] private TextMeshProUGUI historyText;
     [SerializeField] private TextMeshProUGUI rulesText;
     [SerializeField, Min(0.25f)] private float refreshIntervalSeconds = 1f;
+    [SerializeField] private string completedTierLabel = "Done";
+    [SerializeField] private string stageRequestAmountFormat = "Request: {0}";
     [SerializeField, TextArea] private string confirmationSummaryFormat = "{0} will move into your challenge balance.\n\nComplete {1} stages, each with a new task and its own wait, then wait {2} hours. Minimum {3} days in total.\n\nOne request at a time. Each tier can be completed once.";
     [SerializeField, TextArea] private string unavailableMessage = "Rewards are temporarily unavailable. Keep your save data and restart the game. Contact support if this continues.";
 
@@ -82,6 +96,8 @@ public sealed class HarvestRewardsUI : BaseUI
         backButton.onClick.AddListener(Back);
         rulesButton.onClick.AddListener(OpenRules);
         historyButton.onClick.AddListener(OpenHistory);
+        walletRulesButton.onClick.AddListener(OpenRules);
+        walletHistoryButton.onClick.AddListener(OpenHistory);
         applyButton.onClick.AddListener(ReviewApplication);
         if (pendingRewardButton != null) pendingRewardButton.onClick.AddListener(CollectPendingReward);
         confirmButton.onClick.AddListener(ConfirmApplication);
@@ -135,6 +151,9 @@ public sealed class HarvestRewardsUI : BaseUI
     private void ShowPage(Page target)
     {
         page = target;
+        int titleIndex = (int)target;
+        if (titleText != null && pageTitles != null && titleIndex < pageTitles.Length)
+            titleText.text = pageTitles[titleIndex];
         walletRoot.SetActive(target == Page.Wallet);
         confirmationRoot.SetActive(target == Page.Confirmation);
         progressRoot.SetActive(target == Page.Progress);
@@ -142,6 +161,8 @@ public sealed class HarvestRewardsUI : BaseUI
         completedRoot.SetActive(target == Page.Completed);
         historyRoot.SetActive(target == Page.History);
         rulesRoot.SetActive(target == Page.Rules);
+        detailFooterRoot.SetActive(target != Page.Wallet);
+        feedbackText.gameObject.SetActive(target == Page.Wallet);
         backButton.gameObject.SetActive(target != Page.Wallet && target != Page.Completed);
         rulesButton.gameObject.SetActive(target != Page.Rules);
         historyButton.gameObject.SetActive(target != Page.History && target != Page.Confirmation && target != Page.Rules);
@@ -169,26 +190,39 @@ public sealed class HarvestRewardsUI : BaseUI
             tierButtons[i].gameObject.SetActive(exists);
             if (!exists) continue;
             tierButtons[i].interactable = true;
-            tierLabels[i].text = FormatAmount(service.Config.ThresholdCents[i])
-                + (state.CompletedTierIndexes.Contains(i) ? "\nCompleted" : "");
+            tierLabels[i].text = FormatTierAmount(service.Config.ThresholdCents[i])
+                + (state.CompletedTierIndexes.Contains(i) ? "\n" + completedTierLabel : "");
             if (i < tierSelectedMarkers.Length) tierSelectedMarkers[i].SetActive(i == selectedTier);
         }
         bool allDone = state.CompletedTierIndexes.Count >= service.Config.ThresholdCents.Length;
         bool selectedCompleted = state.CompletedTierIndexes.Contains(selectedTier);
-        long missing = Math.Max(0, service.Config.ThresholdCents[selectedTier] - state.AvailableCents);
+        long targetCents = service.Config.ThresholdCents[selectedTier];
+        long missing = Math.Max(0, targetCents - state.AvailableCents);
+        bool showWalletFeedback = !string.IsNullOrEmpty(feedbackText.text);
+        if (walletProgressBar != null)
+        {
+            walletProgressBar.gameObject.SetActive(!showWalletFeedback);
+            walletProgressBar.SetValueWithoutNotify(Mathf.Clamp01((float)((double)state.AvailableCents / targetCents)));
+        }
+        if (percentageText != null)
+        {
+            percentageText.gameObject.SetActive(!showWalletFeedback);
+            percentageText.text = FormatProgressPercentage(state.AvailableCents, targetCents);
+        }
         walletHintText.text = request != null ? "Your current challenge is in progress."
             : allDone ? "All withdrawal tiers are complete."
-            : selectedCompleted ? "This tier is complete. Select another tier to continue."
-            : missing == 0 ? "This tier is ready. Continue to review your request."
-            : FormatAmount(missing) + " more to reach this tier.";
+            : selectedCompleted ? "Tier complete. Choose another target."
+            : missing == 0 ? "Ready to apply. Review your request."
+            : FormatAmount(missing) + " more to apply";
         applyButton.interactable = request != null || (!allDone && !selectedCompleted);
-        applyText.text = request != null ? "View challenge" : allDone ? "Plan completed"
-            : state.CompletedTierIndexes.Contains(selectedTier) ? "Tier completed" : missing > 0 ? "Keep harvesting" : "Continue";
+        applyText.text = request != null ? "VIEW CHALLENGE" : allDone ? "PLAN COMPLETED"
+            : state.CompletedTierIndexes.Contains(selectedTier) ? "TIER COMPLETED" : missing > 0 ? "KEEP HARVESTING" : "CONTINUE";
         confirmButton.interactable = CanApply();
         if (pendingRewardButton != null)
         {
             bool pending = service.HasWinReward || service.HasInGameReward;
-            pendingRewardButton.gameObject.SetActive(pending);
+            pendingRewardButton.gameObject.SetActive(pending && !showWalletFeedback);
+            walletJourneyHintRoot.SetActive(!pending && !showWalletFeedback);
             pendingRewardButton.interactable = pending && !service.IsRewardedAdPending;
             if (pendingRewardText != null) pendingRewardText.text = service.HasWinReward ? "Collect level reward" : "Collect harvest reward";
         }
@@ -210,17 +244,24 @@ public sealed class HarvestRewardsUI : BaseUI
             stageCurrentMarks[i].SetActive(!settling && i == request.StageIndex);
         settlementAmountText.text = FormatAmount(request.AmountCents);
         settlementTimerText.text = FormatDuration(remaining);
+        if (stageRequestAmountText != null)
+            stageRequestAmountText.text = string.Format(CultureInfo.InvariantCulture, stageRequestAmountFormat, FormatAmount(request.AmountCents));
+        if (stageTaskFruitsRoot != null)
+            stageTaskFruitsRoot.SetActive(!settling && service.Config.Stages[request.StageIndex].TaskKind == HarvestStageSettings.Triples);
+        if (stageTaskLevelsRoot != null)
+            stageTaskLevelsRoot.SetActive(!settling && service.Config.Stages[request.StageIndex].TaskKind == HarvestStageSettings.Wins);
         if (settling) return;
         HarvestStageSettings stage = service.Config.Stages[request.StageIndex];
-        stageTitleText.text = "Harvest stage " + (request.StageIndex + 1) + " / " + service.Config.Stages.Length;
+        stageTitleText.text = "Stage " + (request.StageIndex + 1) + " of " + service.Config.Stages.Length;
         stageTaskText.text = CreateTaskText(stage);
         stageCountText.text = request.StageProgress + " / " + stage.Target;
         stageProgressBar.SetValueWithoutNotify(Mathf.Clamp01((float)request.StageProgress / stage.Target));
+        if (stagePercentageText != null) stagePercentageText.text = FormatProgressPercentage(request.StageProgress, stage.Target);
         stageTimerText.text = FormatDuration(remaining);
         stageHintText.text = service.State.ClockRollbackDetected ? "Device time moved back. The timer will resume when it catches up."
             : remaining == 0 ? "Time complete. Finish this task to unlock the next stage."
             : request.StageProgress >= stage.Target ? "Task complete. The next stage opens when the timer ends."
-            : "Finish the task and waiting time to unlock the next stage.";
+            : "Complete both the task and timer";
     }
 
     private void RefreshHistory(bool allDone)
@@ -260,12 +301,17 @@ public sealed class HarvestRewardsUI : BaseUI
         ShowPage(Page.Wallet);
         availableText.text = "--";
         frozenText.text = "In challenge: --";
-        walletHintText.text = unavailableMessage;
-        feedbackText.text = "";
+        if (walletProgressBar != null) walletProgressBar.gameObject.SetActive(false);
+        if (percentageText != null) percentageText.gameObject.SetActive(false);
+        walletHintText.text = "Rewards unavailable";
+        feedbackText.text = unavailableMessage;
         applyText.text = "Temporarily unavailable";
         applyButton.interactable = false;
         confirmButton.interactable = false;
         if (pendingRewardButton != null) pendingRewardButton.gameObject.SetActive(false);
+        walletJourneyHintRoot.SetActive(false);
+        walletRulesButton.interactable = false;
+        walletHistoryButton.interactable = false;
         rulesButton.interactable = false;
         historyButton.interactable = false;
         for (int i = 0; i < tierButtons.Length; i++) tierButtons[i].interactable = false;
@@ -296,7 +342,11 @@ public sealed class HarvestRewardsUI : BaseUI
             feedbackText.text = "";
             ShowPage(RequestPage(service.State.ActiveRequest));
         }
-        else feedbackText.text = "The request could not start. Please review your balance.";
+        else
+        {
+            ShowPage(Page.Wallet);
+            feedbackText.text = "The request could not start. Please review your balance.";
+        }
         Refresh();
     }
 
@@ -406,11 +456,26 @@ public sealed class HarvestRewardsUI : BaseUI
         return stage.TaskKind == HarvestStageSettings.Wins ? "Win " + stage.Target + " main levels" : "Make " + stage.Target + " fruit triples";
     }
     public static string FormatAmount(long cents) { return (cents / 100m).ToString("N2", CultureInfo.InvariantCulture); }
+    public static string FormatTierAmount(long cents)
+    {
+        return (cents / 100m).ToString(cents % 100 == 0 ? "N0" : "N2", CultureInfo.InvariantCulture);
+    }
+    private static string FormatProgressPercentage(long current, long target)
+    {
+        if (target <= 0) return "0%";
+        decimal ratio = Math.Max(0m, Math.Min(1m, (decimal)current / target));
+        int percent = (int)Math.Round(ratio * 100m, 0, MidpointRounding.AwayFromZero);
+        // Keep a nearly reached tier visibly below 100% until its real threshold is met.
+        if (current < target && percent == 100) percent = 99;
+        return percent.ToString(CultureInfo.InvariantCulture) + "%";
+    }
     public static string FormatHours(long seconds) { return (seconds / 3600m).ToString("0.##", CultureInfo.InvariantCulture); }
     private static string FormatDays(long seconds) { return (seconds / 86400m).ToString("0.##", CultureInfo.InvariantCulture); }
     public static string FormatDuration(long seconds)
     {
         seconds = Math.Max(0, seconds);
+        if (seconds < 86400)
+            return string.Format(CultureInfo.InvariantCulture, "{0:00}:{1:00}:{2:00}", seconds / 3600, seconds % 3600 / 60, seconds % 60);
         return string.Format(CultureInfo.InvariantCulture, "{0}d {1:00}:{2:00}:{3:00}", seconds / 86400, seconds % 86400 / 3600, seconds % 3600 / 60, seconds % 60);
     }
 }
