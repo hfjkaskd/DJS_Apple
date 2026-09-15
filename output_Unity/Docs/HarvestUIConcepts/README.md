@@ -2,11 +2,13 @@
 
 日期：2026-09-15
 
-生成方式：内置 image_gen；设计预览，不是 Unity 实机截图。
+效果图生成方式：内置 image_gen。效果图与 Unity 渲染记录分开保存。
 
 最终效果图：[harvest-rewards-ui-v3-money.png](harvest-rewards-ui-v3-money.png)
 
 上一版：[harvest-rewards-ui-v2.png](harvest-rewards-ui-v2.png)
+
+Unity 还原记录：[UnityReference/README.md](UnityReference/README.md)。
 
 ## 视觉方向
 
@@ -22,7 +24,7 @@
 - 效果图内的棋盘、篮子和道具仅表达背景语境；本次设计范围为提现相关 UI，不据此改动玩法或关卡排列。
 - 图中的第一屏和钱包表示未申请状态；第四屏为另一个已申请示例状态。
 - Unity 使用现有可切片 Sprite、Prefab 和标准 Button；静态层级与样式配置在 Prefab，事件通过代码绑定。
-- 优先复用 PopBg、Btn_Normal、Btn_Orange 以及当前游戏背景；提现额度使用独立钞票图标，Fruit_4 仅保留在水果任务和玩法中。
+- 面板、按钮和进度条使用本轮专门制作的九宫格切片，避免旧 PopBg/Btn 素材拉伸成椭圆。提现额度使用独立钞票图标，Fruit_4 仅保留在水果任务和玩法中。
 - 钱包的示例比例 247.61 / 1000 约为 25%；阶段的 86 / 260 约为 33%。运行时均按实际数据刷新。
 
 ## 原始生成提示词

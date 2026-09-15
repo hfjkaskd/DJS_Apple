@@ -6,7 +6,7 @@
 
 落地时新增独立钞票 Sprite，仅用于提现额度；不得全局替换 Fruit_4。确认、最终等待、完成及记录等未在四屏效果图中展开的页面，也应统一使用钞票表示提现额度。
 
-生成方式：内置 image_gen 编辑；尚未改动 Unity 界面。
+效果图生成方式：内置 image_gen 编辑。对应 Unity 资源及界面已替换，还原与验证记录见 [UnityReference/README.md](UnityReference/README.md)。
 
 最终编辑提示词：
 
@@ -22,4 +22,3 @@ Exact replacement locations:
 4. PROGRESS screen: ONLY the papaya next to 'Request: 1,000.00' becomes a small banknote stack.
 
 Critical exceptions: The three papayas DIRECTLY ABOVE 'Make 260 fruit triples' on the fourth screen represent a FRUIT-MATCHING TASK, so KEEP THOSE THREE FRUIT ICONS unchanged. All actual gameplay fruit tiles on the board must remain fruit unchanged. The ordinary gold coin next to the top-right 100 counters on all screens is a different game currency: KEEP those gold coin icons unchanged. Do not change clock, stage nodes, stars, leaves, backgrounds, buttons, or power-up icons. Do not add new text or claims. Keep 33% on the fourth screen and 25% on the second. Preserve the full board with all outer edges visible.
-

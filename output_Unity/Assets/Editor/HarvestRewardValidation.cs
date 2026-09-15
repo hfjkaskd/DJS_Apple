@@ -16,6 +16,7 @@ public static class HarvestRewardValidation
     private static Vector2 ProductionReferenceResolution;
     private static List<LevelConfig> MainLevels;
     private static Dictionary<int, SingleEleImageConfig> FruitSizes;
+    private const string CashSpritePath = "Assets/res/local/harvest/sprite/HarvestCash.png";
     [Serializable] private sealed class MainLevelTable { public MainLevelConfigData[] array = null; }
     private static readonly string[] PageFields = { "walletRoot", "confirmationRoot", "progressRoot", "settlementRoot", "completedRoot", "historyRoot", "rulesRoot" };
     private static readonly string[] PageImages = { "harvest-wallet", "harvest-confirmation", "harvest-progress", "harvest-settlement", "harvest-completed", "harvest-history", "harvest-rules" };
@@ -33,10 +34,12 @@ public static class HarvestRewardValidation
         if (controller == null) throw new InvalidOperationException("Harvest wallet controller is missing.");
         AuditModal(wallet, controller);
         ValidatePages(controller, config.Settings);
+        AuditRewardSymbols(controller);
         GameObject popup = LoadPrefab(HarvestRewardPopupUI.Path);
         HarvestRewardPopupUI popupController = popup.GetComponent<HarvestRewardPopupUI>();
         if (popupController == null) throw new InvalidOperationException("Harvest reward popup controller is missing.");
         AuditModal(popup, popupController);
+        RequireCashIcons(popup, 1);
         for (int i = 0; i < PageFields.Length; i++)
         {
             int page = i;
@@ -47,6 +50,8 @@ public static class HarvestRewardValidation
         Render(popup, "harvest-reward-fruit", 2340, view => PreparePopup(view, 1), true);
         Render(popup, "harvest-reward-win", 2340, view => PreparePopup(view, 2), true);
         Render(popup, "harvest-reward-fruit-short", 1920, view => PreparePopup(view, 1), true);
+        Render(wallet, "harvest-wallet-large-short", 1920, view => PrepareWallet(view, config.Settings, 0, true), true);
+        Render(wallet, "harvest-progress-levels-short", 1920, view => PrepareWallet(view, config.Settings, 2, false, true), true);
         ValidateEntry("home/Home", "harvest-home");
         ValidateEntry("coreplay/CorePlayUI", "harvest-gameplay");
         ValidateEntry("coreplaywin/WinUI", "harvest-win");
@@ -55,7 +60,88 @@ public static class HarvestRewardValidation
         Render(gameplay, "harvest-gameplay-extremes-short", 1920, PrepareGameplayBounds, false);
         if (LayoutErrors.Count > 0)
             throw new InvalidOperationException("Harvest layout issues (all captures were saved):\n" + string.Join("\n", LayoutErrors));
-        Debug.Log("HARVEST_ASSETS_OK: seven wallet pages, reward popup variants, three HUD entries, mainline board bounds, reparent scaling, complete references and standard Buttons validated; 26 captures.");
+        Debug.Log("HARVEST_ASSETS_OK: v3 wallet grid and currency/task symbols, seven wallet pages, reward popup variants, three HUD entries, mainline board bounds, reparent scaling, complete references and standard Buttons validated; 28 captures.");
+    }
+
+    /// <summary>
+    /// Art-review captures at the concept's 373:756 viewport, enlarged exactly 3x.
+    /// This is a visual comparison fixture, not a claim of pixel-perfect acceptance.
+    /// </summary>
+    public static void RenderReferenceComparison()
+    {
+        LayoutErrors.Clear();
+        ReadProductionCanvas();
+        ReadBoardConfigurations();
+        HarvestRewardConfig config = AssetDatabase.LoadAssetAtPath<HarvestRewardConfig>("Assets/Resources/HarvestRewardConfig.asset");
+        if (config == null) throw new InvalidOperationException("Harvest config is missing.");
+        config.Settings.Validate();
+        GameObject wallet = LoadPrefab(HarvestRewardsUI.Path);
+        Render(wallet, "wallet-reference", 2268, view => PrepareWallet(view, config.Settings, 0), true, 1119, true);
+        Render(wallet, "progress-reference", 2268, view => PrepareWallet(view, config.Settings, 2), true, 1119, true);
+        Render(LoadPrefab(HarvestRewardPopupUI.Path), "popup-reference", 2268, PrepareReferencePopup, true, 1119, true);
+        Render(LoadPrefab("coreplay/CorePlayUI"), "hud-reference", 2268, PrepareReferenceGameplay, false, 1119);
+        if (LayoutErrors.Count > 0)
+            throw new InvalidOperationException("Reference capture layout issues (all four images were saved):\n" + string.Join("\n", LayoutErrors));
+        Debug.Log("HARVEST_REFERENCE_RENDERED: four 1119x2268 comparison frames with actual Map1008, level 10004 and authored UI; visual acceptance requires review against the v3 concept.");
+    }
+
+    private static void PrepareReferenceGameplay(GameObject view)
+    {
+        PrepareHud(view, false);
+        var ui = view.GetComponent<CorePlay.CorePlayUI>();
+        Animation animation = view.GetComponent<Animation>();
+        AnimationClip opening = animation != null && ui != null ? animation.GetClip(ui.m_OpenAniName) : null;
+        if (opening != null) opening.SampleAnimation(view, opening.length);
+        Sprite backdrop = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/res_server/server_maps/map1008/Map1008.asset");
+        if (ui == null || ui.m_BgImg == null || backdrop == null)
+            throw new InvalidOperationException("Reference capture requires the actual CorePlayUI background and Map1008 Sprite.");
+        ui.m_BgImg.sprite = backdrop;
+        ui.m_BgImg.color = Color.white;
+        ui.SetGameAreaAlpha(1f);
+        var serialized = new SerializedObject(ui);
+        int levelLabelCount = serialized.FindProperty("m_LevelTexts").arraySize;
+        for (int i = 0; i < levelLabelCount; i++)
+            ArrayReference<TMP_Text>(serialized, "m_LevelTexts", i).text = "Level 4";
+        int levelRootCount = serialized.FindProperty("m_LevelTextGos").arraySize;
+        for (int i = 0; i < levelRootCount; i++)
+            ArrayReference<GameObject>(serialized, "m_LevelTextGos", i).SetActive(i == 0);
+        CommonCoinBtn coin = Reference<CommonCoinBtn>(serialized, "m_CommonCoinBtn");
+        SetText(new SerializedObject(coin), "m_CoinCount", "100");
+
+        LevelConfig level = MainLevels.Find(candidate => candidate.levelID == "10004");
+        if (level == null || level.normalTiles == null || level.normalTiles.Count == 0)
+            throw new InvalidOperationException("The actual reference level 10004 is unavailable.");
+        GameObject fruitPrefab = LoadPrefab("coreplay/prefab/CollectItem");
+        var tiles = new List<SingleNormalTile>(level.normalTiles);
+        tiles.Sort((left, right) => left.layerIndex != right.layerIndex
+            ? left.layerIndex.CompareTo(right.layerIndex) : left.indexInLayer.CompareTo(right.indexInLayer));
+        foreach (SingleNormalTile tile in tiles)
+        {
+            GameObject fruit = (GameObject)PrefabUtility.InstantiatePrefab(fruitPrefab, ui.m_GameLayer);
+            fruit.name = "Reference_Level10004_Tile" + tile.tileID;
+            ((RectTransform)fruit.transform).anchoredPosition = new Vector2(tile.posX, tile.posY);
+            CollectItem item = fruit.GetComponent<CollectItem>();
+            SingleEleImageConfig size;
+            if (!FruitSizes.TryGetValue(tile.eleType, out size)) throw new InvalidOperationException("Missing reference fruit geometry: " + tile.eleType);
+            item.CollectImageRect.sizeDelta = new Vector2(size.sizeX, size.sizeY);
+            Image graphic = item.CollectImageRect.GetComponent<Image>();
+            graphic.sprite = CollectItem.GetItemSprite(tile.eleType);
+            graphic.color = Color.white;
+            if (graphic.sprite == null) throw new InvalidOperationException("Missing reference fruit Sprite: " + tile.eleType);
+            foreach (Orange.DynamicCanvasLayer layer in fruit.GetComponentsInChildren<Orange.DynamicCanvasLayer>(true)) layer.SetLayer(0);
+        }
+    }
+
+    private static void PrepareReferencePopup(GameObject view)
+    {
+        // An ordinary level reward keeps the unavailable-ad option visible. The concept's
+        // 247.61 -> 257.61 balance is a +10 reward, not its inconsistent +100 lettering.
+        PreparePopup(view, 1);
+        var serialized = new SerializedObject(view.GetComponent<HarvestRewardPopupUI>());
+        SetText(serialized, "titleText", serialized.FindProperty("winTitle").stringValue);
+        SetText(serialized, "amountText", "+10.00");
+        SetText(serialized, "balanceText", string.Format(CultureInfo.InvariantCulture,
+            serialized.FindProperty("balanceAfterClaimFormat").stringValue, "257.61"));
     }
 
     private static void ReadProductionCanvas()
@@ -226,6 +312,14 @@ public static class HarvestRewardValidation
     {
         if (prefab.GetComponent<Canvas>() == null || prefab.GetComponent<GraphicRaycaster>() == null)
             throw new InvalidOperationException("Modal needs an authored Canvas and GraphicRaycaster: " + prefab.name);
+        HarvestReferenceLayout layout = prefab.GetComponent<HarvestReferenceLayout>();
+        if (layout == null) throw new InvalidOperationException("Modal needs its authored reference layout: " + prefab.name);
+        AuditReferences(layout);
+        RectTransform dimmer = Reference<RectTransform>(new SerializedObject(layout), "dimmerRoot");
+        Image blocker = dimmer.GetComponent<Image>();
+        if (dimmer.parent != prefab.transform || dimmer.GetSiblingIndex() != 0 ||
+            blocker == null || !blocker.raycastTarget || blocker.color.a <= 0f)
+            throw new InvalidOperationException("Modal needs a visible, raycastable Dimmer as its first child: " + prefab.name);
         AuditHierarchy(prefab);
         AuditReferences(controller);
     }
@@ -287,6 +381,90 @@ public static class HarvestRewardValidation
         RequireArrayLength(serialized, "tierSelectedMarkers", settings.ThresholdCents.Length);
         RequireArrayLength(serialized, "stageCompleteMarks", settings.Stages.Length);
         RequireArrayLength(serialized, "stageCurrentMarks", settings.Stages.Length);
+        RequireArrayLength(serialized, "pageTitles", PageFields.Length);
+        for (int i = 0; i < PageFields.Length; i++)
+            if (string.IsNullOrWhiteSpace(serialized.FindProperty("pageTitles").GetArrayElementAtIndex(i).stringValue))
+                throw new InvalidOperationException("Every wallet page needs a configured title: " + PageFields[i]);
+        AuditDisplaySlider(Reference<Slider>(serialized, "walletProgressBar"), "wallet progress");
+        AuditDisplaySlider(Reference<Slider>(serialized, "stageProgressBar"), "stage progress");
+        if (Reference<GameObject>(serialized, "stageTaskFruitsRoot") == Reference<GameObject>(serialized, "stageTaskLevelsRoot"))
+            throw new InvalidOperationException("Triple and level tasks require distinct authored visual roots.");
+    }
+
+    private static void AuditDisplaySlider(Slider slider, string context)
+    {
+        if (slider.fillRect == null || slider.interactable || slider.onValueChanged.GetPersistentEventCount() != 0)
+            throw new InvalidOperationException("A configured display-only Slider is required for " + context);
+    }
+
+    private static void RequireCashIcons(GameObject root, int minimum)
+    {
+        Sprite cash = AssetDatabase.LoadAssetAtPath<Sprite>(CashSpritePath);
+        if (cash == null) throw new InvalidOperationException("The v3 cash Sprite is missing or not imported as a Sprite: " + CashSpritePath);
+        int found = 0;
+        foreach (Image image in root.GetComponentsInChildren<Image>(true))
+        {
+            if (image.name != "HarvestCash" && image.name != "CashIcon") continue;
+            if (image.sprite != cash || image.color.a <= 0f)
+                throw new InvalidOperationException("Reward amount icon must display the dedicated cash Sprite: " + root.name + "/" + image.name);
+            found++;
+        }
+        if (found < minimum) throw new InvalidOperationException("Missing v3 cash symbols in " + root.name + ": expected at least " + minimum + ", found " + found);
+    }
+
+    private static void AuditRewardSymbols(HarvestRewardsUI controller)
+    {
+        var serialized = new SerializedObject(controller);
+        RequireCashIcons(Reference<GameObject>(serialized, "walletRoot"), 7);
+        foreach (string field in new[] { "confirmationRoot", "progressRoot", "settlementRoot", "completedRoot", "historyRoot" })
+            RequireCashIcons(Reference<GameObject>(serialized, field), 1);
+        Sprite fruit = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprite/Fruit_4.asset");
+        if (fruit == null) throw new InvalidOperationException("The existing fruit-task Sprite is missing.");
+        GameObject fruitRoot = Reference<GameObject>(serialized, "stageTaskFruitsRoot");
+        int fruitCount = 0;
+        foreach (Image image in fruitRoot.GetComponentsInChildren<Image>(true))
+        {
+            if (!image.name.StartsWith("TaskFruit", StringComparison.Ordinal)) continue;
+            if (image.sprite != fruit) throw new InvalidOperationException("Triple-task symbols must keep the existing fruit Sprite: " + image.name);
+            fruitCount++;
+        }
+        if (fruitCount != 3) throw new InvalidOperationException("The triple task must visibly retain its three fruit symbols.");
+    }
+
+    private static void AuditWalletGrid(GameObject view, string imageName)
+    {
+        HarvestRewardsUI controller = view.GetComponent<HarvestRewardsUI>();
+        if (controller == null) return;
+        var serialized = new SerializedObject(controller);
+        GameObject wallet = Reference<GameObject>(serialized, "walletRoot");
+        if (!wallet.activeInHierarchy) return;
+        RequireArrayLength(serialized, "tierButtons", 6);
+        Rect page = WorldRect((RectTransform)wallet.transform);
+        Rect[] cards = new Rect[6];
+        for (int i = 0; i < cards.Length; i++)
+        {
+            Button button = ArrayReference<Button>(serialized, "tierButtons", i);
+            TMP_Text label = ArrayReference<TMP_Text>(serialized, "tierLabels", i);
+            if (!label.transform.IsChildOf(button.transform)) throw new InvalidOperationException("A tier label must belong to its visible Button: " + label.name);
+            cards[i] = WorldRect((RectTransform)button.transform);
+            if (!ContainsRect(page, cards[i], 1f)) LayoutErrors.Add(imageName + ": tier card escapes the wallet page: " + i);
+            for (int previous = 0; previous < i; previous++)
+                if (cards[i].Overlaps(cards[previous])) LayoutErrors.Add(imageName + ": tier cards overlap: " + previous + "/" + i);
+        }
+        for (int row = 0; row < 3; row++)
+        {
+            Rect left = cards[row * 2], right = cards[row * 2 + 1];
+            if (left.xMax >= right.xMin || Mathf.Abs(left.center.y - right.center.y) > 1f ||
+                Mathf.Abs(left.center.x - cards[0].center.x) > 1f || Mathf.Abs(right.center.x - cards[1].center.x) > 1f ||
+                (row > 0 && left.yMax >= cards[(row - 1) * 2].yMin))
+                LayoutErrors.Add(imageName + ": withdrawal tiers must form two aligned columns and three separate rows in configured order.");
+        }
+    }
+
+    private static bool ContainsRect(Rect outer, Rect inner, float tolerance)
+    {
+        return inner.xMin >= outer.xMin - tolerance && inner.xMax <= outer.xMax + tolerance &&
+            inner.yMin >= outer.yMin - tolerance && inner.yMax <= outer.yMax + tolerance;
     }
 
     private static void ValidateEntry(string path, string imageName)
@@ -296,10 +474,12 @@ public static class HarvestRewardValidation
         if (huds.Length != 1) throw new InvalidOperationException("Host requires exactly one harvest HUD: " + path);
         AuditHierarchy(huds[0].gameObject);
         AuditReferences(huds[0]);
+        RequireCashIcons(huds[0].gameObject, 1);
         var serialized = new SerializedObject(huds[0]);
         Reference<Button>(serialized, "walletButton");
         Reference<TMP_Text>(serialized, "balanceText");
         Reference<TMP_Text>(serialized, "goalText");
+        Reference<TMP_Text>(serialized, "goalFractionText");
         Slider progress = Reference<Slider>(serialized, "goalProgressBar");
         if (progress.fillRect == null || progress.interactable || progress.onValueChanged.GetPersistentEventCount() != 0)
             throw new InvalidOperationException("HUD progress requires a configured display-only Slider: " + path);
@@ -309,28 +489,45 @@ public static class HarvestRewardValidation
         Render(prefab, imageName + "-challenge", 2340, view => PrepareHud(view, true), false);
     }
 
-    private static void PrepareWallet(GameObject view, HarvestRewardSettings settings, int page)
+    private static void PrepareWallet(GameObject view, HarvestRewardSettings settings, int page, bool largeAmount = false, bool levelTask = false)
     {
         var serialized = new SerializedObject(view.GetComponent<HarvestRewardsUI>());
         for (int i = 0; i < PageFields.Length; i++) Reference<GameObject>(serialized, PageFields[i]).SetActive(i == page);
         Reference<Button>(serialized, "backButton").gameObject.SetActive(page != 0 && page != 4);
         Reference<Button>(serialized, "rulesButton").gameObject.SetActive(page != 6);
         Reference<Button>(serialized, "historyButton").gameObject.SetActive(page != 5 && page != 1 && page != 6);
-        SetText(serialized, "availableText", "9,750.00");
+        Reference<Button>(serialized, "walletRulesButton").gameObject.SetActive(page == 0);
+        Reference<Button>(serialized, "walletHistoryButton").gameObject.SetActive(page == 0);
+        Reference<GameObject>(serialized, "detailFooterRoot").SetActive(page != 0);
+        Reference<GameObject>(serialized, "walletJourneyHintRoot").SetActive(true);
+        Reference<TMP_Text>(serialized, "feedbackText").gameObject.SetActive(page == 0);
+        SetText(serialized, "feedbackText", "");
+        SetText(serialized, "titleText", serialized.FindProperty("pageTitles").GetArrayElementAtIndex(page).stringValue);
+        Reference<Button>(serialized, "pendingRewardButton").gameObject.SetActive(false);
+        SetText(serialized, "availableText", largeAmount ? "9,750.00" : "247.61");
         SetText(serialized, "frozenText", "In challenge: 0.00");
-        SetText(serialized, "walletHintText", "250.00 more to reach this tier.");
-        SetText(serialized, "applyText", "Keep harvesting");
-        SetText(serialized, "confirmationAmountText", "10,000.00");
+        SetText(serialized, "walletHintText", largeAmount ? "250.00 more to apply" : "752.39 more to apply");
+        SetText(serialized, "applyText", "KEEP HARVESTING");
+        Reference<Slider>(serialized, "walletProgressBar").gameObject.SetActive(true);
+        Reference<TMP_Text>(serialized, "percentageText").gameObject.SetActive(true);
+        Reference<Slider>(serialized, "walletProgressBar").SetValueWithoutNotify(largeAmount ? .975f : .24761f);
+        SetText(serialized, "percentageText", largeAmount ? "98%" : "25%");
+        SetText(serialized, "confirmationAmountText", "1,000.00");
         SerializedProperty summaryFormat = serialized.FindProperty("confirmationSummaryFormat");
-        SetText(serialized, "confirmationSummaryText", string.Format(CultureInfo.InvariantCulture, summaryFormat.stringValue, "10,000.00", 6, "168", "13"));
-        SetText(serialized, "stageTitleText", "Harvest stage 6 / 6");
-        SetText(serialized, "stageTaskText", HarvestRewardsUI.CreateTaskText(settings.Stages[5]));
-        SetText(serialized, "stageCountText", "499 / 500");
-        Reference<Slider>(serialized, "stageProgressBar").SetValueWithoutNotify(.998f);
-        SetText(serialized, "stageTimerText", "0d 23:59:59");
-        SetText(serialized, "stageHintText", "Finish the task and waiting time to unlock the next stage.");
+        SetText(serialized, "confirmationSummaryText", string.Format(CultureInfo.InvariantCulture, summaryFormat.stringValue, "1,000.00", 6, "168", "13"));
+        int stage = levelTask ? 0 : 1;
+        SetText(serialized, "stageTitleText", "Stage " + (stage + 1) + " of " + settings.Stages.Length);
+        SetText(serialized, "stageRequestAmountText", string.Format(CultureInfo.InvariantCulture, serialized.FindProperty("stageRequestAmountFormat").stringValue, "1,000.00"));
+        SetText(serialized, "stageTaskText", HarvestRewardsUI.CreateTaskText(settings.Stages[stage]));
+        SetText(serialized, "stageCountText", levelTask ? "3 / 10" : "86 / 260");
+        Reference<Slider>(serialized, "stageProgressBar").SetValueWithoutNotify(levelTask ? .3f : 86f / 260f);
+        SetText(serialized, "stagePercentageText", levelTask ? "30%" : "33%");
+        Reference<GameObject>(serialized, "stageTaskFruitsRoot").SetActive(!levelTask);
+        Reference<GameObject>(serialized, "stageTaskLevelsRoot").SetActive(levelTask);
+        SetText(serialized, "stageTimerText", HarvestRewardsUI.FormatDuration(18 * 3600 + 42 * 60 + 10));
+        SetText(serialized, "stageHintText", "Complete both the task and timer");
         SetText(serialized, "settlementAmountText", "10,000.00");
-        SetText(serialized, "settlementTimerText", "6d 23:59:59");
+        SetText(serialized, "settlementTimerText", HarvestRewardsUI.FormatDuration(7 * 86400 - 1));
         SetText(serialized, "completedAmountText", "10,000.00");
         SetText(serialized, "completedDetailText", "All harvest withdrawal tiers are complete. No cash was paid.");
         SetText(serialized, "historyText", "10,000.00  -  Completed\n2026-09-15 23:59 UTC\n\n8,000.00  -  Completed\n2026-09-01 23:59 UTC\n\n5,000.00  -  Completed\n2026-08-15 23:59 UTC\n\n3,000.00  -  Completed\n2026-08-01 23:59 UTC\n\n1,500.00  -  Completed\n2026-07-15 23:59 UTC\n\n1,000.00  -  Completed\n2026-07-01 23:59 UTC");
@@ -338,10 +535,11 @@ public static class HarvestRewardValidation
         SetText(serialized, "rulesText", HarvestRewardsUI.CreateRulesText(settings, out minimumWait));
         for (int i = 0; i < settings.ThresholdCents.Length; i++)
         {
-            ArrayReference<TMP_Text>(serialized, "tierLabels", i).text = (settings.ThresholdCents[i] / 100m).ToString("N2", CultureInfo.InvariantCulture) + (i < 5 ? "\nCompleted" : "");
-            ArrayReference<GameObject>(serialized, "tierSelectedMarkers", i).SetActive(i == 5);
-            ArrayReference<GameObject>(serialized, "stageCompleteMarks", i).SetActive(i < 5);
-            ArrayReference<GameObject>(serialized, "stageCurrentMarks", i).SetActive(i == 5);
+            ArrayReference<TMP_Text>(serialized, "tierLabels", i).text = HarvestRewardsUI.FormatTierAmount(settings.ThresholdCents[i])
+                + (largeAmount && i < 5 ? "\n" + serialized.FindProperty("completedTierLabel").stringValue : "");
+            ArrayReference<GameObject>(serialized, "tierSelectedMarkers", i).SetActive(i == (largeAmount ? 5 : 0));
+            ArrayReference<GameObject>(serialized, "stageCompleteMarks", i).SetActive(i < stage);
+            ArrayReference<GameObject>(serialized, "stageCurrentMarks", i).SetActive(i == stage);
         }
     }
 
@@ -350,25 +548,32 @@ public static class HarvestRewardValidation
         var serialized = new SerializedObject(view.GetComponent<HarvestRewardPopupUI>());
         SetText(serialized, "titleText", serialized.FindProperty(kind == 0 ? "welcomeTitle" : kind == 1 ? "fruitTitle" : "winTitle").stringValue);
         SetText(serialized, "amountText", kind == 0 ? "+20.00" : kind == 1 ? "+5.00" : "+100.00");
-        SetText(serialized, "balanceText", kind == 1 ? "Balance: 9,750.00" : "Balance: 20.00");
+        SetText(serialized, "balanceText", string.Format(CultureInfo.InvariantCulture,
+            serialized.FindProperty(kind == 0 ? "currentBalanceFormat" : "balanceAfterClaimFormat").stringValue,
+            kind == 0 ? "20.00" : kind == 1 ? "252.61" : "347.61"));
         SetText(serialized, "hintText", serialized.FindProperty(kind == 0 ? "welcomeHint" : "rewardHint").stringValue);
-        SetText(serialized, "claimText", kind == 0 ? "Continue" : "Collect");
+        SetText(serialized, "claimText", kind == 0 ? "CONTINUE" : "COLLECT");
         SetText(serialized, "adText", "Ad unavailable");
         Reference<Button>(serialized, "adButton").gameObject.SetActive(kind == 1);
         Reference<Button>(serialized, "adButton").interactable = false;
+        Reference<Button>(serialized, "claimButton").interactable = true;
+        Reference<Button>(serialized, "closeButton").interactable = true;
     }
 
     private static void PrepareHud(GameObject view, bool challenge)
     {
         var serialized = new SerializedObject(view.GetComponentInChildren<HarvestRewardsHud>(true));
-        SetText(serialized, "balanceText", "9,750.00");
-        SetText(serialized, "goalText", challenge ? "Stage 3: 3 / 10 levels" : "Earn 250.00 more to apply");
-        Reference<Slider>(serialized, "goalProgressBar").SetValueWithoutNotify(challenge ? .3f : .975f);
+        SetText(serialized, "balanceText", "247.61");
+        SetText(serialized, "goalText", challenge ? "Stage 2: 86 / 260 triples" : "Earn 752.39 more to apply");
+        SetText(serialized, "goalFractionText", challenge ? "86 / 260" : "247.61 / 1,000");
+        Reference<Slider>(serialized, "goalProgressBar").SetValueWithoutNotify(challenge ? 86f / 260f : .24761f);
+        Reference<Slider>(serialized, "goalProgressBar").gameObject.SetActive(!challenge);
+        Reference<TMP_Text>(serialized, "goalFractionText").gameObject.SetActive(!challenge);
         Reference<GameObject>(serialized, "stageTrackRoot").SetActive(challenge);
         for (int i = 0; i < 6; i++)
         {
-            ArrayReference<GameObject>(serialized, "completedMarks", i).SetActive(challenge && i < 2);
-            ArrayReference<GameObject>(serialized, "currentMarks", i).SetActive(challenge && i == 2);
+            ArrayReference<GameObject>(serialized, "completedMarks", i).SetActive(challenge && i < 1);
+            ArrayReference<GameObject>(serialized, "currentMarks", i).SetActive(challenge && i == 1);
         }
     }
 
@@ -393,12 +598,38 @@ public static class HarvestRewardValidation
         if (property == null || !property.isArray || property.arraySize != count) throw new InvalidOperationException("Harvest array requires " + count + " entries: " + field);
     }
 
-    private static void Render(GameObject prefab, string imageName, int height, Action<GameObject> prepare, bool auditAllText)
+    private static GameObject CreateCaptureView(GameObject prefab, Transform canvasParent)
+    {
+        GameObject view = (GameObject)PrefabUtility.InstantiatePrefab(prefab, canvasParent);
+        RectTransform viewRect = view.transform as RectTransform;
+        viewRect.anchorMin = Vector2.zero; viewRect.anchorMax = Vector2.one;
+        viewRect.offsetMin = Vector2.zero; viewRect.offsetMax = Vector2.zero; viewRect.localScale = Vector3.one;
+        BaseUI controller = view.GetComponent<BaseUI>();
+        if (controller != null)
+        {
+            controller.enabled = false;
+            Orange.SafeAreaSim.InsetRect(viewRect);
+        }
+        // Invoke the same public layout operations as BaseUI and the authored adapters,
+        // without initializing gameplay, rewards, ads or a player's save.
+        foreach (Orange.ProtectedAreaAdapt inset in view.GetComponentsInChildren<Orange.ProtectedAreaAdapt>(true))
+            Orange.SafeAreaSim.InsetRect(inset.transform as RectTransform, true);
+        foreach (Orange.ProtectedAreaAdaptReverse reverse in view.GetComponentsInChildren<Orange.ProtectedAreaAdaptReverse>(true))
+            Orange.SafeAreaSim.ExpandRect(reverse.transform as RectTransform, new SerializedObject(reverse).FindProperty("m_IsNeedChangeSizeDelta").boolValue);
+        foreach (HarvestRewardsHud hud in view.GetComponentsInChildren<HarvestRewardsHud>(true)) hud.enabled = false;
+        foreach (LevelBoxReward box in view.GetComponentsInChildren<LevelBoxReward>(true)) box.gameObject.SetActive(false);
+        foreach (Orange.DynamicCanvasLayer layer in view.GetComponentsInChildren<Orange.DynamicCanvasLayer>(true)) layer.SetLayer(0);
+        view.SetActive(true);
+        return view;
+    }
+
+    private static void Render(GameObject prefab, string imageName, int height, Action<GameObject> prepare, bool auditAllText,
+        int width = 1080, bool gameplayBackdrop = false)
     {
         EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
-        // CanvasScaler.Expand preserves the reference height on a wider/shorter phone.
-        float productionScale = Mathf.Min(1080f / ProductionReferenceResolution.x, height / ProductionReferenceResolution.y);
-        Vector2 logicalSize = new Vector2(1080f / productionScale, height / productionScale);
+        // Use the production Expand policy and the requested viewport, not a new UI scale.
+        float productionScale = Mathf.Min(width / ProductionReferenceResolution.x, height / ProductionReferenceResolution.y);
+        Vector2 logicalSize = new Vector2(width / productionScale, height / productionScale);
         GameObject cameraObject = new GameObject("ValidationCamera", typeof(Camera));
         Camera camera = cameraObject.GetComponent<Camera>();
         camera.clearFlags = CameraClearFlags.SolidColor;
@@ -419,35 +650,38 @@ public static class HarvestRewardValidation
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = ProductionReferenceResolution;
         scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
-        GameObject view = (GameObject)PrefabUtility.InstantiatePrefab(prefab, canvasObject.transform);
-        RectTransform viewRect = view.transform as RectTransform;
-        viewRect.anchorMin = Vector2.zero; viewRect.anchorMax = Vector2.one;
-        viewRect.offsetMin = Vector2.zero; viewRect.offsetMax = Vector2.zero; viewRect.localScale = Vector3.one;
-        BaseUI controller = view.GetComponent<BaseUI>();
-        if (controller != null)
+        GameObject backdrop = null;
+        if (gameplayBackdrop)
         {
-            controller.enabled = false;
-            Orange.SafeAreaSim.InsetRect(viewRect);
+            backdrop = CreateCaptureView(LoadPrefab("coreplay/CorePlayUI"), canvasObject.transform);
+            PrepareReferenceGameplay(backdrop);
         }
-        // Invoke the same public layout operations as BaseUI and the authored adapters,
-        // without initializing gameplay, rewards, ads or a player's save.
-        foreach (Orange.ProtectedAreaAdapt inset in view.GetComponentsInChildren<Orange.ProtectedAreaAdapt>(true))
-            Orange.SafeAreaSim.InsetRect(inset.transform as RectTransform, true);
-        foreach (Orange.ProtectedAreaAdaptReverse reverse in view.GetComponentsInChildren<Orange.ProtectedAreaAdaptReverse>(true))
-            Orange.SafeAreaSim.ExpandRect(reverse.transform as RectTransform, new SerializedObject(reverse).FindProperty("m_IsNeedChangeSizeDelta").boolValue);
-        foreach (HarvestRewardsHud hud in view.GetComponentsInChildren<HarvestRewardsHud>(true)) hud.enabled = false;
-        foreach (LevelBoxReward box in view.GetComponentsInChildren<LevelBoxReward>(true)) box.gameObject.SetActive(false);
-        foreach (Orange.DynamicCanvasLayer layer in view.GetComponentsInChildren<Orange.DynamicCanvasLayer>(true)) layer.SetLayer(0);
-        view.SetActive(true);
+        GameObject view = CreateCaptureView(prefab, canvasObject.transform);
+        RectTransform viewRect = (RectTransform)view.transform;
         prepare(view);
-        RenderTexture render = new RenderTexture(1080, height, 24);
+        HarvestRewardsUI walletController = view.GetComponent<HarvestRewardsUI>();
+        if (backdrop != null && walletController != null &&
+            Reference<GameObject>(new SerializedObject(walletController), "progressRoot").activeSelf)
+            PrepareHud(backdrop, true);
+        foreach (HarvestReferenceLayout layout in canvasObject.GetComponentsInChildren<HarvestReferenceLayout>(true))
+            layout.RefreshLayout();
+        RenderTexture render = new RenderTexture(width, height, 24);
         Texture2D capture = null;
         try
         {
             camera.targetTexture = render;
-            camera.aspect = 1080f / height;
+            camera.aspect = (float)width / height;
             Canvas.ForceUpdateCanvases();
             LayoutRebuilder.ForceRebuildLayoutImmediate(viewRect);
+            foreach (HarvestReferenceLayout layout in view.GetComponentsInChildren<HarvestReferenceLayout>(true))
+            {
+                RectTransform dimmer = Reference<RectTransform>(new SerializedObject(layout), "dimmerRoot");
+                Rect fullCanvas = WorldRect(canvasRect), covered = WorldRect(dimmer);
+                // The modal backdrop intentionally covers the full viewport, including safe-area margins.
+                if (!ContainsRect(covered, fullCanvas, 1f) || !ContainsRect(fullCanvas, covered, 1f))
+                    LayoutErrors.Add(imageName + ": dimmer must cover the full canvas, including safe-area margins.");
+            }
+            AuditWalletGrid(view, imageName);
             foreach (TMP_Text text in view.GetComponentsInChildren<TMP_Text>(true))
             {
                 text.ForceMeshUpdate(true);
@@ -464,7 +698,9 @@ public static class HarvestRewardValidation
             string output = Path.GetFullPath(Path.Combine(Application.dataPath, "../Tests/HarvestRewards/Artifacts"));
             Directory.CreateDirectory(output);
             File.WriteAllBytes(Path.Combine(output, imageName + ".png"), capture.EncodeToPNG());
-            Debug.Log("HARVEST_RENDER_OK: " + imageName + " (1080x" + height + ")");
+            Debug.Log("HARVEST_RENDER_OK: " + imageName + " (" + width + "x" + height + "); logical canvas "
+                + logicalSize.x.ToString("F2", CultureInfo.InvariantCulture) + "x" + logicalSize.y.ToString("F2", CultureInfo.InvariantCulture)
+                + "; safe area top/bottom " + Orange.SafeAreaSim.Top + "/" + Orange.SafeAreaSim.Bottom);
         }
         finally
         {
@@ -473,6 +709,7 @@ public static class HarvestRewardValidation
             if (capture != null) UnityEngine.Object.DestroyImmediate(capture);
             UnityEngine.Object.DestroyImmediate(render);
             UnityEngine.Object.DestroyImmediate(view);
+            if (backdrop != null) UnityEngine.Object.DestroyImmediate(backdrop);
             UnityEngine.Object.DestroyImmediate(canvasObject);
             UnityEngine.Object.DestroyImmediate(cameraObject);
         }
