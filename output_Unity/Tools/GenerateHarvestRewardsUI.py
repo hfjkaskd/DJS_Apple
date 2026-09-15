@@ -50,6 +50,12 @@ def ref(n):
     return f"{{fileID: {n}}}"
 
 
+def sprite_ref(path):
+    meta = (ROOT / (path + '.meta')).read_text(encoding='utf-8-sig')
+    asset_guid = re.search(r'^guid: ([a-f0-9]+)', meta, re.M).group(1)
+    return f'{{fileID: 21300000, guid: {asset_guid}, type: 2}}'
+
+
 BASE = "  m_ObjectHideFlags: 0\n  m_CorrespondingSourceObject: {fileID: 0}\n  m_PrefabInstance: {fileID: 0}\n  m_PrefabAsset: {fileID: 0}\n"
 
 
@@ -109,7 +115,7 @@ class Prefab:
     m_Bits: 4294967295
 """)
 
-    def image(self, n, color, raycast=False):
+    def image(self, n, color, raycast=False, sprite=None, sliced=True):
         self.renderer(n)
         return self.component(n, IMAGE, f"""  m_Material: {{fileID: 0}}
   m_Color: {rgba(color)}
@@ -119,19 +125,19 @@ class Prefab:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {{fileID: 0}}
-  m_Type: 0
-  m_PreserveAspect: 0
+  m_Sprite: {sprite_ref(sprite) if sprite else ref(0)}
+  m_Type: {1 if sprite and sliced else 0}
+  m_PreserveAspect: {0 if sliced else 1}
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 3
 """)
 
-    def label(self, name, parent, text, x=0, y=0, w=880, h=70, size=36, color="f8f6e9", left=False):
+    def label(self, name, parent, text, x=0, y=0, w=880, h=70, size=36, color="754221", left=False):
         n = self.node(name, parent, x, y, w, h)
         self.renderer(n)
         component = self.component(n, TEXT, f"""  m_Material: {{fileID: 0}}
@@ -191,9 +197,9 @@ class Prefab:
 """)
         return component
 
-    def button(self, name, parent, label, x=0, y=0, w=400, h=100, color="d3ed76", size=36, anchor=(.5, .5)):
+    def button(self, name, parent, label, x=0, y=0, w=400, h=100, color="ffffff", size=36, anchor=(.5, .5), sprite="Assets/res/local/common/sprite/btn/Btn_Normal.asset"):
         n = self.node(name, parent, x, y, w, h, anchor)
-        img = self.image(n, color, True)
+        img = self.image(n, color, True, sprite)
         btn = self.component(n, BUTTON, f"""  m_Navigation:
     m_Mode: 0
     m_WrapAround: 0
@@ -248,106 +254,6 @@ class Prefab:
         return result
 
 
-def build_center():
-    p = Prefab()
-    root = p.node("HarvestRewardsUI", w=0, h=0, stretch=True)
-    p.canvas(root)
-    p.image(root, "092c23", True)
-    content = p.node("Content", root, w=960, h=2160)
-    p.label("Title", content, "HARVEST REWARDS", y=995, x=-45, w=820, h=90, size=58, left=True)
-    _, close, _ = p.button("Close", content, "X", x=435, y=995, w=90, h=85, color="d6e7d8", size=40)
-    p.label("SimulationNotice", content, "SIMULATION ONLY - NO CASH VALUE", y=901, w=940, h=65, size=31, color="edce74")
-    p.label("Intro", content, "Match fruit. Complete levels. Grow your harvest.", y=841, w=920, h=60, size=31, color="c0d9cb")
-    card = p.node("BalanceCard", content, y=668, w=940, h=242)
-    p.image(card, "174b38")
-    p.label("BalanceHeading", card, "AVAILABLE", x=-208, y=72, w=440, h=50, size=29, color="c0d9cb")
-    available = p.label("AvailableValue", card, "0.00", x=-208, y=-5, w=440, h=100, size=68)
-    p.label("FrozenHeading", card, "IN CHALLENGE", x=239, y=72, w=390, h=50, size=29, color="c0d9cb")
-    frozen = p.label("FrozenValue", card, "0.00", x=239, y=-5, w=390, h=100, size=54)
-    p.label("UnitNotice", card, "All amounts are simulated reward units.", y=-82, w=900, h=46, size=27, color="c0d9cb")
-    _, ingame, ingame_text = p.button("ClaimInGame", content, "Fruit reward\nNothing to claim", x=-242, y=465, w=456, h=105, size=32)
-    _, win, win_text = p.button("ClaimWin", content, "Level reward\nNothing to claim", x=242, y=465, w=456, h=105, size=32)
-    _, ingame_ad, ingame_ad_text = p.button("WatchFruitAd", content, "Watch ad - unavailable", x=-242, y=362, w=456, h=72, color="a7c4b1", size=27)
-    _, win_ad, win_ad_text = p.button("WatchWinAd", content, "Watch ad - unavailable", x=242, y=362, w=456, h=72, color="a7c4b1", size=27)
-    p.label("TierHeading", content, "CHOOSE A SIMULATED WITHDRAWAL", y=268, h=64, size=33, left=True, w=940)
-    tiers, tier_labels = [], []
-    for i in range(6):
-        _, b, t = p.button("Tier" + str(i + 1), content, "Tier " + str(i + 1), x=(i % 3 - 1) * 320, y=178 - (i // 3) * 108, w=300, h=92, color="e0e9d4", size=31)
-        tiers.append(b)
-        tier_labels.append(t)
-    state_card = p.node("ProgressCard", content, y=-150, w=940, h=280)
-    p.image(state_card, "174b38")
-    progress = p.label("Progress", state_card, "Your harvest challenge will appear here.", w=880, h=236, size=32, left=True)
-    p.label("TermsHeading", content, "THE FULL JOURNEY - READ BEFORE APPLYING", y=-325, w=940, h=64, size=31, color="edce74", left=True)
-    terms = p.label("Terms", content, "Complete six stages. Each stage needs its task and waiting time.\nOnly progress after applying counts.\nAll amounts are simulated and cannot be paid out.", y=-599, w=940, h=475, size=30, left=True)
-    _, apply, apply_text = p.button("Apply", content, "Review simulation request", y=-910, w=940, h=108, size=38)
-    feedback = p.label("Feedback", content, "No payment details are collected. No real payout is available.", y=-1020, w=940, h=100, size=28, color="c0d9cb")
-    overlay = p.node("Confirmation", root, w=0, h=0, stretch=True, active=False)
-    p.image(overlay, "092c23f5", True)
-    confirm_card = p.node("ConfirmationCard", overlay, w=940, h=1110)
-    p.image(confirm_card, "174b38")
-    p.label("ConfirmTitle", confirm_card, "CONFIRM SIMULATION", y=443, w=860, h=110, size=48)
-    confirm_body = p.label("ConfirmBody", confirm_card, "This is a simulated withdrawal. No cash will be paid.", y=70, w=850, h=580, size=35, left=True)
-    _, confirm, _ = p.button("ConfirmApply", confirm_card, "Start simulated challenge", y=-320, w=850, h=105, size=35)
-    _, cancel, _ = p.button("CancelApply", confirm_card, "Go back", y=-453, w=850, h=93, color="d6e7d8", size=35)
-    refs = {"availableText": available, "frozenText": frozen, "progressText": progress, "rulesText": terms,
-            "feedbackText": feedback, "inGameRewardButton": ingame, "inGameRewardText": ingame_text,
-            "inGameAdButton": ingame_ad, "inGameAdText": ingame_ad_text,
-            "winAdButton": win_ad, "winAdText": win_ad_text,
-            "winRewardButton": win, "winRewardText": win_text, "applyButton": apply, "applyText": apply_text,
-            "closeButton": close, "confirmationRoot": overlay['go'], "confirmationText": confirm_body,
-            "confirmButton": confirm, "cancelButton": cancel}
-    fields = "  m_OpenAniName:\n  m_IdleAniName:\n  m_CloseAniName:\n"
-    fields += "".join(f"  {key}: {ref(value)}\n" for key, value in refs.items())
-    fields += "  tierButtons:\n" + "".join(f"  - {ref(i)}\n" for i in tiers)
-    fields += "  tierLabels:\n" + "".join(f"  - {ref(i)}\n" for i in tier_labels)
-    fields += "  refreshIntervalSeconds: 1\n"
-    p.component(root, guid(UI_SCRIPT), fields)
-    write(PREFAB, p.render())
-    metadata(PREFAB, "harvest-rewards-prefab")
-    metadata("Assets/res/local/harvest", "harvest-resources", folder=True)
-    metadata("Assets/Scripts/Assembly-CSharp/HarvestRewards/HarvestRewardsUI.cs", UI_SCRIPT, script=True)
-    return root['go']
-
-
-def add_entry(path, root_transform, script_guid, anchor, x, y, width, dynamic_offset=None):
-    file = ROOT / path
-    original = file.read_text(encoding="utf-8-sig")
-    # The generated group occupies a reserved ID range; regeneration is idempotent.
-    original = re.sub(r'^--- !u!\d+ &920\d+\n.*?(?=^--- !u!|\Z)', '', original, flags=re.M | re.S)
-    original = re.sub(r'^  - \{fileID: 920\d+\}\n', '', original, flags=re.M)
-    original = re.sub(r'^  m_HarvestRewardsButton:.*\n', '', original, flags=re.M)
-    p = Prefab(920000000)
-    n, button, _ = p.button("HarvestRewardsEntry", root_transform, "Harvest Rewards\nSIMULATION", x=x, y=y, w=width, h=112, size=30, anchor=anchor)
-    if dynamic_offset is not None:
-        p.canvas(n, sorting_order=dynamic_offset)
-        p.component(n, "c51cf5ae94661753c94ece8e04a3c7ab", f"  offset: {dynamic_offset}\n  addGraphicRaycaster: 0\n  auto: 0\n")
-    pattern = rf'(^--- !u!224 &{root_transform}\n.*?  m_Children:)(.*?)(\n  m_Father:)'
-    match = re.search(pattern, original, flags=re.M | re.S)
-    if match is None:
-        raise RuntimeError("Cannot find root transform in " + path)
-    children = match.group(2).replace(" []", "")
-    original = original[:match.start()] + match.group(1) + children + f"\n  - {ref(n['rt'])}" + match.group(3) + original[match.end():]
-    pattern = rf'(  m_Script: \{{fileID: 11500000, guid: {script_guid}, type: 3\}}\n.*?  m_EditorClassIdentifier:[^\n]*\n)'
-    original, count = re.subn(pattern, lambda m: m.group(1) + f"  m_HarvestRewardsButton: {ref(button)}\n", original, count=1, flags=re.S)
-    if count != 1:
-        raise RuntimeError("Cannot find UI script in " + path)
-    write(path, original.rstrip() + "\n" + p.render(False))
-
-
-def update_catalog(root_id):
-    path = "Assets/Resources/GameResCatalog.asset"
-    text = (ROOT / path).read_text(encoding="utf-8-sig")
-    key = "res/local/harvest/harvestrewardsui"
-    text = re.sub(rf'^  - key: {key}\n    asset:[^\n]*\n', '', text, flags=re.M)
-    text += f"  - key: {key}\n    asset: {{fileID: {root_id}, guid: {guid('harvest-rewards-prefab')}, type: 3}}\n"
-    write(path, text)
-
-
 if __name__ == "__main__":
-    root_id = build_center()
-    add_entry("Assets/res/local/home/Home.prefab", 224518489005915545, "459021fb400c63cca0b33ea27eadcd74", (.5, 0), 0, 205, 400)
-    add_entry("Assets/res/local/coreplay/CorePlayUI.prefab", 224429401810989285, "d9c7a76c884c2e964193a2b8a8f91417", (0, 1), 195, -235, 300)
-    add_entry("Assets/res/local/coreplaywin/WinUI.prefab", 224181586030114204, "c2007158557bcc86d4b6b66c50c174f5", (.5, 1), 0, -230, 400, dynamic_offset=40)
-    update_catalog(root_id)
-    print("Created static HarvestRewardsUI prefab and three serialized standard Button entries.")
+    from HarvestFlowPrefabs import generate
+    generate()

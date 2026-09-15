@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>首页：Play 按钮、金币入口、设置入口。</summary>
 public class HomeUI : BaseUI
 {
-	[SerializeField] private Button m_HarvestRewardsButton;
+
 
 	[SerializeField]
 	private GameObject m_SettingBtn;
@@ -34,10 +33,7 @@ public class HomeUI : BaseUI
 
 	protected override void Init()
 	{
-		if (m_HarvestRewardsButton != null)
-		{
-			m_HarvestRewardsButton.onClick.AddListener(HarvestRewardsUI.Open);
-		}
+
 		if (m_SettingBtn != null)
 		{
 			MCCIJBJGMCK.Get(m_SettingBtn).onClick = OnSettingBtnClick;

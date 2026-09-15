@@ -5,68 +5,96 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>Prefab-authored simulation ledger, reward claims and disclosed challenge rules.</summary>
+/// <summary>Wallet, confirmation and challenge steps are separately authored Prefab pages.</summary>
 public sealed class HarvestRewardsUI : BaseUI
 {
     public const string Path = "harvest/HarvestRewardsUI";
+    private const string AcknowledgedCompletionKey = "harvest.ui.completed_request.v1";
+    private enum Page { Wallet, Confirmation, Progress, Settlement, Completed, History, Rules }
 
+    [SerializeField] private GameObject walletRoot;
+    [SerializeField] private GameObject confirmationRoot;
+    [SerializeField] private GameObject progressRoot;
+    [SerializeField] private GameObject settlementRoot;
+    [SerializeField] private GameObject completedRoot;
+    [SerializeField] private GameObject historyRoot;
+    [SerializeField] private GameObject rulesRoot;
+    [SerializeField] private Button closeButton;
+    [SerializeField] private Button backButton;
+    [SerializeField] private Button rulesButton;
+    [SerializeField] private Button historyButton;
     [SerializeField] private TextMeshProUGUI availableText;
     [SerializeField] private TextMeshProUGUI frozenText;
-    [SerializeField] private TextMeshProUGUI progressText;
-    [SerializeField] private TextMeshProUGUI rulesText;
+    [SerializeField] private TextMeshProUGUI walletHintText;
     [SerializeField] private TextMeshProUGUI feedbackText;
-    [SerializeField] private Button inGameRewardButton;
-    [SerializeField] private TextMeshProUGUI inGameRewardText;
-    [SerializeField] private Button winRewardButton;
-    [SerializeField] private TextMeshProUGUI winRewardText;
-    [SerializeField] private Button inGameAdButton;
-    [SerializeField] private TextMeshProUGUI inGameAdText;
-    [SerializeField] private Button winAdButton;
-    [SerializeField] private TextMeshProUGUI winAdText;
-    [SerializeField] private Button applyButton;
-    [SerializeField] private TextMeshProUGUI applyText;
-    [SerializeField] private Button closeButton;
-    [SerializeField] private GameObject confirmationRoot;
-    [SerializeField] private TextMeshProUGUI confirmationText;
-    [SerializeField] private Button confirmButton;
-    [SerializeField] private Button cancelButton;
     [SerializeField] private Button[] tierButtons;
     [SerializeField] private TextMeshProUGUI[] tierLabels;
+    [SerializeField] private GameObject[] tierSelectedMarkers;
+    [SerializeField] private Button applyButton;
+    [SerializeField] private TextMeshProUGUI applyText;
+    [SerializeField] private Button pendingRewardButton;
+    [SerializeField] private TextMeshProUGUI pendingRewardText;
+    [SerializeField] private TextMeshProUGUI confirmationAmountText;
+    [SerializeField] private TextMeshProUGUI confirmationSummaryText;
+    [SerializeField] private Button confirmButton;
+    [SerializeField] private Button cancelButton;
+    [SerializeField] private TextMeshProUGUI stageTitleText;
+    [SerializeField] private TextMeshProUGUI stageTaskText;
+    [SerializeField] private TextMeshProUGUI stageCountText;
+    [SerializeField] private TextMeshProUGUI stageTimerText;
+    [SerializeField] private TextMeshProUGUI stageHintText;
+    [SerializeField] private Slider stageProgressBar;
+    [SerializeField] private GameObject[] stageCompleteMarks;
+    [SerializeField] private GameObject[] stageCurrentMarks;
+    [SerializeField] private Button playButton;
+    [SerializeField] private TextMeshProUGUI settlementAmountText;
+    [SerializeField] private TextMeshProUGUI settlementTimerText;
+    [SerializeField] private Button settlementCloseButton;
+    [SerializeField] private TextMeshProUGUI completedAmountText;
+    [SerializeField] private TextMeshProUGUI completedDetailText;
+    [SerializeField] private Button completedContinueButton;
+    [SerializeField] private TextMeshProUGUI historyText;
+    [SerializeField] private TextMeshProUGUI rulesText;
     [SerializeField, Min(0.25f)] private float refreshIntervalSeconds = 1f;
+    [SerializeField, TextArea] private string confirmationSummaryFormat = "{0} will move into your challenge balance.\n\nComplete {1} stages, each with a new task and its own wait, then wait {2} hours. Minimum {3} days in total.\n\nOne request at a time. Each tier can be completed once.";
+    [SerializeField, TextArea] private string unavailableMessage = "Rewards are temporarily unavailable. Keep your save data and restart the game. Contact support if this continues.";
 
     private HarvestRewardService service;
+    private Page page;
+    private Page rulesReturnPage;
+    private Page historyReturnPage;
     private int selectedTier;
     private float nextRefreshTime;
     private bool subscribed;
     private long minimumWaitSeconds;
-    private string inGameOfferId;
-    private string winOfferId;
 
     public override PAIEAGDLCBJ Layer { get { return PAIEAGDLCBJ.Top; } }
 
     public static void Open()
     {
-        if (MgrUI.Instance != null && !MCCIJBJGMCK.IsLock())
-            MgrUI.Instance.Open(Path);
+        if (MgrUI.Instance != null && !MCCIJBJGMCK.IsLock()) MgrUI.Instance.Open(Path);
     }
 
     protected override void Init()
     {
         service = HarvestRewardService.Instance;
         closeButton.onClick.AddListener(Close);
-        inGameRewardButton.onClick.AddListener(ClaimInGame);
-        winRewardButton.onClick.AddListener(ClaimWin);
-        inGameAdButton.onClick.AddListener(WatchFruitAd);
-        winAdButton.onClick.AddListener(WatchWinAd);
+        backButton.onClick.AddListener(Back);
+        rulesButton.onClick.AddListener(OpenRules);
+        historyButton.onClick.AddListener(OpenHistory);
         applyButton.onClick.AddListener(ReviewApplication);
+        if (pendingRewardButton != null) pendingRewardButton.onClick.AddListener(CollectPendingReward);
         confirmButton.onClick.AddListener(ConfirmApplication);
-        cancelButton.onClick.AddListener(CancelApplication);
+        cancelButton.onClick.AddListener(BackToWallet);
+        playButton.onClick.AddListener(ReturnToGame);
+        settlementCloseButton.onClick.AddListener(Close);
+        completedContinueButton.onClick.AddListener(AcknowledgeCompletion);
         for (int i = 0; i < tierButtons.Length; i++)
         {
-            int tierIndex = i;
-            tierButtons[i].onClick.AddListener(() => SelectTier(tierIndex));
+            int index = i;
+            tierButtons[i].onClick.AddListener(() => SelectTier(index));
         }
-        if (service.IsAvailable) BuildRules();
+        if (service.IsAvailable) rulesText.text = CreateRulesText(service.Config, out minimumWaitSeconds);
     }
 
     protected override void BeforeOpen()
@@ -76,66 +104,47 @@ public sealed class HarvestRewardsUI : BaseUI
             service.Changed += Refresh;
             subscribed = true;
         }
-        confirmationRoot.SetActive(false);
+        feedbackText.text = "";
         if (service.IsAvailable)
         {
-            if (service.State.ActiveRequest != null)
-                selectedTier = service.State.ActiveRequest.TierIndex;
-            selectedTier = Mathf.Clamp(selectedTier, 0, service.Config.ThresholdCents.Length - 1);
+            HarvestRequestState request = service.State.ActiveRequest;
+            if (request != null) selectedTier = request.TierIndex;
+            else selectedTier = FirstUnfinishedTier(service.Config, service.State);
+            ShowPage(request != null ? RequestPage(request) :
+                HasUnacknowledgedCompletion(service.State) ? Page.Completed : Page.Wallet);
         }
-        feedbackText.text = "No payment details are collected. No real payout is available.";
+        else ShowPage(Page.Wallet);
         Refresh();
     }
 
-    protected override void BeforeClose()
-    {
-        Unsubscribe();
-        confirmationRoot.SetActive(false);
-    }
-
-    private void OnDestroy()
-    {
-        Unsubscribe();
-    }
-
+    protected override void BeforeClose() { Unsubscribe(); }
+    private void OnDestroy() { Unsubscribe(); }
     private void Unsubscribe()
     {
-        if (subscribed && service != null)
-        {
-            service.Changed -= Refresh;
-            subscribed = false;
-        }
+        if (subscribed && service != null) service.Changed -= Refresh;
+        subscribed = false;
     }
 
     private void Update()
     {
-        if (!IsOpening || Time.unscaledTime < nextRefreshTime)
-            return;
+        if (!IsOpening || Time.unscaledTime < nextRefreshTime) return;
         nextRefreshTime = Time.unscaledTime + refreshIntervalSeconds;
         Refresh();
     }
 
-    private void BuildRules()
+    private void ShowPage(Page target)
     {
-        rulesText.text = CreateRulesText(service.Config, out minimumWaitSeconds);
-    }
-
-    public static string CreateRulesText(HarvestRewardSettings config, out long minimumWaitSeconds)
-    {
-        var rules = new StringBuilder(650);
-        minimumWaitSeconds = config.SettlementWaitSeconds;
-        for (int i = 0; i < config.Stages.Length; i++)
-        {
-            HarvestStageSettings stage = config.Stages[i];
-            minimumWaitSeconds += stage.WaitSeconds;
-            rules.Append(i + 1).Append(". ").Append(TaskDescription(stage))
-                .Append(" + wait ").Append(Hours(stage.WaitSeconds)).Append("h\n");
-        }
-        rules.Append("Then wait ").Append(Hours(config.SettlementWaitSeconds)).Append("h; minimum ")
-            .Append(Days(minimumWaitSeconds)).Append(" days.\n")
-            .Append("Each stage needs BOTH its task and timer. Only new play in the active stage counts.\n")
-            .Append("The request amount is frozen. One active request; each tier once. Simulation only; no cash.");
-        return rules.ToString();
+        page = target;
+        walletRoot.SetActive(target == Page.Wallet);
+        confirmationRoot.SetActive(target == Page.Confirmation);
+        progressRoot.SetActive(target == Page.Progress);
+        settlementRoot.SetActive(target == Page.Settlement);
+        completedRoot.SetActive(target == Page.Completed);
+        historyRoot.SetActive(target == Page.History);
+        rulesRoot.SetActive(target == Page.Rules);
+        backButton.gameObject.SetActive(target != Page.Wallet && target != Page.Completed);
+        rulesButton.gameObject.SetActive(target != Page.Rules);
+        historyButton.gameObject.SetActive(target != Page.History && target != Page.Confirmation && target != Page.Rules);
     }
 
     private void Refresh()
@@ -146,174 +155,210 @@ public sealed class HarvestRewardsUI : BaseUI
             return;
         }
         HarvestRewardState state = service.State;
-        availableText.text = Amount(state.AvailableCents);
-        frozenText.text = Amount(state.FrozenCents);
-        inGameOfferId = state.PendingInGameReward != null ? state.PendingInGameReward.RunId : null;
-        winOfferId = state.PendingWinReward != null ? state.PendingWinReward.RunId : null;
-        inGameRewardButton.interactable = service.CanClaimInGameBase;
-        winRewardButton.interactable = service.CanClaimWinBase;
-        inGameRewardText.text = RewardLabel("Fruit reward", service.HasInGameReward,
-            service.CanClaimInGameBase, service.GetInGameRewardPreviewCents());
-        winRewardText.text = RewardLabel("Level reward", service.HasWinReward,
-            service.CanClaimWinBase, service.GetWinRewardPreviewCents());
-        RefreshAdButton(inGameAdButton, inGameAdText, state.PendingInGameReward, HarvestRewardOffer.InGame);
-        RefreshAdButton(winAdButton, winAdText, state.PendingWinReward, HarvestRewardOffer.Win);
+        HarvestRequestState request = state.ActiveRequest;
+        // Details remain readable; an active progress page follows real stage transitions.
+        if (page == Page.Progress || page == Page.Settlement)
+            ShowPage(request != null ? RequestPage(request) : state.Settlements.Count > 0 ? Page.Completed : Page.Wallet);
+        else if (page == Page.Confirmation && request != null) ShowPage(RequestPage(request));
+
+        availableText.text = FormatAmount(state.AvailableCents);
+        frozenText.text = "In challenge: " + FormatAmount(state.FrozenCents);
         for (int i = 0; i < tierButtons.Length; i++)
         {
             bool exists = i < service.Config.ThresholdCents.Length;
             tierButtons[i].gameObject.SetActive(exists);
             if (!exists) continue;
-            bool completed = state.CompletedTierIndexes.Contains(i);
-            string tierState = completed ? (i == selectedTier ? "DONE / SELECTED" : "COMPLETED")
-                : i == selectedTier ? "SELECTED" : "";
-            tierLabels[i].text = Amount(service.Config.ThresholdCents[i])
-                + (tierState.Length > 0 ? "\n" + tierState : "");
+            tierButtons[i].interactable = true;
+            tierLabels[i].text = FormatAmount(service.Config.ThresholdCents[i])
+                + (state.CompletedTierIndexes.Contains(i) ? "\nCompleted" : "");
+            if (i < tierSelectedMarkers.Length) tierSelectedMarkers[i].SetActive(i == selectedTier);
         }
-
-        bool eligible = CanApply();
-        applyButton.interactable = eligible;
-        confirmButton.interactable = eligible;
-        applyText.text = state.ActiveRequest != null ? "Challenge in progress" :
-            state.CompletedTierIndexes.Contains(selectedTier) ? "This tier is completed" :
-            eligible ? "Review simulation request" : "Keep playing to reach this tier";
-        progressText.text = BuildProgressText();
-    }
-
-    private void ShowUnavailable()
-    {
-        inGameRewardButton.interactable = false;
-        winRewardButton.interactable = false;
-        inGameAdButton.interactable = false;
-        winAdButton.interactable = false;
-        applyButton.interactable = false;
-        confirmButton.interactable = false;
-        for (int i = 0; i < tierButtons.Length; i++) tierButtons[i].interactable = false;
-        confirmationRoot.SetActive(false);
-        availableText.text = "--";
-        frozenText.text = "--";
-        applyText.text = "Rewards temporarily unavailable";
-        progressText.text = "REWARDS PAUSED\nYour saved rewards could not be loaded or saved safely.\nKeep your save data and restart the game. Contact support if this continues.";
-        feedbackText.text = "Reward operations are paused. Do not delete your save data.";
-    }
-
-    private void RefreshAdButton(Button button, TextMeshProUGUI label, HarvestRewardOffer offer, int kind)
-    {
-        bool ready = offer != null && !offer.IsFirstFree && service.IsRewardedAvailable(kind);
-        button.interactable = ready;
-        label.text = service.IsRewardedAdPending ? "Ad in progress" :
-            ready ? "Watch ad - bonus reward" : "Watch ad - unavailable";
-    }
-
-    private string BuildProgressText()
-    {
-        HarvestRewardState state = service.State;
-        HarvestRequestState request = state.ActiveRequest;
-        if (request == null)
+        bool allDone = state.CompletedTierIndexes.Count >= service.Config.ThresholdCents.Length;
+        bool selectedCompleted = state.CompletedTierIndexes.Contains(selectedTier);
+        long missing = Math.Max(0, service.Config.ThresholdCents[selectedTier] - state.AvailableCents);
+        walletHintText.text = request != null ? "Your current challenge is in progress."
+            : allDone ? "All withdrawal tiers are complete."
+            : selectedCompleted ? "This tier is complete. Select another tier to continue."
+            : missing == 0 ? "This tier is ready. Continue to review your request."
+            : FormatAmount(missing) + " more to reach this tier.";
+        applyButton.interactable = request != null || (!allDone && !selectedCompleted);
+        applyText.text = request != null ? "View challenge" : allDone ? "Plan completed"
+            : state.CompletedTierIndexes.Contains(selectedTier) ? "Tier completed" : missing > 0 ? "Keep harvesting" : "Continue";
+        confirmButton.interactable = CanApply();
+        if (pendingRewardButton != null)
         {
-            if (state.CompletedTierIndexes.Count >= service.Config.ThresholdCents.Length)
-                return "HARVEST PLAN COMPLETED\nAll simulated withdrawal tiers are complete.\nNo cash was paid. You can keep playing the fruit game.";
-            if (state.Settlements.Count > 0)
-            {
-                HarvestSettlementRecord last = state.Settlements[state.Settlements.Count - 1];
-                return "SIMULATION COMPLETED: " + Amount(last.AmountCents) + " units\n"
-                    + state.Settlements.Count + " challenge(s) completed. No cash was paid.\n"
-                    + "Select another tier to start a new harvest challenge.";
-            }
-            long missing = Math.Max(0, service.Config.ThresholdCents[selectedTier] - state.AvailableCents);
-            return "YOUR NEXT HARVEST CHALLENGE\n"
-                + (missing == 0 ? "This tier is ready to apply for." : Amount(missing) + " more simulated units to reach this tier.")
-                + "\nAll six stages and waiting times begin after applying.";
+            bool pending = service.HasWinReward || service.HasInGameReward;
+            pendingRewardButton.gameObject.SetActive(pending);
+            pendingRewardButton.interactable = pending && !service.IsRewardedAdPending;
+            if (pendingRewardText != null) pendingRewardText.text = service.HasWinReward ? "Collect level reward" : "Collect harvest reward";
         }
+        confirmationAmountText.text = FormatAmount(service.Config.ThresholdCents[selectedTier]);
+        confirmationSummaryText.text = string.Format(CultureInfo.InvariantCulture, confirmationSummaryFormat,
+            FormatAmount(service.Config.ThresholdCents[selectedTier]), service.Config.Stages.Length,
+            FormatHours(service.Config.SettlementWaitSeconds), FormatDays(minimumWaitSeconds));
+        if (request != null) RefreshRequest(request);
+        if (page == Page.Completed || page == Page.History) RefreshHistory(allDone);
+    }
 
+    private void RefreshRequest(HarvestRequestState request)
+    {
         long remaining = service.GetRemainingSeconds();
-        string clockNote = state.ClockRollbackDetected ? "\nDevice clock moved back; time progress is paused." : "";
-        if (request.Status == HarvestRequestState.SettlementWait)
-            return "FINAL SIMULATION WAIT\n" + Amount(request.AmountCents)
-                + " units in challenge. All six stages completed.\n"
-                + "Time left: " + Duration(remaining) + ". No cash payout follows." + clockNote;
+        bool settling = request.Status == HarvestRequestState.SettlementWait;
+        for (int i = 0; i < stageCompleteMarks.Length; i++)
+            stageCompleteMarks[i].SetActive(settling || i < request.StageIndex);
+        for (int i = 0; i < stageCurrentMarks.Length; i++)
+            stageCurrentMarks[i].SetActive(!settling && i == request.StageIndex);
+        settlementAmountText.text = FormatAmount(request.AmountCents);
+        settlementTimerText.text = FormatDuration(remaining);
+        if (settling) return;
         HarvestStageSettings stage = service.Config.Stages[request.StageIndex];
-        return "STAGE " + (request.StageIndex + 1) + " / " + service.Config.Stages.Length
-            + " - " + Amount(request.AmountCents) + " simulated units\n"
-            + TaskDescription(stage) + ": " + request.StageProgress + " / " + stage.Target
-            + "\nTime left: " + Duration(remaining)
-            + (remaining == 0 && request.StageProgress < stage.Target ? " - finish the task to continue." : " - task and timer must both finish.")
-            + clockNote;
+        stageTitleText.text = "Harvest stage " + (request.StageIndex + 1) + " / " + service.Config.Stages.Length;
+        stageTaskText.text = CreateTaskText(stage);
+        stageCountText.text = request.StageProgress + " / " + stage.Target;
+        stageProgressBar.SetValueWithoutNotify(Mathf.Clamp01((float)request.StageProgress / stage.Target));
+        stageTimerText.text = FormatDuration(remaining);
+        stageHintText.text = service.State.ClockRollbackDetected ? "Device time moved back. The timer will resume when it catches up."
+            : remaining == 0 ? "Time complete. Finish this task to unlock the next stage."
+            : request.StageProgress >= stage.Target ? "Task complete. The next stage opens when the timer ends."
+            : "Finish the task and waiting time to unlock the next stage.";
+    }
+
+    private void RefreshHistory(bool allDone)
+    {
+        var records = service.State.Settlements;
+        if (records.Count == 0)
+        {
+            historyText.text = "No completed requests yet.";
+            completedAmountText.text = "0.00";
+            completedDetailText.text = "Complete a harvest challenge to see your result here.";
+            return;
+        }
+        HarvestSettlementRecord latest = records[records.Count - 1];
+        completedAmountText.text = FormatAmount(latest.AmountCents);
+        completedDetailText.text = allDone ? "All harvest withdrawal tiers are complete. No cash was paid."
+            : "Simulated settlement complete. No cash was paid. You can start another tier.";
+        var text = new StringBuilder(512);
+        for (int i = records.Count - 1; i >= 0; i--)
+        {
+            HarvestSettlementRecord record = records[i];
+            if (text.Length > 0) text.Append("\n\n");
+            text.Append(FormatAmount(record.AmountCents)).Append("  -  Completed\n")
+                .Append(DateTimeOffset.FromUnixTimeSeconds(record.CompletedUtcSeconds).UtcDateTime.ToString("yyyy-MM-dd HH:mm 'UTC'", CultureInfo.InvariantCulture));
+        }
+        historyText.text = text.ToString();
     }
 
     private bool CanApply()
     {
-        return service.IsAvailable && service.State.ActiveRequest == null
-            && !service.State.CompletedTierIndexes.Contains(selectedTier)
+        return service.IsAvailable && selectedTier >= 0 && selectedTier < service.Config.ThresholdCents.Length
+            && service.State.ActiveRequest == null && !service.State.CompletedTierIndexes.Contains(selectedTier)
             && service.State.AvailableCents >= service.Config.ThresholdCents[selectedTier];
     }
 
-    private void SelectTier(int tierIndex)
+    private void ShowUnavailable()
     {
-        if (MCCIJBJGMCK.IsLock() || !service.IsAvailable || tierIndex >= service.Config.ThresholdCents.Length) return;
-        selectedTier = tierIndex;
-        confirmationRoot.SetActive(false);
+        ShowPage(Page.Wallet);
+        availableText.text = "--";
+        frozenText.text = "In challenge: --";
+        walletHintText.text = unavailableMessage;
+        feedbackText.text = "";
+        applyText.text = "Temporarily unavailable";
+        applyButton.interactable = false;
+        confirmButton.interactable = false;
+        if (pendingRewardButton != null) pendingRewardButton.gameObject.SetActive(false);
+        rulesButton.interactable = false;
+        historyButton.interactable = false;
+        for (int i = 0; i < tierButtons.Length; i++) tierButtons[i].interactable = false;
+    }
+
+    private void SelectTier(int index)
+    {
+        if (MCCIJBJGMCK.IsLock() || !service.IsAvailable || index < 0 || index >= service.Config.ThresholdCents.Length) return;
+        selectedTier = index;
+        feedbackText.text = "";
         Refresh();
     }
 
     private void ReviewApplication()
     {
-        if (MCCIJBJGMCK.IsLock() || !CanApply()) return;
-        confirmationText.text = "Apply for " + Amount(service.Config.ThresholdCents[selectedTier]) + " simulated units.\n\n"
-            + "This amount moves from available to in-challenge balance.\n\n"
-            + "All six stages and the final " + Hours(service.Config.SettlementWaitSeconds)
-            + "h wait still apply. Minimum " + Days(minimumWaitSeconds) + " days, longer if tasks are unfinished.\n\n"
-            + "There is no real payment or cash withdrawal.";
-        confirmationRoot.SetActive(true);
+        if (MCCIJBJGMCK.IsLock() || !service.IsAvailable) return;
+        if (service.State.ActiveRequest != null) ShowPage(RequestPage(service.State.ActiveRequest));
+        else if (CanApply()) ShowPage(Page.Confirmation);
+        else { ReturnToGame(); return; }
+        Refresh();
     }
 
     private void ConfirmApplication()
     {
-        if (MCCIJBJGMCK.IsLock()) return;
-        bool success = service.TryApply(selectedTier);
-        confirmationRoot.SetActive(false);
-        feedbackText.text = success ? "Simulation started. Only new progress in the current stage counts."
-            : "This request could not be started. Review your balance and active challenge.";
+        if (MCCIJBJGMCK.IsLock() || !CanApply()) return;
+        if (service.TryApply(selectedTier))
+        {
+            feedbackText.text = "";
+            ShowPage(RequestPage(service.State.ActiveRequest));
+        }
+        else feedbackText.text = "The request could not start. Please review your balance.";
         Refresh();
     }
 
-    private void CancelApplication()
+    private void CollectPendingReward()
     {
-        if (!MCCIJBJGMCK.IsLock()) confirmationRoot.SetActive(false);
+        if (MCCIJBJGMCK.IsLock() || !service.IsAvailable || service.IsRewardedAdPending) return;
+        bool hasWin = service.HasWinReward;
+        if (!hasWin && !service.HasInGameReward) { Refresh(); return; }
+        MgrUI.Instance.Close(Path, false);
+        bool opened = hasWin ? HarvestRewardPopupUI.OpenWin() : HarvestRewardPopupUI.OpenInGame();
+        if (!opened) MgrUI.Instance.Open(Path, false);
     }
 
-    private void ClaimInGame()
-    {
-        if (MCCIJBJGMCK.IsLock()) return;
-        bool claimed = service.ClaimInGameBase(inGameOfferId);
-        feedbackText.text = claimed ? "Fruit reward added to your simulated balance." : "No fruit reward is ready to claim yet.";
-        Refresh();
-    }
-
-    private void ClaimWin()
-    {
-        if (MCCIJBJGMCK.IsLock()) return;
-        bool claimed = service.ClaimWinBase(winOfferId);
-        feedbackText.text = claimed ? "Level reward added to your simulated balance." : "No level reward is ready to claim yet.";
-        Refresh();
-    }
-
-    private void WatchFruitAd()
-    {
-        RequestRewardedAd(HarvestRewardOffer.InGame);
-    }
-
-    private void WatchWinAd()
-    {
-        RequestRewardedAd(HarvestRewardOffer.Win);
-    }
-
-    private void RequestRewardedAd(int kind)
+    private void OpenRules()
     {
         if (MCCIJBJGMCK.IsLock() || !service.IsAvailable) return;
-        bool started = service.RequestRewardedReward(kind);
-        feedbackText.text = started ? "Complete the ad to receive the simulated bonus."
-            : "No ad is available. You can still claim the base reward.";
+        rulesReturnPage = page;
+        ShowPage(Page.Rules);
+    }
+
+    private void OpenHistory()
+    {
+        if (MCCIJBJGMCK.IsLock() || !service.IsAvailable) return;
+        historyReturnPage = page;
+        ShowPage(Page.History);
         Refresh();
+    }
+
+    private void Back()
+    {
+        if (MCCIJBJGMCK.IsLock()) return;
+        ShowPage(page == Page.Rules ? rulesReturnPage : page == Page.History ? historyReturnPage : Page.Wallet);
+        Refresh();
+    }
+
+    private void BackToWallet()
+    {
+        if (MCCIJBJGMCK.IsLock()) return;
+        ShowPage(Page.Wallet);
+        Refresh();
+    }
+
+    private void AcknowledgeCompletion()
+    {
+        if (MCCIJBJGMCK.IsLock() || !service.IsAvailable) return;
+        var records = service.State.Settlements;
+        if (records.Count > 0)
+        {
+            PlayerPrefs.SetString(AcknowledgedCompletionKey, records[records.Count - 1].RequestId);
+            PlayerPrefs.Save();
+        }
+        selectedTier = FirstUnfinishedTier(service.Config, service.State);
+        BackToWallet();
+    }
+
+    private void ReturnToGame()
+    {
+        if (MCCIJBJGMCK.IsLock()) return;
+        Close();
+        MgrUI manager = MgrUI.Instance;
+        // Home has no live board. Existing gameplay and Win pages stay exactly where they are.
+        if (manager != null && manager.GetTopUI() is HomeUI) manager.Open("gameloading/GameLoading", false);
     }
 
     private void Close()
@@ -321,37 +366,51 @@ public sealed class HarvestRewardsUI : BaseUI
         if (!MCCIJBJGMCK.IsLock()) MgrUI.Instance.Close(Path, false);
     }
 
-    private static string TaskDescription(HarvestStageSettings stage)
+    private static Page RequestPage(HarvestRequestState request)
     {
-        return stage.TaskKind == HarvestStageSettings.Wins
-            ? "Win " + stage.Target + " main levels"
-            : "Make " + stage.Target + " fruit triples";
+        return request.Status == HarvestRequestState.SettlementWait ? Page.Settlement : Page.Progress;
     }
 
-    private static string RewardLabel(string title, bool offered, bool claimable, long cents)
+    private static bool HasUnacknowledgedCompletion(HarvestRewardState state)
     {
-        return title + "\n" + (!offered ? "Nothing to claim" : claimable ? "Claim " + Amount(cents) : "Ready in a moment");
+        return state.Settlements.Count > 0 && state.Settlements[state.Settlements.Count - 1].RequestId
+            != PlayerPrefs.GetString(AcknowledgedCompletionKey, "");
     }
 
-    private static string Amount(long cents)
+    public static int FirstUnfinishedTier(HarvestRewardSettings config, HarvestRewardState state)
     {
-        return (cents / 100m).ToString("N2", CultureInfo.InvariantCulture);
+        for (int i = 0; i < config.ThresholdCents.Length; i++) if (!state.CompletedTierIndexes.Contains(i)) return i;
+        return config.ThresholdCents.Length - 1;
     }
 
-    private static string Hours(long seconds)
+    public static string CreateRulesText(HarvestRewardSettings config, out long minimumWaitSeconds)
     {
-        return (seconds / 3600m).ToString("0.##", CultureInfo.InvariantCulture);
+        var rules = new StringBuilder(650);
+        minimumWaitSeconds = config.SettlementWaitSeconds;
+        for (int i = 0; i < config.Stages.Length; i++)
+        {
+            HarvestStageSettings stage = config.Stages[i];
+            minimumWaitSeconds += stage.WaitSeconds;
+            rules.Append(i + 1).Append(". ").Append(CreateTaskText(stage))
+                .Append(" + wait ").Append(FormatHours(stage.WaitSeconds)).Append("h\n");
+        }
+        rules.Append("Then wait ").Append(FormatHours(config.SettlementWaitSeconds)).Append("h; minimum ")
+            .Append(FormatDays(minimumWaitSeconds)).Append(" days.\n\n")
+            .Append("Each stage needs BOTH its task and timer. Only new play in the active stage counts.\n\n")
+            .Append("The request amount is frozen. One active request; each tier once. Simulation only; no cash.");
+        return rules.ToString();
     }
 
-    private static string Days(long seconds)
+    public static string CreateTaskText(HarvestStageSettings stage)
     {
-        return (seconds / 86400m).ToString("0.##", CultureInfo.InvariantCulture);
+        return stage.TaskKind == HarvestStageSettings.Wins ? "Win " + stage.Target + " main levels" : "Make " + stage.Target + " fruit triples";
     }
-
-    private static string Duration(long seconds)
+    public static string FormatAmount(long cents) { return (cents / 100m).ToString("N2", CultureInfo.InvariantCulture); }
+    public static string FormatHours(long seconds) { return (seconds / 3600m).ToString("0.##", CultureInfo.InvariantCulture); }
+    private static string FormatDays(long seconds) { return (seconds / 86400m).ToString("0.##", CultureInfo.InvariantCulture); }
+    public static string FormatDuration(long seconds)
     {
         seconds = Math.Max(0, seconds);
-        return string.Format(CultureInfo.InvariantCulture, "{0}d {1:00}:{2:00}:{3:00}",
-            seconds / 86400, seconds % 86400 / 3600, seconds % 3600 / 60, seconds % 60);
+        return string.Format(CultureInfo.InvariantCulture, "{0}d {1:00}:{2:00}:{3:00}", seconds / 86400, seconds % 86400 / 3600, seconds % 3600 / 60, seconds % 60);
     }
 }

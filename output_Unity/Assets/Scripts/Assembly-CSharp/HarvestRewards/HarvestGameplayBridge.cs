@@ -1,14 +1,14 @@
 using UnityEngine;
 
-/// <summary>Connects the configured reward UI and ledger to the existing game lifecycle.</summary>
+/// <summary>Records effective play and presents small rewards only at safe gameplay boundaries.</summary>
 public static class HarvestGameplayBridge
 {
-    private const string RewardPage = "harvest/HarvestRewardsUI";
-    private const string FirstTargetPromptKey = "harvest.first_target_prompt.v1";
+    private const string WelcomePromptKey = "harvest.welcome_card.v1";
     private static float refreshElapsed;
     private static double effectiveElapsed;
     private static bool paused;
-    private static string lastShownOffer;
+    private static string lastShownInGameOffer;
+    private static string lastShownWinOffer;
 
     public static void Initialize()
     {
@@ -16,7 +16,8 @@ public static class HarvestGameplayBridge
         refreshElapsed = 0;
         effectiveElapsed = 0;
         paused = false;
-        lastShownOffer = null;
+        lastShownInGameOffer = null;
+        lastShownWinOffer = null;
     }
 
     public static void Tick(float deltaTime)
@@ -24,12 +25,12 @@ public static class HarvestGameplayBridge
         if (paused || deltaTime <= 0) return;
         MgrUI manager = MgrUI.Instance;
         CorePlay.CorePlayUI playUI = CorePlay.CorePlayUI.Instance;
-        bool playable = manager != null && playUI != null && playUI.IsOpening &&
-            manager.GetTopUI() == playUI && !MCCIJBJGMCK.IsLock() &&
-            JEFOMCDAPGK.Instance.CurMainLevelIndex > 1 &&
-            !JEFOMCDAPGK.Instance.Data.isLevelFinished &&
-            !JEFOMCDAPGK.Instance.MainLevelData.isLose;
-        if (playable) effectiveElapsed += deltaTime;
+        BaseUI top = manager != null ? manager.GetTopUI() : null;
+        bool boardReady = manager != null && playUI != null && playUI.IsOpening && top == playUI
+            && !MCCIJBJGMCK.IsLock() && !JEFOMCDAPGK.Instance.Data.isLevelFinished
+            && !JEFOMCDAPGK.Instance.MainLevelData.isLose;
+        bool countsEffectivePlay = boardReady && JEFOMCDAPGK.Instance.CurMainLevelIndex > 1;
+        if (countsEffectivePlay) effectiveElapsed += deltaTime;
         refreshElapsed += deltaTime;
         if (refreshElapsed < 1f) return;
         refreshElapsed = 0f;
@@ -45,26 +46,32 @@ public static class HarvestGameplayBridge
             service.AdvanceEffectivePlay(effectiveElapsed);
             effectiveElapsed = 0;
         }
-        // Wait until the board is available, so rewards never interrupt a win or another popup.
-        if (!playable) return;
-        HarvestRewardOffer offer = service.State.PendingInGameReward;
-        if (offer != null && offer.RewardId != lastShownOffer)
+        if (manager == null || MCCIJBJGMCK.IsLock() || service.IsRewardedAdPending) return;
+        WinUI win = top as WinUI;
+        bool winReady = win != null && win.IsHarvestRewardPromptReady;
+        if (!boardReady && !winReady) return;
+
+        // The tutorial gift is already credited by the domain engine; this card only acknowledges it.
+        if (service.State.TutorialGiftClaimed && !PlayerPrefs.HasKey(WelcomePromptKey))
         {
-            lastShownOffer = offer.RewardId;
-            manager.Open(RewardPage);
-            return;
-        }
-        if (service.State.ActiveRequest == null &&
-            service.State.AvailableCents >= service.Config.ThresholdCents[0] &&
-            !PlayerPrefs.HasKey(FirstTargetPromptKey))
-        {
-            manager.Open(RewardPage);
-            if (manager.IsOpenning(RewardPage))
+            if (HarvestRewardPopupUI.OpenWelcome())
             {
-                PlayerPrefs.SetInt(FirstTargetPromptKey, 1);
+                PlayerPrefs.SetInt(WelcomePromptKey, 1);
                 PlayerPrefs.Save();
             }
+            return;
         }
+        if (winReady)
+        {
+            HarvestRewardOffer reward = service.State.PendingWinReward;
+            if (reward != null && reward.RewardId != lastShownWinOffer && HarvestRewardPopupUI.OpenWin())
+                lastShownWinOffer = reward.RewardId;
+            return;
+        }
+        HarvestRewardOffer offer = service.State.PendingInGameReward;
+        if (offer != null && offer.RewardId != lastShownInGameOffer && HarvestRewardPopupUI.OpenInGame())
+            lastShownInGameOffer = offer.RewardId;
+        // Thresholds and task progress stay in the HUD; the wallet only opens on a Button click.
     }
 
     public static void SetPaused(bool value)
@@ -72,8 +79,7 @@ public static class HarvestGameplayBridge
         paused = value;
         if (value)
         {
-            if (effectiveElapsed > 0)
-                HarvestRewardService.Instance.AdvanceEffectivePlay(effectiveElapsed);
+            if (effectiveElapsed > 0) HarvestRewardService.Instance.AdvanceEffectivePlay(effectiveElapsed);
             effectiveElapsed = 0;
             HarvestRewardService.Instance.Flush();
         }
