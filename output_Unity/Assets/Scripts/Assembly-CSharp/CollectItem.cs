@@ -243,6 +243,22 @@ public class CollectItem : MonoBehaviour
 		t.localScale = Vector3.one * scale;
 	}
 
+	/// <summary>
+	/// Keep the current visual size after a world-position-preserving reparent, while
+	/// returning the item root to unit scale. The flight tween owns the child ScaleLayer.
+	/// </summary>
+	public void NormalizeScaleAfterReparent()
+	{
+		if (m_ScaleTrans == null || m_ScaleTrans == transform)
+		{
+			return;
+		}
+		Vector3 inheritedScale = transform.localScale;
+		m_ScaleTrans.localPosition = Vector3.Scale(m_ScaleTrans.localPosition, inheritedScale);
+		m_ScaleTrans.localScale = Vector3.Scale(m_ScaleTrans.localScale, inheritedScale);
+		transform.localScale = Vector3.one;
+	}
+
 	public void Init(int eleType, int tileId)
 	{
 		Id = tileId;

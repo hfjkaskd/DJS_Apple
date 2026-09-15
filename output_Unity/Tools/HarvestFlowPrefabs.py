@@ -223,9 +223,33 @@ def catalog(key, root, asset_name):
     write(path,text)
 
 
+def reserve_gameplay_hud_area():
+    """Keep the board in its authored Map coordinate system, below the HUD.
+
+    The full-screen Game image and basket stay unchanged. All level/undo positions
+    remain local to Map/Layer; runtime reparenting normalizes fruit root scale.
+    """
+    path = 'Assets/res/local/coreplay/CorePlayUI.prefab'
+    text = (ROOT/path).read_text(encoding='utf-8-sig')
+    text, count = re.subn(r'^  m_BgTrans: \{fileID: \d+\}$',
+                         '  m_BgTrans: {fileID: 224989434536655964}', text, flags=re.M)
+    if count != 1:
+        raise RuntimeError('Expected one CorePlayUI board reference')
+    pattern = r'^--- !u!224 &224989434536655964\n.*?(?=^--- !u!|\Z)'
+    match = re.search(pattern, text, flags=re.M|re.S)
+    if match is None:
+        raise RuntimeError('Missing authored Game/Map RectTransform')
+    block = re.sub(r'^  m_LocalScale:.*$', '  m_LocalScale: {x: 0.7, y: 0.7, z: 1}',
+                   match.group(0), flags=re.M)
+    block = re.sub(r'^  m_AnchoredPosition:.*$', '  m_AnchoredPosition: {x: 0, y: -100}',
+                   block, flags=re.M)
+    write(path, text[:match.start()] + block + text[match.end():])
+
+
 def generate():
     catalog('res/local/harvest/harvestrewardsui', build_center(), 'harvest-rewards-prefab')
     catalog('res/local/harvest/harvestrewardpopupui', build_popup(), 'harvest-reward-popup-prefab')
+    reserve_gameplay_hud_area()
     add_hud('Assets/res/local/home/Home.prefab',224518489005915545,(.5,0),850,True)
     add_hud('Assets/res/local/coreplay/CorePlayUI.prefab',224429401810989285,(.5,1),-255)
     add_hud('Assets/res/local/coreplaywin/WinUI.prefab',224181586030114204,(.5,1),-245,True,40)

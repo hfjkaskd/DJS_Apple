@@ -420,6 +420,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		item.Status = LECIONHKEJL.InCollect;
 		item.FromGameToBasket = true;
 		item.transform.SetParent(UI.m_CollectArea, true);
+		item.NormalizeScaleAfterReparent();
 		item.RefreshCanvasLayers();
 		item.transform.SetAsLastSibling();
 		Vector3 target = CalculateCollectAreaPos(insertIndex);
@@ -1080,6 +1081,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 				continue;
 			}
 			item.transform.SetParent(UI.m_CollectArea, false);
+			item.transform.localScale = Vector3.one;
 			item.RefreshCanvasLayers();
 			item.Status = LECIONHKEJL.InCollect;
 			CollectAreaList.Add(item);
@@ -1190,6 +1192,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		item.Status = LECIONHKEJL.Returning;
 		item.KillMove();
 		item.transform.SetParent(ItemLayer, true);
+		item.NormalizeScaleAfterReparent();
 		item.RefreshCanvasLayers();
 		item.transform.SetSiblingIndex(Mathf.Min(record.siblingIndex, ItemLayer.childCount - 1));
 		Vector3 target = new Vector3(record.anchoredPos.x, record.anchoredPos.y, 0f);
