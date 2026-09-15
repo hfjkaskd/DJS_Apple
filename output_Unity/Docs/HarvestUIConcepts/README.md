@@ -4,14 +4,16 @@
 
 生成方式：内置 image_gen；设计预览，不是 Unity 实机截图。
 
-最终效果图：[harvest-rewards-ui-v2.png](harvest-rewards-ui-v2.png)
+最终效果图：[harvest-rewards-ui-v3-money.png](harvest-rewards-ui-v3-money.png)
+
+上一版：[harvest-rewards-ui-v2.png](harvest-rewards-ui-v2.png)
 
 ## 视觉方向
 
 - 参考当前游戏截图的蓝天、紫粉花丛、奶油色面板、橙色描边和绿色果冻按钮。
 - 游戏入口：余额、提现入口和目标进度整合在一个紧凑组件内。
 - 钱包选档：独立余额卡，六个档位采用两列三行，绿色选中态，规则和记录作为次级操作。
-- 独立领奖：突出水果奖励与领取按钮，按实际奖励类型展示。
+- 独立领奖：突出钞票奖励图标与领取按钮，按实际奖励类型展示。
 - 阶段进度：六个阶段节点，当前任务、数量进度和等待时间分块展示。
 - 金额、档位和任务条件保持现有配置，继续明确标记模拟奖励。
 
@@ -20,7 +22,7 @@
 - 效果图内的棋盘、篮子和道具仅表达背景语境；本次设计范围为提现相关 UI，不据此改动玩法或关卡排列。
 - 图中的第一屏和钱包表示未申请状态；第四屏为另一个已申请示例状态。
 - Unity 使用现有可切片 Sprite、Prefab 和标准 Button；静态层级与样式配置在 Prefab，事件通过代码绑定。
-- 优先复用 PopBg、Btn_Normal、Btn_Orange、Fruit_4 以及当前游戏背景。
+- 优先复用 PopBg、Btn_Normal、Btn_Orange 以及当前游戏背景；提现额度使用独立钞票图标，Fruit_4 仅保留在水果任务和玩法中。
 - 钱包的示例比例 247.61 / 1000 约为 25%；阶段的 86 / 260 约为 33%。运行时均按实际数据刷新。
 
 ## 原始生成提示词
@@ -39,4 +41,3 @@ All text must be spelled exactly as specified. Screen mockups should have sharp 
 ## 最终修正提示词
 
 Use case: precise-object-edit. This image is the edit target. Preserve the entire four-screen mockup board exactly: layout, all art, background, headers, typography, every other number, all other UI. Make ONLY ONE local text correction: on the far-right fourth screen, in the task card immediately under '86 / 260', change the small percent label to the RIGHT of that card's green progress bar from '25%' to '33%'. The bar already looks about one third full, preserve its appearance. The wallet screen's separate '25%' MUST stay 25% because 247.61 / 1000 rounds to 25%. Do not change gameplay fruit tiles or any other text. Output the same entire full board, all edges visible. Sharp high-quality UI mockup.
-
