@@ -2,7 +2,7 @@
 
 ## 丰收奖励计划
 
-已接入水果三消奖励、六档模拟提现、六阶段任务、倒计时、存档与三个页面入口。使用与验证见 [实现说明](Docs/HarvestRewardsImplementation.md)，设计规格见 [丰收奖励计划](Docs/HarvestRewards.md)／[HTML版](Docs/HarvestRewards.html)。这是明确标注的模拟奖励机制，不代表真实现金兑付；真实广告SDK与自动广告调度尚未接通。
+已接入水果三消奖励、六档模拟提现、六阶段任务、倒计时与存档。首页、局内和胜利页通过HUD展示余额与进度，点击 **WITHDRAW** 进入七页钱包流程；独立奖励小卡领取后返回游戏，未领取奖励可在钱包重开，关卡宝箱先结束再展示丰收卡，达到额度不自动打开钱包。操作见 [游戏内分步流程](Docs/HarvestRewardsFlow.md)，使用与验证见 [实现说明](Docs/HarvestRewardsImplementation.md)／[实现HTML版](Docs/HarvestRewardsImplementation.html)，设计规格见 [丰收奖励计划](Docs/HarvestRewards.md)／[HTML版](Docs/HarvestRewards.html)。这是明确标注的模拟奖励机制，不代表真实现金兑付；真实广告SDK与自动广告调度尚未接通，Android/iOS设备尚未测试。
 
 本目录是可直接作为 Unity 项目打开的开发资产库，目标编辑器版本为 `2022.3.62f3`。启动场景、核心 Prefab、AnimationClip、AnimatorController、Material、Texture、AudioClip、配置、脚本类型和依赖程序集均按 Unity 项目结构组织，并保留项目内对象引用。
 
@@ -56,4 +56,4 @@
 - 2129 个文件/目录 GUID 全部唯一。
 - 5066 条 Unity PPtr GUID 引用全部可解析。
 - 缺失 Meta、孤立 Meta、重复 GUID、悬空 GUID 均为 0。
-- 本机精确版本编辑器不可用；较低版本编辑器的许可证服务在项目导入前退出，因此未把编辑器导入测试标记为通过。首次在 `2022.3.62f3` 打开时必须执行上方检查。
+- 上述资产数量与引用计数是原始交付基线。丰收功能的21项领域回归及本机Unity `2022.3.62f3`脚本编译已通过；含长短屏极值的26个流程、奖励卡与HUD布局已通过最终渲染和目视核查。实际Unity已验证余额入口、六档差额、规则与记录返回层级、余额不足继续游戏、新手礼物不重复加钱和三消刷新余额。局内HUD重叠已修复；最终资产验证通过，覆盖1668个本地主线配置、208929个水果矩形，以及实际Prefab换父、撤销和恢复尺寸。具体范围见 [实现说明](Docs/HarvestRewardsImplementation.md)，Android/iOS设备与真实SDK尚未测试。
