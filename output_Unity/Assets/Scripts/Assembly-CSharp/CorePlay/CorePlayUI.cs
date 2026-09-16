@@ -11,8 +11,6 @@ namespace CorePlay
 	/// <summary>局内主界面：游戏区、收集槽、道具按钮、金币、设置与引导。</summary>
 	public class CorePlayUI : BaseUI
 	{
-
-
 		public static string EntryType;
 
 		[SerializeField]
@@ -168,7 +166,6 @@ namespace CorePlay
 
 		protected override void Init()
 		{
-
 			Instance = this;
 			if (m_CollectAreaInterval <= 0)
 			{

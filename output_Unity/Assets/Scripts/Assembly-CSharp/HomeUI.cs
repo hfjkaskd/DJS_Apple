@@ -5,8 +5,6 @@ using UnityEngine;
 /// <summary>首页：Play 按钮、金币入口、设置入口。</summary>
 public class HomeUI : BaseUI
 {
-
-
 	[SerializeField]
 	private GameObject m_SettingBtn;
 
@@ -33,7 +31,6 @@ public class HomeUI : BaseUI
 
 	protected override void Init()
 	{
-
 		if (m_SettingBtn != null)
 		{
 			MCCIJBJGMCK.Get(m_SettingBtn).onClick = OnSettingBtnClick;

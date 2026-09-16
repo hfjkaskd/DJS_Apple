@@ -7,9 +7,6 @@ namespace CorePlay
 	{
 		public int attempCount;
 
-		// Stable across snapshot restores; reset only when a genuinely new attempt starts.
-		public string harvestRunId;
-
 		public string levelID;
 
 		public bool isWin;
@@ -75,7 +72,6 @@ namespace CorePlay
 
 		public void Reset(bool replay)
 		{
-			harvestRunId = null;
 			isWin = false;
 			isLose = false;
 			hasEffectiveSave = false;

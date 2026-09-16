@@ -6,8 +6,6 @@ using UnityEngine;
 /// <summary>胜利结算页：Well Done、宝箱进度、+50 广告金币与下一关按钮。</summary>
 public class WinUI : BaseUI
 {
-
-
 	[SerializeField]
 	private List<TextMeshProUGUI> m_BtnLevels;
 
@@ -53,20 +51,14 @@ public class WinUI : BaseUI
 	public static int boxIndexAtWin;
 
 	private bool adRewardClaimed;
-	private bool harvestPromptWaitingForBox;
-
-	public bool IsHarvestRewardPromptReady => IsOpening && !harvestPromptWaitingForBox
-		&& (m_LevelBoxReward == null || !m_LevelBoxReward.gameObject.activeInHierarchy);
 
 	public override PAIEAGDLCBJ Layer => PAIEAGDLCBJ.Mid;
 
-	// Victory content reaches +50; the chest modal reserves +60 through +92.
-	public override int OwnLayerCnt => 100;
+	public override int OwnLayerCnt => 5;
 
 
 	protected override void Init()
 	{
-
 		if (m_PlayBtns != null)
 		{
 			foreach (GameObject btn in m_PlayBtns)
@@ -94,7 +86,6 @@ public class WinUI : BaseUI
 	protected override void BeforeOpen()
 	{
 		adRewardClaimed = false;
-		harvestPromptWaitingForBox = boxCompleted && m_LevelBoxProgress != null && m_LevelBoxReward != null;
 		GameAudio.Play(DLMJOHCOJKN.Play_sfx_ui_panel_game_win);
 		string levelFormat = OJEEJGGLNPC.Instance.GetText("common_levelwithindex");
 		if (m_WinLevel != null)
@@ -126,10 +117,6 @@ public class WinUI : BaseUI
 		{
 			m_LevelBoxProgress.InitState(m_LevelBoxReward);
 		}
-		if (m_LevelBoxReward != null)
-		{
-			m_LevelBoxReward.onHidden += OnHarvestChestHidden;
-		}
 		if (m_CommonCoinBtn != null)
 		{
 			m_CommonCoinBtn.AddCurCommonCoinBtn();
@@ -157,10 +144,6 @@ public class WinUI : BaseUI
 
 	protected override void BeforeClose()
 	{
-		if (m_LevelBoxReward != null)
-		{
-			m_LevelBoxReward.onHidden -= OnHarvestChestHidden;
-		}
 		if (m_CommonCoinBtn != null)
 		{
 			m_CommonCoinBtn.RemoveCurCommonCoinBtn();
@@ -169,11 +152,6 @@ public class WinUI : BaseUI
 
 	private void ShowContentForTest()
 	{
-	}
-
-	private void OnHarvestChestHidden()
-	{
-		harvestPromptWaitingForBox = false;
 	}
 
 	private void OnPlayBtn(GameObject obj)

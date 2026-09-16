@@ -187,7 +187,6 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		CreateAllItems(InConfig);
 		LevelData levelData = MainLevelData;
 		levelData.levelID = InConfig.levelID;
-		levelData.harvestRunId = HarvestRewardService.Instance.BeginRun(levelData.harvestRunId);
 		levelData.totalItemCount = TotalItems.Count;
 		// 必须在 LogLevelStart 置位 hasEnterLevel 之前记录“首次进关”，否则新手引导永远不触发
 		bool firstEnterLevel = !JEFOMCDAPGK.Instance.Data.hasEnterLevel;
@@ -420,7 +419,6 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		item.Status = LECIONHKEJL.InCollect;
 		item.FromGameToBasket = true;
 		item.transform.SetParent(UI.m_CollectArea, true);
-		item.NormalizeScaleAfterReparent();
 		item.RefreshCanvasLayers();
 		item.transform.SetAsLastSibling();
 		Vector3 target = CalculateCollectAreaPos(insertIndex);
@@ -514,8 +512,6 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 			LevelData levelData = MainLevelData;
 			levelData.eliminatedItemCount += 3;
 			levelData.elimGroupCount++;
-			HarvestRewardService.Instance.RecordTriple(levelData.harvestRunId,
-				levelData.elimGroupCount, JEFOMCDAPGK.Instance.CurMainLevelIndex == 1, CheckWin());
 			pendingGroups.Add(new MKFGFBJPGFC
 			{
 				items = group,
@@ -733,11 +729,8 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 			return;
 		}
 		MCCIJBJGMCK.Lock();
-		// Commit the reward before the level-finished flag: replaying this stable run is idempotent.
-		HarvestRewardService.Instance.RecordWin(MainLevelData.harvestRunId,
-			JEFOMCDAPGK.Instance.CurMainLevelIndex == 1);
-		// LevelWin commits the finished flag, next level and cleared snapshot together.
-		// An earlier finished-only save would replay the same level under a new reward run after a crash.
+		JEFOMCDAPGK.Instance.LogLevelEnd("win", true);
+		ClearSnapshot();
 		WinUI.wonLevel = JEFOMCDAPGK.Instance.CurMainLevelIndex;
 		WinUI.prevBoxProgress = FPFGGCMEDND.Instance.CurLevelBoxProgress;
 		WinUI.boxIndexAtWin = FPFGGCMEDND.Instance.NextLevelBoxIndex;
@@ -1035,8 +1028,6 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 			yield break;
 		}
 		MCCIJBJGMCK.Lock();
-		MainLevelData.harvestRunId = HarvestRewardService.Instance.BeginRun(MainLevelData.harvestRunId);
-		JEFOMCDAPGK.Instance.SaveData();
 		generation++;
 		BeforeInitActions();
 		curLevelConfig = snapshot.levelConfig;
@@ -1081,7 +1072,6 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 				continue;
 			}
 			item.transform.SetParent(UI.m_CollectArea, false);
-			item.transform.localScale = Vector3.one;
 			item.RefreshCanvasLayers();
 			item.Status = LECIONHKEJL.InCollect;
 			CollectAreaList.Add(item);
@@ -1108,15 +1098,9 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		BuildOcclusionGrid();
 		SetUseAddOneItemStatus(ifUseAddOneItem, false);
 		RandomIdleAnims();
-		MCCIJBJGMCK.UnlockOnce();
-		// A snapshot can be saved after the last match but before OnWin commits.
-		// Re-evaluate the restored board so an empty board cannot strand the run.
-		CheckGameResult();
-		if (!JEFOMCDAPGK.Instance.Data.isLevelFinished && !MainLevelData.isLose)
-		{
-			ShowSnapshotStartPops();
-		}
+		ShowSnapshotStartPops();
 		InEndActions?.Invoke();
+		MCCIJBJGMCK.UnlockOnce();
 	}
 
 	private void ShuffleList<T>(List<T> list)
@@ -1192,7 +1176,6 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		item.Status = LECIONHKEJL.Returning;
 		item.KillMove();
 		item.transform.SetParent(ItemLayer, true);
-		item.NormalizeScaleAfterReparent();
 		item.RefreshCanvasLayers();
 		item.transform.SetSiblingIndex(Mathf.Min(record.siblingIndex, ItemLayer.childCount - 1));
 		Vector3 target = new Vector3(record.anchoredPos.x, record.anchoredPos.y, 0f);
