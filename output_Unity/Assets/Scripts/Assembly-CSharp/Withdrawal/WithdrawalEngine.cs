@@ -223,8 +223,8 @@ namespace FruitWithdrawal
         {
             switch (kind) {
                 case WithdrawalConditionKind.PassLevel: return "Clear fruit levels";
-                case WithdrawalConditionKind.PassHideLevel: return "Hidden-level adaptation: cleared fruit level";
-                case WithdrawalConditionKind.PassStage2Level: return "Second-stage adaptation: cleared fruit level";
+                case WithdrawalConditionKind.PassHideLevel: return "First level milestone";
+                case WithdrawalConditionKind.PassStage2Level: return "Final level milestone";
                 case WithdrawalConditionKind.GoldTarget: return "Required test balance";
                 case WithdrawalConditionKind.LoginPassLevel: return "Win fruit levels in one UTC day";
                 case WithdrawalConditionKind.LoginDay: return "Days with the published daily win goal";

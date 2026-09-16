@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5481163472357824209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5438532603402575145}
+  - component: {fileID: 5903320490712977607}
+  - component: {fileID: 838057564215913762}
+  - component: {fileID: 3442388372489634219}
+  m_Layer: 0
+  m_Name: WithdrawalHost
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5438532603402575145
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5481163472357824209}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!223 &5903320490712977607
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5481163472357824209}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &838057564215913762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5481163472357824209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &3442388372489634219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5481163472357824209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b175f6f2c512745921fad48d6d8f7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OpenAniName: 
+  m_IdleAniName: 
+  m_CloseAniName: 
+  Screens:
+  - Screen: 0
+    ResourcePath: WithdrawalImported/Panels/TXPanel
+  - Screen: 1
+    ResourcePath: WithdrawalImported/Panels/TXCoinPanel
+  - Screen: 2
+    ResourcePath: WithdrawalImported/Panels/TXChannelPanel
+  - Screen: 3
+    ResourcePath: WithdrawalImported/Panels/TXUserInfoSurePanel
+  - Screen: 4
+    ResourcePath: WithdrawalImported/Panels/TXProgress0Panel
+  - Screen: 5
+    ResourcePath: WithdrawalImported/Panels/TXProgress1Panel
+  - Screen: 6
+    ResourcePath: WithdrawalImported/Panels/TXProgress2Panel
+  - Screen: 7
+    ResourcePath: WithdrawalImported/Panels/TXProgress3Panel
+  - Screen: 8
+    ResourcePath: WithdrawalImported/Panels/TXRecordPanel
+  - Screen: 9
+    ResourcePath: WithdrawalImported/Panels/RewardGetPanel
+  - Screen: 10
+    ResourcePath: WithdrawalImported/Panels/RulesPanel
+  PageRoot: {fileID: 5438532603402575145}
