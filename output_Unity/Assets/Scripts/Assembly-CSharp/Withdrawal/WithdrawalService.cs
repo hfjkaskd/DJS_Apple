@@ -47,11 +47,11 @@ namespace FruitWithdrawal
             catch (Exception ex) { SetUnavailable(ex); return false; }
         }
 
-        public string BeginRun(string persistedRunId = null)
+        public string BeginRun(string persistedRunId = null, int initialSequence = 0)
         {
             if (!IsAvailable) return null;
             string runId = string.IsNullOrEmpty(persistedRunId) ? Guid.NewGuid().ToString("N") : persistedRunId;
-            bool changed = Mutate(candidate => candidate.BeginRun(runId, UtcNow()));
+            bool changed = Mutate(candidate => candidate.BeginRun(runId, UtcNow(), initialSequence));
             return IsAvailable && (changed || string.IsNullOrEmpty(LastError)) ? runId : null;
         }
         public bool RecordTriple(string runId, int sequence, bool tutorial = false)

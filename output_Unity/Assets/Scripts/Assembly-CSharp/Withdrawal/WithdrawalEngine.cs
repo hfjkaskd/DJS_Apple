@@ -25,13 +25,16 @@ namespace FruitWithdrawal
 
         public int UserLevel { get { return (int)Math.Min(int.MaxValue, 1L + State.TotalWins / Rules.WinsPerUserLevel); } }
 
-        public bool BeginRun(string runId, long utcSeconds)
+        public bool BeginRun(string runId, long utcSeconds, int initialSequence = 0)
         {
             LastError = "";
             WithdrawalRules.RequireId(runId);
+            if (initialSequence < 0) return Fail("Initial match sequence cannot be negative.");
             bool changed = Tick(utcSeconds);
             if (!runs.ContainsKey(runId)) {
-                var run = new WithdrawalRun { RunId = runId };
+                // A migrated gameplay save can contain matches made before this module existed.
+                // Only a new run adopts that baseline; resumed simulation checkpoints remain authoritative.
+                var run = new WithdrawalRun { RunId = runId, LastTripleSequence = initialSequence };
                 State.Runs.Add(run); runs.Add(runId, run); changed = true;
             }
             if (State.ActiveRunId != runId) { State.ActiveRunId = runId; changed = true; }

@@ -32,7 +32,7 @@ namespace FruitWithdrawal
                 return false;
             }
             if (!initialized || !WithdrawalService.Instance.IsAvailable) return false;
-            string accepted = WithdrawalService.Instance.BeginRun(levelData.withdrawalRunId);
+            string accepted = WithdrawalService.Instance.BeginRun(levelData.withdrawalRunId, levelData.elimGroupCount);
             if (accepted != levelData.withdrawalRunId) return false;
             persistedRunId = accepted;
             return true;

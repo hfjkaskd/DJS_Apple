@@ -19,6 +19,21 @@ public static class WithdrawalCoreTests
             string reward = e.State.PendingRewards[0].RewardId; Check(e.ClaimReward(reward, T), "claim failed");
             Check(!e.ClaimReward(reward, T), "duplicate claim paid"); Check(e.State.CashCents == 20 && e.State.DiamondUnits == 200, "claim totals");
         });
+        Test("legacy match baseline migrates once and does not overwrite resumed progress", () => {
+            var e = Fresh(); Check(e.BeginRun("legacy", T, 17), "legacy run not created");
+            Check(e.State.PendingRewards.Count == 0 && e.State.Runs[0].LastTripleSequence == 17, "migration generated rewards");
+            Check(e.RecordTriple("legacy", 18, false, T), "first new match not recorded");
+            Check(e.State.PendingRewards[0].CashCents == 10 && e.State.PendingRewards[0].DiamondUnits == 100, "old 17 matches paid retroactively");
+            Check(e.ClaimAllRewards(T), "new match reward not claimable");
+            var resumed = new WithdrawalEngine(e.Rules, WithdrawalStorage.Clone(e.State));
+            resumed.BeginRun("legacy", T, 99);
+            Check(resumed.State.Runs[0].LastTripleSequence == 18, "new baseline overwrote a restored checkpoint");
+            Check(resumed.RecordTriple("legacy", 19, false, T), "existing checkpoint lost next match");
+            resumed.BeginRun("legacy", T, 0);
+            Check(!resumed.RecordTriple("legacy", 19, false, T), "smaller baseline allowed duplicate reward");
+            Check(resumed.ClaimAllRewards(T) && resumed.State.CashCents == 20 && resumed.State.DiamondUnits == 200, "migrated run totals incorrect");
+            Check(!resumed.BeginRun("invalid-baseline", T, -1) && resumed.State.Runs.Count == 1, "negative baseline created a run");
+        });
         Test("first win once, unclaimed survives next run, batch claim", () => {
             var e = Fresh(); Win(e,"a",1,T); Check(!e.RecordWin("a",1,false,T), "win duplicated");
             e.BeginRun("b",T); Check(e.State.PendingRewards.Count == 1, "next run dropped offer");
