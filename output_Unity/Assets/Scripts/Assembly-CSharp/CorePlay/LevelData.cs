@@ -7,6 +7,9 @@ namespace CorePlay
 	{
 		public int attempCount;
 
+		// One identifier per attempt, retained when the board snapshot is restored.
+		public string withdrawalRunId;
+
 		public string levelID;
 
 		public bool isWin;
@@ -72,6 +75,7 @@ namespace CorePlay
 
 		public void Reset(bool replay)
 		{
+			withdrawalRunId = null;
 			isWin = false;
 			isLose = false;
 			hasEffectiveSave = false;

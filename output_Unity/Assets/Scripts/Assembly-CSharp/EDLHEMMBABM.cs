@@ -187,6 +187,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		CreateAllItems(InConfig);
 		LevelData levelData = MainLevelData;
 		levelData.levelID = InConfig.levelID;
+		FruitWithdrawal.WithdrawalGameplayBridge.BeginRun(levelData);
 		levelData.totalItemCount = TotalItems.Count;
 		// 必须在 LogLevelStart 置位 hasEnterLevel 之前记录“首次进关”，否则新手引导永远不触发
 		bool firstEnterLevel = !JEFOMCDAPGK.Instance.Data.hasEnterLevel;
@@ -512,6 +513,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 			LevelData levelData = MainLevelData;
 			levelData.eliminatedItemCount += 3;
 			levelData.elimGroupCount++;
+			FruitWithdrawal.WithdrawalGameplayBridge.RecordTriple(levelData, JEFOMCDAPGK.Instance.CurMainLevelIndex);
 			pendingGroups.Add(new MKFGFBJPGFC
 			{
 				items = group,
@@ -729,8 +731,9 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 			return;
 		}
 		MCCIJBJGMCK.Lock();
-		JEFOMCDAPGK.Instance.LogLevelEnd("win", true);
-		ClearSnapshot();
+		// Save the reward against the existing attempt before LevelWin replaces its data.
+		// LevelWin commits the finished flag, cleared snapshot and next level together.
+		FruitWithdrawal.WithdrawalGameplayBridge.RecordWin(MainLevelData, JEFOMCDAPGK.Instance.CurMainLevelIndex);
 		WinUI.wonLevel = JEFOMCDAPGK.Instance.CurMainLevelIndex;
 		WinUI.prevBoxProgress = FPFGGCMEDND.Instance.CurLevelBoxProgress;
 		WinUI.boxIndexAtWin = FPFGGCMEDND.Instance.NextLevelBoxIndex;
@@ -1028,6 +1031,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 			yield break;
 		}
 		MCCIJBJGMCK.Lock();
+		FruitWithdrawal.WithdrawalGameplayBridge.BeginRun(MainLevelData);
 		generation++;
 		BeforeInitActions();
 		curLevelConfig = snapshot.levelConfig;
@@ -1098,9 +1102,15 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		BuildOcclusionGrid();
 		SetUseAddOneItemStatus(ifUseAddOneItem, false);
 		RandomIdleAnims();
-		ShowSnapshotStartPops();
-		InEndActions?.Invoke();
 		MCCIJBJGMCK.UnlockOnce();
+		// The final match may have been saved before the win was committed.
+		// Replaying the same attempt is idempotent and prevents an empty restored board.
+		CheckGameResult();
+		if (!JEFOMCDAPGK.Instance.Data.isLevelFinished && !MainLevelData.isLose)
+		{
+			ShowSnapshotStartPops();
+		}
+		InEndActions?.Invoke();
 	}
 
 	private void ShuffleList<T>(List<T> list)

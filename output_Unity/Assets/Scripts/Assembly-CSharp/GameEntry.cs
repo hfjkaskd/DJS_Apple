@@ -63,6 +63,7 @@ public class GameEntry : MonoBehaviour
 		FPFGGCMEDND.Instance.Init();
 		KDBNHIIFGLD.Instance.Init();
 		EDLHEMMBABM.Instance.Init();
+		FruitWithdrawal.WithdrawalGameplayBridge.Initialize();
 
 		// UI层
 		MgrUI mgrUI = Object.FindObjectOfType<MgrUI>();
@@ -147,5 +148,6 @@ public class GameEntry : MonoBehaviour
 		JEFOMCDAPGK.Instance.TrySaveToDisk();
 		FPFGGCMEDND.Instance.TrySaveToDisk();
 		KDBNHIIFGLD.Instance.TrySaveToDisk();
+		FruitWithdrawal.WithdrawalGameplayBridge.Flush();
 	}
 }

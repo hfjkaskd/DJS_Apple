@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f23387154e914dc3adbee0b78bf72834, type: 3}
+  m_Name: WithdrawalConfig
+  m_EditorClassIdentifier:
+  Rules:
+    SimulationLabel: TEST SIMULATION - NO CASH PAYMENT
+    AdaptationNote: 'Fruit adaptation: hidden and second-stage gates use cleared fruit levels; user rank is earned from wins. Rewards, main cash target and review duration are test settings, not recovered payment guarantees.'
+    TripleCashCents: 10
+    TripleDiamondUnits: 100
+    WinCashCents: 100
+    WinDiamondUnits: 1000
+    FirstWinBonusDiamondUnits: 30000
+    RewardTutorial: 1
+    DailyWinsForCheckIn: 10
+    WinsPerUserLevel: 1
+    Tiers:
+    - Id: cash-040
+      Label: Cash sample 1
+      Currency: 0
+      DisplayCents: 40
+      RequiredBalanceUnits: 40
+      RequiredPassLevels: 1
+      RequiredHiddenPassLevels: 0
+      RequiredStage2PassLevels: 0
+      RequiredDailyWins: 0
+      RequiredCheckInDays: 0
+      RequiredUserLevel: 0
+      ReviewSeconds: 60
+      EvidenceNote: 'Source sample 0.40 and early-level branch; 60-second review is a local test adaptation.'
+    - Id: cash-060
+      Label: Cash sample 2
+      Currency: 0
+      DisplayCents: 60
+      RequiredBalanceUnits: 60
+      RequiredPassLevels: 2
+      RequiredHiddenPassLevels: 0
+      RequiredStage2PassLevels: 0
+      RequiredDailyWins: 0
+      RequiredCheckInDays: 0
+      RequiredUserLevel: 0
+      ReviewSeconds: 60
+      EvidenceNote: 'Source sample 0.60 and early-level branch; 60-second review is a local test adaptation.'
+    - Id: cash-main
+      Label: Cash goal
+      Currency: 0
+      DisplayCents: 50000
+      RequiredBalanceUnits: 50000
+      RequiredPassLevels: 2
+      RequiredHiddenPassLevels: 22
+      RequiredStage2PassLevels: 51
+      RequiredDailyWins: 10
+      RequiredCheckInDays: 5
+      RequiredUserLevel: 31
+      ReviewSeconds: 60
+      EvidenceNote: 'Source third cash tier is MARK with gates 22/51, 5 qualified days and rank 31. Cash target 500.00 and 60-second review are explicit test adaptations.'
+    - Id: diamond-500
+      Label: Diamond goal
+      Currency: 1
+      DisplayCents: 50000
+      RequiredBalanceUnits: 50000
+      RequiredPassLevels: 0
+      RequiredHiddenPassLevels: 0
+      RequiredStage2PassLevels: 0
+      RequiredDailyWins: 10
+      RequiredCheckInDays: 5
+      RequiredUserLevel: 31
+      ReviewSeconds: 60
+      EvidenceNote: 'Source Coin units 50000, displayed 500, 5 qualified days and rank 31. Review duration is a test adaptation.'
+    - Id: diamond-1000
+      Label: Diamond goal
+      Currency: 1
+      DisplayCents: 100000
+      RequiredBalanceUnits: 100000
+      RequiredPassLevels: 0
+      RequiredHiddenPassLevels: 0
+      RequiredStage2PassLevels: 0
+      RequiredDailyWins: 10
+      RequiredCheckInDays: 7
+      RequiredUserLevel: 32
+      ReviewSeconds: 60
+      EvidenceNote: 'Source Coin units 100000, displayed 1000, 7 qualified days and rank 32. Review duration is a test adaptation.'
+    - Id: diamond-1500
+      Label: Diamond goal
+      Currency: 1
+      DisplayCents: 150000
+      RequiredBalanceUnits: 150000
+      RequiredPassLevels: 0
+      RequiredHiddenPassLevels: 0
+      RequiredStage2PassLevels: 0
+      RequiredDailyWins: 10
+      RequiredCheckInDays: 10
+      RequiredUserLevel: 33
+      ReviewSeconds: 60
+      EvidenceNote: 'Source Coin units 150000, displayed 1500, 10 qualified days and rank 33. Review duration is a test adaptation.'
+    - Id: diamond-2000
+      Label: Diamond goal
+      Currency: 1
+      DisplayCents: 200000
+      RequiredBalanceUnits: 200000
+      RequiredPassLevels: 0
+      RequiredHiddenPassLevels: 0
+      RequiredStage2PassLevels: 0
+      RequiredDailyWins: 10
+      RequiredCheckInDays: 15
+      RequiredUserLevel: 34
+      ReviewSeconds: 60
+      EvidenceNote: 'Source Coin units 200000, displayed 2000, 15 qualified days and rank 34. Review duration is a test adaptation.'
+    Channels:
+    - Id: test-wallet
+      Label: Test wallet (no account required)
+    - Id: test-bank
+      Label: Test bank (simulation only)
