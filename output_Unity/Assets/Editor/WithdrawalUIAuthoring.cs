@@ -30,6 +30,12 @@ public static class WithdrawalUIAuthoring
     [MenuItem("Tools/Withdrawal/Build Imported Flow")]
     public static void Build()
     {
+        WithdrawalFruitUIAuthoring.Build();
+    }
+
+    // Retained as the source-import recipe; the menu now always preserves the fruit UI.
+    private static void BuildImportedLegacy()
+    {
         AssetDatabase.Refresh();
         var cash = AssetDatabase.LoadAssetAtPath<GameObject>(Panels + "TXPanel.prefab");
         var coin = AssetDatabase.LoadAssetAtPath<GameObject>(Panels + "TXCoinPanel.prefab");

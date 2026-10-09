@@ -14,22 +14,29 @@ using Object = UnityEngine.Object;
 
 /// <summary>
 /// Renders saved UI with labelled validation fixtures in disposable preview scenes. Does not construct a
-/// WithdrawalHost, access WithdrawalService, invoke Buttons or modify prefabs.
+/// WithdrawalHost, access WithdrawalService or modify prefabs. Button callbacks are replaced
+/// with a local event recorder, so dispatch checks cannot reach game state or player storage.
 /// </summary>
 public static class WithdrawalUIRenderValidation
 {
     private const string PanelFolder = "Assets/Resources/WithdrawalImported/Panels";
-    private const string OutputFolder = "C:/Projects/DJS_Apple/withdrawal-port-validation";
-    private static readonly int[] Heights = { 1920, 2340 };
+    private const string OutputFolder = "C:/Projects/DJS_Apple/withdrawal-fruit-ui-validation";
+    private const string BackgroundPath = "Assets/res_server/server_maps/map1008/Map1008.png";
+    private static readonly Vector2Int[] Sizes = { new Vector2Int(1080, 1920), new Vector2Int(1080, 2340), new Vector2Int(720, 1600) };
+    private static readonly string[] RequiredPages = { "TXPanel", "TXCoinPanel", "TXChannelPanel", "TXUserInfoSurePanel",
+        "TXProgress0Panel", "TXProgress1Panel", "TXProgress2Panel", "TXProgress3Panel", "TXRecordPanel", "RewardGetPanel", "RulesPanel" };
 
     [Serializable]
     private sealed class Report
     {
         public string generatedUtc;
-        public string scope = "Synthetic presentation fixtures matching runtime text formats; not gameplay evidence. No service initialization, Button invocation or player storage access.";
+        public string scope = "Synthetic presentation fixtures over original Map1008. A plain RectTransform receives the same SafeAreaSim.InsetRect call as BaseUI; saved modal shades receive the production ExpandRect call. Button dispatch is exercised only against a local recorder. No WithdrawalHost is instantiated, no service initialization or player storage access.";
         public string outputDirectory;
         public List<string> errors = new List<string>();
         public List<string> skippedUnboundPrefabs = new List<string>();
+        public List<string> runtimePageResources = new List<string>();
+        public string gameEntryPrefab;
+        public string gameEntryButton;
         public List<PageReport> pages = new List<PageReport>();
     }
 
@@ -42,6 +49,13 @@ public static class WithdrawalUIRenderValidation
         public string image;
         public string fixture;
         public bool recordsBottom;
+        public string backgroundAsset;
+        public int verifiedButtonDispatches;
+        public Vector3 actualContentScale;
+        public float recordsNormalizedPosition;
+        public Vector2 safeAreaTopBottom;
+        public Vector2 safeAreaHostSize;
+        public bool shadeCoversCanvas;
         public List<string> fixtureNotes = new List<string>();
         public Vector2 actualCanvasSize;
         public Vector2 configuredDesignSize;
@@ -91,11 +105,12 @@ public static class WithdrawalUIRenderValidation
             generatedUtc = DateTime.UtcNow.ToString("O"),
             outputDirectory = OutputFolder
         };
+        AuditHostResources(report);
         string[] ids = AssetDatabase.FindAssets("t:Prefab", new[] { PanelFolder });
         var paths = new List<string>();
         for (int i = 0; i < ids.Length; i++) paths.Add(AssetDatabase.GUIDToAssetPath(ids[i]));
         paths.Sort(StringComparer.Ordinal);
-        bool rulesFound = false;
+        var foundPages = new HashSet<string>(StringComparer.Ordinal);
         int boundPages = 0;
         foreach (string path in paths)
         {
@@ -111,16 +126,16 @@ public static class WithdrawalUIRenderValidation
                 continue;
             }
             boundPages++;
-            if (Path.GetFileNameWithoutExtension(path) == "RulesPanel") rulesFound = true;
-            foreach (int height in Heights)
+            foundPages.Add(Path.GetFileNameWithoutExtension(path));
+            foreach (Vector2Int size in Sizes)
             {
-                var page = new PageReport { prefab = path, width = 1080, height = height };
+                var page = new PageReport { prefab = path, width = size.x, height = size.y };
                 report.pages.Add(page);
                 try { Render(prefab, page); }
                 catch (Exception exception) { page.renderErrors.Add(exception.ToString()); }
                 if (prefab.name == "TXRecordPanel")
                 {
-                    var bottom = new PageReport { prefab = path, width = 1080, height = height, recordsBottom = true };
+                    var bottom = new PageReport { prefab = path, width = size.x, height = size.y, recordsBottom = true };
                     report.pages.Add(bottom);
                     try { Render(prefab, bottom); }
                     catch (Exception exception) { bottom.renderErrors.Add(exception.ToString()); }
@@ -128,18 +143,96 @@ public static class WithdrawalUIRenderValidation
             }
         }
         if (boundPages == 0) report.errors.Add("No bound WithdrawalPageView prefabs found. Run authoring first.");
-        if (!rulesFound) report.errors.Add("Bound RulesPanel.prefab is missing.");
+        foreach (string required in RequiredPages)
+            if (!foundPages.Contains(required)) report.errors.Add("Bound " + required + ".prefab is missing.");
         foreach (PageReport page in report.pages)
         {
             int failures = page.missingComponents.Count + page.missingFonts.Count + page.missingTextures.Count
                 + page.brokenObjectReferences.Count + page.invalidBindings.Count + page.renderErrors.Count + page.textOverflows.Count;
-            if (failures > 0) report.errors.Add(Path.GetFileNameWithoutExtension(page.prefab) + " " + page.height + ": " + failures + " structural/render issues.");
+            if (failures > 0) report.errors.Add(Path.GetFileNameWithoutExtension(page.prefab) + " " + page.width + "x" + page.height + ": " + failures + " structural/render issues.");
         }
         string reportPath = Path.Combine(OutputFolder, "withdrawal-ui-report.json");
         File.WriteAllText(reportPath, JsonUtility.ToJson(report, true));
         Debug.Log("[WithdrawalUIRenderValidation] " + report.pages.Count + " page renders; report: " + reportPath);
         if (report.errors.Count != 0)
             throw new InvalidOperationException("Static withdrawal UI validation found " + report.errors.Count + " failing page/global checks. See " + reportPath);
+    }
+
+    private static void AuditHostResources(Report report)
+    {
+        const string hostPath = "Assets/res/local/withdrawal/WithdrawalHost.prefab";
+        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(hostPath);
+        WithdrawalHost host = prefab == null ? null : prefab.GetComponent<WithdrawalHost>();
+        if (host == null || host.PageRoot == null || host.Screens == null)
+        {
+            report.errors.Add("Saved WithdrawalHost is missing its component, page root or screen definitions.");
+            return;
+        }
+        var screens = new HashSet<WithdrawalScreen>();
+        var pageNames = new HashSet<string>(StringComparer.Ordinal);
+        foreach (WithdrawalScreenDefinition definition in host.Screens)
+        {
+            if (definition == null || string.IsNullOrEmpty(definition.ResourcePath))
+            {
+                report.errors.Add("WithdrawalHost has an empty screen resource definition.");
+                continue;
+            }
+            if (!screens.Add(definition.Screen)) report.errors.Add("WithdrawalHost has a duplicate screen definition.");
+            string path = "Assets/Resources/" + definition.ResourcePath + ".prefab";
+            int screenIndex = (int)definition.Screen;
+            if (screenIndex < 0 || screenIndex >= RequiredPages.Length
+                || Path.GetFileNameWithoutExtension(path) != RequiredPages[screenIndex])
+                report.errors.Add("WithdrawalHost screen-to-page association is incorrect: " + definition.ResourcePath);
+            GameObject page = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            if (page == null || page.GetComponent<WithdrawalPageView>() == null)
+                report.errors.Add("WithdrawalHost cannot load a bound page at " + path);
+            else
+            {
+                pageNames.Add(Path.GetFileNameWithoutExtension(path));
+                report.runtimePageResources.Add(definition.ResourcePath);
+            }
+        }
+        foreach (string required in RequiredPages)
+            if (!pageNames.Contains(required)) report.errors.Add("WithdrawalHost does not reference " + required + ".");
+
+        const string corePath = "Assets/res/local/coreplay/CorePlayUI.prefab";
+        GameObject core = AssetDatabase.LoadAssetAtPath<GameObject>(corePath);
+        var catalog = AssetDatabase.LoadAssetAtPath<GameResCatalog>("Assets/Resources/GameResCatalog.asset");
+        if (catalog == null || catalog.entries == null)
+            report.errors.Add("Runtime GameResCatalog is missing.");
+        else
+        {
+            bool hostMapped = false, coreMapped = false;
+            foreach (GameResCatalog.Entry entry in catalog.entries)
+            {
+                if (entry == null) continue;
+                if (entry.key == "res/local/withdrawal/withdrawalhost" && entry.asset == prefab) hostMapped = true;
+                if (entry.key == "res/local/coreplay/coreplayui" && entry.asset == core) coreMapped = true;
+            }
+            if (!hostMapped) report.errors.Add("Runtime resource catalog does not map the withdrawal host entry to this saved host.");
+            if (!coreMapped) report.errors.Add("Runtime resource catalog does not map CorePlayUI to this saved gameplay prefab.");
+        }
+        WithdrawalHud[] huds = core == null ? Array.Empty<WithdrawalHud>() : core.GetComponentsInChildren<WithdrawalHud>(true);
+        if (huds.Length != 1) report.errors.Add("CorePlayUI must contain one configured WithdrawalHud entry.");
+        else
+        {
+            WithdrawalHud hud = huds[0];
+            if (hud.CashButton == null || hud.DiamondButton == null || hud.RewardsButton == null
+                || hud.Cash == null || hud.Diamonds == null || hud.Rewards == null)
+                report.errors.Add("CorePlayUI withdrawal entry has incomplete serialized bindings.");
+            else
+            {
+                bool active = hud.enabled && hud.CashButton.enabled && hud.CashButton.interactable;
+                for (Transform current = hud.CashButton.transform; current != null; current = current.parent)
+                    active &= current.gameObject.activeSelf;
+                if (!active) report.errors.Add("CorePlayUI withdrawal cash entry is disabled or inactive.");
+                if (hud.CashButton.targetGraphic == null) report.errors.Add("CorePlayUI withdrawal cash entry has no Button visual.");
+                if (hud.CashButton.onClick.GetPersistentEventCount() != 0)
+                    report.errors.Add("CorePlayUI withdrawal entry has a serialized event instead of code binding.");
+                report.gameEntryPrefab = corePath;
+                report.gameEntryButton = Hierarchy(hud.CashButton.transform, core.transform);
+            }
+        }
     }
 
     private static void Render(GameObject prefab, PageReport report)
@@ -185,15 +278,25 @@ public static class WithdrawalUIRenderValidation
             canvas.renderMode = RenderMode.ScreenSpaceCamera;
             canvas.worldCamera = camera;
             canvas.planeDistance = 1;
-            // At the two requested 1080-wide outputs, the original source's
-            // 1080-wide CanvasScaler also resolves to scale 1. A fixed scale
-            // avoids depending on the batch editor's unrelated Screen size.
+            // A fixed scale exposes the requested physical dimensions to production Fit(),
+            // independently of the batch editor's unrelated Screen size.
             canvas.scaleFactor = 1;
             canvas.referencePixelsPerUnit = 100;
             canvas.additionalShaderChannels = AdditionalCanvasShaderChannels.TexCoord1
                 | AdditionalCanvasShaderChannels.Normal | AdditionalCanvasShaderChannels.Tangent;
 
-            GameObject instance = Object.Instantiate(prefab, canvasObject.transform, false);
+            AddBackground(canvasObject.transform, report);
+
+            var safeHostObject = new GameObject("BaseUISafeAreaRectFixture", typeof(RectTransform));
+            var safeHost = (RectTransform)safeHostObject.transform;
+            safeHost.SetParent(canvasObject.transform, false);
+            safeHost.anchorMin = Vector2.zero;
+            safeHost.anchorMax = Vector2.one;
+            safeHost.offsetMin = safeHost.offsetMax = Vector2.zero;
+            Orange.SafeAreaSim.InsetRect(safeHost);
+            report.safeAreaTopBottom = new Vector2(Orange.SafeAreaSim.Top, Orange.SafeAreaSim.Bottom);
+
+            GameObject instance = Object.Instantiate(prefab, safeHost, false);
             instance.name = prefab.name;
             var page = instance.GetComponent<WithdrawalPageView>();
             report.configuredDesignSize = page.DesignSize;
@@ -203,16 +306,28 @@ public static class WithdrawalUIRenderValidation
                 behaviour.enabled = false;
                 report.disabledNonUiComponents.Add(Hierarchy(behaviour.transform, instance.transform));
             }
+            Transform shadeTransform = instance.transform.Find("ModalShade");
+            RectTransform shade = shadeTransform as RectTransform;
+            var shadeImage = shadeTransform == null ? null : shadeTransform.GetComponent<Image>();
+            var reverse = shadeTransform == null ? null : shadeTransform.GetComponent<Orange.ProtectedAreaAdaptReverse>();
+            if (shade == null || shadeImage == null || reverse == null || !shadeImage.raycastTarget)
+                report.invalidBindings.Add("ModalShade requires a raycast-blocking Image and ProtectedAreaAdaptReverse.");
+            else
+            {
+                // The saved component is disabled above to prevent Start from applying twice.
+                // This is exactly the public layout operation called by its runtime Start.
+                Orange.SafeAreaSim.ExpandRect(shade, false);
+            }
             AuditComponents(instance, report);
             AuditBindings(page, report);
             ApplyFixture(page, report, prefab.name);
             canvasObject.SetActive(true);
             instance.SetActive(true);
             Canvas.ForceUpdateCanvases();
-            // This view method only installs empty callbacks and executes the
-            // production Fit() presentation logic. It has no service access.
-            page.Bind(null);
+            AuditButtonDispatch(page, report);
             Canvas.ForceUpdateCanvases();
+            AuditFit(page, report);
+            AuditSafeArea(page, safeHost, shade, (RectTransform)canvas.transform, report);
             if (prefab.name == "TXRecordPanel")
             {
                 ScrollRect scroll = instance.GetComponentInChildren<ScrollRect>(true);
@@ -221,6 +336,23 @@ public static class WithdrawalUIRenderValidation
                     scroll.StopMovement();
                     scroll.verticalNormalizedPosition = report.recordsBottom ? 0 : 1;
                     Canvas.ForceUpdateCanvases();
+                    report.recordsNormalizedPosition = scroll.verticalNormalizedPosition;
+                    if (scroll.viewport == null || scroll.content == null)
+                        report.invalidBindings.Add("Records ScrollRect is missing its viewport or content.");
+                    else
+                    {
+                        if (scroll.content.rect.height <= scroll.viewport.rect.height)
+                            report.invalidBindings.Add("Eight record cards do not create a scrollable content area.");
+                        if (scroll.viewport.GetComponent<RectMask2D>() == null && scroll.viewport.GetComponent<Mask>() == null)
+                            report.invalidBindings.Add("Records ScrollRect viewport has no clipping mask.");
+                        if (Mathf.Abs(report.recordsNormalizedPosition - (report.recordsBottom ? 0 : 1)) > .01f)
+                            report.invalidBindings.Add("Records ScrollRect did not reach its requested endpoint.");
+                    }
+                    int recordButtons = 0;
+                    for (int i = 0; i < page.Buttons.Length; i++)
+                        if (page.Buttons[i] != null && page.Buttons[i].Action == WithdrawalAction.SelectRecord)
+                            recordButtons++;
+                    if (recordButtons != 8) report.invalidBindings.Add("Records page must bind all eight record cards.");
                 }
                 else report.invalidBindings.Add("Records fixture cannot find its saved ScrollRect.");
             }
@@ -263,29 +395,134 @@ public static class WithdrawalUIRenderValidation
         }
     }
 
+    private static void AuditSafeArea(WithdrawalPageView page, RectTransform safeHost, RectTransform shade, RectTransform canvas, PageReport report)
+    {
+        report.safeAreaHostSize = safeHost.rect.size;
+        var corners = new Vector3[4];
+        var canvasCorners = new Vector3[4];
+        if (shade != null)
+        {
+            shade.GetWorldCorners(corners);
+            canvas.GetWorldCorners(canvasCorners);
+            report.shadeCoversCanvas = true;
+            for (int i = 0; i < 4; i++)
+                if (Vector3.Distance(corners[i], canvasCorners[i]) > .1f) report.shadeCoversCanvas = false;
+            if (!report.shadeCoversCanvas) report.renderErrors.Add("ModalShade does not exactly cover the full canvas after native safe-area expansion.");
+        }
+        foreach (Graphic graphic in page.GetComponentsInChildren<Graphic>(false))
+        {
+            if (!graphic.enabled || graphic.color.a <= 0 || graphic.rectTransform == shade) continue;
+            if (graphic is TMP_Text label && string.IsNullOrEmpty(label.text)) continue;
+            if (graphic.GetComponentInParent<ScrollRect>() != null) continue;
+            graphic.rectTransform.GetWorldCorners(corners);
+            bool outside = false;
+            for (int i = 0; i < 4; i++)
+            {
+                Vector3 local = safeHost.InverseTransformPoint(corners[i]);
+                Rect area = safeHost.rect;
+                if (local.x < area.xMin - .1f || local.x > area.xMax + .1f || local.y < area.yMin - .1f || local.y > area.yMax + .1f)
+                    outside = true;
+            }
+            if (outside) report.renderErrors.Add(Hierarchy(graphic.transform, page.transform) + ": active content extends outside BaseUI's safe area.");
+        }
+        report.fixtureNotes.Add("Applied the production BaseUI safe-area inset to a plain RectTransform and production modal expansion to the disabled saved reverse adapter; no WithdrawalHost was constructed.");
+    }
+
+    private static void AddBackground(Transform parent, PageReport report)
+    {
+        Texture2D texture = AssetDatabase.LoadAssetAtPath<Texture2D>(BackgroundPath);
+        if (texture == null)
+        {
+            report.renderErrors.Add("The original Map1008 background could not be loaded.");
+            return;
+        }
+        var background = new GameObject("OriginalMap1008ValidationBackdrop", typeof(RectTransform), typeof(RawImage));
+        background.transform.SetParent(parent, false);
+        var rect = (RectTransform)background.transform;
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.offsetMin = rect.offsetMax = Vector2.zero;
+        RawImage image = background.GetComponent<RawImage>();
+        image.texture = texture;
+        image.raycastTarget = false;
+        float imageAspect = (float)texture.width / texture.height;
+        float renderAspect = (float)report.width / report.height;
+        float cropWidth = Mathf.Min(1, renderAspect / imageAspect);
+        float cropHeight = Mathf.Min(1, imageAspect / renderAspect);
+        image.uvRect = new Rect((1 - cropWidth) * .5f, (1 - cropHeight) * .5f, cropWidth, cropHeight);
+        report.backgroundAsset = BackgroundPath;
+        report.fixtureNotes.Add("Backdrop is the game's original Map1008 texture with centered aspect-fill cropping; no gameplay objects or game HUD are synthesized.");
+    }
+
+    private static void AuditFit(WithdrawalPageView page, PageReport report)
+    {
+        if (page.Content == null || page.DesignSize.x <= 0 || page.DesignSize.y <= 0) return;
+        var root = (RectTransform)page.transform;
+        float expected = Mathf.Min(root.rect.width / page.DesignSize.x, root.rect.height / page.DesignSize.y, 1);
+        report.actualContentScale = page.Content.localScale;
+        if (Vector3.Distance(page.Content.localScale, Vector3.one * expected) > .001f)
+            report.invalidBindings.Add("Content scale does not match production Fit at this viewport size.");
+        if (Vector2.Distance(page.Content.anchoredPosition, -page.DesignCenter * expected) > .1f)
+            report.invalidBindings.Add("Content center does not match production Fit at this viewport size.");
+    }
+
+    private static void AuditButtonDispatch(WithdrawalPageView page, PageReport report)
+    {
+        if (page.Buttons == null) return;
+        int dispatchCount = 0;
+        WithdrawalAction lastAction = WithdrawalAction.Close;
+        int lastIndex = -1;
+        Action<WithdrawalAction, int> record = (action, index) =>
+        {
+            dispatchCount++;
+            lastAction = action;
+            lastIndex = index;
+        };
+        page.Bind(record);
+        // Rebinding must replace the callback without installing duplicate listeners.
+        page.Bind(record);
+        foreach (WithdrawalButtonBinding binding in page.Buttons)
+        {
+            if (binding == null || binding.Button == null) continue;
+            if (binding.Button.onClick.GetPersistentEventCount() != 0)
+            {
+                report.invalidBindings.Add(binding.Button.name + ": serialized Button event; not invoked by isolated validation.");
+                continue;
+            }
+            int before = dispatchCount;
+            binding.Button.onClick.Invoke();
+            if (dispatchCount - before != 1 || lastAction != binding.Action || lastIndex != binding.Index)
+                report.invalidBindings.Add(binding.Button.name + ": Button dispatch failed or invoked duplicate listeners.");
+            else report.verifiedButtonDispatches++;
+        }
+        page.Bind(null);
+        report.fixtureNotes.Add("Every saved Button was invoked against a local callback recorder after a repeat Bind; no host callback was installed.");
+    }
+
     private static void ApplyFixture(WithdrawalPageView page, PageReport report, string prefabName)
     {
         // These strings intentionally reproduce the Host's display formats,
         // while their values are fixed synthetic data. No state engine or
         // service is created, and only this disposable instance is changed.
         report.fixtureNotes.Add("Synthetic validation content applied to an isolated instance; no actual application or payout.");
-        page.SetText("test", "TEST MODE - NO REAL PAYOUT");
+        page.SetText("test", "TEST MODE - NO CASH VALUE");
         page.SetText("notice", "");
-        page.SetText("cash", "$123,456.78");
-        page.SetText("diamonds", "999,999");
-        page.SetText("frozen", "In application: $500.00");
+        page.SetText("cash", "$512.40");
+        page.SetText("diamonds", "139,400");
+        page.SetText("frozen", "Reserved: $0.00");
         switch (prefabName)
         {
             case "TXPanel":
                 report.fixture = "cash-main-wallet";
                 page.SetText("tier0", "$0.40"); page.SetText("tier1", "$0.60"); page.SetText("tier2", "$500.00");
                 for (int i = 0; i < 4; i++) { page.SetVisible("tier" + i, i < 3); page.SetVisible("selected" + i, i == 2); }
-                page.SetText("amount", "$500.00"); page.SetText("balance", "$499.90");
-                page.SetText("target", "Earn $0.10 more"); page.SetText("ratio", "99%");
-                page.SetText("apply", "Apply $500.00"); page.SetButton(WithdrawalAction.Apply, false);
-                page.SetText("rewards", "Claim rewards (128)");
-                page.SetText("summary", "Earn $0.10 more to apply.\nRead all conditions in Rules.");
-                page.SetProgress(.9998f);
+                page.SetText("tierCost0", "$0.40"); page.SetText("tierCost1", "$0.60"); page.SetText("tierCost2", "$500.00");
+                page.SetText("amount", "$500.00"); page.SetText("balance", "$512.40");
+                page.SetText("target", "Balance target reached"); page.SetText("ratio", "100%");
+                page.SetText("apply", "CHOOSE CHANNEL"); page.SetButton(WithdrawalAction.Apply, true);
+                page.SetText("rewards", "Rewards (3)");
+                page.SetText("summary", "Balance ready. View all conditions before applying.");
+                page.SetProgress(1);
                 break;
             case "TXCoinPanel":
                 report.fixture = "diamond-wallet-largest-published-tier";
@@ -293,45 +530,72 @@ public static class WithdrawalUIRenderValidation
                 for (int i = 0; i < tiers.Length; i++)
                 {
                     page.SetText("tier" + i, tiers[i]); page.SetVisible("tier" + i, true);
+                    page.SetText("tierCost" + i, ((i + 1) * 50000).ToString("N0", System.Globalization.CultureInfo.InvariantCulture));
                     page.SetVisible("selected" + i, i == 3);
                 }
-                page.SetText("amount", "$2,000.00"); page.SetText("balance", "123,456");
-                page.SetText("target", "Earn 76,544 more diamonds"); page.SetText("ratio", "61%");
-                page.SetText("apply", "Apply $2,000.00"); page.SetButton(WithdrawalAction.Apply, false);
-                page.SetText("rewards", "Claim rewards (128)");
-                page.SetText("summary", "All conditions are available in Rules before applying."); page.SetProgress(.61728f);
+                page.SetText("frozen", "Reserved: 0 diamonds");
+                page.SetText("amount", "$2,000.00"); page.SetText("balance", "139,400");
+                page.SetText("target", "Earn 60,600 diamonds more"); page.SetText("ratio", "69%");
+                page.SetText("apply", "KEEP HARVESTING"); page.SetButton(WithdrawalAction.Apply, false);
+                page.SetText("rewards", "Rewards (3)");
+                page.SetText("summary", "Keep matching fruit to reach your target."); page.SetProgress(.697f);
                 break;
             case "TXChannelPanel":
                 report.fixture = "channel-with-full-destination-label";
-                page.SetText("amount", "Apply for $2,000.00");
-                page.SetText("channel0", "[Selected] Test wallet (no account required)");
-                page.SetText("channel1", "Test bank (simulation only)");
+                page.SetText("amount", "$500.00");
+                page.SetText("channel0", "Test wallet");
+                page.SetText("channel1", "Test bank");
+                page.SetVisible("channelSelected0", true); page.SetVisible("channelSelected1", false);
+                page.SetText("hint", "No account details required.");
                 break;
             case "TXUserInfoSurePanel":
                 report.fixture = "full-confirmation-details";
-                page.SetText("amount", "$2,000.00");
-                page.SetText("details", "SIMULATED APPLICATION\n\nTest wallet (no account required)\n\n$2,000.00\n\nNo payment account is collected.\nThe full conditions were shown before applying.");
+                page.SetText("amount", "$500.00");
+                page.SetText("channel", "Test wallet"); page.SetText("reserve", "$500.00"); page.SetText("afterBalance", "$12.40");
+                page.SetText("hint", "View all conditions before confirming.\nTest only; no payment account is collected.");
+                page.SetText("details", "No payment account is collected. Read all conditions before applying.");
                 break;
             case "TXProgress0Panel":
-                report.fixture = "cash-main-500-all-six-conditions";
+                report.fixture = "cash-main-500-all-seven-conditions";
                 SetRequestFixture(page, "Conditions in progress");
+                var conditions = new[] {
+                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.PassLevel, Current = 30, Target = 2, Complete = true },
+                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.PassHideLevel, Current = 30, Target = 22, Complete = true },
+                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.PassStage2Level, Current = 30, Target = 51 },
+                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.GoldTarget, Current = 50000, Target = 50000, Complete = true },
+                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.LoginPassLevel, Current = 9, Target = 10 },
+                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.LoginDay, Current = 4, Target = 5 },
+                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.UserLevel, Current = 30, Target = 31 }
+                };
+                for (int i = 0; i < 7; i++)
+                {
+                    page.SetVisible("condition" + i, true);
+                    page.SetVisible("done" + i, conditions[i].Complete);
+                    page.SetText("cond" + i, WithdrawalPresentation.ConditionText(conditions[i], WithdrawalCurrency.Cash));
+                    page.SetProgress("condition" + i, WithdrawalPresentation.Ratio(conditions[i].Current, conditions[i].Target));
+                }
                 page.SetText("conditions", "[OK] Clear fruit levels  2 / 2\n"
                     + "[OK] First level milestone  22 / 22\n"
                     + "[ ] Final level milestone  30 / 51\n"
                     + "[ ] Win fruit levels in one UTC day  9 / 10\n"
                     + "[ ] Days with the published daily win goal  4 / 5\n"
                     + "[ ] Fruit rank from completed levels  30 / 31\n");
-                page.SetText("step", "Complete the disclosed conditions"); page.SetProgress(2f / 6);
+                page.SetText("step", "3 / 7 CONDITIONS COMPLETE");
+                page.SetText("summary", "Earlier recorded progress counts. Keep playing to finish the remaining goals."); page.SetProgress(3f / 7);
                 break;
             case "TXProgress1Panel":
                 report.fixture = "simulated-review-countdown";
                 SetRequestFixture(page, "Simulated review");
+                page.SetText("countdown", "00:59");
+                page.SetText("reviewHint", "All conditions complete.\nThe test finishes automatically when the timer ends.");
                 page.SetText("conditions", "Application saved locally.\nNo account information is needed.\n\nSimulated review: 59s remaining");
-                page.SetText("step", "SIMULATED REVIEW"); page.SetProgress(1);
+                page.SetText("step", "SIMULATED REVIEW"); page.SetProgress(1f / 60);
                 break;
             case "TXProgress2Panel":
                 report.fixture = "long-simulated-completion-status";
                 SetRequestFixture(page, "SIMULATED COMPLETE - NO PAYMENT");
+                page.SetText("resultTitle", "TEST COMPLETE");
+                page.SetText("resultDetail", "Simulation saved to Records.\nNo money was sent.");
                 page.SetText("conditions", "Simulation completed.\n\nNo money was sent.\nThis result is saved in Records.");
                 page.SetText("step", "SIMULATED COMPLETE - NO PAYMENT"); page.SetProgress(1);
                 page.SetButton(WithdrawalAction.Cancel, false);
@@ -339,6 +603,9 @@ public static class WithdrawalUIRenderValidation
             case "TXProgress3Panel":
                 report.fixture = "rejected-with-returned-units";
                 SetRequestFixture(page, "Test rejected - units returned");
+                page.SetText("resultTitle", "TEST REJECTED");
+                page.SetText("resultDetail", "Reserved reward units were returned.\nYou can start another test.");
+                page.SetText("afterBalance", "$512.40");
                 page.SetText("conditions", "This test application was closed.\nThe reserved reward units were returned.\nYou can start another test.");
                 page.SetText("step", "Test rejected - units returned"); page.SetButton(WithdrawalAction.Cancel, false);
                 break;
@@ -347,24 +614,30 @@ public static class WithdrawalUIRenderValidation
                 report.fixtureNotes.Add("All eight configured record rows are active. Top and bottom screenshots exercise ScrollRect clipping; offscreen rows are expected.");
                 page.SetText("empty", "Your latest simulated applications");
                 string[] amounts = { "$2,000.00", "$1,500.00", "$1,000.00", "$500.00", "$0.60", "$0.40", "$500.00", "$2,000.00" };
-                string[] statuses = { "Test complete\nNo payment", "Test rejected - units returned", "Cancelled - units returned", "Simulated review",
-                    "Conditions in progress", "Test complete\nNo payment", "Cancelled - units returned", "Test complete\nNo payment" };
+                string[] statuses = { "Test complete\nNo payment", "Rejected\nUnits returned", "Cancelled\nUnits returned", "Test review\nIn progress",
+                    "Conditions\nIn progress", "Test complete\nNo payment", "Cancelled\nUnits returned", "Test complete\nNo payment" };
                 for (int i = 0; i < 8; i++)
                 {
                     page.SetVisible("record" + i, true); page.SetText("recordAmount" + i, amounts[i]);
                     page.SetText("recordStatus" + i, statuses[i]);
-                    page.SetText("recordTime" + i, "2026-09-" + (16 - i).ToString("D2") + " 23:59 UTC");
+                    page.SetText("recordTime" + i, "2026-10-" + (9 - i).ToString("D2") + " 12:30 UTC");
                 }
                 break;
             case "RewardGetPanel":
-                report.fixture = "large-accumulated-pending-rewards";
-                page.SetText("rewardCash", "+$123,456.70");
-                page.SetText("rewardDiamonds", "+12,345,678 diamonds");
-                page.SetText("rewardDetail", "Earned by your fruit matches and cleared levels.");
+                report.fixture = "accumulated-fruit-rewards";
+                page.SetText("rewardCash", "+$1.80");
+                page.SetText("rewardDiamonds", "+3,800 diamonds");
+                page.SetText("afterCash", "$514.20"); page.SetText("afterDiamonds", "143,200");
+                page.SetText("rewardDetail", "Earned from fruit matches and cleared levels.");
                 page.SetButton(WithdrawalAction.Claim, true);
                 break;
             case "RulesPanel":
                 report.fixture = "cash-main-rules-all-published-condition-types";
+                page.SetText("amount", "$500.00");
+                WithdrawalRules fixtureRules = WithdrawalRules.CreateDefault();
+                string[] rules = WithdrawalPresentation.RuleRows(fixtureRules.Tiers[2], fixtureRules);
+                for (int i = 0; i < 8; i++) { page.SetVisible("rule" + i, true); page.SetText("rules" + i, rules[i]); }
+                page.SetText("ruleFootnote", "Earlier recorded progress counts. Conditions are checked together. One application at a time. No real payment.");
                 page.SetText("rules", "$500.00 - ALL CONDITIONS\n\n"
                     + "Balance required: $500.00\nClear 2 fruit levels.\n"
                     + "Clear fruit level 22.\n"
@@ -384,7 +657,7 @@ public static class WithdrawalUIRenderValidation
     private static void SetRequestFixture(WithdrawalPageView page, string status)
     {
         page.SetText("amount", "$500.00"); page.SetText("status", status);
-        page.SetText("channel", "Test wallet (no account required)");
+        page.SetText("channel", "Test wallet");
         page.SetText("requestId", "ID: 0123456789ab");
     }
 
@@ -392,7 +665,7 @@ public static class WithdrawalUIRenderValidation
     {
         if (view.Content == null) report.invalidBindings.Add("Content is null.");
         if (view.DesignSize.x <= 0 || view.DesignSize.y <= 0) report.invalidBindings.Add("DesignSize is not positive.");
-        if (view.Texts == null || view.Buttons == null || view.Objects == null)
+        if (view.Texts == null || view.Buttons == null || view.Objects == null || view.Progress == null)
         {
             report.invalidBindings.Add("A serialized binding array is null.");
             return;
@@ -406,6 +679,21 @@ public static class WithdrawalUIRenderValidation
         foreach (WithdrawalObjectBinding binding in view.Objects)
             if (binding == null || binding.Object == null || string.IsNullOrEmpty(binding.Key))
                 report.invalidBindings.Add("Missing Object binding: " + (binding == null ? "null" : binding.Key));
+        foreach (WithdrawalProgressBinding binding in view.Progress)
+            if (binding == null || binding.Fill == null || string.IsNullOrEmpty(binding.Key))
+                report.invalidBindings.Add("Missing Progress binding: " + (binding == null ? "null" : binding.Key));
+        var boundButtons = new HashSet<Button>();
+        foreach (WithdrawalButtonBinding binding in view.Buttons)
+        {
+            if (binding == null || binding.Button == null) continue;
+            if (!boundButtons.Add(binding.Button)) report.invalidBindings.Add(binding.Button.name + ": duplicate Button binding.");
+            if (binding.Button.targetGraphic == null) report.invalidBindings.Add(binding.Button.name + ": Button has no visual targetGraphic.");
+            else if (binding.Button.targetGraphic.transform != binding.Button.transform
+                && !binding.Button.targetGraphic.transform.IsChildOf(binding.Button.transform))
+                report.invalidBindings.Add(binding.Button.name + ": Button visual is outside its hierarchy.");
+        }
+        foreach (Button button in view.GetComponentsInChildren<Button>(true))
+            if (!boundButtons.Contains(button)) report.invalidBindings.Add(button.name + ": clickable Button has no dispatch binding.");
     }
 
     private static void AuditComponents(GameObject root, PageReport report)
@@ -497,7 +785,13 @@ public static class WithdrawalUIRenderValidation
                 Vector3 position = camera.WorldToViewportPoint(corners[i]);
                 if (position.x < -.001f || position.x > 1.001f || position.y < -.001f || position.y > 1.001f) outside = true;
             }
-            if (outside) report.outsideCanvas.Add(Hierarchy(graphic.transform, root.transform));
+            if (outside)
+            {
+                string path = Hierarchy(graphic.transform, root.transform);
+                report.outsideCanvas.Add(path);
+                if (graphic.GetComponentInParent<ScrollRect>() == null)
+                    report.renderErrors.Add(path + ": active visual extends outside the rendered canvas.");
+            }
         }
     }
 
