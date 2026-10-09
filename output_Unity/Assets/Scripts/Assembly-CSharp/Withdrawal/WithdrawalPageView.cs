@@ -33,12 +33,20 @@ namespace FruitWithdrawal
         public GameObject Object;
     }
 
+    [Serializable]
+    public sealed class WithdrawalProgressBinding
+    {
+        public string Key;
+        public Image Fill;
+    }
+
     /// <summary>Bindings authored into the imported prefab; no runtime UI construction.</summary>
     public sealed class WithdrawalPageView : MonoBehaviour
     {
         [SerializeField] public WithdrawalTextBinding[] Texts = Array.Empty<WithdrawalTextBinding>();
         [SerializeField] public WithdrawalButtonBinding[] Buttons = Array.Empty<WithdrawalButtonBinding>();
         [SerializeField] public WithdrawalObjectBinding[] Objects = Array.Empty<WithdrawalObjectBinding>();
+        [SerializeField] public WithdrawalProgressBinding[] Progress = Array.Empty<WithdrawalProgressBinding>();
         [SerializeField] public Image ProgressFill;
         [SerializeField] public RectTransform Content;
         [SerializeField] public Vector2 DesignSize = new Vector2(1080, 1920);
@@ -83,7 +91,30 @@ namespace FruitWithdrawal
 
         public void SetProgress(float progress)
         {
-            if (ProgressFill != null) ProgressFill.fillAmount = Mathf.Clamp01(progress);
+            ApplyProgress(ProgressFill, progress);
+        }
+
+        public void SetProgress(string key, float progress)
+        {
+            for (int i = 0; i < Progress.Length; i++)
+                if (Progress[i].Key == key && Progress[i].Fill != null)
+                    ApplyProgress(Progress[i].Fill, progress);
+        }
+
+        private static void ApplyProgress(Image fill, float progress)
+        {
+            if (fill == null) return;
+            float amount = Mathf.Clamp01(progress);
+            if (fill.type == Image.Type.Sliced)
+            {
+                RectTransform rect = fill.rectTransform;
+                rect.anchorMin = Vector2.zero;
+                rect.anchorMax = new Vector2(amount, 1f);
+                rect.offsetMin = Vector2.zero;
+                rect.offsetMax = Vector2.zero;
+                fill.enabled = amount > 0f;
+            }
+            else fill.fillAmount = amount;
         }
 
         private void OnRectTransformDimensionsChange() { Fit(); }
