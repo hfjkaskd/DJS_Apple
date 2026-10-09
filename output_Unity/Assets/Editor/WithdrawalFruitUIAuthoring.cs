@@ -33,6 +33,11 @@ public static class WithdrawalFruitUIAuthoring
     [MenuItem("Tools/Withdrawal/Build Fruit Style Interfaces")]
     public static void Build()
     {
+        WithdrawalReferenceUIAuthoring.Build();
+    }
+
+    private static void BuildNativeDraft()
+    {
         AssetDatabase.Refresh();
         Directory.CreateDirectory(Art);
         font = Load<TMP_FontAsset>("Assets/res/local/textmeshpro/resources/fonts & materials/802-CAI978 SDF.asset");

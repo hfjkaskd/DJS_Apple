@@ -51,8 +51,12 @@ namespace FruitWithdrawal
         [SerializeField] public RectTransform Content;
         [SerializeField] public Vector2 DesignSize = new Vector2(1080, 1920);
         [SerializeField] public Vector2 DesignCenter;
+        [SerializeField] public bool UseCanvasFrame;
+        [SerializeField] public Rect ArtworkBounds;
         private Action<WithdrawalAction, int> handler;
         private bool bound;
+        private bool fitting;
+        private RectTransform canvasRect;
 
         public void Bind(Action<WithdrawalAction, int> callback)
         {
@@ -117,17 +121,47 @@ namespace FruitWithdrawal
             else fill.fillAmount = amount;
         }
 
+        private void OnEnable() { Fit(); }
         private void OnRectTransformDimensionsChange() { Fit(); }
+        private void OnTransformParentChanged() { canvasRect = null; Fit(); }
+        private void OnCanvasHierarchyChanged() { canvasRect = null; Fit(); }
+        public void RefreshLayout() { Fit(); }
 
         private void Fit()
         {
-            if (Content == null || !(transform is RectTransform root)) return;
-            float scale = Mathf.Min(root.rect.width / DesignSize.x, root.rect.height / DesignSize.y, 1f);
-            if (scale > 0)
-            {
+            if (fitting || Content == null || !(transform is RectTransform root) || DesignSize.x <= 0 || DesignSize.y <= 0) return;
+            fitting = true;
+            try {
+                if (!UseCanvasFrame) {
+                    float legacyScale = Mathf.Min(root.rect.width / DesignSize.x, root.rect.height / DesignSize.y, 1f);
+                    if (legacyScale > 0) {
+                        Content.localScale = Vector3.one * legacyScale;
+                        Content.anchoredPosition = -DesignCenter * legacyScale;
+                    }
+                    return;
+                }
+                if (canvasRect == null) {
+                    Canvas canvas = GetComponentInParent<Canvas>();
+                    if (canvas != null && canvas.rootCanvas != null) canvasRect = canvas.rootCanvas.transform as RectTransform;
+                }
+                if (canvasRect == null) return;
+                float scale = Mathf.Min(canvasRect.rect.width / DesignSize.x, canvasRect.rect.height / DesignSize.y, 1f);
+                bool hasArtwork = ArtworkBounds.width > 0 && ArtworkBounds.height > 0;
+                if (hasArtwork) scale = Mathf.Min(scale, root.rect.width / ArtworkBounds.width, root.rect.height / ArtworkBounds.height);
+                if (scale <= 0) return;
+                Vector2 center = canvasRect.rect.center;
+                Vector3 position = root.InverseTransformPoint(canvasRect.TransformPoint(new Vector3(center.x, center.y, 0f)));
+                position.x -= DesignCenter.x * scale;
+                position.y -= DesignCenter.y * scale;
+                if (hasArtwork) {
+                    // Preserve the full-screen reference location unless its actual art crosses a safe-area edge.
+                    position.x = Mathf.Clamp(position.x, root.rect.xMin - ArtworkBounds.xMin * scale, root.rect.xMax - ArtworkBounds.xMax * scale);
+                    position.y = Mathf.Clamp(position.y, root.rect.yMin - ArtworkBounds.yMin * scale, root.rect.yMax - ArtworkBounds.yMax * scale);
+                }
                 Content.localScale = Vector3.one * scale;
-                Content.anchoredPosition = -DesignCenter * scale;
+                Content.position = root.TransformPoint(position);
             }
+            finally { fitting = false; }
         }
     }
 }

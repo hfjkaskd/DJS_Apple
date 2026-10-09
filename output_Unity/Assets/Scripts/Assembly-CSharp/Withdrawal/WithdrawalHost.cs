@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Globalization;
 using System.Text;
 using UnityEngine;
 
@@ -170,7 +169,7 @@ namespace FruitWithdrawal
 
         private void RenderPage()
         {
-            page.SetText("test", "TEST MODE - NO REAL PAYOUT");
+            page.SetText("test", "TEST MODE • NO CASH VALUE");
             if (!Service.IsAvailable || Service.State == null) {
                 page.SetText("notice", "Simulation unavailable. " + Service.LastError);
                 page.SetButton(WithdrawalAction.Apply, false);
@@ -185,7 +184,7 @@ namespace FruitWithdrawal
             page.SetText("cash", Money(Service.State.CashCents));
             page.SetText("diamonds", WithdrawalPresentation.Number(Service.State.DiamondUnits));
             long frozen = currency == WithdrawalCurrency.Cash ? Service.State.FrozenCashCents : Service.State.FrozenDiamondUnits;
-            page.SetText("frozen", "Reserved: " + WithdrawalPresentation.Units(currency, frozen));
+            page.SetText("frozen", "In application: " + WithdrawalPresentation.Units(currency, frozen));
             if (screen == WithdrawalScreen.Cash || screen == WithdrawalScreen.Diamonds) RenderWallet();
             else if (screen == WithdrawalScreen.Channel) RenderChannel();
             else if (screen == WithdrawalScreen.Confirm) RenderConfirm();
@@ -216,14 +215,18 @@ namespace FruitWithdrawal
             for (int i = 0; i < Service.Rules.Tiers.Length && index < 4; i++) {
                 var item = Service.Rules.Tiers[i];
                 if (item.Currency != currency) continue;
-                page.SetText("tier" + index, Money(item.DisplayCents));
+                page.SetText("tier" + index, WithdrawalPresentation.TierAmount(item.DisplayCents));
                 page.SetText("tierCost" + index, WithdrawalPresentation.Number(item.RequiredBalanceUnits));
                 page.SetVisible("selected" + index, item.Id == selectedTier);
+                page.SetVisible("selectedAmount" + index, item.Id == selectedTier);
                 index++;
             }
             for (int i = 0; i < 4; i++) {
                 page.SetVisible("tier" + i, i < index);
-                if (i >= index) page.SetVisible("selected" + i, false);
+                if (i >= index) {
+                    page.SetVisible("selected" + i, false);
+                    page.SetVisible("selectedAmount" + i, false);
+                }
             }
             if (tier == null) { page.SetButton(WithdrawalAction.Apply, false); return; }
             long balance = WithdrawalPresentation.Balance(Service.State, currency);
@@ -238,9 +241,7 @@ namespace FruitWithdrawal
             page.SetText("apply", active ? "VIEW APPLICATION" : completed ? "TEST COMPLETED" : remaining > 0 ? "KEEP HARVESTING" : "CHOOSE CHANNEL");
             page.SetButton(WithdrawalAction.Apply, active || CanApply(tier));
             page.SetText("rewards", Service.State.PendingRewards.Count > 0 ? "Rewards (" + Service.State.PendingRewards.Count + ")" : "Rewards");
-            page.SetText("summary", completed && !active ? "This test tier is complete. Choose another target."
-                : remaining == 0 ? "Balance ready. View all conditions before applying."
-                : "Keep matching fruit to reach your target.");
+            page.SetText("summary", WithdrawalPresentation.WalletSummary(tier));
         }
 
         private void RenderChannel()
@@ -266,7 +267,7 @@ namespace FruitWithdrawal
             page.SetText("channel", channel == null ? "Select a test channel" : WithdrawalPresentation.ChannelLabel(channel.Label));
             page.SetText("reserve", WithdrawalPresentation.Units(tier.Currency, tier.RequiredBalanceUnits));
             page.SetText("afterBalance", balance >= tier.RequiredBalanceUnits ? WithdrawalPresentation.Units(tier.Currency, balance - tier.RequiredBalanceUnits) : "Insufficient balance");
-            page.SetText("hint", "View all conditions before confirming.\nTest only; no payment account is collected.");
+            page.SetText("hint", "Your test balance will be reserved.");
             page.SetText("details", "SIMULATED APPLICATION\n" + (channel == null ? "" : WithdrawalPresentation.ChannelLabel(channel.Label))
                 + "\nReserve " + WithdrawalPresentation.Units(tier.Currency, tier.RequiredBalanceUnits)
                 + "\nView all conditions before confirming.\nNo account information or real payment.");
@@ -287,7 +288,12 @@ namespace FruitWithdrawal
                 page.SetText("rules" + i, visible ? rows[i] : "");
                 if (visible) legacy.Append(rows[i]).Append('\n');
             }
-            const string footnote = "Earlier recorded progress counts. Conditions are checked together. One application at a time. No real payment.";
+            string[] summaryRows = WithdrawalPresentation.RuleSummaryRows(tier);
+            for (int i = 0; i < summaryRows.Length; i++) {
+                page.SetText("ruleSummary" + i, summaryRows[i]);
+                page.SetVisible("ruleSummaryRow" + i, summaryRows[i].Length > 0);
+            }
+            string footnote = WithdrawalPresentation.RuleFootnote(tier, Service.Rules);
             page.SetText("ruleFootnote", footnote);
             legacy.Append('\n').Append(footnote);
             page.SetText("rules", legacy.ToString());
@@ -297,11 +303,11 @@ namespace FruitWithdrawal
         {
             long cash, diamonds;
             WithdrawalPresentation.RewardTotals(Service.State, out cash, out diamonds);
-            page.SetText("rewardCash", "+" + Money(cash));
+            page.SetText("rewardCash", Money(cash));
             page.SetText("rewardDiamonds", "+" + WithdrawalPresentation.Number(diamonds) + " diamonds");
             page.SetText("afterCash", Money(checked(Service.State.CashCents + cash)));
             page.SetText("afterDiamonds", WithdrawalPresentation.Number(checked(Service.State.DiamondUnits + diamonds)));
-            page.SetText("rewardDetail", cash > 0 || diamonds > 0 ? "Earned from fruit matches and cleared levels." : "Match three fruits or clear a level to earn test rewards.");
+            page.SetText("rewardDetail", cash > 0 || diamonds > 0 ? "Fruit matches + level clear" : "Match three fruits or clear a level to earn test rewards.");
             page.SetButton(WithdrawalAction.Claim, Service.State.PendingRewards.Count > 0);
         }
 
@@ -311,11 +317,16 @@ namespace FruitWithdrawal
             page.SetText("empty", count == 0 ? "No applications yet. Choose a target." : "Your latest simulated applications");
             for (int i = 0; i < 8; i++) {
                 page.SetVisible("record" + i, i < count);
+                page.SetVisible("recordComplete" + i, false);
+                page.SetVisible("recordOther" + i, false);
                 if (i >= count) continue;
                 var r = Service.State.Requests[count - 1 - i];
+                bool completed = r.Status == WithdrawalRequestStatus.SimulatedCompleted;
+                page.SetVisible("recordComplete" + i, completed);
+                page.SetVisible("recordOther" + i, !completed);
                 page.SetText("recordAmount" + i, Money(r.Terms.DisplayCents));
-                page.SetText("recordStatus" + i, r.Status == WithdrawalRequestStatus.SimulatedCompleted ? "Test complete\nNo payment" : RecordStatus(r.Status));
-                page.SetText("recordTime" + i, DateTimeOffset.FromUnixTimeSeconds(r.CreatedUtcSeconds).UtcDateTime.ToString("yyyy-MM-dd HH:mm 'UTC'", CultureInfo.InvariantCulture));
+                page.SetText("recordStatus" + i, WithdrawalPresentation.RecordStatus(r.Status));
+                page.SetText("recordTime" + i, WithdrawalPresentation.RecordDate(r.CreatedUtcSeconds));
             }
         }
 
@@ -338,15 +349,15 @@ namespace FruitWithdrawal
             else if (r.Status == WithdrawalRequestStatus.ReviewPending) {
                 long seconds = Service.GetRemainingReviewSeconds();
                 page.SetText("countdown", WithdrawalPresentation.Countdown(seconds));
-                page.SetText("reviewHint", "All conditions complete.\nThe test finishes automatically when the timer ends.");
+                page.SetText("reviewHint", "All conditions completed.\nReview completes automatically.");
                 page.SetText("conditions", "Application saved locally.\nNo account information is needed.\n\nSimulated review: " + WithdrawalPresentation.Countdown(seconds));
                 page.SetText("step", "SIMULATED REVIEW");
                 page.SetProgress(WithdrawalPresentation.Ratio(r.Terms.ReviewSeconds - seconds, r.Terms.ReviewSeconds));
             }
             else {
                 bool complete = r.Status == WithdrawalRequestStatus.SimulatedCompleted;
-                string title = complete ? "TEST COMPLETE" : r.Status == WithdrawalRequestStatus.Cancelled ? "TEST CANCELLED" : "TEST REJECTED";
-                string detail = complete ? "Simulation saved to Records.\nNo money was sent." : "Reserved reward units were returned.\nYou can start another test.";
+                string title = complete ? "Simulation completed" : "Test request closed";
+                string detail = complete ? "No real money was sent" : "Reserved units returned to wallet";
                 page.SetText("resultTitle", title);
                 page.SetText("resultDetail", detail);
                 page.SetText("afterBalance", WithdrawalPresentation.Units(r.Terms.Currency, WithdrawalPresentation.Balance(Service.State, r.Terms.Currency)));
@@ -358,6 +369,7 @@ namespace FruitWithdrawal
         private void RenderConditions(WithdrawalRequest request)
         {
             var conditions = Service.GetConditions(request.TierId);
+            RenderGroupedConditions(request, conditions);
             var legacy = new StringBuilder();
             int visible = 0, done = 0;
             for (int i = 0; i < conditions.Length && visible < 7; i++) {
@@ -382,6 +394,61 @@ namespace FruitWithdrawal
             page.SetText("step", done + " / " + visible + " CONDITIONS COMPLETE");
             page.SetText("summary", "Earlier recorded progress counts. Keep playing to finish the remaining goals.");
             page.SetProgress(visible == 0 ? 1f : (float)done / visible);
+        }
+
+        private void RenderGroupedConditions(WithdrawalRequest request, WithdrawalConditionProgress[] conditions)
+        {
+            string levels = WithdrawalPresentation.Milestones(request.Terms);
+            page.SetText("milestones", "Level milestones " + levels);
+            page.SetVisible("levelsRow", levels.Length > 0);
+            page.SetText("reserved", "Reserved: " + WithdrawalPresentation.Units(request.Terms.Currency, request.Terms.RequiredBalanceUnits));
+            for (int i = 0; i < 3; i++) {
+                page.SetVisible("levelDone" + i, false);
+                page.SetVisible("levelPending" + i, false);
+            }
+            page.SetVisible("dailyRow", false);
+            page.SetVisible("daysRow", false);
+            page.SetVisible("rankRow", false);
+            page.SetVisible("rankDone", false);
+            page.SetText("daily", "");
+            page.SetText("days", "");
+            page.SetText("rank", "");
+            page.SetText("dailyPercent", "");
+            page.SetText("daysPercent", "");
+            page.SetProgress("daily", 0);
+            page.SetProgress("days", 0);
+            for (int i = 0; i < conditions.Length; i++) {
+                var condition = conditions[i];
+                if (condition.Target == 0) continue;
+                switch (condition.Kind) {
+                    case WithdrawalConditionKind.PassLevel:
+                    case WithdrawalConditionKind.PassHideLevel:
+                    case WithdrawalConditionKind.PassStage2Level:
+                        int levelIndex = (int)condition.Kind - 1;
+                        page.SetVisible("levelDone" + levelIndex, condition.Complete);
+                        page.SetVisible("levelPending" + levelIndex, !condition.Complete);
+                        break;
+                    case WithdrawalConditionKind.LoginPassLevel:
+                        RenderGroupedProgress("daily", condition);
+                        break;
+                    case WithdrawalConditionKind.LoginDay:
+                        RenderGroupedProgress("days", condition);
+                        break;
+                    case WithdrawalConditionKind.UserLevel:
+                        page.SetVisible("rankRow", true);
+                        page.SetText("rank", WithdrawalPresentation.GroupedProgress(condition));
+                        page.SetVisible("rankDone", condition.Complete);
+                        break;
+                }
+            }
+        }
+
+        private void RenderGroupedProgress(string key, WithdrawalConditionProgress condition)
+        {
+            page.SetVisible(key + "Row", true);
+            page.SetText(key, WithdrawalPresentation.GroupedProgress(condition));
+            page.SetText(key + "Percent", WithdrawalPresentation.Percentage(condition.Current, condition.Target));
+            page.SetProgress(key, condition.Complete ? 1f : WithdrawalPresentation.Ratio(condition.Current, condition.Target));
         }
 
         private void Handle(WithdrawalAction action, int index)
@@ -502,15 +569,6 @@ namespace FruitWithdrawal
             return status == WithdrawalRequestStatus.SimulatedCompleted ? WithdrawalScreen.Complete : WithdrawalScreen.Rejected;
         }
         public static string Money(long cents) { return WithdrawalPresentation.Money(cents); }
-        private static string RecordStatus(WithdrawalRequestStatus status)
-        {
-            switch (status) {
-                case WithdrawalRequestStatus.ConditionsPending: return "Conditions\nIn progress";
-                case WithdrawalRequestStatus.ReviewPending: return "Test review\nIn progress";
-                case WithdrawalRequestStatus.Rejected: return "Rejected\nUnits returned";
-                default: return "Cancelled\nUnits returned";
-            }
-        }
         public static string Status(WithdrawalRequestStatus status)
         {
             switch (status) {

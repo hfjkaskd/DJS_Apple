@@ -9,6 +9,10 @@ namespace FruitWithdrawal
     public static class WithdrawalPresentation
     {
         public static string Money(long cents) { return "$" + (cents / 100m).ToString("N2", CultureInfo.InvariantCulture); }
+        public static string TierAmount(long cents)
+        {
+            return cents % 100 == 0 ? "$" + (cents / 100).ToString("N0", CultureInfo.InvariantCulture) : Money(cents);
+        }
         public static string Number(long value) { return value.ToString("N0", CultureInfo.InvariantCulture); }
         public static string Units(WithdrawalCurrency currency, long value)
         {
@@ -67,11 +71,70 @@ namespace FruitWithdrawal
             rows.Add("Days may be separate; cancelling returns reserved units.");
             return rows.ToArray();
         }
+        public static string Milestones(WithdrawalTierRule tier)
+        {
+            var text = new StringBuilder();
+            AppendLevel(text, tier.RequiredPassLevels);
+            if (tier.RequiredHiddenPassLevels != tier.RequiredPassLevels) AppendLevel(text, tier.RequiredHiddenPassLevels);
+            if (tier.RequiredStage2PassLevels != tier.RequiredPassLevels && tier.RequiredStage2PassLevels != tier.RequiredHiddenPassLevels)
+                AppendLevel(text, tier.RequiredStage2PassLevels);
+            return text.ToString();
+        }
+        public static string[] RuleSummaryRows(WithdrawalTierRule tier)
+        {
+            string levels = Milestones(tier);
+            return new[] {
+                "Balance: " + Units(tier.Currency, tier.RequiredBalanceUnits),
+                levels.Length == 0 ? "" : "Level milestones " + levels,
+                tier.RequiredDailyWins == 0 ? "" : "Daily wins: " + Number(tier.RequiredDailyWins),
+                tier.RequiredCheckInDays == 0 ? "" : "Qualified days: " + Number(tier.RequiredCheckInDays),
+                tier.RequiredUserLevel == 0 ? "" : "Reward rank: " + Number(tier.RequiredUserLevel),
+                "Simulated review: " + Number(tier.ReviewSeconds) + " seconds"
+            };
+        }
+        public static string RuleFootnote(WithdrawalTierRule tier, WithdrawalRules rules)
+        {
+            return (tier.RequiredCheckInDays > 0 ? "Each qualified UTC day needs " + Number(rules.DailyWinsForCheckIn) + " wins." : "No qualified-day requirement.")
+                + "\nDays do not need to be consecutive.\nCancel to return reserved units.";
+        }
+        public static string WalletSummary(WithdrawalTierRule tier)
+        {
+            if (tier.Currency == WithdrawalCurrency.Cash) return "Review all conditions before applying";
+            var parts = new List<string>(3);
+            if (tier.RequiredCheckInDays > 0) parts.Add(Number(tier.RequiredCheckInDays) + " qualified days");
+            if (tier.RequiredUserLevel > 0) parts.Add("Rank " + Number(tier.RequiredUserLevel));
+            if (tier.RequiredDailyWins > 0) parts.Add("Daily " + Number(tier.RequiredDailyWins) + " wins");
+            return parts.Count == 0 ? "Review all conditions before applying" : string.Join(" - ", parts);
+        }
+        public static string GroupedProgress(WithdrawalConditionProgress condition)
+        {
+            string values = Number(condition.Current) + " / " + Number(condition.Target);
+            switch (condition.Kind) {
+                case WithdrawalConditionKind.LoginPassLevel: return "Today: " + values + " wins";
+                case WithdrawalConditionKind.LoginDay: return "Qualified days: " + values;
+                case WithdrawalConditionKind.UserLevel: return "Reward rank: " + values;
+                default: return condition.Label + ": " + values;
+            }
+        }
+        public static string RecordStatus(WithdrawalRequestStatus status)
+        {
+            switch (status) {
+                case WithdrawalRequestStatus.ConditionsPending: return "Conditions in progress";
+                case WithdrawalRequestStatus.ReviewPending: return "Simulated review";
+                case WithdrawalRequestStatus.SimulatedCompleted: return "Test complete - No payment";
+                case WithdrawalRequestStatus.Rejected: return "Rejected - Units returned";
+                default: return "Cancelled - Units returned";
+            }
+        }
+        public static string RecordDate(long utcSeconds)
+        {
+            return DateTimeOffset.FromUnixTimeSeconds(utcSeconds).UtcDateTime.ToString("MMM dd", CultureInfo.InvariantCulture);
+        }
         public static string ConditionText(WithdrawalConditionProgress condition, WithdrawalCurrency currency)
         {
-            long shown = Math.Min(condition.Current, condition.Target);
+            long shown = condition.Current;
             if (condition.Kind == WithdrawalConditionKind.GoldTarget)
-                return "Reserved: " + Units(currency, shown) + " / " + Units(currency, condition.Target);
+                return "Reserved: " + Units(currency, Math.Min(shown, condition.Target)) + " / " + Units(currency, condition.Target);
             string label;
             switch (condition.Kind) {
                 case WithdrawalConditionKind.PassLevel: label = "Clear fruit level"; break;
