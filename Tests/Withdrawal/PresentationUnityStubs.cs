@@ -18,23 +18,46 @@ namespace UnityEngine {
     public class MonoBehaviour : Object {
         public GameObject gameObject = new GameObject();
         public Transform transform = new RectTransform();
+        public Canvas ParentCanvas;
+        public int ParentLookupCount;
+        public T GetComponentInParent<T>() where T : class { ParentLookupCount++; return ParentCanvas as T; }
         public Coroutine StartCoroutine(IEnumerator routine) { return new Coroutine(); }
         public void StopCoroutine(Coroutine routine) { }
     }
-    public class Transform : Object { }
-    public class RectTransform : Transform { public Rect rect = new Rect(); public Vector3 localScale; public Vector2 anchoredPosition,anchorMin,anchorMax,offsetMin,offsetMax; }
-    public struct Rect { public float width; public float height; }
+    public class Canvas : MonoBehaviour { public Canvas rootCanvas; }
+    public class Transform : Object {
+        public Transform parent;
+        public Vector3 localPosition;
+        public Vector3 localScale=Vector3.one;
+        public Vector3 position { get { return TransformPoint(new Vector3()); } set { localPosition=parent==null?value:parent.InverseTransformPoint(value); } }
+        public Vector3 TransformPoint(Vector3 p) {
+            var value=new Vector3(localPosition.x+p.x*localScale.x,localPosition.y+p.y*localScale.y,localPosition.z+p.z*localScale.z);
+            return parent==null?value:parent.TransformPoint(value);
+        }
+        public Vector3 InverseTransformPoint(Vector3 p) {
+            var value=parent==null?p:parent.InverseTransformPoint(p);
+            return new Vector3((value.x-localPosition.x)/localScale.x,(value.y-localPosition.y)/localScale.y,(value.z-localPosition.z)/localScale.z);
+        }
+    }
+    public class RectTransform : Transform { public Rect rect = new Rect(); public Vector2 anchoredPosition,anchorMin,anchorMax,offsetMin,offsetMax; }
+    public struct Rect {
+        public float x,y,width,height;
+        public Rect(float x,float y,float width,float height) { this.x=x;this.y=y;this.width=width;this.height=height; }
+        public float xMin=>x;public float yMin=>y;public float xMax=>x+width;public float yMax=>y+height;
+        public Vector2 center=>new Vector2(x+width/2,y+height/2);
+    }
     public struct Vector2 {
         public static Vector2 zero => new Vector2(); public float x,y; public Vector2(float a,float b) { x=a;y=b; }
         public static Vector2 operator -(Vector2 a) { return new Vector2(-a.x,-a.y); }
         public static Vector2 operator *(Vector2 a,float b) { return new Vector2(a.x*b,a.y*b); }
     }
     public struct Vector3 {
-        public float x,y,z; public static Vector3 one => new Vector3 { x=1,y=1,z=1 };
+        public float x,y,z; public Vector3(float x,float y,float z) { this.x=x;this.y=y;this.z=z; } public static Vector3 one => new Vector3 { x=1,y=1,z=1 };
         public static Vector3 operator *(Vector3 a,float b) { return new Vector3 { x=a.x*b,y=a.y*b,z=a.z*b }; }
     }
     public static class Mathf {
         public static float Min(float a,float b,float c) { return Math.Min(a,Math.Min(b,c)); }
+        public static float Clamp(float value,float min,float max) { return Math.Max(min,Math.Min(max,value)); }
         public static float Clamp01(float value) { return Math.Max(0,Math.Min(1,value)); }
     }
     public class Coroutine { }

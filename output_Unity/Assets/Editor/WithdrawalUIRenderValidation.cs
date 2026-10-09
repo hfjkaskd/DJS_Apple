@@ -49,6 +49,7 @@ public static class WithdrawalUIRenderValidation
         public string image;
         public string fixture;
         public bool recordsBottom;
+        public bool matchesReferenceAspect;
         public string backgroundAsset;
         public int verifiedButtonDispatches;
         public Vector3 actualContentScale;
@@ -120,22 +121,26 @@ public static class WithdrawalUIRenderValidation
                 report.errors.Add("Cannot load prefab: " + path);
                 continue;
             }
-            if (prefab.GetComponent<WithdrawalPageView>() == null)
+            WithdrawalPageView sourceView = prefab.GetComponent<WithdrawalPageView>();
+            if (sourceView == null)
             {
                 report.skippedUnboundPrefabs.Add(path);
                 continue;
             }
             boundPages++;
             foundPages.Add(Path.GetFileNameWithoutExtension(path));
-            foreach (Vector2Int size in Sizes)
+            var requestedSizes = new List<Vector2Int>(Sizes);
+            var referenceSize = new Vector2Int(1080, Mathf.RoundToInt(1080 * sourceView.DesignSize.y / sourceView.DesignSize.x));
+            if (referenceSize.y > 0 && !requestedSizes.Contains(referenceSize)) requestedSizes.Add(referenceSize);
+            foreach (Vector2Int size in requestedSizes)
             {
-                var page = new PageReport { prefab = path, width = size.x, height = size.y };
+                var page = new PageReport { prefab = path, width = size.x, height = size.y, matchesReferenceAspect = size == referenceSize };
                 report.pages.Add(page);
                 try { Render(prefab, page); }
                 catch (Exception exception) { page.renderErrors.Add(exception.ToString()); }
                 if (prefab.name == "TXRecordPanel")
                 {
-                    var bottom = new PageReport { prefab = path, width = size.x, height = size.y, recordsBottom = true };
+                    var bottom = new PageReport { prefab = path, width = size.x, height = size.y, recordsBottom = true, matchesReferenceAspect = size == referenceSize };
                     report.pages.Add(bottom);
                     try { Render(prefab, bottom); }
                     catch (Exception exception) { bottom.renderErrors.Add(exception.ToString()); }
@@ -458,6 +463,31 @@ public static class WithdrawalUIRenderValidation
     {
         if (page.Content == null || page.DesignSize.x <= 0 || page.DesignSize.y <= 0) return;
         var root = (RectTransform)page.transform;
+        if (page.UseCanvasFrame)
+        {
+            Canvas canvas = page.GetComponentInParent<Canvas>().rootCanvas;
+            var canvasRect = (RectTransform)canvas.transform;
+            float expectedScale = Mathf.Min(canvasRect.rect.width / page.DesignSize.x, canvasRect.rect.height / page.DesignSize.y, 1);
+            bool bounded = page.ArtworkBounds.width > 0 && page.ArtworkBounds.height > 0;
+            if (bounded) expectedScale = Mathf.Min(expectedScale, root.rect.width / page.ArtworkBounds.width, root.rect.height / page.ArtworkBounds.height);
+            Vector3 origin = root.InverseTransformPoint(canvasRect.TransformPoint(canvasRect.rect.center));
+            origin -= (Vector3)(page.DesignCenter * expectedScale);
+            if (bounded)
+            {
+                origin.x = Mathf.Clamp(origin.x, root.rect.xMin - page.ArtworkBounds.xMin * expectedScale, root.rect.xMax - page.ArtworkBounds.xMax * expectedScale);
+                origin.y = Mathf.Clamp(origin.y, root.rect.yMin - page.ArtworkBounds.yMin * expectedScale, root.rect.yMax - page.ArtworkBounds.yMax * expectedScale);
+            }
+            report.actualContentScale = page.Content.localScale;
+            if (Vector3.Distance(page.Content.localScale, Vector3.one * expectedScale) > .001f)
+                report.invalidBindings.Add("Content scale does not preserve the reference canvas and artwork safe bounds.");
+            if (Vector3.Distance(root.InverseTransformPoint(page.Content.position), origin) > .1f)
+                report.invalidBindings.Add("Content position differs from the centered reference frame with minimal safe-area correction.");
+            Vector3 previousPosition = page.Content.position;
+            page.RefreshLayout();
+            if (Vector3.Distance(previousPosition, page.Content.position) > .1f)
+                report.invalidBindings.Add("Refreshing the reference layout accumulates an unexpected position offset.");
+            return;
+        }
         float expected = Mathf.Min(root.rect.width / page.DesignSize.x, root.rect.height / page.DesignSize.y, 1);
         report.actualContentScale = page.Content.localScale;
         if (Vector3.Distance(page.Content.localScale, Vector3.one * expected) > .001f)
@@ -505,40 +535,41 @@ public static class WithdrawalUIRenderValidation
         // while their values are fixed synthetic data. No state engine or
         // service is created, and only this disposable instance is changed.
         report.fixtureNotes.Add("Synthetic validation content applied to an isolated instance; no actual application or payout.");
-        page.SetText("test", "TEST MODE - NO CASH VALUE");
+        page.SetText("test", "TEST MODE \u2022 NO CASH VALUE");
         page.SetText("notice", "");
-        page.SetText("cash", "$512.40");
-        page.SetText("diamonds", "139,400");
-        page.SetText("frozen", "Reserved: $0.00");
+        page.SetText("cash", "$500.00");
+        page.SetText("diamonds", "50,600");
+        page.SetText("frozen", "In application: $0.00");
         switch (prefabName)
         {
             case "TXPanel":
                 report.fixture = "cash-main-wallet";
-                page.SetText("tier0", "$0.40"); page.SetText("tier1", "$0.60"); page.SetText("tier2", "$500.00");
-                for (int i = 0; i < 4; i++) { page.SetVisible("tier" + i, i < 3); page.SetVisible("selected" + i, i == 2); }
+                page.SetText("tier0", WithdrawalPresentation.TierAmount(40)); page.SetText("tier1", WithdrawalPresentation.TierAmount(60)); page.SetText("tier2", WithdrawalPresentation.TierAmount(50000));
+                for (int i = 0; i < 4; i++) { page.SetVisible("tier" + i, i < 3); page.SetVisible("selected" + i, i == 2); page.SetVisible("selectedAmount" + i, i == 2); }
                 page.SetText("tierCost0", "$0.40"); page.SetText("tierCost1", "$0.60"); page.SetText("tierCost2", "$500.00");
-                page.SetText("amount", "$500.00"); page.SetText("balance", "$512.40");
+                page.SetText("amount", "$500.00"); page.SetText("balance", "$500.00");
                 page.SetText("target", "Balance target reached"); page.SetText("ratio", "100%");
                 page.SetText("apply", "CHOOSE CHANNEL"); page.SetButton(WithdrawalAction.Apply, true);
-                page.SetText("rewards", "Rewards (3)");
-                page.SetText("summary", "Balance ready. View all conditions before applying.");
+                page.SetText("rewards", "Rewards");
+                page.SetText("summary", WithdrawalPresentation.WalletSummary(WithdrawalRules.CreateDefault().Tiers[2]));
                 page.SetProgress(1);
                 break;
             case "TXCoinPanel":
-                report.fixture = "diamond-wallet-largest-published-tier";
-                string[] tiers = { "$500.00", "$1,000.00", "$1,500.00", "$2,000.00" };
+                report.fixture = "reference-diamond-wallet-500-tier";
+                long[] tiers = { 50000, 100000, 150000, 200000 };
                 for (int i = 0; i < tiers.Length; i++)
                 {
-                    page.SetText("tier" + i, tiers[i]); page.SetVisible("tier" + i, true);
+                    page.SetText("tier" + i, WithdrawalPresentation.TierAmount(tiers[i])); page.SetVisible("tier" + i, true);
                     page.SetText("tierCost" + i, ((i + 1) * 50000).ToString("N0", System.Globalization.CultureInfo.InvariantCulture));
-                    page.SetVisible("selected" + i, i == 3);
+                    page.SetVisible("selected" + i, i == 0);
+                    page.SetVisible("selectedAmount" + i, i == 0);
                 }
-                page.SetText("frozen", "Reserved: 0 diamonds");
-                page.SetText("amount", "$2,000.00"); page.SetText("balance", "139,400");
-                page.SetText("target", "Earn 60,600 diamonds more"); page.SetText("ratio", "69%");
-                page.SetText("apply", "KEEP HARVESTING"); page.SetButton(WithdrawalAction.Apply, false);
-                page.SetText("rewards", "Rewards (3)");
-                page.SetText("summary", "Keep matching fruit to reach your target."); page.SetProgress(.697f);
+                page.SetText("frozen", "In application: 0 diamonds");
+                page.SetText("amount", "$500.00"); page.SetText("balance", "50,600");
+                page.SetText("target", "Balance target reached"); page.SetText("ratio", "100%");
+                page.SetText("apply", "CHOOSE CHANNEL"); page.SetButton(WithdrawalAction.Apply, true);
+                page.SetText("rewards", "Rewards");
+                page.SetText("summary", WithdrawalPresentation.WalletSummary(WithdrawalRules.CreateDefault().Tiers[3])); page.SetProgress(1);
                 break;
             case "TXChannelPanel":
                 report.fixture = "channel-with-full-destination-label";
@@ -551,21 +582,21 @@ public static class WithdrawalUIRenderValidation
             case "TXUserInfoSurePanel":
                 report.fixture = "full-confirmation-details";
                 page.SetText("amount", "$500.00");
-                page.SetText("channel", "Test wallet"); page.SetText("reserve", "$500.00"); page.SetText("afterBalance", "$12.40");
-                page.SetText("hint", "View all conditions before confirming.\nTest only; no payment account is collected.");
+                page.SetText("channel", "Test wallet"); page.SetText("reserve", "$500.00"); page.SetText("afterBalance", "$0.00");
+                page.SetText("hint", "Your test balance will be reserved.");
                 page.SetText("details", "No payment account is collected. Read all conditions before applying.");
                 break;
             case "TXProgress0Panel":
                 report.fixture = "cash-main-500-all-seven-conditions";
                 SetRequestFixture(page, "Conditions in progress");
                 var conditions = new[] {
-                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.PassLevel, Current = 30, Target = 2, Complete = true },
-                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.PassHideLevel, Current = 30, Target = 22, Complete = true },
-                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.PassStage2Level, Current = 30, Target = 51 },
+                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.PassLevel, Current = 51, Target = 2, Complete = true },
+                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.PassHideLevel, Current = 51, Target = 22, Complete = true },
+                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.PassStage2Level, Current = 51, Target = 51, Complete = true },
                     new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.GoldTarget, Current = 50000, Target = 50000, Complete = true },
-                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.LoginPassLevel, Current = 9, Target = 10 },
+                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.LoginPassLevel, Current = 8, Target = 10 },
                     new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.LoginDay, Current = 4, Target = 5 },
-                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.UserLevel, Current = 30, Target = 31 }
+                    new WithdrawalConditionProgress { Kind = WithdrawalConditionKind.UserLevel, Current = 49, Target = 31, Complete = true }
                 };
                 for (int i = 0; i < 7; i++)
                 {
@@ -574,28 +605,37 @@ public static class WithdrawalUIRenderValidation
                     page.SetText("cond" + i, WithdrawalPresentation.ConditionText(conditions[i], WithdrawalCurrency.Cash));
                     page.SetProgress("condition" + i, WithdrawalPresentation.Ratio(conditions[i].Current, conditions[i].Target));
                 }
+                page.SetVisible("levelsRow", true); page.SetVisible("dailyRow", true); page.SetVisible("daysRow", true); page.SetVisible("rankRow", true);
+                for (int i = 0; i < 3; i++) { page.SetVisible("levelDone" + i, true); page.SetVisible("levelPending" + i, false); }
+                page.SetVisible("rankDone", true);
+                page.SetText("milestones", "Level milestones " + WithdrawalPresentation.Milestones(WithdrawalRules.CreateDefault().Tiers[2]));
+                page.SetText("daily", WithdrawalPresentation.GroupedProgress(conditions[4]));
+                page.SetText("days", WithdrawalPresentation.GroupedProgress(conditions[5]));
+                page.SetText("rank", WithdrawalPresentation.GroupedProgress(conditions[6]));
+                page.SetText("dailyPercent", "80%"); page.SetText("daysPercent", "80%");
+                page.SetProgress("daily", .8f); page.SetProgress("days", .8f);
                 page.SetText("conditions", "[OK] Clear fruit levels  2 / 2\n"
                     + "[OK] First level milestone  22 / 22\n"
-                    + "[ ] Final level milestone  30 / 51\n"
-                    + "[ ] Win fruit levels in one UTC day  9 / 10\n"
+                    + "[OK] Final level milestone  51 / 51\n"
+                    + "[ ] Win fruit levels in one UTC day  8 / 10\n"
                     + "[ ] Days with the published daily win goal  4 / 5\n"
-                    + "[ ] Fruit rank from completed levels  30 / 31\n");
-                page.SetText("step", "3 / 7 CONDITIONS COMPLETE");
-                page.SetText("summary", "Earlier recorded progress counts. Keep playing to finish the remaining goals."); page.SetProgress(3f / 7);
+                    + "[OK] Fruit rank from completed levels  49 / 31\n");
+                page.SetText("step", "5 / 7 CONDITIONS COMPLETE");
+                page.SetText("summary", "Earlier recorded progress counts. Keep playing to finish the remaining goals."); page.SetProgress(5f / 7);
                 break;
             case "TXProgress1Panel":
                 report.fixture = "simulated-review-countdown";
                 SetRequestFixture(page, "Simulated review");
-                page.SetText("countdown", "00:59");
-                page.SetText("reviewHint", "All conditions complete.\nThe test finishes automatically when the timer ends.");
-                page.SetText("conditions", "Application saved locally.\nNo account information is needed.\n\nSimulated review: 59s remaining");
-                page.SetText("step", "SIMULATED REVIEW"); page.SetProgress(1f / 60);
+                page.SetText("countdown", "00:42");
+                page.SetText("reviewHint", "All conditions completed.\nReview completes automatically.");
+                page.SetText("conditions", "Application saved locally.\nNo account information is needed.\n\nSimulated review: 42s remaining");
+                page.SetText("step", "SIMULATED REVIEW"); page.SetProgress(18f / 60);
                 break;
             case "TXProgress2Panel":
                 report.fixture = "long-simulated-completion-status";
                 SetRequestFixture(page, "SIMULATED COMPLETE - NO PAYMENT");
-                page.SetText("resultTitle", "TEST COMPLETE");
-                page.SetText("resultDetail", "Simulation saved to Records.\nNo money was sent.");
+                page.SetText("resultTitle", "Simulation completed");
+                page.SetText("resultDetail", "No real money was sent");
                 page.SetText("conditions", "Simulation completed.\n\nNo money was sent.\nThis result is saved in Records.");
                 page.SetText("step", "SIMULATED COMPLETE - NO PAYMENT"); page.SetProgress(1);
                 page.SetButton(WithdrawalAction.Cancel, false);
@@ -603,9 +643,9 @@ public static class WithdrawalUIRenderValidation
             case "TXProgress3Panel":
                 report.fixture = "rejected-with-returned-units";
                 SetRequestFixture(page, "Test rejected - units returned");
-                page.SetText("resultTitle", "TEST REJECTED");
-                page.SetText("resultDetail", "Reserved reward units were returned.\nYou can start another test.");
-                page.SetText("afterBalance", "$512.40");
+                page.SetText("resultTitle", "Test request closed");
+                page.SetText("resultDetail", "Reserved units returned to wallet");
+                page.SetText("afterBalance", "$500.00");
                 page.SetText("conditions", "This test application was closed.\nThe reserved reward units were returned.\nYou can start another test.");
                 page.SetText("step", "Test rejected - units returned"); page.SetButton(WithdrawalAction.Cancel, false);
                 break;
@@ -613,22 +653,27 @@ public static class WithdrawalUIRenderValidation
                 report.fixture = report.recordsBottom ? "eight-records-scroll-bottom" : "eight-records-scroll-top";
                 report.fixtureNotes.Add("All eight configured record rows are active. Top and bottom screenshots exercise ScrollRect clipping; offscreen rows are expected.");
                 page.SetText("empty", "Your latest simulated applications");
-                string[] amounts = { "$2,000.00", "$1,500.00", "$1,000.00", "$500.00", "$0.60", "$0.40", "$500.00", "$2,000.00" };
-                string[] statuses = { "Test complete\nNo payment", "Rejected\nUnits returned", "Cancelled\nUnits returned", "Test review\nIn progress",
-                    "Conditions\nIn progress", "Test complete\nNo payment", "Cancelled\nUnits returned", "Test complete\nNo payment" };
+                string[] amounts = { "$500.00", "$0.60", "$0.40", "$500.00", "$1,000.00", "$1,500.00", "$500.00", "$2,000.00" };
+                WithdrawalRequestStatus[] statuses = { WithdrawalRequestStatus.SimulatedCompleted, WithdrawalRequestStatus.Cancelled,
+                    WithdrawalRequestStatus.SimulatedCompleted, WithdrawalRequestStatus.Rejected, WithdrawalRequestStatus.ConditionsPending,
+                    WithdrawalRequestStatus.ReviewPending, WithdrawalRequestStatus.Cancelled, WithdrawalRequestStatus.SimulatedCompleted };
+                string[] dates = { "2026-10-09", "2026-10-08", "2026-10-08", "2026-10-07", "2026-10-06", "2026-10-05", "2026-10-04", "2026-10-03" };
                 for (int i = 0; i < 8; i++)
                 {
                     page.SetVisible("record" + i, true); page.SetText("recordAmount" + i, amounts[i]);
-                    page.SetText("recordStatus" + i, statuses[i]);
-                    page.SetText("recordTime" + i, "2026-10-" + (9 - i).ToString("D2") + " 12:30 UTC");
+                    page.SetVisible("recordComplete" + i, statuses[i] == WithdrawalRequestStatus.SimulatedCompleted);
+                    page.SetVisible("recordOther" + i, statuses[i] != WithdrawalRequestStatus.SimulatedCompleted);
+                    page.SetText("recordStatus" + i, WithdrawalPresentation.RecordStatus(statuses[i]));
+                    long created = DateTimeOffset.Parse(dates[i] + "T12:30:00Z", System.Globalization.CultureInfo.InvariantCulture).ToUnixTimeSeconds();
+                    page.SetText("recordTime" + i, WithdrawalPresentation.RecordDate(created));
                 }
                 break;
             case "RewardGetPanel":
                 report.fixture = "accumulated-fruit-rewards";
-                page.SetText("rewardCash", "+$1.80");
-                page.SetText("rewardDiamonds", "+3,800 diamonds");
-                page.SetText("afterCash", "$514.20"); page.SetText("afterDiamonds", "143,200");
-                page.SetText("rewardDetail", "Earned from fruit matches and cleared levels.");
+                page.SetText("rewardCash", "$1.30");
+                page.SetText("rewardDiamonds", "+1,300 diamonds");
+                page.SetText("afterCash", "$500.00"); page.SetText("afterDiamonds", "50,600");
+                page.SetText("rewardDetail", "Fruit matches + level clear");
                 page.SetButton(WithdrawalAction.Claim, true);
                 break;
             case "RulesPanel":
@@ -637,7 +682,13 @@ public static class WithdrawalUIRenderValidation
                 WithdrawalRules fixtureRules = WithdrawalRules.CreateDefault();
                 string[] rules = WithdrawalPresentation.RuleRows(fixtureRules.Tiers[2], fixtureRules);
                 for (int i = 0; i < 8; i++) { page.SetVisible("rule" + i, true); page.SetText("rules" + i, rules[i]); }
-                page.SetText("ruleFootnote", "Earlier recorded progress counts. Conditions are checked together. One application at a time. No real payment.");
+                string[] summaries = WithdrawalPresentation.RuleSummaryRows(fixtureRules.Tiers[2]);
+                for (int i = 0; i < summaries.Length; i++)
+                {
+                    page.SetVisible("ruleSummaryRow" + i, !string.IsNullOrEmpty(summaries[i]));
+                    page.SetText("ruleSummary" + i, summaries[i]);
+                }
+                page.SetText("ruleFootnote", WithdrawalPresentation.RuleFootnote(fixtureRules.Tiers[2], fixtureRules));
                 page.SetText("rules", "$500.00 - ALL CONDITIONS\n\n"
                     + "Balance required: $500.00\nClear 2 fruit levels.\n"
                     + "Clear fruit level 22.\n"
