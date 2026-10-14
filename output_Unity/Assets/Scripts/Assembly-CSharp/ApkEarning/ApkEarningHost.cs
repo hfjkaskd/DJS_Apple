@@ -29,6 +29,7 @@ namespace FruitApkEarning
         public override PAIEAGDLCBJ Layer => PAIEAGDLCBJ.Top;
         public static bool IsOpen => MgrUI.Instance != null && MgrUI.Instance.IsOpenning(Path);
         public static string Money(long cents) => "$"+(cents/100m).ToString("N2",CultureInfo.InvariantCulture);
+        private static string SourceMoney(long cents) => "$"+(cents/100m).ToString(cents%100==0?"N0":"N2",CultureInfo.InvariantCulture);
         public static string DiamondText(long value) => (value/100m).ToString("0.##",CultureInfo.InvariantCulture);
 
         public static void Open(bool diamonds=false,bool rewards=false) { Open(diamonds,rewards,null); }
@@ -169,13 +170,14 @@ namespace FruitApkEarning
             else if(panel=="TXCoinPanel")
             {
                 long required=Service.Rules.DiamondTargets[tier],value=Service.Rules.DiamondPayoutCents[tier];
-                page.SetText("CoinValue",DiamondText(state.Diamonds));page.SetText("GoldValue",Money(state.Diamonds/100));
-                page.SetText("TipValue","100 = $1");page.SetText("TXTip","Withdraw "+Money(value));
-                page.SetText("IitemTip","Earn "+Money(Math.Max(0,required-state.Diamonds)/100)+" more to withdraw "+Money(value));
-                page.SetText("TipBarValue",Money(Math.Min(state.Diamonds,required)/100)+"/"+Money(value));
+                string amount=SourceMoney(value),remaining=SourceMoney(Math.Max(0,required-state.Diamonds)/100);
+                page.SetText("CoinValue",DiamondText(state.Diamonds));page.SetText("GoldValue",SourceMoney(state.Diamonds/100));
+                page.SetText("TipValue","100=$1");page.SetText("TXTip",amount+" Withdrawal Instructions:");
+                page.SetText("IitemTip","Balance reaches <color=#ABFA76>"+amount+"</color> to withdraw all\nStill <color=#ABFA76>"+remaining+"</color> to go");
+                page.SetText("TipBarValue",SourceMoney(Math.Min(state.Diamonds,required)/100)+"/"+amount);
                 page.SetProgress("TipBar",(float)state.Diamonds/required);
                 for(int i=0;i<4;i++){
-                    page.SetText("amounts["+i+"]",Money(Service.Rules.DiamondPayoutCents[i]));page.SetVisible("selectionFrames["+i+"]",i==tier);
+                    page.SetText("amounts["+i+"]",SourceMoney(Service.Rules.DiamondPayoutCents[i]));page.SetVisible("selectionFrames["+i+"]",i==tier);
                     var option=page.GetButton("options["+i+"]");var art=option==null?null:option.targetGraphic as UnityEngine.UI.Image;
                     var sprite=i==tier?selectedDiamondOption:normalDiamondOption;if(art!=null&&sprite!=null)art.sprite=sprite;
                 }
@@ -315,7 +317,7 @@ namespace FruitApkEarning
         }
         private void ShowHistory()
         {
-            Show("LocalCashHistory");page.SetText("titleLabel","Withdrawal History");page.SetText("balanceLabel","Available: "+Money(Service.State.CashCents));
+            Show("LocalCashHistory");page.SetText("titleLabel","Withdrawal History");page.SetText("balanceLabel",SourceMoney(Service.State.CashCents));
             page.Bind("closeButton",ShowWallet);
             var parent=page.GetObject("rowParent");if(parent==null)return;
             var prefab=Resources.Load<GameObject>("ApkEarningReference/Panels/LocalCashHistoryRow");
