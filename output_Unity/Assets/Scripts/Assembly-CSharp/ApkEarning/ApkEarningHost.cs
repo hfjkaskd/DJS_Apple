@@ -173,7 +173,8 @@ namespace FruitApkEarning
                 string amount=SourceMoney(value),remaining=SourceMoney(Math.Max(0,required-state.Diamonds)/100);
                 page.SetText("CoinValue",DiamondText(state.Diamonds));page.SetText("GoldValue",SourceMoney(state.Diamonds/100));
                 page.SetText("TipValue","100=$1");page.SetText("TXTip",amount+" Withdrawal Instructions:");
-                page.SetText("IitemTip","Balance reaches <color=#ABFA76>"+amount+"</color> to withdraw all\nStill <color=#ABFA76>"+remaining+"</color> to go");
+                string emphasis=ColorUtility.ToHtmlStringRGB(page.EmphasisColor);
+                page.SetText("IitemTip","Balance reaches <color=#"+emphasis+">"+amount+"</color> to withdraw all\nStill <color=#"+emphasis+">"+remaining+"</color> to go");
                 page.SetText("TipBarValue",SourceMoney(Math.Min(state.Diamonds,required)/100)+"/"+amount);
                 page.SetProgress("TipBar",(float)state.Diamonds/required);
                 for(int i=0;i<4;i++){

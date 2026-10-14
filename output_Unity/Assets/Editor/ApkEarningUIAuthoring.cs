@@ -82,6 +82,7 @@ public static class ApkEarningUIAuthoring
         BuildRecoveryPage();
         BuildHost();
         BuildConfig();
+        OrchardEarningArtAuthoring.ApplyIfConfigured();
         AssetDatabase.SaveAssets();
         GameResCatalogBuilder.Build();
         Debug.Log("[ApkEarningUIAuthoring] Saved " + authored.Count + " imported pages and " + totalBindings +

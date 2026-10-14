@@ -1,0 +1,1304 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38278cd96823f8d4fa4e317718d71fab, type: 3}
+  m_Name: OrchardEarningTheme
+  m_EditorClassIdentifier: 
+  Enabled: 1
+  PanelFolder: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels
+  AdditionalPrefabs:
+  - Assets/res/local/withdrawal/ApkEarningTop.prefab
+  - Assets/res/local/withdrawal/ApkEarningHost.prefab
+  SpriteRules:
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/panel.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 3.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/panel-heading.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 3.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/background.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 3.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/diamond-panel.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 3.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/wood-card.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 3.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-steps-panel.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 3.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 5.5
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cash-card.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 5.5
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/stats-panel.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 5.5
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 5.5
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-level-card.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 5.5
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-verification-card.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 5.5
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-currency-card.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 5.5
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-tip.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 5.5
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/approvedgarden/stats-card.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 5.5
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/localhistory/record-card.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 5.5
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/txrecordpanel/bg1.png
+    ReplacementPath: Assets/ApkEarningReference/Visuals/atlas/txrecordpanel/bg1.png
+    ImageType: 0
+    KeepImageType: 0
+    PreserveAspect: 1
+    PixelsPerUnitMultiplier: 1
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 3.2
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-cash-button.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 3.2
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-guide-withdraw.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 3.2
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/title.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 2.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 1
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cash-heading.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 2.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 1
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/wood-ribbon.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 2.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-ribbon.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 2.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/success-title.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 2.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-guide-title.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 2.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 1
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-complete-title.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 2.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-level-title.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 2.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-level-band.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 2.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-loading-band.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 2.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/approvedgarden/cash-title.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 2.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/approvedgarden/selection-title.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 2.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/approvedgarden/title.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 2.8
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 1
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/close.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopClose_top.asset
+    ImageType: 0
+    KeepImageType: 0
+    PreserveAspect: 1
+    PixelsPerUnitMultiplier: 1
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-blue-close.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopClose_top.asset
+    ImageType: 0
+    KeepImageType: 0
+    PreserveAspect: 1
+    PixelsPerUnitMultiplier: 1
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/amount-normal.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 4.5
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/amount-selected.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 4.5
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-milestone-pending.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopCloseBg.asset
+    ImageType: 0
+    KeepImageType: 0
+    PreserveAspect: 1
+    PixelsPerUnitMultiplier: 1
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-milestone-normal.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/MidBtn_Green.asset
+    ImageType: 0
+    KeepImageType: 0
+    PreserveAspect: 1
+    PixelsPerUnitMultiplier: 1
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-milestone-active.png
+    ReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+    ImageType: 0
+    KeepImageType: 0
+    PreserveAspect: 1
+    PixelsPerUnitMultiplier: 1
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-guide-node.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopCloseBg.asset
+    ImageType: 0
+    KeepImageType: 0
+    PreserveAspect: 1
+    PixelsPerUnitMultiplier: 1
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-track.png
+    ReplacementPath: Assets/res/local/common/sprite/ProgressBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 2
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+    ReplacementPath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+    ImageType: 1
+    KeepImageType: 1
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 1
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/diamond-progress-fill.png
+    ReplacementPath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+    ImageType: 1
+    KeepImageType: 1
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 1
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/locallucky/screw-decoration.png
+    ReplacementPath: Assets/OrchardEarningArt/AppleCrest.png
+    ImageType: 0
+    KeepImageType: 0
+    PreserveAspect: 1
+    PixelsPerUnitMultiplier: 1
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/newbieguidepanel/yellow-screw.png
+    ReplacementPath: Assets/res_server/server_images/fruit/Fruit_16.png
+    ImageType: 0
+    KeepImageType: 0
+    PreserveAspect: 1
+    PixelsPerUnitMultiplier: 1
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/localearningmessages/portrait-banner.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 4.5
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/localearningmessages/cash-banner.png
+    ReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+    ImageType: 1
+    KeepImageType: 0
+    PreserveAspect: 0
+    PixelsPerUnitMultiplier: 4.5
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/rewardactivation/reward2.png
+    ReplacementPath: Assets/OrchardEarningArt/AppleCrest.png
+    ImageType: 0
+    KeepImageType: 0
+    PreserveAspect: 1
+    PixelsPerUnitMultiplier: 1
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/rewardactivation/reward3.png
+    ReplacementPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Artwork/CashPile.asset
+    ImageType: 0
+    KeepImageType: 0
+    PreserveAspect: 1
+    PixelsPerUnitMultiplier: 1
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: X10
+  - SourcePath: Assets/ApkEarningReference/Visuals/atlas/rewardactivation/reward4.png
+    ReplacementPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Artwork/DiamondPile.asset
+    ImageType: 0
+    KeepImageType: 0
+    PreserveAspect: 1
+    PixelsPerUnitMultiplier: 1
+    Tint: {r: 1, g: 1, b: 1, a: 1}
+    AddAppleAccent: 0
+    OverlayText: 
+  DisplayFontPath: Assets/res/local/textmeshpro/resources/fonts & materials/802-CAI978
+    SDF.asset
+  DisplayMaterialPath: Assets/OrchardEarningArt/OrchardDisplay.mat
+  DisplayFontMinimumSize: 55
+  BodyColor: {r: 0.44313726, g: 0.22352941, b: 0.105882354, a: 1}
+  HeadingColor: {r: 0.47843137, g: 0.23921569, b: 0.101960786, a: 1}
+  ButtonTextColor: {r: 1, g: 1, b: 0.95686275, a: 1}
+  AccentTextColor: {r: 0.20784314, g: 0.43137255, b: 0.11372549, a: 1}
+  DisplayOutlineColor: {r: 0.43529412, g: 0.2, b: 0.05882353, a: 1}
+  DisplayOutlineWidth: 0.1
+  AppleCrestPath: Assets/OrchardEarningArt/AppleCrest.png
+  AppleAccentPath: Assets/res_server/server_images/fruit/Fruit_16.png
+  AddTitleApples: 1
+  AppleAccentAnchor: {x: 0, y: 0.8}
+  AppleAccentPosition: {x: 8, y: 8}
+  AppleAccentSize: {x: 86, y: 94}
+  RestyleSuccessLayout: 1
+  SuccessPanelSize: {x: 980, y: 1400}
+  SuccessPanelPosition: {x: 0, y: 40}
+  SuccessTitleSize: {x: 860, y: 150}
+  SuccessTitlePosition: {x: 0, y: 530}
+  SuccessLabelSize: {x: 760, y: 100}
+  SuccessCrestSize: {x: 420, y: 168}
+  SuccessCrestPosition: {x: 0, y: 140}
+  TestBackdropPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  TestBackdropPadding: {x: 32, y: 16}
+  TestBackdropColor: {r: 1, g: 1, b: 1, a: 0.96}
+  TestBackdropPixelsPerUnitMultiplier: 10
+  RewardOverlayPosition: {x: 0, y: 10}
+  RewardOverlaySize: {x: 180, y: 58}
+  RewardOverlayFontSize: 48
+  NormalMilestonePath: Assets/res/local/common/sprite/pop/PopCloseBg.asset
+  PassedMilestonePath: Assets/res/local/common/sprite/btn/MidBtn_Green.asset
+  ActiveMilestonePath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  NormalOptionTexture: Assets/res/local/common/sprite/pop/PopBg.png
+  SelectedOptionTexture: Assets/res/local/common/sprite/btn/Btn_Normal.png
+  NormalOptionBorder: {x: 230, y: 230, z: 230, w: 230}
+  SelectedOptionBorder: {x: 127, y: 103, z: 128, w: 103}
+  OptionPixelsPerUnitMultiplier: 4.5
+  AuthoredImages:
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalCashHistory.prefab
+    HierarchyIndices: 0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/panel.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalCashHistory.prefab
+    HierarchyIndices: 0/0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/wood-ribbon.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalCashHistory.prefab
+    HierarchyIndices: 0/0/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/close.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopClose_top.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalCashHistory.prefab
+    HierarchyIndices: 0/0/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalCashHistory.prefab
+    HierarchyIndices: 0/0/2/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/txrecordpanel/bg1.png
+    LastReplacementPath: Assets/ApkEarningReference/Visuals/atlas/txrecordpanel/bg1.png
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalCashHistoryEntry.prefab
+    HierarchyIndices: 0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalCashHistoryRow.prefab
+    HierarchyIndices: 0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/localhistory/record-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalCashHistoryRow.prefab
+    HierarchyIndices: 1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/localhistory/record-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalDiamondUnlockGuide.prefab
+    HierarchyIndices: 0/9/0/0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-currency-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalDiamondUnlockGuide.prefab
+    HierarchyIndices: 0/9/0/0/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-cash-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalDiamondUnlockGuide.prefab
+    HierarchyIndices: 0/9/0/0/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-tip.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalDiamondUnlockGuide.prefab
+    HierarchyIndices: 0/10/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalDiamondUnlockGuide.prefab
+    HierarchyIndices: 0/10/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/newbieguidepanel/yellow-screw.png
+    LastReplacementPath: Assets/res_server/server_images/fruit/Fruit_16.png
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningRecovery.prefab
+    HierarchyIndices: 0/0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cash-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningRecovery.prefab
+    HierarchyIndices: 0/1/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cash-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningRecovery.prefab
+    HierarchyIndices: 0/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/panel-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningRecovery.prefab
+    HierarchyIndices: 0/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cash-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningRecovery.prefab
+    HierarchyIndices: 0/5/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cash-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningRecovery.prefab
+    HierarchyIndices: 0/6/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/close.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopClose_top.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningRecovery.prefab
+    HierarchyIndices: 0/10/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningRecovery.prefab
+    HierarchyIndices: 0/11/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-track.png
+    LastReplacementPath: Assets/res/local/common/sprite/ProgressBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningRecovery.prefab
+    HierarchyIndices: 0/11/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+    LastReplacementPath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningRecovery.prefab
+    HierarchyIndices: 0/11/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningRecovery.prefab
+    HierarchyIndices: 0/14/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/approvedgarden/cash-title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningRecovery.prefab
+    HierarchyIndices: 0/16/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/0/0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/localearningmessages/cash-banner.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/0/1/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/localearningmessages/portrait-banner.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/0/2/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/localearningmessages/portrait-banner.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/0/3/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/localearningmessages/cash-banner.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/background.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/3/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/wood-ribbon.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-ribbon.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/5/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/5/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/wood-ribbon.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/6/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/6/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/wood-ribbon.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/7/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/7/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/wood-ribbon.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/8/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/8/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/wood-ribbon.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/9/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/9/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/wood-ribbon.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/2/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/success-title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalLuckyReward.prefab
+    HierarchyIndices: 0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/background.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalLuckyReward.prefab
+    HierarchyIndices: 1/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalLuckyReward.prefab
+    HierarchyIndices: 1/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/wood-ribbon.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalLuckyReward.prefab
+    HierarchyIndices: 1/4/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/locallucky/screw-decoration.png
+    LastReplacementPath: Assets/OrchardEarningArt/AppleCrest.png
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalLuckyReward.prefab
+    HierarchyIndices: 1/4/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/wood-ribbon.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalMainPanelTop.prefab
+    HierarchyIndices: 1/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-currency-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalMainPanelTop.prefab
+    HierarchyIndices: 1/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-cash-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalMainPanelTop.prefab
+    HierarchyIndices: 1/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-tip.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalMainPanelTop.prefab
+    HierarchyIndices: 2/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-currency-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalMainPanelTop.prefab
+    HierarchyIndices: 2/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-cash-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalMainPanelTop.prefab
+    HierarchyIndices: 2/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-tip.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalMainPanelTop.prefab
+    HierarchyIndices: 3/1/0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-milestone-pending.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopCloseBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalMainPanelTop.prefab
+    HierarchyIndices: 3/1/1/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-milestone-pending.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopCloseBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalMainPanelTop.prefab
+    HierarchyIndices: 3/1/2/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-milestone-pending.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopCloseBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalMainPanelTop.prefab
+    HierarchyIndices: 3/1/3/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-milestone-pending.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopCloseBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalMainPanelTop.prefab
+    HierarchyIndices: 3/1/3/3/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalMainPanelTop.prefab
+    HierarchyIndices: 3/1/4/3/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalSuccess.prefab
+    HierarchyIndices: 0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/background.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalSuccess.prefab
+    HierarchyIndices: 1/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalSuccess.prefab
+    HierarchyIndices: 1/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/success-title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalUserLevel.prefab
+    HierarchyIndices: 0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalUserLevel.prefab
+    HierarchyIndices: 0/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/wood-ribbon.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalUserLevel.prefab
+    HierarchyIndices: 0/3/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/close.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopClose_top.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalUserLevel.prefab
+    HierarchyIndices: 0/6/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-track.png
+    LastReplacementPath: Assets/res/local/common/sprite/ProgressBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalUserLevel.prefab
+    HierarchyIndices: 0/7/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+    LastReplacementPath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalUserLevel.prefab
+    HierarchyIndices: 0/9/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalConditions.prefab
+    HierarchyIndices: 0/0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cash-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalConditions.prefab
+    HierarchyIndices: 0/1/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cash-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalConditions.prefab
+    HierarchyIndices: 0/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/panel-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalConditions.prefab
+    HierarchyIndices: 0/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cash-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalConditions.prefab
+    HierarchyIndices: 0/5/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cash-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalConditions.prefab
+    HierarchyIndices: 0/6/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/close.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopClose_top.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalConditions.prefab
+    HierarchyIndices: 0/10/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalConditions.prefab
+    HierarchyIndices: 0/11/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-track.png
+    LastReplacementPath: Assets/res/local/common/sprite/ProgressBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalConditions.prefab
+    HierarchyIndices: 0/11/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+    LastReplacementPath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalConditions.prefab
+    HierarchyIndices: 0/11/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalConditions.prefab
+    HierarchyIndices: 0/14/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/approvedgarden/cash-title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalVerification.prefab
+    HierarchyIndices: 0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/panel.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalVerification.prefab
+    HierarchyIndices: 0/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalVerification.prefab
+    HierarchyIndices: 0/5/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/wood-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalVerification.prefab
+    HierarchyIndices: 0/6/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalVerification.prefab
+    HierarchyIndices: 0/7/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/wood-ribbon.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalVerification.prefab
+    HierarchyIndices: 0/9/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-blue-close.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopClose_top.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/NewbieGuidePanel.prefab
+    HierarchyIndices: 0/1/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/NewbieGuidePanel.prefab
+    HierarchyIndices: 0/1/1/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/newbieguidepanel/yellow-screw.png
+    LastReplacementPath: Assets/res_server/server_images/fruit/Fruit_16.png
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/PlayerInfo.prefab
+    HierarchyIndices: 0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/stats-panel.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/PlayerInfo.prefab
+    HierarchyIndices: 2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/approvedgarden/stats-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/PlayerInfo.prefab
+    HierarchyIndices: 3/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/approvedgarden/stats-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/PlayerInfo.prefab
+    HierarchyIndices: 4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/approvedgarden/stats-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/SuccessPanel.prefab
+    HierarchyIndices: 0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/background.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/SuccessPanel.prefab
+    HierarchyIndices: 1/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/SuccessPanel.prefab
+    HierarchyIndices: 1/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/success-title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXChannelPanel.prefab
+    HierarchyIndices: 0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/panel-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXChannelPanel.prefab
+    HierarchyIndices: 0/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXChannelPanel.prefab
+    HierarchyIndices: 0/3/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-blue-close.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopClose_top.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXChannelPanel.prefab
+    HierarchyIndices: 0/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXChannelPanel.prefab
+    HierarchyIndices: 0/5/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXCoinPanel.prefab
+    HierarchyIndices: 0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/diamond-panel.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXCoinPanel.prefab
+    HierarchyIndices: 0/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-ribbon.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXCoinPanel.prefab
+    HierarchyIndices: 0/3/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXCoinPanel.prefab
+    HierarchyIndices: 0/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/approvedgarden/selection-title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXCoinPanel.prefab
+    HierarchyIndices: 0/5/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/close.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopClose_top.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXCoinPanel.prefab
+    HierarchyIndices: 0/6/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/approvedgarden/title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXCoinPanel.prefab
+    HierarchyIndices: 0/11/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/amount-selected.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXCoinPanel.prefab
+    HierarchyIndices: 0/11/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/amount-normal.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXCoinPanel.prefab
+    HierarchyIndices: 0/11/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/amount-normal.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXCoinPanel.prefab
+    HierarchyIndices: 0/11/3/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/amount-normal.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXCoinPanel.prefab
+    HierarchyIndices: 0/12/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXCoinPanel.prefab
+    HierarchyIndices: 0/14/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXCoinPanel.prefab
+    HierarchyIndices: 0/14/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-track.png
+    LastReplacementPath: Assets/res/local/common/sprite/ProgressBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXCoinPanel.prefab
+    HierarchyIndices: 0/14/1/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+    LastReplacementPath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXGuideLoadingPanel.prefab
+    HierarchyIndices: 0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-loading-band.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXGuideLoadingPanel.prefab
+    HierarchyIndices: 0/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-track.png
+    LastReplacementPath: Assets/res/local/common/sprite/ProgressBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXGuideLoadingPanel.prefab
+    HierarchyIndices: 0/1/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+    LastReplacementPath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXGuideTargetCompletePanel.prefab
+    HierarchyIndices: 0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/panel.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXGuideTargetCompletePanel.prefab
+    HierarchyIndices: 0/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXGuideTargetCompletePanel.prefab
+    HierarchyIndices: 0/3/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXGuideTargetCompletePanel.prefab
+    HierarchyIndices: 0/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-complete-title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXLevelPanel.prefab
+    HierarchyIndices: 0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/panel.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXLevelPanel.prefab
+    HierarchyIndices: 0/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-level-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXLevelPanel.prefab
+    HierarchyIndices: 0/5/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-level-title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXLevelPanel.prefab
+    HierarchyIndices: 0/6/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXLevelPanel.prefab
+    HierarchyIndices: 0/7/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-level-band.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXLevelPanel.prefab
+    HierarchyIndices: 0/9/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-blue-close.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopClose_top.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXPanel.prefab
+    HierarchyIndices: 0/0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cash-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXPanel.prefab
+    HierarchyIndices: 0/1/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cash-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXPanel.prefab
+    HierarchyIndices: 0/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/panel-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXPanel.prefab
+    HierarchyIndices: 0/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cash-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXPanel.prefab
+    HierarchyIndices: 0/5/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cash-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXPanel.prefab
+    HierarchyIndices: 0/6/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/close.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopClose_top.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXPanel.prefab
+    HierarchyIndices: 0/10/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXPanel.prefab
+    HierarchyIndices: 0/11/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-track.png
+    LastReplacementPath: Assets/res/local/common/sprite/ProgressBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXPanel.prefab
+    HierarchyIndices: 0/11/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+    LastReplacementPath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXPanel.prefab
+    HierarchyIndices: 0/11/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXPanel.prefab
+    HierarchyIndices: 0/14/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/approvedgarden/cash-title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXProgress0Panel.prefab
+    HierarchyIndices: 0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-steps-panel.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXProgress0Panel.prefab
+    HierarchyIndices: 0/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXProgress0Panel.prefab
+    HierarchyIndices: 0/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXProgress0Panel.prefab
+    HierarchyIndices: 0/6/2/1/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXRecordGuidePanel.prefab
+    HierarchyIndices: 0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-guide-title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXRecordGuidePanel.prefab
+    HierarchyIndices: 0/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXRecordGuidePanel.prefab
+    HierarchyIndices: 0/3/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-track.png
+    LastReplacementPath: Assets/res/local/common/sprite/ProgressBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXRecordGuidePanel.prefab
+    HierarchyIndices: 0/3/0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+    LastReplacementPath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXRecordGuidePanel.prefab
+    HierarchyIndices: 0/3/1/0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-guide-node.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopCloseBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXRecordGuidePanel.prefab
+    HierarchyIndices: 0/3/1/0/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-guide-withdraw.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXRecordGuidePanel.prefab
+    HierarchyIndices: 0/3/1/1/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-guide-node.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopCloseBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXRecordGuidePanel.prefab
+    HierarchyIndices: 0/3/1/1/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-guide-withdraw.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXRecordGuidePanel.prefab
+    HierarchyIndices: 0/3/1/2/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-guide-node.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopCloseBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXRecordGuidePanel.prefab
+    HierarchyIndices: 0/3/1/2/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-guide-withdraw.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXRecordGuidePanel.prefab
+    HierarchyIndices: 0/3/1/3/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-guide-node.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopCloseBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXRecordGuidePanel.prefab
+    HierarchyIndices: 0/3/1/3/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-guide-withdraw.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXRecordGuidePanel.prefab
+    HierarchyIndices: 0/3/1/4/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-guide-withdraw.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXRecordGuidePanel.prefab
+    HierarchyIndices: 0/6/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXTooFastHintPanel.prefab
+    HierarchyIndices: 0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/panel-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXTooFastHintPanel.prefab
+    HierarchyIndices: 0/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXTooFastHintPanel.prefab
+    HierarchyIndices: 0/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-verification-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXTooFastHintPanel.prefab
+    HierarchyIndices: 0/3/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXTooFastHintPanel.prefab
+    HierarchyIndices: 0/6/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXTooFastHintPanel.prefab
+    HierarchyIndices: 0/7/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXTooFastHintPanel.prefab
+    HierarchyIndices: 0/8/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXTooFastHintPanel.prefab
+    HierarchyIndices: 0/8/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+    LastReplacementPath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXTooFastHintPanel.prefab
+    HierarchyIndices: 0/9/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXTooFastHintPanel.prefab
+    HierarchyIndices: 0/9/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+    LastReplacementPath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/progress-fill.png
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoPanel.prefab
+    HierarchyIndices: 0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/panel-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoPanel.prefab
+    HierarchyIndices: 0/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoPanel.prefab
+    HierarchyIndices: 0/5/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-blue-close.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopClose_top.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoPanel.prefab
+    HierarchyIndices: 0/6/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoPanel.prefab
+    HierarchyIndices: 0/7/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoPanel.prefab
+    HierarchyIndices: 0/8/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoPanel.prefab
+    HierarchyIndices: 0/9/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoPanel.prefab
+    HierarchyIndices: 0/11/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoSurePanel.prefab
+    HierarchyIndices: 0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/panel-heading.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoSurePanel.prefab
+    HierarchyIndices: 0/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/cream-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoSurePanel.prefab
+    HierarchyIndices: 0/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/title.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Orange.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoSurePanel.prefab
+    HierarchyIndices: 0/5/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/aux-blue-close.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopClose_top.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoSurePanel.prefab
+    HierarchyIndices: 0/6/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoSurePanel.prefab
+    HierarchyIndices: 0/6/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/primary-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/res/local/withdrawal/ApkEarningTop.prefab
+    HierarchyIndices: 1/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-currency-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/res/local/withdrawal/ApkEarningTop.prefab
+    HierarchyIndices: 1/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-cash-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/res/local/withdrawal/ApkEarningTop.prefab
+    HierarchyIndices: 1/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-tip.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/res/local/withdrawal/ApkEarningTop.prefab
+    HierarchyIndices: 2/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-currency-card.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/res/local/withdrawal/ApkEarningTop.prefab
+    HierarchyIndices: 2/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-cash-button.png
+    LastReplacementPath: Assets/res/local/common/sprite/btn/Btn_Normal.asset
+  - PrefabPath: Assets/res/local/withdrawal/ApkEarningTop.prefab
+    HierarchyIndices: 2/4/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-tip.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/res/local/withdrawal/ApkEarningTop.prefab
+    HierarchyIndices: 3/1/0/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-milestone-pending.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopCloseBg.asset
+  - PrefabPath: Assets/res/local/withdrawal/ApkEarningTop.prefab
+    HierarchyIndices: 3/1/1/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-milestone-pending.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopCloseBg.asset
+  - PrefabPath: Assets/res/local/withdrawal/ApkEarningTop.prefab
+    HierarchyIndices: 3/1/2/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-milestone-pending.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopCloseBg.asset
+  - PrefabPath: Assets/res/local/withdrawal/ApkEarningTop.prefab
+    HierarchyIndices: 3/1/3/0/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/main-milestone-pending.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopCloseBg.asset
+  - PrefabPath: Assets/res/local/withdrawal/ApkEarningTop.prefab
+    HierarchyIndices: 3/1/3/3/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/res/local/withdrawal/ApkEarningTop.prefab
+    HierarchyIndices: 3/1/4/3/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/octobergarden/input.png
+    LastReplacementPath: Assets/res/local/common/sprite/pop/PopBg.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/2/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/rewardactivation/reward4.png
+    LastReplacementPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Artwork/DiamondPile.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/6/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/rewardactivation/reward2.png
+    LastReplacementPath: Assets/OrchardEarningArt/AppleCrest.png
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/7/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/rewardactivation/reward3.png
+    LastReplacementPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Artwork/CashPile.asset
+  - PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab
+    HierarchyIndices: 0/1/8/1/
+    SourcePath: Assets/ApkEarningReference/Visuals/atlas/rewardactivation/reward4.png
+    LastReplacementPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Artwork/DiamondPile.asset
+  ThemeVersion: 2
