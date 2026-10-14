@@ -243,6 +243,19 @@ public class CollectItem : MonoBehaviour
 		t.localScale = Vector3.one * scale;
 	}
 
+	/// <summary>Keep the visible size continuous while moving between the fitted field and unscaled tray.</summary>
+	public void ReparentForFlight(Transform parent)
+	{
+		transform.SetParent(parent, true);
+		if (m_ScaleTrans != null && m_ScaleTrans != transform)
+		{
+			// SetParent(true) preserves world scale on the root. Transfer that ratio
+			// to the existing animated visual so flight ends at its authored target.
+			m_ScaleTrans.localScale = Vector3.Scale(m_ScaleTrans.localScale, transform.localScale);
+			transform.localScale = Vector3.one;
+		}
+	}
+
 	public void Init(int eleType, int tileId)
 	{
 		Id = tileId;

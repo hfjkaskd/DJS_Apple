@@ -185,6 +185,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		}
 		yield return null;
 		CreateAllItems(InConfig);
+		if (UI != null) UI.FitGameField(InConfig);
 		LevelData levelData = MainLevelData;
 		levelData.levelID = InConfig.levelID;
 		FruitWithdrawal.WithdrawalGameplayBridge.BeginRun(levelData);
@@ -358,6 +359,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 
 	public void OnClick(CollectItem InCollectItem)
 	{
+		if (FruitApkEarning.ApkEarningHost.IsOpen) return;
 		if (InCollectItem == null || InCollectItem.Status != LECIONHKEJL.OnField)
 		{
 			return;
@@ -419,7 +421,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		CollectAreaList.Insert(insertIndex, item);
 		item.Status = LECIONHKEJL.InCollect;
 		item.FromGameToBasket = true;
-		item.transform.SetParent(UI.m_CollectArea, true);
+		item.ReparentForFlight(UI.m_CollectArea);
 		item.RefreshCanvasLayers();
 		item.transform.SetAsLastSibling();
 		Vector3 target = CalculateCollectAreaPos(insertIndex);
@@ -1076,6 +1078,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 				continue;
 			}
 			item.transform.SetParent(UI.m_CollectArea, false);
+			item.transform.localScale = Vector3.one;
 			item.RefreshCanvasLayers();
 			item.Status = LECIONHKEJL.InCollect;
 			CollectAreaList.Add(item);
@@ -1085,6 +1088,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 			itemMap[item.Id] = item;
 		}
 		// 撤销栈（undoRecords 顺序为栈顶→栈底）
+		if (UI != null) UI.FitGameField(curLevelConfig);
 		for (int i = snapshot.undoRecords.Count - 1; i >= 0; i--)
 		{
 			UndoRecord undoRecord = snapshot.undoRecords[i];
@@ -1185,7 +1189,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		CollectAreaList.Remove(item);
 		item.Status = LECIONHKEJL.Returning;
 		item.KillMove();
-		item.transform.SetParent(ItemLayer, true);
+		item.ReparentForFlight(ItemLayer);
 		item.RefreshCanvasLayers();
 		item.transform.SetSiblingIndex(Mathf.Min(record.siblingIndex, ItemLayer.childCount - 1));
 		Vector3 target = new Vector3(record.anchoredPos.x, record.anchoredPos.y, 0f);

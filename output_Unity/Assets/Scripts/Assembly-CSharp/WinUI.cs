@@ -51,6 +51,7 @@ public class WinUI : BaseUI
 	public static int boxIndexAtWin;
 
 	private bool adRewardClaimed;
+	private bool earningRewardShown;
 
 	public override PAIEAGDLCBJ Layer => PAIEAGDLCBJ.Mid;
 
@@ -86,6 +87,7 @@ public class WinUI : BaseUI
 	protected override void BeforeOpen()
 	{
 		adRewardClaimed = false;
+		earningRewardShown = false;
 		GameAudio.Play(DLMJOHCOJKN.Play_sfx_ui_panel_game_win);
 		string levelFormat = OJEEJGGLNPC.Instance.GetText("common_levelwithindex");
 		if (m_WinLevel != null)
@@ -125,6 +127,7 @@ public class WinUI : BaseUI
 
 	protected override void AfterOpen()
 	{
+		Timer.Instance.Delay(Mathf.Max(openLockTime, 0.2f) + 0.1f, () => ShowEarningReward());
 		if (openLockTime > 0f)
 		{
 			MCCIJBJGMCK.Lock();
@@ -160,6 +163,22 @@ public class WinUI : BaseUI
 		{
 			return;
 		}
+		if (ShowEarningReward()) return;
+		ContinueAfterEarning();
+	}
+
+	private bool ShowEarningReward()
+	{
+		var service = FruitApkEarning.ApkEarningService.Instance;
+		if (!IsOpening || earningRewardShown || !service.Available || service.State.PendingRewards.Count == 0 || MCCIJBJGMCK.IsLock()) return false;
+		earningRewardShown = true;
+		FruitApkEarning.ApkEarningHost.Open(false, true, ContinueAfterEarning);
+		return true;
+	}
+
+	private void ContinueAfterEarning()
+	{
+		if (!IsOpening) return;
 		Close();
 		if (CorePlay.CorePlayUI.Instance != null)
 		{

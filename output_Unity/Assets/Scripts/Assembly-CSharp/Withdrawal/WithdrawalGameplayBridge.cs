@@ -1,5 +1,6 @@
 using System;
 using CorePlay;
+using FruitApkEarning;
 using UnityEngine;
 
 namespace FruitWithdrawal
@@ -14,7 +15,7 @@ namespace FruitWithdrawal
         {
             persistedRunId = null;
             initialized = true;
-            WithdrawalService.Instance.Init();
+            ApkEarningService.Instance.Init(JEFOMCDAPGK.Instance.CurMainLevelIndex);
         }
 
         public static bool BeginRun(LevelData levelData)
@@ -31,35 +32,35 @@ namespace FruitWithdrawal
                 Debug.LogWarning("[Withdrawal] Could not save the gameplay attempt. Rewards are skipped for this attempt.");
                 return false;
             }
-            if (!initialized || !WithdrawalService.Instance.IsAvailable) return false;
-            string accepted = WithdrawalService.Instance.BeginRun(levelData.withdrawalRunId, levelData.elimGroupCount);
-            if (accepted != levelData.withdrawalRunId) return false;
-            persistedRunId = accepted;
+            if (!initialized || !ApkEarningService.Instance.Available) return false;
+            if (!ApkEarningService.Instance.BeginRun(levelData.withdrawalRunId, levelData.elimGroupCount,
+                JEFOMCDAPGK.Instance.CurMainLevelIndex)) return false;
+            persistedRunId = levelData.withdrawalRunId;
             return true;
         }
 
         public static bool RecordTriple(LevelData levelData, int levelNumber)
         {
-            return CanRecord(levelData) && WithdrawalService.Instance.RecordTriple(
-                persistedRunId, levelData.elimGroupCount, levelNumber == 1);
+            return CanRecord(levelData) && ApkEarningService.Instance.RecordMatch(
+                persistedRunId, levelData.elimGroupCount, levelNumber,
+                levelData.totalItemCount > 0 && levelData.eliminatedItemCount >= levelData.totalItemCount);
         }
 
         public static bool RecordWin(LevelData levelData, int wonLevel)
         {
-            return CanRecord(levelData) && WithdrawalService.Instance.RecordWin(
-                persistedRunId, wonLevel, wonLevel == 1);
+            return CanRecord(levelData) && ApkEarningService.Instance.RecordWin(persistedRunId, wonLevel);
         }
 
         public static void Flush()
         {
-            if (initialized && WithdrawalService.Instance.IsAvailable)
-                WithdrawalService.Instance.Flush();
+            if (initialized && ApkEarningService.Instance.Available)
+                ApkEarningService.Instance.Flush();
         }
 
         private static bool CanRecord(LevelData levelData)
         {
             return initialized && levelData != null && !string.IsNullOrEmpty(persistedRunId)
-                && levelData.withdrawalRunId == persistedRunId && WithdrawalService.Instance.IsAvailable;
+                && levelData.withdrawalRunId == persistedRunId && ApkEarningService.Instance.Available;
         }
     }
 }
