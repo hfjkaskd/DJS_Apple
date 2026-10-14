@@ -16,3 +16,19 @@
 生成提示词：
 
 > Use case: stylized-concept. Asset type: one production-ready transparent UI ornament sprite for a Unity mobile apple-orchard fruit puzzle game. Reference image 1 is ONLY a style reference for the game's soft polished 3D fruit and foliage, not an edit target. Create a compact, charming orchard crest: three shiny ripe red apples, the center apple slightly larger, with short brown stems and a restrained fan of lush fresh green leaves behind them. Front-facing slightly elevated view, rounded toy-like forms, vivid fruit colors, warm upper-left highlights, soft painted 3D shading that matches the fruit game. Broad low composition about 2.5:1, all objects grouped together, a clean readable silhouette with a shallow curved bottom so the ornament sits above an orange rounded title plaque. Apples only, no other fruits. Single isolated ornament, no panel, no lettering, no numbers, no currency symbol, no watermark, no screws, no nuts, no scenery, no ground plane, no rectangle/background or baked checkerboard. Transparent pixels outside the ornament. Keep all leaves and stems within the image with roughly 7% empty transparent margin. Final sprite should still read at 180px width.
+
+## 美术配置与维护
+
+主题配置：`Assets/OrchardEarningArt/OrchardEarningTheme.asset`。在 Inspector 调整资源路径、九宫格像素倍率、字体颜色和装饰参数，然后在停止 Play 时执行 `Tools > Apk Earning > Apply Orchard Art and Validate`（Ctrl+Alt+O）。改动保存到 Prefab；运行时不动态构建美术结构。原有 `Build` 作者工具会在生成页面后重新应用已启用的主题。
+
+复用原游戏 `res/local/common/sprite` 中的 `PopBg`、`Btn_Normal`、`Btn_Orange`、`PopClose_top`、进度条和里程碑素材，标题使用 `802-CAI978 SDF`。苹果饰图按比例显示，透明纹理最大尺寸为 1024，禁用 mipmap；主体面板使用九宫格。钻石选档的两个 Resources 图片也同步更换，避免点击切档时恢复原版图片；两种底色上的金额统一深棕。
+
+现金、钻石、支付渠道图标、奖励数值、提现条件与代码事件绑定保留。钻石说明中的强调色读取 PageView 的 `EmphasisColor`，以保持奶油底上的可读性。主题作者工具位于 Editor 目录，运行时不依赖 Editor 分支。
+
+## 验证与实际对比（2026-10-14）
+
+- Unity 2022.3.62f3 成功编译并运行。32 个 Prefab 审计及 33 张静态多分辨率渲染完成，报告错误为 0。覆盖 1080×1920、1080×2340、720×1600；报告另保留原 CorePlayUI 字体、静态隐藏序列和输入占位文本的提示，不能据此声称所有旧界面均无警告。
+- 在当前关卡实际点击并验证现金钱包、历史记录、钻石钱包、500/1,000 档位切换、条件页及返回；通过正常水果三消触发幸运奖励，普通领取后余额更新并自动返回游戏。未通过修改存档构造截图。
+- 6 组修改前后对比保存于 `C:/Projects/DJS_Apple/orchard-art-review/output/index.html`，总览为同目录 `overview.png`。左右均为 Unity 实际运行截图；修改前来自此前保留的运行采集，修改后对应 `after/*.json` 的页面标识和时间。余额、奖励及日期存在正常运行产生的差异。
+- 原始截图位于 `before/`、`after/`，配对配置为 `pairs.json`，采集与静态验证报告保存在该审阅目录。对比工具只进行等比排版，不裁切、不修饰原始游戏画面。静态 Prefab 渲染不冒充运行截图。
+- 本轮提交为 Unity 工程美术更新，未重新构建 Android APK。测试状态与无真实打款说明继续保留。

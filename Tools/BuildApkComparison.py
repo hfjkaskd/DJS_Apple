@@ -1,4 +1,4 @@
-"""Lay out real APK / Unity runtime screenshots without changing their content.
+"""Lay out paired real runtime screenshots without changing their content.
 
 Example (PowerShell)::
 
@@ -12,6 +12,13 @@ are relative to their corresponding input directory. Example entry::
 
     {"id": "cash-wallet", "title": "现金钱包 / Cash wallet",
      "reference": "04-cash-wallet.png", "game": "cash-wallet.png"}
+
+Optional top-level ``left_label``, ``right_label`` and ``footer`` strings
+customize the comparison captions. Omit them to retain the original APK/game
+report labels. For an art revision, use e.g. ``left_label: 改前 / Before`` and
+``right_label: 苹果树风格 / Orchard style``; point ``--reference-dir`` at the
+before captures and ``--game-dir`` at the after captures. An empty footer hides
+the footer text. Labels do not alter capture pixels or source provenance.
 
 Only supplied captures are used. Images are fitted, with their original aspect
 ratio, inside a common 1080 x 1920 frame. No content is cropped or retouched.
@@ -54,10 +61,28 @@ class Pair:
     note: str
 
 
+@dataclass(frozen=True)
+class Labels:
+    left_label: str = "原 APK / Original APK"
+    right_label: str = "游戏实际运行 / Game runtime"
+    footer: str = "完整截图等比排版，保留原始画面 / Full captures; aspect ratio preserved"
+
+
+def load_labels(data: dict) -> Labels:
+    defaults = Labels()
+    values: dict[str, str] = {}
+    for key in ("left_label", "right_label", "footer"):
+        value = data.get(key, getattr(defaults, key))
+        if not isinstance(value, str) or (key != "footer" and not value.strip()):
+            raise ValueError(f"'{key}' must be a string; left and right labels cannot be empty.")
+        values[key] = value
+    return Labels(**values)
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--reference-dir", type=Path, required=True)
-    parser.add_argument("--game-dir", type=Path, required=True)
+    parser.add_argument("--reference-dir", type=Path, required=True, help="Left-side captures: original APK or before revision")
+    parser.add_argument("--game-dir", type=Path, required=True, help="Right-side captures: game runtime or after revision")
     parser.add_argument("--pairs", type=Path, required=True, help="JSON containing the actual capture pairings")
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--font", type=Path, help="A CJK-capable TrueType/OpenType font; defaults to Microsoft YaHei")
@@ -92,11 +117,12 @@ def input_path(directory: Path, relative: str) -> Path:
     return result
 
 
-def load_pairs(args: argparse.Namespace) -> tuple[str, list[Pair]]:
+def load_pairs(args: argparse.Namespace) -> tuple[str, list[Pair], Labels]:
     data = json.loads(args.pairs.read_text(encoding="utf-8-sig"))
     if not isinstance(data, dict) or not isinstance(data.get("pairs"), list) or not data["pairs"]:
         raise ValueError("The JSON must contain a nonempty 'pairs' array; no images are fabricated for missing pairings.")
     title = str(data.get("title", "APK 与游戏实际运行对比 / Actual runtime comparison"))
+    labels = load_labels(data)
     pairs: list[Pair] = []
     identifiers: set[str] = set()
     for index, entry in enumerate(data["pairs"], 1):
@@ -117,7 +143,7 @@ def load_pairs(args: argparse.Namespace) -> tuple[str, list[Pair]]:
                           input_path(args.reference_dir, entry.get("reference")),
                           input_path(args.game_dir, entry.get("game")),
                           str(entry.get("note", ""))))
-    return title, pairs
+    return title, pairs, labels
 
 
 def inspect_image(path: Path) -> dict:
@@ -162,14 +188,14 @@ def paste_capture(page: Image.Image, path: Path, left: int, top: int) -> list[in
         return [x, y, size[0], size[1]]
 
 
-def build_pair(pair: Pair, metadata: dict, target: Path, fonts: Path) -> None:
+def build_pair(pair: Pair, metadata: dict, target: Path, fonts: Path, labels: Labels) -> None:
     page = Image.new("RGB", (PAGE_WIDTH, PAGE_HEIGHT), BACKGROUND)
     draw = ImageDraw.Draw(page)
     centered_text(draw, pair.title, (MARGIN, 0, PAGE_WIDTH - MARGIN, TITLE_HEIGHT), fonts, 48)
     top = TITLE_HEIGHT + COLUMN_HEIGHT
     for column, label, path, key in (
-        (0, "原 APK / Original APK", pair.reference, "reference"),
-        (1, "游戏实际运行 / Game runtime", pair.game, "game"),
+        (0, labels.left_label, pair.reference, "reference"),
+        (1, labels.right_label, pair.game, "game"),
     ):
         left = MARGIN + column * (FRAME[0] + GAP)
         centered_text(draw, label, (left, TITLE_HEIGHT, left + FRAME[0], top), fonts, 32)
@@ -182,8 +208,8 @@ def build_pair(pair: Pair, metadata: dict, target: Path, fonts: Path) -> None:
     foot_top = top + FRAME[1] + CAPTION_HEIGHT
     if pair.note:
         centered_text(draw, pair.note, (MARGIN, foot_top, PAGE_WIDTH - MARGIN, foot_top + 44), fonts, 27, MUTED)
-    centered_text(draw, "完整截图等比排版，保留原始画面 / Full captures; aspect ratio preserved",
-                  (MARGIN, foot_top + 44, PAGE_WIDTH - MARGIN, PAGE_HEIGHT), fonts, 22, MUTED)
+    if labels.footer:
+        centered_text(draw, labels.footer, (MARGIN, foot_top + 44, PAGE_WIDTH - MARGIN, PAGE_HEIGHT), fonts, 22, MUTED)
     page.save(target, optimize=True)
 
 
@@ -214,11 +240,12 @@ def main() -> int:
             stream.reconfigure(encoding="utf-8")
     args = parse_args()
     try:
-        title, pairs = load_pairs(args)
+        title, pairs, labels = load_pairs(args)
         fonts = font_path(args.font)
         if not 300 <= args.overview_cell_width <= 1800:
             raise ValueError("--overview-cell-width must be between 300 and 1800.")
-        manifest = {"title": title, "frame_size": list(FRAME), "pair_image_size": [PAGE_WIDTH, PAGE_HEIGHT],
+        manifest = {"title": title, "left_label": labels.left_label, "right_label": labels.right_label,
+                    "footer": labels.footer, "frame_size": list(FRAME), "pair_image_size": [PAGE_WIDTH, PAGE_HEIGHT],
                     "processing": "EXIF orientation, aspect-preserving resize, letterbox; no crop or retouch",
                     "pairs": [{"id": pair.identifier, "title": pair.title, "note": pair.note,
                                "reference": inspect_image(pair.reference), "game": inspect_image(pair.game)}
@@ -234,7 +261,7 @@ def main() -> int:
             raise ValueError("Output must not overwrite a source capture or pairing configuration.")
         output.mkdir(parents=True, exist_ok=True)
         for pair, metadata, target in zip(pairs, manifest["pairs"], destinations):
-            build_pair(pair, metadata, target, fonts)
+            build_pair(pair, metadata, target, fonts, labels)
             metadata["output"] = target.name
         build_overview(title, destinations[:len(pairs)], output / "overview.png", fonts,
                        args.overview_columns, args.overview_cell_width)

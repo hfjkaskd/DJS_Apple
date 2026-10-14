@@ -18,7 +18,10 @@ public static class ApkEarningValidation
     private const string CorePath = "Assets/res/local/coreplay/CorePlayUI.prefab";
     private const string HostPath = "Assets/res/local/withdrawal/ApkEarningHost.prefab";
     private const string Output = "E:/CodexCacheBackups/DJS_Apple-apk-validation-20261014";
-    private static readonly string[] Pages = { "TXPanel", "TXCoinPanel", "LocalWithdrawalConditions", "LocalCashHistory", "LocalEarningSequence" };
+    private static readonly string[] Pages = {
+        "TXPanel", "TXCoinPanel", "LocalWithdrawalConditions", "LocalCashHistory", "LocalEarningSequence",
+        "LocalLuckyReward", "TXUserInfoPanel", "TXUserInfoSurePanel", "LocalSuccess", "LocalEarningRecovery"
+    };
     private static string pendingCapture;
     private static double captureDeadline;
 
