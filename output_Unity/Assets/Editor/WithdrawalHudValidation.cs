@@ -180,7 +180,7 @@ public static class WithdrawalHudValidation
             if (level != null)
             {
                 for (int i = 0; i < level.childCount; i++) level.GetChild(i).gameObject.SetActive(level.GetChild(i).name == "Bg_Normal");
-                foreach (TMP_Text text in level.GetComponentsInChildren<TMP_Text>(true)) text.text = "Level 4";
+                foreach (TMP_Text text in level.GetComponentsInChildren<TMP_Text>(true)) text.text = "4";
             }
             Orange.SafeAreaSim.InsetRect((RectTransform)instance.transform);
             report.safeAreaTopBottom = new Vector2(Orange.SafeAreaSim.Top, Orange.SafeAreaSim.Bottom);

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using Framework.Base.UtilModule;
 using Orange;
@@ -53,6 +54,8 @@ namespace CorePlay
 
 		[SerializeField]
 		private Image m_SettingBtnImg;
+
+		private Button settingButton;
 
 		[SerializeField]
 		private CorePlayItemBtn m_AddOneBtn;
@@ -177,7 +180,18 @@ namespace CorePlay
 			}
 			if (m_SettingBtn != null)
 			{
-				MCCIJBJGMCK.Get(m_SettingBtn).onClick = OnSettingBtnClick;
+				settingButton = m_SettingBtn.GetComponent<Button>();
+				if (settingButton != null)
+				{
+					settingButton.onClick.RemoveListener(OnSettingBtnClick);
+					settingButton.onClick.AddListener(OnSettingBtnClick);
+				}
+				InputMono legacyInput = m_SettingBtn.GetComponent<InputMono>();
+				if (legacyInput != null)
+				{
+					legacyInput.onClick = null;
+					legacyInput.enabled = false;
+				}
 			}
 			if (m_CommonCoinBtn != null)
 			{
@@ -238,7 +252,7 @@ namespace CorePlay
 		private void UpdateText()
 		{
 			int level = JEFOMCDAPGK.Instance.CurMainLevelIndex;
-			string levelStr = string.Format(OJEEJGGLNPC.Instance.GetText("common_levelwithindex"), level);
+			string levelStr = level.ToString(CultureInfo.InvariantCulture);
 			if (m_LevelTexts != null)
 			{
 				foreach (TextMeshProUGUI text in m_LevelTexts)
@@ -364,9 +378,20 @@ namespace CorePlay
 			}
 		}
 
-		private void OnSettingBtnClick(GameObject InGo)
+		private void OnSettingBtnClick()
 		{
+			if (MCCIJBJGMCK.IsLock()) return;
+			GameAudio.Play(DLMJOHCOJKN.Play_sfx_ui_button_common);
 			MgrUI.Instance.Open("pops/setting/GameSettingUI");
+		}
+
+		protected override void WhenDestroy()
+		{
+			if (settingButton != null)
+			{
+				settingButton.onClick.RemoveListener(OnSettingBtnClick);
+			}
+			base.WhenDestroy();
 		}
 
 		public void ChangeGameBg(string InMapID)

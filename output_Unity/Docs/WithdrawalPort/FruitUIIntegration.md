@@ -1,6 +1,6 @@
 # Fruit-style withdrawal interfaces
 
-The gameplay header shows separate cash and diamond cards with their current simulated balances above both the settings button and level title. Settings and the level share the next row. Each green Cash button opens the matching wallet; the small Rewards button opens unclaimed rewards. The former gameplay coin/purchase entry and bottom TEST shortcut are removed. The Home withdrawal entry stays removed. The gameplay board and tool positions are unchanged.
+The gameplay header uses one row: numeric level badge on the left, separate cash and diamond balance cards in the middle, and settings on the right. Each green Cash button opens the matching wallet; the small Rewards button below opens unclaimed rewards beside the test-state label. Settings uses a standard Button with code-bound events, and its entrance animation slides in from the right. The former gameplay coin/purchase entry and bottom TEST shortcut are removed. The Home withdrawal entry stays removed. The gameplay board and tool positions are unchanged.
 
 ## Top currency HUD and inventory-only tools
 
@@ -8,11 +8,11 @@ The gameplay header shows separate cash and diamond cards with their current sim
 
 The old gameplay `CommonCoinBtn` is inactive and the controller's serialized reference is cleared, so level transitions cannot reactivate it. Four tool roots now contain standard Unity Buttons targeting their visible child artwork; their old empty raycast graphics are disabled. Tools consume existing inventory only. Zero stock displays 0 and disables use; it cannot spend the legacy coins or open the shop. Free grants and unlock rewards remain available. Legacy coin plus signs and purchase callbacks are removed; paid shop items and offer buttons are hidden.
 
-`Tools > Withdrawal > Build Top Currency HUD` (Ctrl+Alt+H) saves the HUD and validates it outside Play mode. Its static authoring recipe is `Assets/Editor/WithdrawalHudAuthoring.cs`; the full reference interface builder forwards to it. `Tools/InstallCurrencyHud.py` performs bounded, idempotent edits to the gameplay prefab: old coin activation/reference, nested HUD overrides and four Button components. It preserves unrelated gameplay YAML documents.
+`Tools > Withdrawal > Build Top Currency HUD` (Ctrl+Alt+H) saves the HUD and validates it outside Play mode. Its static authoring recipe is `Assets/Editor/WithdrawalHudAuthoring.cs`; the full reference interface builder forwards to it. `Tools/InstallCurrencyHud.py` performs bounded, idempotent edits to the gameplay prefab: old coin activation/reference, nested HUD overrides, compact level/settings positions, and five Button components (four tools plus settings). It preserves unrelated gameplay YAML documents.
 
 Verification: 20 presentation/HUD tests and 7 purchase-removal tests pass. `WithdrawalHudValidation.Run` rendered 1080x1920, 1080x2340 and 720x1600 with no reported overlap, overflow, missing binding or active legacy-coin issues. Images and the report are in `C:/Projects/DJS_Apple/withdrawal-hud-validation`. These image fixtures use fixed sample balances; the live game reads the current local test balance.
 
-The open Unity Editor also ran Level 4 with the saved gameplay prefab. Both header buttons opened their corresponding cash/diamond wallets, and closing each returned to the game. The original coin entry was absent from the gameplay header.
+The open Unity Editor also ran Level 4 with the saved gameplay prefab. Both header buttons opened their corresponding cash/diamond wallets, and closing each returned to the game. The single-row update passed all three render sizes, and the right-side settings Button opened and closed the existing Settings panel in Play mode. The original coin entry was absent from the gameplay header.
 
 ## Saved interfaces and flow
 

@@ -42,10 +42,10 @@ public static class WithdrawalHudAuthoring
             rect.sizeDelta = new Vector2(1000, 174);
             rect.localScale = Vector3.one;
             var hud = root.GetComponent<WithdrawalHud>();
-            Currency(root.transform, "Cash", -256, "CashBundle", "$0.00", out hud.CashButton, out hud.Cash);
-            Currency(root.transform, "Diamonds", 256, "Gem", "0", out hud.DiamondButton, out hud.Diamonds);
-            Text("TestLabel", root.transform, new Vector2(-177, -130), new Vector2(625, 38), "TEST MODE • NO CASH VALUE", 24, false).color = Ink;
-            hud.RewardsButton = Action("Rewards", root.transform, new Vector2(355, -132), new Vector2(270, 48), "REWARDS", out hud.Rewards, false);
+            Currency(root.transform, "Cash", -196, "CashBundle", "$0.00", out hud.CashButton, out hud.Cash);
+            Currency(root.transform, "Diamonds", 196, "Gem", "0", out hud.DiamondButton, out hud.Diamonds);
+            Text("TestLabel", root.transform, new Vector2(-135, -130), new Vector2(470, 38), "TEST MODE • NO CASH VALUE", 24, false).color = Ink;
+            hud.RewardsButton = Action("Rewards", root.transform, new Vector2(260, -132), new Vector2(240, 48), "REWARDS", out hud.Rewards, false);
             hud.Rewards.fontSize = hud.Rewards.fontSizeMax = 25;
             hud.Rewards.fontSizeMin = 19;
             root.SetActive(true);
@@ -57,15 +57,17 @@ public static class WithdrawalHudAuthoring
 
     private static void Currency(Transform parent, string name, float x, string icon, string value, out Button button, out TMP_Text amount)
     {
-        var card = Image(name + "Card", parent, new Vector2(x, -50), new Vector2(488, 100), "InsetCard", true);
+        var card = Image(name + "Card", parent, new Vector2(x, -50), new Vector2(368, 100), "InsetCard", true);
         card.pixelsPerUnitMultiplier = 2.4f;
-        var glyph = Image(name + "Icon", card.transform, new Vector2(-192, 0), new Vector2(90, 80), icon, false);
+        var glyph = Image(name + "Icon", card.transform, new Vector2(-143, 0), new Vector2(66, 72), icon, false);
         glyph.preserveAspect = true;
-        amount = Text(name + "Balance", card.transform, new Vector2(-43, 0), new Vector2(214, 76), value, 48, true);
-        amount.fontSizeMin = 25;
+        amount = Text(name + "Balance", card.transform, new Vector2(-28, 0), new Vector2(152, 76), value, 38, true);
+        amount.fontSizeMin = 22;
         amount.enableWordWrapping = false;
         TMP_Text action;
-        button = Action(name, card.transform, new Vector2(162, 0), new Vector2(160, 94), "Cash", out action, true);
+        button = Action(name, card.transform, new Vector2(119, 0), new Vector2(118, 94), "Cash", out action, true);
+        action.fontSize = action.fontSizeMax = 32;
+        action.fontSizeMin = 26;
     }
 
     private static RectTransform Node(string name, Transform parent, Vector2 pos, Vector2 size)

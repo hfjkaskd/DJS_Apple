@@ -21,11 +21,34 @@ def main():
     updated = dict(docs)
     added = []
     button_count = 0
+
+    def field(file_id, key, value):
+        updated[file_id], count = re.subn(r'^  ' + re.escape(key) + r': .*$', '  ' + key + ': ' + value, updated[file_id], flags=re.M)
+        assert count == 1, (file_id, key)
+
+    # One fixed-width row: level badge, two currency cards, then settings.
+    # These are saved RectTransforms; runtime does not build or move the layout.
+    field('224894225446638996', 'm_AnchoredPosition', '{x: 0, y: -84}')
+    field('224250083484182041', 'm_AnchoredPosition', '{x: -450, y: 10}')
+    field('224041608817324026', 'm_AnchorMin', '{x: 0.5, y: 0.5}')
+    field('224041608817324026', 'm_AnchorMax', '{x: 0.5, y: 0.5}')
+    field('224041608817324026', 'm_AnchoredPosition', '{x: 450, y: 10}')
+    for rect_id in ('224290791091168379', '224083485975560739'):
+        field(rect_id, 'm_AnchoredPosition', '{x: 0, y: 0}')
+    for rect_id in ('224020314340478216', '224372353275341440', '224370081907136253'):
+        field(rect_id, 'm_AnchoredPosition', '{x: 0, y: 0}')
+        field(rect_id, 'm_SizeDelta', '{x: 110, y: 110}')
+    for rect_id in ('224502609866597578', '224583788928901705', '224817105377731967'):
+        field(rect_id, 'm_AnchoredPosition', '{x: 0, y: 1}')
+        field(rect_id, 'm_SizeDelta', '{x: 96, y: 94}')
+    for text_id in ('114975779338151784', '114904400124545405', '114232720755092366'):
+        for key, value in {'m_text': '4', 'm_fontSize': '60', 'm_fontSizeBase': '60', 'm_fontSizeMax': '60', 'm_fontSizeMin': '22', 'm_HorizontalAlignment': '2', 'm_enableWordWrapping': '0'}.items():
+            field(text_id, key, value)
+    for rect_id in ('224405989028062321', '224401109917237556'):
+        field(rect_id, 'm_AnchoredPosition', '{x: -34, y: 34}')
+        field(rect_id, 'm_SizeDelta', '{x: 28, y: 28}')
+
     for file_id, doc in docs.items():
-        if '  m_Name: Top\n' in doc:
-            rect_id = re.search(r'  - component: \{fileID: (\d+)\}', doc)[1]
-            updated[rect_id], count = re.subn(r'  m_AnchoredPosition: \{x: 0, y: -?\d+(?:\.\d+)?\}', '  m_AnchoredPosition: {x: 0, y: -278}', docs[rect_id])
-            assert count == 1
         if 'guid: d9c7a76c884c2e964193a2b8a8f91417,' in doc:
             updated[file_id], count = re.subn(r'  m_CommonCoinBtn: \{fileID: -?\d+\}', '  m_CommonCoinBtn: {fileID: 0}', doc)
             assert count == 1
@@ -36,22 +59,23 @@ def main():
             updated[file_id], count = re.subn(r'    m_Modifications:\n.*?(?=    m_RemovedComponents:)', '    m_Modifications: []\n', doc, flags=re.S)
             # A second run already has no overrides.
             assert count == 1 or '    m_Modifications: []\n' in doc
-        if 'guid: e27dfa1edef8d05e624efed135e4c05e,' not in doc:
+        is_setting = file_id == '1946936116752871'
+        if not is_setting and 'guid: e27dfa1edef8d05e624efed135e4c05e,' not in doc:
             continue
-        go_id = re.search(r'  m_GameObject: \{fileID: (\d+)\}', doc)[1]
+        go_id = file_id if is_setting else re.search(r'  m_GameObject: \{fileID: (\d+)\}', doc)[1]
         components = re.findall(r'  - component: \{fileID: (\d+)\}', docs[go_id])
         if any(f'guid: {BUTTON_GUID},' in docs[c] for c in components):
             button_count += 1
             continue
         # The existing visible background is a child of this button root. Retire the
         # legacy empty CustomImage hit region and use the actual artwork as the target.
-        graphics = [re.search(r'  m_ItemBG: \{fileID: (\d+)\}', doc)[1]]
+        graphics = ['114616352195932608' if is_setting else re.search(r'  m_ItemBG: \{fileID: (\d+)\}', doc)[1]]
         assert '  m_Sprite:' in docs[graphics[0]]
         updated[graphics[0]] = docs[graphics[0]].replace('  m_RaycastTarget: 0\n', '  m_RaycastTarget: 1\n')
         for component in components:
             if '  m_RaycastTarget:' in docs[component] and '  m_Sprite:' not in docs[component]:
                 updated[component] = docs[component].replace('  m_RaycastTarget: 1\n', '  m_RaycastTarget: 0\n')
-        button_id = str(7900401400010000 + button_count)
+        button_id = '7900401400010010' if is_setting else str(7900401400010000 + button_count)
         assert button_id not in docs
         button_count += 1
         updated[go_id] = docs[go_id].replace('  m_Layer:', f'  - component: {{fileID: {button_id}}}\n  m_Layer:', 1)
@@ -100,7 +124,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
 ''')
-    assert button_count == 4, button_count
+    assert button_count == 5, button_count
     result = text[:matches[0].start()] + ''.join(updated.values()) + ''.join(added)
     assert PATH.read_bytes() == original, 'Prefab changed during analysis'
     PATH.write_bytes(result.encode('utf-8'))
