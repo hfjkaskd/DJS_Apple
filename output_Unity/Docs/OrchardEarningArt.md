@@ -32,3 +32,13 @@
 - 6 组修改前后对比保存于 `C:/Projects/DJS_Apple/orchard-art-review/output/index.html`，总览为同目录 `overview.png`。左右均为 Unity 实际运行截图；修改前来自此前保留的运行采集，修改后对应 `after/*.json` 的页面标识和时间。余额、奖励及日期存在正常运行产生的差异。
 - 原始截图位于 `before/`、`after/`，配对配置为 `pairs.json`，采集与静态验证报告保存在该审阅目录。对比工具只进行等比排版，不裁切、不修饰原始游戏画面。静态 Prefab 渲染不冒充运行截图。
 - 本轮提交为 Unity 工程美术更新，未重新构建 Android APK。测试状态与无真实打款说明继续保留。
+
+## 立体感微调
+
+沿用同一套苹果树素材，适度降低九宫格的像素倍率，使原图已有的橙色倒角、奶油内高光和绿色按钮下缘重新显现。主面板、大内卡、小输入框及 HUD 分别配置倍率，避免小控件变成胶囊形。大内卡略微调暖，与主面板拉开层次。
+
+轻投影通过标准 Unity UI `Shadow` 配置在原有 Image 对象上，颜色、偏移和开关保存在主题的 SpriteRule 中。作者工具只在 Editor 保存 Prefab；运行时复用已有结构。每个适用 Graphic 仅单层阴影，不引入实时灯光、模糊材质、额外大纹理或逐帧逻辑。保留原 Button 点击区域、货币标识和测试状态。
+
+本次微调在 Unity 中重新编译、应用并验证：32 个 Prefab 审计、33 张三种分辨率渲染的错误为 0；保留上述既有提示。实际打开现金钱包、钻石钱包及游戏顶部栏，验证 500/1,000 档位往返切换，三次运行采集的错误均为 0。
+
+3 组真实运行对比位于 `C:/Projects/DJS_Apple/orchard-depth-review/output/index.html`，原始图片及采集 JSON 位于该目录上级的 `before/`、`after/`；静态报告为 `prefab-fixtures-report.json`。左右分别为上一版苹果树美术和本次立体感微调，均为 Unity 运行图。本轮未重新构建 Android APK。
