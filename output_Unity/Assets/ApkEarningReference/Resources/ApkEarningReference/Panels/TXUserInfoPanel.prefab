@@ -456,6 +456,7 @@ GameObject:
   - component: {fileID: 222279359913592680}
   - component: {fileID: 114384403120170545}
   - component: {fileID: 114149520701623706}
+  - component: {fileID: 4339264213094589022}
   m_Layer: 5
   m_Name: InputName
   m_TagString: Untagged
@@ -520,7 +521,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 5.5
+  m_PixelsPerUnitMultiplier: 4.8
 --- !u!114 &114149520701623706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,6 +620,21 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &4339264213094589022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044625135789424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.34509805, g: 0.1764706, b: 0.08627451, a: 0.13}
+  m_EffectDistance: {x: 0, y: -4}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1061268324235159
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,6 +788,7 @@ GameObject:
   - component: {fileID: 224726790013014859}
   - component: {fileID: 222436073260064126}
   - component: {fileID: 114693329660128220}
+  - component: {fileID: 3409753450528004599}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -837,7 +854,22 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 2.8
+  m_PixelsPerUnitMultiplier: 2.4
+--- !u!114 &3409753450528004599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099118695303065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.34509805, g: 0.1764706, b: 0.08627451, a: 0.16}
+  m_EffectDistance: {x: 0, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1161607090078389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,6 +1188,7 @@ GameObject:
   - component: {fileID: 222703931505913403}
   - component: {fileID: 114121005239445321}
   - component: {fileID: 114806657225351454}
+  - component: {fileID: 923851986894499370}
   m_Layer: 5
   m_Name: InputNumber
   m_TagString: Untagged
@@ -1220,7 +1253,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 5.5
+  m_PixelsPerUnitMultiplier: 4.8
 --- !u!114 &114806657225351454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1319,6 +1352,21 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &923851986894499370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256069497284392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.34509805, g: 0.1764706, b: 0.08627451, a: 0.13}
+  m_EffectDistance: {x: 0, y: -4}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1302127217294661
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,6 +2146,7 @@ GameObject:
   - component: {fileID: 222215879266689626}
   - component: {fileID: 114689364072382846}
   - component: {fileID: 114043919389829319}
+  - component: {fileID: 7736018952849723012}
   m_Layer: 5
   m_Name: Get
   m_TagString: Untagged
@@ -2162,7 +2211,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 3.2
+  m_PixelsPerUnitMultiplier: 1.8
 --- !u!114 &114043919389829319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2207,6 +2256,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7736018952849723012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587765826080250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.34509805, g: 0.1764706, b: 0.08627451, a: 0.16}
+  m_EffectDistance: {x: 0, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1589667821646929
 GameObject:
   m_ObjectHideFlags: 0
@@ -2656,6 +2720,7 @@ GameObject:
   - component: {fileID: 222358105479016104}
   - component: {fileID: 114291632710222552}
   - component: {fileID: 114433013960508438}
+  - component: {fileID: 6529148564944327123}
   m_Layer: 5
   m_Name: InputEmail
   m_TagString: Untagged
@@ -2720,7 +2785,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 5.5
+  m_PixelsPerUnitMultiplier: 4.8
 --- !u!114 &114433013960508438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2819,6 +2884,21 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &6529148564944327123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694121525821480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.34509805, g: 0.1764706, b: 0.08627451, a: 0.13}
+  m_EffectDistance: {x: 0, y: -4}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1703437598541787
 GameObject:
   m_ObjectHideFlags: 0
@@ -3950,6 +4030,7 @@ GameObject:
   - component: {fileID: 224472185465350827}
   - component: {fileID: 222518489005915545}
   - component: {fileID: 114220653531496868}
+  - component: {fileID: 1539407713213628176}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -4013,7 +4094,22 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 3.8
+  m_PixelsPerUnitMultiplier: 2.4
+--- !u!114 &1539407713213628176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724804207875695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.34509805, g: 0.1764706, b: 0.08627451, a: 0.18}
+  m_EffectDistance: {x: 0, y: -8}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1730242686860875
 GameObject:
   m_ObjectHideFlags: 0
@@ -4809,6 +4905,7 @@ GameObject:
   - component: {fileID: 222552309709192268}
   - component: {fileID: 114571878917323452}
   - component: {fileID: 114534704304255049}
+  - component: {fileID: 944929915539097545}
   m_Layer: 5
   m_Name: InputAreaNumber
   m_TagString: Untagged
@@ -4873,7 +4970,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 5.5
+  m_PixelsPerUnitMultiplier: 4.8
 --- !u!114 &114534704304255049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4972,6 +5069,21 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &944929915539097545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985305603660343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.34509805, g: 0.1764706, b: 0.08627451, a: 0.13}
+  m_EffectDistance: {x: 0, y: -4}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8408153696987561694
 GameObject:
   m_ObjectHideFlags: 0

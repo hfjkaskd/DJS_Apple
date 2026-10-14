@@ -91,25 +91,67 @@ public static class OrchardEarningArtAuthoring
 
     private static void UpgradeTheme(OrchardEarningTheme theme)
     {
-        if (theme.ThemeVersion >= 2) return;
+        if (theme.ThemeVersion >= 3) return;
+        if (theme.ThemeVersion < 2)
+        {
+            foreach (var rule in theme.SpriteRules)
+            {
+                if (rule.SourcePath == SourceArt + "txrecordpanel/bg1.png")
+                {
+                    rule.ReplacementPath = rule.SourcePath;
+                    rule.ImageType = Image.Type.Simple; rule.KeepImageType = false;
+                    rule.PreserveAspect = true; rule.PixelsPerUnitMultiplier = 1;
+                }
+                if (rule.SourcePath == SourceArt + "approvedgarden/cash-title.png" ||
+                    rule.SourcePath == SourceArt + "approvedgarden/selection-title.png")
+                    rule.AddAppleAccent = false;
+            }
+            AddIfMissing(theme, "rewardactivation/reward2", theme.AppleCrestPath);
+            var multiplier = AddIfMissing(theme, "rewardactivation/reward3", ResourceArt + "CashPile.asset");
+            multiplier.OverlayText = "X10";
+            AddIfMissing(theme, "rewardactivation/reward4", ResourceArt + "DiamondPile.asset");
+            theme.ThemeVersion = 2;
+        }
+        // Version 3 adds restrained depth using the existing beveled sprites.
+        // Exact source rules leave currencies, fruit, progress fills and gameplay
+        // art alone. Values remain editable in the saved Inspector theme.
+        foreach (string name in new[] { "panel", "panel-heading", "background", "diamond-panel", "wood-card", "aux-steps-panel" })
+            SetDepth(theme, "octobergarden/" + name, 2.4f, .18f, -8);
+        foreach (string name in new[] { "cream-card", "cash-card", "stats-panel" })
+            SetDepth(theme, "octobergarden/" + name, 3.6f, .13f, -4, true);
+        SetDepth(theme, "approvedgarden/stats-card", 3.6f, .13f, -4, true);
+        SetDepth(theme, "localhistory/record-card", 3.6f, .13f, -4, true);
+        foreach (string name in new[] { "input", "aux-level-card", "aux-verification-card" })
+            SetDepth(theme, "octobergarden/" + name, 4.8f, .13f, -4);
+        foreach (string name in new[] { "main-currency-card", "main-tip" })
+            SetDepth(theme, "octobergarden/" + name, 4.5f, 0, 0);
+        SetDepth(theme, "octobergarden/primary-button", 1.8f, .16f, -5);
+        SetDepth(theme, "octobergarden/main-cash-button", 2.2f, 0, 0);
+        SetDepth(theme, "octobergarden/aux-guide-withdraw", 2.8f, .16f, -5);
+        foreach (string name in new[] { "title", "cash-heading", "wood-ribbon", "cream-ribbon", "success-title", "aux-guide-title", "aux-complete-title", "aux-level-title", "aux-level-band", "aux-loading-band" })
+            SetDepth(theme, "octobergarden/" + name, 2.4f, .16f, -5);
+        foreach (string name in new[] { "cash-title", "selection-title", "title" })
+            SetDepth(theme, "approvedgarden/" + name, 2.4f, .16f, -5);
+        theme.OptionPixelsPerUnitMultiplier = 2.8f;
+        SetDepth(theme, "octobergarden/amount-normal", theme.OptionPixelsPerUnitMultiplier, .13f, -4);
+        SetDepth(theme, "octobergarden/amount-selected", theme.OptionPixelsPerUnitMultiplier, .13f, -4);
+        theme.ThemeVersion = 3;
+        EditorUtility.SetDirty(theme);
+    }
+
+    private static void SetDepth(OrchardEarningTheme theme, string source, float ppu, float alpha, float offsetY, bool warmCard = false)
+    {
+        string path = SourceArt + source + ".png";
         foreach (var rule in theme.SpriteRules)
         {
-            if (rule.SourcePath == SourceArt + "txrecordpanel/bg1.png")
-            {
-                rule.ReplacementPath = rule.SourcePath;
-                rule.ImageType = Image.Type.Simple; rule.KeepImageType = false;
-                rule.PreserveAspect = true; rule.PixelsPerUnitMultiplier = 1;
-            }
-            if (rule.SourcePath == SourceArt + "approvedgarden/cash-title.png" ||
-                rule.SourcePath == SourceArt + "approvedgarden/selection-title.png")
-                rule.AddAppleAccent = false;
+            if (rule.SourcePath != path) continue;
+            rule.PixelsPerUnitMultiplier = ppu;
+            rule.AddShadow = alpha > 0;
+            rule.ShadowColor = new Color(88f / 255, 45f / 255, 22f / 255, alpha);
+            rule.ShadowOffset = new Vector2(0, offsetY);
+            if (warmCard) rule.Tint = new Color32(255, 248, 232, 255);
+            return;
         }
-        AddIfMissing(theme, "rewardactivation/reward2", theme.AppleCrestPath);
-        var multiplier = AddIfMissing(theme, "rewardactivation/reward3", ResourceArt + "CashPile.asset");
-        multiplier.OverlayText = "X10";
-        AddIfMissing(theme, "rewardactivation/reward4", ResourceArt + "DiamondPile.asset");
-        theme.ThemeVersion = 2;
-        EditorUtility.SetDirty(theme);
     }
 
     private static OrchardEarningTheme.SpriteRule AddIfMissing(OrchardEarningTheme theme, string source, string replacement)
@@ -146,6 +188,9 @@ public static class OrchardEarningArtAuthoring
         foreach (var rule in theme.SpriteRules)
         {
             if (string.IsNullOrEmpty(rule.SourcePath) || string.IsNullOrEmpty(rule.ReplacementPath)) continue;
+            if (rule.SourcePath == SourceArt + "octobergarden/amount-normal.png" ||
+                rule.SourcePath == SourceArt + "octobergarden/amount-selected.png")
+                rule.PixelsPerUnitMultiplier = theme.OptionPixelsPerUnitMultiplier;
             if (rules.ContainsKey(rule.SourcePath)) throw new InvalidOperationException("Duplicate orchard image rule: " + rule.SourcePath);
             rules.Add(rule.SourcePath, rule);
         }
@@ -171,6 +216,10 @@ public static class OrchardEarningArtAuthoring
                 {
                     if (image == null || image.name == AccentName || image.sprite == null) continue;
                     string source = AssetDatabase.GetAssetPath(image.sprite);
+                    // Runtime selection replaces only the sprite. Recognize its
+                    // exact Resources images if a page has been saved with one.
+                    if (source == ResourceArt + "DiamondOptionNormal.png") source = SourceArt + "octobergarden/amount-normal.png";
+                    else if (source == ResourceArt + "DiamondOptionSelected.png") source = SourceArt + "octobergarden/amount-selected.png";
                     string hierarchy = HierarchyIndices(root.transform, image.transform);
                     string key = path + "|" + hierarchy;
                     OrchardEarningTheme.SpriteRule rule;
@@ -195,13 +244,14 @@ public static class OrchardEarningArtAuthoring
                     image.pixelsPerUnitMultiplier = rule.PixelsPerUnitMultiplier;
                     image.preserveAspect = rule.PreserveAspect;
                     image.color = rule.Tint;
+                    ApplyImageShadow(image, rule);
                     AddAppleAccent(theme, image, rule.AddAppleAccent);
                     AddRewardOverlay(theme, image, rule.OverlayText, font, displayMaterial);
                     changedImages++;
                 }
                 StyleSuccessLayout(root, path, theme);
                 StyleTestCaption(root, theme);
-                StyleOptionImages(root, theme);
+                StyleOptionImages(root, theme, rules);
                 StyleTypography(root, theme, font, displayMaterial);
                 StyleOptionLabels(root, theme);
                 foreach (ApkEarningPageView page in root.GetComponentsInChildren<ApkEarningPageView>(true))
@@ -222,8 +272,25 @@ public static class OrchardEarningArtAuthoring
             " images. Currency icons, monetary values, conditions and test labels remain unchanged.");
     }
 
-    private static void StyleOptionImages(GameObject root, OrchardEarningTheme theme)
+    private static void ApplyImageShadow(Image image, OrchardEarningTheme.SpriteRule rule)
     {
+        // Reuse the same component, including an inherited one on a prefab
+        // variant. An Outline is a different effect and must not be repurposed.
+        Shadow shadow = null;
+        foreach (Shadow effect in image.GetComponents<Shadow>())
+            if (!(effect is Outline)) { shadow = effect; break; }
+        if (shadow == null && rule.AddShadow) shadow = image.gameObject.AddComponent<Shadow>();
+        if (shadow == null) return;
+        shadow.enabled = rule.AddShadow;
+        shadow.effectColor = rule.ShadowColor;
+        shadow.effectDistance = rule.ShadowOffset;
+        shadow.useGraphicAlpha = true;
+    }
+
+    private static void StyleOptionImages(GameObject root, OrchardEarningTheme theme,
+        Dictionary<string, OrchardEarningTheme.SpriteRule> rules)
+    {
+        rules.TryGetValue(SourceArt + "octobergarden/amount-normal.png", out var sharedOptionRule);
         foreach (ApkEarningPageView page in root.GetComponentsInChildren<ApkEarningPageView>(true))
         {
             for (int i = 0; i < 4; i++)
@@ -234,6 +301,9 @@ public static class OrchardEarningArtAuthoring
                 image.type = Image.Type.Sliced;
                 image.pixelsPerUnitMultiplier = theme.OptionPixelsPerUnitMultiplier;
                 image.preserveAspect = false;
+                // Keep all four shadows equal while runtime swaps normal and
+                // selected Resources sprites; no runtime component work needed.
+                if (sharedOptionRule != null) ApplyImageShadow(image, sharedOptionRule);
             }
         }
     }

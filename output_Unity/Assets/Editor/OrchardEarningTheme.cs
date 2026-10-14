@@ -19,6 +19,9 @@ public sealed class OrchardEarningTheme : ScriptableObject
         public Color Tint = Color.white;
         public bool AddAppleAccent;
         public string OverlayText;
+        public bool AddShadow;
+        public Color ShadowColor = new Color32(88, 45, 22, 33);
+        public Vector2 ShadowOffset = new Vector2(0, -4);
     }
 
     [Serializable]
@@ -91,7 +94,7 @@ public sealed class OrchardEarningTheme : ScriptableObject
     public string SelectedOptionTexture = "Assets/res/local/common/sprite/btn/Btn_Normal.png";
     public Vector4 NormalOptionBorder = new Vector4(230, 230, 230, 230);
     public Vector4 SelectedOptionBorder = new Vector4(127, 103, 128, 103);
-    [Min(.01f)] public float OptionPixelsPerUnitMultiplier = 4.5f;
+    [Min(.01f)] public float OptionPixelsPerUnitMultiplier = 2.8f;
 
     // Remember exact original images so a second apply can refresh parameters without
     // confusing a shared native card with a title or changing a business icon.
