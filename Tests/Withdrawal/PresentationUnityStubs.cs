@@ -68,10 +68,21 @@ namespace UnityEngine {
     }
     public static class Debug { public static void LogError(string value) { throw new Exception(value); } }
 }
-namespace TMPro { public sealed class TMP_Text { public string text; } }
+namespace TMPro {
+    public sealed class TMP_Text {
+        private string value;
+        public int WriteCount { get; private set; }
+        public string text { get { return value; } set { this.value=value; WriteCount++; } }
+    }
+}
 namespace UnityEngine.UI {
     public sealed class Image { public enum Type { Simple,Sliced,Tiled,Filled } public Type type; public float fillAmount; public bool enabled=true; public UnityEngine.RectTransform rectTransform=new UnityEngine.RectTransform(); }
-    public sealed class ClickEvent { private event Action handlers; public void AddListener(Action h) { handlers+=h; } public void Invoke() { handlers?.Invoke(); } }
+    public sealed class ClickEvent {
+        private event Action handlers;
+        public void AddListener(Action h) { handlers+=h; }
+        public void RemoveListener(Action h) { handlers-=h; }
+        public void Invoke() { handlers?.Invoke(); }
+    }
     public sealed class Button {
         public bool interactable = true; public readonly ClickEvent onClick = new ClickEvent();
         public void Press() { if(interactable) onClick.Invoke(); }
@@ -85,7 +96,9 @@ public class BaseUI : UnityEngine.MonoBehaviour {
 }
 public sealed class MgrUI {
     public static readonly MgrUI Instance = new MgrUI(); public Action OnClose;
-    public void Open(string path) { } public void Close(string path,bool animated) { OnClose?.Invoke(); }
+    public int OpenCount; public string LastOpenedPath;
+    public void Open(string path) { OpenCount++; LastOpenedPath=path; }
+    public void Close(string path,bool animated) { OnClose?.Invoke(); }
 }
 public static class MCCIJBJGMCK { public static bool IsLock() { return false; } }
 namespace FruitWithdrawal {
@@ -110,6 +123,7 @@ namespace FruitWithdrawal {
         public bool CancelRequest(string id) { return Mutate(e=>e.CancelRequest(id,Utc)); }
         public bool ResolveSimulation(string id,bool approved) { return Mutate(e=>e.ResolveSimulation(id,approved,Utc)); }
         public bool ClaimAllRewards() { return Mutate(e=>e.ClaimAllRewards(Utc)); }
+        public void SetAvailable(bool value) { IsAvailable=value; Changed?.Invoke(); }
         public long GetRemainingReviewSeconds() { return engine.GetRemainingReviewSeconds(Utc); }
         public WithdrawalConditionProgress[] GetConditions(string tier) { return engine.GetConditions(tier); }
     }

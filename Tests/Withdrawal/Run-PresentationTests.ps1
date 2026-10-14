@@ -4,7 +4,7 @@ $presentationData = Join-Path $UnityEditor 'Data'
 $presentationMono = Join-Path $presentationData 'MonoBleedingEdge/bin/mono.exe'
 $presentationCompiler = Join-Path $presentationData 'MonoBleedingEdge/lib/mono/4.5/csc.exe'
 $presentationOutput = Join-Path $env:TEMP 'FruitWithdrawal-PresentationTests.exe'
-$presentationSources = @('WithdrawalRules.cs','WithdrawalState.cs','WithdrawalEngine.cs','WithdrawalStorage.cs','WithdrawalPresentation.cs','WithdrawalHost.cs','WithdrawalPageView.cs') |
+$presentationSources = @('WithdrawalRules.cs','WithdrawalState.cs','WithdrawalEngine.cs','WithdrawalStorage.cs','WithdrawalPresentation.cs','WithdrawalHost.cs','WithdrawalPageView.cs','WithdrawalHud.cs') |
     ForEach-Object { Join-Path $presentationRepository ('output_Unity/Assets/Scripts/Assembly-CSharp/Withdrawal/' + $_) }
 & $presentationMono $presentationCompiler /nologo /target:exe "/out:$presentationOutput" @presentationSources (Join-Path $PSScriptRoot 'PresentationUnityStubs.cs') (Join-Path $PSScriptRoot 'WithdrawalPresentationTests.cs')
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

@@ -1,6 +1,18 @@
 # Fruit-style withdrawal interfaces
 
-The gameplay TEST money button opens the withdrawal pages. The Home entry stays removed. The gameplay board and its controls keep their original placement.
+The gameplay header now shows separate cash and diamond cards with their current simulated balances. Each green Cash button opens the matching wallet; the small Rewards button opens unclaimed rewards. The former gameplay coin/purchase entry and bottom TEST shortcut are removed. The Home withdrawal entry stays removed. The gameplay board and tool positions are unchanged.
+
+## Top currency HUD and inventory-only tools
+
+`WithdrawalHud.prefab` contains the two currency cards, standard Buttons, live amount labels, reward entry and explicit test-state label. `WithdrawalHud.Bind`/`Unbind` own the Changed subscription and code-only click listeners. Claiming rewards, reserving a request and returning it all refresh the displayed balances from the existing withdrawal service. No extra balance storage or real payment integration is introduced. An unavailable service disables the entries and clears stale amounts.
+
+The old gameplay `CommonCoinBtn` is inactive and the controller's serialized reference is cleared, so level transitions cannot reactivate it. Four tool roots now contain standard Unity Buttons targeting their visible child artwork; their old empty raycast graphics are disabled. Tools consume existing inventory only. Zero stock displays 0 and disables use; it cannot spend the legacy coins or open the shop. Free grants and unlock rewards remain available. Legacy coin plus signs and purchase callbacks are removed; paid shop items and offer buttons are hidden.
+
+`Tools > Withdrawal > Build Top Currency HUD` (Ctrl+Alt+H) saves the HUD and validates it outside Play mode. Its static authoring recipe is `Assets/Editor/WithdrawalHudAuthoring.cs`; the full reference interface builder forwards to it. `Tools/InstallCurrencyHud.py` performs bounded, idempotent edits to the gameplay prefab: old coin activation/reference, nested HUD overrides and four Button components. It preserves unrelated gameplay YAML documents.
+
+Verification: 20 presentation/HUD tests and 7 purchase-removal tests pass. `WithdrawalHudValidation.Run` rendered 1080x1920, 1080x2340 and 720x1600 with no reported overlap, overflow, missing binding or active legacy-coin issues. Images and the report are in `C:/Projects/DJS_Apple/withdrawal-hud-validation`. These image fixtures use fixed sample balances; the live game reads the current local test balance.
+
+The open Unity Editor also ran Level 4 with the saved gameplay prefab. Both header buttons opened their corresponding cash/diamond wallets, and closing each returned to the game. The original coin entry was absent from the gameplay header.
 
 ## Saved interfaces and flow
 
@@ -28,7 +40,7 @@ The conditions page groups level milestones, daily wins, qualified days and rank
 
 ## Verification scope
 
-`Tests/Withdrawal/Run-CoreTests.ps1` currently passes **10 domain/storage tests**. `Run-PresentationTests.ps1` currently passes **15 presentation checks** using the production Host/PageView/Presentation code, an in-memory Unity presentation stub, and the real state engine. The harness does not access player saves. Coverage includes full-canvas centering, safe-area fitting and minimal translation, cached layout lookup, sliced fill behavior, reward previews, synchronous Changed callbacks, Rules return paths, request-history isolation, grouped requirements, status indicators, short copy and automatic review completion.
+`Tests/Withdrawal/Run-CoreTests.ps1` previously passed **10 domain/storage tests**; the domain/storage code is unchanged by the HUD update. `Run-PresentationTests.ps1` now passes **20 presentation/HUD checks** using the production Host/PageView/Presentation/Hud code, an in-memory Unity presentation stub, and the real state engine. The harness does not access player saves. Coverage includes full-canvas centering, safe-area fitting and minimal translation, cached layout lookup, sliced fill behavior, reward previews, synchronous Changed callbacks, Rules return paths, request-history isolation, grouped requirements, status indicators, short copy, automatic review completion, currency balance changes and HUD listener lifecycle.
 
 The three runtime presentation files have also compiled against the installed Unity Core/UI/TMP assemblies without launching the Editor. This is a code check, not device verification.
 

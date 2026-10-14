@@ -12,6 +12,7 @@ internal static class WithdrawalPresentationTests
     private static WithdrawalScreen shown;
     private static int created;
     private static WithdrawalHost host;
+    private static WithdrawalHud hud;
 
     private static void Main()
     {
@@ -30,6 +31,11 @@ internal static class WithdrawalPresentationTests
         Run("Historical request terms do not replace wallet selection", History);
         Run("Review completion while reading Rules returns to terminal result", ReviewReturn);
         Run("Cancel Changed retains result and shows refunded balance", Cancel);
+        Run("HUD cash, diamond and rewards Buttons open their actual destinations", HudNavigation);
+        Run("HUD updates both currencies once when claiming a reward batch", HudClaim);
+        Run("HUD applies and refunds only the selected currency", HudReserveAndRefund);
+        Run("HUD repeated Bind and Unbind preserve one callback and current balances", HudLifecycle);
+        Run("HUD unavailable state clears values and disables all three Buttons", HudUnavailable);
         Console.WriteLine(passed+" presentation checks passed.");
     }
     private static void Run(string name,Action test) { test(); passed++; Console.WriteLine("PASS "+name); }
@@ -37,6 +43,7 @@ internal static class WithdrawalPresentationTests
     private static void True(bool value) { if(!value)throw new Exception("Assertion failed"); }
     private static WithdrawalService Setup(WithdrawalState state=null)
     {
+        if(hud!=null) { hud.Unbind(); hud=null; }
         if(host!=null)host.TestClose();
         var service=new WithdrawalService(WithdrawalRules.CreateDefault(),state??new WithdrawalState { CashCents=100000,DiamondUnits=100000 });
         host=new WithdrawalHost { PageRoot=new RectTransform(),Screens=new WithdrawalScreenDefinition[11] };
@@ -229,5 +236,88 @@ internal static class WithdrawalPresentationTests
     {
         var service=Setup();ApplySelected();int before=created;Click(WithdrawalAction.Cancel);
         Eq(before+1,created);Eq(WithdrawalScreen.Rejected,shown);Eq("Test request closed",Text("resultTitle"));Eq("$1,000.00",Text("afterBalance"));Eq(0L,service.State.FrozenCashCents);
+    }
+    private static WithdrawalHud MakeHud()
+    {
+        hud=new WithdrawalHud {
+            CashButton=new Button(),DiamondButton=new Button(),RewardsButton=new Button(),
+            Cash=new TMP_Text(),Diamonds=new TMP_Text(),Rewards=new TMP_Text()
+        };
+        hud.Bind();return hud;
+    }
+    private static void OpenFromHud(Button button,WithdrawalScreen expected)
+    {
+        host.TestClose();
+        int before=MgrUI.Instance.OpenCount;
+        button.Press();
+        Eq(before+1,MgrUI.Instance.OpenCount);Eq(WithdrawalHost.Path,MgrUI.Instance.LastOpenedPath);
+        host.TestOpen();Eq(expected,shown);
+    }
+    private static WithdrawalState WithHudRewards(long cash=100000,long diamonds=100000)
+    {
+        var state=new WithdrawalState { CashCents=cash,DiamondUnits=diamonds };
+        state.PendingRewards.Add(new WithdrawalReward { RewardId="hud-one",RunId="hud-run",CashCents=10,DiamondUnits=3 });
+        state.PendingRewards.Add(new WithdrawalReward { RewardId="hud-two",RunId="hud-run",CashCents=100,DiamondUnits=7 });
+        return state;
+    }
+    private static void HudNavigation()
+    {
+        Setup(WithHudRewards());MakeHud();
+        OpenFromHud(hud.CashButton,WithdrawalScreen.Cash);Eq("$0.40",Text("tier0"));
+        OpenFromHud(hud.DiamondButton,WithdrawalScreen.Diamonds);Eq("50,000",Text("tierCost0"));
+        OpenFromHud(hud.RewardsButton,WithdrawalScreen.Rewards);Eq("$1.10",Text("rewardCash"));
+    }
+    private static void HudClaim()
+    {
+        var service=Setup(WithHudRewards(200,100));MakeHud();
+        Eq("$2.00",hud.Cash.text);Eq("100",hud.Diamonds.text);Eq("Claim (2)",hud.Rewards.text);
+        int cashWrites=hud.Cash.WriteCount,diamondWrites=hud.Diamonds.WriteCount;
+        True(service.ClaimAllRewards());
+        Eq("$3.10",hud.Cash.text);Eq("110",hud.Diamonds.text);Eq("Rewards",hud.Rewards.text);
+        Eq(cashWrites+1,hud.Cash.WriteCount);Eq(diamondWrites+1,hud.Diamonds.WriteCount);
+        True(!service.ClaimAllRewards());Eq(cashWrites+1,hud.Cash.WriteCount);
+    }
+    private static void HudReserveAndRefund()
+    {
+        var service=Setup();MakeHud();
+        True(service.Apply("cash-main","test-wallet"));
+        Eq(50000L,service.State.FrozenCashCents);Eq("$500.00",hud.Cash.text);Eq("100,000",hud.Diamonds.text);
+        True(service.CancelRequest(service.State.ActiveRequest.RequestId));
+        Eq(0L,service.State.FrozenCashCents);Eq("$1,000.00",hud.Cash.text);Eq("100,000",hud.Diamonds.text);
+        True(service.Apply("diamond-500","test-bank"));
+        Eq(50000L,service.State.FrozenDiamondUnits);Eq("$1,000.00",hud.Cash.text);Eq("50,000",hud.Diamonds.text);
+        True(service.CancelRequest(service.State.ActiveRequest.RequestId));
+        Eq(0L,service.State.FrozenDiamondUnits);Eq("$1,000.00",hud.Cash.text);Eq("100,000",hud.Diamonds.text);
+    }
+    private static void HudLifecycle()
+    {
+        var service=Setup(WithHudRewards());MakeHud();hud.Bind();hud.Bind();
+        OpenFromHud(hud.CashButton,WithdrawalScreen.Cash);
+        OpenFromHud(hud.DiamondButton,WithdrawalScreen.Diamonds);
+        OpenFromHud(hud.RewardsButton,WithdrawalScreen.Rewards);
+        int cashWrites=hud.Cash.WriteCount,diamondWrites=hud.Diamonds.WriteCount;
+        True(service.ClaimAllRewards());Eq(cashWrites+1,hud.Cash.WriteCount);Eq(diamondWrites+1,hud.Diamonds.WriteCount);
+        hud.Unbind();hud.Unbind();
+        cashWrites=hud.Cash.WriteCount;diamondWrites=hud.Diamonds.WriteCount;
+        int opens=MgrUI.Instance.OpenCount;
+        hud.CashButton.Press();hud.DiamondButton.Press();hud.RewardsButton.Press();Eq(opens,MgrUI.Instance.OpenCount);
+        True(service.Apply("cash-main","test-wallet"));
+        Eq(cashWrites,hud.Cash.WriteCount);Eq(diamondWrites,hud.Diamonds.WriteCount);Eq("$1,001.10",hud.Cash.text);
+        hud.Bind();Eq("$501.10",hud.Cash.text);Eq("100,010",hud.Diamonds.text);
+        cashWrites=hud.Cash.WriteCount;
+        True(service.CancelRequest(service.State.ActiveRequest.RequestId));Eq("$1,001.10",hud.Cash.text);Eq(cashWrites+1,hud.Cash.WriteCount);
+        OpenFromHud(hud.DiamondButton,WithdrawalScreen.Diamonds);
+    }
+    private static void HudUnavailable()
+    {
+        var service=Setup(WithHudRewards());MakeHud();service.SetAvailable(false);
+        Eq("--",hud.Cash.text);Eq("--",hud.Diamonds.text);Eq("Unavailable",hud.Rewards.text);
+        True(!hud.CashButton.interactable);True(!hud.DiamondButton.interactable);True(!hud.RewardsButton.interactable);
+        int opens=MgrUI.Instance.OpenCount;
+        hud.CashButton.Press();hud.DiamondButton.Press();hud.RewardsButton.Press();Eq(opens,MgrUI.Instance.OpenCount);
+        service.SetAvailable(true);
+        Eq("$1,000.00",hud.Cash.text);Eq("100,000",hud.Diamonds.text);Eq("Claim (2)",hud.Rewards.text);
+        True(hud.CashButton.interactable);True(hud.DiamondButton.interactable);True(hud.RewardsButton.interactable);
+        OpenFromHud(hud.CashButton,WithdrawalScreen.Cash);
     }
 }
