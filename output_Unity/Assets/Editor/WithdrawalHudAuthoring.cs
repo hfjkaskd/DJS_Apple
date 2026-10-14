@@ -38,7 +38,7 @@ public static class WithdrawalHudAuthoring
             root.layer = 5;
             rect.anchorMin = rect.anchorMax = new Vector2(.5f, 1);
             rect.pivot = new Vector2(.5f, 1);
-            rect.anchoredPosition = new Vector2(0, -158);
+            rect.anchoredPosition = new Vector2(0, -24);
             rect.sizeDelta = new Vector2(1000, 174);
             rect.localScale = Vector3.one;
             var hud = root.GetComponent<WithdrawalHud>();

@@ -1,6 +1,6 @@
 # Fruit-style withdrawal interfaces
 
-The gameplay header now shows separate cash and diamond cards with their current simulated balances. Each green Cash button opens the matching wallet; the small Rewards button opens unclaimed rewards. The former gameplay coin/purchase entry and bottom TEST shortcut are removed. The Home withdrawal entry stays removed. The gameplay board and tool positions are unchanged.
+The gameplay header shows separate cash and diamond cards with their current simulated balances above both the settings button and level title. Settings and the level share the next row. Each green Cash button opens the matching wallet; the small Rewards button opens unclaimed rewards. The former gameplay coin/purchase entry and bottom TEST shortcut are removed. The Home withdrawal entry stays removed. The gameplay board and tool positions are unchanged.
 
 ## Top currency HUD and inventory-only tools
 

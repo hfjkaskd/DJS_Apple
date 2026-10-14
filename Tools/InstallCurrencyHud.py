@@ -22,6 +22,10 @@ def main():
     added = []
     button_count = 0
     for file_id, doc in docs.items():
+        if '  m_Name: Top\n' in doc:
+            rect_id = re.search(r'  - component: \{fileID: (\d+)\}', doc)[1]
+            updated[rect_id], count = re.subn(r'  m_AnchoredPosition: \{x: 0, y: -?\d+(?:\.\d+)?\}', '  m_AnchoredPosition: {x: 0, y: -278}', docs[rect_id])
+            assert count == 1
         if 'guid: d9c7a76c884c2e964193a2b8a8f91417,' in doc:
             updated[file_id], count = re.subn(r'  m_CommonCoinBtn: \{fileID: -?\d+\}', '  m_CommonCoinBtn: {fileID: 0}', doc)
             assert count == 1
