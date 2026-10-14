@@ -28,6 +28,8 @@ public class PopRemoveAD : BaseUI
 
 	protected override void BeforeOpen()
 	{
+		if (m_Buybtn != null) m_Buybtn.SetActive(false);
+		if (m_RestoreBtn != null) m_RestoreBtn.SetActive(false);
 	}
 
 	protected override void BeforeClose()

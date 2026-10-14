@@ -15,13 +15,8 @@ public class RemoveADItem : ShopItem
 	{
 		if (m_BuyBtn != null)
 		{
-			MCCIJBJGMCK.Get(m_BuyBtn).onClick = OnBuyBtnClick;
+			m_BuyBtn.SetActive(false);
 		}
 	}
 
-	private void OnBuyBtnClick(GameObject gameObject)
-	{
-		GameAudio.Play(DLMJOHCOJKN.Play_sfx_notice_purchased);
-		MgrGlobalUI.Instance.ShowGlobalText(OJEEJGGLNPC.Instance.GetText("shop_purchase_completed_text"), FFMLGGBCOOO.positive);
-	}
 }

@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>局内道具按钮：撤销/洗牌/魔法/扩容。管理锁定、直接使用、金币购买三种状态。</summary>
+/// <summary>局内道具按钮：撤销/洗牌/魔法/扩容。只使用已有库存，耗尽时不购买或跳转商店。</summary>
 public class CorePlayItemBtn : MonoBehaviour
 {
 	[SerializeField]
@@ -42,46 +42,34 @@ public class CorePlayItemBtn : MonoBehaviour
 
 	private DBMNIMJGPGN itemBtnStatus;
 
-	private DPOCDHPGHMF itemSpendReason;
-
-	private NMNPFKEJMHO itemAddSource;
-
-	private string VADStr;
+	private Button itemButton;
 
 	private bool clickDisabled;
 
 	public void Init(POJCEPBNNIP InType)
 	{
 		itemType = InType;
-		switch (InType)
+		itemButton = GetComponent<Button>();
+		if (itemButton != null)
 		{
-		case POJCEPBNNIP.Undo:
-			itemSpendReason = DPOCDHPGHMF.Undo;
-			itemAddSource = NMNPFKEJMHO.Undo;
-			break;
-		case POJCEPBNNIP.Shuffle:
-			itemSpendReason = DPOCDHPGHMF.Shuffle;
-			itemAddSource = NMNPFKEJMHO.Shuffle;
-			break;
-		case POJCEPBNNIP.Magic:
-			itemSpendReason = DPOCDHPGHMF.Magic;
-			itemAddSource = NMNPFKEJMHO.Magic;
-			break;
-		case POJCEPBNNIP.Extra:
-			itemSpendReason = DPOCDHPGHMF.Extra;
-			itemAddSource = NMNPFKEJMHO.Extra;
-			break;
+			itemButton.onClick.RemoveListener(OnButtonClick);
+			itemButton.onClick.AddListener(OnButtonClick);
 		}
-		InputMono input = MCCIJBJGMCK.Get(gameObject);
-		input.playClickSound = true;
-		input.onClick = OnClick;
+		// Legacy pointer input must not fire alongside the prefab's standard Button.
+		InputMono legacyInput = GetComponent<InputMono>();
+		if (legacyInput != null)
+		{
+			legacyInput.onClick = null;
+			legacyInput.enabled = false;
+		}
+		GNEJJHEDEBL.OnItemChanged -= OnItemChanged;
 		GNEJJHEDEBL.OnItemChanged += OnItemChanged;
 		UpdateStatus();
 	}
 
 	private void OnItemChanged(POJCEPBNNIP InType)
 	{
-		if (InType == itemType || InType == POJCEPBNNIP.Coin)
+		if (InType == itemType)
 		{
 			UpdateStatus();
 		}
@@ -112,8 +100,6 @@ public class CorePlayItemBtn : MonoBehaviour
 		int unlockLevel = GNEJJHEDEBL.Instance.GetItemUnlockLevel(itemType);
 		int curLevel = JEFOMCDAPGK.Instance.CurMainLevelIndex;
 		int count = GNEJJHEDEBL.Instance.GetItemCount(itemType, true);
-		int coinCount = GNEJJHEDEBL.Instance.GetItemCount(POJCEPBNNIP.Coin, true);
-		int goldCost = GNEJJHEDEBL.Instance.GetItemGoldCost(itemType);
 		if (curLevel < unlockLevel)
 		{
 			itemBtnStatus = DBMNIMJGPGN.Lock;
@@ -126,13 +112,9 @@ public class CorePlayItemBtn : MonoBehaviour
 		{
 			itemBtnStatus = DBMNIMJGPGN.UseDirectly;
 		}
-		else if (coinCount >= goldCost)
-		{
-			itemBtnStatus = DBMNIMJGPGN.UseGold;
-		}
 		else
 		{
-			itemBtnStatus = DBMNIMJGPGN.WatchAds;
+			itemBtnStatus = DBMNIMJGPGN.CanNotUseItem;
 		}
 		if (m_LockIcon != null)
 		{
@@ -140,15 +122,15 @@ public class CorePlayItemBtn : MonoBehaviour
 		}
 		if (m_UseDirectly != null)
 		{
-			m_UseDirectly.SetActive(itemBtnStatus == DBMNIMJGPGN.UseDirectly);
+			m_UseDirectly.SetActive(itemBtnStatus != DBMNIMJGPGN.Lock);
 		}
 		if (m_UseCoin != null)
 		{
-			m_UseCoin.SetActive(itemBtnStatus == DBMNIMJGPGN.UseGold);
+			m_UseCoin.SetActive(false);
 		}
 		if (m_WatchAD != null)
 		{
-			m_WatchAD.SetActive(itemBtnStatus == DBMNIMJGPGN.WatchAds);
+			m_WatchAD.SetActive(false);
 		}
 		if (m_OnlyUnlockIcon != null)
 		{
@@ -158,11 +140,18 @@ public class CorePlayItemBtn : MonoBehaviour
 		{
 			m_LeftItemNum.text = count.ToString();
 		}
-		if (m_ConsumeCoinNum != null)
+		if (itemButton != null)
 		{
-			m_ConsumeCoinNum.text = GNEJJHEDEBL.Instance.GetItemGoldCost(itemType).ToString();
+			itemButton.interactable = !clickDisabled && (itemBtnStatus == DBMNIMJGPGN.Lock || count > 0);
 		}
 		UpdateIconBehavior();
+	}
+
+	private void OnButtonClick()
+	{
+		if (clickDisabled || MCCIJBJGMCK.IsLock()) return;
+		GameAudio.Play(DLMJOHCOJKN.Play_sfx_ui_button_common);
+		OnClick(gameObject);
 	}
 
 	private void OnClick(GameObject InGo)
@@ -171,6 +160,9 @@ public class CorePlayItemBtn : MonoBehaviour
 		{
 			return;
 		}
+		// Inventory may change while another operation is finishing; never consume a stale UI state.
+		UpdateStatus();
+		if (itemBtnStatus != DBMNIMJGPGN.Lock && GNEJJHEDEBL.Instance.GetItemCount(itemType, true) <= 0) return;
 		switch (itemBtnStatus)
 		{
 		case DBMNIMJGPGN.Lock:
@@ -183,32 +175,9 @@ public class CorePlayItemBtn : MonoBehaviour
 		case DBMNIMJGPGN.CanNotUseItem:
 			ShowCanNotUseTip();
 			break;
-		case DBMNIMJGPGN.WatchAds:
-			MgrUI.Instance.Open("shop/prefab/ShopUI");
-			break;
 		case DBMNIMJGPGN.UseDirectly:
 			UseItem();
 			break;
-		case DBMNIMJGPGN.UseGold:
-		{
-			int cost = GNEJJHEDEBL.Instance.GetItemGoldCost(itemType);
-			if (GNEJJHEDEBL.Instance.GetItemCount(POJCEPBNNIP.Coin, true) >= cost)
-			{
-				if (!CheckCanUse())
-				{
-					ShowCanNotUseTip();
-					return;
-				}
-				GNEJJHEDEBL.Instance.UseItem(POJCEPBNNIP.Coin, cost, itemSpendReason, 0f, EDLHEMMBABM.Instance.GetTotalItems().Count);
-				JEFOMCDAPGK.Instance.MainLevelData.goldSpendCount += cost;
-				DoUseItem();
-			}
-			else
-			{
-				MgrUI.Instance.Open("shop/prefab/ShopUI");
-			}
-			break;
-		}
 		}
 	}
 
@@ -294,16 +263,19 @@ public class CorePlayItemBtn : MonoBehaviour
 	public void DisableClick()
 	{
 		clickDisabled = true;
+		if (itemButton != null) itemButton.interactable = false;
 	}
 
 	public void EnableClick()
 	{
 		clickDisabled = false;
+		UpdateStatus();
 	}
 
 	private void OnDestroy()
 	{
 		GNEJJHEDEBL.OnItemChanged -= OnItemChanged;
+		if (itemButton != null) itemButton.onClick.RemoveListener(OnButtonClick);
 	}
 
 	/// <summary>

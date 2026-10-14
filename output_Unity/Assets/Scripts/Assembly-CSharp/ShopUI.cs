@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>商店覆盖层：礼包、去广告、免费金币与金币包，关闭时不影响局内状态。</summary>
+/// <summary>旧商店兼容页：购买商品已移除，只保留原非购买领取项。</summary>
 public class ShopUI : BaseUI
 {
 	[SerializeField]
@@ -113,45 +113,27 @@ public class ShopUI : BaseUI
 		}
 		if (m_MoreOfferBtn != null)
 		{
-			MCCIJBJGMCK.Get(m_MoreOfferBtn).onClick = OnMoreOfferBtnClick;
+			m_MoreOfferBtn.SetActive(false);
 		}
 		if (m_CommonCoinBtn != null)
 		{
 			m_CommonCoinBtn.Init(FCCMMLGODPL.ShopinPlay, false);
 		}
-		List<FPHGLNCPHJP> giftRewards = FPHGLNCPHJP.GetGiftPackRewards();
 		if (m_GiftPacks != null)
 		{
 			for (int i = 0; i < m_GiftPacks.Count; i++)
-			{
-				if (m_GiftPacks[i] != null && i < giftRewards.Count)
-				{
-					m_GiftPacks[i].InitGiftPack(giftRewards[i]);
-					shopItems.Add(m_GiftPacks[i]);
-				}
-			}
+				if (m_GiftPacks[i] != null) m_GiftPacks[i].gameObject.SetActive(false);
 		}
-		if (m_NoADProduct != null)
-		{
-			m_NoADProduct.InitRemoveAD();
-			shopItems.Add(m_NoADProduct);
-		}
+		if (m_NoADProduct != null) m_NoADProduct.gameObject.SetActive(false);
 		if (m_FreeCoinItem != null)
 		{
 			m_FreeCoinItem.InitFreeCoin();
 			shopItems.Add(m_FreeCoinItem);
 		}
-		List<COAEOCCIEAO> coinRewards = COAEOCCIEAO.GetCoinPackRewards();
 		if (m_CoinPacks != null)
 		{
 			for (int i = 0; i < m_CoinPacks.Count; i++)
-			{
-				if (m_CoinPacks[i] != null && i < coinRewards.Count)
-				{
-					m_CoinPacks[i].InitCoinPack(coinRewards[i]);
-					shopItems.Add(m_CoinPacks[i]);
-				}
-			}
+				if (m_CoinPacks[i] != null) m_CoinPacks[i].gameObject.SetActive(false);
 		}
 	}
 

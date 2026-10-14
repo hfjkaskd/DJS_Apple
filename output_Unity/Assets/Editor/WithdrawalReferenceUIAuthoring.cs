@@ -445,14 +445,6 @@ public static class WithdrawalReferenceUIAuthoring
     }
     private static void Hud()
     {
-        const string path="Assets/res/local/withdrawal/WithdrawalHud.prefab";
-        var instance=PrefabUtility.LoadPrefabContents(path);
-        try {
-            var hud=instance.GetComponent<WithdrawalHud>(); var background=hud.CashButton.GetComponent<Image>();
-            background.sprite=sprites["PrimaryButton"]; background.type=Image.Type.Sliced; background.pixelsPerUnitMultiplier=5;
-            var icon=hud.CashButton.transform.Find("CashIcon").GetComponent<Image>(); icon.sprite=sprites["CashBundle"]; icon.preserveAspect=true;
-            var label=instance.transform.Find("TestLabel").GetComponent<TMP_Text>(); label.font=display; label.fontSharedMaterial=whiteOutline;
-            PrefabUtility.SaveAsPrefabAsset(instance,path);
-        } finally { PrefabUtility.UnloadPrefabContents(instance); }
+        WithdrawalHudAuthoring.Build();
     }
 }

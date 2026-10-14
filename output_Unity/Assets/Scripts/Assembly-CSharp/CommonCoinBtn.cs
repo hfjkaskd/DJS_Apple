@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-/// <summary>HUD 金币按钮：显示金币数、承接金币飞行落点、可点击进入商店。</summary>
+/// <summary>旧金币显示：保留数值与奖励飞行落点，不再提供商店入口。</summary>
 public class CommonCoinBtn : MonoBehaviour
 {
 	[SerializeField]
@@ -16,8 +16,6 @@ public class CommonCoinBtn : MonoBehaviour
 	private GameObject m_GetEffectGo;
 
 	private static IHJFHNCGPKF coinPool;
-
-	private FCCMMLGODPL purchaseActScene;
 
 	private bool isFlying;
 
@@ -35,11 +33,18 @@ public class CommonCoinBtn : MonoBehaviour
 
 	public void Init(FCCMMLGODPL InPurchaseActScene, bool InCanClick)
 	{
-		purchaseActScene = InPurchaseActScene;
-		if (InCanClick)
+		InputMono legacyInput = GetComponent<InputMono>();
+		if (legacyInput != null)
 		{
-			MCCIJBJGMCK.Get(gameObject).onClick = OnCommonCoinBtnClick;
+			legacyInput.onClick = null;
+			legacyInput.enabled = false;
 		}
+		UnityEngine.UI.Button button = GetComponent<UnityEngine.UI.Button>();
+		if (button != null) button.interactable = false;
+		// The legacy coin prefab's Add child is a purchase affordance, not a reward effect.
+		Transform addIndicator = transform.Find("Add");
+		if (addIndicator != null) addIndicator.gameObject.SetActive(false);
+		GNEJJHEDEBL.OnItemChanged -= OnItemChanged;
 		GNEJJHEDEBL.OnItemChanged += OnItemChanged;
 		RefreshCoinCount();
 	}
@@ -56,15 +61,6 @@ public class CommonCoinBtn : MonoBehaviour
 		{
 			RefreshCoinCount();
 		}
-	}
-
-	private void OnCommonCoinBtnClick(GameObject InGameObject)
-	{
-		if (MCCIJBJGMCK.IsLock())
-		{
-			return;
-		}
-		MgrUI.Instance.Open("shop/prefab/ShopUI");
 	}
 
 	private void RefreshCoinCount()

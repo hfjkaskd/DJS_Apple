@@ -23,11 +23,8 @@ public class GiftPackItem : ShopItem
 	[SerializeField]
 	private GameObject m_BuyBtn;
 
-	private FPHGLNCPHJP giftPackReward;
-
 	public void InitGiftPack(FPHGLNCPHJP InGiftPackReward)
 	{
-		giftPackReward = InGiftPackReward;
 		if (m_CoinCount != null)
 		{
 			m_CoinCount.text = InGiftPackReward.coinCount.ToString();
@@ -46,22 +43,8 @@ public class GiftPackItem : ShopItem
 		}
 		if (m_BuyBtn != null)
 		{
-			MCCIJBJGMCK.Get(m_BuyBtn).onClick = OnBuyBtnClick;
+			m_BuyBtn.SetActive(false);
 		}
 	}
 
-	private void OnBuyBtnClick(GameObject gameObject)
-	{
-		if (giftPackReward == null)
-		{
-			return;
-		}
-		// 无真实 IAP：直接发放礼包内容
-		GNEJJHEDEBL.Instance.AddItem(POJCEPBNNIP.Coin, giftPackReward.coinCount, false, NMNPFKEJMHO.Iap);
-		GNEJJHEDEBL.Instance.AddItem(POJCEPBNNIP.Undo, giftPackReward.undoCount, false, NMNPFKEJMHO.Iap);
-		GNEJJHEDEBL.Instance.AddItem(POJCEPBNNIP.Magic, giftPackReward.magicCount, false, NMNPFKEJMHO.Iap);
-		GNEJJHEDEBL.Instance.AddItem(POJCEPBNNIP.Shuffle, giftPackReward.shuffleCount, false, NMNPFKEJMHO.Iap);
-		GameAudio.Play(DLMJOHCOJKN.Play_sfx_notice_purchased);
-		MgrGlobalUI.Instance.ShowGlobalText(OJEEJGGLNPC.Instance.GetText("shop_purchase_completed_text"), FFMLGGBCOOO.positive);
-	}
 }
