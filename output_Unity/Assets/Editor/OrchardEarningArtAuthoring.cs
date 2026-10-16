@@ -15,6 +15,7 @@ public static class OrchardEarningArtAuthoring
     private const string SourceArt = "Assets/ApkEarningReference/Visuals/atlas/";
     private const string Common = "Assets/res/local/common/sprite/";
     private const string ResourceArt = "Assets/ApkEarningReference/Resources/ApkEarningReference/Artwork/";
+    private const string OrchardArt = "Assets/OrchardEarningArt/";
     private const string AccentName = "OrchardAppleAccent";
 
     [MenuItem("Tools/Apk Earning/Apply Orchard Art and Validate %&o")]
@@ -90,6 +91,74 @@ public static class OrchardEarningArtAuthoring
     }
 
     private static void UpgradeTheme(OrchardEarningTheme theme)
+    {
+        UpgradeDepthTheme(theme);
+        if (theme.ThemeVersion >= 4) return;
+        string panel = OrchardArt + "OrchardPanel.png";
+        string button = OrchardArt + "OrchardPrimaryButton.png";
+        string selected = OrchardArt + "OrchardSelectedButton.png";
+        string title = OrchardArt + "OrchardWoodTitle.png";
+        AddTextureRule(theme, panel, new Vector4(280, 280, 280, 280), 1024);
+        AddTextureRule(theme, button, new Vector4(330, 250, 330, 330), 1024);
+        AddTextureRule(theme, selected, new Vector4(330, 250, 330, 330), 1024);
+        AddTextureRule(theme, title, new Vector4(150, 70, 150, 70), 1024);
+        foreach (string name in new[] { "panel", "panel-heading", "background", "diamond-panel", "wood-card", "aux-steps-panel" })
+            SetArtwork(theme, "octobergarden/" + name, panel, 2f);
+        foreach (string name in new[] { "cream-card", "cash-card", "stats-panel" })
+            SetArtwork(theme, "octobergarden/" + name, panel, 3.8f);
+        SetArtwork(theme, "approvedgarden/stats-card", panel, 10f);
+        SetArtwork(theme, "localhistory/record-card", panel, 3.8f);
+        foreach (string name in new[] { "input", "aux-level-card", "aux-verification-card", "main-currency-card", "main-tip" })
+            SetArtwork(theme, "octobergarden/" + name, panel, 6f);
+        SetArtwork(theme, "localearningmessages/portrait-banner", panel, 3.8f);
+        SetArtwork(theme, "localearningmessages/cash-banner", panel, 3.8f);
+        SetArtwork(theme, "octobergarden/primary-button", button, 4f);
+        SetArtwork(theme, "octobergarden/main-cash-button", button, 5.5f);
+        SetArtwork(theme, "octobergarden/aux-guide-withdraw", button, 8f);
+        foreach (string name in new[] { "title", "cash-heading", "wood-ribbon", "cream-ribbon", "success-title", "aux-guide-title", "aux-complete-title", "aux-level-title", "aux-level-band", "aux-loading-band" })
+            SetArtwork(theme, "octobergarden/" + name, title, 3f);
+        foreach (string name in new[] { "title", "cash-heading", "success-title", "aux-guide-title", "aux-complete-title", "aux-level-title" })
+            SetArtwork(theme, "octobergarden/" + name, title, 1.8f);
+        SetArtwork(theme, "approvedgarden/cash-title", title, 3f);
+        SetArtwork(theme, "approvedgarden/title", title, 1.8f);
+        SetArtwork(theme, "approvedgarden/selection-title", title, 3f);
+        theme.NormalOptionTexture = panel;
+        theme.NormalOptionBorder = new Vector4(280, 280, 280, 280);
+        theme.SelectedOptionTexture = selected;
+        theme.SelectedOptionBorder = new Vector4(330, 250, 330, 330);
+        theme.OptionPixelsPerUnitMultiplier = 4f;
+        SetArtwork(theme, "octobergarden/amount-normal", panel, theme.OptionPixelsPerUnitMultiplier);
+        SetArtwork(theme, "octobergarden/amount-selected", selected, theme.OptionPixelsPerUnitMultiplier);
+        theme.ThemeVersion = 4;
+        EditorUtility.SetDirty(theme);
+    }
+
+    private static void AddTextureRule(OrchardEarningTheme theme, string path, Vector4 border, int maxSize)
+    {
+        foreach (var rule in theme.TextureRules) if (rule.Path == path) return;
+        theme.TextureRules.Add(new OrchardEarningTheme.TextureRule { Path = path, Border = border, MaxTextureSize = maxSize });
+    }
+
+    private static void SetArtwork(OrchardEarningTheme theme, string source, string replacement, float ppu)
+    {
+        var rule = FindRule(theme, source);
+        if (rule == null) return;
+        rule.ReplacementPath = replacement;
+        rule.PixelsPerUnitMultiplier = ppu;
+        rule.ImageType = Image.Type.Sliced;
+        rule.KeepImageType = false;
+        rule.PreserveAspect = false;
+        rule.Tint = Color.white;
+    }
+
+    private static OrchardEarningTheme.SpriteRule FindRule(OrchardEarningTheme theme, string source)
+    {
+        string path = SourceArt + source + ".png";
+        foreach (var rule in theme.SpriteRules) if (rule.SourcePath == path) return rule;
+        return null;
+    }
+
+    private static void UpgradeDepthTheme(OrchardEarningTheme theme)
     {
         if (theme.ThemeVersion >= 3) return;
         if (theme.ThemeVersion < 2)
@@ -179,9 +248,12 @@ public static class OrchardEarningArtAuthoring
             throw new InvalidOperationException("Stop Play before authoring orchard earning art.");
         if (!theme.Enabled) return;
         UpgradeTheme(theme);
+        ConfigureThemeTextures(theme);
         ConfigureCrest(theme.AppleCrestPath);
-        WriteOptionResource(theme.NormalOptionTexture, ResourceArt + "DiamondOptionNormal.png", theme.NormalOptionBorder);
-        WriteOptionResource(theme.SelectedOptionTexture, ResourceArt + "DiamondOptionSelected.png", theme.SelectedOptionBorder);
+        WriteOptionResource(theme.NormalOptionTexture, ResourceArt + "DiamondOptionNormal.png", theme.NormalOptionBorder,
+            OptionTextureSize(theme, theme.NormalOptionTexture));
+        WriteOptionResource(theme.SelectedOptionTexture, ResourceArt + "DiamondOptionSelected.png", theme.SelectedOptionBorder,
+            OptionTextureSize(theme, theme.SelectedOptionTexture));
         var font = Require<TMP_FontAsset>(theme.DisplayFontPath);
         Material displayMaterial = GetDisplayMaterial(theme, font);
         var rules = new Dictionary<string, OrchardEarningTheme.SpriteRule>(StringComparer.Ordinal);
@@ -250,6 +322,7 @@ public static class OrchardEarningArtAuthoring
                     changedImages++;
                 }
                 StyleSuccessLayout(root, path, theme);
+                StyleStatsLayout(root, path, theme);
                 StyleTestCaption(root, theme);
                 StyleOptionImages(root, theme, rules);
                 StyleTypography(root, theme, font, displayMaterial);
@@ -310,6 +383,8 @@ public static class OrchardEarningArtAuthoring
 
     private static void StyleTypography(GameObject root, OrchardEarningTheme theme, TMP_FontAsset font, Material material)
     {
+        var headingRule = FindRule(theme, "octobergarden/title");
+        var buttonRule = FindRule(theme, "octobergarden/primary-button");
         foreach (TMP_Text text in root.GetComponentsInChildren<TMP_Text>(true))
         {
             bool longBody = text.text != null && (text.text.Length > 75 || text.text.IndexOf('\n') >= 0);
@@ -317,9 +392,12 @@ public static class OrchardEarningArtAuthoring
             for (Transform node = text.transform.parent; node != null && node != root.transform; node = node.parent)
             {
                 var background = node.GetComponent<Image>();
-                if (background != null && background.sprite != null &&
-                    AssetDatabase.GetAssetPath(background.sprite) == Common + "btn/Btn_Orange.asset")
-                { orangeHeading = true; break; }
+                if (background != null && background.sprite != null)
+                {
+                    string path = AssetDatabase.GetAssetPath(background.sprite);
+                    if (path == Common + "btn/Btn_Orange.asset" || (headingRule != null && path == headingRule.ReplacementPath))
+                    { orangeHeading = true; break; }
+                }
             }
             bool display = !longBody && (orangeHeading || text.fontSize >= theme.DisplayFontMinimumSize);
             if (display) { text.font = font; text.fontSharedMaterial = material; }
@@ -335,7 +413,8 @@ public static class OrchardEarningArtAuthoring
             {
                 Image buttonImage = button.targetGraphic as Image;
                 string path = buttonImage != null && buttonImage.sprite != null ? AssetDatabase.GetAssetPath(buttonImage.sprite) : string.Empty;
-                if (path == Common + "btn/Btn_Normal.asset" || path == Common + "btn/Btn_Orange.asset")
+                if (path == Common + "btn/Btn_Normal.asset" || path == Common + "btn/Btn_Orange.asset" ||
+                    (buttonRule != null && path == buttonRule.ReplacementPath))
                     text.color = theme.ButtonTextColor;
             }
         }
@@ -404,6 +483,19 @@ public static class OrchardEarningArtAuthoring
         crest.sprite = crestSprite; crest.type = Image.Type.Simple;
         crest.preserveAspect = true; crest.raycastTarget = false;
         SetCenteredRect(crest.rectTransform, theme.SuccessCrestPosition, theme.SuccessCrestSize);
+    }
+
+    private static void StyleStatsLayout(GameObject root, string path, OrchardEarningTheme theme)
+    {
+        if (Path.GetFileNameWithoutExtension(path) != "PlayerInfo") return;
+        RectTransform header = root.transform.Find("Time") as RectTransform;
+        if (header != null) header.anchoredPosition = theme.StatsHeaderPosition;
+        foreach (string labelPath in new[] { "1/label_32", "2/label_33", "3/label_34" })
+        {
+            Transform node = root.transform.Find(labelPath);
+            TMP_Text label = node != null ? node.GetComponent<TMP_Text>() : null;
+            if (label != null) label.margin = theme.StatsLabelMargin;
+        }
     }
 
     private static Image ReuseInheritedReceiptCrest(Transform title, string basePath, Sprite crestSprite)
@@ -499,6 +591,36 @@ public static class OrchardEarningArtAuthoring
         rect.localScale = Vector3.one; rect.localRotation = Quaternion.identity;
     }
 
+    private static void ConfigureThemeTextures(OrchardEarningTheme theme)
+    {
+        foreach (var rule in theme.TextureRules)
+        {
+            if (string.IsNullOrEmpty(rule.Path) || !File.Exists(rule.Path))
+                throw new InvalidOperationException("Missing orchard theme texture: " + rule.Path);
+            if (rule.MaxTextureSize < 32 || rule.MaxTextureSize > 8192 || !Mathf.IsPowerOfTwo(rule.MaxTextureSize))
+                throw new InvalidOperationException("Orchard texture size must be a power of two from 32 to 8192: " + rule.Path);
+            var importer = AssetImporter.GetAtPath(rule.Path) as TextureImporter;
+            if (importer == null)
+            {
+                AssetDatabase.ImportAsset(rule.Path, ImportAssetOptions.ForceUpdate);
+                importer = AssetImporter.GetAtPath(rule.Path) as TextureImporter;
+            }
+            if (importer == null) throw new InvalidOperationException("Not an orchard theme texture: " + rule.Path);
+            bool changed = importer.textureType != TextureImporterType.Sprite || importer.spriteImportMode != SpriteImportMode.Single ||
+                importer.spriteBorder != rule.Border || importer.spritePixelsPerUnit != 100 || importer.mipmapEnabled ||
+                importer.maxTextureSize != rule.MaxTextureSize || !importer.alphaIsTransparency ||
+                importer.textureCompression != TextureImporterCompression.Compressed;
+            if (!changed) continue;
+            importer.textureType = TextureImporterType.Sprite;
+            importer.spriteImportMode = SpriteImportMode.Single;
+            importer.spriteBorder = rule.Border; importer.spritePixelsPerUnit = 100;
+            importer.alphaIsTransparency = true; importer.mipmapEnabled = false;
+            importer.maxTextureSize = rule.MaxTextureSize;
+            importer.textureCompression = TextureImporterCompression.Compressed;
+            importer.SaveAndReimport();
+        }
+    }
+
     private static void ConfigureCrest(string path)
     {
         if (!File.Exists(path)) throw new InvalidOperationException("Missing orchard crest: " + path);
@@ -513,7 +635,15 @@ public static class OrchardEarningArtAuthoring
         importer.textureCompression = TextureImporterCompression.Compressed; importer.SaveAndReimport();
     }
 
-    private static void WriteOptionResource(string source, string target, Vector4 border)
+    private static int OptionTextureSize(OrchardEarningTheme theme, string source)
+    {
+        // Keep runtime copies at the same import resolution as their authored
+        // source so swapping an option sprite retains its nine-slice geometry.
+        foreach (var rule in theme.TextureRules) if (rule.Path == source) return rule.MaxTextureSize;
+        return 512;
+    }
+
+    private static void WriteOptionResource(string source, string target, Vector4 border, int maxSize)
     {
         byte[] desired = File.ReadAllBytes(source);
         bool write = !File.Exists(target);
@@ -526,10 +656,13 @@ public static class OrchardEarningArtAuthoring
         if (write) { File.WriteAllBytes(target, desired); AssetDatabase.ImportAsset(target, ImportAssetOptions.ForceUpdate); }
         var importer = AssetImporter.GetAtPath(target) as TextureImporter;
         if (importer == null) throw new InvalidOperationException("Missing runtime option texture: " + target);
-        if (!write && importer.spriteBorder == border && importer.spriteImportMode == SpriteImportMode.Single && !importer.mipmapEnabled) return;
+        if (!write && importer.textureType == TextureImporterType.Sprite && importer.spriteBorder == border &&
+            importer.spriteImportMode == SpriteImportMode.Single && importer.spritePixelsPerUnit == 100 &&
+            !importer.mipmapEnabled && importer.alphaIsTransparency && importer.maxTextureSize == maxSize &&
+            importer.textureCompression == TextureImporterCompression.Compressed) return;
         importer.textureType = TextureImporterType.Sprite; importer.spriteImportMode = SpriteImportMode.Single;
         importer.spriteBorder = border; importer.spritePixelsPerUnit = 100;
-        importer.alphaIsTransparency = true; importer.mipmapEnabled = false; importer.maxTextureSize = 512;
+        importer.alphaIsTransparency = true; importer.mipmapEnabled = false; importer.maxTextureSize = maxSize;
         importer.textureCompression = TextureImporterCompression.Compressed; importer.SaveAndReimport();
     }
 

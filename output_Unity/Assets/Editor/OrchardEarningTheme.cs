@@ -8,6 +8,14 @@ using UnityEngine.UI;
 public sealed class OrchardEarningTheme : ScriptableObject
 {
     [Serializable]
+    public sealed class TextureRule
+    {
+        public string Path;
+        public Vector4 Border;
+        [Min(32)] public int MaxTextureSize = 1024;
+    }
+
+    [Serializable]
     public sealed class SpriteRule
     {
         public string SourcePath;
@@ -44,6 +52,9 @@ public sealed class OrchardEarningTheme : ScriptableObject
     [Header("Exact image replacements; currency and payment icons are intentionally absent")]
     public List<SpriteRule> SpriteRules = new List<SpriteRule>();
 
+    [Header("Owned sprite imports; border order is left, bottom, right, top")]
+    public List<TextureRule> TextureRules = new List<TextureRule>();
+
     [Header("Typography")]
     public string DisplayFontPath = "Assets/res/local/textmeshpro/resources/fonts & materials/802-CAI978 SDF.asset";
     public string DisplayMaterialPath = "Assets/OrchardEarningArt/OrchardDisplay.mat";
@@ -73,6 +84,10 @@ public sealed class OrchardEarningTheme : ScriptableObject
     public Vector2 SuccessCrestSize = new Vector2(420, 168);
     public Vector2 SuccessCrestPosition = new Vector2(0, 140);
 
+    [Header("Statistics card spacing")]
+    public Vector2 StatsHeaderPosition = new Vector2(0, 119);
+    public Vector4 StatsLabelMargin = new Vector4(28, 12, 28, 8);
+
     [Header("HUD test label")]
     public string TestBackdropPath = "Assets/res/local/common/sprite/pop/PopBg.asset";
     public Vector2 TestBackdropPadding = new Vector2(32, 16);
@@ -94,7 +109,7 @@ public sealed class OrchardEarningTheme : ScriptableObject
     public string SelectedOptionTexture = "Assets/res/local/common/sprite/btn/Btn_Normal.png";
     public Vector4 NormalOptionBorder = new Vector4(230, 230, 230, 230);
     public Vector4 SelectedOptionBorder = new Vector4(127, 103, 128, 103);
-    [Min(.01f)] public float OptionPixelsPerUnitMultiplier = 2.8f;
+    [Min(.01f)] public float OptionPixelsPerUnitMultiplier = 4f;
 
     // Remember exact original images so a second apply can refresh parameters without
     // confusing a shared native card with a title or changing a business icon.
