@@ -1,0 +1,122 @@
+{
+  "tool": "built-in image_gen",
+  "reference": "C:/Projects/DJS_Apple/orchard-wallet-redesign-review/cash-wallet-concept-v1.png",
+  "pixelEditsApplied": false,
+  "assets": [
+    {
+      "file": "CashWalletInset.png",
+      "prompt": "Use case: precise-object-edit. Asset type: one standalone transparent Unity UI inset card sprite. From the supplied approved Cash Wallet mockup, faithfully isolate/redraw ONLY the pale peach cream rounded inset card that contains Level 4 and its green progress bar. Remove ALL contents: no text, numbers, progress bar, labels or icons. The output is one blank softly rounded horizontal rectangle with visible width:height 2.5:1 and corner radius about one-fifth of its height. The card is warm pale peach cream, almost borderless, slightly more golden at the top and lower corners, subtly shaded and softly cushioned into the white main panel. It must have no orange outline, wooden frame, hard border, thick bevel, detached drop shadow or ornament. Match the reference's quiet peach fill and soft warm gradient exactly; avoid an opaque white background around it. Frontal straight-on flat UI card silhouette with smooth straight top/bottom middle sections suited to nine-slice, only very subtle edge softness. True transparent alpha outside the rounded rectangle, tightly framed with a small clear margin. Prefer canvas 1500x600. No lettering, symbols, UI screenshot, other objects or watermark.",
+      "source": "C:/Users/pc/.codex/generated_images/01a142bb-edde-79c0-8f12-33469e44c098/exec-fcb7a49c-be89-424c-bbd8-6ce6e86bd34a.png",
+      "dimensions": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "solidBoundsTopLeftXYXY": [
+        84,
+        124,
+        1899,
+        660
+      ],
+      "solidMarginLBRTop": [
+        84,
+        133,
+        84,
+        124
+      ],
+      "suggestedUnitySpriteRectXYWH": [
+        77,
+        126,
+        1829,
+        549
+      ],
+      "suggestedBorderLBRTop": [
+        150,
+        150,
+        150,
+        150
+      ]
+    },
+    {
+      "file": "CashWalletProgressTrack.png",
+      "prompt": "Use case: precise-object-edit. Asset type: isolated transparent Unity UI empty progress track sprite. Faithfully redraw ONLY the long rounded cream progress bar groove inside the Level 4 card in the supplied approved Cash Wallet mockup. Remove the green fill, ALL lettering and numbers; the entire track is empty. Subject is ONE horizontal capsule shape with visible width:height approximately 8.5:1, rounded semicircular ends and straight horizontal middle edges for nine-slice. It has a thin soft apricot-orange outer lip, a very pale cream inner rim highlight, and an inset ivory-cream trough. Shade the trough subtly darker along the inner top and lower edge to suggest a smooth shallow concave recess, with softly warm cream center. Match the reference's restrained orange/cream frame, no thick wood, no hard black outlines, no detached pedestal or large external shadow. Frontal straight-on view with no perspective. Elegant soft 3D cartoon orchard-game UI material, not flat vector. Output one complete track on genuine transparent alpha background, tightly framed with small clear margin if possible; no blue/green fill, no percentage, no text, no decorations, no background card or scene, no watermark.",
+      "source": "C:/Users/pc/.codex/generated_images/01a142bb-edde-79c0-8f12-33469e44c098/exec-92e541a8-0894-45ee-ac75-13cc30be9d94.png",
+      "dimensions": [
+        1994,
+        789
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "solidBoundsTopLeftXYXY": [
+        43,
+        257,
+        1951,
+        533
+      ],
+      "solidMarginLBRTop": [
+        43,
+        256,
+        43,
+        257
+      ],
+      "suggestedUnitySpriteRectXYWH": [
+        36,
+        249,
+        1923,
+        290
+      ],
+      "suggestedBorderLBRTop": [
+        150,
+        70,
+        150,
+        70
+      ]
+    },
+    {
+      "file": "CashWalletProgressFill.png",
+      "prompt": "Use case: precise-object-edit. Asset type: one standalone transparent Unity UI progress fill sprite. Faithfully recreate ONLY the glossy green fill of the Level 4 progress bar shown in the supplied Cash Wallet concept, with ALL text/numbers removed. Make it a COMPLETE long horizontal green capsule, visible width:height about 8.5:1 (full progress width), with perfectly rounded semicircular ends, straight horizontal middle edges for nine-slice. Match its bright apple/lime-green top and center, a wide gentle yellow-green top rim highlight, richer saturated leaf-green bottom edge with a thin dark green lower lip, softly inflated jelly 3D surface. At the left end, include exactly the source-like restrained white oval glint and one tiny white dot. Continuous clean green middle with no other markings. No cream track, no outer orange rim, no wood, no detached pedestal, no big shadow, no background. Front-facing orthographic UI sprite, no perspective. Soft polished cartoon orchard material matching the mockup. One complete capsule only, genuinely transparent alpha outside it, centered with minimal clear margin. No text, letters, fractions, digits, icons, extra objects, image layout or watermark.",
+      "source": "C:/Users/pc/.codex/generated_images/01a142bb-edde-79c0-8f12-33469e44c098/exec-30233201-7adf-4c01-9a9c-32ab4a9b32c6.png",
+      "dimensions": [
+        2043,
+        770
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "solidBoundsTopLeftXYXY": [
+        52,
+        222,
+        1992,
+        547
+      ],
+      "solidMarginLBRTop": [
+        52,
+        223,
+        51,
+        222
+      ],
+      "suggestedUnitySpriteRectXYWH": [
+        45,
+        215,
+        1954,
+        340
+      ],
+      "suggestedBorderLBRTop": [
+        190,
+        60,
+        190,
+        180
+      ]
+    }
+  ],
+  "notes": "Original generated PNGs copied unchanged. Suggested SpriteRects omit padding via Unity import only; they do not alter PNG pixels and include 4px around alpha>1 bounds. Unity sprite rect origin is bottom-left. Tool did not adhere exactly to requested visible aspect ratios; use 9-slice layout at target aspect ratio, preserving rounded caps. Fill should resize sliced width to preserve its rounded moving right cap instead of hard cutting the source with a rectangular fillAmount. All 3 are newly generated from the approved concept. No scripts, Prefabs, meta files, or desktop UI changed."
+}

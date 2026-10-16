@@ -1,0 +1,84 @@
+{
+  "tool": "built-in image_gen",
+  "reference": "C:/Projects/DJS_Apple/orchard-wallet-redesign-review/cash-wallet-concept-v1.png",
+  "pixelEditsApplied": false,
+  "assets": [
+    {
+      "file": "CashWalletButton.png",
+      "prompt": "Use case: precise-object-edit. Asset type: ONE standalone transparent Unity UI button sprite extracted/redrawn from the supplied approved Cash Wallet concept. Match the lower blue Withdraw button in that concept as closely as possible, while REMOVING ALL TEXT. Output only that button, frontal straight-on view, centered. Its visible silhouette has width:height approximately 4.5:1, horizontal rounded rectangle with softly rounded end corners, straight top and bottom middle sections for nine-slice. Saturated bright sky-blue glossy inflated face, lighter cyan top highlight rim, deep royal-blue thin lower edge. A small white oval gloss and a small white dot near upper-left, like the source. Surround the blue face with a THIN warm-orange/golden outline only, about 2-3 percent of button height, a restrained thin darker bottom lip and small soft contact shadow. This new design has NO thick wooden base or chunky wooden bezel, NO wood grain, NO large pedestal. The interior blue fill runs almost edge to edge like the exact reference button. Rounded polished 3D cartoon candy/jelly material, not flat vector. Preserve ample uninterrupted empty blue area for game-engine text. Transparent background with real alpha, tightly framed with a small uniform clear margin (under 2% of width), prefer 1800x400 canvas. No text, lettering, numerals, icons, apple decorations, game background, panel, white rectangle, checkerboard, watermark, alternate buttons or layout sheet.",
+      "source": "C:/Users/pc/.codex/generated_images/01a142bb-edde-79c0-8f12-33469e44c098/exec-82cb37f7-0650-4fd0-9ad7-40ffbc0b45c3.png",
+      "dimensions": [
+        1881,
+        836
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "solidBoundsTopLeftXYXY": [
+        71,
+        218,
+        1811,
+        610
+      ],
+      "solidMarginLBRTop": [
+        71,
+        226,
+        70,
+        218
+      ],
+      "suggestedUnitySpriteRectXYWH": [
+        64,
+        219,
+        1755,
+        410
+      ],
+      "suggestedBorderLBRTopForThatRect": [
+        240,
+        70,
+        220,
+        180
+      ]
+    },
+    {
+      "file": "CashWalletHeader.png",
+      "prompt": "Use case: precise-object-edit. Asset type: ONE production transparent Unity UI title plaque sprite. In the supplied approved Cash Wallet concept, isolate and faithfully redraw ONLY the orange rounded header plate behind the words CASH WALLET, with ALL text REMOVED and the apple, leaves and white flower REMOVED. The desired shape is a wide softly rounded horizontal rectangle, width:height around 4:1, gently organic but almost straight horizontal upper and lower center edges for nine-slice, symmetric frontal straight-on view without perspective. Retain the concept's beautiful rich orange face, soft golden top/left highlight rim, amber inner bevel and darker warm orange lower edge giving a restrained 3D inflated carved surface. The face is calm warm orange, subtle shaded amber near bottom, barely noticeable soft grain, as in the concept. Frame thickness is moderate and does not become a bulky wooden base. Rounded, polished soft 3D casual orchard-game material with broad gentle highlights, not flat vector. Preserve large continuous empty orange interior for runtime white title lettering. No white text, no letters, no symbols, no apple or any decoration, no close button, no panel or scene, no giant shadow or pedestal, no watermark. Genuine transparent alpha outside the isolated rounded rectangle, tightly fit it within a wide horizontal canvas (prefer 1600x400) with a small clear perimeter margin only. No checkerboard.",
+      "source": "C:/Users/pc/.codex/generated_images/01a142bb-edde-79c0-8f12-33469e44c098/exec-2aa92b32-98f7-49e2-81db-8c92d149b9d2.png",
+      "dimensions": [
+        1983,
+        793
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "solidBoundsTopLeftXYXY": [
+        48,
+        172,
+        1935,
+        592
+      ],
+      "solidMarginLBRTop": [
+        48,
+        201,
+        48,
+        172
+      ],
+      "suggestedUnitySpriteRectXYWH": [
+        41,
+        192,
+        1900,
+        437
+      ],
+      "suggestedBorderLBRTopForThatRect": [
+        200,
+        70,
+        200,
+        85
+      ]
+    }
+  ],
+  "notes": "Original generated PNGs copied unchanged. Generated canvas has extra transparent vertical margin despite tight-framing prompt. Suggested SpriteRects omit that padding via Unity import only; they do not alter PNG pixels and include 4px around alpha>1 bounds. Unity sprite rect origin is bottom-left. Scale fixed sliced border through pixelsPerUnitMultiplier to match UI target dimensions. No scripts, Prefabs, meta files, or desktop UI changed."
+}
