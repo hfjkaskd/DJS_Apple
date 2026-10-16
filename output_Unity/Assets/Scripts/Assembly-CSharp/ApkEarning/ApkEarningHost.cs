@@ -105,7 +105,7 @@ namespace FruitApkEarning
             page.Bind("Close",Close);page.Bind("CloseBtn",Close);page.Bind("close",Close);page.Bind("closeButton",Close);
             page.SetText("TestMode","TEST MODE · NO CASH PAYMENT");
             var localTestMode=page.GetText("TestMode");
-            bool hasLocalTestMode=name=="TXPanel"&&localTestMode!=null&&localTestMode.isActiveAndEnabled;
+            bool hasLocalTestMode=localTestMode!=null&&localTestMode.isActiveAndEnabled;
             if(GlobalTestModeCaption!=null)GlobalTestModeCaption.gameObject.SetActive(!hasLocalTestMode);
             return page;
         }
@@ -116,8 +116,10 @@ namespace FruitApkEarning
             Show(diamonds?"TXCoinPanel":"TXPanel");
             page.Bind("TXBtn",BeginWithdrawal);
             if(diamonds){
-                selectedDiamondOption=Resources.Load<Sprite>("ApkEarningReference/Artwork/DiamondOptionSelected");
-                normalDiamondOption=Resources.Load<Sprite>("ApkEarningReference/Artwork/DiamondOptionNormal");
+                if(!page.TintDiamondOptions){
+                    selectedDiamondOption=Resources.Load<Sprite>("ApkEarningReference/Artwork/DiamondOptionSelected");
+                    normalDiamondOption=Resources.Load<Sprite>("ApkEarningReference/Artwork/DiamondOptionNormal");
+                }
                 for(int i=0;i<4;i++){int selected=i;page.Bind("options["+i+"]",()=>{tier=selected;Refresh();});}
             }
             else {page.Bind("HistoryButton",ShowHistory);page.SetVisible("Level1",false);page.SetVisible("Level2",false);}
@@ -186,7 +188,10 @@ namespace FruitApkEarning
                 for(int i=0;i<4;i++){
                     page.SetText("amounts["+i+"]",SourceMoney(Service.Rules.DiamondPayoutCents[i]));page.SetVisible("selectionFrames["+i+"]",i==tier);
                     var option=page.GetButton("options["+i+"]");var art=option==null?null:option.targetGraphic as UnityEngine.UI.Image;
-                    var sprite=i==tier?selectedDiamondOption:normalDiamondOption;if(art!=null&&sprite!=null)art.sprite=sprite;
+                    if(art!=null){
+                        if(page.TintDiamondOptions)art.color=i==tier?page.SelectedOptionColor:page.NormalOptionColor;
+                        else {var sprite=i==tier?selectedDiamondOption:normalDiamondOption;if(sprite!=null)art.sprite=sprite;}
+                    }
                 }
                 page.SetText("labels[0].Text","My Diamonds");
             }
@@ -369,7 +374,7 @@ namespace FruitApkEarning
             var item=Instantiate(prefab,parent,false).GetComponent<ApkEarningPageView>();
             item.SetText("count",diamond?DiamondText(amount):Money(amount));item.SetVisible("max",false);
             var icon=item.GetImage("icon");var art=Resources.Load<Sprite>("ApkEarningReference/Artwork/"+(diamond?"DiamondPile":"CashPile"));
-            if(icon!=null&&art!=null){icon.sprite=art;icon.SetNativeSize();}
+            if(icon!=null&&art!=null){icon.sprite=art;icon.preserveAspect=true;}
         }
         private void ClaimReward()
         {
@@ -453,6 +458,7 @@ namespace FruitApkEarning
             });
             // Leaving does not claim, archive, submit or erase the failed transaction.
             page.Bind("close",()=>MgrUI.Instance.Close(Path,false));
+            page.Bind("Close",()=>MgrUI.Instance.Close(Path,false));
         }
         private void Notice(string message)
         {

@@ -25,6 +25,9 @@ namespace FruitApkEarning
         public float MinimumReferenceHeight = 1800;
         public bool FitWidth;
         public Color EmphasisColor = new Color32(53, 110, 29, 255);
+        public bool TintDiamondOptions;
+        public Color SelectedOptionColor = new Color32(210, 246, 160, 255);
+        public Color NormalOptionColor = Color.white;
         private readonly Dictionary<Button, UnityAction> listeners = new Dictionary<Button, UnityAction>();
         private bool fitting;
 
