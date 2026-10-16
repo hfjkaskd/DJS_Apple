@@ -1,0 +1,30 @@
+{
+  "tool": "built-in image_gen",
+  "mode": "generate, then one targeted edit for fill/proportion",
+  "inputReferences": [
+    "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/res/local/coreplay/sprite/item/ItemBg_Normal.png",
+    "C:/Projects/DJS_Apple/orchard-depth-review/after/04-game-hud.png"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: production Unity 9-slice button sprite, not a mockup. Create ONE empty horizontal rounded-rectangle button, canvas 1024x512, transparent outside, centered and nearly filling the canvas (12 px clear margin). Match the rich rounded 3D casual orchard game's bottom toolbar buttons in the attached reference. The second reference image shows the full game solely for style; do not reproduce its scene. First reference is the exact glossy blue button family to match. Button exterior: warm honey-golden carved wood frame about 35 px wide, smoothly rounded and bulging, rich orange-brown lower edge visibly thick, pale golden top bevel, very subtle wood grain along edges. Interior: continuous saturated blue jelly/cushion face, sky-blue upper rim highlight and turquoise mid-lower glow, deep royal blue lower lip giving strong plump physical thickness. Small soft white specular gleam at upper-left, restrained. Face is blank with lots of clear uninterrupted blue space for runtime text. Orthographic straight-on frontal presentation, no camera tilt, no perspective or trapezoid. Overall corner radius about 90 pixels, with long straight horizontal top/bottom center edges for 9-slice. Strongly tactile softly inflated 3D cartoon material matching polished game fruit, not flat vector. Preserve a true rounded rectangle, not a capsule. NO text, letters, numbers, currency signs, icons, fruit decorations, leaves, extra objects, UI screenshot, background rectangle or watermark. True transparent alpha outside shape; no baked checkerboard. Use the reference just for lighting, materials and palette, with no white icon copied.",
+  "refinementPrompt": "Use case: precise-object-edit. This is an empty production Unity button sprite. Preserve the supplied image's blue jelly/cushion center, glossy highlights, honey golden wooden carved outer frame, straight-on frontal view, all colors and beautiful 3D inflated materials. Change ONLY framing/proportions: make the button taller to occupy almost the full transparent canvas height and width, leaving no more than 12 pixels clear margin on all four sides. Canvas is a 2:1 horizontal rectangle, prefer 1024x512. Button visible silhouette must also be almost 2:1, not a very narrow 3:1 strip. Keep corners rounded at about 90px radius on a 1024x512 canvas, continuous straight horizontal top and bottom stretches, continuous blank blue middle for text, suitable for nine-slice. Do not reduce the obvious thick carved wooden lower edge, inset blue bevel, or shine. Keep alpha genuinely transparent outside. No text or icons. No frame cropping. No extra shadows or transparent padding far outside.",
+  "source": "C:/Users/pc/.codex/generated_images/01a142bb-edde-79c0-8f12-33469e44c098/exec-906d0cde-84fa-4609-9ed3-d5aa78eaec40.png",
+  "asset": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/OrchardEarningArt/OrchardPrimaryButton.png",
+  "actualDimensions": [
+    1774,
+    887
+  ],
+  "format": "PNG RGBA; alpha 0..255",
+  "solidAlphaBoundsXYXY": [
+    9,
+    52,
+    1766,
+    818
+  ],
+  "recommendedUnityBorderLBRTop": [
+    330,
+    250,
+    330,
+    330
+  ],
+  "note": "No resampling, cropping or pixel edits were applied. The tool ignored requested exact 1024x512 size. Scale nine-slice pixelsPerUnitMultiplier so top+bottom fixed border does not exceed UI height; e.g. ~6 for a 110px-tall button if ReferencePixelsPerUnit=100 and SpritePPU=100."
+}
