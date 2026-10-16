@@ -20,7 +20,11 @@ public static class ApkEarningValidation
     private const string Output = "E:/CodexCacheBackups/DJS_Apple-apk-validation-20261014";
     private static readonly string[] Pages = {
         "TXPanel", "TXCoinPanel", "LocalWithdrawalConditions", "LocalCashHistory", "LocalEarningSequence",
-        "LocalLuckyReward", "TXUserInfoPanel", "TXUserInfoSurePanel", "LocalSuccess", "LocalEarningRecovery"
+        "LocalLuckyReward", "TXUserInfoPanel", "TXUserInfoSurePanel", "LocalSuccess", "LocalEarningRecovery",
+        "TXRecordGuidePanel", "TXGuideLoadingPanel", "TXProgress0Panel", "TXChannelPanel",
+        "LocalWithdrawalVerification", "TXGuideTargetCompletePanel", "LocalDiamondUnlockGuide", "Tip",
+        // Retained source/alternate pages are also checked so a later route cannot restore old artwork.
+        "NewbieGuidePanel", "RewardPanel", "SuccessPanel", "LocalUserLevel", "TXLevelPanel", "TXTooFastHintPanel"
     };
     private static string pendingCapture;
     private static double captureDeadline;
@@ -40,7 +44,8 @@ public static class ApkEarningValidation
     }
     [Serializable] private sealed class RenderReport
     {
-        public string page, image;
+        public string page, state, image;
+        public string dataSource = "Static editor preview data only; not player data or a running-game capture.";
         public int width, height, activeButtons, activeTexts;
         public float canvasScale;
         public List<string> errors = new List<string>();
@@ -90,7 +95,7 @@ public static class ApkEarningValidation
         Directory.CreateDirectory(Output);
         var report = new Report {
             generatedUtc = DateTime.UtcNow.ToString("O"),
-            scope = "Saved prefab visual fixtures, not live gameplay or APK device screenshots. Imported earning prefabs, earning children inside CorePlayUI, and the modal host are audited strictly. Unassigned fonts on legacy CorePlayUI text outside earning views are reported separately as warnings; their runtime assignment is outside this fixture. Static authored labels/states are preserved. Runtime accounting, host navigation and player storage are never initialized. Production PageView.RefreshLayout and Game.unity Expand scaling are reused."
+            scope = "Saved prefab visual fixtures with explicitly synthetic preview data, not live gameplay or APK device screenshots. All active earning pages and retained alternate/source pages are rendered. Conditions, history records, reward items, account forms and every message/receipt/bonus sequence layout receive representative static data in an isolated preview scene. No Service, Host navigation, accounting, player storage or payment operation is initialized. Imported earning prefabs, earning children inside CorePlayUI, and the modal host are audited strictly. Unassigned fonts on legacy CorePlayUI text outside earning views are reported separately as warnings. Production PageView.RefreshLayout and Game.unity Expand scaling are reused."
         };
         foreach (string guid in AssetDatabase.FindAssets("t:Prefab", new[] { PanelFolder.TrimEnd('/') }))
         {
@@ -102,7 +107,9 @@ public static class ApkEarningValidation
         foreach (Vector2Int size in new[] { new Vector2Int(1080, 1920), new Vector2Int(1080, 2340), new Vector2Int(720, 1600) })
         {
             RenderFixture("GameplayHUD", CorePath, size, true, report);
-            foreach (string page in Pages) RenderFixture(page, PanelFolder + page + ".prefab", size, false, report);
+            foreach (string page in Pages)
+                foreach (string state in FixtureStates(page))
+                    RenderFixture(page, PanelFolder + page + ".prefab", size, false, report, state);
         }
         File.WriteAllText(Path.Combine(Output, "prefab-fixtures-report.json"), JsonUtility.ToJson(report, true));
         if (report.errors.Count > 0)
@@ -279,9 +286,9 @@ public static class ApkEarningValidation
             errors.Add(Hierarchy(button.transform) + ": Button does not own its target graphic.");
     }
 
-    private static void RenderFixture(string name, string path, Vector2Int size, bool hudOnly, Report report)
+    private static void RenderFixture(string name, string path, Vector2Int size, bool hudOnly, Report report, string state = "")
     {
-        var item = new RenderReport { page = name, width = size.x, height = size.y };
+        var item = new RenderReport { page = name, state = string.IsNullOrEmpty(state) ? "representative" : state, width = size.x, height = size.y };
         report.renders.Add(item);
         Scene scene = EditorSceneManager.NewPreviewScene();
         RenderTexture texture = null; Texture2D pixels = null;
@@ -305,6 +312,7 @@ public static class ApkEarningValidation
             canvas.additionalShaderChannels = AdditionalCanvasShaderChannels.TexCoord1 | AdditionalCanvasShaderChannels.Normal | AdditionalCanvasShaderChannels.Tangent;
             AddBackground(canvas.transform, size);
             GameObject instance = Object.Instantiate(source, canvas.transform, false); instance.name = source.name;
+            if (!hudOnly) ApplyPreviewState(instance.GetComponent<ApkEarningPageView>(), name, state);
             // The inactive ancestor prevents runtime accounting/host initialization. Only the shared layout view survives.
             foreach (MonoBehaviour component in instance.GetComponentsInChildren<MonoBehaviour>(true))
                 if (component != null && !(component is UIBehaviour) && !(component is ApkEarningPageView)) Object.DestroyImmediate(component);
@@ -324,18 +332,22 @@ public static class ApkEarningValidation
                     item.warnings.Add(Hierarchy(button.transform) + ": authored state keeps Button offscreen; runtime routing must hide or position it.");
                 else if (bounds.xMin < -1 || bounds.yMin < -1 || bounds.xMax > size.x + 1 || bounds.yMax > size.y + 1)
                     item.errors.Add(Hierarchy(button.transform) + ": visible Button crosses viewport bounds: " + bounds);
+                AuditMaskClipping((RectTransform)button.transform, camera, "Button", item.warnings);
             }
             foreach (TMP_Text text in instance.GetComponentsInChildren<TMP_Text>(false))
             {
+                if (!text.isActiveAndEnabled) continue;
                 item.activeTexts++;
-                if (text.isTextOverflowing) item.warnings.Add(Hierarchy(text.transform) + ": authored placeholder overflows; inspect live text separately.");
+                if (text.isTextOverflowing) item.warnings.Add(Hierarchy(text.transform) + ": representative preview text overflows its text area.");
+                if (!string.IsNullOrWhiteSpace(text.text)) AuditMaskClipping(text.rectTransform, camera, "text", item.warnings);
             }
             if (hudOnly && item.activeTexts == 0) item.errors.Add("The earning HUD fixture contains no visible text.");
             if (name == "LocalEarningSequence" && item.activeTexts == 0)
-                item.warnings.Add("Sequence groups are inactive in the saved prefab. This fixture audits their references only; actual sequence appearance requires a runtime capture.");
+                item.errors.Add("The requested sequence preview state contains no visible text.");
             RenderTexture.active = texture; pixels = new Texture2D(size.x, size.y, TextureFormat.RGBA32, false);
             pixels.ReadPixels(new Rect(0, 0, size.x, size.y), 0, 0); pixels.Apply(false, false);
-            item.image = Path.Combine(Output, "fixture-" + name + "-" + size.x + "x" + size.y + ".png");
+            string stateSuffix = string.IsNullOrEmpty(state) ? string.Empty : "--" + state;
+            item.image = Path.Combine(Output, "fixture-" + name + stateSuffix + "-" + size.x + "x" + size.y + ".png");
             File.WriteAllBytes(item.image, pixels.EncodeToPNG());
         }
         catch (Exception exception) { item.errors.Add(exception.ToString()); }
@@ -349,8 +361,270 @@ public static class ApkEarningValidation
             if (texture != null) { texture.Release(); Object.DestroyImmediate(texture); }
             EditorSceneManager.ClosePreviewScene(scene);
         }
-        foreach (string error in item.errors) report.errors.Add(name + " " + size + ": " + error);
-        foreach (string warning in item.warnings) report.warnings.Add(name + " " + size + ": " + warning);
+        foreach (string error in item.errors) report.errors.Add(name + " [" + item.state + "] " + size + ": " + error);
+        foreach (string warning in item.warnings) report.warnings.Add(name + " [" + item.state + "] " + size + ": " + warning);
+    }
+
+    private static string[] FixtureStates(string page)
+    {
+        switch (page)
+        {
+            case "LocalEarningSequence": return new[] { "", "activating", "activated", "summary", "receipt", "bonuses" };
+            case "LocalWithdrawalConditions": return new[] { "", "diamond", "ready" };
+            case "TXUserInfoPanel": return new[] { "", "email" };
+            case "TXCoinPanel": return new[] { "", "target-reached" };
+            case "LocalSuccess": return new[] { "", "early-reward" };
+            default: return new[] { "" };
+        }
+    }
+
+    // This is deliberately editor-only fixture setup. It fills existing saved views
+    // and instantiates saved row/item prefabs, never the runtime service or a host.
+    private static void ApplyPreviewState(ApkEarningPageView page, string name, string state)
+    {
+        if (page == null) throw new InvalidOperationException("Missing preview PageView: " + name);
+        page.SetText("TestMode", "TEST MODE · NO CASH PAYMENT");
+        switch (name)
+        {
+            case "TXPanel":
+                page.SetText("GoldCount", "$3.15"); page.SetText("Title", "CASH WALLET");
+                page.SetText("StageLabel", "Level 4"); page.SetText("labels[0].Text", "Available balance");
+                page.SetText("Tip", "Clear level 5\nto review withdrawal"); page.SetText("TXText", "Withdraw");
+                page.SetText("ProgressValue", "3 / 5"); page.SetText("ProgressTipValue", "2"); page.SetProgress("Progress", .6f);
+                page.SetText("Stats.PassCount", "Today: 3"); page.SetText("Stats.ChallengeTimes", "Total runs: 12");
+                page.SetText("Stats.GoldGetCount", "$3.15"); page.SetVisible("Level1", false); page.SetVisible("Level2", false);
+                break;
+            case "TXCoinPanel": PreviewDiamonds(page, state == "target-reached"); break;
+            case "LocalWithdrawalConditions": PreviewConditions(page, state); break;
+            case "LocalCashHistory": PreviewHistory(page); break;
+            case "TXUserInfoPanel": PreviewAccount(page, state == "email"); break;
+            case "TXUserInfoSurePanel":
+                page.SetText("labels[0].Text", "Confirm account"); page.SetText("labels[1].Text", "Confirm");
+                page.SetText("labels[2].Text", "Re-enter");
+                page.SetText("Tip", "Preview Player\npreview@example.com\n\nTest request · no payment");
+                PreviewSprite(page, "Image", "PayPalLarge"); break;
+            case "TXChannelPanel":
+                page.SetText("labels[0].Text", "Enter test payment account information. No payment is submitted.");
+                page.SetText("labels[1].Text", "Withdrawal account"); page.SetText("labels[2].Text", "Confirm");
+                PreviewInput(page, "InputInfo", "Preview Player\npreview@example.com"); break;
+            case "LocalSuccess": case "SuccessPanel": case "LocalLuckyReward":
+                PreviewReward(page, name == "LocalLuckyReward", state == "early-reward"); break;
+            case "RewardPanel":
+                var items = page.GetObject("items");
+                if (items == null) items = page.GetObject("Items");
+                if (items != null) { PreviewRewardItem(items.transform, false, false); PreviewRewardItem(items.transform, true, false); }
+                break;
+            case "LocalEarningSequence": PreviewSequence(page, state); break;
+            case "TXGuideLoadingPanel":
+                page.SetText("label", "Preparing withdrawal request..."); page.SetProgress("Progress", .65f); break;
+            case "LocalWithdrawalVerification": case "TXLevelPanel":
+                page.SetText("Tip", "Reward #1"); page.SetText("GoldCount", "$1.50");
+                PreviewSteps(page, true); break;
+            case "TXProgress0Panel": PreviewSteps(page, false); break;
+            case "TXGuideTargetCompletePanel":
+                page.SetText("labels[0].Text", "Withdraw"); page.SetText("labels[1].Text", "Withdrawal on Clear");
+                page.SetText("tip", "$1.50"); break;
+            case "LocalDiamondUnlockGuide":
+                page.SetText("title", "Diamond rewards unlocked"); page.SetText("diamondAmount", "102");
+                page.SetText("body", "Diamond rewards are unlocked. Tap here to review withdrawal requirements."); break;
+            case "LocalEarningRecovery":
+                page.SetText("title", "Local save unavailable");
+                page.SetText("body", "Preview save error.\nYour last saved rewards are preserved. Retry saving, or return to the game and recover them on restart."); break;
+            case "LocalUserLevel":
+                page.SetText("levelLabel", "Level 4"); page.SetText("progressLabel", "3 / 5"); page.SetProgress("progressFill", .6f); break;
+            case "TXTooFastHintPanel":
+                page.SetText("LevelTip", "Complete the next level target"); page.SetText("VideoTip", "Reward video unavailable");
+                page.SetText("LevelPregressValue", "3 / 5"); page.SetText("VideoPregressValue", "0 / 1");
+                page.SetProgress("LevelPregress", .6f); page.SetProgress("VideoPregress", 0); break;
+            case "Tip": page.SetText("content", "Reward video unavailable. Use Claim to collect."); break;
+        }
+    }
+
+    private static void PreviewDiamonds(ApkEarningPageView page, bool reached)
+    {
+        page.SetText("labels[0].Text", "My Diamonds");
+        page.SetText("CoinValue", reached ? "50,000" : "102"); page.SetText("GoldValue", reached ? "$500.00" : "$1.02");
+        page.SetText("TipValue", "100=$1"); page.SetText("TXTip", "$500 Withdrawal Instructions:");
+        page.SetText("IitemTip", reached ? "Balance target complete\nReview remaining withdrawal requirements" : "Balance reaches $500 to withdraw all\nStill $498.98 to go");
+        page.SetText("TipBarValue", reached ? "$500 / $500" : "$1.02 / $500"); page.SetProgress("TipBar", reached ? 1 : .00204f);
+        string[] amounts = { "$500", "$1,000", "$1,500", "$2,000" };
+        for (int i = 0; i < amounts.Length; i++)
+        {
+            page.SetText("amounts[" + i + "]", amounts[i]); page.SetVisible("selectionFrames[" + i + "]", i == 0);
+            Button button = page.GetButton("options[" + i + "]");
+            var graphic = button == null ? null : button.targetGraphic as Image;
+            if (graphic != null)
+            {
+                if (page.TintDiamondOptions) graphic.color = i == 0 ? page.SelectedOptionColor : page.NormalOptionColor;
+                else { Sprite sprite = LoadPreviewSprite(i == 0 ? "DiamondOptionSelected" : "DiamondOptionNormal"); if(sprite != null) graphic.sprite = sprite; }
+            }
+        }
+    }
+
+    private static void PreviewConditions(ApkEarningPageView page, string state)
+    {
+        bool diamond = state == "diamond", ready = state == "ready";
+        page.SetText("title", "Withdrawal requirements"); page.SetText("subtitle", diamond ? "Diamond withdrawal" : "Cash withdrawal");
+        page.SetText("notice", ready ? "Requirements complete. Confirm your payment details." : "Complete the requirements below to continue.");
+        page.SetText("actionCaption", ready ? "Enter payment details" : "Continue playing");
+        string[] names = diamond
+            ? new[] { "Required balance", "Complete cash guidance", "Login days", "Account level" }
+            : new[] { "Complete level 5", "Complete level 30", "Required balance", "Complete cash guidance", "Levels completed today", "Login days", "Account level" };
+        string[] values = diamond ? new[] { "102 / 50,000", "1 / 1", "2 / 5", "Awaiting account update" }
+            : new[] { "3 / 5 boards", "3 / 30 boards", "$3.15 / $300.00", "1 / 1", "3 / 10", "2 / 5", "Awaiting account update" };
+        for (int i = 0; i < 7; i++)
+        {
+            string key = "rows[" + i + "]"; page.SetVisible(key + ".Root", i < names.Length);
+            if (i >= names.Length) continue;
+            page.SetText(key + ".Name", names[i]); page.SetText(key + ".Value", ready ? "Complete" : values[i]);
+            page.SetText(key + ".Status", ready || names[i] == "Complete cash guidance" ? "Complete" : "In progress");
+        }
+    }
+
+    private static void PreviewHistory(ApkEarningPageView page)
+    {
+        page.SetText("titleLabel", "Withdrawal History"); page.SetText("balanceLabel", "$3.15");
+        GameObject parent = page.GetObject("rowParent");
+        if (parent == null) throw new InvalidOperationException("History preview has no rowParent.");
+        for (int i = 0; i < 3; i++)
+        {
+            ApkEarningPageView row = InstantiatePreview("LocalCashHistoryRow", parent.transform);
+            bool pending = i == 0;
+            row.SetText("titleLabel", "Cash Reward #" + (i + 1));
+            row.SetText("timeLabel", i < 2 ? "10/16/2026 09:30" : string.Empty);
+            row.SetText("amountLabel", i == 2 ? "$3.15" : "$1.50"); row.SetText("actionLabel", "Withdraw");
+            row.SetText("statusLabel", "Pending - not paid"); row.SetVisible("readyVisual", !pending);
+            row.SetVisible("pendingVisual", pending); row.SetVisible("statusLabel", pending);
+            row.SetVisible("actionButton", !pending);
+            Button action = row.GetButton("actionButton");
+            if (action != null) { action.interactable = !pending; action.gameObject.SetActive(!pending); }
+        }
+    }
+
+    private static void PreviewAccount(ApkEarningPageView page, bool email)
+    {
+        page.SetText("labels[0].Text", "Use test account details. No payment is submitted.");
+        page.SetText("labels[1].Text", "Withdrawal account"); page.SetText("labels[2].Text", "Confirm");
+        PreviewInput(page, "InputName", "Preview Player"); PreviewInput(page, "InputEmail", "preview@example.com");
+        PreviewInput(page, "InputAreaNumber", "+1"); PreviewInput(page, "InputNumber", "2025550123");
+        foreach (string key in new[] { "InputEmail", "InputAreaNumber", "InputNumber" })
+        {
+            TMP_InputField input = page.GetInput(key);
+            if (input != null) input.gameObject.SetActive(key == "InputEmail" ? email : !email);
+        }
+        string[] icons = { "VenmoSmall", "ZelleSmall", "PayPalSmall" };
+        for (int i = 0; i < icons.Length; i++)
+        {
+            PreviewSprite(page, "channels[" + i + "].Icon", icons[i]);
+            page.SetVisible("channels[" + i + "].Checkmark", i == (email ? 2 : 0));
+        }
+    }
+
+    private static void PreviewReward(ApkEarningPageView page, bool lucky, bool early)
+    {
+        page.SetText("labels[2].Text", lucky ? "Lucky Reward" : "Level Complete");
+        page.SetText("moreLabel", early ? "Withdraw" : "Claim 10X"); page.SetText("labels[1].Text", "Claim");
+        page.SetVisible("ad", !early); page.SetVisible("MoreGetBtn", true); page.SetVisible("GetBtn", !early); page.SetVisible("Close", false);
+        GameObject parent = page.GetObject("Items");
+        if (parent == null) throw new InvalidOperationException("Reward preview has no Items binding.");
+        PreviewRewardItem(parent.transform, false, lucky);
+        if (!early) PreviewRewardItem(parent.transform, true, lucky);
+    }
+
+    private static void PreviewRewardItem(Transform parent, bool diamond, bool lucky)
+    {
+        ApkEarningPageView item = InstantiatePreview(lucky ? "LocalLuckyItem" : "Item_Big", parent);
+        item.SetText("count", diamond ? "102" : "$1.50"); item.SetVisible("max", false);
+        Image icon = item.GetImage("icon"); Sprite art = LoadPreviewSprite(diamond ? "DiamondPile" : "CashPile");
+        if (icon != null && art != null) { icon.sprite = art; icon.preserveAspect = true; }
+    }
+
+    private static void PreviewSequence(ApkEarningPageView page, string state)
+    {
+        bool receipt = state == "receipt", bonuses = state == "bonuses";
+        int index = state == "activating" ? 1 : state == "activated" ? 2 : state == "summary" ? 3 : 0;
+        page.SetVisible("messageGroup", !receipt && !bonuses); page.SetVisible("receiptGroup", receipt); page.SetVisible("bonusesGroup", bonuses);
+        string[] titles = { "Reward assessment", "Activating rewards", "Rewards activated", "Your withdrawal history" };
+        string[] bodies = { "Your first two cash rewards are saved in withdrawal history.", "Preparing your cash rewards and level bonuses...", "Continue playing to collect cash and unlock more rewards.", "Your reward records are saved. Submitted requests remain pending; no payment has been made." };
+        for (int i = 0; i < 4; i++)
+        {
+            page.SetVisible("messageLayouts[" + i + "].Root", !receipt && !bonuses && i == index);
+            page.SetText("messageLayouts[" + i + "].Title", titles[i]); page.SetText("messageLayouts[" + i + "].Body", bodies[i]);
+        }
+        page.SetText("receiptAmount", "$3.15"); page.SetText("bonusesTitle", "Your reward bonuses");
+        string[] captions = { "Extra cash reward", "Match three fruits to earn a reward", "Reward video bonus - unavailable", "Unlock diamond rewards", "Withdrawal requirements" };
+        for (int i = 0; i < captions.Length; i++)
+        {
+            page.SetText("bonusCaptions[" + i + "]", captions[i]);
+            GameObject row = page.GetObject("bonusRows[" + i + "]");
+            if (row != null) { row.SetActive(true); CanvasGroup group = row.GetComponent<CanvasGroup>(); if (group != null) group.alpha = 1; }
+            page.SetVisible("flightIcons[" + i + "]", false);
+        }
+    }
+
+    private static void PreviewSteps(ApkEarningPageView page, bool verification)
+    {
+        page.SetText("labels[0].Text", verification ? "Withdrawal request" : "Withdrawal progress");
+        page.SetText("labels[1].Text", verification ? "Confirm withdrawal" : "Back to withdrawal");
+        page.SetText("labels[2].Text", verification ? "Current status" : "Complete the next stage requirements");
+        page.SetText("labels[3].Text", verification ? "Reward recorded" : "First level target completed");
+        page.SetText("labels[4].Text", verification ? "Account details entered" : "Next level target pending");
+        page.SetText("labels[5].Text", verification ? "Ready to submit" : "Review remaining requirements before applying");
+        if (!verification)
+        {
+            page.SetText("Tip", "Complete level 30 to continue the next stage");
+            page.SetText("Des", "Complete the next level target to continue."); page.SetText("KeFu", "Application not submitted");
+        }
+        for (int i = 1; i <= (verification ? 3 : 4); i++)
+        {
+            string key = "path:main/Step/" + i;
+            page.SetVisible(key + "/Done", verification || i == 1); page.SetVisible(key + "/Loading", !verification && i > 1);
+            page.SetText(key + "/Content/Time", string.Empty);
+        }
+    }
+
+    private static ApkEarningPageView InstantiatePreview(string prefab, Transform parent)
+    {
+        GameObject source = AssetDatabase.LoadAssetAtPath<GameObject>(PanelFolder + prefab + ".prefab");
+        if (source == null) throw new InvalidOperationException("Missing fixture child prefab: " + prefab);
+        GameObject child = Object.Instantiate(source, parent, false); child.name = prefab + "Preview";
+        ApkEarningPageView view = child.GetComponent<ApkEarningPageView>();
+        if (view == null) throw new InvalidOperationException("Fixture child lacks PageView: " + prefab);
+        return view;
+    }
+
+    private static void PreviewInput(ApkEarningPageView page, string key, string value)
+    { TMP_InputField input = page.GetInput(key); if (input != null) input.SetTextWithoutNotify(value); }
+
+    private static void PreviewSprite(ApkEarningPageView page, string key, string name)
+    { Image image = page.GetImage(key); Sprite sprite = LoadPreviewSprite(name); if (image != null && sprite != null) image.sprite = sprite; }
+
+    private static Sprite LoadPreviewSprite(string name)
+    {
+        string root = "Assets/ApkEarningReference/Resources/ApkEarningReference/Artwork/" + name;
+        foreach (string extension in new[] { ".asset", ".png" })
+            foreach (Object asset in AssetDatabase.LoadAllAssetsAtPath(root + extension))
+                if (asset is Sprite sprite) return sprite;
+        return null;
+    }
+
+    private static void AuditMaskClipping(RectTransform target, Camera camera, string kind, List<string> warnings)
+    {
+        Rect bounds = ScreenBounds(target, camera);
+        foreach (RectMask2D mask in target.GetComponentsInParent<RectMask2D>(false))
+            if (mask.isActiveAndEnabled && mask.transform != target)
+                AuditClipBounds(target, bounds, ScreenBounds(mask.rectTransform, camera), kind, warnings);
+        foreach (Mask mask in target.GetComponentsInParent<Mask>(false))
+            if (mask.isActiveAndEnabled && mask.transform != target)
+                AuditClipBounds(target, bounds, ScreenBounds(mask.rectTransform, camera), kind, warnings);
+    }
+
+    private static void AuditClipBounds(RectTransform target, Rect bounds, Rect clip, string kind, List<string> warnings)
+    {
+        if (bounds.xMax <= clip.xMin || bounds.xMin >= clip.xMax || bounds.yMax <= clip.yMin || bounds.yMin >= clip.yMax)
+            warnings.Add(Hierarchy(target) + ": preview " + kind + " is completely outside an ancestor mask.");
+        else if (bounds.xMin < clip.xMin - 1 || bounds.yMin < clip.yMin - 1 || bounds.xMax > clip.xMax + 1 || bounds.yMax > clip.yMax + 1)
+            warnings.Add(Hierarchy(target) + ": preview " + kind + " rectangle crosses an ancestor mask; inspect intended clipping.");
     }
 
     private static void KeepHeader(Transform root)
