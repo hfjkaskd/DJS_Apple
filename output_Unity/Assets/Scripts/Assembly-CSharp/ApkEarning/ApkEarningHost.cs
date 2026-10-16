@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Globalization;
+using TMPro;
 using UnityEngine;
 
 namespace FruitApkEarning
@@ -10,6 +11,7 @@ namespace FruitApkEarning
     {
         public const string Path = "withdrawal/ApkEarningHost";
         public RectTransform PageRoot;
+        public TMP_Text GlobalTestModeCaption;
         public float ReceiptSeconds = 2, MessageSeconds = 3, BonusesSeconds = 5.5f, LoadingSeconds = 1.5f;
         private static bool requestedDiamonds, requestedRewards;
         private static Action requestedCompletion;
@@ -102,6 +104,9 @@ namespace FruitApkEarning
             page.RefreshLayout();
             page.Bind("Close",Close);page.Bind("CloseBtn",Close);page.Bind("close",Close);page.Bind("closeButton",Close);
             page.SetText("TestMode","TEST MODE · NO CASH PAYMENT");
+            var localTestMode=page.GetText("TestMode");
+            bool hasLocalTestMode=name=="TXPanel"&&localTestMode!=null&&localTestMode.isActiveAndEnabled;
+            if(GlobalTestModeCaption!=null)GlobalTestModeCaption.gameObject.SetActive(!hasLocalTestMode);
             return page;
         }
         private void ShowWallet()
@@ -149,7 +154,7 @@ namespace FruitApkEarning
                 int target=state.HighestClearedLevel<Service.Rules.FirstCashGate?Service.Rules.FirstCashGate:Service.Rules.SecondCashGate;
                 int shownLevel=config.GetDisplayLevel(state.CurrentLevel),shownTarget=config.GetDisplayLevel(target);
                 long current=Math.Max(0,shownLevel-1),total=shownTarget;
-                string hint="Clear level "+shownTarget+", review withdrawal";
+                string hint="Clear level "+shownTarget+"\nto review withdrawal";
                 if(state.HighestClearedLevel>=Service.Rules.SecondCashGate){
                     var requirements=Service.GetRequirements(false,0);
                     foreach(var item in requirements.Items)if(!item.Complete){current=item.Current;total=item.Target;hint=item.Known?RequirementName(item.Key):"Awaiting account update";break;}
@@ -157,14 +162,15 @@ namespace FruitApkEarning
                 var early=FindEarlyRecord();
                 if(early!=null){current=1;total=1;hint="View your cash reward";}
                 page.SetText("GoldCount",Money(early!=null?early.AmountCents:state.CashCents));
-                page.SetText("Title","Level "+(early!=null?early.Ordinal:shownLevel));
-                page.SetText("TXText","Withdraw");page.SetText("Tip",hint);page.SetText("labels[0].Text","Withdrawal amount");
-                page.SetText("ProgressValue",total>0?Math.Min(current,total)+"/"+total:"--");
+                page.SetText("Title","CASH WALLET");
+                page.SetText("StageLabel","Level "+(early!=null?early.Ordinal:shownLevel));
+                page.SetText("TXText","Withdraw");page.SetText("Tip",hint);page.SetText("labels[0].Text","Available balance");
+                page.SetText("ProgressValue",total>0?Math.Min(current,total)+" / "+total:"--");
                 page.SetText("ProgressTipValue",early!=null?string.Empty:total>0?Math.Max(0,total-current).ToString(CultureInfo.InvariantCulture):"--");
                 page.SetProgress("Progress",total>0?(float)current/total:0);
                 page.SetText("Stats.Time","Local stats ("+DateTime.Now.ToString("MM/dd/yyyy",CultureInfo.InvariantCulture)+")");
-                page.SetText("Stats.PassCount",state.TodayWins.ToString(CultureInfo.InvariantCulture));
-                page.SetText("Stats.ChallengeTimes",state.Runs.Count.ToString(CultureInfo.InvariantCulture));
+                page.SetText("Stats.PassCount","Today: "+state.TodayWins.ToString(CultureInfo.InvariantCulture));
+                page.SetText("Stats.ChallengeTimes","Total runs: "+state.Runs.Count.ToString(CultureInfo.InvariantCulture));
                 page.SetText("Stats.GoldGetCount",Money(state.CashCents));
             }
             else if(panel=="TXCoinPanel")

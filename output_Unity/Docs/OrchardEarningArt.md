@@ -42,3 +42,15 @@
 本次微调在 Unity 中重新编译、应用并验证：32 个 Prefab 审计、33 张三种分辨率渲染的错误为 0；保留上述既有提示。实际打开现金钱包、钻石钱包及游戏顶部栏，验证 500/1,000 档位往返切换，三次运行采集的错误均为 0。
 
 3 组真实运行对比位于 `C:/Projects/DJS_Apple/orchard-depth-review/output/index.html`，原始图片及采集 JSON 位于该目录上级的 `before/`、`after/`；静态报告为 `prefab-fixtures-report.json`。左右分别为上一版苹果树美术和本次立体感微调，均为 Unity 运行图。本轮未重新构建 Android APK。
+
+## 已确认的紧凑现金钱包（2026-10-16）
+
+现金钱包按确认稿改为一张奶油色卡片，使用橙色标题、苹果白花饰图、苹果钞票图标、浅桃色进度区域和蓝色主按钮。今日统计及历史入口收进主卡，减少原有木框堆叠。现金、关卡进度及统计仍来自真实存档，提现条件和路由逻辑保留；测试说明显示在卡片顶部。
+
+布局配置保存在 `Assets/OrchardEarningArt/CashWallet/CashWalletArtTheme.asset`，可调整位置、尺寸、字体、描边及资源裁切。停止 Play 后执行 `Tools > Apk Earning > Apply Approved Cash Wallet and Validate`（Ctrl+Alt+U）。新美术保存到原 `TXPanel.prefab`，保持原标准 Button 和别名绑定，运行时仅刷新数据与进度。整体主题的 Apply/Build 最后会重新应用本现金钱包配置。
+
+9 张透明原画及生成记录保存在同目录。通过 SpriteRect 去除透明留白，不改写原 PNG；纹理限制为 256–1024，禁用 mipmap 和 Read/Write。高光及体积光影直接来自素材，没有新增实时模糊、灯光或逐帧静态 UI 创建。进度填充用固定最大宽度乘实际进度，保持圆头；旧页面仍使用 fillAmount。
+
+本轮 Unity 编译成功，32 个 Prefab 审计和 33 张多分辨率静态渲染通过，错误为 0，保留既有 21 条旧资源提示。实际点击验证现金入口、历史及返回、提现条件及返回、关闭及重新打开；运行采集错误为 0，三个前景 Button 中心可命中。验证未修改存档。
+
+对比包位于 `C:/Projects/DJS_Apple/orchard-wallet-redesign-review/output/index.html`，并排图为 `comparison.png`。左侧是用户确认的生成效果图，右侧为 `actual/cash-wallet.png` 的 Unity 运行截图；实际余额 $3.15、钻石 102、Level 4、进度 3/5。只等比排版，不修饰或替换截图。字体、进度条及背景 HUD 仍有细节差异，不宣称像素级一致。本轮未重新构建 Android APK。

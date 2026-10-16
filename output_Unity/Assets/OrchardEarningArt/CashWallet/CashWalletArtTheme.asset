@@ -1,0 +1,713 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7179d95493a74df0bfab6f001acc19e4, type: 3}
+  m_Name: CashWalletArtTheme
+  m_EditorClassIdentifier: 
+  Enabled: 1
+  PrefabPath: Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXPanel.prefab
+  FontPath: Assets/ApkEarningReference/Visuals/MonoBehaviour/zh_Custom SDF.asset
+  ScrimColor: {r: 0.12, g: 0.08, b: 0.25, a: 0.38}
+  HistoryPosition: {x: 0, y: -508}
+  HistorySize: {x: 760, y: 80}
+  DividerColor: {r: 0.9, g: 0.745, b: 0.533, a: 0.7}
+  OutlineWidth: 0.22
+  OutlineColor: {r: 0.43529412, g: 0.2, b: 0.05882353, a: 1}
+  PreviewProgress: 0.6
+  Sprites:
+  - Path: Assets/OrchardEarningArt/CashWallet/CashWalletPanel.png
+    SpriteRect: {serializedVersion: 2, x: 12, y: 16, width: 1083, height: 1387}
+    Border: {x: 150, y: 150, z: 150, w: 150}
+    MaxSize: 1024
+  - Path: Assets/OrchardEarningArt/CashWallet/CashWalletButton.png
+    SpriteRect: {serializedVersion: 2, x: 64, y: 219, width: 1755, height: 410}
+    Border: {x: 240, y: 70, z: 220, w: 180}
+    MaxSize: 1024
+  - Path: Assets/OrchardEarningArt/CashWallet/CashWalletHeader.png
+    SpriteRect: {serializedVersion: 2, x: 41, y: 192, width: 1900, height: 437}
+    Border: {x: 200, y: 70, z: 200, w: 85}
+    MaxSize: 1024
+  - Path: Assets/OrchardEarningArt/CashWallet/CashWalletMoney.png
+    SpriteRect: {serializedVersion: 2, x: 157, y: 175, width: 966, height: 874}
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MaxSize: 512
+  - Path: Assets/OrchardEarningArt/CashWallet/CashWalletApple.png
+    SpriteRect: {serializedVersion: 2, x: 175, y: 52, width: 929, height: 1144}
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MaxSize: 512
+  - Path: Assets/OrchardEarningArt/CashWallet/CashWalletClose.png
+    SpriteRect: {serializedVersion: 2, x: 118, y: 118, width: 1018, height: 1018}
+    Border: {x: 0, y: 0, z: 0, w: 0}
+    MaxSize: 256
+  - Path: Assets/OrchardEarningArt/CashWallet/CashWalletInset.png
+    SpriteRect: {serializedVersion: 2, x: 77, y: 126, width: 1829, height: 549}
+    Border: {x: 150, y: 150, z: 150, w: 150}
+    MaxSize: 1024
+  - Path: Assets/OrchardEarningArt/CashWallet/CashWalletProgressTrack.png
+    SpriteRect: {serializedVersion: 2, x: 36, y: 249, width: 1923, height: 290}
+    Border: {x: 150, y: 70, z: 150, w: 70}
+    MaxSize: 1024
+  - Path: Assets/OrchardEarningArt/CashWallet/CashWalletProgressFill.png
+    SpriteRect: {serializedVersion: 2, x: 45, y: 215, width: 1954, height: 340}
+    Border: {x: 190, y: 0, z: 190, w: 0}
+    MaxSize: 1024
+  Elements:
+  - Target: "i:main/Image"
+    Active: 1
+    SetRect: 1
+    Position: {x: 0, y: 0}
+    Size: {x: 936, y: 1200}
+    StyleImage: 1
+    ImageEnabled: 1
+    SpritePath: "Assets/OrchardEarningArt/CashWallet/CashWalletPanel.png"
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "i:main/Image (1)"
+    Active: 1
+    SetRect: 1
+    Position: {x: 0, y: -3}
+    Size: {x: 800, y: 320}
+    StyleImage: 1
+    ImageEnabled: 1
+    SpritePath: "Assets/OrchardEarningArt/CashWallet/CashWalletInset.png"
+    ImageType: 1
+    PixelsPerUnit: 2
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "i:main/Image (2)"
+    Active: 0
+    SetRect: 0
+    Position: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "l:labels[0].Text"
+    Active: 1
+    SetRect: 0
+    Position: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    StyleImage: 1
+    ImageEnabled: 0
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "i:main/Title1"
+    Active: 1
+    SetRect: 1
+    Position: {x: 20, y: 578}
+    Size: {x: 620, y: 148}
+    StyleImage: 1
+    ImageEnabled: 1
+    SpritePath: "Assets/OrchardEarningArt/CashWallet/CashWalletHeader.png"
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "t:Title"
+    Active: 1
+    SetRect: 1
+    Position: {x: 40, y: 578}
+    Size: {x: 560, y: 115}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 1
+    Text: "CASH WALLET"
+    FontSize: 72
+    FontStyle: 1
+    TextColor: {r: 1, g: 1, b: 0.96, a: 1}
+    Outlined: 1
+    Wrap: 0
+  - Target: "p:main/Title1/OrchardAppleAccent"
+    Active: 1
+    SetRect: 1
+    Position: {x: -278, y: 622}
+    Size: {x: 130, y: 160}
+    StyleImage: 1
+    ImageEnabled: 1
+    SpritePath: "Assets/OrchardEarningArt/CashWallet/CashWalletApple.png"
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 1
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "i:main/Close"
+    Active: 1
+    SetRect: 1
+    Position: {x: 430, y: 550}
+    Size: {x: 112, y: 112}
+    StyleImage: 1
+    ImageEnabled: 1
+    SpritePath: "Assets/OrchardEarningArt/CashWallet/CashWalletClose.png"
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 1
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "t:TestMode"
+    Active: 1
+    SetRect: 1
+    Position: {x: 0, y: 470}
+    Size: {x: 760, y: 42}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 1
+    Text: "TEST MODE · NO CASH PAYMENT"
+    FontSize: 24
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 0
+  - Target: "t:labels[0].Text"
+    Active: 1
+    SetRect: 1
+    Position: {x: 0, y: 388}
+    Size: {x: 750, y: 65}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 1
+    Text: "Available balance"
+    FontSize: 43
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 0
+  - Target: "i:goldImage"
+    Active: 1
+    SetRect: 1
+    Position: {x: -220, y: 265}
+    Size: {x: 206, y: 190}
+    StyleImage: 1
+    ImageEnabled: 1
+    SpritePath: "Assets/OrchardEarningArt/CashWallet/CashWalletMoney.png"
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 1
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "t:GoldCount"
+    Active: 1
+    SetRect: 1
+    Position: {x: 112, y: 265}
+    Size: {x: 460, y: 170}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 1
+    Text: "$3.15"
+    FontSize: 152
+    FontStyle: 1
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 0
+  - Target: "t:StageLabel"
+    Active: 1
+    SetRect: 1
+    Position: {x: 0, y: 105}
+    Size: {x: 700, y: 65}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 1
+    Text: "Level 4"
+    FontSize: 50
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 0
+  - Target: "i:main/Progress"
+    Active: 1
+    SetRect: 1
+    Position: {x: 0, y: 20}
+    Size: {x: 726, y: 86}
+    StyleImage: 1
+    ImageEnabled: 1
+    SpritePath: "Assets/OrchardEarningArt/CashWallet/CashWalletProgressTrack.png"
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "i:Progress"
+    Active: 1
+    SetRect: 1
+    Position: {x: 0, y: 20}
+    Size: {x: 708, y: 72}
+    StyleImage: 1
+    ImageEnabled: 1
+    SpritePath: "Assets/OrchardEarningArt/CashWallet/CashWalletProgressFill.png"
+    ImageType: 1
+    PixelsPerUnit: 2.5
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "t:ProgressValue"
+    Active: 1
+    SetRect: 1
+    Position: {x: 0, y: 20}
+    Size: {x: 640, y: 70}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 1
+    Text: "3 / 5"
+    FontSize: 48
+    TextColor: {r: 1, g: 1, b: 0.96, a: 1}
+    Outlined: 1
+    Wrap: 0
+  - Target: "p:main/Progress/Tip"
+    Active: 0
+    SetRect: 0
+    Position: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "t:Tip"
+    Active: 1
+    SetRect: 1
+    Position: {x: 0, y: -94}
+    Size: {x: 740, y: 105}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 1
+    Text: "Clear level 5\nto review withdrawal"
+    FontSize: 38
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "b:TXBtn"
+    Active: 1
+    SetRect: 1
+    Position: {x: 0, y: -272}
+    Size: {x: 676, y: 160}
+    StyleImage: 1
+    ImageEnabled: 1
+    SpritePath: "Assets/OrchardEarningArt/CashWallet/CashWalletButton.png"
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "t:TXText"
+    Active: 1
+    SetRect: 1
+    Position: {x: 0, y: -272}
+    Size: {x: 600, y: 120}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 1
+    Text: "Withdraw"
+    FontSize: 76
+    FontStyle: 1
+    TextColor: {r: 1, g: 1, b: 0.96, a: 1}
+    Outlined: 1
+    Wrap: 0
+  - Target: "i:main/PlayerInfoPos/PlayerInfo/Image"
+    Active: 1
+    SetRect: 0
+    Position: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    StyleImage: 1
+    ImageEnabled: 0
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "i:main/PlayerInfoPos/PlayerInfo/1"
+    Active: 1
+    SetRect: 0
+    Position: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    StyleImage: 1
+    ImageEnabled: 0
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "i:main/PlayerInfoPos/PlayerInfo/2"
+    Active: 1
+    SetRect: 0
+    Position: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    StyleImage: 1
+    ImageEnabled: 0
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "i:main/PlayerInfoPos/PlayerInfo/3"
+    Active: 1
+    SetRect: 0
+    Position: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    StyleImage: 1
+    ImageEnabled: 0
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "t:Stats.Time"
+    Active: 0
+    SetRect: 0
+    Position: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "t:Stats.GoldGetCount"
+    Active: 0
+    SetRect: 0
+    Position: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "p:main/PlayerInfoPos/PlayerInfo/1/label_32"
+    Active: 0
+    SetRect: 0
+    Position: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "p:main/PlayerInfoPos/PlayerInfo/2/label_33"
+    Active: 0
+    SetRect: 0
+    Position: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "p:main/PlayerInfoPos/PlayerInfo/3/label_34"
+    Active: 0
+    SetRect: 0
+    Position: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "t:Stats.PassCount"
+    Active: 1
+    SetRect: 1
+    Position: {x: -174, y: -404}
+    Size: {x: 320, y: 58}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 1
+    Text: "Today: 0"
+    FontSize: 36
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 0
+  - Target: "t:Stats.ChallengeTimes"
+    Active: 1
+    SetRect: 1
+    Position: {x: 154, y: -404}
+    Size: {x: 360, y: 58}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 1
+    Text: "Total runs: 1"
+    FontSize: 36
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 0
+  - Target: "p:main/CashStatsDivider"
+    Active: 1
+    SetRect: 1
+    Position: {x: 0, y: -452}
+    Size: {x: 704, y: 2}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "t:HistoryCaption"
+    Active: 1
+    SetRect: 1
+    Position: {x: 0, y: -508}
+    Size: {x: 760, y: 80}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 1
+    Text: "Withdrawal history  >"
+    FontSize: 38
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 0
+  - Target: "p:main/1"
+    Active: 0
+    SetRect: 0
+    Position: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "p:main/2"
+    Active: 0
+    SetRect: 0
+    Position: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1
+  - Target: "p:main/Items"
+    Active: 0
+    SetRect: 0
+    Position: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    StyleImage: 0
+    ImageEnabled: 1
+    SpritePath: ""
+    ImageType: 0
+    PixelsPerUnit: 1
+    PreserveAspect: 0
+    ImageColor: {r: 1, g: 1, b: 1, a: 1}
+    StyleText: 0
+    Text: ""
+    FontSize: 40
+    TextColor: {r: 0.44313725490196076, g: 0.2235294117647059, b: 0.10588235294117647, a: 1}
+    Outlined: 0
+    Wrap: 1

@@ -13,7 +13,7 @@ namespace FruitApkEarning
         [Serializable] public sealed class TextSlot { public string Key; public TMP_Text Target; }
         [Serializable] public sealed class ButtonSlot { public string Key; public Button Target; }
         [Serializable] public sealed class ObjectSlot { public string Key; public GameObject Target; }
-        [Serializable] public sealed class ImageSlot { public string Key; public Image Target; }
+        [Serializable] public sealed class ImageSlot { public string Key; public Image Target; public bool ResizeWidthWithProgress; public float FullProgressWidth; }
         [Serializable] public sealed class InputSlot { public string Key; public TMP_InputField Target; }
         public TextSlot[] Texts = Array.Empty<TextSlot>();
         public ButtonSlot[] Buttons = Array.Empty<ButtonSlot>();
@@ -35,7 +35,23 @@ namespace FruitApkEarning
         public TMP_InputField GetInput(string key) { foreach(var s in Inputs) if(s.Key==key)return s.Target; return null; }
         public void SetText(string key,string value) { var t=GetText(key); if(t!=null&&t.text!=value)t.text=value; }
         public void SetVisible(string key,bool visible) { var o=GetObject(key); if(o!=null&&o.activeSelf!=visible)o.SetActive(visible); }
-        public void SetProgress(string key,float value) { var i=GetImage(key); if(i!=null)i.fillAmount=Mathf.Clamp01(value); }
+        public void SetProgress(string key,float value)
+        {
+            foreach(var slot in Images)
+            {
+                if(slot.Key!=key)continue;
+                var target=slot.Target;if(target==null)return;
+                float progress=Mathf.Clamp01(value);
+                if(slot.ResizeWidthWithProgress)
+                {
+                    var size=target.rectTransform.sizeDelta;
+                    size.x=slot.FullProgressWidth*progress;target.rectTransform.sizeDelta=size;
+                    target.enabled=progress>0;
+                }
+                else target.fillAmount=progress;
+                return;
+            }
+        }
         public void Bind(string key,Action action)
         {
             var button=GetButton(key); if(button==null)return;

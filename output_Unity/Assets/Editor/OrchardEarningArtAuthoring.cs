@@ -341,6 +341,7 @@ public static class OrchardEarningArtAuthoring
         }
         EditorUtility.SetDirty(theme);
         AssetDatabase.SaveAssets();
+        CashWalletArtAuthoring.ApplyIfConfigured();
         Debug.Log("[OrchardEarningArt] Applied Inspector theme to " + paths.Count + " saved prefabs / " + changedImages +
             " images. Currency icons, monetary values, conditions and test labels remain unchanged.");
     }

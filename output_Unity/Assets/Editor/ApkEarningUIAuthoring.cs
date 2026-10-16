@@ -451,6 +451,7 @@ public static class ApkEarningUIAuthoring
             caption.fontSize = 22; caption.alignment = TextAlignmentOptions.Center;
             caption.color = Color.white; caption.raycastTarget = false; caption.enableWordWrapping = false;
             caption.text = "TEST MODE • NO CASH PAYMENT";
+            host.GlobalTestModeCaption = caption;
             PrefabUtility.SaveAsPrefabAsset(root, HostPath);
         }
         finally { PrefabUtility.UnloadPrefabContents(root); }
