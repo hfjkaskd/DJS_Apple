@@ -74,6 +74,8 @@ public static class CompactHudAuthoring
             var action = Picture(task.transform, "View", theme.ViewPosition, theme.ViewSize, SpriteAt(theme.Action), theme.ButtonPixelsPerUnit);
             BindButton(view, "CompactTaskView", Clickable(action));
             Label(action.transform, "Label", Vector2.zero, theme.ViewSize - new Vector2(14, 12), "View", 40, true);
+            // The wallet keeps the complete task details; gameplay can use a single row.
+            task.gameObject.SetActive(theme.ShowTaskStrip);
             var disclosure = Picture(content, "Disclosure", theme.DisclosurePosition, theme.DisclosureSize, SpriteAt(theme.Card), 9);
             Label(disclosure.transform, "Label", Vector2.zero, theme.DisclosureSize - new Vector2(20, 4), "TEST MODE · NO CASH VALUE", theme.DisclosureFontSize, false);
             controller.CompactHud = true;
@@ -90,11 +92,11 @@ public static class CompactHudAuthoring
     {
         Image card = Picture(parent, name, pos, size, SpriteAt(theme.Card), theme.CardPixelsPerUnit);
         BindButton(view, alias + ".click", Clickable(card));
-        Picture(card.transform, "Icon", new Vector2(-size.x / 2 + 57, 0), new Vector2(88, 88), icon, 1, true);
-        var text = Label(card.transform, "Value", new Vector2(8, 0), new Vector2(188, 86), value, theme.BalanceFontSize, false);
+        Picture(card.transform, "Icon", new Vector2(-size.x / 2 + 57, 0), theme.CurrencyIconSize, icon, 1, true);
+        var text = Label(card.transform, "Value", new Vector2(8, 0), theme.CurrencyValueSize, value, theme.BalanceFontSize, false);
         text.fontSizeMin = 28;
         BindText(view, alias + ".value", text);
-        Picture(card.transform, "Chevron", new Vector2(size.x / 2 - 41, 0), new Vector2(62, 62), chevronSprite, 1, true);
+        Picture(card.transform, "Chevron", new Vector2(size.x / 2 - 41, 0), theme.ChevronSize, chevronSprite, 1, true);
     }
 
     static void ApplyNativeControls()
@@ -116,9 +118,9 @@ public static class CompactHudAuthoring
                 var bg = level.Find(name).GetComponent<Image>(); SetRect(bg.rectTransform, Vector2.zero, theme.LevelSize);
                 Style(bg, levelSprite, 1, true);
                 var number = bg.transform.Find("Text (TMP)").GetComponent<TMP_Text>();
-                SetRect(number.rectTransform, new Vector2(0, 12), new Vector2(112, 70)); StyleText(number, 66, true); number.text = "4";
+                SetRect(number.rectTransform, theme.LevelNumberPosition, theme.LevelNumberSize); StyleText(number, theme.LevelNumberFontSize, true); number.text = "4";
                 Transform ornament = bg.transform.Find("Image"); if (ornament != null) ornament.gameObject.SetActive(false);
-                Label(bg.transform, "CompactLevelCaption", new Vector2(0, -36), new Vector2(108, 34), "LEVEL", 26, true);
+                Label(bg.transform, "CompactLevelCaption", theme.LevelCaptionPosition, theme.LevelCaptionSize, "LEVEL", theme.LevelCaptionFontSize, true);
             }
             var setting = row.Find("SettingBtn"); SetRect((RectTransform)setting, theme.SettingsPosition, theme.SettingsSize);
             // Native CorePlayUI still binds this same standard Button in code.
