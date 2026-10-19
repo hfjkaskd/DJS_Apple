@@ -1,0 +1,84 @@
+{
+    "generatedUtc": "2026-10-19T03:49:33.4462012Z",
+    "scope": "Saved CorePlayUI and ApkEarningTop prefab audit with three isolated gameplay HUD previews. The serialized $3.15 / 102 / 3-of-5 values are representative preview data, not live player data. The native normal level badge and completed header fade-in are selected explicitly because runtime controllers and animations are disabled. BaseUI safe-area insetting and ApkEarningTopView.RefreshLayout are reused. The disabled TopView never initializes the service; no accounting, player storage, navigation or payment operation is initialized. Visible HUD text overflow, Button viewport boundaries and a greater-than-three-pixel vertical center mismatch in the compact header row are errors. Legacy CorePlayUI fonts outside earning views remain separate warnings.",
+    "errors": [],
+    "warnings": [
+        "Legacy CorePlayUI text (outside imported earning audit; verify runtime font assignment): Assets/res/local/coreplay/CorePlayUI.prefab: missing text font/material at CorePlayUI/UI/Bottom/Box_Root/AddOne/AniLayer/ItemStatus/AD/Shadow",
+        "Legacy CorePlayUI text (outside imported earning audit; verify runtime font assignment): Assets/res/local/coreplay/CorePlayUI.prefab: missing text font/material at CorePlayUI/UI/Bottom/Box_Root/AddOne/AniLayer/ItemStatus/AD/Shadow/Text",
+        "Legacy CorePlayUI text (outside imported earning audit; verify runtime font assignment): Assets/res/local/coreplay/CorePlayUI.prefab: missing text font/material at CorePlayUI/UI/Bottom/Box_Root/AddOne/AniLayer/ItemStatus/UseDirectly/Text",
+        "Legacy CorePlayUI text (outside imported earning audit; verify runtime font assignment): Assets/res/local/coreplay/CorePlayUI.prefab: missing text font/material at CorePlayUI/UI/Bottom/Undo/AniLayer/ItemStatus/UseCoin/BG/Num",
+        "Legacy CorePlayUI text (outside imported earning audit; verify runtime font assignment): Assets/res/local/coreplay/CorePlayUI.prefab: missing text font/material at CorePlayUI/UI/Bottom/Undo/AniLayer/ItemStatus/AD/BG/Num",
+        "Legacy CorePlayUI text (outside imported earning audit; verify runtime font assignment): Assets/res/local/coreplay/CorePlayUI.prefab: missing text font/material at CorePlayUI/UI/Bottom/Undo/AniLayer/ItemStatus/AD/BG/Num/Num (1)",
+        "Legacy CorePlayUI text (outside imported earning audit; verify runtime font assignment): Assets/res/local/coreplay/CorePlayUI.prefab: missing text font/material at CorePlayUI/UI/Bottom/Magic/AniLayer/ItemStatus/UseCoin/BG/Num",
+        "Legacy CorePlayUI text (outside imported earning audit; verify runtime font assignment): Assets/res/local/coreplay/CorePlayUI.prefab: missing text font/material at CorePlayUI/UI/Bottom/Magic/AniLayer/ItemStatus/AD/BG/Num",
+        "Legacy CorePlayUI text (outside imported earning audit; verify runtime font assignment): Assets/res/local/coreplay/CorePlayUI.prefab: missing text font/material at CorePlayUI/UI/Bottom/Magic/AniLayer/ItemStatus/AD/BG/Num/Num (1)",
+        "Legacy CorePlayUI text (outside imported earning audit; verify runtime font assignment): Assets/res/local/coreplay/CorePlayUI.prefab: missing text font/material at CorePlayUI/UI/Bottom/Shuffle/AniLayer/ItemStatus/UseCoin/BG/Num",
+        "Legacy CorePlayUI text (outside imported earning audit; verify runtime font assignment): Assets/res/local/coreplay/CorePlayUI.prefab: missing text font/material at CorePlayUI/UI/Bottom/Shuffle/AniLayer/ItemStatus/AD/BG/Num",
+        "Legacy CorePlayUI text (outside imported earning audit; verify runtime font assignment): Assets/res/local/coreplay/CorePlayUI.prefab: missing text font/material at CorePlayUI/UI/Bottom/Shuffle/AniLayer/ItemStatus/AD/BG/Num/Num (1)"
+    ],
+    "pages": [
+        {
+            "path": "Assets/res/local/coreplay/CorePlayUI.prefab",
+            "buttons": 16,
+            "texts": 56,
+            "images": 120,
+            "textBindings": 0,
+            "buttonBindings": 0,
+            "imageBindings": 0,
+            "objectBindings": 0,
+            "inputBindings": 0
+        },
+        {
+            "path": "Assets/res/local/withdrawal/ApkEarningTop.prefab",
+            "buttons": 11,
+            "texts": 33,
+            "images": 63,
+            "textBindings": 166,
+            "buttonBindings": 21,
+            "imageBindings": 126,
+            "objectBindings": 266,
+            "inputBindings": 0
+        }
+    ],
+    "renders": [
+        {
+            "page": "GameplayHUD",
+            "state": "representative",
+            "image": "E:/CodexCacheBackups/DJS_Apple-apk-validation-20261014\\fixture-GameplayHUD-1080x1920.png",
+            "dataSource": "Static editor preview data only; not player data or a running-game capture.",
+            "width": 1080,
+            "height": 1920,
+            "activeButtons": 3,
+            "activeTexts": 5,
+            "canvasScale": 0.8205128312110901,
+            "errors": [],
+            "warnings": []
+        },
+        {
+            "page": "GameplayHUD",
+            "state": "representative",
+            "image": "E:/CodexCacheBackups/DJS_Apple-apk-validation-20261014\\fixture-GameplayHUD-1080x2340.png",
+            "dataSource": "Static editor preview data only; not player data or a running-game capture.",
+            "width": 1080,
+            "height": 2340,
+            "activeButtons": 3,
+            "activeTexts": 5,
+            "canvasScale": 1.0,
+            "errors": [],
+            "warnings": []
+        },
+        {
+            "page": "GameplayHUD",
+            "state": "representative",
+            "image": "E:/CodexCacheBackups/DJS_Apple-apk-validation-20261014\\fixture-GameplayHUD-720x1600.png",
+            "dataSource": "Static editor preview data only; not player data or a running-game capture.",
+            "width": 720,
+            "height": 1600,
+            "activeButtons": 3,
+            "activeTexts": 5,
+            "canvasScale": 0.6666666865348816,
+            "errors": [],
+            "warnings": []
+        }
+    ]
+}

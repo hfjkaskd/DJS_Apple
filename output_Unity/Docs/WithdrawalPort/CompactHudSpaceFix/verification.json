@@ -1,0 +1,83 @@
+{
+  "generated_utc": "2026-10-19T03:54:09.345457+00:00",
+  "change_zh": "HUD 改为更矮的单行及窄测试标识，主界面隐藏任务条；任务进度仍可在现金页面查看。",
+  "reserved_height_design_units": {
+    "before": 320,
+    "after": 160,
+    "released_to_gameplay": 160
+  },
+  "comparison": {
+    "file": "before-after.png",
+    "method_zh": "两张完整真实截图均等比缩放到 600 像素宽后并排，未裁切或修改实机内容。"
+  },
+  "captures": [
+    {
+      "image": "before-gameplay.png",
+      "report": "before-gameplay.json",
+      "source_image": "E:\\CodexCacheBackups\\DJS_Apple-apk-validation-20261014\\runtime-20261019-032221-285.png",
+      "source_report": "E:\\CodexCacheBackups\\DJS_Apple-apk-validation-20261014\\runtime-20261019-032221-285.json",
+      "sha256": "b8efc72d631f5556964acf7ec092945fd3bee24ab894cbd78fe6241e0c62d456",
+      "generated_utc": "2026-10-19T03:22:21.2788690Z",
+      "size": [
+        720,
+        1280
+      ],
+      "errors": []
+    },
+    {
+      "image": "actual-gameplay.png",
+      "report": "actual-gameplay.json",
+      "source_image": "E:\\CodexCacheBackups\\DJS_Apple-apk-validation-20261014\\runtime-20261019-035138-481.png",
+      "source_report": "E:\\CodexCacheBackups\\DJS_Apple-apk-validation-20261014\\runtime-20261019-035138-481.json",
+      "sha256": "ad601975882f7b8128e1abf0e8563b7af1ffd99c085c74ac6a3392f03934d517",
+      "generated_utc": "2026-10-19T03:51:38.4749808Z",
+      "size": [
+        720,
+        1280
+      ],
+      "errors": []
+    },
+    {
+      "image": "actual-cash-wallet.png",
+      "report": "actual-cash-wallet.json",
+      "source_image": "E:\\CodexCacheBackups\\DJS_Apple-apk-validation-20261014\\runtime-20261019-035216-855.png",
+      "source_report": "E:\\CodexCacheBackups\\DJS_Apple-apk-validation-20261014\\runtime-20261019-035216-855.json",
+      "sha256": "01947ecb4606d596a2faf202624a965920e1789574514d48f9b4ddad48f322dc",
+      "generated_utc": "2026-10-19T03:52:16.8505029Z",
+      "size": [
+        720,
+        1280
+      ],
+      "errors": []
+    }
+  ],
+  "validation": {
+    "report": "compact-hud-report.json",
+    "generated_utc": "2026-10-19T03:49:33.4462012Z",
+    "error_count": 0,
+    "legacy_font_warning_count": 12,
+    "resolutions": [
+      [
+        1080,
+        1920
+      ],
+      [
+        1080,
+        2340
+      ],
+      [
+        720,
+        1600
+      ]
+    ],
+    "note_zh": "三分辨率为隔离 Prefab 预览校验，与实际运行截图分开记录；12 条警告来自已有 CorePlayUI 字体引用。"
+  },
+  "cash_entry_verification_zh": "主代理已点击现金入口实测，现金页面仍显示 3/5 任务进度；证据为 actual-cash-wallet.png。",
+  "capture_environment": "Unity Editor Play Mode, 720 x 1280",
+  "new_apk_built": false,
+  "limitations_zh": [
+    "运行截图来自 Editor，不是新 APK。",
+    "截图保留真实安全区与游戏对象位置。",
+    "提现为测试流程，无真实现金支付。"
+  ]
+}
