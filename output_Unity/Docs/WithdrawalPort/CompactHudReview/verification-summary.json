@@ -1,0 +1,116 @@
+{
+  "generated_utc": "2026-10-19T03:27:35.451267+00:00",
+  "description_zh": "批准的主界面效果图与 Unity 真实运行画面对照。原始运行截图逐字节复制；对比图只等比缩放、并排排版及标注。",
+  "approved_concept": {
+    "source": "C:\\Projects\\DJS_Apple\\orchard-hud-redesign-review\\main-hud-concept-v1.png",
+    "evidence_file": "approved-main-hud-concept.png",
+    "sha256": "1f4fc6305e231f0188a5adf196306fde7a87858f7f0870e44e0063eb25b06b56",
+    "size": [
+      941,
+      1672
+    ]
+  },
+  "captures": [
+    {
+      "kind": "gameplay",
+      "source_image": "E:\\CodexCacheBackups\\DJS_Apple-apk-validation-20261014\\runtime-20261019-032221-285.png",
+      "source_report": "E:\\CodexCacheBackups\\DJS_Apple-apk-validation-20261014\\runtime-20261019-032221-285.json",
+      "evidence_image": "actual-gameplay.png",
+      "evidence_report": "actual-gameplay.json",
+      "image_sha256": "b8efc72d631f5556964acf7ec092945fd3bee24ab894cbd78fe6241e0c62d456",
+      "generated_utc": "2026-10-19T03:22:21.2788690Z",
+      "dimensions": [
+        720,
+        1280
+      ],
+      "errors": [],
+      "active_pages": [
+        "ApkEarningTop"
+      ]
+    },
+    {
+      "kind": "cash_wallet",
+      "source_image": "E:\\CodexCacheBackups\\DJS_Apple-apk-validation-20261014\\runtime-20261019-032250-061.png",
+      "source_report": "E:\\CodexCacheBackups\\DJS_Apple-apk-validation-20261014\\runtime-20261019-032250-061.json",
+      "evidence_image": "actual-cash-wallet.png",
+      "evidence_report": "actual-cash-wallet.json",
+      "image_sha256": "e3f1726c47f69783afb21d072c63466652a2464f04e4790c32e9d683528d7d66",
+      "generated_utc": "2026-10-19T03:22:50.0548558Z",
+      "dimensions": [
+        720,
+        1280
+      ],
+      "errors": [],
+      "active_pages": [
+        "LocalCashHistoryEntry",
+        "PlayerInfo",
+        "TXPanel(Clone)",
+        "ApkEarningTop"
+      ]
+    },
+    {
+      "kind": "diamonds",
+      "source_image": "E:\\CodexCacheBackups\\DJS_Apple-apk-validation-20261014\\runtime-20261019-032348-652.png",
+      "source_report": "E:\\CodexCacheBackups\\DJS_Apple-apk-validation-20261014\\runtime-20261019-032348-652.json",
+      "evidence_image": "actual-diamonds.png",
+      "evidence_report": "actual-diamonds.json",
+      "image_sha256": "8bac905cf3a6a9e5ca64563bb77e5a68989c8c016e95857465c5da78fcf8553e",
+      "generated_utc": "2026-10-19T03:23:48.6493591Z",
+      "dimensions": [
+        720,
+        1280
+      ],
+      "errors": [],
+      "active_pages": [
+        "TXCoinPanel(Clone)",
+        "ApkEarningTop"
+      ]
+    }
+  ],
+  "comparison_method": {
+    "main": "Full source images, each resized proportionally to width 720; no source content edits.",
+    "top": "Same proportional resize, then identical [0, 0, 720, 300] crop in normalized pixels; safe area retained.",
+    "main_file": "main-hud-comparison.png",
+    "top_file": "top-hud-comparison.png",
+    "pixel_identical_claim": false
+  },
+  "prefab_validation": {
+    "source_report": "E:\\CodexCacheBackups\\DJS_Apple-apk-validation-20261014\\compact-hud-report.json",
+    "evidence_report": "compact-hud-report.json",
+    "generated_utc": "2026-10-19T03:20:37.2901311Z",
+    "error_count": 0,
+    "warning_count": 12,
+    "warning_scope": "Legacy CorePlayUI font/material references outside imported earning view audit; see full report.",
+    "render_sizes": [
+      [
+        1080,
+        1920
+      ],
+      [
+        1080,
+        2340
+      ],
+      [
+        720,
+        1600
+      ]
+    ],
+    "fixture_note": "The three validation renders are isolated prefab previews, distinct from the actual running-game captures in this package."
+  },
+  "interactive_verification": {
+    "source": "Parent implementation agent performed actual Unity mouse interaction before collecting these captures.",
+    "passed_entries": [
+      "Cash card",
+      "Diamonds card",
+      "View button",
+      "Settings button"
+    ]
+  },
+  "limitations": [
+    "Actual game data and fruit layout are preserved; no attempt to match concept fruit positions.",
+    "This is a Unity Editor Play Mode capture, not a new Android APK capture.",
+    "Test-only reward and withdrawal experience; no real cash payment service.",
+    "The three captured runtime screens are evidence of those screens only, not a complete test of every withdrawal state."
+  ],
+  "new_apk_built": false
+}
