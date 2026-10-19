@@ -16,6 +16,7 @@ public static class ApkEarningValidation
 {
     private const string PanelFolder = "Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/";
     private const string CorePath = "Assets/res/local/coreplay/CorePlayUI.prefab";
+    private const string TopPath = "Assets/res/local/withdrawal/ApkEarningTop.prefab";
     private const string HostPath = "Assets/res/local/withdrawal/ApkEarningHost.prefab";
     private const string Output = "E:/CodexCacheBackups/DJS_Apple-apk-validation-20261014";
     private static readonly string[] Pages = {
@@ -115,6 +116,26 @@ public static class ApkEarningValidation
         if (report.errors.Count > 0)
             throw new InvalidOperationException("APK earning fixture validation found " + report.errors.Count + " errors. See " + Output);
         Debug.Log("[ApkEarningValidation] Passed " + report.pages.Count + " prefab audits and " + report.renders.Count + " fixture renders. " + Output);
+    }
+
+    [MenuItem("Tools/Apk Earning/Validate Compact Gameplay HUD %#&y")]
+    public static void ValidateCompactGameplayHud()
+    {
+        if (EditorApplication.isPlayingOrWillChangePlaymode)
+            throw new InvalidOperationException("Stop Play before rendering saved HUD fixtures.");
+        Directory.CreateDirectory(Output);
+        var report = new Report {
+            generatedUtc = DateTime.UtcNow.ToString("O"),
+            scope = "Saved CorePlayUI and ApkEarningTop prefab audit with three isolated gameplay HUD previews. The serialized $3.15 / 102 / 3-of-5 values are representative preview data, not live player data. The native normal level badge and completed header fade-in are selected explicitly because runtime controllers and animations are disabled. BaseUI safe-area insetting and ApkEarningTopView.RefreshLayout are reused. The disabled TopView never initializes the service; no accounting, player storage, navigation or payment operation is initialized. Visible HUD text overflow, Button viewport boundaries and a greater-than-three-pixel vertical center mismatch in the compact header row are errors. Legacy CorePlayUI fonts outside earning views remain separate warnings."
+        };
+        AuditPrefab(AssetDatabase.LoadAssetAtPath<GameObject>(CorePath), CorePath, report, false, true);
+        AuditPrefab(AssetDatabase.LoadAssetAtPath<GameObject>(TopPath), TopPath, report);
+        foreach (Vector2Int size in new[] { new Vector2Int(1080, 1920), new Vector2Int(1080, 2340), new Vector2Int(720, 1600) })
+            RenderFixture("GameplayHUD", CorePath, size, true, report);
+        File.WriteAllText(Path.Combine(Output, "compact-hud-report.json"), JsonUtility.ToJson(report, true));
+        if (report.errors.Count > 0)
+            throw new InvalidOperationException("Compact HUD validation found " + report.errors.Count + " errors. See " + Output);
+        Debug.Log("[ApkEarningValidation] Compact HUD passed " + report.pages.Count + " prefab audits and " + report.renders.Count + " fixture renders. " + Output);
     }
 
     [MenuItem("Tools/Apk Earning/Capture Current Runtime %&k")]
@@ -313,23 +334,36 @@ public static class ApkEarningValidation
             AddBackground(canvas.transform, size);
             GameObject instance = Object.Instantiate(source, canvas.transform, false); instance.name = source.name;
             if (!hudOnly) ApplyPreviewState(instance.GetComponent<ApkEarningPageView>(), name, state);
-            // The inactive ancestor prevents runtime accounting/host initialization. Only the shared layout view survives.
+            // The inactive ancestor prevents runtime accounting/host initialization.
+            // HUD previews retain a disabled controller solely to call its shared layout method.
             foreach (MonoBehaviour component in instance.GetComponentsInChildren<MonoBehaviour>(true))
-                if (component != null && !(component is UIBehaviour) && !(component is ApkEarningPageView)) Object.DestroyImmediate(component);
+            {
+                if (hudOnly && component is ApkEarningTopView top) top.enabled = false;
+                else if (component != null && !(component is UIBehaviour) && !(component is ApkEarningPageView)) Object.DestroyImmediate(component);
+            }
             foreach (Animation animation in instance.GetComponentsInChildren<Animation>(true)) animation.enabled = false;
             foreach (Animator animator in instance.GetComponentsInChildren<Animator>(true)) animator.enabled = false;
-            if (hudOnly) KeepHeader(instance.transform);
+            if (hudOnly)
+            {
+                KeepHeader(instance.transform);
+                ApplyHeaderPreviewState(instance.transform);
+                Orange.SafeAreaSim.InsetRect(instance.transform as RectTransform);
+            }
             canvasObject.SetActive(true); instance.SetActive(true);
             Canvas.ForceUpdateCanvases();
             foreach (ApkEarningPageView view in instance.GetComponentsInChildren<ApkEarningPageView>(true)) view.RefreshLayout();
+            if (hudOnly)
+                foreach (ApkEarningTopView top in instance.GetComponentsInChildren<ApkEarningTopView>(true)) top.RefreshLayout();
             foreach (TMP_Text text in instance.GetComponentsInChildren<TMP_Text>(false)) text.ForceMeshUpdate(true, true);
             Canvas.ForceUpdateCanvases(); camera.Render();
+            if (hudOnly) AuditCompactHeaderAlignment(instance.transform, camera, item.errors);
             foreach (Button button in instance.GetComponentsInChildren<Button>(false))
             {
                 item.activeButtons++; Rect bounds = ScreenBounds((RectTransform)button.transform, camera);
-                if (bounds.width < .5f || bounds.height < .5f) item.warnings.Add(Hierarchy(button.transform) + ": static Button has no visible size.");
+                if (bounds.width < .5f || bounds.height < .5f)
+                    (hudOnly ? item.errors : item.warnings).Add(Hierarchy(button.transform) + ": static Button has no visible size.");
                 else if (bounds.xMax < 0 || bounds.xMin > size.x || bounds.yMax < 0 || bounds.yMin > size.y)
-                    item.warnings.Add(Hierarchy(button.transform) + ": authored state keeps Button offscreen; runtime routing must hide or position it.");
+                    (hudOnly ? item.errors : item.warnings).Add(Hierarchy(button.transform) + ": authored state keeps Button offscreen; runtime routing must hide or position it.");
                 else if (bounds.xMin < -1 || bounds.yMin < -1 || bounds.xMax > size.x + 1 || bounds.yMax > size.y + 1)
                     item.errors.Add(Hierarchy(button.transform) + ": visible Button crosses viewport bounds: " + bounds);
                 AuditMaskClipping((RectTransform)button.transform, camera, "Button", item.warnings);
@@ -338,7 +372,14 @@ public static class ApkEarningValidation
             {
                 if (!text.isActiveAndEnabled) continue;
                 item.activeTexts++;
-                if (text.isTextOverflowing) item.warnings.Add(Hierarchy(text.transform) + ": representative preview text overflows its text area.");
+                if (text.isTextOverflowing)
+                    (hudOnly ? item.errors : item.warnings).Add(Hierarchy(text.transform) + ": representative preview text overflows its text area.");
+                if (hudOnly && !string.IsNullOrWhiteSpace(text.text))
+                {
+                    Rect bounds = ScreenBounds(text.rectTransform, camera);
+                    if (bounds.xMin < -1 || bounds.yMin < -1 || bounds.xMax > size.x + 1 || bounds.yMax > size.y + 1)
+                        item.errors.Add(Hierarchy(text.transform) + ": visible HUD text crosses viewport bounds: " + bounds);
+                }
                 if (!string.IsNullOrWhiteSpace(text.text)) AuditMaskClipping(text.rectTransform, camera, "text", item.warnings);
             }
             if (hudOnly && item.activeTexts == 0) item.errors.Add("The earning HUD fixture contains no visible text.");
@@ -638,6 +679,53 @@ public static class ApkEarningValidation
         if (hud == null) throw new InvalidOperationException("CorePlayUI earning HUD is missing.");
         hud.gameObject.SetActive(true);
         KeepBranches(root, top, hud);
+    }
+    private static void ApplyHeaderPreviewState(Transform root)
+    {
+        // CorePlayUI.UpdateText selects the normal badge at runtime. Its three
+        // variants are saved inactive, so a controller-free fixture must select
+        // that same representative variant explicitly. Opening animations also
+        // fade these native controls; preview their settled visible state only.
+        Transform level = root.Find("UI/Top/Level");
+        if (level == null) throw new InvalidOperationException("CorePlayUI level badge is missing.");
+        level.gameObject.SetActive(true);
+        foreach (string name in new[] { "Bg_Normal", "Bg_Hard", "Bg_SuperHard" })
+        {
+            Transform variant = level.Find(name);
+            if (variant == null) throw new InvalidOperationException("CorePlayUI level badge variant is missing: " + name);
+            variant.gameObject.SetActive(name == "Bg_Normal");
+        }
+        CanvasGroup levelGroup = level.GetComponent<CanvasGroup>();
+        if (levelGroup != null) levelGroup.alpha = 1;
+        Transform settings = root.Find("UI/Top/SettingBtn");
+        if (settings == null) throw new InvalidOperationException("CorePlayUI settings button is missing.");
+        settings.gameObject.SetActive(true);
+        CanvasGroup settingsGroup = settings.GetComponent<CanvasGroup>();
+        if (settingsGroup != null) settingsGroup.alpha = 1;
+    }
+    private static void AuditCompactHeaderAlignment(Transform root, Camera camera, List<string> errors)
+    {
+        ApkEarningTopView controller = root.GetComponentInChildren<ApkEarningTopView>(true);
+        if (controller == null || !controller.CompactHud) return;
+        RectTransform level = root.Find("UI/Top/Level") as RectTransform;
+        RectTransform settings = root.Find("UI/Top/SettingBtn") as RectTransform;
+        RectTransform cash = controller.transform.Find("CompactHud/Cash") as RectTransform;
+        RectTransform diamonds = controller.transform.Find("CompactHud/Diamonds") as RectTransform;
+        if (level == null || settings == null || cash == null || diamonds == null)
+        {
+            errors.Add("Compact header alignment requires level, cash, diamonds and settings rectangles.");
+            return;
+        }
+        float levelY = ScreenBounds(level, camera).center.y;
+        float settingsY = ScreenBounds(settings, camera).center.y;
+        float cashY = ScreenBounds(cash, camera).center.y;
+        float diamondsY = ScreenBounds(diamonds, camera).center.y;
+        float minY = Mathf.Min(Mathf.Min(levelY, settingsY), Mathf.Min(cashY, diamondsY));
+        float maxY = Mathf.Max(Mathf.Max(levelY, settingsY), Mathf.Max(cashY, diamondsY));
+        if (maxY - minY > 3)
+            errors.Add("Compact header centers differ by more than 3 screen pixels: level=" + levelY +
+                ", cash=" + cashY + ", diamonds=" + diamondsY + ", settings=" + settingsY +
+                ". Check nested earning-prefab RectTransform anchor overrides.");
     }
     private static void KeepBranches(Transform parent, Transform top, Transform hud)
     {

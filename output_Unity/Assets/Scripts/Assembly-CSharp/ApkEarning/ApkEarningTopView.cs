@@ -16,6 +16,7 @@ namespace FruitApkEarning
         }
         [Serializable] public sealed class DotSlot { public GameObject Root, Left, Right; public Image Icon; }
         public ApkEarningPageView View;
+        public bool CompactHud;
         public Sprite NormalMilestone, PassedMilestone, ActiveMilestone;
         public Sprite PendingDot, PassedDot;
         public LevelDisplay[] Levels = Array.Empty<LevelDisplay>();
@@ -43,6 +44,7 @@ namespace FruitApkEarning
             service.Changed += Refresh;
             View.Bind("OriginalGoldItem.click", OpenCash);
             View.Bind("OriginalCoinItem.click", OpenDiamonds);
+            View.Bind("CompactTaskView", OpenCash);
             for (int i = 0; i < 5; i++) View.Bind("MilestoneButton[" + i + "]", OpenCash);
             bound = true; lastAutomaticReward = null;
             RefreshLayout();
@@ -108,21 +110,38 @@ namespace FruitApkEarning
             if (View == null || service == null) return;
             bool ready = service.Available && service.State != null;
             Button cash = View.GetButton("OriginalGoldItem.click"), diamond = View.GetButton("OriginalCoinItem.click");
+            Button task = View.GetButton("CompactTaskView");
             if (cash != null) cash.interactable = ready || !string.IsNullOrEmpty(service.Error);
             if (diamond != null) diamond.interactable = ready;
+            if (task != null) task.interactable = ready || !string.IsNullOrEmpty(service.Error);
             if (!ready)
             {
                 View.SetText("OriginalGoldItem.value", "--"); View.SetText("OriginalCoinItem.value", "--");
-                View.SetText("OriginalGoldItem.goldHintText", "Local rewards unavailable");
-                View.SetText("OriginalCoinItem.hintText", "Local rewards unavailable");
+                if (CompactHud)
+                {
+                    blinking = null;
+                    View.SetText("CompactTaskLabel", "Local rewards unavailable");
+                    View.SetText("CompactTaskRatio", "--");
+                    View.SetProgress("CompactTaskProgress", 0);
+                }
+                else
+                {
+                    View.SetText("OriginalGoldItem.goldHintText", "Local rewards unavailable");
+                    View.SetText("OriginalCoinItem.hintText", "Local rewards unavailable");
+                }
                 return;
             }
             ApkEarningState state = service.State;
             bool showDiamonds = state.DiamondGuideShown || state.CurrentLevel >= service.Rules.DiamondFirstLevel;
-            View.SetVisible("CoinItem", showDiamonds);
+            View.SetVisible("CoinItem", CompactHud || showDiamonds);
             if (diamond != null) diamond.interactable = showDiamonds;
             View.SetText("OriginalGoldItem.value", Money(state.CashCents));
             View.SetText("OriginalCoinItem.value", (state.Diamonds / (decimal)ApkEarningRules.DiamondScale).ToString("0.##", CultureInfo.InvariantCulture));
+            if (CompactHud)
+            {
+                RefreshCompactTask(state);
+                return;
+            }
             View.SetText("OriginalGoldItem.goldHintText", state.CurrentLevel <= service.Rules.FirstCashGate ?
                 "<color=#FF0000>Clear this level</color> Withdraw all" : "Clear level <color=#FF0000>" + DisplayLevel(service.Rules.SecondCashGate) + "</color> Withdraw all");
             long remaining = Math.Max(0, service.Rules.DiamondTargets[0] - state.Diamonds);
@@ -131,6 +150,54 @@ namespace FruitApkEarning
             View.SetVisible("GoldItem/Hint", state.CurrentLevel <= service.Rules.SecondCashGate);
             View.SetVisible("CoinItem/Hint", remaining > 0);
             RefreshMilestones(state);
+        }
+        private void RefreshCompactTask(ApkEarningState state)
+        {
+            blinking = null;
+            // The wallet resumes an unarchived early reward before its next target.
+            foreach (ApkRecord record in state.Records)
+            {
+                if (record.Archived) continue;
+                View.SetText("CompactTaskLabel", "Review cash reward");
+                View.SetText("CompactTaskRatio", "1 / 1");
+                View.SetProgress("CompactTaskProgress", 1);
+                return;
+            }
+            ApkRequirements requirements = service.GetRequirements(false, 0);
+            ApkRequirement next = null;
+            foreach (ApkRequirement item in requirements.Items)
+                if (!item.Complete) { next = item; break; }
+            if (next == null)
+            {
+                View.SetText("CompactTaskLabel", "Ready to review");
+                View.SetText("CompactTaskRatio", "Complete");
+                View.SetProgress("CompactTaskProgress", 1);
+                return;
+            }
+            if (!next.Known || next.Target <= 0)
+            {
+                View.SetText("CompactTaskLabel", "Awaiting account update");
+                View.SetText("CompactTaskRatio", "--");
+                View.SetProgress("CompactTaskProgress", 0);
+                return;
+            }
+
+            long current = Math.Max(0, Math.Min(next.Current, next.Target));
+            long target = next.Target;
+            string label = RequirementName(next.Key);
+            if (next.Key == "firstLevel" || next.Key == "secondLevel")
+            {
+                // The imported rules count boards; the player sees the configured
+                // level groups, as in the wallet. A group completes after all its rounds.
+                target = DisplayLevel((int)next.Target);
+                current = Math.Max(0, Math.Min(DisplayLevel(state.CurrentLevel) - 1, target));
+                label = "Clear level " + target.ToString(CultureInfo.InvariantCulture);
+            }
+            string ratio = next.Key == "balance" ? Money(current) + " / " + Money(target) :
+                current.ToString(CultureInfo.InvariantCulture) + " / " + target.ToString(CultureInfo.InvariantCulture);
+            View.SetText("CompactTaskLabel", label);
+            View.SetText("CompactTaskRatio", ratio);
+            View.SetProgress("CompactTaskProgress", target > 0 ? (float)current / target : 0);
         }
         private void RefreshMilestones(ApkEarningState state)
         {

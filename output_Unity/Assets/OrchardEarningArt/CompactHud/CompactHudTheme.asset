@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91a0d6e3766338c49a9e50d792c1bae4, type: 3}
+  m_Name: CompactHudTheme
+  m_EditorClassIdentifier:
+  Enabled: 1
+  TopPrefab: Assets/res/local/withdrawal/ApkEarningTop.prefab
+  CorePrefab: Assets/res/local/coreplay/CorePlayUI.prefab
+  Font: Assets/ApkEarningReference/Visuals/MonoBehaviour/zh_Custom SDF.asset
+  PlainMaterial: Assets/OrchardEarningArt/CashWallet/CashWalletPlain.mat
+  OutlinedMaterial: Assets/OrchardEarningArt/CashWallet/CashWalletOutlined.mat
+  Controls: Assets/OrchardEarningArt/CompactHud/HudControls.png
+  Card: Assets/OrchardEarningArt/CashWallet/CashWalletPanel.png
+  Action: Assets/OrchardEarningArt/CashWallet/CashWalletButton.png
+  Track: Assets/OrchardEarningArt/CashWallet/CashWalletProgressTrack.png
+  Fill: Assets/OrchardEarningArt/CashWallet/CashWalletProgressFill.png
+  ReferenceWidth: 1080
+  RowY: -98
+  ViewportTop: 320
+  CashPosition: {x: -174, y: -98}
+  DiamondPosition: {x: 202, y: -98}
+  CashSize: {x: 374, y: 108}
+  DiamondSize: {x: 360, y: 108}
+  LevelPosition: {x: -438, y: 0}
+  LevelSize: {x: 146, y: 146}
+  SettingsPosition: {x: 450, y: 0}
+  SettingsSize: {x: 120, y: 120}
+  TaskPosition: {x: 0, y: -214}
+  TaskSize: {x: 1024, y: 92}
+  DisclosurePosition: {x: 0, y: -277}
+  DisclosureSize: {x: 890, y: 40}
+  TaskLabelPosition: {x: -338, y: 0}
+  TaskLabelSize: {x: 306, y: 60}
+  ProgressPosition: {x: 60, y: 0}
+  ProgressSize: {x: 460, y: 42}
+  ViewPosition: {x: 423, y: 0}
+  ViewSize: {x: 156, y: 70}
+  BalanceFontSize: 62
+  TaskFontSize: 38
+  RatioFontSize: 38
+  DisclosureFontSize: 23
+  CardPixelsPerUnit: 3.5
+  TaskPixelsPerUnit: 4
+  ButtonPixelsPerUnit: 6
+  Ink: {r: 0.44313726, g: 0.22352941, b: 0.105882354, a: 1}
