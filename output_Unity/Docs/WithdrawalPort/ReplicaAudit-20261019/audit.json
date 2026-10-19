@@ -1,0 +1,118 @@
+{
+  "audit_date": "2026-10-19",
+  "timezone": "America/New_York",
+  "implementation_commit": "1c2eabe",
+  "verdict": "未达到视觉或完整流程的 1:1 复刻",
+  "reference_policy": "美术对照已确认的苹果树效果图；业务结构对照指定 APK 及其对应工程。后续明确要求的换皮、顶部精简和提示条删除属于授权改动。",
+  "reference_apk": "C:/Projects/com.nut.sort.relax/Builds/Android/ColorNutParty-1.0.1-20261013-app-icon-fix.apk",
+  "reference_capture_directory": "C:/Projects/DJS_Apple/apk-comparison/reference",
+  "visual_findings": [
+    {
+      "page": "主界面",
+      "result": "授权调整后的版本",
+      "details": "单排等级、现金、钻石、设置已经落实。顶部任务条和测试提示条按后续要求删除；不能再与旧效果图作全屏像素一致判定。"
+    },
+    {
+      "page": "现金钱包",
+      "result": "接近确认图，未 1:1",
+      "details": "总体布局相近；标题和按钮文字字重、描边颜色、现金图标角度、进度条厚度、历史入口箭头仍有可见差异。"
+    },
+    {
+      "page": "钻石钱包、条件、历史",
+      "result": "保留对应功能，采用重新设计的布局",
+      "details": "苹果树主题、紧凑面板、档位排列及统计呈现与 APK 原界面存在有意差异；不是逐像素复制。"
+    }
+  ],
+  "flow_findings": [
+    {
+      "id": "activation-resume",
+      "result": "未等价",
+      "reference": "参考工程逐步保存 activationStep，最后一页完成后才标记激活，随后回到游戏初始化。",
+      "actual": "当前从头播放，在加成页后提前完成激活标记，之后继续显示余额和说明，结束打开历史。中断恢复行为不同。",
+      "reference_code": "C:/Projects/com.nut.sort.relax/Assets/NutSort/Runtime/UI/LocalGameplayController.TutorialBalance.cs:105",
+      "actual_code": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/Scripts/Assembly-CSharp/ApkEarning/ApkEarningHost.cs:421",
+      "verification": "代码对照，未做本轮完整中断恢复实测"
+    },
+    {
+      "id": "diamond-guide-navigation",
+      "result": "未等价",
+      "reference": "引导点击后完成并关闭，回到游戏。",
+      "actual": "当前完成引导后直接打开钻石钱包。",
+      "reference_code": "C:/Projects/com.nut.sort.relax/Assets/NutSort/Runtime/UI/OriginalNewbieGuideView.cs:113",
+      "actual_code": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/Scripts/Assembly-CSharp/ApkEarning/ApkEarningHost.cs:408",
+      "verification": "代码对照"
+    },
+    {
+      "id": "second-stage-review",
+      "result": "缺少对应运行路径",
+      "reference": "第二阶段播放步骤动画并可进入 TXTooFastHintPanel 的复审说明。",
+      "actual": "当前阶段页显示固定步骤，确认与关闭返回条件页，没有对应复审页面路由。",
+      "reference_code": "C:/Projects/com.nut.sort.relax/Assets/NutSort/Runtime/UI/LocalGameplayController.WithdrawalConditions.cs:109",
+      "actual_code": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/Scripts/Assembly-CSharp/ApkEarning/ApkEarningHost.cs:247",
+      "verification": "代码对照"
+    },
+    {
+      "id": "rules-and-adaptations",
+      "result": "主要门槛对应，存在明确适配",
+      "details": "现金 22/51 实际局门槛、钻石四档和登录/等级数值对应。UTC 跨日、测试账户仅内存保存、水果三消奖励触发、广告不可用均与参考存在差异。"
+    }
+  ],
+  "current_runtime_capture_names": [
+    "cash-wallet",
+    "history",
+    "diamond-wallet",
+    "diamond-conditions"
+  ],
+  "runtime_verified": [
+    "现金钱包 → 历史 → 返回钱包 → 返回游戏",
+    "钻石入口 → $500 钱包 → 条件 → 继续游戏"
+  ],
+  "coverage_limits": [
+    "本轮实际截图来自 Unity Editor Play Mode，不是新 Android APK。",
+    "原 APK 参考图是此前保存的真实设备截图，本轮未重新运行 APK。",
+    "账户提交、奖励激活、阶段进度和完整跨日条件未在本轮逐分支实测。静态 Prefab 渲染不等于实际交互验收。",
+    "参考文件 05-account.png 是加载页，07-confirm.png 是账户校验提示，不能标成账户页和提交确认页。",
+    "两侧数值来自各自存档，没有为凑一致修改余额或记录。",
+    "没有计算或宣称主观相似度百分比。"
+  ],
+  "game_code_changed_by_audit": false,
+  "new_apk_built": false,
+  "current_runtime_captures": [
+    {
+      "page": "cash-wallet",
+      "generated_utc": "2026-10-19T04:33:31.3262114Z",
+      "size": [
+        720,
+        1280
+      ],
+      "errors": []
+    },
+    {
+      "page": "history",
+      "generated_utc": "2026-10-19T04:34:24.6009000Z",
+      "size": [
+        720,
+        1280
+      ],
+      "errors": []
+    },
+    {
+      "page": "diamond-wallet",
+      "generated_utc": "2026-10-19T04:36:22.3011421Z",
+      "size": [
+        720,
+        1280
+      ],
+      "errors": []
+    },
+    {
+      "page": "diamond-conditions",
+      "generated_utc": "2026-10-19T04:37:02.6477127Z",
+      "size": [
+        720,
+        1280
+      ],
+      "errors": []
+    }
+  ]
+}

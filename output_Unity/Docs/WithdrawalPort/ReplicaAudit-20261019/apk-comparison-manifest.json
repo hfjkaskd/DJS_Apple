@@ -1,0 +1,259 @@
+{
+  "title": "原 APK 与苹果树当前游戏｜5 组真实界面对照",
+  "left_label": "原 APK 截图",
+  "right_label": "苹果树游戏｜Unity 实际运行",
+  "footer": "苹果树换皮及 HUD 精简为授权改动；仅等比排版，不裁切或修饰原图。",
+  "frame_size": [
+    1080,
+    1920
+  ],
+  "pair_image_size": [
+    2256,
+    2262
+  ],
+  "processing": "EXIF orientation, aspect-preserving resize, letterbox; no crop or retouch",
+  "pairs": [
+    {
+      "id": "01-main-hud",
+      "title": "01  主界面 HUD",
+      "note": "HUD 缩短、隐藏任务条、删除提示条为后续授权调整；余额及进度来自各自存档。",
+      "reference": {
+        "path": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-level4-hud.png",
+        "native_size": [
+          1080,
+          1920
+        ],
+        "orientation_corrected_size": [
+          1080,
+          1920
+        ],
+        "sha256": "cee23a3e214854fa9f8d6013db5781a829417e9eeada6780274f1276e033c78e",
+        "fitted_rectangle": [
+          32,
+          178,
+          1080,
+          1920
+        ]
+      },
+      "game": {
+        "path": "C:\\Projects\\DJS_Apple\\replica-audit-20261019\\actual\\main-hud.png",
+        "native_size": [
+          720,
+          1280
+        ],
+        "orientation_corrected_size": [
+          720,
+          1280
+        ],
+        "sha256": "bcbf5492704d014e695548711365c787b70cdcda92f02daf6f7dadb387d3adb8",
+        "fitted_rectangle": [
+          1144,
+          178,
+          1080,
+          1920
+        ]
+      },
+      "output": "01-main-hud.png",
+      "output_sha256": "97bf7287e6395d693a2a731674568911686b6ec6045676e01c433236e7c49c48"
+    },
+    {
+      "id": "02-cash-wallet",
+      "title": "02  现金钱包",
+      "note": "苹果树风格换皮已获授权；余额、进度和页面文字均按真实截图保留。",
+      "reference": {
+        "path": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-cash-wallet.png",
+        "native_size": [
+          1080,
+          1920
+        ],
+        "orientation_corrected_size": [
+          1080,
+          1920
+        ],
+        "sha256": "d7e21556030900dd9fb5fc1becbbbfac805f636038f06ccde5eed271a8bcce6a",
+        "fitted_rectangle": [
+          32,
+          178,
+          1080,
+          1920
+        ]
+      },
+      "game": {
+        "path": "C:\\Projects\\DJS_Apple\\replica-audit-20261019\\actual\\cash-wallet.png",
+        "native_size": [
+          720,
+          1280
+        ],
+        "orientation_corrected_size": [
+          720,
+          1280
+        ],
+        "sha256": "d77efda565cebb24660dea3b7767e077ca2acca6d489bda467a6e4d3e66538a4",
+        "fitted_rectangle": [
+          1144,
+          178,
+          1080,
+          1920
+        ],
+        "runtime_report": "C:\\Projects\\DJS_Apple\\replica-audit-20261019\\actual\\cash-wallet.json",
+        "runtime_report_sha256": "a1e4ea16faff899fa32c3dd8a1a7fd6c6f2eaa97194bda78866dacb459c9e833",
+        "captured_utc": "2026-10-19T04:33:31.3262114Z"
+      },
+      "output": "02-cash-wallet.png",
+      "output_sha256": "83c7456d648eeb5e52d6c08b1c0a3845b16ccd8ac9b02ad45764e226698fc06f"
+    },
+    {
+      "id": "03-diamond-wallet",
+      "title": "03  钻石钱包｜$500 档位",
+      "note": "两侧均为 $500 档位；余额及进度来自各自存档，未人为改成相同数值。",
+      "reference": {
+        "path": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-diamond-wallet.png",
+        "native_size": [
+          1080,
+          1920
+        ],
+        "orientation_corrected_size": [
+          1080,
+          1920
+        ],
+        "sha256": "9709559a4d7a896c9e6acdd26b1d16686381a301cd92072038f9c4e493c39694",
+        "fitted_rectangle": [
+          32,
+          178,
+          1080,
+          1920
+        ]
+      },
+      "game": {
+        "path": "C:\\Projects\\DJS_Apple\\replica-audit-20261019\\actual\\diamond-wallet.png",
+        "native_size": [
+          720,
+          1280
+        ],
+        "orientation_corrected_size": [
+          720,
+          1280
+        ],
+        "sha256": "12148acad0e2630f9ee2e00ef0f48c5b159d80cd36bf5a31337726dd5ad3bc59",
+        "fitted_rectangle": [
+          1144,
+          178,
+          1080,
+          1920
+        ],
+        "runtime_report": "C:\\Projects\\DJS_Apple\\replica-audit-20261019\\actual\\diamond-wallet.json",
+        "runtime_report_sha256": "5a7c989651f76580651ced3c0a7f2def712a96580bd30f72debf17868c8047b1",
+        "captured_utc": "2026-10-19T04:36:22.3011421Z"
+      },
+      "output": "03-diamond-wallet.png",
+      "output_sha256": "216961911e93b825e18f43ddd27ca167651d836fd0620e1bbe077e87d3386466"
+    },
+    {
+      "id": "04-diamond-conditions",
+      "title": "04  钻石提现条件",
+      "note": "同为钻石条件页；原 APK 与当前游戏的文案、排列和当前数值按原图保留。",
+      "reference": {
+        "path": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-diamond-requirements.png",
+        "native_size": [
+          1080,
+          1920
+        ],
+        "orientation_corrected_size": [
+          1080,
+          1920
+        ],
+        "sha256": "26a48cb0cce500f8934e8a1fee482986454125e163dc9103e9e557a524d1bcf6",
+        "fitted_rectangle": [
+          32,
+          178,
+          1080,
+          1920
+        ]
+      },
+      "game": {
+        "path": "C:\\Projects\\DJS_Apple\\replica-audit-20261019\\actual\\diamond-conditions.png",
+        "native_size": [
+          720,
+          1280
+        ],
+        "orientation_corrected_size": [
+          720,
+          1280
+        ],
+        "sha256": "d155664b7e9faa22deb7c5db4b31b6e61a50a91bfd0596079ef7e980af39e9f4",
+        "fitted_rectangle": [
+          1144,
+          178,
+          1080,
+          1920
+        ],
+        "runtime_report": "C:\\Projects\\DJS_Apple\\replica-audit-20261019\\actual\\diamond-conditions.json",
+        "runtime_report_sha256": "595ad48d1d77744c6abacfbbfb3b15e855efff6d034adf6e8a3d36b96e17243f",
+        "captured_utc": "2026-10-19T04:37:02.6477127Z"
+      },
+      "output": "04-diamond-conditions.png",
+      "output_sha256": "69d521d78b2f321036a1f8d9845850b5071c15db8c60e8e46f5f1c4c8ea685f0"
+    },
+    {
+      "id": "05-history",
+      "title": "05  提现历史",
+      "note": "同为提现历史；保留各自的记录状态和文字，未补造记录。",
+      "reference": {
+        "path": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-cash-history.png",
+        "native_size": [
+          1080,
+          1920
+        ],
+        "orientation_corrected_size": [
+          1080,
+          1920
+        ],
+        "sha256": "f10e30d2206c955c26299127c64a58a15c841908d012f9509b6bd04846e11ec6",
+        "fitted_rectangle": [
+          32,
+          178,
+          1080,
+          1920
+        ]
+      },
+      "game": {
+        "path": "C:\\Projects\\DJS_Apple\\replica-audit-20261019\\actual\\history.png",
+        "native_size": [
+          720,
+          1280
+        ],
+        "orientation_corrected_size": [
+          720,
+          1280
+        ],
+        "sha256": "96c46af1825d6fba084ba25bde6dfa5314c43096c4a210076cf9f19ab914976c",
+        "fitted_rectangle": [
+          1144,
+          178,
+          1080,
+          1920
+        ],
+        "runtime_report": "C:\\Projects\\DJS_Apple\\replica-audit-20261019\\actual\\history.json",
+        "runtime_report_sha256": "423b0318b0530045adaf444bb51e6eb74289571e765824192399a1acb3bce7c0",
+        "captured_utc": "2026-10-19T04:34:24.6009000Z"
+      },
+      "output": "05-history.png",
+      "output_sha256": "28072563e6b642eebb8cf1ddbccd70315f4592c284b5dd1b9b38485249b88567"
+    }
+  ],
+  "generated_utc": "2026-10-19T04:42:25.804271+00:00",
+  "reference_capture_policy": "Previously saved original APK device screenshots; APK was not rerun during this audit.",
+  "actual_capture_policy": "Current Unity Editor Play Mode screenshots; not new Android APK captures. Balances and progress belong to separate saves.",
+  "authorized_art_and_hud_changes_zh": [
+    "苹果树主题换皮",
+    "顶部 HUD 精简",
+    "主界面任务条隐藏",
+    "顶部提示条删除"
+  ],
+  "pixel_identical_claim": false,
+  "audit": {
+    "file": "../audit.json",
+    "verdict": "未达到视觉或完整流程的 1:1 复刻",
+    "sha256": "85ab378d2a99ce4482a145284b6a37c0a162f892e0e5ee25bda1f48461af6f86"
+  }
+}

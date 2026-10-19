@@ -1,0 +1,57 @@
+{
+  "generated_utc": "2026-10-19T04:36:40.916789+00:00",
+  "comparison_image": "approved-concepts-comparison.png",
+  "comparison_sha256": "2934771ca69967dbd25dee106d0f03ceb55e0318c7f39957fc43249fe5fa956c",
+  "method_zh": "两行并排，左确认效果图、右最新 Unity 实际运行图；每张完整等比缩放至 480 像素宽。仅拼版和外部标注，不修改源图内容。",
+  "authorized_later_changes_zh": [
+    "主界面 HUD 高度缩短",
+    "主界面任务条隐藏",
+    "主界面测试提示条删除"
+  ],
+  "pixel_identical_claim": false,
+  "new_apk_capture": false,
+  "sources": [
+    {
+      "row": "主界面 HUD",
+      "role": "approved_concept",
+      "source": "C:\\Projects\\DJS_Apple\\orchard-hud-redesign-review\\main-hud-concept-v1.png",
+      "size": [
+        941,
+        1672
+      ],
+      "sha256": "1f4fc6305e231f0188a5adf196306fde7a87858f7f0870e44e0063eb25b06b56"
+    },
+    {
+      "row": "主界面 HUD",
+      "role": "unity_actual",
+      "source": "C:\\Projects\\DJS_Apple\\orchard-hud-redesign-review\\space-fix\\notice-removed-gameplay.png",
+      "size": [
+        720,
+        1280
+      ],
+      "sha256": "bcbf5492704d014e695548711365c787b70cdcda92f02daf6f7dadb387d3adb8"
+    },
+    {
+      "row": "现金钱包",
+      "role": "approved_concept",
+      "source": "C:\\Projects\\DJS_Apple\\orchard-wallet-redesign-review\\cash-wallet-concept-v1.png",
+      "size": [
+        941,
+        1672
+      ],
+      "sha256": "48c16921f4510482100dd27ed429560644d7dbe3ee71df23b587136945927891"
+    },
+    {
+      "row": "现金钱包",
+      "role": "unity_actual",
+      "source": "C:\\Projects\\DJS_Apple\\replica-audit-20261019\\actual\\cash-wallet.png",
+      "size": [
+        720,
+        1280
+      ],
+      "sha256": "d77efda565cebb24660dea3b7767e077ca2acca6d489bda467a6e4d3e66538a4",
+      "runtime_report": "C:\\Projects\\DJS_Apple\\replica-audit-20261019\\actual\\cash-wallet.json",
+      "runtime_report_sha256": "a1e4ea16faff899fa32c3dd8a1a7fd6c6f2eaa97194bda78866dacb459c9e833"
+    }
+  ]
+}
