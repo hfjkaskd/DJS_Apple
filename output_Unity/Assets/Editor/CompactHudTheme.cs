@@ -16,7 +16,7 @@ public sealed class CompactHudTheme : ScriptableObject
     public string Track = "Assets/OrchardEarningArt/CashWallet/CashWalletProgressTrack.png";
     public string Fill = "Assets/OrchardEarningArt/CashWallet/CashWalletProgressFill.png";
     public float ReferenceWidth = 1080;
-    public float RowY = -64, ViewportTop = 160;
+    public float RowY = -64, ViewportTop = 132;
     public Vector2 CashPosition = new Vector2(-174, -64), DiamondPosition = new Vector2(202, -64);
     public Vector2 CashSize = new Vector2(374, 90), DiamondSize = new Vector2(360, 90);
     public Vector2 CurrencyIconSize = new Vector2(74, 74), CurrencyValueSize = new Vector2(188, 72);
@@ -28,11 +28,10 @@ public sealed class CompactHudTheme : ScriptableObject
     public Vector2 SettingsPosition = new Vector2(450, 0), SettingsSize = new Vector2(96, 96);
     public bool ShowTaskStrip = false;
     public Vector2 TaskPosition = new Vector2(0, -214), TaskSize = new Vector2(1024, 92);
-    public Vector2 DisclosurePosition = new Vector2(0, -128), DisclosureSize = new Vector2(500, 28);
     public Vector2 TaskLabelPosition = new Vector2(-338, 0), TaskLabelSize = new Vector2(306, 60);
     public Vector2 ProgressPosition = new Vector2(60, 0), ProgressSize = new Vector2(460, 42);
     public Vector2 ViewPosition = new Vector2(423, 0), ViewSize = new Vector2(156, 70);
-    public float BalanceFontSize = 54, TaskFontSize = 38, RatioFontSize = 38, DisclosureFontSize = 23;
+    public float BalanceFontSize = 54, TaskFontSize = 38, RatioFontSize = 38;
     public float CardPixelsPerUnit = 3.5f, TaskPixelsPerUnit = 4, ButtonPixelsPerUnit = 6;
     public Color Ink = new Color32(113, 57, 27, 255);
 }

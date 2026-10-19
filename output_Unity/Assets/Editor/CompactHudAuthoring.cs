@@ -76,8 +76,12 @@ public static class CompactHudAuthoring
             Label(action.transform, "Label", Vector2.zero, theme.ViewSize - new Vector2(14, 12), "View", 40, true);
             // The wallet keeps the complete task details; gameplay can use a single row.
             task.gameObject.SetActive(theme.ShowTaskStrip);
-            var disclosure = Picture(content, "Disclosure", theme.DisclosurePosition, theme.DisclosureSize, SpriteAt(theme.Card), 9);
-            Label(disclosure.transform, "Label", Vector2.zero, theme.DisclosureSize - new Vector2(20, 4), "TEST MODE · NO CASH VALUE", theme.DisclosureFontSize, false);
+            // Keep the test-state notice in the wallet, without a gameplay banner.
+            foreach (string path in new[] { RootName + "/Disclosure", "TestModeCaption", "OrchardTestBackdrop" })
+            {
+                var notice = root.transform.Find(path);
+                if (notice != null) Object.DestroyImmediate(notice.gameObject);
+            }
             controller.CompactHud = true;
             controller.ReferenceWidth = theme.ReferenceWidth; controller.ReferencePosition = Vector2.zero;
             controller.ReferenceSettingsY = theme.RowY; controller.ReferenceViewportTop = theme.ViewportTop;
