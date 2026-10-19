@@ -13,7 +13,17 @@ namespace FruitApkEarning
         [Serializable] public sealed class TextSlot { public string Key; public TMP_Text Target; }
         [Serializable] public sealed class ButtonSlot { public string Key; public Button Target; }
         [Serializable] public sealed class ObjectSlot { public string Key; public GameObject Target; }
-        [Serializable] public sealed class ImageSlot { public string Key; public Image Target; public bool ResizeWidthWithProgress; public float FullProgressWidth; }
+        [Serializable] public sealed class ImageSlot
+        {
+            public string Key;
+            public Image Target;
+            public bool ResizeWidthWithProgress;
+            public float FullProgressWidth;
+            // Saved with the prefab. A positive height enables proportional round caps
+            // even when the earned amount is narrower than the normal bar height.
+            public float FullProgressHeight;
+            public float FullProgressPixelsPerUnit;
+        }
         [Serializable] public sealed class InputSlot { public string Key; public TMP_InputField Target; }
         public TextSlot[] Texts = Array.Empty<TextSlot>();
         public ButtonSlot[] Buttons = Array.Empty<ButtonSlot>();
@@ -48,8 +58,18 @@ namespace FruitApkEarning
                 if(slot.ResizeWidthWithProgress)
                 {
                     var size=target.rectTransform.sizeDelta;
-                    size.x=slot.FullProgressWidth*progress;target.rectTransform.sizeDelta=size;
-                    target.enabled=progress>0;
+                    size.x=slot.FullProgressWidth*progress;
+                    if(slot.FullProgressHeight>0)
+                    {
+                        // Do not impose a minimum width: tiny balances must not look
+                        // more complete than they are. Scale the cap into a small dot.
+                        size.y=progress>0?Mathf.Min(slot.FullProgressHeight,size.x):slot.FullProgressHeight;
+                        target.pixelsPerUnitMultiplier=size.y>0
+                            ?slot.FullProgressPixelsPerUnit*slot.FullProgressHeight/size.y
+                            :slot.FullProgressPixelsPerUnit;
+                    }
+                    target.rectTransform.sizeDelta=size;
+                    target.enabled=size.x>0;
                 }
                 else target.fillAmount=progress;
                 return;

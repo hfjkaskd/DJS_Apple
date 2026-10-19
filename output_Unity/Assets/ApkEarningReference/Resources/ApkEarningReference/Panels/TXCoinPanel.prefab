@@ -1693,7 +1693,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 310618702212999517, guid: d415a82a5aa4b504abe917abe2ab22df, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1701,7 +1701,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 4.3939395
 --- !u!1 &1587765826080250
 GameObject:
   m_ObjectHideFlags: 0
@@ -3393,260 +3393,388 @@ MonoBehaviour:
   Images:
   - Key: TipBar
     Target: {fileID: 114592460329389196}
-    ResizeWidthWithProgress: 0
-    FullProgressWidth: 0
+    ResizeWidthWithProgress: 1
+    FullProgressWidth: 706
+    FullProgressHeight: 54
+    FullProgressPixelsPerUnit: 6.2972393
   - Key: LocalDiamondWithdrawalPanel.TipBar
     Target: {fileID: 114592460329389196}
-    ResizeWidthWithProgress: 0
-    FullProgressWidth: 0
+    ResizeWidthWithProgress: 1
+    FullProgressWidth: 706
+    FullProgressHeight: 54
+    FullProgressPixelsPerUnit: 6.2972393
   - Key: source:114217368724061974:TipBar
     Target: {fileID: 114592460329389196}
-    ResizeWidthWithProgress: 0
-    FullProgressWidth: 0
+    ResizeWidthWithProgress: 1
+    FullProgressWidth: 706
+    FullProgressHeight: 54
+    FullProgressPixelsPerUnit: 6.2972393
   - Key: $root
     Target: {fileID: 114733206282342372}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:$root
     Target: {fileID: 114733206282342372}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: TXCoinPanel
     Target: {fileID: 114733206282342372}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/bg
     Target: {fileID: 114060945828524476}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/bg
     Target: {fileID: 114060945828524476}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: bg
     Target: {fileID: 114060945828524476}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Image
     Target: {fileID: 114518489005915545}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Image
     Target: {fileID: 114518489005915545}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Image
     Target: {fileID: 114518489005915545}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Image (1)
     Target: {fileID: 114967328832014496}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Image (1)
     Target: {fileID: 114967328832014496}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Image (1)
     Target: {fileID: 114967328832014496}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Image (2)
     Target: {fileID: 114919942235722503}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Image (2)
     Target: {fileID: 114919942235722503}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Image (2)
     Target: {fileID: 114919942235722503}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Image (3)
     Target: {fileID: 114632746491512912}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Image (3)
     Target: {fileID: 114632746491512912}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Image (3)
     Target: {fileID: 114632746491512912}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Close
     Target: {fileID: 114436073260064126}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Close
     Target: {fileID: 114436073260064126}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Close
     Target: {fileID: 114436073260064126}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Title
     Target: {fileID: 114397768327470545}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Title
     Target: {fileID: 114397768327470545}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Title
     Target: {fileID: 114397768327470545}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/CoinIcon
     Target: {fileID: 114924050743934937}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/CoinIcon
     Target: {fileID: 114924050743934937}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: CoinIcon
     Target: {fileID: 114924050743934937}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/value/CoinIcon
     Target: {fileID: 114572839542275309}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/value/CoinIcon
     Target: {fileID: 114572839542275309}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Items/item1
     Target: {fileID: 114393105877652414}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Items/item1
     Target: {fileID: 114393105877652414}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: item1
     Target: {fileID: 114393105877652414}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Items/item1/Kuang
     Target: {fileID: 114651560128206891}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Items/item1/Kuang
     Target: {fileID: 114651560128206891}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Kuang
     Target: {fileID: 114651560128206891}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Items/item2
     Target: {fileID: 114431740505123533}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Items/item2
     Target: {fileID: 114431740505123533}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: item2
     Target: {fileID: 114431740505123533}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Items/item2/Kuang
     Target: {fileID: 114703931505913403}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Items/item2/Kuang
     Target: {fileID: 114703931505913403}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Items/item3
     Target: {fileID: 114704330047573733}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Items/item3
     Target: {fileID: 114704330047573733}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: item3
     Target: {fileID: 114704330047573733}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Items/item3/Kuang
     Target: {fileID: 114855482821919830}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Items/item3/Kuang
     Target: {fileID: 114855482821919830}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Items/item4
     Target: {fileID: 114880619614767448}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Items/item4
     Target: {fileID: 114880619614767448}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: item4
     Target: {fileID: 114880619614767448}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Items/item4/Kuang
     Target: {fileID: 114690175861776792}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Items/item4/Kuang
     Target: {fileID: 114690175861776792}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/TX
     Target: {fileID: 114240571728440943}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/TX
     Target: {fileID: 114240571728440943}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: TX
     Target: {fileID: 114240571728440943}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/TXProgress
     Target: {fileID: 114386943702330414}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/TXProgress
     Target: {fileID: 114386943702330414}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: TXProgress
     Target: {fileID: 114386943702330414}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/TXProgress/Bar
     Target: {fileID: 114187454977326620}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/TXProgress/Bar
     Target: {fileID: 114187454977326620}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Bar
     Target: {fileID: 114187454977326620}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/TXProgress/Bar/Bar
     Target: {fileID: 114592460329389196}
-    ResizeWidthWithProgress: 0
-    FullProgressWidth: 0
+    ResizeWidthWithProgress: 1
+    FullProgressWidth: 706
+    FullProgressHeight: 54
+    FullProgressPixelsPerUnit: 6.2972393
   - Key: path:main/TXProgress/Bar/Bar
     Target: {fileID: 114592460329389196}
-    ResizeWidthWithProgress: 0
-    FullProgressWidth: 0
+    ResizeWidthWithProgress: 1
+    FullProgressWidth: 706
+    FullProgressHeight: 54
+    FullProgressPixelsPerUnit: 6.2972393
   Inputs: []
   ArtworkRoot: {fileID: 224089843903986396}
   ReferenceWidth: 1080
@@ -3999,11 +4127,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224275549183895104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 9, y: 0}
   m_SizeDelta: {x: 706, y: 54}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &222232094423628703
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4033,7 +4161,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: -7391009079161991328, guid: 534d3aa39c4ba594d9d4e8084470301d, type: 3}
-  m_Type: 3
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
@@ -4041,7 +4169,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6.2972393
 --- !u!1 &1884547391421755
 GameObject:
   m_ObjectHideFlags: 0

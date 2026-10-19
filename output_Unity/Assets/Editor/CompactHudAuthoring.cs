@@ -65,11 +65,13 @@ public static class CompactHudAuthoring
             label.alignment = TextAlignmentOptions.MidlineLeft;
             BindText(view, "CompactTaskLabel", label);
             Picture(task.transform, "ProgressTrack", theme.ProgressPosition, theme.ProgressSize, SpriteAt(theme.Track), 5);
-            var fill = Picture(task.transform, "ProgressFill", theme.ProgressPosition, theme.ProgressSize, SpriteAt(theme.Fill), 6);
+            Vector2 fillSize = theme.ProgressSize - theme.ProgressFillInset * 2;
+            if (theme.ProgressFillInset.x < 0 || theme.ProgressFillInset.y < 0 || fillSize.x <= 0 || fillSize.y <= 0)
+                throw new InvalidOperationException("Progress fill inset must leave a positive inner size.");
+            var fill = Picture(task.transform, "ProgressFill", theme.ProgressPosition, fillSize, SpriteAt(theme.Fill), 6);
             fill.rectTransform.pivot = new Vector2(0, .5f);
-            fill.rectTransform.anchoredPosition = theme.ProgressPosition - new Vector2(theme.ProgressSize.x / 2, 0);
-            BindProgress(view, "CompactTaskProgress", fill, theme.ProgressSize.x);
-            view.SetProgress("CompactTaskProgress", .6f);
+            fill.rectTransform.anchoredPosition = theme.ProgressPosition - new Vector2(fillSize.x / 2, 0);
+            BindProgress(view, "CompactTaskProgress", fill, fillSize.x);
             BindText(view, "CompactTaskRatio", Label(task.transform, "Ratio", theme.ProgressPosition, theme.ProgressSize, "3 / 5", theme.RatioFontSize, true));
             var action = Picture(task.transform, "View", theme.ViewPosition, theme.ViewSize, SpriteAt(theme.Action), theme.ButtonPixelsPerUnit);
             BindButton(view, "CompactTaskView", Clickable(action));
@@ -85,6 +87,9 @@ public static class CompactHudAuthoring
             controller.CompactHud = true;
             controller.ReferenceWidth = theme.ReferenceWidth; controller.ReferencePosition = Vector2.zero;
             controller.ReferenceSettingsY = theme.RowY; controller.ReferenceViewportTop = theme.ViewportTop;
+            // Store the theme's full size before the runtime preview resizes it.
+            RoundedEarningProgressAuthoring.Apply(root, true);
+            view.SetProgress("CompactTaskProgress", .6f);
             PrefabUtility.SaveAsPrefabAsset(root, theme.TopPrefab);
         }
         finally { PrefabUtility.UnloadPrefabContents(root); }

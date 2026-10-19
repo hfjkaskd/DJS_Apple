@@ -453,11 +453,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224436073260064126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 6, y: 0}
   m_SizeDelta: {x: 638, y: 34}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &222397768327470545
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -487,7 +487,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: -7391009079161991328, guid: 534d3aa39c4ba594d9d4e8084470301d, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
@@ -495,7 +495,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 10.001497
 --- !u!1 &1099118695303065
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,7 +638,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 310618702212999517, guid: d415a82a5aa4b504abe917abe2ab22df, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -646,7 +646,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 6.0416665
 --- !u!1 &1256069497284392
 GameObject:
   m_ObjectHideFlags: 0
@@ -7466,174 +7466,260 @@ MonoBehaviour:
     Target: {fileID: 114672306508523268}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: OriginalRecordGuidePanel.backdrop
     Target: {fileID: 114672306508523268}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: source:114808113985169905:backdrop
     Target: {fileID: 114672306508523268}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: $root
     Target: {fileID: 114672306508523268}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:$root
     Target: {fileID: 114672306508523268}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: TXRecordGuidePanel
     Target: {fileID: 114672306508523268}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Title
     Target: {fileID: 114518489005915545}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Title
     Target: {fileID: 114518489005915545}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Title
     Target: {fileID: 114518489005915545}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Image
     Target: {fileID: 114919942235722503}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Image
     Target: {fileID: 114919942235722503}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Image
     Target: {fileID: 114919942235722503}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/HideLevel/Progress
     Target: {fileID: 114801075752484240}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/HideLevel/Progress
     Target: {fileID: 114801075752484240}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Progress
     Target: {fileID: 114801075752484240}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/HideLevel/Progress/Bar
     Target: {fileID: 114571718729274231}
-    ResizeWidthWithProgress: 0
-    FullProgressWidth: 0
+    ResizeWidthWithProgress: 1
+    FullProgressWidth: 638
+    FullProgressHeight: 34
+    FullProgressPixelsPerUnit: 10.001497
   - Key: path:main/HideLevel/Progress/Bar
     Target: {fileID: 114571718729274231}
-    ResizeWidthWithProgress: 0
-    FullProgressWidth: 0
+    ResizeWidthWithProgress: 1
+    FullProgressWidth: 638
+    FullProgressHeight: 34
+    FullProgressPixelsPerUnit: 10.001497
   - Key: Bar
     Target: {fileID: 114571718729274231}
-    ResizeWidthWithProgress: 0
-    FullProgressWidth: 0
+    ResizeWidthWithProgress: 1
+    FullProgressWidth: 638
+    FullProgressHeight: 34
+    FullProgressPixelsPerUnit: 10.001497
   - Key: main/HideLevel/Levels/1/BG
     Target: {fileID: 114215879266689626}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/HideLevel/Levels/1/BG
     Target: {fileID: 114215879266689626}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: BG
     Target: {fileID: 114215879266689626}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/HideLevel/Levels/1/Get
     Target: {fileID: 114572839542275309}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/HideLevel/Levels/1/Get
     Target: {fileID: 114572839542275309}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Get
     Target: {fileID: 114572839542275309}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/HideLevel/Levels/2/BG
     Target: {fileID: 114574304967836189}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/HideLevel/Levels/2/BG
     Target: {fileID: 114574304967836189}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/HideLevel/Levels/2/Get
     Target: {fileID: 114552309709192268}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/HideLevel/Levels/2/Get
     Target: {fileID: 114552309709192268}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/HideLevel/Levels/3/BG
     Target: {fileID: 114976365255789935}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/HideLevel/Levels/3/BG
     Target: {fileID: 114976365255789935}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/HideLevel/Levels/3/Get
     Target: {fileID: 114121005239445321}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/HideLevel/Levels/3/Get
     Target: {fileID: 114121005239445321}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/HideLevel/Levels/4/BG
     Target: {fileID: 114123703392571528}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/HideLevel/Levels/4/BG
     Target: {fileID: 114123703392571528}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/HideLevel/Levels/4/Get
     Target: {fileID: 114641631609468814}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/HideLevel/Levels/4/Get
     Target: {fileID: 114641631609468814}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/HideLevel/Levels/7/BG
     Target: {fileID: 114240571728440943}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/HideLevel/Levels/7/BG
     Target: {fileID: 114240571728440943}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/HideLevel/Levels/7/Get
     Target: {fileID: 114633296557590524}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/HideLevel/Levels/7/Get
     Target: {fileID: 114633296557590524}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Button/Start
     Target: {fileID: 114771092198208730}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Button/Start
     Target: {fileID: 114771092198208730}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Start
     Target: {fileID: 114771092198208730}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   Inputs: []
   ArtworkRoot: {fileID: 224060945828524476}
   ReferenceWidth: 1080

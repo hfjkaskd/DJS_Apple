@@ -129,6 +129,7 @@ public static class CompactEarningArtAuthoring
                 // Some imported buttons use their visible TMP label as their target graphic.
                 foreach(var button in root.GetComponentsInChildren<Button>(true))
                     if(button.targetGraphic!=null)button.targetGraphic.raycastTarget=true;
+                RoundedEarningProgressAuthoring.Apply(root, true);
                 PrefabUtility.SaveAsPrefabAsset(root,path);
             }
             finally { PrefabUtility.UnloadPrefabContents(root); }

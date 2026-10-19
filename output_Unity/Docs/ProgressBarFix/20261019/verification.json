@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-19",
+  "change": "Keep the original rounded progress artwork proportional across cash, diamond, request loading, record guide, and the hidden compact HUD.",
+  "verification": {
+    "unityVersion": "2022.3.62f3",
+    "compiled": true,
+    "prefabFixtures": "5 bars x 6 values: 0, 0.00204, 0.01, 0.1, 0.6, 1. Reverse/reset and clamping are also checked by the validation tool.",
+    "repeatAuthoring": "All five serialized prefab SHA-256 hashes were unchanged after the second Apply run, before whitespace cleanup.",
+    "runtime": "Normal Home > Level 4 > cash and diamond entry Button navigation. Real local save; no fixture values substituted.",
+    "captureErrors": [],
+    "newAndroidBuild": false
+  },
+  "evidenceDirectory": "C:\\Projects\\DJS_Apple\\progress-bar-fix-20261019",
+  "comparison": "before-after.png: 1:1 pixel crops of actual 720x1280 Unity runtime screenshots, both Level 4 at 3/5.",
+  "screenshots": {
+    "before": "C:\\Projects\\DJS_Apple\\progress-bar-fix-20261019\\before\\cash-wallet.png",
+    "cashAfter": "C:\\Projects\\DJS_Apple\\progress-bar-fix-20261019\\after\\runtime-cash-wallet.png",
+    "diamondAfter": "C:\\Projects\\DJS_Apple\\progress-bar-fix-20261019\\after\\runtime-diamond-wallet.png"
+  }
+}

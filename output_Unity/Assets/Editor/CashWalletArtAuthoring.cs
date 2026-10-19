@@ -84,17 +84,10 @@ public static class CashWalletArtAuthoring
                     if (rule.Text != null && rule.Text.Length > 0) text.text = rule.Text;
                 }
             }
+            // Capture freshly authored full sizes before applying the preview value.
+            RoundedEarningProgressAuthoring.Apply(root, true);
+            view.SetProgress("Progress", theme.PreviewProgress);
             // Draw the compact title, its apple and close control over the card.
-            Image progress = view.GetImage("Progress");
-            RectTransform fill = progress.rectTransform;
-            Vector2 fullSize = fill.sizeDelta;
-            float leftInset = (((RectTransform)fill.parent).rect.width - fullSize.x) * .5f;
-            fill.anchorMin = fill.anchorMax = fill.pivot = new Vector2(0, .5f);
-            fill.sizeDelta = new Vector2(fullSize.x * theme.PreviewProgress, fullSize.y);
-            fill.anchoredPosition = new Vector2(leftInset, 0);
-            foreach (var slot in view.Images)
-                if (slot.Key == "Progress")
-                { slot.ResizeWidthWithProgress = true; slot.FullProgressWidth = fullSize.x; break; }
             view.GetText("Title").transform.parent.SetAsLastSibling();
             view.GetButton("Close").transform.SetAsLastSibling();
             Button history = view.GetButton("HistoryButton");

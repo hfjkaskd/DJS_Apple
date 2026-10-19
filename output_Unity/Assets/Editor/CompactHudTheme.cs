@@ -30,6 +30,7 @@ public sealed class CompactHudTheme : ScriptableObject
     public Vector2 TaskPosition = new Vector2(0, -214), TaskSize = new Vector2(1024, 92);
     public Vector2 TaskLabelPosition = new Vector2(-338, 0), TaskLabelSize = new Vector2(306, 60);
     public Vector2 ProgressPosition = new Vector2(60, 0), ProgressSize = new Vector2(460, 42);
+    public Vector2 ProgressFillInset = new Vector2(6, 6);
     public Vector2 ViewPosition = new Vector2(423, 0), ViewSize = new Vector2(156, 70);
     public float BalanceFontSize = 54, TaskFontSize = 38, RatioFontSize = 38;
     public float CardPixelsPerUnit = 3.5f, TaskPixelsPerUnit = 4, ButtonPixelsPerUnit = 6;
