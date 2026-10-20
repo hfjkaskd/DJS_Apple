@@ -64,6 +64,10 @@ namespace FruitApkEarning
         public bool RecordWin(string id, int level)
         { return Mutate(candidate => candidate.RecordWin(id, level, UtcNow())); }
         public bool Claim(string id) { return Mutate(candidate => candidate.Claim(id, UtcNow())); }
+        // Only the explicitly labelled local video simulator may call this after
+        // its completion. A cancelled simulation does not write or notify.
+        public bool ClaimWithTestVideo(string id, bool completed)
+        { return completed && Mutate(candidate => candidate.ClaimWithTestVideo(id, true, UtcNow())); }
         public bool ArchiveEarlyReward(int ordinal)
         {
             if (Mutate(candidate => candidate.ArchiveEarlyReward(ordinal, UtcNow()))) return true;
@@ -83,7 +87,21 @@ namespace FruitApkEarning
             ApkRecord submitted = Available ? FindRecord(State, ordinal) : null;
             return submitted != null && submitted.Pending;
         }
-        public bool CompleteActivation() { return Mutate(candidate => candidate.CompleteActivation(UtcNow())); }
+        public bool SetActivationStep(int completedStep)
+        {
+            if (Available && completedStep >= 0 && completedStep <= 6 && State.ActivationStep == completedStep) return true;
+            return Mutate(candidate => candidate.SetActivationStep(completedStep, UtcNow()));
+        }
+        public bool ApplyActivationBalance()
+        {
+            if (Available && State.ActivationBalanceApplied) return true;
+            return Mutate(candidate => candidate.ApplyActivationBalance(UtcNow()));
+        }
+        public bool CompleteActivation()
+        {
+            if (Available && State.Activated) return true;
+            return Mutate(candidate => candidate.CompleteActivation(UtcNow()));
+        }
         public bool CompleteWelcome()
         {
             if (Available && State.WelcomeShown) return true;
@@ -104,7 +122,7 @@ namespace FruitApkEarning
             if (!Available) return false;
             long now = UtcNow();
             // UI polling must not clone the complete history every frame or second.
-            if (State.LastUtcDay >= now / 86400 && State.LastLuckyUtc > 0) return false;
+            if (!engine.NeedsTick(now)) return false;
             return Mutate(candidate => candidate.Tick(now));
         }
 
@@ -190,7 +208,7 @@ namespace FruitApkEarning
     internal static class ApkEarningStorage
     {
         private const uint Magic = 0x46414531;
-        private const int Version = 2, MaxBytes = 16 * 1024 * 1024, MaxEntries = 100000;
+        private const int Version = 3, MaxBytes = 16 * 1024 * 1024, MaxEntries = 100000;
         private static readonly Encoding Utf8 = new UTF8Encoding(false, true);
 
         internal static ApkEarningState Load(string path, ApkEarningRules rules, out bool recovered)
@@ -240,7 +258,8 @@ namespace FruitApkEarning
                 WelcomeShown = state.WelcomeShown,
                 CashGuidanceComplete = state.CashGuidanceComplete, DiamondGuideShown = state.DiamondGuideShown,
                 ActivationStep = state.ActivationStep, LuckyMatches = state.LuckyMatches, CashTargetCents = state.CashTargetCents,
-                LastUtcDay = state.LastUtcDay, LastLuckyUtc = state.LastLuckyUtc, NextRewardSequence = state.NextRewardSequence
+                LastUtcDay = state.LastUtcDay, LastLuckyUtc = state.LastLuckyUtc, NextRewardSequence = state.NextRewardSequence,
+                LastLocalDay = state.LastLocalDay, ActivationBalanceApplied = state.ActivationBalanceApplied, RewardVideos = state.RewardVideos
             };
             foreach (var reward in state.PendingRewards) copy.PendingRewards.Add(new ApkReward {
                 Id = reward.Id, Kind = reward.Kind, CashCents = reward.CashCents, Diamonds = reward.Diamonds,
@@ -280,6 +299,7 @@ namespace FruitApkEarning
                     WriteText(writer, run.Id); writer.Write(run.Level); writer.Write(run.LastSequence); writer.Write(run.Won);
                 }
                 writer.Write(state.WelcomeShown);
+                writer.Write(state.LastLocalDay); writer.Write(state.ActivationBalanceApplied); writer.Write(state.RewardVideos);
                 writer.Flush();
                 if (stream.Length > MaxBytes) throw new InvalidDataException("Earning history exceeds the supported save size.");
                 return stream.ToArray();
@@ -334,6 +354,16 @@ namespace FruitApkEarning
                 for (int i = 0; i < count; i++) state.Runs.Add(new ApkRunCheckpoint {
                     Id = ReadText(reader), Level = reader.ReadInt32(), LastSequence = reader.ReadInt32(), Won = reader.ReadBoolean() });
                 state.WelcomeShown = version >= 2 ? reader.ReadBoolean() : state.CurrentLevel > 1;
+                if (version >= 3) {
+                    state.LastLocalDay = reader.ReadInt64(); state.ActivationBalanceApplied = reader.ReadBoolean();
+                    state.RewardVideos = reader.ReadInt32();
+                }
+                else {
+                    // Old activation was committed with its balance. Never replay
+                    // that grant when upgrading an already activated account.
+                    state.ActivationBalanceApplied = state.Activated;
+                    if (state.Activated) state.ActivationStep = 6;
+                }
                 state.Version = Version;
                 if (stream.Position != stream.Length) throw new InvalidDataException("Unexpected trailing earning state.");
                 return state;

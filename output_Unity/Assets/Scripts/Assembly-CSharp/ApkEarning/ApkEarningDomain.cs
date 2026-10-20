@@ -123,16 +123,20 @@ namespace FruitApkEarning
     [Serializable]
     public sealed class ApkEarningState
     {
-        public int Version = 2;
+        public int Version = 3;
         public long CashCents, Diamonds;
         public int CurrentLevel = 1, HighestClearedLevel, TodayWins, LoginDays, AccountLevel;
         public bool Activated, ActivationPending, DiamondGuideShown, WelcomeShown;
         // Native IsGuideGold defaults false; true is an explicit account guide request.
         public bool CashGuidanceComplete = true;
-        public int ActivationStep, LuckyMatches;
+        public int ActivationStep, LuckyMatches, RewardVideos;
+        public bool ActivationBalanceApplied;
         // MARK stays unknown until an actual configured account target is supplied.
         public long CashTargetCents;
         public long LastUtcDay = -1, LastLuckyUtc, NextRewardSequence;
+        // Local civil-date ordinal; UTC timestamps above remain unchanged.
+        // -1 with a known LastUtcDay identifies a pre-local-calendar save.
+        public long LastLocalDay = -1;
         public List<ApkReward> PendingRewards = new List<ApkReward>();
         public List<ApkRecord> Records = new List<ApkRecord>();
         public List<ApkRunCheckpoint> Runs = new List<ApkRunCheckpoint>();
@@ -160,17 +164,19 @@ namespace FruitApkEarning
         public ApkEarningRules Rules { get; private set; }
         public ApkEarningState State { get; private set; }
         private readonly Func<double> random;
+        private readonly Func<long, long> localDay;
         private readonly Dictionary<string, ApkRunCheckpoint> runs = new Dictionary<string, ApkRunCheckpoint>(StringComparer.Ordinal);
 
-        public ApkEarningEngine(ApkEarningRules rules, ApkEarningState state, Func<double> random = null)
+        public ApkEarningEngine(ApkEarningRules rules, ApkEarningState state, Func<double> random = null, Func<long, long> localDay = null)
         {
             if (rules == null || state == null) throw new ArgumentNullException();
             rules.Validate(); Rules = rules; State = state;
             var generator = new Random(); this.random = random ?? generator.NextDouble;
+            this.localDay = localDay ?? LocalCalendarDay;
             if (state.CashCents < 0 || state.Diamonds < 0 || state.CashTargetCents < 0 || state.CurrentLevel < 1 ||
                 state.HighestClearedLevel < 0 || state.TodayWins < 0 || state.LoginDays < 0 || state.AccountLevel < 0 ||
-                state.LuckyMatches < 0 || state.NextRewardSequence < 0 || state.LastUtcDay < -1 ||
-                state.LastLuckyUtc < 0 || state.ActivationStep < 0 || state.Runs == null ||
+                state.LuckyMatches < 0 || state.NextRewardSequence < 0 || state.LastUtcDay < -1 || state.LastLocalDay < -1 ||
+                state.LastLuckyUtc < 0 || state.ActivationStep < 0 || state.ActivationStep > 6 || state.RewardVideos < 0 || state.Runs == null ||
                 state.PendingRewards == null || state.Records == null) throw new InvalidOperationException("Invalid earning state.");
             foreach (var run in state.Runs) {
                 if (run == null || string.IsNullOrEmpty(run.Id) || run.Level < 1 || run.LastSequence < 0)
@@ -198,14 +204,27 @@ namespace FruitApkEarning
         {
             RequireTime(utc);
             bool changed = false;
-            long day = utc / 86400;
-            if (State.LastUtcDay < 0) { State.LastUtcDay = day; State.LoginDays = Math.Max(1, State.LoginDays); changed = true; }
-            else if (day > State.LastUtcDay) {
-                State.LoginDays = checked(State.LoginDays + 1); State.TodayWins = 0; State.LastUtcDay = day; changed = true;
+            long day = localDay(utc);
+            if (day < 0) throw new InvalidOperationException("Invalid local calendar day.");
+            if (State.LastLocalDay < 0) {
+                // Old files counted UTC dates, without recording their time zone.
+                // Establish today's local baseline once, retaining their counters;
+                // guessing a conversion can otherwise award the same login twice.
+                State.LastLocalDay = day; State.LoginDays = Math.Max(1, State.LoginDays); changed = true;
             }
+            else if (day > State.LastLocalDay) {
+                State.LoginDays = checked(State.LoginDays + 1); State.TodayWins = 0; State.LastLocalDay = day; changed = true;
+            }
+            if (changed) State.LastUtcDay = Math.Max(State.LastUtcDay, utc / 86400);
             if (State.LastLuckyUtc <= 0) { State.LastLuckyUtc = utc; changed = true; }
             return changed;
         }
+
+        public bool NeedsTick(long utc)
+        { return State.LastLocalDay < 0 || localDay(utc) > State.LastLocalDay || State.LastLuckyUtc <= 0; }
+
+        public static long LocalCalendarDay(long utc)
+        { return DateTimeOffset.FromUnixTimeSeconds(utc).ToLocalTime().Date.Ticks / TimeSpan.TicksPerDay; }
 
         public bool BeginRun(string id, int initialSequence, int level, long utc)
         {
@@ -272,6 +291,19 @@ namespace FruitApkEarning
             return true;
         }
 
+        public bool ClaimWithTestVideo(string id, bool completed, long utc)
+        {
+            RequireTime(utc);
+            if (!completed) return false;
+            int index = RewardIndex(id);
+            if (index < 0) return false;
+            ApkReward reward = State.PendingRewards[index];
+            if (reward.EarlyOrdinal != 0 || reward.Level <= 2 ||
+                (reward.Kind != "level" && reward.Kind != "lucky")) return false;
+            ClaimAt(index, utc, Rules.BonusMultiplier, true);
+            return true;
+        }
+
         /// <summary>
         /// Completes already-earned rewards from a previous session without
         /// reopening their presentation. The caller saves this candidate before
@@ -286,13 +318,15 @@ namespace FruitApkEarning
             return changed;
         }
 
-        private void ClaimAt(int index, long utc)
+        private void ClaimAt(int index, long utc, int multiplier = 1, bool testVideo = false)
         {
             var reward = State.PendingRewards[index];
-            long cash = checked(State.CashCents + reward.CashCents), diamonds = checked(State.Diamonds + reward.Diamonds);
+            long cash = checked(State.CashCents + checked(reward.CashCents * multiplier));
+            long diamonds = checked(State.Diamonds + checked(reward.Diamonds * multiplier));
+            int videos = testVideo ? checked(State.RewardVideos + 1) : State.RewardVideos;
             if (reward.EarlyOrdinal > 0 && FindRecord(reward.EarlyOrdinal) != null)
                 throw new InvalidOperationException("Early reward was already claimed.");
-            Tick(utc); State.CashCents = cash; State.Diamonds = diamonds;
+            Tick(utc); State.CashCents = cash; State.Diamonds = diamonds; State.RewardVideos = videos;
             if (reward.EarlyOrdinal > 0) State.Records.Add(new ApkRecord { Ordinal = reward.EarlyOrdinal,
                 AmountCents = reward.CashCents, CreatedUtc = utc });
             State.PendingRewards.RemoveAt(index);
@@ -317,15 +351,39 @@ namespace FruitApkEarning
             record.Pending = true; record.SubmittedUtc = utc; return true;
         }
 
+        public bool SetActivationStep(int completedStep, long utc)
+        {
+            RequireTime(utc);
+            if (completedStep < 0 || completedStep > 6) return false;
+            if (!CanActivate() || completedStep != State.ActivationStep + 1) return false;
+            // The balance receipt must finish its saved collection before advancing.
+            if (completedStep == 4 && !State.ActivationBalanceApplied) return false;
+            State.ActivationStep = completedStep; State.ActivationPending = true;
+            return true;
+        }
+
+        public bool ApplyActivationBalance(long utc)
+        {
+            RequireTime(utc);
+            if (!CanActivate() || State.ActivationStep != 3 || State.ActivationBalanceApplied) return false;
+            // The US APK response sets an absolute 500 balance only at this boundary.
+            if (State.CurrentLevel == 3) State.CashCents = Math.Max(State.CashCents, Rules.TutorialBalanceCents);
+            State.ActivationBalanceApplied = true;
+            return true;
+        }
+
         public bool CompleteActivation(long utc)
         {
             RequireTime(utc);
-            var first = FindRecord(1); var second = FindRecord(2);
-            if (State.Activated || State.CurrentLevel < 3 || first == null || second == null || !first.Archived || !second.Archived) return false;
-            // The US APK response sets an absolute 500 balance only at this boundary.
-            if (State.CurrentLevel == 3) State.CashCents = Math.Max(State.CashCents, Rules.TutorialBalanceCents);
-            State.Activated = true; State.ActivationPending = false; State.ActivationStep = 6;
+            if (!CanActivate() || State.ActivationStep != 6 || !State.ActivationBalanceApplied) return false;
+            State.Activated = true; State.ActivationPending = false;
             return true;
+        }
+
+        private bool CanActivate()
+        {
+            var first = FindRecord(1); var second = FindRecord(2);
+            return !State.Activated && State.CurrentLevel >= 3 && first != null && second != null && first.Archived && second.Archived;
         }
 
         public ApkRequirements GetRequirements(bool diamonds, int tier)

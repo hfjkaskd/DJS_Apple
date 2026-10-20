@@ -10,6 +10,14 @@ static class ApkEarningTests
     { return new ApkEarningEngine(ApkEarningRules.CreateDefault(), state ?? new ApkEarningState(), () => random); }
     static ApkReward Win(ApkEarningEngine engine, string run, int level, long utc = Utc)
     { engine.BeginRun(run, 0, level, utc); engine.RecordWin(run, level, utc); return engine.State.PendingRewards[engine.State.PendingRewards.Count - 1]; }
+    static bool Activate(ApkEarningEngine engine)
+    {
+        for (int step = 1; step <= 6; step++) {
+            if (step == 4) engine.ApplyActivationBalance(Utc);
+            engine.SetActivationStep(step, Utc);
+        }
+        return engine.CompleteActivation(Utc);
+    }
     static void Main()
     {
         EarlyFlow(); MatchAndLucky(); SettlementBands(); CalendarAndConditions(); ResumeAndBounds();
@@ -30,16 +38,16 @@ static class ApkEarningTests
         Check(second.CashCents == 60 && second.EarlyOrdinal == 2, "US second reward is 0.60");
         engine.Claim(second.Id, Utc); engine.ArchiveEarlyReward(2, Utc);
         Check(engine.State.ActivationPending && !engine.State.Activated, "Both archived records begin activation");
-        Check(engine.CompleteActivation(Utc) && engine.State.CashCents == 50000 && engine.State.Activated && !engine.State.ActivationPending, "US activation sets absolute $500");
+        Check(Activate(engine) && engine.State.CashCents == 50000 && engine.State.Activated && !engine.State.ActivationPending, "US activation sets absolute $500");
         Check(!engine.CompleteActivation(Utc) && engine.State.CashCents == 50000, "Activation does not repeat grant");
         var high = Engine(new ApkEarningState { CurrentLevel = 3, CashCents = 60000 });
         high.State.Records.Add(new ApkRecord { Ordinal = 1, AmountCents = 40, Archived = true });
         high.State.Records.Add(new ApkRecord { Ordinal = 2, AmountCents = 60, Archived = true });
-        Check(high.CompleteActivation(Utc) && high.State.CashCents == 60000, "Tutorial balance never reduces existing cash");
+        Check(Activate(high) && high.State.CashCents == 60000, "Tutorial balance never reduces existing cash");
         var late = Engine(new ApkEarningState { CurrentLevel = 4 });
         late.State.Records.Add(new ApkRecord { Ordinal = 1, AmountCents = 40, Archived = true });
         late.State.Records.Add(new ApkRecord { Ordinal = 2, AmountCents = 60, Archived = true });
-        Check(late.CompleteActivation(Utc) && late.State.CashCents == 0, "No guessed historical tutorial balance");
+        Check(Activate(late) && late.State.CashCents == 0, "No guessed historical tutorial balance");
     }
     static void MatchAndLucky()
     {
