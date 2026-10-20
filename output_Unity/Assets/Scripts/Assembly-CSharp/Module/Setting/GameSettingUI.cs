@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
+using FruitApkEarning;
 
 namespace Module.Setting
 {
-	/// <summary>局内设置弹窗：音效/音乐/震动开关、语言、重开。</summary>
+	/// <summary>局内设置弹窗：音效/音乐/震动开关、语言、账户等级、重开。</summary>
 	public class GameSettingUI : BaseUI
 	{
 		[SerializeField]
@@ -41,6 +43,11 @@ namespace Module.Setting
 		[SerializeField]
 		private GameObject m_ReplayBtn;
 
+		[SerializeField]
+		private Button m_AccountLevelBtn;
+
+		private bool openAccountLevelAfterClose;
+
 		public override PAIEAGDLCBJ Layer => PAIEAGDLCBJ.Top;
 
 		protected override void Init()
@@ -69,11 +76,42 @@ namespace Module.Setting
 			{
 				MCCIJBJGMCK.Get(m_ReplayBtn).onClick = OnReplayClick;
 			}
+			if (m_AccountLevelBtn != null)
+			{
+				m_AccountLevelBtn.onClick.AddListener(OnAccountLevelClick);
+			}
 		}
 
 		protected override void BeforeOpen()
 		{
+			openAccountLevelAfterClose = false;
 			UpdateUI();
+		}
+
+		protected override void AfterClose()
+		{
+			bool openAccountLevel = openAccountLevelAfterClose;
+			openAccountLevelAfterClose = false;
+			// BaseUI releases the closing-animation input lock before this callback.
+			if (openAccountLevel)
+			{
+				ApkEarningHost.OpenAccountLevel();
+			}
+		}
+
+		protected override void WhenDestroy()
+		{
+			if (m_AccountLevelBtn != null)
+			{
+				m_AccountLevelBtn.onClick.RemoveListener(OnAccountLevelClick);
+			}
+		}
+
+		private void OnAccountLevelClick()
+		{
+			if (!IsOpening || MCCIJBJGMCK.IsLock()) return;
+			openAccountLevelAfterClose = true;
+			MgrUI.Instance.Close("pops/setting/GameSettingUI", false);
 		}
 
 		private void UpdateUI()

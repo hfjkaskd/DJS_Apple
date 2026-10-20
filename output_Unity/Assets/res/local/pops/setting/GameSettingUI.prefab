@@ -594,14 +594,13 @@ GameObject:
   - component: {fileID: 114528911807818478}
   - component: {fileID: 222187454977326620}
   - component: {fileID: 114091882994760266}
-  - component: {fileID: 114232094423628703}
   m_Layer: 5
-  m_Name: HomeBtn
+  m_Name: AccountLevelBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1587397909062814
 GameObject:
   serializedVersion: 6
@@ -619,7 +618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1875609422105747
 GameObject:
   serializedVersion: 6
@@ -630,7 +629,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224011164340880974}
   - component: {fileID: 222056248600188076}
-  - component: {fileID: 114992816746925483}
   - component: {fileID: 114695600491528212}
   m_Layer: 5
   m_Name: Text (TMP)
@@ -746,6 +744,7 @@ MonoBehaviour:
   m_VibrateOff: {fileID: 1302127217294661}
   m_LanguageBtn: {fileID: 1642988549198181}
   m_ReplayBtn: {fileID: 1371939378208658}
+  m_AccountLevelBtn: {fileID: 114528911807818478}
 --- !u!111 &111217368724061974
 Animation:
   serializedVersion: 3
@@ -2819,12 +2818,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 1918264173551851}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c27009001263a3a49a708250f4703f00, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name:
   m_EditorClassIdentifier:
-  scaleAni: {fileID: 111275549183895104}
-  clipDown: {fileID: 7400000, guid: 97c785c159506bd4b8366cf4ba694af1, type: 2}
-  clipUp: {fileID: 7400000, guid: cdb8007b487eb734eb70fb2e6a1ad637, type: 2}
+  m_Navigation:
+    m_Mode: 0
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 114091882994760266}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!222 &222187454977326620
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2863,23 +2891,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &114232094423628703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1918264173551851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1239c4ab7b41490d7979ba6421ca5a9, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  m_Spacing: 0
-  m_MaxWidth: 300
-  m_IconRect: {fileID: 224592460329389196}
-  m_TextRect: {fileID: 224011164340880974}
-  m_TextComp: {fileID: 114695600491528212}
 --- !u!224 &224592460329389196
 RectTransform:
   serializedVersion: 2
@@ -2955,8 +2966,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 49.999992, y: 5}
-  m_SizeDelta: {x: 200, y: 100}
+  m_AnchoredPosition: {x: 0, y: 5}
+  m_SizeDelta: {x: 320, y: 112}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222056248600188076
 CanvasRenderer:
@@ -2966,19 +2977,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875609422105747}
   m_CullTransparentMesh: 1
---- !u!114 &114992816746925483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875609422105747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9984842642d93d9132e26b28beb7ab0e, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  key: setting_pop_home
 --- !u!114 &114695600491528212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2999,7 +2997,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Home
+  m_text: "Account\nLevel"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 05f05f2053e2fef4d92a08aa0d1478de, type: 2}
   m_sharedMaterial: {fileID: 0}
@@ -3026,12 +3024,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
+  m_fontSize: 48
   m_fontSizeBase: 66
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 70
+  m_fontSizeMin: 40
+  m_fontSizeMax: 48
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -3093,7 +3091,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -233}
+  m_AnchoredPosition: {x: 205, y: -233}
   m_SizeDelta: {x: 360, y: 154}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!111 &111291632710222552

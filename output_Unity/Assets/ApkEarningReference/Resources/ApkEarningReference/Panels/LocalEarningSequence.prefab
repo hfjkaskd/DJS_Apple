@@ -4052,6 +4052,70 @@ MonoBehaviour:
   TintDiamondOptions: 0
   SelectedOptionColor: {r: 0.8235294, g: 0.9647059, b: 0.627451, a: 1}
   NormalOptionColor: {r: 1, g: 1, b: 1, a: 1}
+  BonusRowCount: 5
+  BonusRevealInterval: 0.35
+  BonusPulseDuration: 0.5
+  BonusPulseCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.35
+      value: 1.035
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ReceiptIconCount: 5
+  ReceiptCollectDelay: 1
+  ReceiptFlightDuration: 0.65
+  ReceiptFlightStagger: 0.075
+  ReceiptFlightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4183727113025630086
 GameObject:
   m_ObjectHideFlags: 0
