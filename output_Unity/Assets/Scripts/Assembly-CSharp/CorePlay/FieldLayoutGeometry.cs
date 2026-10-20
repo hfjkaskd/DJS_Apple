@@ -17,15 +17,14 @@ namespace CorePlay
     // Uniform presentation transform only: source tile coordinates remain unchanged.
     public static class FieldLayoutGeometry
     {
-        public static FieldLayoutFit Fit(FieldLayoutBounds content, FieldLayoutBounds viewport, float maximumScale)
+        public static FieldLayoutFit Cover(FieldLayoutBounds artwork, FieldLayoutBounds screen)
         {
-            Validate(content); Validate(viewport);
-            if (!Finite(maximumScale) || maximumScale <= 0f) throw new ArgumentOutOfRangeException(nameof(maximumScale));
-            float scale = Math.Min(maximumScale, Math.Min((viewport.MaxX - viewport.MinX) / (content.MaxX - content.MinX),
-                (viewport.MaxY - viewport.MinY) / (content.MaxY - content.MinY)));
+            Validate(artwork); Validate(screen);
+            float scale = Math.Max((screen.MaxX - screen.MinX) / (artwork.MaxX - artwork.MinX),
+                (screen.MaxY - screen.MinY) / (artwork.MaxY - artwork.MinY));
             return new FieldLayoutFit { Scale = scale,
-                X = (viewport.MinX + viewport.MaxX) * 0.5f - (content.MinX + content.MaxX) * 0.5f * scale,
-                Y = (viewport.MinY + viewport.MaxY) * 0.5f - (content.MinY + content.MaxY) * 0.5f * scale };
+                X = (screen.MinX + screen.MaxX) * 0.5f - (artwork.MinX + artwork.MaxX) * 0.5f * scale,
+                Y = (screen.MinY + screen.MaxY) * 0.5f - (artwork.MinY + artwork.MaxY) * 0.5f * scale };
         }
         private static void Validate(FieldLayoutBounds bounds)
         {

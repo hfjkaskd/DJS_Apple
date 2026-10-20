@@ -168264,11 +168264,7 @@ MonoBehaviour:
   m_ChooseArea: {fileID: 224071519224935516}
   m_BgTrans: {fileID: 224989434536655964}
   m_BgImg: {fileID: 114228214996573471}
-  m_FieldViewport: {fileID: 5997221994201826432}
-  m_FieldTrayRect: {fileID: 224824711297872077}
-  m_FieldItemPadding: {x: 110, y: 120}
-  m_FieldMaximumScale: 1
-  m_FieldTrayGap: 40
+  m_FieldPresentationRoot: {fileID: 224947810564538834}
   m_GameAreaGroup: {fileID: 225329075794784248}
   m_BottomRect: {fileID: 224045549052472940}
   m_CollectArea: {fileID: 224247376316416563}
@@ -178389,7 +178385,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224947810564538834}
   - component: {fileID: 222729821067651183}
-  - component: {fileID: 114041320612064254}
   - component: {fileID: 114228214996573471}
   - component: {fileID: 225641204913154593}
   - component: {fileID: 114521597976012101}
@@ -178419,7 +178414,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1760, y: 2520}
+  m_SizeDelta: {x: 1760, y: 2920}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222729821067651183
 CanvasRenderer:
@@ -178429,19 +178424,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730242686860875}
   m_CullTransparentMesh: 1
---- !u!114 &114041320612064254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1730242686860875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43da0d139c35454c6be239eaafbc3070, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsNeedChangeSizeDelta: 1
 --- !u!114 &114228214996573471
 MonoBehaviour:
   m_ObjectHideFlags: 0

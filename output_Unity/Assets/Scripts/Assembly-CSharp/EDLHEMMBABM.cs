@@ -185,7 +185,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		}
 		yield return null;
 		CreateAllItems(InConfig);
-		if (UI != null) UI.FitGameField(InConfig);
+		if (UI != null) UI.FitGameField();
 		LevelData levelData = MainLevelData;
 		levelData.levelID = InConfig.levelID;
 		FruitWithdrawal.WithdrawalGameplayBridge.BeginRun(levelData);
@@ -1088,7 +1088,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 			itemMap[item.Id] = item;
 		}
 		// 撤销栈（undoRecords 顺序为栈顶→栈底）
-		if (UI != null) UI.FitGameField(curLevelConfig);
+		if (UI != null) UI.FitGameField();
 		for (int i = snapshot.undoRecords.Count - 1; i >= 0; i--)
 		{
 			UndoRecord undoRecord = snapshot.undoRecords[i];

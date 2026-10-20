@@ -11,7 +11,15 @@ if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 $fieldPreviousMonoPath = $env:MONO_PATH
 try {
     $env:MONO_PATH = (Join-Path $UnityEditor 'Data/Managed')
-    & $fieldMono $fieldOutput (Join-Path $fieldRepository 'output_Unity/Assets/res_server/server_levelconfigs/mainlevel') (Join-Path $fieldRepository 'output_Unity/Assets/res_server/server_configs/AllEleImageConfig.json')
+    $fieldAssets = Join-Path $fieldRepository 'output_Unity/Assets'
+    & $fieldMono $fieldOutput `
+        (Join-Path $fieldAssets 'res_server/server_levelconfigs/mainlevel') `
+        (Join-Path $fieldAssets 'res_server/server_configs/AllEleImageConfig.json') `
+        (Join-Path $fieldAssets 'res/local/coreplay/CorePlayUI.prefab') `
+        (Join-Path $fieldAssets 'Game.unity') `
+        (Join-Path $fieldAssets 'res/local/coreplay/prefab/CollectItem.prefab') `
+        (Join-Path $fieldAssets 'res/local/coreplay/effct/anim') `
+        (Join-Path $fieldAssets 'res/local/withdrawal/ApkEarningTop.prefab')
     $fieldResult = $LASTEXITCODE
 } finally {
     $env:MONO_PATH = $fieldPreviousMonoPath

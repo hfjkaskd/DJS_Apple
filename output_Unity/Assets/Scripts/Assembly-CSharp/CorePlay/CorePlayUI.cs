@@ -27,11 +27,8 @@ namespace CorePlay
 		public Image m_BgImg;
 
 		[Header("Gameplay presentation area")]
-		[SerializeField] public RectTransform m_FieldViewport;
-		[SerializeField] public RectTransform m_FieldTrayRect;
-		[SerializeField] public Vector2 m_FieldItemPadding = new Vector2(110f, 120f);
-		[SerializeField] public float m_FieldMaximumScale = 1f;
-		[SerializeField] public float m_FieldTrayGap = 40f;
+		[Tooltip("Shared authored coordinate system for the tree artwork and its fruit layer.")]
+		[SerializeField] public RectTransform m_FieldPresentationRoot;
 
 		private readonly Vector3[] fieldCorners = new Vector3[4];
 
@@ -439,16 +436,17 @@ namespace CorePlay
 			}
 		}
 
-		/// <summary>Fit once per new/restored board after layout; never move individual tile coordinates.</summary>
-		public void FitGameField(LevelConfig config)
+		/// <summary>Fit the complete authored scene once; tree and fruit keep the same relative coordinates.</summary>
+		public void FitGameField()
 		{
-			if (m_FieldViewport == null || m_BgTrans == null || m_BgTrans.parent == null ||
-				config == null || config.normalTiles == null || config.normalTiles.Count == 0)
-			{
-				return;
-			}
-			Transform parent = m_BgTrans.parent;
-			m_FieldViewport.GetWorldCorners(fieldCorners);
+			if (m_FieldPresentationRoot == null || m_FieldPresentationRoot.parent == null) return;
+			Canvas canvas = m_FieldPresentationRoot.GetComponentInParent<Canvas>();
+			RectTransform screen = canvas != null ? canvas.rootCanvas.transform as RectTransform : null;
+			if (screen == null) return;
+			// The full canvas owns background coverage. Safe-area offsets apply to
+			// the controls only; they must not stretch the tree independently.
+			Transform parent = m_FieldPresentationRoot.parent;
+			screen.GetWorldCorners(fieldCorners);
 			Vector3 corner = parent.InverseTransformPoint(fieldCorners[0]);
 			var viewport = new FieldLayoutBounds(corner.x, corner.y, corner.x, corner.y);
 			for (int i = 1; i < fieldCorners.Length; i++)
@@ -459,29 +457,11 @@ namespace CorePlay
 				viewport.MaxX = Mathf.Max(viewport.MaxX, corner.x);
 				viewport.MaxY = Mathf.Max(viewport.MaxY, corner.y);
 			}
-			if (m_FieldTrayRect != null)
-			{
-				m_FieldTrayRect.GetWorldCorners(fieldCorners);
-				float trayTop = float.NegativeInfinity;
-				for (int i = 0; i < fieldCorners.Length; i++)
-					trayTop = Mathf.Max(trayTop, parent.InverseTransformPoint(fieldCorners[i]).y);
-				float gap = Mathf.Abs(parent.InverseTransformVector(m_FieldViewport.TransformVector(Vector3.up * m_FieldTrayGap)).y);
-				viewport.MinY = Mathf.Max(viewport.MinY, trayTop + gap);
-			}
-			var content = new FieldLayoutBounds(float.PositiveInfinity, float.PositiveInfinity, float.NegativeInfinity, float.NegativeInfinity);
-			foreach (SingleNormalTile tile in config.normalTiles)
-			{
-				CollectItem.TryGetEleSize(tile.eleType, out float width, out float height);
-				float paddingX = Mathf.Max(m_FieldItemPadding.x, width * 0.5f);
-				float paddingY = Mathf.Max(m_FieldItemPadding.y, height * 0.5f);
-				content.MinX = Mathf.Min(content.MinX, tile.posX - paddingX);
-				content.MinY = Mathf.Min(content.MinY, tile.posY - paddingY);
-				content.MaxX = Mathf.Max(content.MaxX, tile.posX + paddingX);
-				content.MaxY = Mathf.Max(content.MaxY, tile.posY + paddingY);
-			}
-			FieldLayoutFit fit = FieldLayoutGeometry.Fit(content, viewport, m_FieldMaximumScale);
-			m_BgTrans.localScale = new Vector3(fit.Scale, fit.Scale, 1f);
-			m_BgTrans.localPosition = new Vector3(fit.X, fit.Y, m_BgTrans.localPosition.z);
+			Rect artwork = m_FieldPresentationRoot.rect;
+			FieldLayoutFit fit = FieldLayoutGeometry.Cover(
+				new FieldLayoutBounds(artwork.xMin, artwork.yMin, artwork.xMax, artwork.yMax), viewport);
+			m_FieldPresentationRoot.localScale = new Vector3(fit.Scale, fit.Scale, 1f);
+			m_FieldPresentationRoot.localPosition = new Vector3(fit.X, fit.Y, m_FieldPresentationRoot.localPosition.z);
 		}
 
 		/// <summary>把配置坐标（已按 1080 画布单位）转换为世界坐标。</summary>

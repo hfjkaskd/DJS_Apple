@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-20",
+  "scope": "Shared tree/fruit layout and a single level-win settlement flow. No APK was built or installed.",
+  "layout": {
+    "designFrame": [1760, 2920],
+    "treeAndFruitRoot": "CorePlayUI/Game",
+    "fruitMap": "CorePlayUI/Game/Map",
+    "screenFit": "Uniform full-canvas cover; no per-level fruit recentering or background-only safe-area stretching.",
+    "editorValidation": "GameplayPresentationValidation.Run",
+    "editorExitCode": 0,
+    "savedPrefabProfilesPassed": 8,
+    "offlineTest": "Tests/ApkEarning/Run-FieldLayoutTests.ps1",
+    "levelConfigurationsChecked": 4336,
+    "animatedSpriteBoundsChecked": 2093304,
+    "animationEnvelope": "Authored image pivot and idle position/scale curves, including extrema between keys.",
+    "minimumPixelGaps": [
+      { "resolution": [1080, 2400], "screenSides": 12.33, "hud": 203.84, "tray": 94.56 },
+      { "resolution": [1080, 2340], "screenSides": 25.52, "hud": 195.45, "tray": 74.70 },
+      { "resolution": [720, 1280], "screenSides": 78.58, "hud": 91.12, "tray": 40.86 },
+      { "resolution": [1080, 1920], "screenSides": 117.86, "hud": 136.67, "tray": 61.29 }
+    ]
+  },
+  "settlement": {
+    "flow": "Level win -> existing reward host -> reward flow closes -> next level. No original WinUI opens.",
+    "routeTest": "Tests/ApkEarning/Run-SettlementRouteTests.ps1",
+    "routeCasesPassed": 8,
+    "serviceTest": "Tests/ApkEarning/Run-ServiceTests.ps1",
+    "serviceCasesPassed": 37,
+    "accountingChanges": false
+  },
+  "verificationLimits": "Unity compilation and saved-prefab transform checks plus isolated route/service tests and offline asset geometry. The changed version has not been packaged or tested on the physical phone. Existing unrelated working-tree edits were not included."
+}

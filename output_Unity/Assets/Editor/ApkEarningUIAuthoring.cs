@@ -695,10 +695,11 @@ public static class ApkEarningUIAuthoring
             // Source earnings occupy y=15..430; controls remain on one row beneath it.
             row.anchoredPosition = new Vector2(0, -520);
             var gameplay = core.GetComponent<CorePlay.CorePlayUI>();
+            RectTransform presentation = core.transform.Find("Game") as RectTransform;
             RectTransform map = core.transform.Find("Game/Map") as RectTransform;
             RectTransform ui = core.transform.Find("UI") as RectTransform;
             RectTransform tray = core.transform.Find("UI/Bottom/Box_Root") as RectTransform;
-            if (gameplay == null || map == null || ui == null || tray == null)
+            if (gameplay == null || presentation == null || map == null || ui == null || tray == null)
                 throw new InvalidOperationException("CorePlayUI gameplay/viewport references are missing.");
             RectTransform viewport = ui.Find("FieldViewport") as RectTransform;
             if (viewport == null)
@@ -709,8 +710,14 @@ public static class ApkEarningUIAuthoring
             viewport.anchorMin = Vector2.zero; viewport.anchorMax = Vector2.one;
             viewport.offsetMin = new Vector2(40, 0); viewport.offsetMax = new Vector2(-40, -600);
             gameplay.m_BgTrans = map;
-            gameplay.m_FieldViewport = viewport; gameplay.m_FieldTrayRect = tray;
-            gameplay.m_FieldItemPadding = new Vector2(110, 120); gameplay.m_FieldMaximumScale = 1; gameplay.m_FieldTrayGap = 40;
+            gameplay.m_FieldPresentationRoot = presentation;
+            // One fixed frame leaves room for edge-fruit idle motion. Never
+            // stretch only the background by a device-dependent safe-area height.
+            presentation.sizeDelta = new Vector2(1760, 2920);
+            presentation.anchoredPosition = Vector2.zero; presentation.localScale = Vector3.one;
+            var backgroundSafeArea = presentation.GetComponent<Orange.ProtectedAreaAdaptReverse>();
+            if (backgroundSafeArea != null) Object.DestroyImmediate(backgroundSafeArea);
+            map.anchoredPosition = Vector2.zero; map.localScale = Vector3.one;
             var topController = instance.GetComponent<ApkEarningTopView>();
             topController.LevelSettingsRow = row; topController.GameplayViewport = viewport;
             PrefabUtility.RecordPrefabInstancePropertyModifications(topController);
