@@ -1,0 +1,185 @@
+{
+  "title": "参考 APK 与 1.0.11 手机实拍 · 2026-10-20 自查",
+  "left_label": "参考 APK 1.0.1 · 已保存设备原图",
+  "right_label": "苹果树 1.0.11 · 本次 Pixel 8 实拍",
+  "footer": "完整截图等比排版；不同存档数值不作为缺陷；换皮是已确认的调整",
+  "frame_size": [
+    1080,
+    1920
+  ],
+  "pair_image_size": [
+    2256,
+    2262
+  ],
+  "processing": "EXIF orientation, aspect-preserving resize, letterbox; no crop or retouch",
+  "pairs": [
+    {
+      "id": "01-cash-wallet",
+      "title": "现金钱包：关卡编号和统计含义需要核对",
+      "note": "当前顶部第7关，钱包第5关；原模拟统计已改为本地统计。",
+      "reference": {
+        "path": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-cash-wallet.png",
+        "native_size": [
+          1080,
+          1920
+        ],
+        "orientation_corrected_size": [
+          1080,
+          1920
+        ],
+        "sha256": "d7e21556030900dd9fb5fc1becbbbfac805f636038f06ccde5eed271a8bcce6a",
+        "fitted_rectangle": [
+          32,
+          178,
+          1080,
+          1920
+        ]
+      },
+      "game": {
+        "path": "C:\\Projects\\DJS_Apple\\flow-parity-audit-20261020\\02-cash-wallet.png",
+        "native_size": [
+          1080,
+          2400
+        ],
+        "orientation_corrected_size": [
+          1080,
+          2400
+        ],
+        "sha256": "3d8909743dc370ac0b9622da3f161fd15e77f993dab2d55bfcd1a2b9f0991a06",
+        "fitted_rectangle": [
+          1252,
+          178,
+          864,
+          1920
+        ]
+      },
+      "output": "01-cash-wallet.png"
+    },
+    {
+      "id": "02-diamond-wallet",
+      "title": "钻石钱包：四档可选，剩余金额存在一分钱截断误差",
+      "note": "355.11钻石折合$3.55，剩余应为$496.45，当前为$496.44。",
+      "reference": {
+        "path": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-diamond-wallet.png",
+        "native_size": [
+          1080,
+          1920
+        ],
+        "orientation_corrected_size": [
+          1080,
+          1920
+        ],
+        "sha256": "9709559a4d7a896c9e6acdd26b1d16686381a301cd92072038f9c4e493c39694",
+        "fitted_rectangle": [
+          32,
+          178,
+          1080,
+          1920
+        ]
+      },
+      "game": {
+        "path": "C:\\Projects\\DJS_Apple\\flow-parity-audit-20261020\\08-diamond-wallet.png",
+        "native_size": [
+          1080,
+          2400
+        ],
+        "orientation_corrected_size": [
+          1080,
+          2400
+        ],
+        "sha256": "10fc6ba95c1e0a49f50dacfa6d79458fae760c0bbdaa1907b29c23905a7e06fc",
+        "fitted_rectangle": [
+          1252,
+          178,
+          864,
+          1920
+        ]
+      },
+      "output": "02-diamond-wallet.png"
+    },
+    {
+      "id": "03-diamond-conditions",
+      "title": "钻石条件：同为500档，目标数值对应",
+      "note": "目标为50000钻石、每日10局、登录5天、账户31级。",
+      "reference": {
+        "path": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-diamond-requirements.png",
+        "native_size": [
+          1080,
+          1920
+        ],
+        "orientation_corrected_size": [
+          1080,
+          1920
+        ],
+        "sha256": "26a48cb0cce500f8934e8a1fee482986454125e163dc9103e9e557a524d1bcf6",
+        "fitted_rectangle": [
+          32,
+          178,
+          1080,
+          1920
+        ]
+      },
+      "game": {
+        "path": "C:\\Projects\\DJS_Apple\\flow-parity-audit-20261020\\15-diamond-500-conditions.png",
+        "native_size": [
+          1080,
+          2400
+        ],
+        "orientation_corrected_size": [
+          1080,
+          2400
+        ],
+        "sha256": "3ae918fc252c68453b52a90a25a974ac78e92b5ad253720004df981fb3785667",
+        "fitted_rectangle": [
+          1252,
+          178,
+          864,
+          1920
+        ]
+      },
+      "output": "03-diamond-conditions.png"
+    },
+    {
+      "id": "04-history",
+      "title": "记录页：同有两笔早期奖励和当前余额",
+      "note": "两侧存档提交状态不同；不能据此判定记录页流程不一致。",
+      "reference": {
+        "path": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-cash-history.png",
+        "native_size": [
+          1080,
+          1920
+        ],
+        "orientation_corrected_size": [
+          1080,
+          1920
+        ],
+        "sha256": "f10e30d2206c955c26299127c64a58a15c841908d012f9509b6bd04846e11ec6",
+        "fitted_rectangle": [
+          32,
+          178,
+          1080,
+          1920
+        ]
+      },
+      "game": {
+        "path": "C:\\Projects\\DJS_Apple\\flow-parity-audit-20261020\\05-history.png",
+        "native_size": [
+          1080,
+          2400
+        ],
+        "orientation_corrected_size": [
+          1080,
+          2400
+        ],
+        "sha256": "74b72cfe5842116fb80dc9cd721bede6c8208728fee754fe9da99c9e8b83643c",
+        "fitted_rectangle": [
+          1252,
+          178,
+          864,
+          1920
+        ]
+      },
+      "output": "04-history.png"
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "date": "2026-10-20",
+  "timezone": "America/New_York",
+  "version": "1.0.11",
+  "implementationCommit": "d185d35",
+  "captureRoot": "C:/Projects/DJS_Apple/flow-parity-audit-20261020",
+  "verdict": "未达到完整流程 1:1。主要数值和基础页面已对应，但存在两项真机可见缺陷及多个缺失/简化的交互分支。",
+  "reference": {
+    "apk": "C:/Projects/com.nut.sort.relax/Builds/Android/ColorNutParty-1.0.1-20261013-app-icon-fix.apk",
+    "version": "1.0.1",
+    "sha256": "C0C4E5DE0DACDF0F8E7376C8A270BF2BD11AB6D06B6989994F0858A73266B238",
+    "source": "C:/Projects/com.nut.sort.relax",
+    "extracted": "E:/CodexCacheBackups/DJS_Apple-apk-reference-20261014",
+    "actualScreenshots": "C:/Projects/DJS_Apple/apk-comparison/reference",
+    "policy": "业务结构对照指定 APK、抽取配置及其对应工程；美术遵循后续批准的苹果树风格。最初 HTML 的六阶段/13天方案已被后来的 APK 参考替代。"
+  },
+  "sourceRoots": {
+    "current": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/Scripts/Assembly-CSharp",
+    "reference": "C:/Projects/com.nut.sort.relax/Assets/NutSort/Runtime"
+  },
+  "findings": [
+    {
+      "id": "F01", "priority": "优先修正", "title": "主界面与钱包使用两套关卡编号",
+      "current": "真机顶部 Level 7，现金钱包 Level 5、4/5，条件页实际为6/22 boards。实际第7至22局被钱包映射为显示第5关。",
+      "reference": "参考使用大关/子局映射及分轮界面。当前精简顶部后仍沿用钱包映射，缺少对应解释。",
+      "impact": "玩家已过第5关却仍被要求通关第5关，无法理解还差多少局。",
+      "evidence": "真机复现 + 当前代码/配置",
+      "currentSource": ["CorePlay/CorePlayUI.cs:258", "ApkEarning/ApkEarningHost.cs:155", "ApkEarning/ApkEarningHost.cs:225"],
+      "captures": ["02-cash-wallet.png", "03-cash-conditions.png"],
+      "recommendation": "保持原实际门槛，统一显示关卡和任务进度的口径，或明确标出大关内剩余子局。"
+    },
+    {
+      "id": "F02", "priority": "优先修正", "title": "钻石折算剩余金额截断一分钱",
+      "current": "355.11钻石显示$3.55，但距$500显示$496.44；四档均有同样截断。",
+      "reference": "参考保留小数后用货币格式舍入，此例应显示$496.45。",
+      "impact": "显示金额相加不等于目标。实际钻石余额没有因此改变。",
+      "evidence": "真机四档复现 + 双方源码",
+      "currentSource": ["ApkEarning/ApkEarningHost.cs:181"],
+      "referenceSource": ["UI/LocalDiamondWithdrawalPanel.cs:54", "Content/OriginalGoldFormatter.cs:47"],
+      "captures": ["08-diamond-wallet.png", "09-diamond-1000.png", "10-diamond-1500.png", "11-diamond-2000.png"],
+      "recommendation": "按参考小数换算与货币舍入规则显示，不在换算前整数截断。"
+    },
+    {
+      "id": "F03", "priority": "流程缺失", "title": "第二阶段复审分支未接入",
+      "current": "阶段页只有固定四行状态，确认/关闭返回条件；TXTooFastHintPanel只有资源，没有运行路由。",
+      "reference": "阶段步骤可转入复审说明，含奖励视频次数相关信息。",
+      "evidence": "双方代码/抽取配置；本轮未达条件，未做此分支手机实测",
+      "currentSource": ["ApkEarning/ApkEarningHost.cs:247"],
+      "referenceSource": ["UI/LocalGameplayController.WithdrawalConditions.cs:89"],
+      "recommendation": "补齐测试状态下的阶段步骤、复审说明和返回路线。"
+    },
+    {
+      "id": "F04", "priority": "流程不同", "title": "激活过程没有逐步续播，结束位置也不同",
+      "current": "每次从评估重播，加成页后提前标记激活，最后进入历史；中断会重复前半段或跳过后半段。",
+      "reference": "每一步保存activationStep，所有页面完成才激活，然后回游戏。",
+      "evidence": "双方代码；未重置用户存档来重演首次激活",
+      "currentSource": ["ApkEarning/ApkEarningHost.cs:421", "ApkEarning/ApkEarningDomain.cs:327"],
+      "referenceSource": ["UI/LocalGameplayController.TutorialBalance.cs:105"],
+      "recommendation": "每步完成后持久化，完成所有步骤再结束激活，并对齐返回位置。"
+    },
+    {
+      "id": "F05", "priority": "流程不同", "title": "钻石引导完成后去向不同",
+      "current": "确认引导后直接打开钻石钱包。",
+      "reference": "确认后关闭引导、返回游戏。",
+      "evidence": "双方代码",
+      "currentSource": ["ApkEarning/ApkEarningHost.cs:409"],
+      "referenceSource": ["UI/OriginalNewbieGuideView.cs:113"]
+    },
+    {
+      "id": "F06", "priority": "入口缺失", "title": "账户等级页面只有资源，没有运行入口",
+      "current": "设置仍是原苹果树设置，没有账户等级入口；LocalUserLevel未被运行代码打开。",
+      "reference": "设置包含用户等级和历史入口。",
+      "evidence": "本次手机设置页确认没有入口 + 当前Prefab/运行调用与参考代码",
+      "captures": ["17-settings.png"],
+      "currentSource": ["CorePlay/CorePlayUI.cs:387", "Module/Setting/GameSettingUI.cs:43"],
+      "referenceSource": ["UI/LocalGameplayController.Settings.cs:19", "UI/LocalGameplayController.Settings.cs:58"]
+    },
+    {
+      "id": "F07", "priority": "动态过程缺失", "title": "验证、加成与到账动画被静态页代替",
+      "current": "验证三步直接Done；所有加成同时显示；到账飞行图标始终关闭，仅等待固定时间。",
+      "reference": "验证逐步执行，结束后才可确认；加成逐项强调，收款图标飞向顶部。",
+      "evidence": "双方代码；不是仅比较静态截图",
+      "currentSource": ["ApkEarning/ApkEarningHost.cs:327", "ApkEarning/ApkEarningHost.cs:429", "ApkEarning/ApkEarningHost.cs:445"],
+      "referenceSource": ["UI/OriginalWithdrawalLevelPanel.cs:69", "UI/LocalEarningSequencePanel.cs:117"],
+      "recommendation": "补表现与按钮时序，保留当前先可靠保存再展示的奖励幂等保护。"
+    },
+    {
+      "id": "F08", "priority": "规则差异", "title": "每日任务和登录天数使用不同日期边界",
+      "current": "按UTC日期跨日。",
+      "reference": "按设备本地日期跨日。",
+      "evidence": "双方代码；未修改手机时间做跨日测试",
+      "currentSource": ["ApkEarning/ApkEarningDomain.cs:201"],
+      "referenceSource": ["UI/LocalGameplayController.WithdrawalConditions.cs:35"]
+    },
+    {
+      "id": "F09", "priority": "分支不可用", "title": "广告倍领按钮没有可执行的倍领奖励流程",
+      "current": "Claim 10X只提示广告不可用，可普通领取。",
+      "reference": "存在广告成功回调后倍增结算路径；这不代表参考当前一定有可用广告填充。",
+      "evidence": "双方代码",
+      "currentSource": ["ApkEarning/ApkEarningHost.cs:366"],
+      "referenceSource": ["UI/LocalGameplayController.Lucky.cs:177", "UI/LocalGameplayController.Success.cs:45"],
+      "recommendation": "若需测试该完整交互，应使用明确的模拟广告完成/取消流程；不得将失败或取消当完成。"
+    },
+    {
+      "id": "F10", "priority": "内容语义不同", "title": "钱包统计内容已改变",
+      "current": "显示本地Today和Total runs。",
+      "reference": "显示明确标为Simulated stats的玩家通关数、平均尝试次数、平均提现金额。",
+      "evidence": "原APK真实截图与本次手机截图",
+      "captures": ["02-cash-wallet.png"],
+      "recommendation": "记录为差异；如保留参考统计，必须继续明确其模拟属性。不能把它当成两份存档数字不同。"
+    },
+    {
+      "id": "F11", "priority": "返回路线不同", "title": "非早期账户/确认页关闭后返回游戏",
+      "current": "默认关闭整个Host，返回游戏。",
+      "reference": "非早期申请关闭后恢复底下的钱包。",
+      "evidence": "双方代码；当前正常存档资格未达，此分支未真机执行",
+      "currentSource": ["ApkEarning/ApkEarningHost.cs:80", "ApkEarning/ApkEarningHost.cs:105"],
+      "referenceSource": ["UI/LocalGameplayController.Account.cs:26"]
+    }
+  ],
+  "matched": [
+    "首两次奖励$0.40/$0.60及对应历史记录结构。",
+    "激活余额至少$500且只处理一次，不是重复累加$500。",
+    "现金主要奖励区间、钻石奖励区间及原实际局门槛22/51对应。",
+    "钻石100个=$1；四档50000/100000/150000/200000钻石，对应$500/$1000/$1500/$2000。",
+    "钻石每日10局，四档登录5/7/10/15天，账户等级31/32/33/34对应。",
+    "现金/钻石入口、钱包、条件、历史基本导航及四档切换可用。",
+    "Venmo/Zelle电话和PayPal邮箱、账户校验、早期提交与Pending记录路由存在。",
+    "奖励和重复提交防重、存档失败保护、重启不重复入账的当前测试通过。"
+  ],
+  "authorizedChanges": [
+    "苹果树背景、立体木边美术与紧凑布局。",
+    "顶部等级、现金、钻石、设置并排；删除任务条及顶部测试提示条。",
+    "启动直接进关卡，通关只保留一个结算，移除自动评分打断。",
+    "重启补入已获得但未领取奖励，不再次打开旧结算。",
+    "本地测试账户和无真实支付，界面保留测试状态。"
+  ],
+  "referenceBoundaries": [
+    "参考APK自己也没有真实打款，普通提现末端是service not connected，不能将无真实到账当作移植遗漏。",
+    "参考与当前都缺少账户等级、现金MARK目标的权威更新来源；后期条件不能自然全部满足。如需全终态可演示，须定义明确的测试推进规则，不能伪造达标或真实到账。",
+    "三消替代完成螺杆属于玩法适配。",
+    "两侧余额、早期记录提交状态不同来自各自存档，不单独作为缺陷。",
+    "视觉已授权换皮，不能再以原APK逐像素相同为验收口径；现有苹果树页面也不据此宣称与效果图逐像素一致。"
+  ],
+  "validation": {
+    "device": "Pixel 8",
+    "installedVersion": "1.0.11 / 111",
+    "deviceStartState": {"level": 7, "cash": "508.55", "diamonds": "355.11", "field": 60, "tray": 0},
+    "currentPhoneVerified": [
+      "现金入口→钱包→条件→返回钱包→历史→返回钱包→回游戏。",
+      "钻石入口→四个档位切换；$2000条件显示200000钻石/每日10局/15天/34级。",
+      "切回$500→条件→继续游戏。",
+      "打开设置确认没有账户等级入口，随后关闭设置回到第7关。",
+      "观察到关卡编号冲突和四档剩余金额截断。",
+      "所有保存的玩法快照均仍为第7关、60个场内水果、0个篮内水果，本轮没有改写玩家文件或清数据。"
+    ],
+    "automatedRerun": {"domain": "45/45 PASS", "service": "37/37 PASS", "settlementRoute": "10/10 PASS", "startupRecovery": "PASS"},
+    "prefabInspection": "30个页面的直接序列化文本/按钮/图片/输入/对象引用没有零或缺失目标。继承Prefab及实际Unity生命周期不能由文本扫描完全验证。",
+    "coverageLimitations": [
+      "本轮没有重新运行原APK；使用经哈希确认的原APK抽取资料、对应工程与已保存的真实设备截图。",
+      "首次欢迎、两笔早期申请、激活中断续播、后期达标账户和复审终态由代码核对，未在当前手机存档逐一走通。",
+      "没有改系统日期，没有修改用户余额、关卡或账户等级来制造达标。",
+      "自动测试通过代表既有规则、存档及结算回归通过，不代表完整参考流程或美术1:1通过。",
+      "原05-account.png实际为加载页，07-confirm.png实际为无效姓名提示；静态Prefab示例图不算APK实拍。"
+    ]
+  },
+  "gameCodeChanged": false,
+  "newApkBuilt": false,
+  "nextPriority": ["F01", "F02", "F03", "F04", "F06", "F05", "F07", "F08", "F09", "F11"]
+}
