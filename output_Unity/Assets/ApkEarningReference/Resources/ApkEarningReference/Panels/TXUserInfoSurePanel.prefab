@@ -92,12 +92,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
+  m_fontSize: 72
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 48
-  m_fontSizeMax: 64
+  m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -168,9 +168,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224336590748365959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 430, y: 550}
+  m_AnchorMin: {x: 0.5, y: 0.8548387}
+  m_AnchorMax: {x: 0.5, y: 0.8548387}
+  m_AnchoredPosition: {x: 430, y: 0}
   m_SizeDelta: {x: 112, y: 112}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222017697238300914
@@ -311,9 +311,9 @@ RectTransform:
   - {fileID: 251702342752618334}
   m_Father: {fileID: 224336590748365959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20, y: 578}
+  m_AnchorMin: {x: 0.5, y: 0.8729032}
+  m_AnchorMax: {x: 0.5, y: 0.8729032}
+  m_AnchoredPosition: {x: 20, y: 0}
   m_SizeDelta: {x: 620, y: 148}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222918264173551851
@@ -670,10 +670,10 @@ RectTransform:
   - {fileID: 224291844617409189}
   m_Father: {fileID: 224336590748365959}
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -320}
-  m_SizeDelta: {x: 800, y: 400}
+  m_AnchorMin: {x: 0.5, y: 0.16451612}
+  m_AnchorMax: {x: 0.5, y: 0.42258063}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 800, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &114808113985169905
 MonoBehaviour:
@@ -736,9 +736,9 @@ RectTransform:
   - {fileID: 224833703512093738}
   m_Father: {fileID: 224672306508523268}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -120}
+  m_AnchorMin: {x: 0.5, y: 0.2}
+  m_AnchorMax: {x: 0.5, y: 0.2}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 510, y: 106}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222344419225485095
@@ -871,10 +871,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224336590748365959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 40}
-  m_SizeDelta: {x: 800, y: 320}
+  m_AnchorMin: {x: 0.5, y: 0.42258063}
+  m_AnchorMax: {x: 0.5, y: 0.62903225}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 800, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222313026266067498
 CanvasRenderer:
@@ -961,9 +961,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224336590748365959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 320}
+  m_AnchorMin: {x: 0.5, y: 0.7064516}
+  m_AnchorMax: {x: 0.5, y: 0.7064516}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 340, y: 194}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222634108722742392
@@ -1299,127 +1299,269 @@ MonoBehaviour:
     Target: {fileID: 114302127217294661}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: OriginalWithdrawalConfirmationPanel.Image
     Target: {fileID: 114302127217294661}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: source:114977153420339851:Image
     Target: {fileID: 114302127217294661}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: backdrop
     Target: {fileID: 114705390221481576}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: OriginalWithdrawalConfirmationPanel.backdrop
     Target: {fileID: 114705390221481576}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: source:114977153420339851:backdrop
     Target: {fileID: 114705390221481576}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: $root
     Target: {fileID: 114705390221481576}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:$root
     Target: {fileID: 114705390221481576}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: TXUserInfoSurePanel
     Target: {fileID: 114705390221481576}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/bg
     Target: {fileID: 114002669891404536}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/bg
     Target: {fileID: 114002669891404536}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: bg
     Target: {fileID: 114002669891404536}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/bg1
     Target: {fileID: 114621510681728303}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/bg1
     Target: {fileID: 114621510681728303}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: bg1
     Target: {fileID: 114621510681728303}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Image
     Target: {fileID: 114302127217294661}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Image
     Target: {fileID: 114302127217294661}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Title
     Target: {fileID: 114587397909062814}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Title
     Target: {fileID: 114587397909062814}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Title
     Target: {fileID: 114587397909062814}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/Close
     Target: {fileID: 114733206282342372}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/Close
     Target: {fileID: 114733206282342372}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Close
     Target: {fileID: 114733206282342372}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/btnParent/Get
     Target: {fileID: 114472185465350827}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/btnParent/Get
     Target: {fileID: 114472185465350827}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: Get
     Target: {fileID: 114472185465350827}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: main/btnParent/ReEnter
     Target: {fileID: 114919942235722503}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:main/btnParent/ReEnter
     Target: {fileID: 114919942235722503}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: ReEnter
     Target: {fileID: 114919942235722503}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   Inputs: []
   ArtworkRoot: {fileID: 224336590748365959}
-  ReferenceWidth: 1080
-  MinimumReferenceHeight: 1800
+  ReferenceWidth: 1000
+  MinimumReferenceHeight: 1550
   FitWidth: 1
   EmphasisColor: {r: 0.20784314, g: 0.43137255, b: 0.11372549, a: 1}
   TintDiamondOptions: 0
   SelectedOptionColor: {r: 0.8235294, g: 0.9647059, b: 0.627451, a: 1}
   NormalOptionColor: {r: 1, g: 1, b: 1, a: 1}
+  VerificationStepCount: 3
+  VerificationStepPrefix: path:main/Step/
+  VerificationConfirmKey: SureBtn
+  VerificationFirstDelay: 0.3
+  VerificationRowSpacing: 1.5
+  VerificationRowDuration: 0.1
+  VerificationContentDelay: 1
+  VerificationContentDuration: 0.1
+  VerificationConfirmDuration: 0.3
+  StageRowDuration: 0.1
+  StageContentDuration: 0.2
+  StageFirstDelay: 0.3
+  StageFirstSpacing: 2
+  StageFirstContentDelay: 1.5
+  StageHintDelay: 2
+  StageResumeContentDelay: 0.5
+  StageThirdRowDelay: 0.9
+  StageThirdContentDelay: 1
+  StageLastRowDelay: 2.5
+  StageButtonDuration: 0.3
+  BonusRowCount: 5
+  BonusRevealInterval: 0.35
+  BonusPulseDuration: 0.5
+  BonusPulseCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.35
+      value: 1.035
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ReceiptIconCount: 5
+  ReceiptCollectDelay: 1
+  ReceiptFlightDuration: 0.65
+  ReceiptFlightStagger: 0.075
+  ReceiptFlightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1709867586078768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,10 +1597,10 @@ RectTransform:
   - {fileID: 224220653531496868}
   m_Father: {fileID: 224672306508523268}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 64}
-  m_SizeDelta: {x: 676, y: 160}
+  m_AnchorMin: {x: 0.5, y: 0.66}
+  m_AnchorMax: {x: 0.5, y: 0.66}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 720, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222900271049623953
 CanvasRenderer:
@@ -1590,10 +1732,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224336590748365959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.11290322}
+  m_AnchorMax: {x: 0.5, y: 0.88709676}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 936, y: 1200}
+  m_SizeDelta: {x: 936, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222161607090078389
 CanvasRenderer:
@@ -1624,7 +1766,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 8296453942858741580, guid: befe5d08464fc4448a18e5e0de39804f, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1632,7 +1774,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.83466274
 --- !u!114 &1869913476098735590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1723,9 +1865,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224336590748365959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 40}
+  m_AnchorMin: {x: 0.5, y: 0.5258064}
+  m_AnchorMax: {x: 0.5, y: 0.5258064}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 704, y: 260}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222642988549198181
@@ -1859,9 +2001,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224711914853252429}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -8, y: 45}
+  m_AnchorMin: {x: 0, y: 0.8040541}
+  m_AnchorMax: {x: 0, y: 0.8040541}
+  m_AnchoredPosition: {x: -8, y: 0}
   m_SizeDelta: {x: 100, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5585717308959904550
@@ -1934,9 +2076,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224336590748365959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 470}
+  m_AnchorMin: {x: 0.5, y: 0.8032258}
+  m_AnchorMax: {x: 0.5, y: 0.8032258}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 760, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4217187081609593255
@@ -1957,8 +2099,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0

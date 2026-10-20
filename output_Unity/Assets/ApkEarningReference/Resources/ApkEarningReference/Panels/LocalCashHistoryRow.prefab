@@ -610,18 +610,26 @@ MonoBehaviour:
     Target: {fileID: 9069450593278733864}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:ReadyVisual
     Target: {fileID: 9069450593278733864}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: PendingVisual
     Target: {fileID: 43030839523819705}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   - Key: path:PendingVisual
     Target: {fileID: 43030839523819705}
     ResizeWidthWithProgress: 0
     FullProgressWidth: 0
+    FullProgressHeight: 0
+    FullProgressPixelsPerUnit: 0
   Inputs: []
   ArtworkRoot: {fileID: 5813194475953193242}
   ReferenceWidth: 1080
@@ -631,6 +639,90 @@ MonoBehaviour:
   TintDiamondOptions: 0
   SelectedOptionColor: {r: 0.8235294, g: 0.9647059, b: 0.627451, a: 1}
   NormalOptionColor: {r: 1, g: 1, b: 1, a: 1}
+  VerificationStepCount: 3
+  VerificationStepPrefix: path:main/Step/
+  VerificationConfirmKey: SureBtn
+  VerificationFirstDelay: 0.3
+  VerificationRowSpacing: 1.5
+  VerificationRowDuration: 0.1
+  VerificationContentDelay: 1
+  VerificationContentDuration: 0.1
+  VerificationConfirmDuration: 0.3
+  StageRowDuration: 0.1
+  StageContentDuration: 0.2
+  StageFirstDelay: 0.3
+  StageFirstSpacing: 2
+  StageFirstContentDelay: 1.5
+  StageHintDelay: 2
+  StageResumeContentDelay: 0.5
+  StageThirdRowDelay: 0.9
+  StageThirdContentDelay: 1
+  StageLastRowDelay: 2.5
+  StageButtonDuration: 0.3
+  BonusRowCount: 5
+  BonusRevealInterval: 0.35
+  BonusPulseDuration: 0.5
+  BonusPulseCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.35
+      value: 1.035
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ReceiptIconCount: 5
+  ReceiptCollectDelay: 1
+  ReceiptFlightDuration: 0.65
+  ReceiptFlightStagger: 0.075
+  ReceiptFlightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6994139505660609104
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,12 +1085,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 53
+  m_fontSize: 64
   m_fontSizeBase: 66
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 39.75
-  m_fontSizeMax: 53
+  m_fontSizeMax: 64
   m_fontStyle: 1
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
