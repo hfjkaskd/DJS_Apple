@@ -1,0 +1,31 @@
+{
+    "generatedUtc": "2026-10-20T10:51:34.6580285Z",
+    "scope": "Actual Unity Play-mode frames in an isolated empty scene. Saved page prefabs, production ApkEarningPageView coroutines, real UGUI Buttons and pointer dispatch. The HUD target and page text/status are explicit fixture data, not a player or device capture. No gameplay host, earning service, player storage, payment operation or original scene is loaded.",
+    "passed": true,
+    "assertions": 32639,
+    "playFrames": 86138,
+    "warmupFrames": 28,
+    "verificationFrames": 23105,
+    "largestPlayFrameDelta": 0.7767894268035889,
+    "isolatedScenePath": "",
+    "isolatedSceneRootCount": 0,
+    "elapsedSeconds": 19.493790999999999,
+    "cases": [
+        "verification-progress-button-gate",
+        "verification-cancel-disable-reentry",
+        "stage-first-and-resume-with-pending-requirements",
+        "bonus-sequential-pulse-and-restore",
+        "receipt-flight-completion-and-cancel"
+    ],
+    "screenshots": [
+        "animation-verification-complete.png",
+        "animation-stage-before-review.png",
+        "animation-stage-after-review.png",
+        "animation-bonuses-complete.png",
+        "animation-receipt-in-flight.png"
+    ],
+    "errors": [],
+    "warnings": [
+        "The referenced script on this Behaviour (Game Object 'FreeCoinUI') is missing!"
+    ]
+}

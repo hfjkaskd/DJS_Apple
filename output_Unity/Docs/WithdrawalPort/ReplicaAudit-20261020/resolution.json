@@ -1,0 +1,114 @@
+{
+  "date": "2026-10-20",
+  "request": "修改自查发现的问题",
+  "scope": "修复 audit.json 中 F01–F11 的客户端差异；保留用户批准的苹果树美术、紧凑顶部、直接进入关卡、单次结算和重启奖励恢复。",
+  "newApkBuilt": false,
+  "deviceInstalledVersion": "1.0.11 / 111，仍为本次修复前版本",
+  "implementation": [
+    {
+      "id": "F01",
+      "status": "fixed",
+      "change": "顶部、现金钱包、条件和阶段页统一按实际关卡编号显示；实际门槛仍为 22/51，不修改达标规则。",
+      "validation": "代码交叉核对；现金钱包静态 fixture 显示 Level 7 / 6 of 22。"
+    },
+    {
+      "id": "F02",
+      "status": "fixed",
+      "change": "钻石换算保留精度至最后一步货币舍入。355.11 钻石显示 $3.55，距 $500 显示 $496.45。",
+      "validation": "24 项金额展示测试，覆盖四个档位和舍入边界。"
+    },
+    {
+      "id": "F03",
+      "status": "fixed",
+      "change": "接通阶段首段、复审说明、阶段后段和返回条件页；显示实际关卡与已完成测试视频数，未新增虚构达标条件。",
+      "validation": "路由和绑定交叉核对；复审页静态 fixture；阶段实际帧动画验证另附。"
+    },
+    {
+      "id": "F04",
+      "status": "fixed",
+      "change": "六步激活逐步保存并从未完成步骤继续；余额只应用一次；第六步完成后才标记激活并回游戏。早期验证提交后自动继续激活或回游戏，不再先停历史页。",
+      "validation": "状态、存档失败、重启和重复调用回归；提交后返回路线源码核对。",
+      "intentionalDifference": "余额在收据动画前可靠保存，动画只负责表现；保留防丢奖励保护，不声称与参考入账动画毫秒时点相同。"
+    },
+    {
+      "id": "F05",
+      "status": "fixed",
+      "change": "钻石引导确认后保存完成状态并返回游戏。",
+      "validation": "路由源码核对。"
+    },
+    {
+      "id": "F06",
+      "status": "fixed",
+      "change": "设置增加账户等级标准 Button；关闭设置并释放输入锁后进入账户等级页；页面可关闭回游戏。",
+      "validation": "Prefab 绑定检查、独立程序集编译和账户等级页静态 fixture。",
+      "boundary": "参考缺少权威账户等级更新来源；继续显示真实保存值和 Awaiting account update，不捏造等级进度。"
+    },
+    {
+      "id": "F07",
+      "status": "fixed",
+      "change": "恢复逐步验证、结束后确认、逐项加成强调和五枚到账图标飞向现金栏；取消页面会终止并复原表现。",
+      "validation": "生产 PageView 的真实 Unity 帧测试另附。"
+    },
+    {
+      "id": "F08",
+      "status": "fixed",
+      "change": "登录天数和每日关卡按设备本地日期刷新；旧存档首次迁移保持已积累的天数和今日进度，事件时间仍保存 UTC。",
+      "validation": "日期边界与旧存档迁移测试。"
+    },
+    {
+      "id": "F09",
+      "status": "fixed",
+      "change": "10X 入口接入明确标识的本地测试视频：倒计时后可完成，取消保留原奖励；完成只发一次奖励并记录一次测试视频。",
+      "validation": "成功、取消、重复完成和存档失败测试；测试视频等待及完成两种静态 fixture。",
+      "boundary": "没有接广告网络或真实支付。"
+    },
+    {
+      "id": "F10",
+      "status": "fixed",
+      "change": "钱包恢复模拟玩家数、平均尝试次数与模拟金额，明确显示 Simulated stats；当日平均尝试次数持久化，重复打开不重新抽样。",
+      "validation": "统计重复调用、跨日和存档测试；现金钱包静态 fixture。"
+    },
+    {
+      "id": "F11",
+      "status": "fixed",
+      "change": "非早期账户和确认页关闭返回钱包；其他账户重新输入保留已填信息；早期流程继续按归档/激活路线处理。",
+      "validation": "路由和所有关联 Button 别名交叉核对。"
+    }
+  ],
+  "automatedTests": {
+    "domain": "45/45 PASS",
+    "service": "37/37 PASS",
+    "parityState": "67/67 PASS",
+    "currencyPresentation": "24/24 PASS",
+    "settlementRoute": "10/10 PASS",
+    "startupRecovery": "PASS，13 个独立进程 / 115 条断言",
+    "evidence": "上述测试结果保留于本轮工具输出；未重新运行已经通过的测试以生成额外 stdout 文件。"
+  },
+  "unityStaticValidation": {
+    "result": "PASS",
+    "pages": 9,
+    "renders": 54,
+    "errors": 0,
+    "warnings": 0,
+    "report": "C:/Projects/DJS_Apple/flow-parity-fix-20261020/static-fixtures/prefab-fixtures-report.json",
+    "log": "C:/Projects/DJS_Apple/flow-parity-fix-20261020/unity-static-validation.log",
+    "scope": "隔离静态编辑器样例，使用明确的合成展示数据；不是手机截图或完整 Host 路由实测。"
+  },
+  "unityAnimationValidation": {
+    "result": "PASS",
+    "cases": 5,
+    "errors": 0,
+    "report": "animation-validation.json",
+    "captureDirectory": "C:/Projects/DJS_Apple/flow-parity-fix-20261020",
+    "log": "C:/Projects/DJS_Apple/flow-parity-fix-20261020/unity-animation-validation-2.log",
+    "scope": "空场景中的生产 PageView 协程、实际 PlayerLoop 帧与 UGUI Button 事件；检查确认前禁用、完成后启用、取消、重入、两段阶段动画、加成缩放恢复及全部五枚到账图标。",
+    "firstRun": "首次验证脚本受 Editor 资源目录初始化约 10 秒阻塞影响，在同一帧重复消费 delta 导致取消断言失败。已将验证驱动移至 PlayerLoop 并预热真实帧，保留原断言后重跑通过；未为通过检查改变游戏逻辑。",
+    "knownWarning": "既有 GameResCatalogBuilder 扫描 FreeCoinUI 资产时提示缺失脚本，调用栈来自目录生成器；验证场景开始时根对象数为 0，未启动玩家场景。"
+  },
+  "remainingBoundaries": [
+    "新代码尚未打包安装；本轮不能宣称手机端已验证修复后的所有分支。",
+    "原 APK 也不具备真实打款服务，且缺少账户等级和现金 MARK 的权威更新来源；这些外部来源缺失仍明确显示，不伪造达标或到账。",
+    "保留已批准的苹果树换皮和布局调整，不以原 APK 的像素相同为目标。",
+    "状态与动画测试分别验证，不等同于使用真实存档从头走完所有 Host 导航。"
+  ]
+}
