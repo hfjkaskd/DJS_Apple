@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-20",
+  "method": "Physical phone interaction through ADB, raw device screenshots, and recorded cold-launch frames",
+  "device": {
+    "model": "Google Pixel 8",
+    "resolution": [1080, 2400]
+  },
+  "application": {
+    "package": "com.flyfox.tripleharvest.preview",
+    "versionName": "1.0.6",
+    "versionCode": 106,
+    "apkSha256": "05452fbfbb94a1a7d24fc28cfc02f5bb134bbf7ca1a14f5f61f5abf61ee38bfe"
+  },
+  "scope": {
+    "coldLaunches": 1,
+    "completedLevel": 4,
+    "nextLevel": 5,
+    "saveDataCleared": false,
+    "allLevelsTested": false
+  },
+  "evidenceDirectory": "C:/Projects/DJS_Apple/DeviceQA/20261020-v106",
+  "checks": [
+    {
+      "name": "Cold launch enters gameplay",
+      "result": "PASS",
+      "observation": "After force-stop, am start -W reported LaunchState COLD. The Unity splash and loading transition led directly into Level 4, without the original home/start screen.",
+      "evidence": ["startup.mp4", "02-cold-start-restored.png"]
+    },
+    {
+      "name": "Fruit and tree alignment",
+      "result": "PASS_IN_OBSERVED_LEVELS",
+      "observation": "Level 4 remaining fruit and Level 5 complete fruit layout appeared on their respective tree canopies without visible overall displacement. Four background regions in the before/after cold-start screenshots had identical RGB pixels in an independent read-only comparison.",
+      "evidence": ["01-current.png", "02-cold-start-restored.png", "04-before-final-match.png", "08-next-level-clean.png"]
+    },
+    {
+      "name": "Single victory settlement",
+      "result": "PASS",
+      "observation": "Matching the final Level 4 fruit opened one new Level Complete screen. The original WinUI did not appear. Plain Claim showed the existing short reward receipt, then gameplay advanced to Level 5.",
+      "evidence": ["04-before-final-match.png", "05-level-complete.png", "06-reward-receipt.png", "07-next-board.png", "08-next-level-clean.png"]
+    }
+  ],
+  "remainingPopupsObserved": [
+    "A Lucky Reward popup appeared before the final match and was claimed.",
+    "A short reward receipt appeared after claiming the Level Complete reward.",
+    "Level 5 displayed NEW TOOL UNLOCKED for the extra slot. Claiming it returned to clean Level 5 gameplay. This was a tool-unlock popup rather than a second victory settlement."
+  ],
+  "limitations": [
+    "This is a test of the existing save on one physical device, not a fresh-install or all-level test.",
+    "Fruit idle animation changes the visual fruit bounds slightly.",
+    "The settlement recording ended early; the screenshot sequence is the evidence for the complete claim-to-next-level transition."
+  ],
+  "finalPhoneState": "Level 5 gameplay, new-tool unlock popup claimed",
+  "sourceChangesDuringTest": false
+}
