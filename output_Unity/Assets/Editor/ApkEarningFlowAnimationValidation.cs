@@ -46,7 +46,9 @@ public static class ApkEarningFlowAnimationValidation
         public bool passed;
         public int assertions, playFrames;
         public int warmupFrames, verificationFrames;
+        public int pointerHitChecks;
         public float largestPlayFrameDelta;
+        public float conditionSevenRowsHeight, conditionFourRowsHeight, conditionRestoredHeight;
         public string isolatedScenePath;
         public int isolatedSceneRootCount;
         public double elapsedSeconds;
@@ -353,6 +355,90 @@ public static class ApkEarningFlowAnimationValidation
             Require(!page.GetObject("flightIcons[" + i + "]").activeSelf,
                 "Cancelled receipt icon " + i + " remains hidden.");
         report.cases.Add("receipt-flight-completion-and-cancel");
+
+        page = fixture.Show("LocalWithdrawalConditions");
+        SetConditionRows(page, false);
+        yield return SettleFrames();
+        Canvas.ForceUpdateCanvases();
+        Image card = page.GetImage("main/Image");
+        Button action = page.GetButton("action");
+        Require(card != null && action != null, "Conditions retain their existing card and action Button bindings.");
+        Rect sevenRows = fixture.ScreenBounds(card.rectTransform);
+        report.conditionSevenRowsHeight = sevenRows.height;
+        Require(sevenRows.height > 0 && fixture.Contains((RectTransform)action.transform),
+            "Seven-row cash conditions have a visible card and an action inside the viewport.");
+        SetConditionRows(page, true);
+        yield return SettleFrames();
+        Canvas.ForceUpdateCanvases();
+        Rect fourRows = fixture.ScreenBounds(card.rectTransform);
+        report.conditionFourRowsHeight = fourRows.height;
+        Require(fourRows.height > sevenRows.height * .5f && fourRows.height < sevenRows.height * .85f,
+            "Real layout frames shrink the card meaningfully for four diamond rows without collapsing it.");
+        Require(Mathf.Abs(fourRows.yMax - sevenRows.yMax) < 1,
+            "Changing row count preserves the top-aligned card origin.");
+        Require(fixture.Contains((RectTransform)action.transform),
+            "The four-row diamond action stays inside the viewport after content shrink.");
+        SetConditionRows(page, false);
+        yield return SettleFrames();
+        Canvas.ForceUpdateCanvases();
+        Rect restored = fixture.ScreenBounds(card.rectTransform);
+        report.conditionRestoredHeight = restored.height;
+        Require(Mathf.Abs(restored.height - sevenRows.height) < 1 &&
+                Mathf.Abs(restored.yMax - sevenRows.yMax) < 1,
+            "Restoring all seven rows restores the card height and top position within one screen pixel.");
+        Require(fixture.Contains((RectTransform)action.transform),
+            "The restored seven-row action remains inside the viewport.");
+        report.cases.Add("conditions-four-seven-row-layout-reflow");
+
+        page = fixture.Show("TXPanel");
+        int historyClicks = 0;
+        page.Bind("HistoryButton", () => historyClicks++);
+        yield return SettleFrames();
+        ClickAtCenter(page.GetButton("HistoryButton"));
+        yield return null;
+        Require(historyClicks == 1, "The cash history Button receives exactly one center-pointer click.");
+        page = fixture.Show("TXCoinPanel");
+        var optionClicks = new int[4];
+        for (int i = 0; i < optionClicks.Length; i++)
+        {
+            int option = i;
+            page.Bind("options[" + i + "]", () => optionClicks[option]++);
+        }
+        yield return SettleFrames();
+        for (int i = 0; i < optionClicks.Length; i++)
+        {
+            ClickAtCenter(page.GetButton("options[" + i + "]"));
+            yield return null;
+            for (int other = 0; other < optionClicks.Length; other++)
+                Require(optionClicks[other] == (other <= i ? 1 : 0),
+                    "Clicking diamond option " + i + " fires only its own callback, once; observed option " + other + ".");
+        }
+        report.cases.Add("wallet-history-and-diamond-options-pointer-hit");
+    }
+
+    private static void SetConditionRows(ApkEarningPageView page, bool diamond)
+    {
+        page.SetText("title", "Withdrawal requirements");
+        page.SetText("subtitle", diamond ? "Diamond withdrawal" : "Cash withdrawal");
+        page.SetText("notice", "Complete the requirements below to continue.");
+        page.SetText("actionCaption", "Continue playing");
+        string[] names = diamond
+            ? new[] { "Required balance", "Levels completed today", "Login days", "Account level" }
+            : new[] { "Complete level 22", "Complete level 51", "Required balance", "Complete cash guidance",
+                "Levels completed today", "Login days", "Account level" };
+        string[] values = diamond ? new[] { "355.11 / 50,000", "6 / 10", "2 / 5", "0 / 31" }
+            : new[] { "6 / 22 boards", "6 / 51 boards", "Awaiting account update", "0 / 1", "6 / 10", "2 / 5", "0 / 31" };
+        for (int i = 0; i < 7; i++)
+        {
+            string key = "rows[" + i + "]";
+            GameObject row = page.GetObject(key + ".Root");
+            Require(row != null, "Conditions retain row binding " + i + ".");
+            page.SetVisible(key + ".Root", i < names.Length);
+            if (i >= names.Length) continue;
+            page.SetText(key + ".Name", names[i]);
+            page.SetText(key + ".Value", values[i]);
+            page.SetText(key + ".Status", "In progress");
+        }
     }
 
     private static IEnumerator Drain(IEnumerator routine, float maximumSeconds, Action observe = null)
@@ -414,6 +500,39 @@ public static class ApkEarningFlowAnimationValidation
         var pointer = new PointerEventData(fixture.Events) { button = PointerEventData.InputButton.Left };
         ExecuteEvents.Execute(button.gameObject, pointer, ExecuteEvents.pointerClickHandler);
     }
+    private static void ClickAtCenter(Button button)
+    {
+        Require(button != null && button.isActiveAndEnabled && button.IsInteractable(),
+            "The requested wallet control is an active interactable standard Button.");
+        Canvas.ForceUpdateCanvases();
+        Require(fixture.Contains((RectTransform)button.transform),
+            "The requested wallet Button is wholly inside the fixture viewport: " + button.name);
+        var pointer = new PointerEventData(fixture.Events) {
+            pointerId = -1, button = PointerEventData.InputButton.Left,
+            position = fixture.ScreenBounds((RectTransform)button.transform).center,
+            clickCount = 1, eligibleForClick = true
+        };
+        var hits = new List<RaycastResult>();
+        fixture.Events.RaycastAll(pointer, hits);
+        Require(hits.Count > 0, "EventSystem raycast finds a Graphic at the Button center: " + button.name);
+        GameObject hit = hits[0].gameObject;
+        GameObject clicked = ExecuteEvents.GetEventHandler<IPointerClickHandler>(hit);
+        Require(clicked == button.gameObject,
+            "The frontmost Graphic routes its center click to the expected Button " + button.name +
+            "; frontmost hit=" + hit.name + ", handler=" + (clicked == null ? "none" : clicked.name) + ".");
+        report.pointerHitChecks++;
+        pointer.pointerCurrentRaycast = pointer.pointerPressRaycast = hits[0];
+        pointer.pressPosition = pointer.position;
+        pointer.rawPointerPress = hit;
+        // Resolve from the actual raycast winner rather than dispatching directly
+        // to a requested Button; a newly blocking sibling must fail this test.
+        pointer.pointerPress = ExecuteEvents.ExecuteHierarchy(hit, pointer, ExecuteEvents.pointerDownHandler);
+        Require(pointer.pointerPress == clicked, "Pointer down resolves to the same Button as the center click.");
+        ExecuteEvents.Execute(pointer.pointerPress, pointer, ExecuteEvents.pointerUpHandler);
+        ExecuteEvents.Execute(clicked, pointer, ExecuteEvents.pointerClickHandler);
+        pointer.pointerPress = pointer.rawPointerPress = null;
+        pointer.eligibleForClick = false;
+    }
     private static bool Near(Vector3 a, Vector3 b) => (a - b).sqrMagnitude < .00001f;
     private static void Require(bool value, string message)
     {
@@ -449,7 +568,7 @@ public static class ApkEarningFlowAnimationValidation
         if (DateTime.TryParse(SessionState.GetString(StartedKey, ""), null,
                 System.Globalization.DateTimeStyles.RoundtripKind, out began))
             report.elapsedSeconds = (DateTime.UtcNow - began).TotalSeconds;
-        report.passed = report.errors.Count == 0 && report.cases.Count == 5;
+        report.passed = report.errors.Count == 0 && report.cases.Count == 7;
         SessionState.SetBool(ActiveKey, false);
         if (playerLoopInstalled)
         {
@@ -486,10 +605,13 @@ public static class ApkEarningFlowAnimationValidation
         public Transform ReceiptTarget { get; }
         public Fixture()
         {
-            foreach (string name in new[] { "LocalWithdrawalVerification", "TXProgress0Panel", "LocalEarningSequence" })
+            foreach (string name in new[] { "LocalWithdrawalVerification", "TXProgress0Panel", "LocalEarningSequence",
+                "LocalWithdrawalConditions", "TXPanel", "TXCoinPanel" })
             {
                 var prefab = Resources.Load<GameObject>(PagePath + name);
                 Require(prefab != null, "Saved fixture prefab exists: " + name);
+                Require(prefab.GetComponentInChildren<ApkEarningHost>(true) == null,
+                    "The isolated page prefab contains no earning Host: " + name);
                 prefabs.Add(name, prefab);
             }
             root = new GameObject("Earning animation validation fixture");
@@ -559,6 +681,25 @@ public static class ApkEarningFlowAnimationValidation
                 RenderTexture.active = previous;
                 Object.DestroyImmediate(image);
             }
+        }
+        public Rect ScreenBounds(RectTransform rect)
+        {
+            var corners = new Vector3[4];
+            rect.GetWorldCorners(corners);
+            Vector2 min = camera.WorldToScreenPoint(corners[0]), max = min;
+            for (int i = 1; i < corners.Length; i++)
+            {
+                Vector2 point = camera.WorldToScreenPoint(corners[i]);
+                min = Vector2.Min(min, point); max = Vector2.Max(max, point);
+            }
+            return Rect.MinMaxRect(min.x, min.y, max.x, max.y);
+        }
+        public bool Contains(RectTransform rect)
+        {
+            Rect bounds = ScreenBounds(rect);
+            return bounds.width > 0 && bounds.height > 0 &&
+                bounds.xMin >= -1 && bounds.yMin >= -1 &&
+                bounds.xMax <= texture.width + 1 && bounds.yMax <= texture.height + 1;
         }
         public void Dispose()
         {
