@@ -312,6 +312,8 @@ public static class FruitTouchValidation
 public sealed class FruitTouchFixtureInputModule : StandaloneInputModule
 {
     private readonly List<RaycastResult> hits = new List<RaycastResult>();
+    public bool UseEventSystemRaycasts { get; set; }
+    public Scene RaycastScene { get; set; }
 
     // Editor-only fixture input is driven explicitly by the cases above.
     public override void Process() { }
@@ -327,7 +329,15 @@ public sealed class FruitTouchFixtureInputModule : StandaloneInputModule
     {
         var pointer = new PointerEventData(owner) { position = position };
         hits.Clear();
-        raycaster.Raycast(pointer, hits);
+        if (UseEventSystemRaycasts)
+        {
+            // Preserve Unity's cross-Canvas sorting. The original touch-only
+            // fixture intentionally uses one canvas; return fixtures must not.
+            owner.RaycastAll(pointer, hits);
+            if (RaycastScene.IsValid())
+                hits.RemoveAll(hit => hit.gameObject == null || hit.gameObject.scene != RaycastScene);
+        }
+        else raycaster.Raycast(pointer, hits);
         return hits.Count > 0 ? hits[0] : default(RaycastResult);
     }
 
@@ -340,7 +350,11 @@ public sealed class FruitTouchFixtureInputModule : StandaloneInputModule
         {
             if (description.Length > 0) description.Append(", ");
             description.Append(hit.gameObject != null ? hit.gameObject.name : "<null>")
-                .Append("(depth=").Append(hit.depth).Append(", distance=").Append(hit.distance).Append(')');
+                .Append("(fruit=").Append(hit.gameObject.GetComponentInParent<CollectItem>() != null
+                    ? hit.gameObject.GetComponentInParent<CollectItem>().name : "<none>")
+                .Append(", module=").Append(hit.module != null ? hit.module.name : "<none>")
+                .Append(", order=").Append(hit.sortingOrder)
+                .Append(", depth=").Append(hit.depth).Append(", distance=").Append(hit.distance).Append(')');
         }
         return description.ToString();
     }
