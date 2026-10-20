@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-20",
+  "device": "Google Pixel 8",
+  "packageName": "com.flyfox.tripleharvest.preview",
+  "testedGameplayVersion": "1.0.10",
+  "restartRecovery": {
+    "result": "PASS",
+    "firstRestart": {
+      "level": 6,
+      "oldSettlementVisible": false,
+      "cash": "505.78",
+      "diamonds": "226.81",
+      "screenshot": "C:/Projects/DJS_Apple/DeviceQA/20261020-v110/01-cold-launch.png"
+    },
+    "secondRestart": {
+      "level": 6,
+      "oldSettlementVisible": false,
+      "cash": "505.78",
+      "diamonds": "226.81",
+      "screenshot": "C:/Projects/DJS_Apple/DeviceQA/20261020-v110/02-second-restart.png"
+    }
+  },
+  "gameplayChecks": {
+    "isolatedGroups": 6,
+    "result": "Each verified group removed precisely the three expected tile IDs and completed elimination.",
+    "laterSharedPlay": "The user then helped clear the board to its last group; subsequent gameplay counts are not attributed to isolated automated input.",
+    "lastGroupBefore": {
+      "fieldCount": 2,
+      "trayCount": 1,
+      "eliminatedCount": 57,
+      "type": 37
+    },
+    "lastGroupTaps": [[787, 562], [282, 849]],
+    "video": "C:/Projects/DJS_Apple/DeviceQA/20261020-v110/final-settlement.mp4",
+    "timingScope": "Last tap command ended about 1.50 seconds after recording launch; by video time 3 seconds the post-win rating modal was visible. This run did not reach the six-second animation timeout. It is not a precise measurement of the final reward modal's appearance time.",
+    "ratingInterruption": "The existing level-6 rating modal was confirmed on device. After closing it, the reward settlement opened. Automatic rating was subsequently removed and tested in 1.0.11.",
+    "rewardScreenshot": "C:/Projects/DJS_Apple/DeviceQA/20261020-v110/06-close-rating-show-settlement.png"
+  },
+  "restartAfterNewUnclaimedWin": {
+    "result": "PASS",
+    "rewardBeforeRestart": {"cash": "0.08", "diamonds": "108.30"},
+    "afterRestart": {"level": 7, "cash": "508.55", "diamonds": "355.11", "oldSettlementVisible": false},
+    "screenshot": "C:/Projects/DJS_Apple/DeviceQA/20261020-v110/07-restart-with-unclaimed-win.png",
+    "saveDataCleared": false,
+    "playerFilesEdited": false
+  },
+  "finalRatingRemoval": {
+    "version": "1.0.11",
+    "productionRoutingTests": "10/10 PASS, including former rating checkpoints 6/16/36/66/106, exactly one reward, exactly one next-level transition, input locking and stale-generation cancellation.",
+    "limitation": "The rating removal was validated through production routing tests and APK metadata. The completed level-6 phone run occurred on 1.0.10 before that final removal."
+  }
+}

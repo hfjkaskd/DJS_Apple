@@ -29,8 +29,8 @@ public static class BuildScript
 		if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.Android)
 			throw new InvalidOperationException("Select Android first, or launch Unity with -buildTarget Android.");
 
-		PlayerSettings.bundleVersion = "1.0.9";
-		PlayerSettings.Android.bundleVersionCode = 109;
+		PlayerSettings.bundleVersion = "1.0.11";
+		PlayerSettings.Android.bundleVersionCode = 111;
 
 		string output = Environment.GetEnvironmentVariable("DJS_APPLE_APK_OUTPUT");
 		if (string.IsNullOrEmpty(output))

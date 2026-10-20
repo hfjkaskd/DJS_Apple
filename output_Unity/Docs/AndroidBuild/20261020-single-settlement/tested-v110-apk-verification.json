@@ -1,0 +1,80 @@
+{
+  "apk": "C:/Projects/DJS_Apple/Builds/Android/TripleHarvest-1.0.10-20261020-settlement-fix.apk",
+  "verifiedAtUtc": "2026-10-20T08:20:44.681850+00:00",
+  "fileBytes": 190020347,
+  "sha256": "52b36a44c5e9d40dadb635aa557eafe27278ad1a978f3d1dce7b4690effc69e1",
+  "packageName": "com.flyfox.tripleharvest.preview",
+  "versionCode": 110,
+  "versionName": "1.0.10",
+  "minSdk": 22,
+  "targetSdk": 34,
+  "abis": [
+    "arm64-v8a",
+    "armeabi-v7a"
+  ],
+  "manifestChecksPassed": true,
+  "zipEntryCount": 28,
+  "zipIntegrityFailedEntry": null,
+  "zipIntegrityPassed": true,
+  "editorTestPathMatches": [],
+  "runtimeAssemblyCount": 121,
+  "editorTestAssemblyMatches": [],
+  "runtimeFixMetadataSymbols": {
+    "ResolveRestoredRewards": true,
+    "WaitEliminationAndOpenWinUI": true,
+    "OnMatchedItemLanded": true,
+    "WatchPendingRewards": true,
+    "FruitCollectButton": true,
+    "CollectItemFieldOrder": true,
+    "ResolvePriority": true,
+    "DynamicCanvasLayer": true,
+    "inheritParentSorting": true,
+    "RefreshCanvasLayers": true,
+    "RefreshInChildren": true
+  },
+  "editorValidationMetadataSymbols": {
+    "FruitTouchValidation": false,
+    "FruitReturnValidation": false,
+    "GameplayPresentationValidation": false,
+    "WithdrawalUIRenderValidation": false,
+    "WithdrawalHudValidation": false,
+    "RoundedEarningProgressValidation": false,
+    "ApkEarningValidation": false,
+    "ApkStartupRecoveryTests": false,
+    "SettlementRouteTests": false
+  },
+  "bootConfig": [
+    "gfx-disable-mt-rendering=1",
+    "wait-for-native-debugger=0",
+    "hdr-display-enabled=0",
+    "androidStartInFullscreen=1",
+    "androidRenderOutsideSafeArea=1",
+    "build-guid=fcc857d68528443598f80467f7ccb94a"
+  ],
+  "addedRuntimeAssemblies": [],
+  "removedRuntimeAssemblies": [],
+  "editorTestContentChecksPassed": true,
+  "runtimeFixMetadataCheckPassed": true,
+  "zipalignPassed": true,
+  "zipalignResultLines": [
+    "190011802 META-INF/CERT.RSA (OK - compressed)",
+    "190012871 META-INF/MANIFEST.MF (OK - compressed)",
+    "Verification succesful"
+  ],
+  "signatureVerified": true,
+  "signatureSchemes": [
+    "v1",
+    "v2"
+  ],
+  "certificateSha256": "982a7eccc34b6387d810c04e0938771edad69f63dfb289fce55b1b583d2e2a46",
+  "previous109CertificateSha256": "982a7eccc34b6387d810c04e0938771edad69f63dfb289fce55b1b583d2e2a46",
+  "matchesPreviousSigner": true,
+  "signatureWarnings": [
+    "WARNING: META-INF/com/android/build/gradle/app-metadata.properties not protected by signature. Unauthorized modifications to this JAR entry will not be detected. Delete or move the entry outside of META-INF/.",
+    "WARNING: META-INF/com.android.games.engine.build_fingerprint not protected by signature. Unauthorized modifications to this JAR entry will not be detected. Delete or move the entry outside of META-INF/."
+  ],
+  "apksignerOutput": "Verifies\nVerified using v1 scheme (JAR signing): true\nVerified using v2 scheme (APK Signature Scheme v2): true\nVerified using v3 scheme (APK Signature Scheme v3): false\nVerified using v3.1 scheme (APK Signature Scheme v3.1): false\nVerified using v4 scheme (APK Signature Scheme v4): false\nVerified for SourceStamp: false\nNumber of signers: 1\nSigner #1 certificate DN: C=US, O=Android, CN=Android Debug\nSigner #1 certificate SHA-256 digest: 982a7eccc34b6387d810c04e0938771edad69f63dfb289fce55b1b583d2e2a46\nSigner #1 certificate SHA-1 digest: a85de871735607449e9cb2e28465f74787a2f8bf\nSigner #1 certificate MD5 digest: 48ce312e59732adb7cd53bfcb94a1370\nSigner #1 key algorithm: RSA\nSigner #1 key size (bits): 2048\nSigner #1 public key SHA-256 digest: 30960dc20a17172b8bdc3342b5ab790100e440a233dbb4545e3298f209c39d5b\nSigner #1 public key SHA-1 digest: b1de5f8bdeb59b67368b1a527707ea14f72f9fb5\nSigner #1 public key MD5 digest: 154179d81fb451f0418b3bfc695ff77e\nWARNING: META-INF/com/android/build/gradle/app-metadata.properties not protected by signature. Unauthorized modifications to this JAR entry will not be detected. Delete or move the entry outside of META-INF/.\nWARNING: META-INF/com.android.games.engine.build_fingerprint not protected by signature. Unauthorized modifications to this JAR entry will not be detected. Delete or move the entry outside of META-INF/.",
+  "apksignerStderr": "",
+  "allChecksPassed": true,
+  "scope": "Static APK validation only; no device interaction. IL2CPP metadata symbol presence confirms named runtime symbols are included, not every compiled method body or device behavior. Existing UnityEngine.UnityTestProtocolModule.dll and ABTest.Core.dll are baseline runtime modules, not Editor validation assemblies."
+}
