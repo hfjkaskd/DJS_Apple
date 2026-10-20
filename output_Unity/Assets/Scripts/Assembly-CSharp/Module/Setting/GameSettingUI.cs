@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Module.Setting
 {
-	/// <summary>局内设置弹窗：音效/音乐/震动开关、语言、回主页、重开。</summary>
+	/// <summary>局内设置弹窗：音效/音乐/震动开关、语言、重开。</summary>
 	public class GameSettingUI : BaseUI
 	{
 		[SerializeField]
@@ -39,9 +39,6 @@ namespace Module.Setting
 		private GameObject m_LanguageBtn;
 
 		[SerializeField]
-		private GameObject m_HomeBtn;
-
-		[SerializeField]
 		private GameObject m_ReplayBtn;
 
 		public override PAIEAGDLCBJ Layer => PAIEAGDLCBJ.Top;
@@ -67,10 +64,6 @@ namespace Module.Setting
 			if (m_LanguageBtn != null)
 			{
 				MCCIJBJGMCK.Get(m_LanguageBtn).onClick = OnLanguageClick;
-			}
-			if (m_HomeBtn != null)
-			{
-				MCCIJBJGMCK.Get(m_HomeBtn).onClick = OnHomeClick;
 			}
 			if (m_ReplayBtn != null)
 			{
@@ -163,14 +156,6 @@ namespace Module.Setting
 		private void OnLanguageClick(GameObject gameObject)
 		{
 			MgrUI.Instance.Open("pops/language/LanguageUI");
-		}
-
-		private void OnHomeClick(GameObject gameObject)
-		{
-			MgrUI.Instance.Close("pops/setting/GameSettingUI", false, false);
-			MgrUI.Instance.Close("coreplay/CorePlayUI", false, false);
-			EDLHEMMBABM.Instance.ReleaseAllItems();
-			MgrUI.Instance.Open("home/Home", false);
 		}
 
 		private void OnReplayClick(GameObject gameObject)

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-/// <summary>游戏入口：初始化框架、数据、UI，然后打开首页。</summary>
+/// <summary>游戏入口：初始化框架、数据、UI，然后直接进入当前关卡。</summary>
 public class GameEntry : MonoBehaviour
 {
 	public enum GNDIEJJKAJM
@@ -89,16 +89,8 @@ public class GameEntry : MonoBehaviour
 		InitFinish = true;
 
 		GameAudio.PlayMusic();
-		if (IsFirstLogin)
-		{
-			// 录屏首启流程：Logo页显示“开始”+隐私文案，点击后走进度条直接进第1关，不经过首页
-			GameLoadingUI.StartMode = true;
-			MgrUI.Instance.Open("gameloading/GameLoading", false);
-		}
-		else
-		{
-			MgrUI.Instance.Open("home/Home", false);
-		}
+		// CorePlayUI owns both saved-board recovery and fresh-level creation.
+		MgrUI.Instance.Open("coreplay/CorePlayUI", false);
 	}
 
 	/// <summary>命令行 -lang xx（如 zh_cn）可强制语言，用于与目标录屏环境对齐。</summary>
