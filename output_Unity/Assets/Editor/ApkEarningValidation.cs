@@ -49,8 +49,18 @@ public static class ApkEarningValidation
         public string dataSource = "Static editor preview data only; not player data or a running-game capture.";
         public int width, height, activeButtons, activeTexts;
         public float canvasScale;
+        public ModalBoundsReport modalBounds;
         public List<string> errors = new List<string>();
         public List<string> warnings = new List<string>();
+    }
+    [Serializable] private sealed class ModalBoundsReport
+    {
+        public string measurement = "Screen-space rectangle union of enabled, non-transparent CashWalletPanel Images; not alpha-pixel bounds. Visible bounds are intersected with active ancestor masks and the viewport.";
+        public int frameCount;
+        public float referenceWidth, minimumReferenceHeight, artworkScale;
+        public Rect frameBounds, visibleFrameBounds;
+        public float widthRatio, heightRatio, visibleWidthRatio, visibleHeightRatio;
+        public List<string> frames = new List<string>();
     }
     [Serializable] private sealed class RuntimeReport
     {
@@ -119,6 +129,56 @@ public static class ApkEarningValidation
         if (report.errors.Count > 0)
             throw new InvalidOperationException("Restored flow fixture validation found " + report.errors.Count + " errors. See " + Output);
         Debug.Log("[ApkEarningValidation] Restored flow passed " + report.pages.Count + " prefab audits and " + report.renders.Count + " static fixture renders. " + Output);
+    }
+
+    [MenuItem("Tools/Apk Earning/Validate Enlarged Modal Fixtures")]
+    public static void ValidateEnlargedModalFixtures()
+    {
+        if (EditorApplication.isPlayingOrWillChangePlaymode)
+            throw new InvalidOperationException("Stop Play before rendering saved modal fixtures.");
+        const string output = "E:/CodexCacheBackups/DJS_Apple-modal-size-20261020/after";
+        Directory.CreateDirectory(output);
+        var report = new Report {
+            generatedUtc = DateTime.UtcNow.ToString("O"),
+            scope = "Read-only saved-prefab modal size validation. Every Panels prefab whose root PageView has FitWidth enabled, including variants and LocalRewardVideoTest, is rendered in all existing fixture states at 1080x1920, 1080x2400 and 720x1600. Only nine representative default-state 1080x2400 PNGs plus cash, diamond and account 1080x1920 PNGs are saved; other renders still run layout, camera rendering and audits without GPU readback or PNG encoding. Modal coverage measures visible CashWalletPanel Image rectangles, not alpha pixels; absent frames are reported explicitly. Synthetic preview data and production RefreshLayout are reused unchanged. No authoring, save mutation, Service, Host, ad network or payment operation is run."
+        };
+        var paths = new List<string>();
+        foreach (string guid in AssetDatabase.FindAssets("t:Prefab", new[] { PanelFolder.TrimEnd('/') }))
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            ApkEarningPageView view = prefab == null ? null : prefab.GetComponent<ApkEarningPageView>();
+            if (view != null && view.FitWidth) paths.Add(path);
+        }
+        paths.Sort(StringComparer.Ordinal);
+        if (paths.Count == 0) report.errors.Add("No FitWidth modal prefabs were found.");
+        if (!paths.Contains(PanelFolder + "LocalRewardVideoTest.prefab"))
+            report.errors.Add("LocalRewardVideoTest must be present and configured as a FitWidth modal.");
+        var screenshots = new HashSet<string>(StringComparer.Ordinal) {
+            "TXPanel", "TXCoinPanel", "TXUserInfoPanel", "LocalCashHistory", "LocalSuccess",
+            "LocalWithdrawalConditions", "LocalEarningSequence", "LocalWithdrawalVerification", "LocalRewardVideoTest"
+        };
+        foreach (string name in screenshots)
+            if (!paths.Contains(PanelFolder + name + ".prefab"))
+                report.errors.Add("Representative FitWidth modal is missing: " + name);
+        foreach (string path in paths)
+            AuditPrefab(AssetDatabase.LoadAssetAtPath<GameObject>(path), path, report);
+        foreach (Vector2Int size in new[] { new Vector2Int(1080, 1920), new Vector2Int(1080, 2400), new Vector2Int(720, 1600) })
+            foreach (string path in paths)
+            {
+                string name = Path.GetFileNameWithoutExtension(path);
+                foreach (string state in FixtureStates(name))
+                    RenderFixture(name, path, size, false, report, state,
+                        string.IsNullOrEmpty(state) && size.x == 1080 &&
+                        ((size.y == 2400 && screenshots.Contains(name)) ||
+                         (size.y == 1920 && (name == "TXPanel" || name == "TXCoinPanel" || name == "TXUserInfoPanel"))),
+                        true, output);
+            }
+        File.WriteAllText(Path.Combine(output, "enlarged-modal-fixtures-report.json"), JsonUtility.ToJson(report, true));
+        if (report.errors.Count > 0)
+            throw new InvalidOperationException("Enlarged modal validation found " + report.errors.Count + " errors. See " + output);
+        Debug.Log("[ApkEarningValidation] Enlarged modals passed " + report.pages.Count + " prefab audits and " +
+            report.renders.Count + " static renders, with twelve representative PNGs. " + output);
     }
 
     [MenuItem("Tools/Apk Earning/Validate and Render Saved Fixtures")]
@@ -340,7 +400,8 @@ public static class ApkEarningValidation
             errors.Add(Hierarchy(button.transform) + ": Button does not own its target graphic.");
     }
 
-    private static void RenderFixture(string name, string path, Vector2Int size, bool hudOnly, Report report, string state = "")
+    private static void RenderFixture(string name, string path, Vector2Int size, bool hudOnly, Report report,
+        string state = "", bool saveImage = true, bool measureModal = false, string outputDirectory = null)
     {
         var item = new RenderReport { page = name, state = string.IsNullOrEmpty(state) ? "representative" : state, width = size.x, height = size.y };
         report.renders.Add(item);
@@ -389,6 +450,7 @@ public static class ApkEarningValidation
                 foreach (ApkEarningTopView top in instance.GetComponentsInChildren<ApkEarningTopView>(true)) top.RefreshLayout();
             foreach (TMP_Text text in instance.GetComponentsInChildren<TMP_Text>(false)) text.ForceMeshUpdate(true, true);
             Canvas.ForceUpdateCanvases(); camera.Render();
+            if (measureModal) MeasureModalBounds(instance, camera, size, item);
             if (hudOnly) AuditCompactHeaderAlignment(instance.transform, camera, item.errors);
             foreach (Button button in instance.GetComponentsInChildren<Button>(false))
             {
@@ -418,11 +480,14 @@ public static class ApkEarningValidation
             if (hudOnly && item.activeTexts == 0) item.errors.Add("The earning HUD fixture contains no visible text.");
             if (name == "LocalEarningSequence" && item.activeTexts == 0)
                 item.errors.Add("The requested sequence preview state contains no visible text.");
-            RenderTexture.active = texture; pixels = new Texture2D(size.x, size.y, TextureFormat.RGBA32, false);
-            pixels.ReadPixels(new Rect(0, 0, size.x, size.y), 0, 0); pixels.Apply(false, false);
-            string stateSuffix = string.IsNullOrEmpty(state) ? string.Empty : "--" + state;
-            item.image = Path.Combine(Output, "fixture-" + name + stateSuffix + "-" + size.x + "x" + size.y + ".png");
-            File.WriteAllBytes(item.image, pixels.EncodeToPNG());
+            if (saveImage)
+            {
+                RenderTexture.active = texture; pixels = new Texture2D(size.x, size.y, TextureFormat.RGBA32, false);
+                pixels.ReadPixels(new Rect(0, 0, size.x, size.y), 0, 0); pixels.Apply(false, false);
+                string stateSuffix = string.IsNullOrEmpty(state) ? string.Empty : "--" + state;
+                item.image = Path.Combine(outputDirectory ?? Output, "fixture-" + name + stateSuffix + "-" + size.x + "x" + size.y + ".png");
+                File.WriteAllBytes(item.image, pixels.EncodeToPNG());
+            }
         }
         catch (Exception exception) { item.errors.Add(exception.ToString()); }
         finally
@@ -437,6 +502,60 @@ public static class ApkEarningValidation
         }
         foreach (string error in item.errors) report.errors.Add(name + " [" + item.state + "] " + size + ": " + error);
         foreach (string warning in item.warnings) report.warnings.Add(name + " [" + item.state + "] " + size + ": " + warning);
+    }
+
+    private static void MeasureModalBounds(GameObject instance, Camera camera, Vector2Int size, RenderReport item)
+    {
+        var bounds = new ModalBoundsReport();
+        item.modalBounds = bounds;
+        ApkEarningPageView view = instance.GetComponent<ApkEarningPageView>();
+        if (view != null)
+        {
+            bounds.referenceWidth = view.ReferenceWidth;
+            bounds.minimumReferenceHeight = view.MinimumReferenceHeight;
+            if (view.ArtworkRoot != null) bounds.artworkScale = view.ArtworkRoot.localScale.x;
+        }
+        Rect viewport = new Rect(0, 0, size.x, size.y);
+        foreach (Image image in instance.GetComponentsInChildren<Image>(false))
+        {
+            Sprite sprite = image.overrideSprite != null ? image.overrideSprite : image.sprite;
+            if (!image.isActiveAndEnabled || sprite == null || sprite.name != "CashWalletPanel" ||
+                image.color.a * image.canvasRenderer.GetAlpha() * image.canvasRenderer.GetInheritedAlpha() <= .001f) continue;
+            Rect frame = ScreenBounds(image.rectTransform, camera);
+            Rect visible = IntersectBounds(frame, viewport);
+            foreach (RectMask2D mask in image.GetComponentsInParent<RectMask2D>(false))
+                if (mask.isActiveAndEnabled && mask.transform != image.transform)
+                    visible = IntersectBounds(visible, ScreenBounds(mask.rectTransform, camera));
+            foreach (Mask mask in image.GetComponentsInParent<Mask>(false))
+                if (mask.isActiveAndEnabled && mask.transform != image.transform)
+                    visible = IntersectBounds(visible, ScreenBounds(mask.rectTransform, camera));
+            if (visible.width <= 0 || visible.height <= 0) continue;
+            bounds.frameBounds = bounds.frameCount == 0 ? frame : UnionBounds(bounds.frameBounds, frame);
+            bounds.visibleFrameBounds = bounds.frameCount == 0 ? visible : UnionBounds(bounds.visibleFrameBounds, visible);
+            bounds.frameCount++;
+            bounds.frames.Add(Hierarchy(image.transform));
+            if (frame.xMin < -1 || frame.yMin < -1 || frame.xMax > size.x + 1 || frame.yMax > size.y + 1)
+                item.errors.Add(Hierarchy(image.transform) + ": visible modal frame crosses viewport bounds: " + frame);
+        }
+        if (bounds.frameCount == 0)
+            item.warnings.Add("No visible CashWalletPanel Image is available for modal coverage measurement.");
+        bounds.widthRatio = bounds.frameBounds.width / size.x;
+        bounds.heightRatio = bounds.frameBounds.height / size.y;
+        bounds.visibleWidthRatio = bounds.visibleFrameBounds.width / size.x;
+        bounds.visibleHeightRatio = bounds.visibleFrameBounds.height / size.y;
+    }
+
+    private static Rect IntersectBounds(Rect first, Rect second)
+    {
+        float left = Mathf.Max(first.xMin, second.xMin), bottom = Mathf.Max(first.yMin, second.yMin);
+        return new Rect(left, bottom, Mathf.Max(0, Mathf.Min(first.xMax, second.xMax) - left),
+            Mathf.Max(0, Mathf.Min(first.yMax, second.yMax) - bottom));
+    }
+
+    private static Rect UnionBounds(Rect first, Rect second)
+    {
+        return Rect.MinMaxRect(Mathf.Min(first.xMin, second.xMin), Mathf.Min(first.yMin, second.yMin),
+            Mathf.Max(first.xMax, second.xMax), Mathf.Max(first.yMax, second.yMax));
     }
 
     private static string[] FixtureStates(string page)
