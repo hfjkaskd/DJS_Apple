@@ -180,14 +180,15 @@ public static class ApkEarningValidation
                         size.x == 1080 &&
                         ((size.y == 2400 && string.IsNullOrEmpty(state) && screenshots.Contains(name)) ||
                          (size.y == 1920 && ((string.IsNullOrEmpty(state) && standardScreenshots.Contains(name)) ||
-                          (name == "LocalWithdrawalConditions" && state == "diamond")))),
+                          (name == "LocalWithdrawalConditions" && state == "diamond") ||
+                          (name == "LocalSuccess" && state == "early-reward")))),
                         true, output);
             }
         File.WriteAllText(Path.Combine(output, "enlarged-modal-fixtures-report.json"), JsonUtility.ToJson(report, true));
         if (report.errors.Count > 0)
             throw new InvalidOperationException("Modal layout validation found " + report.errors.Count + " errors. See " + output);
         Debug.Log("[ApkEarningValidation] Modal layouts passed " + report.pages.Count + " prefab audits and " +
-            report.renders.Count + " static renders, with eighteen representative PNGs. " + output);
+            report.renders.Count + " static renders, with nineteen representative PNGs. " + output);
     }
 
     [MenuItem("Tools/Apk Earning/Validate and Render Saved Fixtures")]
