@@ -47,7 +47,7 @@ public static class ApkEarningValidation
     {
         public string page, state, image;
         public string dataSource = "Static editor preview data only; not player data or a running-game capture.";
-        public int width, height, activeButtons, activeTexts, textOverlapChecks, buttonOverlapChecks;
+        public int width, height, activeButtons, activeTexts, textOverlapChecks, buttonOverlapChecks, buttonTextOverlapChecks;
         public float canvasScale;
         public ModalBoundsReport modalBounds;
         public List<string> errors = new List<string>();
@@ -608,6 +608,7 @@ public static class ApkEarningValidation
             AuditTextPair(page, "TestMode", "labels[0].Text", camera, size, item);
             foreach (string key in new[] { "Stats.PassCount", "Stats.ChallengeTimes", "Stats.GoldGetCount" })
                 AuditTextPair(page, "Stats.Time", key, camera, size, item);
+            AuditButtonTextPair(page, "TXBtn", "Stats.Time", camera, size, item);
         }
         else if (name == "LocalWithdrawalConditions")
         {
@@ -635,6 +636,43 @@ public static class ApkEarningValidation
             item.errors.Add("Visible TMP text overlaps: " + firstKey + " / " + secondKey +
                 "; first=" + firstBounds + "; second=" + secondBounds + "; overlap=" + overlap +
                 ". Bounds use rendered textBounds, not the RectTransform text areas.");
+    }
+
+    private static void AuditButtonTextPair(ApkEarningPageView page, string buttonKey, string textKey,
+        Camera camera, Vector2Int size, RenderReport item)
+    {
+        Button button = page.GetButton(buttonKey);
+        TMP_Text text = page.GetText(textKey);
+        if (button == null || text == null)
+        {
+            item.errors.Add("Cannot audit modal Button/text overlap; required bindings are missing: " + buttonKey + " / " + textKey);
+            return;
+        }
+        Graphic graphic = button.targetGraphic;
+        if (!button.gameObject.activeInHierarchy || graphic == null || !graphic.isActiveAndEnabled ||
+            graphic.canvasRenderer.cull ||
+            graphic.color.a * graphic.canvasRenderer.GetAlpha() * graphic.canvasRenderer.GetInheritedAlpha() <= .001f ||
+            !TryVisibleTextBounds(text, camera, size, out Rect textBounds)) return;
+        RectTransform rect = button.transform as RectTransform;
+        if (rect == null)
+        {
+            item.errors.Add("Modal Button has no RectTransform: " + buttonKey);
+            return;
+        }
+        Rect buttonBounds = IntersectBounds(ScreenBounds(rect, camera), new Rect(0, 0, size.x, size.y));
+        foreach (RectMask2D mask in button.GetComponentsInParent<RectMask2D>(false))
+            if (mask.isActiveAndEnabled && mask.transform != button.transform)
+                buttonBounds = IntersectBounds(buttonBounds, ScreenBounds(mask.rectTransform, camera));
+        foreach (Mask mask in button.GetComponentsInParent<Mask>(false))
+            if (mask.isActiveAndEnabled && mask.transform != button.transform)
+                buttonBounds = IntersectBounds(buttonBounds, ScreenBounds(mask.rectTransform, camera));
+        if (buttonBounds.width <= 0 || buttonBounds.height <= 0) return;
+        item.buttonTextOverlapChecks++;
+        Rect overlap = IntersectBounds(buttonBounds, textBounds);
+        if (overlap.width > 0 && overlap.height > 0)
+            item.errors.Add("Visible Button and TMP text overlap: " + buttonKey + " / " + textKey +
+                "; button=" + buttonBounds + "; text=" + textBounds + "; overlap=" + overlap +
+                ". Bounds use the Button RectTransform and rendered textBounds, not the text area.");
     }
 
     private static bool TryVisibleTextBounds(TMP_Text text, Camera camera, Vector2Int size, out Rect screenBounds)
