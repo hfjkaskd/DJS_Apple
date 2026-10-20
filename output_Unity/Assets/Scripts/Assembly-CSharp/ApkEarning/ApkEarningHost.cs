@@ -13,7 +13,7 @@ namespace FruitApkEarning
         public RectTransform PageRoot;
         public TMP_Text GlobalTestModeCaption;
         public float ReceiptSeconds = 2, MessageSeconds = 3, BonusesSeconds = 5.5f, LoadingSeconds = 1.5f;
-        private static bool requestedDiamonds, requestedRewards;
+        private static bool requestedDiamonds, requestedRewards, requestedAccountLevel;
         private static Action requestedCompletion;
         private Action completion;
         private ApkEarningPageView page;
@@ -27,19 +27,24 @@ namespace FruitApkEarning
         private Sprite selectedDiamondOption, normalDiamondOption;
         private ApkEarningConfig config;
         private bool useOtherAccount;
+        private long simulatedCashCents;
         private ApkEarningService Service => ApkEarningService.Instance;
         public override PAIEAGDLCBJ Layer => PAIEAGDLCBJ.Top;
         public static bool IsOpen => MgrUI.Instance != null && MgrUI.Instance.IsOpenning(Path);
         public static string Money(long cents) => "$"+(cents/100m).ToString("N2",CultureInfo.InvariantCulture);
         private static string SourceMoney(long cents) => "$"+(cents/100m).ToString(cents%100==0?"N0":"N2",CultureInfo.InvariantCulture);
+        private static string DiamondMoney(long hundredths) => SourceMoney(ApkEarningPresentation.DiamondCashCents(hundredths));
         public static string DiamondText(long value) => (value/100m).ToString("0.##",CultureInfo.InvariantCulture);
 
         public static void Open(bool diamonds=false,bool rewards=false) { Open(diamonds,rewards,null); }
         public static void Open(bool diamonds,bool rewards,Action finished)
+        { OpenPage(diamonds,rewards,finished,false); }
+        public static void OpenAccountLevel() { OpenPage(false,false,null,true); }
+        private static void OpenPage(bool diamonds,bool rewards,Action finished,bool accountLevel)
         {
             var service=ApkEarningService.Instance;
             if(IsOpen||MgrUI.Instance==null||MCCIJBJGMCK.IsLock()||(!service.Available&&string.IsNullOrEmpty(service.Error)))return;
-            requestedDiamonds=diamonds;requestedRewards=rewards;requestedCompletion=finished;
+            requestedDiamonds=diamonds;requestedRewards=rewards;requestedCompletion=finished;requestedAccountLevel=accountLevel;
             MgrUI.Instance.Open(Path);
         }
         protected override void Init()
@@ -63,7 +68,8 @@ namespace FruitApkEarning
         }
         private void ShowInitialPage()
         {
-            if(!Service.State.WelcomeShown&&Service.State.CurrentLevel==1)ShowWelcome();
+            if(requestedAccountLevel){requestedAccountLevel=false;ShowAccountLevel();}
+            else if(!Service.State.WelcomeShown&&Service.State.CurrentLevel==1)ShowWelcome();
             else if(requestedRewards&&Service.State.PendingRewards.Count>0)ShowReward();
             else if(Service.State.ActivationPending)StartActivation();
             else if(!Service.State.DiamondGuideShown&&Service.State.CurrentLevel>=Service.Rules.DiamondFirstLevel)StartDiamondGuide();
@@ -80,8 +86,14 @@ namespace FruitApkEarning
         private void Close()
         {
             if(earlyOrdinal>0&&!ArchiveEarly(false,Close))return;
-            if(Service.State.ActivationPending){StartActivation();return;}
+            if(Service.State.ActivationPending&&panel!="LocalEarningSequence"){StartActivation();return;}
             MgrUI.Instance.Close(Path,false);
+        }
+        private void StopSequence()
+        {
+            if(sequence!=null)StopCoroutine(sequence);
+            sequence=null;
+            if(page!=null)page.CancelPresentation();
         }
         private bool ArchiveEarly(bool submitted,Action recovered)
         {
@@ -111,6 +123,15 @@ namespace FruitApkEarning
         }
         private void ShowWallet()
         {
+            StopSequence();
+            if(!diamonds)
+            {
+                busy=true;bool saved;
+                try{saved=Service.RefreshSimulatedStats(config.SimulatedAttemptsMinimum,config.SimulatedAttemptsMaximumExclusive);}
+                finally{busy=false;}
+                if(!saved){ShowRecovery(ShowWallet);return;}
+                simulatedCashCents=UnityEngine.Random.Range(config.SimulatedCashMinimumCents,config.SimulatedCashMaximumCents);
+            }
             // The record is persisted before its presentation. Resume it after a restart too.
             if(!diamonds&&earlyOrdinal==0)earlyOrdinal=FindUnarchivedOrdinal();
             Show(diamonds?"TXCoinPanel":"TXPanel");
@@ -154,9 +175,9 @@ namespace FruitApkEarning
             if(panel=="TXPanel")
             {
                 int target=state.HighestClearedLevel<Service.Rules.FirstCashGate?Service.Rules.FirstCashGate:Service.Rules.SecondCashGate;
-                int shownLevel=config.GetDisplayLevel(state.CurrentLevel),shownTarget=config.GetDisplayLevel(target);
-                long current=Math.Max(0,shownLevel-1),total=shownTarget;
-                string hint="Clear level "+shownTarget+"\nto review withdrawal";
+                int shownLevel=state.CurrentLevel;
+                long current=state.HighestClearedLevel,total=target;
+                string hint="Clear level "+target+"\nto review withdrawal";
                 if(state.HighestClearedLevel>=Service.Rules.SecondCashGate){
                     var requirements=Service.GetRequirements(false,0);
                     foreach(var item in requirements.Items)if(!item.Complete){current=item.Current;total=item.Target;hint=item.Known?RequirementName(item.Key):"Awaiting account update";break;}
@@ -170,20 +191,24 @@ namespace FruitApkEarning
                 page.SetText("ProgressValue",total>0?Math.Min(current,total)+" / "+total:"--");
                 page.SetText("ProgressTipValue",early!=null?string.Empty:total>0?Math.Max(0,total-current).ToString(CultureInfo.InvariantCulture):"--");
                 page.SetProgress("Progress",total>0?(float)current/total:0);
-                page.SetText("Stats.Time","Local stats ("+DateTime.Now.ToString("MM/dd/yyyy",CultureInfo.InvariantCulture)+")");
-                page.SetText("Stats.PassCount","Today: "+state.TodayWins.ToString(CultureInfo.InvariantCulture));
-                page.SetText("Stats.ChallengeTimes","Total runs: "+state.Runs.Count.ToString(CultureInfo.InvariantCulture));
-                page.SetText("Stats.GoldGetCount",Money(state.CashCents));
+                int players=(int)DateTime.Now.TimeOfDay.TotalMinutes*config.SimulatedPlayersPerMinute;
+                int attempts=early!=null||state.CurrentLevel<=2?1:state.SimulatedDailyAttempts;
+                long sample=early!=null?early.AmountCents:state.CurrentLevel<=2?
+                    (state.CurrentLevel==1?Service.Rules.EarlyFirstCents:Service.Rules.EarlySecondCents):simulatedCashCents;
+                page.SetText("Stats.Time","Simulated stats");
+                page.SetText("Stats.PassCount","Players today\n"+players.ToString("N0",CultureInfo.InvariantCulture));
+                page.SetText("Stats.ChallengeTimes","Avg. attempts\n"+attempts.ToString(CultureInfo.InvariantCulture));
+                page.SetText("Stats.GoldGetCount","Avg. amount\n"+Money(sample));
             }
             else if(panel=="TXCoinPanel")
             {
                 long required=Service.Rules.DiamondTargets[tier],value=Service.Rules.DiamondPayoutCents[tier];
-                string amount=SourceMoney(value),remaining=SourceMoney(Math.Max(0,required-state.Diamonds)/100);
-                page.SetText("CoinValue",DiamondText(state.Diamonds));page.SetText("GoldValue",SourceMoney(state.Diamonds/100));
+                string amount=SourceMoney(value),remaining=DiamondMoney(Math.Max(0,required-state.Diamonds));
+                page.SetText("CoinValue",DiamondText(state.Diamonds));page.SetText("GoldValue",DiamondMoney(state.Diamonds));
                 page.SetText("TipValue","100=$1");page.SetText("TXTip",amount+" Withdrawal Instructions:");
                 string emphasis=ColorUtility.ToHtmlStringRGB(page.EmphasisColor);
                 page.SetText("IitemTip","Balance reaches <color=#"+emphasis+">"+amount+"</color> to withdraw all\nStill <color=#"+emphasis+">"+remaining+"</color> to go");
-                page.SetText("TipBarValue",SourceMoney(Math.Min(state.Diamonds,required)/100)+"/"+amount);
+                page.SetText("TipBarValue",DiamondMoney(Math.Min(state.Diamonds,required))+"/"+amount);
                 page.SetProgress("TipBar",(float)state.Diamonds/required);
                 for(int i=0;i<4;i++){
                     page.SetText("amounts["+i+"]",SourceMoney(Service.Rules.DiamondPayoutCents[i]));page.SetVisible("selectionFrames["+i+"]",i==tier);
@@ -212,6 +237,7 @@ namespace FruitApkEarning
         }
         private void ShowConditions()
         {
+            StopSequence();
             Show("LocalWithdrawalConditions");page.Bind("action",ConditionsAction);page.Bind("close",ShowWallet);RenderConditions();
         }
         private void RenderConditions()
@@ -223,7 +249,7 @@ namespace FruitApkEarning
             for(int i=0;i<7;i++)
             {
                 string prefix="rows["+i+"]";bool exists=i<data.Items.Count;page.SetVisible(prefix+".Root",exists);if(!exists)continue;
-                var row=data.Items[i];page.SetText(prefix+".Name",row.Key=="firstLevel"||row.Key=="secondLevel"?"Complete level "+config.GetDisplayLevel((int)row.Target):RequirementName(row.Key));
+                var row=data.Items[i];page.SetText(prefix+".Name",row.Key=="firstLevel"||row.Key=="secondLevel"?"Complete level "+row.Target:RequirementName(row.Key));
                 page.SetText(prefix+".Value",!row.Known?"Awaiting account update":row.Waived?"Login complete":RequirementValue(row));
                 page.SetText(prefix+".Status",row.Complete?"Complete":"In progress");
             }
@@ -244,14 +270,16 @@ namespace FruitApkEarning
             var data=Service.GetRequirements(diamonds,tier);
             if(data.Eligible)ShowAccount();else if(data.FirstIncomplete=="secondLevel")ShowStage();else Close();
         }
-        private void ShowStage()
+        private void ShowStage() { ShowStage(false); }
+        private void ShowStage(bool resume)
         {
+            StopSequence();
             Show("TXProgress0Panel");
             page.SetText("labels[0].Text","Withdrawal progress");page.SetText("labels[1].Text","Back to withdrawal");
             page.SetText("labels[2].Text","Complete the next stage requirements");
             page.SetText("labels[3].Text","First level target completed");page.SetText("labels[4].Text","Next level target pending");
             page.SetText("labels[5].Text","Review remaining requirements before applying");
-            page.SetText("Tip","Complete level <color=#FF0000>"+config.GetDisplayLevel(Service.Rules.SecondCashGate)+"</color> to continue the next stage");
+            page.SetText("Tip","Complete level <color=#FF0000>"+Service.Rules.SecondCashGate+"</color> to continue the next stage");
             page.SetText("Des","Complete the next level target to continue.");page.SetText("KeFu","Application not submitted");
             for(int i=1;i<=4;i++){
                 string key="path:main/Step/"+i;
@@ -259,10 +287,50 @@ namespace FruitApkEarning
                 page.SetText(key+"/Content/Time",string.Empty);
             }
             page.Bind("SureBtn",ShowConditions);page.Bind("CloseBtn",ShowConditions);
+            sequence=StartCoroutine(StageSequence(resume));
+        }
+        private IEnumerator StageSequence(bool resume)
+        {
+            var view=page;
+            yield return view.PlayStageSteps(resume);
+            sequence=null;
+            if(opened&&page==view&&!resume)ShowRequirementsReview();
+        }
+        private void ShowRequirementsReview()
+        {
+            Show("TXTooFastHintPanel");
+            page.SetText("labels[0].Text","Complete the next level target to continue. Your current progress is shown below.");
+            page.SetText("labels[1].Text","Requirements review");page.SetText("labels[2].Text","Continue");
+            int target=Service.Rules.SecondCashGate;
+            page.SetText("LevelTip","Complete level "+target);
+            page.SetText("LevelPregressValue",Service.State.HighestClearedLevel+" / "+target);
+            page.SetProgress("LevelPregress",target>0?(float)Service.State.HighestClearedLevel/target:0);
+            page.SetText("VideoTip","Test reward videos completed");
+            page.SetText("VideoPregressValue",Service.State.RewardVideos+" / "+config.ReviewVideoReferenceCount);
+            page.SetProgress("VideoPregress",config.ReviewVideoReferenceCount>0?(float)Service.State.RewardVideos/config.ReviewVideoReferenceCount:0);
+            page.Bind("IKnowBtn",()=>ShowStage(true));
+        }
+        private void ShowAccountLevel()
+        {
+            StopSequence();Show("LocalUserLevel");
+            page.SetText("Title","Account level");
+            page.SetText("levelLabel","Level "+Service.State.AccountLevel);
+            page.SetText("progressLabel","Awaiting account update");
+            page.SetText("ProgressCaption","Account progress");
+            page.SetText("Caption","Continue");
+            page.SetProgress("progressFill",0);
+            page.Bind("closeButton",()=>MgrUI.Instance.Close(Path,false));
+            page.Bind("continueButton",()=>MgrUI.Instance.Close(Path,false));
+        }
+        private void CloseAccount()
+        {
+            if(earlyOrdinal>0)Close();else ShowWallet();
         }
         private void ShowAccount()
         {
+            StopSequence();
             Show("TXUserInfoPanel");useOtherAccount=false;
+            page.Bind("CloseBtn",CloseAccount);
             SetInput("InputName",accountName);SetInput("InputEmail",accountEmail);SetInput("InputAreaNumber",accountArea);SetInput("InputNumber",accountNumber);
             page.SetText("labels[0].Text","Use test account details. No payment is submitted.");
             page.SetText("labels[1].Text","Withdrawal account");page.SetText("labels[2].Text","Confirm");
@@ -304,13 +372,15 @@ namespace FruitApkEarning
         private void ShowConfirmation()
         {
             Show("TXUserInfoSurePanel");page.SetText("labels[0].Text","Confirm account");page.SetText("labels[1].Text","Confirm");page.SetText("labels[2].Text","Re-enter");
+            page.Bind("CloseBtn",CloseAccount);
             page.SetText("Tip",(useOtherAccount?channelInfo:SelectedChannel.FormatAccount(accountName,accountEmail,accountArea,accountNumber))+"\n\nTest request · no payment");
             SetSprite("Image",useOtherAccount?config.OtherChannelIconPath:SelectedChannel.LargeIconPath);
-            page.Bind("ReEnterBtn",ShowAccount);page.Bind("GetBtn",()=>{if(earlyOrdinal>0)ShowVerification();else{ShowConditions();Notice("Withdrawal service is not connected. No withdrawal has been submitted.");}});
+            page.Bind("ReEnterBtn",()=>{if(useOtherAccount)ShowChannelHelp();else ShowAccount();});page.Bind("GetBtn",()=>{if(earlyOrdinal>0)ShowVerification();else{ShowConditions();Notice("Withdrawal service is not connected. No withdrawal has been submitted.");}});
         }
         private void ShowChannelHelp()
         {
-            ReadAccount();Show("TXChannelPanel");
+            if(panel=="TXUserInfoPanel")ReadAccount();
+            Show("TXChannelPanel");
             page.SetText("labels[0].Text","Enter test payment account information. No payment is submitted.");
             page.SetText("labels[1].Text","Withdrawal account");page.SetText("labels[2].Text","Confirm");SetInput("InputInfo",channelInfo);
             page.Bind("CloseBtn",ShowAccount);page.Bind("SureBtn",()=>{
@@ -324,11 +394,18 @@ namespace FruitApkEarning
             Show("LocalWithdrawalVerification");page.SetText("Tip","Reward #"+earlyOrdinal);page.SetText("GoldCount",Money(record.AmountCents));
             page.SetText("labels[0].Text","Withdrawal request");page.SetText("labels[1].Text","Confirm withdrawal");
             page.SetText("labels[2].Text","Current status");page.SetText("labels[3].Text","Reward recorded");page.SetText("labels[4].Text","Account details entered");page.SetText("labels[5].Text","Ready to submit");
-            for(int i=1;i<=3;i++){page.SetVisible("path:main/Step/"+i+"/Done",true);page.SetVisible("path:main/Step/"+i+"/Loading",false);}
-            page.Bind("SureBtn",()=>{if(ArchiveEarly(true,ShowHistory))ShowHistory();});
+            page.Bind("CloseBtn",CloseAccount);
+            page.Bind("SureBtn",()=>{if(page.VerificationReady&&ArchiveEarly(true,Close))Close();});
+            sequence=StartCoroutine(VerificationSequence());
+        }
+        private IEnumerator VerificationSequence()
+        {
+            yield return page.PlayVerificationSteps();
+            sequence=null;
         }
         private void ShowHistory()
         {
+            StopSequence();
             Show("LocalCashHistory");page.SetText("titleLabel","Withdrawal History");page.SetText("balanceLabel",SourceMoney(Service.State.CashCents));
             page.Bind("closeButton",ShowWallet);
             var parent=page.GetObject("rowParent");if(parent==null)return;
@@ -363,7 +440,7 @@ namespace FruitApkEarning
             page.SetVisible("ad",reward.EarlyOrdinal==0);
             page.SetVisible("MoreGetBtn",true);page.SetVisible("GetBtn",reward.EarlyOrdinal==0);page.SetVisible("Close",false);
             page.SetText("moreLabel",reward.EarlyOrdinal>0?"Withdraw":"Claim "+Service.Rules.BonusMultiplier+"X");page.SetText("labels[1].Text","Claim");
-            page.Bind("GetBtn",ClaimReward);page.Bind("MoreGetBtn",()=>{if(reward.EarlyOrdinal>0)ClaimReward();else Notice("Reward video unavailable. Use Claim to collect.");});
+            page.Bind("GetBtn",ClaimReward);page.Bind("MoreGetBtn",()=>{if(reward.EarlyOrdinal>0)ClaimReward();else ShowTestVideo();});
             var parent=page.GetObject("Items");
             if(parent!=null){if(reward.CashCents>0)AddRewardItem(parent.transform,false,reward.CashCents);if(reward.Diamonds>0)AddRewardItem(parent.transform,true,reward.Diamonds);}
         }
@@ -376,17 +453,53 @@ namespace FruitApkEarning
             var icon=item.GetImage("icon");var art=Resources.Load<Sprite>("ApkEarningReference/Artwork/"+(diamond?"DiamondPile":"CashPile"));
             if(icon!=null&&art!=null){icon.sprite=art;icon.preserveAspect=true;}
         }
-        private void ClaimReward()
+        private void ShowTestVideo()
+        {
+            if(reward==null||reward.EarlyOrdinal>0||busy)return;
+            StopSequence();Show("LocalRewardVideoTest");
+            page.SetText("title","Test reward video");
+            page.SetText("actionCaption","Complete test video");page.SetText("cancelCaption","Cancel");
+            var confirm=page.GetButton("retry");if(confirm!=null)confirm.interactable=false;
+            page.Bind("close",CancelTestVideo);page.Bind("Close",CancelTestVideo);page.Bind("CloseBtn",CancelTestVideo);
+            page.Bind("retry",()=>{if(confirm!=null&&confirm.interactable){StopSequence();ClaimReward(true);}});
+            sequence=StartCoroutine(TestVideoCountdown());
+        }
+        private IEnumerator TestVideoCountdown()
+        {
+            var view=page;float remaining=Mathf.Max(0,config.TestVideoSeconds);int shown=-1;
+            while(remaining>0&&page==view)
+            {
+                int seconds=Mathf.CeilToInt(remaining);
+                if(seconds!=shown){shown=seconds;view.SetText("body","Local test video · "+seconds+"s\nNo ad network or payment is connected.\nComplete to collect "+Service.Rules.BonusMultiplier+"X, or cancel without changing your reward.");}
+                remaining-=Time.unscaledDeltaTime;yield return null;
+            }
+            sequence=null;
+            if(page!=view)yield break;
+            view.SetText("body","Test video finished.\nTap Complete test video to collect "+Service.Rules.BonusMultiplier+"X.\nCancel keeps the normal reward available.");
+            var button=view.GetButton("retry");if(button!=null)button.interactable=true;
+        }
+        private void CancelTestVideo()
+        {
+            StopSequence();
+            if(reward!=null)Service.ClaimWithTestVideo(reward.Id,false);
+            ShowReward();
+        }
+        private void ClaimReward() { ClaimReward(false); }
+        private void ClaimReward(bool testVideoCompleted)
         {
             if(reward==null||busy)return;busy=true;bool claimed;
-            try{claimed=Service.Claim(reward.Id);}finally{busy=false;}
-            if(!claimed){ShowRecovery(ClaimReward);return;}
-            earlyOrdinal=reward.EarlyOrdinal;sequence=StartCoroutine(Receipt(reward.CashCents));
+            try{claimed=testVideoCompleted?Service.ClaimWithTestVideo(reward.Id,true):Service.Claim(reward.Id);}finally{busy=false;}
+            if(!claimed){
+                if(Service.Available&&string.IsNullOrEmpty(Service.Error)){ShowReward();return;}
+                ShowRecovery(()=>ClaimReward(testVideoCompleted));return;
+            }
+            long cash=checked(reward.CashCents*(testVideoCompleted?Service.Rules.BonusMultiplier:1));
+            earlyOrdinal=reward.EarlyOrdinal;sequence=StartCoroutine(Receipt(cash));
         }
         private IEnumerator Receipt(long cash)
         {
             Show("LocalEarningSequence");SequenceMode(-1,true,false);page.SetText("receiptAmount",Money(cash));
-            yield return new WaitForSecondsRealtime(ReceiptSeconds);sequence=null;
+            yield return page.PlayReceipt(ApkEarningTopView.CashReceiptTarget,ReceiptSeconds);sequence=null;
             if(earlyOrdinal>0){Show("TXGuideTargetCompletePanel");page.SetText("labels[0].Text","Withdraw");page.SetText("labels[1].Text","Withdrawal on Clear");page.SetText("tip",Money(cash));page.Bind("continueButton",()=>{diamonds=false;ShowWallet();});}
             else if(Service.State.PendingRewards.Count>0)ShowReward();else Close();
         }
@@ -410,33 +523,51 @@ namespace FruitApkEarning
         {
             Show("LocalDiamondUnlockGuide");
             page.SetText("title","Diamond rewards unlocked");
-            page.SetText("body","Diamond rewards are unlocked. Tap here to review withdrawal requirements.");
+            page.SetText("body","Diamond rewards are unlocked. Tap to continue playing.");
             page.SetText("diamondAmount",DiamondText(Service.State.Diamonds));
             page.Bind("continueButton",()=>{
                 busy=true;bool saved;try{saved=Service.CompleteDiamondGuide();}finally{busy=false;}
                 if(!saved){ShowRecovery(ShowDiamondGuide);return;}
-                diamonds=true;tier=0;ShowWallet();
+                Close();
             });
         }
         private IEnumerator Activation()
         {
-            Show("LocalEarningSequence");SequenceMode(0,false,false);SetMessage(0,"Reward assessment","Your first two cash rewards are saved in withdrawal history.");
-            yield return new WaitForSecondsRealtime(MessageSeconds);
-            SequenceMode(1,false,false);SetMessage(1,"Activating rewards","Preparing your cash rewards and level bonuses...");
-            yield return new WaitForSecondsRealtime(MessageSeconds);
-            SequenceMode(-1,false,true);page.SetText("bonusesTitle","Your reward bonuses");
-            string[] captions={"Extra cash reward","Match three fruits to earn a reward","Reward video bonus — unavailable","Unlock diamond rewards","Withdrawal requirements"};
-            for(int i=0;i<captions.Length;i++){page.SetText("bonusCaptions["+i+"]",captions[i]);var obj=page.GetObject("bonusRows["+i+"]");if(obj!=null){obj.SetActive(true);var group=obj.GetComponent<CanvasGroup>();if(group!=null)group.alpha=1;}}
-            yield return new WaitForSecondsRealtime(BonusesSeconds);
+            Show("LocalEarningSequence");
+            while(Service.State.ActivationStep<6)
+            {
+                int step=Service.State.ActivationStep;
+                if(step==2)
+                {
+                    SequenceMode(-1,false,true);page.SetText("bonusesTitle","Your reward bonuses");
+                    string[] captions={"Extra cash reward","Match three fruits to earn a reward","Test reward video bonus","Unlock diamond rewards","Withdrawal requirements"};
+                    for(int i=0;i<captions.Length;i++)page.SetText("bonusCaptions["+i+"]",captions[i]);
+                    yield return page.PlayBonusSequence(BonusesSeconds);
+                }
+                else if(step==3)
+                {
+                    busy=true;bool applied;try{applied=Service.ApplyActivationBalance();}finally{busy=false;}
+                    if(!applied){sequence=null;ShowRecovery(StartActivation);yield break;}
+                    SequenceMode(-1,true,false);page.SetText("receiptAmount",Money(Service.State.CashCents));
+                    yield return page.PlayReceipt(ApkEarningTopView.CashReceiptTarget,ReceiptSeconds);
+                }
+                else
+                {
+                    int layout=step<2?step:step-2;
+                    SequenceMode(layout,false,false);
+                    if(step==0)SetMessage(layout,"Reward assessment","Your first two cash rewards are saved in withdrawal history.");
+                    else if(step==1)SetMessage(layout,"Activating rewards","Preparing your cash rewards and level bonuses...");
+                    else if(step==4)SetMessage(layout,"Rewards activated","Continue playing to collect cash and unlock more rewards.");
+                    else SetMessage(layout,"Your withdrawal history","Your reward records are saved. Submitted requests remain pending; no payment has been made.");
+                    yield return new WaitForSecondsRealtime(MessageSeconds);
+                }
+                busy=true;bool saved;try{saved=Service.SetActivationStep(step+1);}finally{busy=false;}
+                if(!saved){sequence=null;ShowRecovery(StartActivation);yield break;}
+            }
             busy=true;bool complete;try{complete=Service.CompleteActivation();}finally{busy=false;}
-            if(!complete){sequence=null;ShowRecovery(StartActivation);yield break;}
-            // The source activation presents its absolute tutorial balance between bonuses and activation.
-            SequenceMode(-1,true,false);page.SetText("receiptAmount",Money(Service.State.CashCents));
-            yield return new WaitForSecondsRealtime(ReceiptSeconds);
-            SequenceMode(2,false,false);SetMessage(2,"Rewards activated","Continue playing to collect cash and unlock more rewards.");
-            yield return new WaitForSecondsRealtime(MessageSeconds);
-            SequenceMode(3,false,false);SetMessage(3,"Your withdrawal history","Your reward records are saved. Submitted requests remain pending; no payment has been made.");
-            yield return new WaitForSecondsRealtime(MessageSeconds);sequence=null;ShowHistory();
+            sequence=null;
+            if(!complete){ShowRecovery(StartActivation);yield break;}
+            Close();
         }
         private void SequenceMode(int message,bool receipt,bool bonuses)
         {

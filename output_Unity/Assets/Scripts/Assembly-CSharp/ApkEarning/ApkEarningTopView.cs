@@ -35,12 +35,15 @@ namespace FruitApkEarning
         private Image blinking;
         private float blinkStart;
         private bool fittingLayout;
+        public static Transform CashReceiptTarget { get; private set; }
 
         private void OnEnable()
         {
             if (View == null) View = GetComponent<ApkEarningPageView>();
             owner = GetComponentInParent<CorePlay.CorePlayUI>();
             service = ApkEarningService.Instance;
+            var cashTarget = View.GetButton("OriginalGoldItem.click");
+            CashReceiptTarget = cashTarget == null ? null : cashTarget.transform;
             service.Changed += Refresh;
             View.Bind("OriginalGoldItem.click", OpenCash);
             View.Bind("OriginalCoinItem.click", OpenDiamonds);
@@ -53,6 +56,8 @@ namespace FruitApkEarning
         }
         private void OnDisable()
         {
+            var cashTarget = View == null ? null : View.GetButton("OriginalGoldItem.click");
+            if (cashTarget != null && CashReceiptTarget == cashTarget.transform) CashReceiptTarget = null;
             if (bound && service != null) service.Changed -= Refresh;
             bound = false;
             if (View != null) View.Unbind();
@@ -191,10 +196,8 @@ namespace FruitApkEarning
             string label = RequirementName(next.Key);
             if (next.Key == "firstLevel" || next.Key == "secondLevel")
             {
-                // The imported rules count boards; the player sees the configured
-                // level groups, as in the wallet. A group completes after all its rounds.
-                target = DisplayLevel((int)next.Target);
-                current = Math.Max(0, Math.Min(DisplayLevel(state.CurrentLevel) - 1, target));
+                // The fruit game's header counts individual boards. Keep the
+                // wallet and task on that same scale without changing eligibility.
                 label = "Clear level " + target.ToString(CultureInfo.InvariantCulture);
             }
             string ratio = next.Key == "balance" ? Money(current) + " / " + Money(target) :

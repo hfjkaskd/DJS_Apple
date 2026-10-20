@@ -34,6 +34,13 @@ namespace FruitApkEarning
         public string OtherChannelIconPath;
         public long DiamondPreviewHundredths = 3000000;
         public float DiamondPreviewSeconds = 2;
+        [Min(0)] public float TestVideoSeconds = 3;
+        [Min(1)] public int ReviewVideoReferenceCount = 10;
+        [Min(0)] public int SimulatedPlayersPerMinute = 23;
+        [Min(1)] public int SimulatedAttemptsMinimum = 5;
+        [Min(2)] public int SimulatedAttemptsMaximumExclusive = 11;
+        [Min(0)] public int SimulatedCashMinimumCents = 2000000;
+        [Min(1)] public int SimulatedCashMaximumCents = 5000000;
 
         public int GetDisplayLevel(int actual)
         { return DisplayLevels != null && actual >= 0 && actual < DisplayLevels.Length && DisplayLevels[actual] > 0 ? DisplayLevels[actual] : actual; }
