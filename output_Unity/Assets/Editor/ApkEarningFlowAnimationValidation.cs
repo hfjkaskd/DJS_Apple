@@ -7,6 +7,8 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.LowLevel;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
@@ -28,9 +30,10 @@ public static class ApkEarningFlowAnimationValidation
     private static readonly Stack<IEnumerator> routines = new Stack<IEnumerator>();
     private static Report report;
     private static Fixture fixture;
-    private static bool started, finishing;
+    private static bool started, finishing, playerLoopInstalled;
     private static int lastFrame = -1;
     private static string output;
+    private static PlayerLoopSystem originalPlayerLoop;
 
     [Serializable]
     private sealed class Report
@@ -42,6 +45,10 @@ public static class ApkEarningFlowAnimationValidation
             "No gameplay host, earning service, player storage, payment operation or original scene is loaded.";
         public bool passed;
         public int assertions, playFrames;
+        public int warmupFrames, verificationFrames;
+        public float largestPlayFrameDelta;
+        public string isolatedScenePath;
+        public int isolatedSceneRootCount;
         public double elapsedSeconds;
         public List<string> cases = new List<string>();
         public List<string> screenshots = new List<string>();
@@ -90,6 +97,8 @@ public static class ApkEarningFlowAnimationValidation
 
     private static void OnPlayModeState(PlayModeStateChange state)
     {
+        if (state == PlayModeStateChange.EnteredPlayMode && SessionState.GetBool(ActiveKey, false))
+            InstallPlayerLoop();
         if (!finishing && started && state == PlayModeStateChange.ExitingPlayMode)
             Finish(new InvalidOperationException("Play mode stopped before animation validation completed."));
     }
@@ -104,21 +113,55 @@ public static class ApkEarningFlowAnimationValidation
             Finish(new TimeoutException("Animation validation exceeded the 120-second wall-clock limit."));
             return;
         }
-        if (!EditorApplication.isPlaying || EditorApplication.isCompiling || Time.frameCount == 0) return;
+        // Editor update is a wall-clock watchdog only. Its scheduling and delayCall
+        // callbacks do not share the player coroutine update boundary.
+    }
+
+    private static void InstallPlayerLoop()
+    {
+        if (playerLoopInstalled) return;
+        originalPlayerLoop = PlayerLoop.GetCurrentPlayerLoop();
+        var loop = PlayerLoop.GetCurrentPlayerLoop();
+        for (int i = 0; i < loop.subSystemList.Length; i++)
+        {
+            if (loop.subSystemList[i].type != typeof(UnityEngine.PlayerLoop.Update)) continue;
+            var update = loop.subSystemList[i];
+            var systems = update.subSystemList;
+            Array.Resize(ref systems, systems.Length + 1);
+            systems[systems.Length - 1] = new PlayerLoopSystem
+            {
+                type = typeof(ApkEarningFlowAnimationValidation),
+                updateDelegate = TickPlayFrame
+            };
+            update.subSystemList = systems;
+            loop.subSystemList[i] = update;
+            PlayerLoop.SetPlayerLoop(loop);
+            playerLoopInstalled = true;
+            return;
+        }
+        Finish(new InvalidOperationException("Cannot find the Unity player Update loop."));
+    }
+
+    private static void TickPlayFrame()
+    {
+        if (finishing || !EditorApplication.isPlaying || Time.frameCount == lastFrame) return;
         try
         {
             if (!started)
             {
                 started = true;
                 EnsureReport();
+                var scene = SceneManager.GetActiveScene();
+                report.isolatedScenePath = scene.path;
+                report.isolatedSceneRootCount = scene.rootCount;
+                Require(SceneManager.sceneCount == 1 && scene.rootCount == 0 && string.IsNullOrEmpty(scene.path),
+                    "Play mode starts from the isolated empty unsaved scene, without gameplay roots.");
                 fixture = new Fixture();
                 routines.Push(Cases());
             }
-            // Editor update can run more than once per game frame. Advance the actual
-            // page enumerators once per rendered Play frame, using Unity's real delta.
-            if (Time.frameCount == lastFrame) return;
             lastFrame = Time.frameCount;
             report.playFrames++;
+            report.largestPlayFrameDelta = Mathf.Max(report.largestPlayFrameDelta, Time.unscaledDeltaTime);
             while (routines.Count != 0)
             {
                 var current = routines.Peek();
@@ -141,11 +184,12 @@ public static class ApkEarningFlowAnimationValidation
     private static IEnumerator Cases()
     {
         var page = fixture.Show("LocalWithdrawalVerification");
-        yield return null;
+        yield return SettleFrames();
         Button confirm = page.GetButton("SureBtn");
         Require(confirm != null && confirm.interactable, "Saved verification confirm is available before presentation.");
         int clicks = 0;
         confirm.onClick.AddListener(() => clicks++);
+        int verificationFirstFrame = Time.frameCount;
         var verification = page.PlayVerificationSteps();
         Require(verification.MoveNext(), "Verification starts across frames.");
         Require(page.IsPresentationPlaying && !page.VerificationReady && !confirm.interactable,
@@ -158,6 +202,8 @@ public static class ApkEarningFlowAnimationValidation
         });
         Require(page.VerificationReady && !page.IsPresentationPlaying && confirm.interactable,
             "Verification completion releases confirmation exactly after its animation.");
+        report.verificationFrames = Time.frameCount - verificationFirstFrame;
+        Require(report.verificationFrames >= 5, "Verification is sampled across multiple real player frames.");
         for (int i = 1; i <= 3; i++)
         {
             string key = "path:main/Step/" + i;
@@ -172,6 +218,7 @@ public static class ApkEarningFlowAnimationValidation
         fixture.Capture("animation-verification-complete.png");
         report.cases.Add("verification-progress-button-gate");
 
+        yield return SettleFrames();
         verification = page.PlayVerificationSteps();
         Require(verification.MoveNext(), "Verification can be replayed.");
         yield return AdvanceFor(verification, .65f);
@@ -207,7 +254,7 @@ public static class ApkEarningFlowAnimationValidation
             if (i <= 2) page.SetVisible(key + "/Done", i == 1);
             page.SetVisible(key + "/Loading", i != 1);
         }
-        yield return null;
+        yield return SettleFrames();
         confirm = page.GetButton("SureBtn");
         var firstStage = page.PlayStageSteps(false);
         Require(firstStage.MoveNext() && !confirm.interactable, "First stage starts with confirmation disabled.");
@@ -246,6 +293,7 @@ public static class ApkEarningFlowAnimationValidation
             if (opacity != null) opacity.alpha = 1;
             bonusScales[i] = row.transform.localScale;
         }
+        yield return SettleFrames();
         bool sawPulse = false;
         var bonuses = page.PlayBonusSequence(0);
         yield return Drain(bonuses, 6, () =>
@@ -271,6 +319,7 @@ public static class ApkEarningFlowAnimationValidation
             icon.SetActive(false);
             origins[i] = icon.transform.localPosition;
         }
+        yield return SettleFrames();
         bool receiptCaptured = false;
         var receipt = page.PlayReceipt(fixture.ReceiptTarget, 0);
         yield return Drain(receipt, 6, () =>
@@ -311,6 +360,9 @@ public static class ApkEarningFlowAnimationValidation
         float began = Time.realtimeSinceStartup;
         try
         {
+            // The caller may just have started this iterator. Never consume the same
+            // player frame's delta a second time at a nested iterator boundary.
+            yield return null;
             while (routine.MoveNext())
             {
                 if (Time.realtimeSinceStartup - began > maximumSeconds)
@@ -325,10 +377,28 @@ public static class ApkEarningFlowAnimationValidation
     private static IEnumerator AdvanceFor(IEnumerator routine, float seconds)
     {
         float began = Time.realtimeSinceStartup;
+        yield return null;
         while (Time.realtimeSinceStartup - began < seconds)
         {
             Require(routine.MoveNext(), "Presentation remains live during its partial-frame sample.");
             yield return null;
+        }
+    }
+
+    private static IEnumerator SettleFrames()
+    {
+        float began = Time.realtimeSinceStartup;
+        int stable = 0;
+        while (stable < 5)
+        {
+            yield return null;
+            report.warmupFrames++;
+            // Resource imports, Editor delayCall work and PNG encoding are fixture
+            // setup, not animation samples. Wait for real frames instead of replacing
+            // or clamping the delta consumed by production code.
+            stable = Time.unscaledDeltaTime > 0 && Time.unscaledDeltaTime < .1f ? stable + 1 : 0;
+            if (Time.realtimeSinceStartup - began > 20)
+                throw new TimeoutException("Player frames did not stabilize after fixture setup.");
         }
     }
 
@@ -381,6 +451,11 @@ public static class ApkEarningFlowAnimationValidation
             report.elapsedSeconds = (DateTime.UtcNow - began).TotalSeconds;
         report.passed = report.errors.Count == 0 && report.cases.Count == 5;
         SessionState.SetBool(ActiveKey, false);
+        if (playerLoopInstalled)
+        {
+            PlayerLoop.SetPlayerLoop(originalPlayerLoop);
+            playerLoopInstalled = false;
+        }
         EditorApplication.update -= Tick;
         EditorApplication.playModeStateChanged -= OnPlayModeState;
         Application.logMessageReceived -= OnLog;
@@ -405,11 +480,18 @@ public static class ApkEarningFlowAnimationValidation
         private readonly Camera camera;
         private readonly Canvas canvas;
         private readonly RenderTexture texture;
+        private readonly Dictionary<string, GameObject> prefabs = new Dictionary<string, GameObject>();
         private ApkEarningPageView current;
         public EventSystem Events { get; }
         public Transform ReceiptTarget { get; }
         public Fixture()
         {
+            foreach (string name in new[] { "LocalWithdrawalVerification", "TXProgress0Panel", "LocalEarningSequence" })
+            {
+                var prefab = Resources.Load<GameObject>(PagePath + name);
+                Require(prefab != null, "Saved fixture prefab exists: " + name);
+                prefabs.Add(name, prefab);
+            }
             root = new GameObject("Earning animation validation fixture");
             var cameraObject = new GameObject("Fixture camera");
             cameraObject.transform.SetParent(root.transform, false);
@@ -445,7 +527,8 @@ public static class ApkEarningFlowAnimationValidation
         public ApkEarningPageView Show(string name)
         {
             if (current != null) Object.DestroyImmediate(current.gameObject);
-            var prefab = Resources.Load<GameObject>(PagePath + name);
+            GameObject prefab;
+            prefabs.TryGetValue(name, out prefab);
             Require(prefab != null, "Saved prefab exists: " + name);
             current = Object.Instantiate(prefab, canvas.transform, false).GetComponent<ApkEarningPageView>();
             Require(current != null, "Saved page binding exists: " + name);
