@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using CorePlay;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -21,8 +22,10 @@ public static class FruitReturnValidation
     {
         public string generatedUtc;
         public string scope = "Isolated saved CollectItem prefab fixtures, production CollectItemFieldOrder.Restore, " +
-            "production occlusion query/calculation, and real GraphicRaycaster/UGUI touch dispatch. " +
-            "Uses level 30005 tile geometry and artwork. Button-event observations do not invoke gameplay collection. " +
+            "production RefreshCanvasLayers, occlusion query/calculation, and EventSystem.RaycastAll/UGUI touch dispatch. " +
+            "Uses the actual CorePlayUI background/Map/Layer prefab subtree, level 30005 geometry and sprites, " +
+            "and RenderTexture pixel comparisons against upper-only/lower-only renders. Button-event observations do not invoke gameplay collection. " +
+            "Cold restore/pool/undo are isolated lifecycle fixtures, not private RestoreFromSnapshot execution. " +
             "Returning snapshot serialization is a production-data-contract fixture, not a call to private SaveSnapshot " +
             "or a device persistence test. No player services, saves, user scenes, or phone are modified.";
         public List<string> passed = new List<string>();
@@ -58,6 +61,7 @@ public static class FruitReturnValidation
                 ValidatePair(fixture, level, 8, 27, report);
                 fixture.ClearField();
                 ValidateReturningMembership(fixture, level, report);
+                ValidateRestoredPriority(level, report);
             }
         }
         catch (Exception exception) { report.errors.Add(exception.ToString()); }
@@ -80,10 +84,10 @@ public static class FruitReturnValidation
         CollectItem c = f.Create(2, 10, 2, Vector2.zero);
         CollectItem d = f.Create(3, 10, 3, Vector2.zero);
         int oldIndex = c.transform.GetSiblingIndex();
-        c.transform.SetParent(f.Tray, false);
+        f.Reparent(c, f.Tray);
         Object.DestroyImmediate(a.gameObject);
         Object.DestroyImmediate(b.gameObject);
-        c.transform.SetParent(f.Field, false);
+        f.Reparent(c, f.Field);
         c.transform.SetSiblingIndex(Mathf.Min(oldIndex, f.Field.childCount - 1));
         var field = new List<CollectItem> { d, c };
         Require(d.transform.GetSiblingIndex() == 0 && c.transform.GetSiblingIndex() == 1,
@@ -114,6 +118,23 @@ public static class FruitReturnValidation
         CollectItem lower = f.Create(lowerTile);
         CollectItem upper = f.Create(upperTile);
         var field = new List<CollectItem> { upper, lower };
+        CollectItemFieldOrder.Restore(f.Field, field);
+        ValidateFront(f, lower, upper, field, "cold restore creation order " + lowerId + "/" + upperId, report);
+
+        // Pool reuse changes enable/Canvas registration order, but not field order.
+        lower.gameObject.SetActive(false);
+        upper.gameObject.SetActive(false);
+        f.Reparent(upper, f.Tray);
+        f.Reparent(lower, f.Tray);
+        f.Reparent(upper, f.Field);
+        f.Reparent(lower, f.Field);
+        upper.gameObject.SetActive(true);
+        upper.RefreshCanvasLayers();
+        lower.gameObject.SetActive(true);
+        lower.RefreshCanvasLayers();
+        CollectItemFieldOrder.Restore(f.Field, field);
+        ValidateFront(f, lower, upper, field, "pool reuse " + lowerId + "/" + upperId, report);
+
         // Exact failure shape: returned lower-priority fruit became the last child.
         lower.transform.SetAsLastSibling();
         f.Render();
@@ -123,7 +144,7 @@ public static class FruitReturnValidation
         Require(f.Hit(lower) == f.Button(lower).gameObject,
             "Level 30005 historical wrong order did not hit the lower fruit.");
         CollectItemFieldOrder.Restore(f.Field, field);
-        f.Render();
+        ValidateFront(f, lower, upper, field, "undo reordered pair " + lowerId + "/" + upperId, report);
         Require(upper.transform.GetSiblingIndex() > lower.transform.GetSiblingIndex(),
             "Higher-priority tile " + upperId + " was not restored above " + lowerId + ".");
         Require(f.Hit(lower) == f.Button(upper).gameObject && f.Hit(upper) == f.Button(upper).gameObject,
@@ -141,7 +162,7 @@ public static class FruitReturnValidation
 
         // The actual occlusion index must stop considering the collected upper fruit.
         upper.Status = LECIONHKEJL.InCollect;
-        upper.transform.SetParent(f.Tray, false);
+        f.Reparent(upper, f.Tray);
         upper.gameObject.SetActive(false);
         var index = new OPIBKKOCCIA(f.Field);
         index.Build(field);
@@ -156,6 +177,38 @@ public static class FruitReturnValidation
         f.Tap(lower);
         Require(lowerClicks == 1, "Exposed lower fruit did not receive one click.");
         report.passed.Add("30005 tiles " + lowerId + "/" + upperId + ": InCollect fruit is excluded from candidates; after removal the lower fruit receives one UGUI click.");
+    }
+
+    private static void ValidateFront(Fixture f, CollectItem lower, CollectItem upper,
+        List<CollectItem> field, string label, Report report)
+    {
+        f.Render();
+        string diagnostic = f.Describe(lower, upper);
+        report.diagnostics.Add(label + ": " + diagnostic);
+        Require(f.Hit(lower) == f.Button(upper).gameObject && f.Hit(upper) == f.Button(upper).gameObject,
+            label + ": EventSystem.RaycastAll does not hit the high-priority fruit. " + diagnostic);
+        Require(Mathf.Approximately(f.Occlusion(upper, field), 0),
+            label + ": high-priority fruit is logically occluded.");
+        report.diagnostics.Add(label + ": " + f.VerifyFrontPixels(lower, upper));
+        Require(f.Hit(upper) == f.Button(upper).gameObject,
+            label + ": visibility/enable cycling changed the front raycast.");
+        report.passed.Add(label + ": actual sprite pixels, all-Canvas UGUI raycast, and production occlusion agree on the high-priority fruit.");
+    }
+
+    private static void ValidateRestoredPriority(LevelConfig level, Report report)
+    {
+        SingleNormalTile upper = FindTile(level, 32);
+        Require(CollectItemFieldOrder.ResolvePriority(upper, 0) == 10005,
+            "A pooled/restored tray fruit with zero stored priority does not recover its configured priority.");
+        Require(CollectItemFieldOrder.ResolvePriority(upper, 123) == 10005,
+            "A stale saved priority overrode the configured tile order.");
+        SingleNormalTile zero = FindTile(level, 0);
+        Require(CollectItemFieldOrder.ResolvePriority(zero, 90000) == 0,
+            "The valid configured priority zero was treated as missing.");
+        Require(CollectItemFieldOrder.ResolvePriority(null, 73) == 73 &&
+            CollectItemFieldOrder.ResolvePriority(null, 0) == 0,
+            "A missing configured tile did not preserve its saved priority fallback.");
+        report.passed.Add("Production ResolvePriority recovers nonzero tray/undo priority from the tile configuration, preserves valid zero, rejects conflicting saved values, and uses saved priority when the tile is absent. Private restore caller coverage is static review.");
     }
 
     private static void ValidateReturningMembership(Fixture f, LevelConfig level, Report report)
@@ -214,6 +267,7 @@ public static class FruitReturnValidation
         private readonly Canvas canvas;
         private readonly GraphicRaycaster raycaster;
         private readonly RenderTexture texture;
+        private readonly List<BaseRaycaster> registeredRaycasters = new List<BaseRaycaster>();
         private readonly Dictionary<int, SingleEleImageConfig> sizes = new Dictionary<int, SingleEleImageConfig>();
         public readonly RectTransform Field;
         public readonly RectTransform Tray;
@@ -225,19 +279,37 @@ public static class FruitReturnValidation
             previousEventSystem = EventSystem.current;
             GameObject cameraObject = Create("Return fixture camera");
             camera = cameraObject.AddComponent<Camera>();
-            camera.enabled = false; camera.scene = scene; camera.orthographic = true;
+            cameraObject.tag = "MainCamera";
+            camera.enabled = true; camera.scene = scene; camera.orthographic = true;
             camera.orthographicSize = 1200; camera.transform.position = new Vector3(0, 0, -100);
             camera.nearClipPlane = .1f; camera.farClipPlane = 200;
+            camera.clearFlags = CameraClearFlags.SolidColor; camera.backgroundColor = Color.black;
             texture = new RenderTexture(1080, 2400, 0); texture.Create();
             camera.targetTexture = texture; camera.aspect = 1080f / 2400;
             GameObject canvasObject = Create("Return fixture canvas", typeof(RectTransform));
             canvas = canvasObject.AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.WorldSpace; canvas.worldCamera = camera;
+            canvas.renderMode = RenderMode.ScreenSpaceCamera; canvas.worldCamera = camera;
+            canvas.planeDistance = 100;
+            canvas.sortingOrder = 100;
             ((RectTransform)canvas.transform).sizeDelta = new Vector2(1080, 2400);
             raycaster = canvasObject.AddComponent<GraphicRaycaster>();
-            Field = (RectTransform)Create("Field", typeof(RectTransform)).transform;
-            Field.SetParent(canvas.transform, false);
-            Field.sizeDelta = new Vector2(1080, 2400);
+            CorePlayUI ui = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/res/local/coreplay/CorePlayUI.prefab")
+                .GetComponent<CorePlayUI>();
+            Require(ui != null && ui.m_FieldPresentationRoot != null && ui.m_BgTrans != null,
+                "Saved gameplay background/field hierarchy is missing.");
+            // Clone only the authored presentation subtree. CorePlayUI itself is
+            // never instantiated, so it cannot initialize services or player data.
+            RectTransform presentation = Object.Instantiate(ui.m_FieldPresentationRoot, canvas.transform, false);
+            string mapPath = AnimationUtility.CalculateTransformPath(ui.m_BgTrans, ui.m_FieldPresentationRoot);
+            Transform map = presentation.Find(mapPath);
+            Field = (RectTransform)map.Find("Layer");
+            Require(Field != null, "Actual Map/Layer field parent is missing.");
+            string imagePath = AnimationUtility.CalculateTransformPath(ui.m_BgImg.transform, ui.m_FieldPresentationRoot);
+            Image background = imagePath.Length == 0 ? presentation.GetComponent<Image>()
+                : presentation.Find(imagePath).GetComponent<Image>();
+            background.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/res_server/server_maps/map1011/Map1011.png");
+            Require(background.sprite != null, "Actual level 30005 map artwork is missing.");
+            Orange.DynamicCanvasLayer.RefreshInChildren(presentation);
             Tray = (RectTransform)Create("Tray", typeof(RectTransform)).transform;
             Tray.SetParent(canvas.transform, false);
             Tray.anchoredPosition = new Vector2(0, -900);
@@ -245,6 +317,7 @@ public static class FruitReturnValidation
             events = eventObject.AddComponent<FruitTouchFixtureEventSystem>(); events.InitializeFixture();
             events.pixelDragThreshold = 10;
             input = eventObject.AddComponent<FruitTouchFixtureInputModule>(); input.InitializeFixture();
+            input.UseEventSystemRaycasts = true; input.RaycastScene = scene;
             EventSystem.current = events;
             var config = JsonUtility.FromJson<AllEleImageConfig>(File.ReadAllText("Assets/res_server/server_configs/AllEleImageConfig.json"));
             foreach (SingleEleImageConfig size in config.eleImageConfigs) sizes.Add(size.eleID, size);
@@ -273,6 +346,23 @@ public static class FruitReturnValidation
             Image graphic = item.CollectImageRect.GetComponent<Image>();
             graphic.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/res_server/server_images/fruit/Fruit_" + type + ".png");
             Require(graphic.sprite != null, "Actual fruit artwork is missing for type " + type);
+            // Match SetType's four sprite assignments without invoking asset
+            // services or initializing the player's gameplay controller.
+            var serialized = new SerializedObject(item);
+            foreach (string property in new[] { "m_CollectEFImage", "m_CollectEF2Image", "m_GlowImage" })
+            {
+                Image effect = serialized.FindProperty(property).objectReferenceValue as Image;
+                if (effect != null) effect.sprite = graphic.sprite;
+            }
+            item.CachedEffectSizeX = size.sizeX; item.CachedEffectSizeY = size.sizeY;
+            item.DefaultIdleAnim = "anim_Fruits_Idle" + (type % 3);
+            Animation animation = serialized.FindProperty("m_Anim").objectReferenceValue as Animation;
+            Require(animation != null && animation.GetClip(item.DefaultIdleAnim) != null,
+                "The real fruit idle animation is missing.");
+            // Sample authored visibility, scale, rotation and effect state. This
+            // is an isolated preview object, not an Editor runtime fallback.
+            animation.GetClip(item.DefaultIdleAnim).SampleAnimation(animation.gameObject, 0);
+            item.RefreshCanvasLayers();
             return item;
         }
 
@@ -281,7 +371,98 @@ public static class FruitReturnValidation
             RectTransformUtility.WorldToScreenPoint(camera, item.CollectImageRect.TransformPoint(item.CollectImageRect.rect.center));
         public GameObject Hit(CollectItem item) => input.Hit(raycaster, events, Center(item)).gameObject;
         public void Tap(CollectItem item) => input.Gesture(raycaster, events, Center(item), Center(item));
-        public void Render() { Canvas.ForceUpdateCanvases(); camera.Render(); Canvas.ForceUpdateCanvases(); }
+        public void Reparent(CollectItem item, Transform parent)
+        {
+            item.transform.SetParent(parent, false);
+            item.RefreshCanvasLayers();
+        }
+        public void Render()
+        {
+            // BaseRaycaster does not execute its runtime OnEnable in an Edit-mode
+            // preview. Register only these actual raycasters via Unity's public
+            // registry; EventSystem performs every hit test and sort itself.
+            List<BaseRaycaster> registry = RaycasterManager.GetRaycasters();
+            for (int i = registeredRaycasters.Count - 1; i >= 0; i--)
+                if (registeredRaycasters[i] == null)
+                {
+                    registry.Remove(registeredRaycasters[i]);
+                    registeredRaycasters.RemoveAt(i);
+                }
+            foreach (GraphicRaycaster current in canvas.GetComponentsInChildren<GraphicRaycaster>(false))
+                if (current.isActiveAndEnabled && !registry.Contains(current))
+                {
+                    registry.Add(current);
+                    registeredRaycasters.Add(current);
+                }
+            Canvas.ForceUpdateCanvases(); camera.Render(); Canvas.ForceUpdateCanvases();
+        }
+        public string Describe(params CollectItem[] items)
+        {
+            var description = new StringBuilder();
+            foreach (CollectItem item in items)
+            {
+                Image image = item.CollectImageRect.GetComponent<Image>();
+                description.Append(item.name).Append(" priority=").Append(item.Priority)
+                    .Append(" sibling=").Append(item.transform.GetSiblingIndex())
+                    .Append(" graphicDepth=").Append(image.depth).Append(" culled=").Append(image.canvasRenderer.cull);
+                foreach (Canvas ancestor in image.GetComponentsInParent<Canvas>(true))
+                    description.Append(" canvas=").Append(ancestor.name).Append('[')
+                        .Append("override=").Append(ancestor.overrideSorting).Append(",order=").Append(ancestor.sortingOrder)
+                        .Append(",renderOrder=").Append(ancestor.renderOrder).Append(']');
+                description.Append(" hits=").Append(input.DescribeHits(raycaster, events, Center(item))).Append("; ");
+            }
+            return description.ToString();
+        }
+        public string VerifyFrontPixels(CollectItem lower, CollectItem upper)
+        {
+            Vector2 center = Center(upper);
+            Color32[] combined = ReadPatch(center);
+            Color32[] upperOnly;
+            Color32[] lowerOnly;
+            try
+            {
+                lower.gameObject.SetActive(false); Render();
+                upperOnly = ReadPatch(center);
+                upper.gameObject.SetActive(false);
+                lower.gameObject.SetActive(true); lower.RefreshCanvasLayers(); Render();
+                lowerOnly = ReadPatch(center);
+            }
+            finally
+            {
+                lower.gameObject.SetActive(true); upper.gameObject.SetActive(true);
+                lower.RefreshCanvasLayers(); upper.RefreshCanvasLayers(); Render();
+            }
+            float distinction = PixelDifference(upperOnly, lowerOnly);
+            float upperDifference = PixelDifference(combined, upperOnly);
+            float lowerDifference = PixelDifference(combined, lowerOnly);
+            string result = "20x20 actual-artwork pixels: combined/upper=" + upperDifference.ToString("F3") +
+                ", combined/lower=" + lowerDifference.ToString("F3") + ", upper/lower=" + distinction.ToString("F3");
+            Require(distinction > 2, "The sampled fruit pixels are not discriminating (or artwork did not render). " + result);
+            Require(upperDifference < 1 && lowerDifference > upperDifference + 2,
+                "The visible fruit does not match the logical/UGUI upper fruit. " + result);
+            return result;
+        }
+        private Color32[] ReadPatch(Vector2 center)
+        {
+            var patch = new Texture2D(20, 20, TextureFormat.RGBA32, false);
+            RenderTexture previous = RenderTexture.active;
+            try
+            {
+                RenderTexture.active = texture;
+                patch.ReadPixels(new Rect(Mathf.RoundToInt(center.x) - 10, Mathf.RoundToInt(center.y) - 10, 20, 20), 0, 0);
+                patch.Apply();
+                return patch.GetPixels32();
+            }
+            finally { RenderTexture.active = previous; Object.DestroyImmediate(patch); }
+        }
+        private static float PixelDifference(Color32[] first, Color32[] second)
+        {
+            float total = 0;
+            for (int i = 0; i < first.Length; i++)
+                total += Mathf.Abs(first[i].r - second[i].r) + Mathf.Abs(first[i].g - second[i].g) +
+                    Mathf.Abs(first[i].b - second[i].b);
+            return total / (first.Length * 3);
+        }
         public float Occlusion(CollectItem item, List<CollectItem> field)
         {
             var index = new OPIBKKOCCIA(Field); index.Build(field);
@@ -295,6 +476,8 @@ public static class FruitReturnValidation
         }
         public void Dispose()
         {
+            foreach (BaseRaycaster registered in registeredRaycasters)
+                RaycasterManager.GetRaycasters().Remove(registered);
             events.ReleaseFixture();
             EditorSceneManager.ClosePreviewScene(scene);
             if (previousEventSystem != null) EventSystem.current = previousEventSystem;

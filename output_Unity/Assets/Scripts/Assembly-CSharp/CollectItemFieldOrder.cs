@@ -7,6 +7,13 @@ public static class CollectItemFieldOrder
 {
 	private static readonly Comparison<CollectItem> CompareItems = Compare;
 
+	public static int ResolvePriority(SingleNormalTile tile, int savedPriority)
+	{
+		// The authored tile is authoritative. Older snapshots can contain zero
+		// for a basket fruit because its priority was not restored after Init.
+		return tile != null ? tile.layerIndex * 10000 + tile.indexInLayer : savedPriority;
+	}
+
 	public static void Restore(Transform fieldLayer, List<CollectItem> fieldItems)
 	{
 		if (fieldLayer == null || fieldItems == null)

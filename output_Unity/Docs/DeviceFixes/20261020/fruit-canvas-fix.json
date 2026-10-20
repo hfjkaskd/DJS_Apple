@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-20",
+  "issue": "Visible overlapping peach/orange still rejected taps in the existing level 30005 save after the initial return-order fix.",
+  "intermediateDeviceResult": {
+    "version": "1.0.8",
+    "result": "FAIL",
+    "tap": [710, 812],
+    "evidence": "C:/Projects/DJS_Apple/DeviceQA/20261020-v108/device-result.json",
+    "savePreserved": true
+  },
+  "rootCauses": [
+    "Each main fruit image created an independent equal-order override Canvas and GraphicRaycaster. Sibling order alone did not reliably govern rendering and EventSystem hit order.",
+    "Restored tray fruits retained Init's priority zero. Stored undo priorities were not restored, and older snapshots could subsequently persist these invalid zero priorities."
+  ],
+  "changes": [
+    "Add a prefab-configured inheritParentSorting option to DynamicCanvasLayer, enabled only on the main CollectItem Image. Other UI and fruit effects retain their existing behavior.",
+    "Use the authored tile priority for initial, field, tray, and undo restoration; use saved priority only when the tile configuration is unavailable.",
+    "Sort field hierarchy after completing snapshot restoration.",
+    "Retain the previous immediate returning-fruit membership, return completion lock, and shuffle guard fixes."
+  ],
+  "prefabAudit": {
+    "field": "Main fruit images share Map ordering, after the tree background.",
+    "tray": "Fruit images inherit tray Layer ordering, above the backboard and below the front lip.",
+    "effects": "Idle animations hide highlight/glow images; effects do not intercept raycasts."
+  },
+  "validation": {
+    "entryPoint": "FruitReturnValidation.Run",
+    "unity": "2022.3.62f3",
+    "exitCode": 0,
+    "passed": 15,
+    "errors": 0,
+    "report": "fruit-canvas-results.json",
+    "improvement": "Uses actual CorePlayUI background/Map/Layer, complete fruit/effect sprites, idle animation sampling, real RefreshCanvasLayers, EventSystem.RaycastAll, and rendered pixel comparisons.",
+    "limits": "Lifecycle fixtures exercise shared production helpers; actual Android restore/undo/collection requires the separately recorded device regression."
+  }
+}

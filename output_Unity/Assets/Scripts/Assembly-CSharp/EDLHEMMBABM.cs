@@ -304,7 +304,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		item.RefreshCanvasLayers();
 		rect.anchoredPosition = new Vector2(tile.posX, tile.posY);
 		rect.localScale = Vector3.one;
-		item.Priority = tile.layerIndex * 10000 + tile.indexInLayer;
+		item.Priority = CollectItemFieldOrder.ResolvePriority(tile, 0);
 		item.Status = LECIONHKEJL.OnField;
 		rect.SetAsLastSibling();
 		item.gameObject.name = $"Item_{tile.tileID}_{type}";
@@ -1096,7 +1096,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 			CollectItem item = CreateItemAtTile(tile, itemData.type);
 			if (item != null)
 			{
-				item.Priority = itemData.priority;
+				item.Priority = CollectItemFieldOrder.ResolvePriority(tile, itemData.priority);
 				TotalItems.Add(item);
 				itemMap[item.Id] = item;
 			}
@@ -1113,6 +1113,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 			{
 				continue;
 			}
+			item.Priority = CollectItemFieldOrder.ResolvePriority(t, 0);
 			item.transform.SetParent(UI.m_CollectArea, false);
 			item.transform.localScale = Vector3.one;
 			item.RefreshCanvasLayers();
@@ -1129,6 +1130,11 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		{
 			UndoRecord undoRecord = snapshot.undoRecords[i];
 			itemMap.TryGetValue(undoRecord.itemId, out CollectItem item);
+			if (item != null)
+			{
+				tileDict.TryGetValue(undoRecord.itemId, out SingleNormalTile tile);
+				item.Priority = CollectItemFieldOrder.ResolvePriority(tile, undoRecord.savedPriority);
+			}
 			undoStack.Push(new JELADCKDFLB
 			{
 				item = item,
@@ -1138,6 +1144,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 				anchoredPos = new Vector2(undoRecord.anchoredX, undoRecord.anchoredY)
 			});
 		}
+		CollectItemFieldOrder.Restore(ItemLayer, TotalItems);
 		yield return null;
 		BuildOcclusionGrid();
 		SetUseAddOneItemStatus(ifUseAddOneItem, false);

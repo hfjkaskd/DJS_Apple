@@ -18,9 +18,25 @@ namespace Orange
 		[SerializeField]
 		private bool auto;
 
+		[Header("沿用父级绘制顺序，不为此图像创建独立排序边界")]
+		[SerializeField]
+		private bool inheritParentSorting;
+
 		public void SetLayer(int baseLayer)
 		{
 			Canvas canvas = GetComponent<Canvas>();
+			if (inheritParentSorting)
+			{
+				// Main fruit images must share hierarchy ordering with each other.
+				// Equal-order override canvases otherwise have independent render
+				// and raycast ordering that can disagree with fruit priority.
+				if (canvas != null)
+				{
+					canvas.overrideSorting = false;
+					canvas.sortingOrder = 0;
+				}
+				return;
+			}
 			if (canvas == null)
 			{
 				canvas = gameObject.AddComponent<Canvas>();
