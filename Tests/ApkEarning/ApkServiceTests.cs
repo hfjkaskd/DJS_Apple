@@ -5,6 +5,7 @@ using FruitApkEarning;
 namespace UnityEngine {
     public class ScriptableObject { }
     [AttributeUsage(AttributeTargets.Class)] public sealed class CreateAssetMenuAttribute : Attribute { public string menuName; }
+    [AttributeUsage(AttributeTargets.Field)] public sealed class MinAttribute : Attribute { public MinAttribute(float minimum) { } }
     public static class Resources { public static object Asset; public static T Load<T>(string path) where T:class { return Asset as T; } }
     public static class Application { public static string persistentDataPath; }
     public static class Debug { public static void LogError(object v) { } public static void LogWarning(object v) { } public static void LogException(Exception e) { } }
