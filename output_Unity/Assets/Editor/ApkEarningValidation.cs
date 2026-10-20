@@ -47,7 +47,7 @@ public static class ApkEarningValidation
     {
         public string page, state, image;
         public string dataSource = "Static editor preview data only; not player data or a running-game capture.";
-        public int width, height, activeButtons, activeTexts, textOverlapChecks;
+        public int width, height, activeButtons, activeTexts, textOverlapChecks, buttonOverlapChecks;
         public float canvasScale;
         public ModalBoundsReport modalBounds;
         public List<string> errors = new List<string>();
@@ -454,6 +454,8 @@ public static class ApkEarningValidation
             {
                 MeasureModalBounds(instance, camera, size, item);
                 AuditModalTextOverlaps(instance.GetComponent<ApkEarningPageView>(), name, camera, size, item);
+                if (name == "TXCoinPanel")
+                    AuditDiamondOptionOverlaps(instance.GetComponent<ApkEarningPageView>(), camera, size, item);
             }
             if (hudOnly) AuditCompactHeaderAlignment(instance.transform, camera, item.errors);
             foreach (Button button in instance.GetComponentsInChildren<Button>(false))
@@ -547,6 +549,54 @@ public static class ApkEarningValidation
         bounds.heightRatio = bounds.frameBounds.height / size.y;
         bounds.visibleWidthRatio = bounds.visibleFrameBounds.width / size.x;
         bounds.visibleHeightRatio = bounds.visibleFrameBounds.height / size.y;
+    }
+
+    private static void AuditDiamondOptionOverlaps(ApkEarningPageView page, Camera camera,
+        Vector2Int size, RenderReport item)
+    {
+        if (page == null) return;
+        var bounds = new Rect[4];
+        var visible = new bool[4];
+        for (int i = 0; i < bounds.Length; i++)
+        {
+            Button button = page.GetButton("options[" + i + "]");
+            if (button == null)
+            {
+                item.errors.Add("Cannot audit diamond option overlap; required Button is missing: options[" + i + "]");
+                continue;
+            }
+            Graphic graphic = button.targetGraphic;
+            if (!button.gameObject.activeInHierarchy || graphic == null || !graphic.isActiveAndEnabled ||
+                graphic.canvasRenderer.cull ||
+                graphic.color.a * graphic.canvasRenderer.GetAlpha() * graphic.canvasRenderer.GetInheritedAlpha() <= .001f) continue;
+            // Measure the actual Button rectangle, never its label or a child
+            // decoration. Disabled-but-visible options still occupy screen area.
+            RectTransform rect = button.transform as RectTransform;
+            if (rect == null)
+            {
+                item.errors.Add("Diamond option Button has no RectTransform: options[" + i + "]");
+                continue;
+            }
+            bounds[i] = IntersectBounds(ScreenBounds(rect, camera), new Rect(0, 0, size.x, size.y));
+            foreach (RectMask2D mask in button.GetComponentsInParent<RectMask2D>(false))
+                if (mask.isActiveAndEnabled && mask.transform != button.transform)
+                    bounds[i] = IntersectBounds(bounds[i], ScreenBounds(mask.rectTransform, camera));
+            foreach (Mask mask in button.GetComponentsInParent<Mask>(false))
+                if (mask.isActiveAndEnabled && mask.transform != button.transform)
+                    bounds[i] = IntersectBounds(bounds[i], ScreenBounds(mask.rectTransform, camera));
+            visible[i] = bounds[i].width > 0 && bounds[i].height > 0;
+        }
+        for (int first = 0; first < bounds.Length; first++)
+            for (int second = first + 1; second < bounds.Length; second++)
+            {
+                if (!visible[first] || !visible[second]) continue;
+                item.buttonOverlapChecks++;
+                Rect overlap = IntersectBounds(bounds[first], bounds[second]);
+                if (overlap.width > 0 && overlap.height > 0)
+                    item.errors.Add("Visible diamond option Buttons overlap: options[" + first + "] / options[" + second +
+                        "]; first=" + bounds[first] + "; second=" + bounds[second] + "; overlap=" + overlap +
+                        ". Bounds use the actual Button RectTransforms.");
+            }
     }
 
     private static void AuditModalTextOverlaps(ApkEarningPageView page, string name, Camera camera,
