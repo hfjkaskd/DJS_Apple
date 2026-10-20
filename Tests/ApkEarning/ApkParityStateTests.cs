@@ -32,6 +32,7 @@ public static class ApkParityStateTests
         Directory.CreateDirectory(folder);
         CalendarCases();
         MigrationCases(folder);
+        SimulatedStatsCases(folder);
         TestVideoCases();
         ServiceTransactions(folder);
         Console.WriteLine("APK_PARITY_STATE_PASS " + checks + " checks");
@@ -66,7 +67,8 @@ public static class ApkParityStateTests
         WriteV2(path, false);
         bool recovered;
         var state = ApkEarningStorage.Load(path, Rules, out recovered);
-        Check(state.Version == 3 && state.LastLocalDay == -1 && state.LoginDays == 4 && state.TodayWins == 8,
+        Check(state.Version == 3 && state.LastLocalDay == -1 && state.LoginDays == 4 && state.TodayWins == 8 &&
+            state.StatsDisplayUtcDay == -1 && state.SimulatedDailyAttempts == 0,
             "v2 read preserves its UTC counters until first local tick");
         var engine = new ApkEarningEngine(Rules, state, () => .5, Calendar(14));
         engine.Tick(Unix(20, 12));
@@ -80,6 +82,36 @@ public static class ApkParityStateTests
             "old completed activation cannot replay its absolute balance grant");
         engine = new ApkEarningEngine(Rules, state, () => .5);
         Check(!engine.ApplyActivationBalance(Now) && state.CashCents == 51000, "legacy activation is never paid twice");
+    }
+    private static void SimulatedStatsCases(string folder)
+    {
+        int samples = 0;
+        var state = new ApkEarningState { TodayWins = 8, LoginDays = 7, CashCents = 12345, Diamonds = 67890, RewardVideos = 2 };
+        var engine = new ApkEarningEngine(Rules, state, () => { samples++; return 1; }, Calendar(-4));
+        Check(engine.RefreshSimulatedStats(5, 11, Unix(20, 23)) && state.SimulatedDailyAttempts == 10,
+            "display attempt draw honors maximum-exclusive even for RNG endpoint one");
+        Check(!engine.RefreshSimulatedStats(5, 11, Unix(20, 23, 59)) && samples == 1,
+            "same UTC date retains one display sample");
+        Check(!engine.RefreshSimulatedStats(5, 11, Unix(19, 23)) && samples == 1,
+            "backward clock cannot reroll display sample");
+        Check(engine.RefreshSimulatedStats(5, 11, Unix(21, 0)) && samples == 2 &&
+            state.StatsDisplayUtcDay == Unix(21, 0) / 86400, "display statistics change on UTC date independently of local login calendar");
+        Check(state.TodayWins == 8 && state.LoginDays == 7 && state.CashCents == 12345 && state.Diamonds == 67890 &&
+            state.RewardVideos == 2 && state.LastLocalDay == -1, "display sampling changes no gameplay, money, calendar or video state");
+        var lower = new ApkEarningEngine(Rules, new ApkEarningState(), () => 0);
+        Check(lower.RefreshSimulatedStats(5, 11, Now) && lower.State.SimulatedDailyAttempts == 5, "display attempt minimum is inclusive");
+        bool rejected = false;
+        try { lower.RefreshSimulatedStats(5, 5, Now); } catch (ArgumentOutOfRangeException) { rejected = true; }
+        Check(rejected, "empty display sample range is rejected");
+        string path = Path.Combine(folder, "stats-roundtrip.dat");
+        ApkEarningStorage.Save(path, state); bool recovered;
+        var loaded = ApkEarningStorage.Load(path, Rules, out recovered);
+        var copy = ApkEarningStorage.Clone(loaded);
+        Check(loaded.StatsDisplayUtcDay == state.StatsDisplayUtcDay && loaded.SimulatedDailyAttempts == 10 &&
+            copy.StatsDisplayUtcDay == state.StatsDisplayUtcDay && copy.SimulatedDailyAttempts == 10,
+            "display sample survives checksummed round trip and cloning");
+        var resumed = new ApkEarningEngine(Rules, loaded, () => { throw new Exception("must not redraw"); });
+        Check(!resumed.RefreshSimulatedStats(5, 11, Unix(21, 12)), "reopening a saved display day never rerolls");
     }
     private static void TestVideoCases()
     {
@@ -161,6 +193,21 @@ public static class ApkParityStateTests
             "reload cannot replay the committed video");
         Check(!service.ClaimWithTestVideo("saved-video:level", true) && service.State.RewardVideos == 1,
             "late duplicate video callback has no effect");
+        long cashBeforeStats = service.State.CashCents, diamondsBeforeStats = service.State.Diamonds;
+        int winsBeforeStats = service.State.TodayWins, loginBeforeStats = service.State.LoginDays, videosBeforeStats = service.State.RewardVideos;
+        Directory.CreateDirectory(path + ".tmp");
+        Check(!service.RefreshSimulatedStats(5, 11) && service.State.StatsDisplayUtcDay == -1 &&
+            service.State.SimulatedDailyAttempts == 0, "failed statistics save cannot publish an uncommitted sample");
+        Directory.Delete(path + ".tmp");
+        Check(service.Init(4) && service.RefreshSimulatedStats(5, 11), "statistics retry commits a display sample");
+        loaded = ApkEarningStorage.Load(path, Rules, out recovered);
+        Check(loaded.StatsDisplayUtcDay == Now / 86400 && loaded.SimulatedDailyAttempts >= 5 && loaded.SimulatedDailyAttempts <= 10 &&
+            loaded.CashCents == cashBeforeStats && loaded.Diamonds == diamondsBeforeStats &&
+            loaded.TodayWins == winsBeforeStats && loaded.LoginDays == loginBeforeStats && loaded.RewardVideos == videosBeforeStats,
+            "statistics transaction preserves every gameplay counter and balance");
+        previous = File.ReadAllBytes(path);
+        Check(service.RefreshSimulatedStats(5, 11) && SameBytes(previous, File.ReadAllBytes(path)),
+            "same-day wallet reopen succeeds without another statistics write");
     }
     private static bool SameBytes(byte[] a, byte[] b)
     { if (a.Length != b.Length) return false; for (int i = 0; i < a.Length; i++) if (a[i] != b[i]) return false; return true; }

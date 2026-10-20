@@ -68,6 +68,13 @@ namespace FruitApkEarning
         // its completion. A cancelled simulation does not write or notify.
         public bool ClaimWithTestVideo(string id, bool completed)
         { return completed && Mutate(candidate => candidate.ClaimWithTestVideo(id, true, UtcNow())); }
+        public bool RefreshSimulatedStats(int minimum, int maximumExclusive)
+        {
+            if (!Available || minimum < 0 || maximumExclusive <= minimum) return false;
+            long now = UtcNow();
+            if (State.StatsDisplayUtcDay >= now / 86400) return true;
+            return Mutate(candidate => candidate.RefreshSimulatedStats(minimum, maximumExclusive, now));
+        }
         public bool ArchiveEarlyReward(int ordinal)
         {
             if (Mutate(candidate => candidate.ArchiveEarlyReward(ordinal, UtcNow()))) return true;
@@ -259,7 +266,8 @@ namespace FruitApkEarning
                 CashGuidanceComplete = state.CashGuidanceComplete, DiamondGuideShown = state.DiamondGuideShown,
                 ActivationStep = state.ActivationStep, LuckyMatches = state.LuckyMatches, CashTargetCents = state.CashTargetCents,
                 LastUtcDay = state.LastUtcDay, LastLuckyUtc = state.LastLuckyUtc, NextRewardSequence = state.NextRewardSequence,
-                LastLocalDay = state.LastLocalDay, ActivationBalanceApplied = state.ActivationBalanceApplied, RewardVideos = state.RewardVideos
+                LastLocalDay = state.LastLocalDay, ActivationBalanceApplied = state.ActivationBalanceApplied, RewardVideos = state.RewardVideos,
+                StatsDisplayUtcDay = state.StatsDisplayUtcDay, SimulatedDailyAttempts = state.SimulatedDailyAttempts
             };
             foreach (var reward in state.PendingRewards) copy.PendingRewards.Add(new ApkReward {
                 Id = reward.Id, Kind = reward.Kind, CashCents = reward.CashCents, Diamonds = reward.Diamonds,
@@ -300,6 +308,7 @@ namespace FruitApkEarning
                 }
                 writer.Write(state.WelcomeShown);
                 writer.Write(state.LastLocalDay); writer.Write(state.ActivationBalanceApplied); writer.Write(state.RewardVideos);
+                writer.Write(state.StatsDisplayUtcDay); writer.Write(state.SimulatedDailyAttempts);
                 writer.Flush();
                 if (stream.Length > MaxBytes) throw new InvalidDataException("Earning history exceeds the supported save size.");
                 return stream.ToArray();
@@ -357,6 +366,7 @@ namespace FruitApkEarning
                 if (version >= 3) {
                     state.LastLocalDay = reader.ReadInt64(); state.ActivationBalanceApplied = reader.ReadBoolean();
                     state.RewardVideos = reader.ReadInt32();
+                    state.StatsDisplayUtcDay = reader.ReadInt64(); state.SimulatedDailyAttempts = reader.ReadInt32();
                 }
                 else {
                     // Old activation was committed with its balance. Never replay

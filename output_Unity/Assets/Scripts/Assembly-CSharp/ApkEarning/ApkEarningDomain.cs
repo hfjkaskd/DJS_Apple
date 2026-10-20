@@ -137,6 +137,9 @@ namespace FruitApkEarning
         // Local civil-date ordinal; UTC timestamps above remain unchanged.
         // -1 with a known LastUtcDay identifies a pre-local-calendar save.
         public long LastLocalDay = -1;
+        // Reference-wallet presentation samples are separate from player progress.
+        public long StatsDisplayUtcDay = -1;
+        public int SimulatedDailyAttempts;
         public List<ApkReward> PendingRewards = new List<ApkReward>();
         public List<ApkRecord> Records = new List<ApkRecord>();
         public List<ApkRunCheckpoint> Runs = new List<ApkRunCheckpoint>();
@@ -176,7 +179,8 @@ namespace FruitApkEarning
             if (state.CashCents < 0 || state.Diamonds < 0 || state.CashTargetCents < 0 || state.CurrentLevel < 1 ||
                 state.HighestClearedLevel < 0 || state.TodayWins < 0 || state.LoginDays < 0 || state.AccountLevel < 0 ||
                 state.LuckyMatches < 0 || state.NextRewardSequence < 0 || state.LastUtcDay < -1 || state.LastLocalDay < -1 ||
-                state.LastLuckyUtc < 0 || state.ActivationStep < 0 || state.ActivationStep > 6 || state.RewardVideos < 0 || state.Runs == null ||
+                state.LastLuckyUtc < 0 || state.ActivationStep < 0 || state.ActivationStep > 6 || state.RewardVideos < 0 ||
+                state.StatsDisplayUtcDay < -1 || state.SimulatedDailyAttempts < 0 || state.Runs == null ||
                 state.PendingRewards == null || state.Records == null) throw new InvalidOperationException("Invalid earning state.");
             foreach (var run in state.Runs) {
                 if (run == null || string.IsNullOrEmpty(run.Id) || run.Level < 1 || run.LastSequence < 0)
@@ -225,6 +229,20 @@ namespace FruitApkEarning
 
         public static long LocalCalendarDay(long utc)
         { return DateTimeOffset.FromUnixTimeSeconds(utc).ToLocalTime().Date.Ticks / TimeSpan.TicksPerDay; }
+
+        public bool RefreshSimulatedStats(int minimum, int maximumExclusive, long utc)
+        {
+            RequireTime(utc);
+            if (minimum < 0 || maximumExclusive <= minimum) throw new ArgumentOutOfRangeException(nameof(maximumExclusive));
+            long day = utc / 86400;
+            if (State.StatsDisplayUtcDay >= day) return false;
+            int range = maximumExclusive - minimum;
+            int offset = (int)Math.Min(range - 1, Math.Floor(NextRandom() * range));
+            State.SimulatedDailyAttempts = minimum + offset;
+            State.StatsDisplayUtcDay = day;
+            // No Tick: a display refresh must never alter login, wins or balances.
+            return true;
+        }
 
         public bool BeginRun(string id, int initialSequence, int level, long utc)
         {

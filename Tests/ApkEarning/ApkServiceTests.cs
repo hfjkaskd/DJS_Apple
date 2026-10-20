@@ -44,7 +44,7 @@ public static class ApkServiceTests {
         Check(presentation.PaymentChannels[0].FormatAccount("Test user","email@example.com","+1","0000000000")=="Test user\n+1 0000000000"&&presentation.PaymentChannels[2].FormatAccount("Test user","email@example.com","+1","0000000000")=="Test user\nemail@example.com","confirmation formats only selected channel account data");
         string sample=Path.Combine(root,"sample.dat");bool recovered;
         string v1=Path.Combine(root,"v1.dat");WriteV1(v1,1);var migrated=ApkEarningStorage.Load(v1,rules,out recovered);
-        Check(migrated.Version==3&&!migrated.WelcomeShown&&migrated.CashCents==123&&migrated.Diamonds==456,"version 1 first-level save migrates without losing balances");
+        Check(migrated.Version==3&&!migrated.WelcomeShown&&migrated.CashCents==123&&migrated.Diamonds==456&&migrated.StatsDisplayUtcDay==-1&&migrated.SimulatedDailyAttempts==0,"version 1 first-level save migrates without losing balances");
         WriteV1(v1,4);migrated=ApkEarningStorage.Load(v1,rules,out recovered);
         Check(migrated.Version==3&&migrated.WelcomeShown&&migrated.CurrentLevel==4,"version 1 returning player skips welcome");
         migrated.WelcomeShown=true;ApkEarningStorage.Save(v1,migrated);migrated=ApkEarningStorage.Load(v1,rules,out recovered);
