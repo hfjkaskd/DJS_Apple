@@ -29,6 +29,9 @@ public static class BuildScript
 		if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.Android)
 			throw new InvalidOperationException("Select Android first, or launch Unity with -buildTarget Android.");
 
+		PlayerSettings.bundleVersion = "1.0.6";
+		PlayerSettings.Android.bundleVersionCode = 106;
+
 		string output = Environment.GetEnvironmentVariable("DJS_APPLE_APK_OUTPUT");
 		if (string.IsNullOrEmpty(output))
 			output = "Builds/Android/TripleHarvest-" + PlayerSettings.bundleVersion + "-preview.apk";
@@ -36,7 +39,6 @@ public static class BuildScript
 		Directory.CreateDirectory(Path.GetDirectoryName(output));
 
 		PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.Android, "com.flyfox.tripleharvest.preview");
-		PlayerSettings.Android.bundleVersionCode = 105;
 		PlayerSettings.Android.minSdkVersion = AndroidSdkVersions.AndroidApiLevel22;
 		PlayerSettings.Android.targetSdkVersion = AndroidSdkVersions.AndroidApiLevel34;
 		PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64 | AndroidArchitecture.ARMv7;
