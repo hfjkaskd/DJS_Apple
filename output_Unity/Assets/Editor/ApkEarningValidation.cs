@@ -47,7 +47,7 @@ public static class ApkEarningValidation
     {
         public string page, state, image;
         public string dataSource = "Static editor preview data only; not player data or a running-game capture.";
-        public int width, height, activeButtons, activeTexts;
+        public int width, height, activeButtons, activeTexts, textOverlapChecks;
         public float canvasScale;
         public ModalBoundsReport modalBounds;
         public List<string> errors = new List<string>();
@@ -450,7 +450,11 @@ public static class ApkEarningValidation
                 foreach (ApkEarningTopView top in instance.GetComponentsInChildren<ApkEarningTopView>(true)) top.RefreshLayout();
             foreach (TMP_Text text in instance.GetComponentsInChildren<TMP_Text>(false)) text.ForceMeshUpdate(true, true);
             Canvas.ForceUpdateCanvases(); camera.Render();
-            if (measureModal) MeasureModalBounds(instance, camera, size, item);
+            if (measureModal)
+            {
+                MeasureModalBounds(instance, camera, size, item);
+                AuditModalTextOverlaps(instance.GetComponent<ApkEarningPageView>(), name, camera, size, item);
+            }
             if (hudOnly) AuditCompactHeaderAlignment(instance.transform, camera, item.errors);
             foreach (Button button in instance.GetComponentsInChildren<Button>(false))
             {
@@ -543,6 +547,76 @@ public static class ApkEarningValidation
         bounds.heightRatio = bounds.frameBounds.height / size.y;
         bounds.visibleWidthRatio = bounds.visibleFrameBounds.width / size.x;
         bounds.visibleHeightRatio = bounds.visibleFrameBounds.height / size.y;
+    }
+
+    private static void AuditModalTextOverlaps(ApkEarningPageView page, string name, Camera camera,
+        Vector2Int size, RenderReport item)
+    {
+        if (page == null) return;
+        if (name == "TXPanel")
+        {
+            AuditTextPair(page, "TestMode", "labels[0].Text", camera, size, item);
+            foreach (string key in new[] { "Stats.PassCount", "Stats.ChallengeTimes", "Stats.GoldGetCount" })
+                AuditTextPair(page, "Stats.Time", key, camera, size, item);
+        }
+        else if (name == "LocalWithdrawalConditions")
+        {
+            foreach (ApkEarningPageView.TextSlot slot in page.Texts)
+                if (slot != null && slot.Key != null && slot.Key.StartsWith("rows[", StringComparison.Ordinal) &&
+                    slot.Key.EndsWith("].Name", StringComparison.Ordinal))
+                    AuditTextPair(page, slot.Key, slot.Key.Substring(0, slot.Key.Length - 4) + "Value", camera, size, item);
+        }
+    }
+
+    private static void AuditTextPair(ApkEarningPageView page, string firstKey, string secondKey,
+        Camera camera, Vector2Int size, RenderReport item)
+    {
+        TMP_Text first = page.GetText(firstKey), second = page.GetText(secondKey);
+        if (first == null || second == null)
+        {
+            item.errors.Add("Cannot audit modal text overlap; required bindings are missing: " + firstKey + " / " + secondKey);
+            return;
+        }
+        if (!TryVisibleTextBounds(first, camera, size, out Rect firstBounds) ||
+            !TryVisibleTextBounds(second, camera, size, out Rect secondBounds)) return;
+        item.textOverlapChecks++;
+        Rect overlap = IntersectBounds(firstBounds, secondBounds);
+        if (overlap.width > 0 && overlap.height > 0)
+            item.errors.Add("Visible TMP text overlaps: " + firstKey + " / " + secondKey +
+                "; first=" + firstBounds + "; second=" + secondBounds + "; overlap=" + overlap +
+                ". Bounds use rendered textBounds, not the RectTransform text areas.");
+    }
+
+    private static bool TryVisibleTextBounds(TMP_Text text, Camera camera, Vector2Int size, out Rect screenBounds)
+    {
+        screenBounds = default;
+        if (!text.isActiveAndEnabled || string.IsNullOrWhiteSpace(text.text) || text.canvasRenderer.cull ||
+            text.color.a * text.canvasRenderer.GetAlpha() * text.canvasRenderer.GetInheritedAlpha() <= .001f) return false;
+        bool hasVisibleCharacter = false;
+        for (int i = 0; i < text.textInfo.characterCount; i++)
+            if (text.textInfo.characterInfo[i].isVisible) { hasVisibleCharacter = true; break; }
+        if (!hasVisibleCharacter) return false;
+        // ForceMeshUpdate already ran before camera.Render. TMP textBounds is the
+        // actual local text extent; a large text RectTransform is not a collision.
+        Bounds local = text.textBounds;
+        if (local.size.x <= 0 || local.size.y <= 0) return false;
+        Vector2 min = Vector2.zero, max = Vector2.zero;
+        for (int corner = 0; corner < 4; corner++)
+        {
+            var point = new Vector3((corner & 1) == 0 ? local.min.x : local.max.x,
+                (corner & 2) == 0 ? local.min.y : local.max.y, local.center.z);
+            Vector2 screen = RectTransformUtility.WorldToScreenPoint(camera, text.transform.TransformPoint(point));
+            if (corner == 0) min = max = screen;
+            else { min = Vector2.Min(min, screen); max = Vector2.Max(max, screen); }
+        }
+        screenBounds = IntersectBounds(Rect.MinMaxRect(min.x, min.y, max.x, max.y), new Rect(0, 0, size.x, size.y));
+        foreach (RectMask2D mask in text.GetComponentsInParent<RectMask2D>(false))
+            if (mask.isActiveAndEnabled && mask.transform != text.transform)
+                screenBounds = IntersectBounds(screenBounds, ScreenBounds(mask.rectTransform, camera));
+        foreach (Mask mask in text.GetComponentsInParent<Mask>(false))
+            if (mask.isActiveAndEnabled && mask.transform != text.transform)
+                screenBounds = IntersectBounds(screenBounds, ScreenBounds(mask.rectTransform, camera));
+        return screenBounds.width > 0 && screenBounds.height > 0;
     }
 
     private static Rect IntersectBounds(Rect first, Rect second)
