@@ -18,7 +18,7 @@ public static class ApkEarningValidation
     private const string CorePath = "Assets/res/local/coreplay/CorePlayUI.prefab";
     private const string TopPath = "Assets/res/local/withdrawal/ApkEarningTop.prefab";
     private const string HostPath = "Assets/res/local/withdrawal/ApkEarningHost.prefab";
-    private const string Output = "E:/CodexCacheBackups/DJS_Apple-apk-validation-20261014";
+    private static string Output = "E:/CodexCacheBackups/DJS_Apple-apk-validation-20261014";
     private static readonly string[] Pages = {
         "TXPanel", "TXCoinPanel", "LocalWithdrawalConditions", "LocalCashHistory", "LocalEarningSequence",
         "LocalLuckyReward", "TXUserInfoPanel", "TXUserInfoSurePanel", "LocalSuccess", "LocalEarningRecovery",
@@ -86,6 +86,39 @@ public static class ApkEarningValidation
     {
         ApkEarningUIAuthoring.Build();
         RenderFixtures();
+    }
+
+    [MenuItem("Tools/Apk Earning/Apply and Validate Flow Fixes")]
+    public static void ApplyAndValidateFlowFixes()
+    {
+        if (EditorApplication.isPlayingOrWillChangePlaymode)
+            throw new InvalidOperationException("Stop Play before applying and rendering saved flow fixtures.");
+        ApkEarningFlowAdditionsAuthoring.Apply();
+        ApkEarningFlowPrefabValidation.Validate();
+        Output = "C:/Projects/DJS_Apple/flow-parity-fix-20261020/static-fixtures";
+        Directory.CreateDirectory(Output);
+        var report = new Report {
+            generatedUtc = DateTime.UtcNow.ToString("O"),
+            scope = "Only the nine restored-flow pages are audited and rendered after localized prefab authoring. These are isolated static editor fixtures with explicitly synthetic preview data, not real players, live Host navigation, APK screenshots or device captures. No service, accounting, storage, ad network or payment operation is initialized. Test-video countdown and completion are separate authored presentation fixtures; animation and button behavior require the independent Play-mode regression."
+        };
+        string[] changedPages = {
+            "TXPanel", "TXCoinPanel", "LocalWithdrawalConditions", "LocalUserLevel",
+            "TXTooFastHintPanel", "LocalRewardVideoTest", "LocalWithdrawalVerification",
+            "TXProgress0Panel", "LocalEarningSequence"
+        };
+        foreach (string name in changedPages)
+        {
+            string path = PanelFolder + name + ".prefab";
+            AuditPrefab(AssetDatabase.LoadAssetAtPath<GameObject>(path), path, report);
+        }
+        foreach (Vector2Int size in new[] { new Vector2Int(1080, 1920), new Vector2Int(1080, 2340), new Vector2Int(720, 1600) })
+            foreach (string name in changedPages)
+                foreach (string state in FixtureStates(name))
+                    RenderFixture(name, PanelFolder + name + ".prefab", size, false, report, state);
+        File.WriteAllText(Path.Combine(Output, "prefab-fixtures-report.json"), JsonUtility.ToJson(report, true));
+        if (report.errors.Count > 0)
+            throw new InvalidOperationException("Restored flow fixture validation found " + report.errors.Count + " errors. See " + Output);
+        Debug.Log("[ApkEarningValidation] Restored flow passed " + report.pages.Count + " prefab audits and " + report.renders.Count + " static fixture renders. " + Output);
     }
 
     [MenuItem("Tools/Apk Earning/Validate and Render Saved Fixtures")]
@@ -414,6 +447,7 @@ public static class ApkEarningValidation
             case "LocalWithdrawalConditions": return new[] { "", "diamond", "ready" };
             case "TXUserInfoPanel": return new[] { "", "email" };
             case "TXCoinPanel": return new[] { "", "target-reached" };
+            case "LocalRewardVideoTest": return new[] { "", "complete" };
             case "LocalSuccess": return new[] { "", "early-reward" };
             default: return new[] { "" };
         }
@@ -428,12 +462,13 @@ public static class ApkEarningValidation
         switch (name)
         {
             case "TXPanel":
-                page.SetText("GoldCount", "$3.15"); page.SetText("Title", "CASH WALLET");
-                page.SetText("StageLabel", "Level 4"); page.SetText("labels[0].Text", "Available balance");
-                page.SetText("Tip", "Clear level 5\nto review withdrawal"); page.SetText("TXText", "Withdraw");
-                page.SetText("ProgressValue", "3 / 5"); page.SetText("ProgressTipValue", "2"); page.SetProgress("Progress", .6f);
-                page.SetText("Stats.PassCount", "Today: 3"); page.SetText("Stats.ChallengeTimes", "Total runs: 12");
-                page.SetText("Stats.GoldGetCount", "$3.15"); page.SetVisible("Level1", false); page.SetVisible("Level2", false);
+                page.SetText("GoldCount", "$500.79"); page.SetText("Title", "CASH WALLET");
+                page.SetText("StageLabel", "Level 7"); page.SetText("labels[0].Text", "Available balance");
+                page.SetText("Tip", "Clear level 22\nto review withdrawal"); page.SetText("TXText", "Withdraw");
+                page.SetText("ProgressValue", "6 / 22"); page.SetText("ProgressTipValue", "16"); page.SetProgress("Progress", 6f / 22);
+                page.SetText("Stats.Time", "Simulated stats");
+                page.SetText("Stats.PassCount", "Players today\n13,110"); page.SetText("Stats.ChallengeTimes", "Avg. attempts\n8");
+                page.SetText("Stats.GoldGetCount", "Avg. amount\n$32,500.00"); page.SetVisible("Level1", false); page.SetVisible("Level2", false);
                 break;
             case "TXCoinPanel": PreviewDiamonds(page, state == "target-reached"); break;
             case "LocalWithdrawalConditions": PreviewConditions(page, state); break;
@@ -471,12 +506,25 @@ public static class ApkEarningValidation
             case "LocalEarningRecovery":
                 page.SetText("title", "Local save unavailable");
                 page.SetText("body", "Preview save error.\nYour last saved rewards are preserved. Retry saving, or return to the game and recover them on restart."); break;
+            case "LocalRewardVideoTest":
+                page.SetText("title", "Test reward video");
+                page.SetText("body", state == "complete"
+                    ? "Test video finished.\nTap Complete test video to collect 10X.\nCancel keeps the normal reward available."
+                    : "Local test video · 5s\nNo ad network or payment is connected.\nComplete to collect 10X, or cancel without changing your reward.");
+                page.SetText("actionCaption", "Complete test video"); page.SetText("cancelCaption", "Cancel");
+                Button videoConfirm = page.GetButton("retry");
+                if (videoConfirm != null) videoConfirm.interactable = state == "complete";
+                break;
             case "LocalUserLevel":
-                page.SetText("levelLabel", "Level 4"); page.SetText("progressLabel", "3 / 5"); page.SetProgress("progressFill", .6f); break;
+                page.SetText("Title", "Account level"); page.SetText("levelLabel", "Level 0");
+                page.SetText("progressLabel", "Awaiting account update"); page.SetText("ProgressCaption", "Account progress");
+                page.SetText("Caption", "Continue"); page.SetProgress("progressFill", 0); break;
             case "TXTooFastHintPanel":
-                page.SetText("LevelTip", "Complete the next level target"); page.SetText("VideoTip", "Reward video unavailable");
-                page.SetText("LevelPregressValue", "3 / 5"); page.SetText("VideoPregressValue", "0 / 1");
-                page.SetProgress("LevelPregress", .6f); page.SetProgress("VideoPregress", 0); break;
+                page.SetText("labels[0].Text", "Complete the next level target to continue. Your current progress is shown below.");
+                page.SetText("labels[1].Text", "Requirements review"); page.SetText("labels[2].Text", "Continue");
+                page.SetText("LevelTip", "Complete level 51"); page.SetText("VideoTip", "Test reward videos completed");
+                page.SetText("LevelPregressValue", "22 / 51"); page.SetText("VideoPregressValue", "0 / 10");
+                page.SetProgress("LevelPregress", 22f / 51); page.SetProgress("VideoPregress", 0); break;
             case "Tip": page.SetText("content", "Reward video unavailable. Use Claim to collect."); break;
         }
     }
@@ -484,10 +532,10 @@ public static class ApkEarningValidation
     private static void PreviewDiamonds(ApkEarningPageView page, bool reached)
     {
         page.SetText("labels[0].Text", "My Diamonds");
-        page.SetText("CoinValue", reached ? "50,000" : "102"); page.SetText("GoldValue", reached ? "$500.00" : "$1.02");
+        page.SetText("CoinValue", reached ? "50,000" : "355.11"); page.SetText("GoldValue", reached ? "$500" : "$3.55");
         page.SetText("TipValue", "100=$1"); page.SetText("TXTip", "$500 Withdrawal Instructions:");
-        page.SetText("IitemTip", reached ? "Balance target complete\nReview remaining withdrawal requirements" : "Balance reaches $500 to withdraw all\nStill $498.98 to go");
-        page.SetText("TipBarValue", reached ? "$500 / $500" : "$1.02 / $500"); page.SetProgress("TipBar", reached ? 1 : .00204f);
+        page.SetText("IitemTip", reached ? "Balance target complete\nReview remaining withdrawal requirements" : "Balance reaches $500 to withdraw all\nStill $496.45 to go");
+        page.SetText("TipBarValue", reached ? "$500 / $500" : "$3.55 / $500"); page.SetProgress("TipBar", reached ? 1 : 355.11f / 50000);
         string[] amounts = { "$500", "$1,000", "$1,500", "$2,000" };
         for (int i = 0; i < amounts.Length; i++)
         {
@@ -509,16 +557,16 @@ public static class ApkEarningValidation
         page.SetText("notice", ready ? "Requirements complete. Confirm your payment details." : "Complete the requirements below to continue.");
         page.SetText("actionCaption", ready ? "Enter payment details" : "Continue playing");
         string[] names = diamond
-            ? new[] { "Required balance", "Complete cash guidance", "Login days", "Account level" }
-            : new[] { "Complete level 5", "Complete level 30", "Required balance", "Complete cash guidance", "Levels completed today", "Login days", "Account level" };
-        string[] values = diamond ? new[] { "102 / 50,000", "1 / 1", "2 / 5", "Awaiting account update" }
-            : new[] { "3 / 5 boards", "3 / 30 boards", "$3.15 / $300.00", "1 / 1", "3 / 10", "2 / 5", "Awaiting account update" };
+            ? new[] { "Required balance", "Levels completed today", "Login days", "Account level" }
+            : new[] { "Complete level 22", "Complete level 51", "Required balance", "Complete cash guidance", "Levels completed today", "Login days", "Account level" };
+        string[] values = diamond ? new[] { "355.11 / 50,000", "6 / 10", "2 / 5", "0 / 31" }
+            : new[] { "6 / 22 boards", "6 / 51 boards", "Awaiting account update", "0 / 1", "6 / 10", "2 / 5", "0 / 31" };
         for (int i = 0; i < 7; i++)
         {
             string key = "rows[" + i + "]"; page.SetVisible(key + ".Root", i < names.Length);
             if (i >= names.Length) continue;
             page.SetText(key + ".Name", names[i]); page.SetText(key + ".Value", ready ? "Complete" : values[i]);
-            page.SetText(key + ".Status", ready || names[i] == "Complete cash guidance" ? "Complete" : "In progress");
+            page.SetText(key + ".Status", ready ? "Complete" : "In progress");
         }
     }
 
@@ -593,7 +641,7 @@ public static class ApkEarningValidation
             page.SetText("messageLayouts[" + i + "].Title", titles[i]); page.SetText("messageLayouts[" + i + "].Body", bodies[i]);
         }
         page.SetText("receiptAmount", "$3.15"); page.SetText("bonusesTitle", "Your reward bonuses");
-        string[] captions = { "Extra cash reward", "Match three fruits to earn a reward", "Reward video bonus - unavailable", "Unlock diamond rewards", "Withdrawal requirements" };
+        string[] captions = { "Extra cash reward", "Match three fruits to earn a reward", "Test reward video bonus", "Unlock diamond rewards", "Withdrawal requirements" };
         for (int i = 0; i < captions.Length; i++)
         {
             page.SetText("bonusCaptions[" + i + "]", captions[i]);
@@ -613,7 +661,7 @@ public static class ApkEarningValidation
         page.SetText("labels[5].Text", verification ? "Ready to submit" : "Review remaining requirements before applying");
         if (!verification)
         {
-            page.SetText("Tip", "Complete level 30 to continue the next stage");
+            page.SetText("Tip", "Complete level 51 to continue the next stage");
             page.SetText("Des", "Complete the next level target to continue."); page.SetText("KeFu", "Application not submitted");
         }
         for (int i = 1; i <= (verification ? 3 : 4); i++)
