@@ -96,8 +96,12 @@ namespace FruitApkEarning
             while (true)
             {
                 yield return delay;
-                if (!service.Available || service.State == null || !CanOpen()) continue;
+                if (!service.Available || service.State == null ||
+                    JEFOMCDAPGK.Instance.Data.isLevelFinished || !CanOpen()) continue;
                 ApkEarningState state = service.State;
+                // Level rewards belong to the settlement queue, which also owns
+                // the callback that starts the next board after the page closes.
+                if (state.PendingRewards.Count > 0 && state.PendingRewards[0].Kind != "lucky") continue;
                 string pending = !state.WelcomeShown && state.CurrentLevel == 1 ? "welcome" : state.ActivationPending ? "activation" : state.PendingRewards.Count > 0 ? state.PendingRewards[0].Id :
                     !state.DiamondGuideShown && state.CurrentLevel >= service.Rules.DiamondFirstLevel ? "diamond-guide" : null;
                 if (pending == null || pending == lastAutomaticReward) continue;

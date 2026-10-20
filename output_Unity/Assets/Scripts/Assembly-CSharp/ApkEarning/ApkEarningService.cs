@@ -35,7 +35,14 @@ namespace FruitApkEarning
                 ApkEarningState saved = ApkEarningStorage.Load(savePath, config.Rules, out recovered);
                 if (saved == null) saved = MigrateLegacy(currentLevel);
                 var candidate = new ApkEarningEngine(config.Rules, saved);
-                candidate.Tick(UtcNow());
+                long now = UtcNow();
+                candidate.Tick(now);
+                // A new session resumes gameplay, not the previous session's
+                // reward modal. Preserve its earned money and early records in
+                // the same atomic save, before any observer can see this state.
+                // Init also retries failed in-session saves. Keep that live
+                // reward available for the original Claim action to retry.
+                if (engine == null) candidate.ResolveRestoredRewards(now);
                 ApkEarningStorage.Save(savePath, candidate.State, recovered);
                 engine = candidate;
                 RecoveredFromBackup = recovered;

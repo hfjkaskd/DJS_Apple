@@ -743,7 +743,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		FPFGGCMEDND.Instance.OnLevelPass();
 		WinUI.boxCompleted = FPFGGCMEDND.Instance.CurLevelBoxProgress == 0;
 		WinUI.newBoxProgress = WinUI.boxCompleted ? FPFGGCMEDND.LEVELS_PER_BOX : FPFGGCMEDND.Instance.CurLevelBoxProgress;
-		CoroutineManager.Instance.StartCor(WaitEliminationAndOpenWinUI(InNeedWait ? 6f : 0f));
+		CoroutineManager.Instance.StartCor(WaitEliminationAndOpenWinUI(InNeedWait ? 6f : 0f, generation));
 	}
 
 	public void OnLose()
@@ -757,32 +757,37 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		OpenLoseUI();
 	}
 
-	private IEnumerator WaitEliminationAndOpenWinUI(float InMaxWaitTime)
+	private IEnumerator WaitEliminationAndOpenWinUI(float InMaxWaitTime, int finishedGeneration)
 	{
-		float waited = 0f;
-		while (waited < InMaxWaitTime)
+		try
 		{
-			bool hasPending = pendingGroups.Count > 0;
-			if (!hasPending)
+			float waited = 0f;
+			while (finishedGeneration == generation && waited < InMaxWaitTime)
 			{
-				foreach (CollectItem item in CollectAreaList)
+				// Basket slots are freed before their disappearance effect ends.
+				// itemMap retains those fruits until the effect releases them.
+				if (pendingGroups.Count == 0 && CollectAreaList.Count == 0 && itemMap.Count == 0)
 				{
-					if (item != null)
-					{
-						hasPending = true;
-						break;
-					}
+					break;
 				}
+				yield return null;
+				waited += Time.deltaTime;
 			}
-			if (!hasPending)
+			if (finishedGeneration == generation && InMaxWaitTime > 0f && waited >= InMaxWaitTime &&
+				(pendingGroups.Count > 0 || CollectAreaList.Count > 0 || itemMap.Count > 0))
 			{
-				break;
+				Debug.LogWarning("[Settlement] Elimination did not finish before the timeout: groups=" +
+					pendingGroups.Count + ", basket=" + CollectAreaList.Count + ", liveFruits=" + itemMap.Count);
 			}
-			yield return null;
-			waited += Time.deltaTime;
 		}
-		yield return new WaitForSeconds(0.3f);
-		MCCIJBJGMCK.UnlockOnce();
+		finally
+		{
+			MCCIJBJGMCK.UnlockOnce();
+		}
+		if (finishedGeneration != generation || !JEFOMCDAPGK.Instance.Data.isLevelFinished)
+		{
+			yield break;
+		}
 		OpenWinUI();
 	}
 
@@ -922,6 +927,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 
 	private void RefreshCollectAreaPositions(bool InWithAni)
 	{
+		int capturedGen = generation;
 		for (int i = 0; i < CollectAreaList.Count; i++)
 		{
 			CollectItem item = CollectAreaList[i];
@@ -946,7 +952,15 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 			float speed = UI.moveParams != null && UI.moveParams.reorderSpeed > 0f ? UI.moveParams.reorderSpeed : COLLECT_MOVE_SPEED;
 			float duration = Mathf.Clamp(Vector3.Distance(item.transform.localPosition, target) / speed, 0.05f, 0.3f);
 			AnimationCurve curve = UI.moveParams != null ? UI.moveParams.reorderCurve : null;
-			item.MoveInSameArea(target, duration, curve, generation);
+			item.MoveInSameArea(target, duration, curve, capturedGen, delegate
+			{
+				// A group may be waiting for this reorder after its entering fruit
+				// has already landed. Both movement paths must finish the group.
+				if (capturedGen == generation && item != null && item.Status == LECIONHKEJL.LogicMatched)
+				{
+					OnMatchedItemLanded(item);
+				}
+			});
 		}
 	}
 

@@ -268,6 +268,26 @@ namespace FruitApkEarning
         {
             RequireTime(utc);
             int index = RewardIndex(id); if (index < 0) return false;
+            ClaimAt(index, utc);
+            return true;
+        }
+
+        /// <summary>
+        /// Completes already-earned rewards from a previous session without
+        /// reopening their presentation. The caller saves this candidate before
+        /// publishing it; this never creates a reward or changes a run's Won flag.
+        /// </summary>
+        public bool ResolveRestoredRewards(long utc)
+        {
+            RequireTime(utc);
+            bool changed = State.PendingRewards.Count > 0;
+            // Remove from the end so recovering a long saved queue stays linear.
+            for (int i = State.PendingRewards.Count - 1; i >= 0; i--) ClaimAt(i, utc);
+            return changed;
+        }
+
+        private void ClaimAt(int index, long utc)
+        {
             var reward = State.PendingRewards[index];
             long cash = checked(State.CashCents + reward.CashCents), diamonds = checked(State.Diamonds + reward.Diamonds);
             if (reward.EarlyOrdinal > 0 && FindRecord(reward.EarlyOrdinal) != null)
@@ -276,7 +296,6 @@ namespace FruitApkEarning
             if (reward.EarlyOrdinal > 0) State.Records.Add(new ApkRecord { Ordinal = reward.EarlyOrdinal,
                 AmountCents = reward.CashCents, CreatedUtc = utc });
             State.PendingRewards.RemoveAt(index);
-            return true;
         }
 
         public bool ArchiveEarlyReward(int ordinal, long utc)

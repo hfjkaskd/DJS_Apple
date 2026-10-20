@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-20",
+  "issues": [
+    "A completed triple could wait for the six-second settlement timeout when its last movement was a basket reorder.",
+    "An unclaimed level reward reopened over the next level after an application restart."
+  ],
+  "changes": [
+    "Notify matched groups when a basket reorder finishes, guarded by the current generation and LogicMatched status.",
+    "Wait for actual fruit release, then open settlement without an additional fixed delay. Cancel stale-generation settlement and pair its input unlock in finally.",
+    "HUD automatic reward polling no longer owns level settlement or opens rewards while the level is finished.",
+    "On a new service session, settle already-earned saved rewards using existing claim semantics and publish only after the atomic save succeeds.",
+    "Preserve live pending rewards during in-session save-error recovery so their current Claim action can retry."
+  ],
+  "validation": {
+    "startupRecoveryAssertions": 150,
+    "existingServiceAssertions": 37,
+    "existingDomainAssertions": 45,
+    "passed": true,
+    "runner": "Tests/ApkEarning/Run-StartupRecoveryTests.ps1",
+    "log": "C:/Projects/DJS_Apple/DeviceQA/20261020-v109/startup-recovery-tests.log",
+    "realBackupCopy": {
+      "sourceUnmodified": true,
+      "pendingLevelRewardsBefore": 1,
+      "cashCentsBefore": 50567,
+      "cashCentsAfter": 50578,
+      "diamondHundredthsBefore": 11196,
+      "diamondHundredthsAfter": 22681,
+      "pendingAfter": 0,
+      "secondStartupBalanceDelta": 0
+    },
+    "review": "Independent read-only review found no blocking lifecycle, generation, lock or duplicate-popup issue.",
+    "limits": "Offline tests execute the production service/domain/storage in isolated processes and temporary directories. Actual animation timing and phone restart behavior require device verification."
+  }
+}
