@@ -136,11 +136,13 @@ public static class ApkEarningValidation
     {
         if (EditorApplication.isPlayingOrWillChangePlaymode)
             throw new InvalidOperationException("Stop Play before rendering saved modal fixtures.");
-        const string output = "E:/CodexCacheBackups/DJS_Apple-modal-size-20261020/after";
+        string output = Environment.GetEnvironmentVariable("DJS_APPLE_MODAL_VALIDATION_OUTPUT");
+        if (string.IsNullOrWhiteSpace(output))
+            output = "E:/CodexCacheBackups/DJS_Apple-modal-size-20261020/after";
         Directory.CreateDirectory(output);
         var report = new Report {
             generatedUtc = DateTime.UtcNow.ToString("O"),
-            scope = "Read-only saved-prefab modal size validation. Every Panels prefab whose root PageView has FitWidth enabled, including variants and LocalRewardVideoTest, is rendered in all existing fixture states at 1080x1920, 1080x2400 and 720x1600. Only nine representative default-state 1080x2400 PNGs plus cash, diamond and account 1080x1920 PNGs are saved; other renders still run layout, camera rendering and audits without GPU readback or PNG encoding. Modal coverage measures visible CashWalletPanel Image rectangles, not alpha pixels; absent frames are reported explicitly. Synthetic preview data and production RefreshLayout are reused unchanged. No authoring, save mutation, Service, Host, ad network or payment operation is run."
+            scope = "Read-only saved-prefab layout previews and cross-resolution validation. Every Panels prefab whose root PageView has FitWidth enabled, including variants and LocalRewardVideoTest, is rendered in all existing fixture states at 1080x1920, 1080x2400 and 720x1600. Nine representative default-state 1080x2400 PNGs are saved. At 1080x1920, cash, diamond, account, history, reward, withdrawal conditions, verification and account confirmation default states plus diamond withdrawal conditions are saved for equal-resolution layout comparisons. Other renders still run layout, camera rendering and all existing audits without GPU readback or PNG encoding. Modal coverage measures visible CashWalletPanel Image rectangles, not alpha pixels; absent frames are reported explicitly. Synthetic preview data and production RefreshLayout are reused unchanged. These are layout previews, not live gameplay captures or proof of reference-pixel parity. No authoring, save mutation, Service, Host, ad network or payment operation is run."
         };
         var paths = new List<string>();
         foreach (string guid in AssetDatabase.FindAssets("t:Prefab", new[] { PanelFolder.TrimEnd('/') }))
@@ -158,7 +160,13 @@ public static class ApkEarningValidation
             "TXPanel", "TXCoinPanel", "TXUserInfoPanel", "LocalCashHistory", "LocalSuccess",
             "LocalWithdrawalConditions", "LocalEarningSequence", "LocalWithdrawalVerification", "LocalRewardVideoTest"
         };
-        foreach (string name in screenshots)
+        var standardScreenshots = new HashSet<string>(StringComparer.Ordinal) {
+            "TXPanel", "TXCoinPanel", "TXUserInfoPanel", "LocalCashHistory", "LocalSuccess",
+            "LocalWithdrawalConditions", "LocalWithdrawalVerification", "TXUserInfoSurePanel"
+        };
+        var requiredScreenshots = new HashSet<string>(screenshots, StringComparer.Ordinal);
+        requiredScreenshots.UnionWith(standardScreenshots);
+        foreach (string name in requiredScreenshots)
             if (!paths.Contains(PanelFolder + name + ".prefab"))
                 report.errors.Add("Representative FitWidth modal is missing: " + name);
         foreach (string path in paths)
@@ -169,16 +177,17 @@ public static class ApkEarningValidation
                 string name = Path.GetFileNameWithoutExtension(path);
                 foreach (string state in FixtureStates(name))
                     RenderFixture(name, path, size, false, report, state,
-                        string.IsNullOrEmpty(state) && size.x == 1080 &&
-                        ((size.y == 2400 && screenshots.Contains(name)) ||
-                         (size.y == 1920 && (name == "TXPanel" || name == "TXCoinPanel" || name == "TXUserInfoPanel"))),
+                        size.x == 1080 &&
+                        ((size.y == 2400 && string.IsNullOrEmpty(state) && screenshots.Contains(name)) ||
+                         (size.y == 1920 && ((string.IsNullOrEmpty(state) && standardScreenshots.Contains(name)) ||
+                          (name == "LocalWithdrawalConditions" && state == "diamond")))),
                         true, output);
             }
         File.WriteAllText(Path.Combine(output, "enlarged-modal-fixtures-report.json"), JsonUtility.ToJson(report, true));
         if (report.errors.Count > 0)
-            throw new InvalidOperationException("Enlarged modal validation found " + report.errors.Count + " errors. See " + output);
-        Debug.Log("[ApkEarningValidation] Enlarged modals passed " + report.pages.Count + " prefab audits and " +
-            report.renders.Count + " static renders, with twelve representative PNGs. " + output);
+            throw new InvalidOperationException("Modal layout validation found " + report.errors.Count + " errors. See " + output);
+        Debug.Log("[ApkEarningValidation] Modal layouts passed " + report.pages.Count + " prefab audits and " +
+            report.renders.Count + " static renders, with eighteen representative PNGs. " + output);
     }
 
     [MenuItem("Tools/Apk Earning/Validate and Render Saved Fixtures")]
