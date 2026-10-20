@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-20",
+  "issue": "After repeated revive, visibly front peach/orange can intercept a touch while logical occlusion rejects them.",
+  "phoneReproduction": {
+    "version": "1.0.7",
+    "level": "30005",
+    "before": "C:/Projects/DJS_Apple/DeviceQA/20261020-v107/04-before-peach-tap.png",
+    "after": "C:/Projects/DJS_Apple/DeviceQA/20261020-v107/05-after-peach-tap.png",
+    "tap": [710, 812],
+    "result": "Peach was not collected; tray had room.",
+    "pairs": [
+      { "visibleFrontTile": 1, "logicalFrontTile": 32, "types": [33, 37] },
+      { "visibleFrontTile": 8, "logicalFrontTile": 27, "types": [10, 52] }
+    ]
+  },
+  "cause": "Undo/revive restored historical siblingIndex after other siblings had disappeared, making draw order disagree with stable Priority.",
+  "changes": [
+    "Restore returning fruit sibling order using current Priority and Id.",
+    "Move logical membership to TotalItems before the return animation, so immediate snapshots retain the fruit.",
+    "Keep revive input locked until that revive's return animations finish, with a paired finally unlock.",
+    "Prevent shuffle from cancelling a return tween before its completion callback."
+  ],
+  "verification": {
+    "entryPoint": "FruitReturnValidation.Run",
+    "unityVersion": "2022.3.62f3",
+    "exitCode": 0,
+    "checksPassed": 8,
+    "results": "fruit-return-results.json",
+    "scope": "Real saved prefab and UGUI raycast/touch dispatch; original history-index failure reproduced, both actual overlap pairs validated. Snapshot roundtrip is a data-contract fixture, not a call to private SaveSnapshot."
+  },
+  "savePreservation": {
+    "oldSnapshotCountMismatchObserved": true,
+    "approach": "A successful ordinary gameplay touch naturally saved the now-completed return; no player file was edited.",
+    "snapshotBeforeUpgrade": "C:/Projects/DJS_Apple/DeviceQA/20261020-v107/after-isolated-touch-CorePlayModel.json",
+    "fieldCount": 6,
+    "trayCount": 6,
+    "eliminatedCount": 33,
+    "configuredCount": 45
+  }
+}

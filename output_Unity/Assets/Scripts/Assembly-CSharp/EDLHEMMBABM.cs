@@ -870,16 +870,52 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 	private IEnumerator RealRevive(float undoInterval = 0.15f, float shuffleDelay = 0f)
 	{
 		MCCIJBJGMCK.Lock();
-		int undoCount = 0;
-		while (CountInCollect() > MaxCollectAreaNum - 3 && undoStack.Count > 0 && undoCount < 3)
+		int capturedGen = generation;
+		var returningItems = new List<CollectItem>(3);
+		try
 		{
-			UndoLogic();
-			undoCount++;
-			yield return new WaitForSeconds(undoInterval);
+			int undoCount = 0;
+			while (capturedGen == generation && CountInCollect() > MaxCollectAreaNum - 3 && undoStack.Count > 0 && undoCount < 3)
+			{
+				JELADCKDFLB record = UndoLogic();
+				if (record.item != null && record.item.Status == LECIONHKEJL.Returning)
+				{
+					returningItems.Add(record.item);
+				}
+				undoCount++;
+				yield return new WaitForSeconds(undoInterval);
+			}
+			// The last flight can outlast the spacing between the three returns.
+			// Keep this revive's input lock until every fruit has landed.
+			while (capturedGen == generation)
+			{
+				bool hasReturningItem = false;
+				for (int i = 0; i < returningItems.Count; i++)
+				{
+					CollectItem item = returningItems[i];
+					if (item != null && item.Status == LECIONHKEJL.Returning)
+					{
+						hasReturningItem = true;
+						break;
+					}
+				}
+				if (!hasReturningItem)
+				{
+					break;
+				}
+				yield return null;
+			}
+			if (capturedGen != generation)
+			{
+				yield break;
+			}
+			SaveSnapshot();
+			RefreshCollectAreaPositions(true);
 		}
-		SaveSnapshot();
-		RefreshCollectAreaPositions(true);
-		MCCIJBJGMCK.UnlockOnce();
+		finally
+		{
+			MCCIJBJGMCK.UnlockOnce();
+		}
 	}
 
 	// ==================== 收集槽布局 ====================
@@ -1188,10 +1224,13 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 		}
 		CollectAreaList.Remove(item);
 		item.Status = LECIONHKEJL.Returning;
+		// Return the logical ownership before the flight: any snapshot taken
+		// during undo/revive must still contain this fruit exactly once.
+		TotalItems.Add(item);
 		item.KillMove();
 		item.ReparentForFlight(ItemLayer);
 		item.RefreshCanvasLayers();
-		item.transform.SetSiblingIndex(Mathf.Min(record.siblingIndex, ItemLayer.childCount - 1));
+		CollectItemFieldOrder.Restore(ItemLayer, TotalItems);
 		Vector3 target = new Vector3(record.anchoredPos.x, record.anchoredPos.y, 0f);
 		float speed = UI.moveParams != null && UI.moveParams.enterSpeed > 0f ? UI.moveParams.enterSpeed : COLLECT_ENTER_SPEED;
 		float duration = Mathf.Clamp(Vector3.Distance(item.transform.localPosition, target) / speed, 0.08f, 0.6f);
@@ -1207,7 +1246,6 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 			item.Status = LECIONHKEJL.OnField;
 			item.PlayAnim("anim_Fruits_Return");
 			item.PlayQueuedAnim(item.DefaultIdleAnim);
-			TotalItems.Add(item);
 			if (occlusionGrid != null)
 			{
 				occlusionGrid.Add(item);
@@ -1417,7 +1455,20 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 
 	public bool CheckCanShuffle()
 	{
-		return TotalItems.Count > 1;
+		if (TotalItems.Count <= 1)
+		{
+			return false;
+		}
+		for (int i = 0; i < TotalItems.Count; i++)
+		{
+			if (TotalItems[i] != null && TotalItems[i].Status == LECIONHKEJL.Returning)
+			{
+				// Shuffle owns the same movement tween. Let undo finish first
+				// so it cannot cancel the callback that restores OnField.
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public bool Shuffle(bool InConsumeItem = true)

@@ -1,0 +1,19 @@
+{
+    "generatedUtc": "2026-10-20T07:37:13.2924155Z",
+    "scope": "Isolated saved CollectItem prefab fixtures, production CollectItemFieldOrder.Restore, production occlusion query/calculation, and real GraphicRaycaster/UGUI touch dispatch. Uses level 30005 tile geometry and artwork. Button-event observations do not invoke gameplay collection. Returning snapshot serialization is a production-data-contract fixture, not a call to private SaveSnapshot or a device persistence test. No player services, saves, user scenes, or phone are modified.",
+    "passed": [
+        "Original history-index rule reproduces [A0,B1,C2,D3] -> [D3,C2]: C receives the raycast while D makes its occlusion exceed 80%.",
+        "Production helper restores [C2,D3]; D receives one UGUI click and has zero production occlusion.",
+        "30005 tiles 1/32: production order and real UGUI agree; high-priority fruit receives exactly one click.",
+        "30005 tiles 1/32: InCollect fruit is excluded from candidates; after removal the lower fruit receives one UGUI click.",
+        "30005 tiles 8/27: production order and real UGUI agree; high-priority fruit receives exactly one click.",
+        "30005 tiles 8/27: InCollect fruit is excluded from candidates; after removal the lower fruit receives one UGUI click.",
+        "Ordering retains Returning membership across repeated calls; a GameSnapshot JSON round trip preserves both IDs before return completes. This is a data-contract fixture, not private SaveSnapshot execution.",
+        "Independent production controller disables shuffle while Returning exists and enables it once return completes; no singleton/player storage involved."
+    ],
+    "diagnostics": [
+        "30005 tiles 1/32: lowerOcclusion=0.9444; upperOcclusion=0; frontHit=Tile_32_Type_37; original tile coordinates, types and authored image sizes used.",
+        "30005 tiles 8/27: lowerOcclusion=0.9444; upperOcclusion=0; frontHit=Tile_27_Type_52; original tile coordinates, types and authored image sizes used."
+    ],
+    "errors": []
+}
