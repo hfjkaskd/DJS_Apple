@@ -1,0 +1,137 @@
+{
+  "generated_utc": "2026-10-20T11:34:51.408075+00:00",
+  "status": "rendered",
+  "title": "提现弹窗尺寸对比",
+  "scope": "左列为参考 APK 的已保存设备原图；中列与右列为采用合成数据的 Unity 静态预览，不是安装后的手机实拍。只比较外观和占屏比例。",
+  "processing": "Read-only source images; EXIF orientation; full-frame aspect-preserving 1080x1920 to 540x960 LANCZOS resize; no crop, retouch or replacement.",
+  "columns": [
+    {
+      "id": "reference",
+      "label": "参考 APK 原界面",
+      "subtitle": "已保存的 APK 设备原图"
+    },
+    {
+      "id": "before",
+      "label": "修改前 · Unity 预览",
+      "subtitle": "合成数据，非手机实拍"
+    },
+    {
+      "id": "after",
+      "label": "放大后 · Unity 预览",
+      "subtitle": "合成数据，非手机实拍"
+    }
+  ],
+  "frame_size": [
+    540,
+    960
+  ],
+  "image_size": [
+    1704,
+    2358
+  ],
+  "output": "overview.png",
+  "rows": [
+    {
+      "id": "cash-wallet",
+      "label": "现金钱包",
+      "images": [
+        {
+          "column": "reference",
+          "source": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-cash-wallet.png",
+          "native_size": [
+            1080,
+            1920
+          ],
+          "sha256": "d7e21556030900dd9fb5fc1becbbbfac805f636038f06ccde5eed271a8bcce6a",
+          "fitted_rectangle": [
+            24,
+            238,
+            540,
+            960
+          ]
+        },
+        {
+          "column": "before",
+          "source": "C:\\Projects\\DJS_Apple\\flow-parity-fix-20261020\\static-fixtures\\fixture-TXPanel-1080x1920.png",
+          "native_size": [
+            1080,
+            1920
+          ],
+          "sha256": "602c459a98de7979c65c48d79bc56608cd96d66d26983f374e2964f978413618",
+          "fitted_rectangle": [
+            582,
+            238,
+            540,
+            960
+          ]
+        },
+        {
+          "column": "after",
+          "source": "E:\\CodexCacheBackups\\DJS_Apple-modal-size-20261020\\after\\fixture-TXPanel-1080x1920.png",
+          "native_size": [
+            1080,
+            1920
+          ],
+          "sha256": "8df21edb169619bad6d64c1eedf722b5cd8a9806c324db4b18f0590d9be6ec81",
+          "fitted_rectangle": [
+            1140,
+            238,
+            540,
+            960
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diamond-wallet",
+      "label": "钻石钱包",
+      "images": [
+        {
+          "column": "reference",
+          "source": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-diamond-wallet.png",
+          "native_size": [
+            1080,
+            1920
+          ],
+          "sha256": "9709559a4d7a896c9e6acdd26b1d16686381a301cd92072038f9c4e493c39694",
+          "fitted_rectangle": [
+            24,
+            1298,
+            540,
+            960
+          ]
+        },
+        {
+          "column": "before",
+          "source": "C:\\Projects\\DJS_Apple\\flow-parity-fix-20261020\\static-fixtures\\fixture-TXCoinPanel-1080x1920.png",
+          "native_size": [
+            1080,
+            1920
+          ],
+          "sha256": "0ef400e0b802cfde67d8a1eba18d49e77fe02fe80e4b2e1c2fdbb5fd8e33c7c0",
+          "fitted_rectangle": [
+            582,
+            1298,
+            540,
+            960
+          ]
+        },
+        {
+          "column": "after",
+          "source": "E:\\CodexCacheBackups\\DJS_Apple-modal-size-20261020\\after\\fixture-TXCoinPanel-1080x1920.png",
+          "native_size": [
+            1080,
+            1920
+          ],
+          "sha256": "9461911a738f6a050dab1c36f8ffde68289188475175de6f3fa52b6b52f685b5",
+          "fitted_rectangle": [
+            1140,
+            1298,
+            540,
+            960
+          ]
+        }
+      ]
+    }
+  ]
+}

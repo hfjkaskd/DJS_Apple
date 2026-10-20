@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-20",
+  "implementationCommit": "1b07b04",
+  "scope": "Enlarge 24 earning modal pages and 3 child prefabs using saved anchors, sliced panel backgrounds, and adjusted text, icons and buttons. Gameplay HUD and runtime business logic are outside this change.",
+  "authoringEntry": "ApkEarningModalSizingAuthoring.Apply",
+  "baseline": "Assets/Editor/ApkEarningModalSizingBaseline.json",
+  "resolutions": [
+    "1080x1920",
+    "1080x2400",
+    "720x1600"
+  ],
+  "static": {
+    "pages": 24,
+    "renders": 105,
+    "errors": 0,
+    "warnings": 9,
+    "textOverlapChecks": 66.0,
+    "buttonOverlapChecks": 36.0,
+    "buttonTextOverlapChecks": 3.0,
+    "warningExplanation": "Three retained source pages lack a visible CashWalletPanel Image for coverage measurement; reported at all three resolutions. Binding and layout audits still run."
+  },
+  "animation": {
+    "passed": true,
+    "cases": [
+      "verification-progress-button-gate",
+      "verification-cancel-disable-reentry",
+      "stage-first-and-resume-with-pending-requirements",
+      "bonus-sequential-pulse-and-restore",
+      "receipt-flight-completion-and-cancel"
+    ],
+    "scope": "Actual Unity Play-mode frames in an isolated empty scene. Saved page prefabs, production ApkEarningPageView coroutines, real UGUI Buttons and pointer dispatch. The HUD target and page text/status are explicit fixture data, not a player or device capture. No gameplay host, earning service, player storage, payment operation or original scene is loaded.",
+    "warnings": [
+      "The referenced script on this Behaviour (Game Object 'FreeCoinUI') is missing!"
+    ],
+    "note": "Executed after modal resizing. Subsequent final change only positions and sizes the static cash statistics caption; all static checks were rerun afterward."
+  },
+  "representativeCoverage": [
+    {
+      "page": "LocalCashHistory",
+      "widthRatio": 0.9360000491142273,
+      "heightRatio": 0.774193525314331,
+      "measurement": "Screen-space rectangle union of enabled, non-transparent CashWalletPanel Images; not alpha-pixel bounds. Visible bounds are intersected with active ancestor masks and the viewport."
+    },
+    {
+      "page": "LocalSuccess",
+      "widthRatio": 0.9360000491142273,
+      "heightRatio": 0.7225807309150696,
+      "measurement": "Screen-space rectangle union of enabled, non-transparent CashWalletPanel Images; not alpha-pixel bounds. Visible bounds are intersected with active ancestor masks and the viewport."
+    },
+    {
+      "page": "TXCoinPanel",
+      "widthRatio": 0.9360000491142273,
+      "heightRatio": 0.8450705409049988,
+      "measurement": "Screen-space rectangle union of enabled, non-transparent CashWalletPanel Images; not alpha-pixel bounds. Visible bounds are intersected with active ancestor masks and the viewport."
+    },
+    {
+      "page": "TXPanel",
+      "widthRatio": 0.9360000491142273,
+      "heightRatio": 0.800000011920929,
+      "measurement": "Screen-space rectangle union of enabled, non-transparent CashWalletPanel Images; not alpha-pixel bounds. Visible bounds are intersected with active ancestor masks and the viewport."
+    },
+    {
+      "page": "TXUserInfoPanel",
+      "widthRatio": 0.9360000491142273,
+      "heightRatio": 0.774193525314331,
+      "measurement": "Screen-space rectangle union of enabled, non-transparent CashWalletPanel Images; not alpha-pixel bounds. Visible bounds are intersected with active ancestor masks and the viewport."
+    }
+  ],
+  "reviewedScreens": [
+    "TXPanel at 1080x1920 and 1080x2400",
+    "TXCoinPanel at 1080x1920 and 1080x2400",
+    "TXUserInfoPanel",
+    "LocalWithdrawalConditions",
+    "LocalSuccess",
+    "LocalCashHistory",
+    "LocalRewardVideoTest",
+    "LocalEarningSequence assessment and bonuses",
+    "LocalWithdrawalVerification",
+    "Receipt in-flight"
+  ],
+  "comparison": "E:/CodexCacheBackups/DJS_Apple-modal-size-20261020/comparison/overview.png",
+  "comparisonScope": "Reference APK device captures versus before/after Unity static renders with synthetic fixture data, normalized to the same 1080x1920 source size; not new phone captures or a pixel-identical recreation.",
+  "delivery": {
+    "apkBuilt": false,
+    "phoneInstalled": false,
+    "phoneRevalidated": false
+  },
+  "evidenceRoot": "E:/CodexCacheBackups/DJS_Apple-modal-size-20261020"
+}
