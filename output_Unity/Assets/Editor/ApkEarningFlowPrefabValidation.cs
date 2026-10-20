@@ -51,6 +51,10 @@ public static class ApkEarningFlowPrefabValidation
             Require(sequence.GetObject("bonusRows[" + i + "]") != null, "Missing saved bonus row " + i);
             Require(sequence.GetObject("flightIcons[" + i + "]") != null, "Missing saved receipt icon " + i);
         }
+        var video = Page("LocalRewardVideoTest");
+        Texts(video, "title", "body", "actionCaption", "cancelCaption");
+        CheckButton(video.GetButton("retry"), "Test video complete");
+        CheckButton(video.GetButton("close"), "Test video cancel");
         Debug.Log("[ApkEarningFlowPrefabValidation] Saved settings, account level, review, step and sequence bindings passed.");
     }
 
