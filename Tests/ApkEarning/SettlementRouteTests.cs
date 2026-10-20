@@ -18,8 +18,10 @@ public static class SettlementRouteTests
         Run(ContinueAlreadyClaimedReward, "already-claimed rewards need no empty settlement page");
         Run(CancelStaleGeneration, "a stale settlement cannot interrupt a newer level");
         Run(KeepRecoveryFlow, "save failure keeps the existing recovery UI");
-        Run(RatingThenReward, "rating popup hands off directly to the new reward settlement");
-        Console.WriteLine("SETTLEMENT_ROUTE_PASS cases=" + passed + "/8; isolated routing tests, not a Unity runtime capture.");
+        Run(FormerRatingLevelsGoDirectToReward, "levels 6/16/36/66/106 open only one reward and continue once");
+        Run(LevelSixAlreadyClaimedReward, "level 6 already-claimed reward continues once without a rating page");
+        Run(LevelSixWaitsOnlyForInputLock, "level 6 waits for the real input lock and needs no rating callback");
+        Console.WriteLine("SETTLEMENT_ROUTE_PASS cases=" + passed + "/10; isolated routing tests, not a Unity runtime capture.");
         return 0;
     }
 
@@ -28,6 +30,8 @@ public static class SettlementRouteTests
         Reset();
         test();
         Check(MgrUI.Instance.LegacyWinOpens == 0, "The original WinUI must never open.");
+        Check(MgrUI.Instance.RatingOpens == 0, "Settlement must not open the original rating UI.");
+        Check(Module.Setting.UIRate.onCloseAction == null, "Settlement must not register a rating continuation.");
         passed++;
         Console.WriteLine("PASS " + description);
     }
@@ -129,14 +133,58 @@ public static class SettlementRouteTests
             "A save failure bypassed the existing recovery flow.");
     }
 
-    private static void RatingThenReward()
+    private static void FormerRatingLevelsGoDirectToReward()
+    {
+        foreach (int level in new[] { 6, 16, 36, 66, 106 })
+        {
+            Reset();
+            BMNFNJFCPHG.Instance.Rated = false;
+            WinUI.wonLevel = level;
+            Start();
+            Tick();
+            Check(MgrUI.Instance.RatingOpens == 0 && Module.Setting.UIRate.onCloseAction == null,
+                "Former rating checkpoint opened a rating page or installed its callback: " + level);
+            Check(ApkEarningHost.Opens == 1 && EDLHEMMBABM.Instance.StartedLevels == 0,
+                "Former rating checkpoint did not immediately open exactly one reward: " + level);
+            Action finished = ApkEarningHost.Completion;
+            ApkEarningHost.IsOpen = false;
+            finished();
+            finished();
+            Tick();
+            Check(ApkEarningHost.Opens == 1 && EDLHEMMBABM.Instance.StartedLevels == 1,
+                "Reward completion did not advance exactly once at level " + level);
+        }
+    }
+
+    private static void LevelSixAlreadyClaimedReward()
     {
         BMNFNJFCPHG.Instance.Rated = false;
         WinUI.wonLevel = 6;
+        ApkEarningService.Instance.State.PendingRewards.Clear();
         Start();
-        Check(MgrUI.Instance.RatingOpens == 1 && ApkEarningHost.Opens == 0,
-            "Rating and reward pages were opened together.");
-        Module.Setting.UIRate.onCloseAction();
-        Check(ApkEarningHost.Opens == 1, "Rating did not continue to the new reward page.");
+        Tick();
+        Check(ApkEarningHost.Opens == 0 && EDLHEMMBABM.Instance.StartedLevels == 1,
+            "Already-claimed level 6 must continue once without an empty reward or rating page.");
+    }
+
+    private static void LevelSixWaitsOnlyForInputLock()
+    {
+        BMNFNJFCPHG.Instance.Rated = false;
+        WinUI.wonLevel = 6;
+        MCCIJBJGMCK.Locked = true;
+        Start();
+        Tick();
+        Check(MgrUI.Instance.RatingOpens == 0 && ApkEarningHost.Opens == 0,
+            "Level 6 opened a page before its real input lock ended.");
+        MCCIJBJGMCK.Locked = false;
+        Tick();
+        Tick();
+        Check(ApkEarningHost.Opens == 1 && EDLHEMMBABM.Instance.StartedLevels == 0,
+            "Level 6 did not open exactly one reward immediately after unlocking.");
+        ApkEarningHost.IsOpen = false;
+        ApkEarningHost.Completion();
+        Tick();
+        Check(EDLHEMMBABM.Instance.StartedLevels == 1,
+            "Level 6 needed a rating callback to continue after its reward.");
     }
 }
