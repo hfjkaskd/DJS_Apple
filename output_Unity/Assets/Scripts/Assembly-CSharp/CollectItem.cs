@@ -11,6 +11,9 @@ public class CollectItem : MonoBehaviour
 	private Image m_CollectImage;
 
 	[SerializeField]
+	private FruitCollectButton m_CollectButton;
+
+	[SerializeField]
 	private Image m_CollectEFImage;
 
 	[SerializeField]
@@ -141,7 +144,7 @@ public class CollectItem : MonoBehaviour
 
 	private bool CanInteract()
 	{
-		if (Status != LECIONHKEJL.OnField)
+		if (MCCIJBJGMCK.IsLock() || Status != LECIONHKEJL.OnField)
 		{
 			return false;
 		}
@@ -326,27 +329,32 @@ public class CollectItem : MonoBehaviour
 
 	public void BindClick()
 	{
-		InputMono input = MCCIJBJGMCK.Get(gameObject);
-		input.playClickSound = false;
-		input.onClick = OnClick;
-		input.onDown = OnPointerDown;
-		input.onUp = OnPointerUp;
+		if (m_CollectButton == null)
+		{
+			Debug.LogError("[CollectItem] CollectItem prefab is missing its fruit Button.", this);
+			return;
+		}
+		// Pool reuse and undo can both bind the same fruit again.
+		m_CollectButton.onClick.RemoveListener(OnButtonClicked);
+		m_CollectButton.onClick.AddListener(OnButtonClicked);
+		m_CollectButton.PressedStateChanged -= OnButtonPressedStateChanged;
+		m_CollectButton.PressedStateChanged += OnButtonPressedStateChanged;
 	}
 
 	public void UnBindClick()
 	{
-		InputMono input = gameObject.GetComponent<InputMono>();
-		if (input != null)
+		if (m_CollectButton != null)
 		{
-			input.onClick = null;
-			input.onDown = null;
-			input.onUp = null;
+			m_CollectButton.onClick.RemoveListener(OnButtonClicked);
+			m_CollectButton.PressedStateChanged -= OnButtonPressedStateChanged;
 		}
+		isPointerDown = false;
+		cachedDownCanInteract = false;
 	}
 
-	private void OnClick(GameObject InGo)
+	private void OnButtonClicked()
 	{
-		if (!cachedDownCanInteract || Status != LECIONHKEJL.OnField)
+		if (MCCIJBJGMCK.IsLock() || !cachedDownCanInteract || Status != LECIONHKEJL.OnField)
 		{
 			return;
 		}
@@ -355,7 +363,19 @@ public class CollectItem : MonoBehaviour
 		EDLHEMMBABM.Instance.OnClick(this);
 	}
 
-	private void OnPointerDown(GameObject InGo)
+	private void OnButtonPressedStateChanged(bool pressed)
+	{
+		if (pressed)
+		{
+			OnFruitPressed();
+		}
+		else
+		{
+			OnFruitReleased();
+		}
+	}
+
+	private void OnFruitPressed()
 	{
 		isPointerDown = true;
 		cachedDownCanInteract = CanInteract();
@@ -365,7 +385,7 @@ public class CollectItem : MonoBehaviour
 		}
 	}
 
-	private void OnPointerUp(GameObject InGo)
+	private void OnFruitReleased()
 	{
 		if (!isPointerDown)
 		{

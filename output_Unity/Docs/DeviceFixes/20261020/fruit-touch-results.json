@@ -1,0 +1,20 @@
+{
+    "generatedUtc": "2026-10-20T07:08:24.7465210Z",
+    "scope": "Temporary instance of the saved fruit prefab in an isolated preview scene. Real GraphicRaycaster and StandaloneInputModule touch dispatch; no player save, gameplay initialization, scene saving or device interaction. Positive gesture cases count Button events using a fixture listener. Guard cases retain the production fruit callback. Does not claim device input, successful gameplay collection or runtime listener-count inspection.",
+    "passed": [
+        "Saved prefab owns one standard Button on the visible fruit Image, with no drag handler or Inspector event.",
+        "Stationary touch on the saved fruit Button emits exactly one click.",
+        "15px movement inside the same real fruit Image emits exactly one standard Button click.",
+        "Pressing fruit then releasing outside it emits no click.",
+        "Original InputMono control: stationary touch clicks; the same 15px movement within its Image is discarded.",
+        "Eight bind/unbind and enable cycles preserve one Button click per gesture and do not recreate a legacy drag component. Listener idempotence is a separate static review.",
+        "Non-OnField production callback returns without entering gameplay.",
+        "Global lock at press prevents the production callback from entering gameplay.",
+        "Global lock acquired after press also prevents collection on release."
+    ],
+    "errors": [],
+    "diagnostics": [
+        "position=(540.00, 1200.00) screen=640x480 graphicsDevice=Direct3D11 raycaster=Fruit touch validation canvas enabled=True registeredGraphics=1 eventCamera=Fruit touch validation camera pixelRect=(x:0.00, y:0.00, width:1080.00, height:2400.00) viewportPoint=(0.50, 0.50, 0.00) nearFar=0.1/200 target=ItemImage active=True raycastTarget=True depth=1 cull=False canvas=Fruit touch validation canvas rect=(x:-58.00, y:-87.00, width:116.00, height:174.00) pivot=(0.50, 0.50) worldCenter=(0.00, 0.00, 0.00) lossyScale=(1.00, 1.00, 1.00) contains=True graphicFilterPass=True hits=ItemImage(depth=1, distance=99.9)",
+        "position=(240.00, 1200.00) screen=640x480 graphicsDevice=Direct3D11 raycaster=Fruit touch validation canvas enabled=True registeredGraphics=2 eventCamera=Fruit touch validation camera pixelRect=(x:0.00, y:0.00, width:1080.00, height:2400.00) viewportPoint=(0.22, 0.50, 0.00) nearFar=0.1/200 target=Original InputMono baseline active=True raycastTarget=True depth=2 cull=False canvas=Fruit touch validation canvas rect=(x:-80.00, y:-80.00, width:160.00, height:160.00) pivot=(0.50, 0.50) worldCenter=(-300.00, 0.00, 0.00) lossyScale=(1.00, 1.00, 1.00) contains=True graphicFilterPass=True hits=Original InputMono baseline(depth=2, distance=99.9)"
+    ]
+}

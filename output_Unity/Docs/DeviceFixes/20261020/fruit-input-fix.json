@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-20",
+  "issue": "Ordinary fruit touches can be discarded after a small finger movement, even when release remains inside the same fruit.",
+  "confirmedMechanism": {
+    "sceneDragThresholdPixels": 10,
+    "previousHandler": "CollectItem bound InputMono, which registers drag handlers even though fruits have no drag action.",
+    "failure": "UGUI marks the touch as dragging after the threshold. InputMono.OnPointerClick then rejects the click.",
+    "baselineReproducedInUnity": "Stationary touch invokes InputMono; moving 15 pixels within its Image before release does not."
+  },
+  "fix": {
+    "input": "Prefab-owned FruitCollectButton derives from standard Unity UI Button and sits on the existing visible fruit Image.",
+    "binding": "Code binds onClick and Selectable-state animation feedback. No persistent Inspector event or runtime-created input component.",
+    "preserved": [
+      "Same fruit visual and raycast rectangle",
+      "Pressed and released fruit animation feedback",
+      "Global input locks",
+      "OnField state requirement",
+      "Existing occlusion threshold",
+      "Symmetric pool and undo event binding"
+    ]
+  },
+  "verification": {
+    "unityVersion": "2022.3.62f3",
+    "activeBuildTarget": "Android",
+    "entryPoint": "FruitTouchValidation.Run",
+    "unityExitCode": 0,
+    "passedChecks": 9,
+    "results": "fruit-touch-results.json",
+    "log": "C:/Projects/DJS_Apple/DeviceQA/20261020-fruit-input/unity-touch-validation-3.log",
+    "method": "Saved fruit prefab, real GraphicRaycaster, original UGUI touch/drag/release dispatch in an isolated Editor fixture.",
+    "limits": "Positive checks count Button events rather than initializing gameplay storage. Negative checks retain the production callback. Binding idempotence is reviewed statically; no private listener count is inspected."
+  },
+  "deviceVerification": {
+    "installedVersionDuringInvestigation": "1.0.6",
+    "previousStationaryTouchSucceeded": true,
+    "smallMovementReproducedOnPhone": false,
+    "reason": "The user switched the phone to another application during investigation; further phone interaction was stopped.",
+    "fixedApkBuilt": false,
+    "fixedApkInstalled": false,
+    "fixedVersionTestedOnPhone": false
+  },
+  "conclusion": "A real normal-play input defect has been reproduced and corrected in the project. This does not establish that every historical missed touch had this cause."
+}
