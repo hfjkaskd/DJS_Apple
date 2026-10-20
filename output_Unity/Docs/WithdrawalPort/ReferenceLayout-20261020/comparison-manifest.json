@@ -1,0 +1,286 @@
+{
+  "generated_utc": "2026-10-20T12:16:03.781219+00:00",
+  "status": "rendered",
+  "scope": "参考 APK 的已保存原图与 Unity 工程静态预览比较。所有预览均使用合成数据，不是安装后手机实拍。不同存档数值、奖励状态不能用于断言功能一致。",
+  "processing": "Full-frame EXIF-oriented RGB images; strict 1080x1920 input; aspect-preserving LANCZOS resize to 540x960; no crop, retouch, source modification or stretching.",
+  "frame_size": [
+    540,
+    960
+  ],
+  "figures": [
+    {
+      "title": "钱包布局重排对比",
+      "output": "wallet-layout-comparison.png",
+      "image_size": [
+        1704,
+        2452
+      ],
+      "columns": [
+        {
+          "id": "reference",
+          "label": "参考 APK 原界面",
+          "subtitle": "已保存的 APK 设备原图"
+        },
+        {
+          "id": "previous",
+          "label": "上一版 · 仅放大",
+          "subtitle": "Unity 合成数据预览，非实拍"
+        },
+        {
+          "id": "current",
+          "label": "本轮 · 按参考重排",
+          "subtitle": "Unity 合成数据预览，非实拍"
+        }
+      ],
+      "notes": [
+        "中列、右列是 Unity 合成数据预览，不是安装后的手机实拍。",
+        "保持苹果树美术；存档数值不同，仅比较界面结构。",
+        "本图不代表已完成新版本打包、安装或手机流程验证。"
+      ],
+      "rows": [
+        {
+          "id": "cash-wallet",
+          "label": "现金钱包",
+          "note": "比较金额卡、条件进度、主按钮、独立统计板和历史入口的分区。",
+          "images": [
+            {
+              "column": "reference",
+              "source": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-cash-wallet.png",
+              "native_size": [
+                1080,
+                1920
+              ],
+              "sha256": "d7e21556030900dd9fb5fc1becbbbfac805f636038f06ccde5eed271a8bcce6a",
+              "fitted_rectangle": [
+                24,
+                268,
+                540,
+                960
+              ]
+            },
+            {
+              "column": "previous",
+              "source": "E:\\CodexCacheBackups\\DJS_Apple-modal-size-20261020\\after\\fixture-TXPanel-1080x1920.png",
+              "native_size": [
+                1080,
+                1920
+              ],
+              "sha256": "8df21edb169619bad6d64c1eedf722b5cd8a9806c324db4b18f0590d9be6ec81",
+              "fitted_rectangle": [
+                582,
+                268,
+                540,
+                960
+              ]
+            },
+            {
+              "column": "current",
+              "source": "E:\\CodexCacheBackups\\DJS_Apple-reference-layout-20261020\\after\\fixture-TXPanel-1080x1920.png",
+              "native_size": [
+                1080,
+                1920
+              ],
+              "sha256": "1a50adc46689cef144fe02e87e1fbf303acbf6010ad26c5328ac46eb1ee69045",
+              "fitted_rectangle": [
+                1140,
+                268,
+                540,
+                960
+              ]
+            }
+          ]
+        },
+        {
+          "id": "diamond-wallet",
+          "label": "钻石钱包",
+          "note": "比较钻石余额条、现金等值主卡、兑换率、档位总面板和条件区。",
+          "images": [
+            {
+              "column": "reference",
+              "source": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-diamond-wallet.png",
+              "native_size": [
+                1080,
+                1920
+              ],
+              "sha256": "9709559a4d7a896c9e6acdd26b1d16686381a301cd92072038f9c4e493c39694",
+              "fitted_rectangle": [
+                24,
+                1358,
+                540,
+                960
+              ]
+            },
+            {
+              "column": "previous",
+              "source": "E:\\CodexCacheBackups\\DJS_Apple-modal-size-20261020\\after\\fixture-TXCoinPanel-1080x1920.png",
+              "native_size": [
+                1080,
+                1920
+              ],
+              "sha256": "9461911a738f6a050dab1c36f8ffde68289188475175de6f3fa52b6b52f685b5",
+              "fitted_rectangle": [
+                582,
+                1358,
+                540,
+                960
+              ]
+            },
+            {
+              "column": "current",
+              "source": "E:\\CodexCacheBackups\\DJS_Apple-reference-layout-20261020\\after\\fixture-TXCoinPanel-1080x1920.png",
+              "native_size": [
+                1080,
+                1920
+              ],
+              "sha256": "491ca1078e12a37be28b0cd2e4b4304da4e44df7fd68ad8e4c260ee6798a6004",
+              "fitted_rectangle": [
+                1140,
+                1358,
+                540,
+                960
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "流程页面布局对比",
+      "output": "flow-layout-comparison.png",
+      "image_size": [
+        1146,
+        3542
+      ],
+      "columns": [
+        {
+          "id": "reference",
+          "label": "参考 APK 原界面",
+          "subtitle": "已保存的 APK 设备原图"
+        },
+        {
+          "id": "current",
+          "label": "本轮 · 按参考重排",
+          "subtitle": "Unity 合成数据预览，非实拍"
+        }
+      ],
+      "notes": [
+        "右列是 Unity 合成数据预览，不是安装后的手机实拍。",
+        "奖励页均为普通结算；参考单现金，新版双币，不比较奖励数量或金额。",
+        "本图不代表已完成新版本打包、安装或手机流程验证。"
+      ],
+      "rows": [
+        {
+          "id": "account",
+          "label": "收款账户",
+          "note": "参考使用无错误提示的账户页；比较渠道选择、字段和确认区。",
+          "images": [
+            {
+              "column": "reference",
+              "source": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\06-account.png",
+              "native_size": [
+                1080,
+                1920
+              ],
+              "sha256": "04c019b902a156777e57973d1c9a361473f296e3951dcc030a8296b981a1a8e9",
+              "fitted_rectangle": [
+                24,
+                268,
+                540,
+                960
+              ]
+            },
+            {
+              "column": "current",
+              "source": "E:\\CodexCacheBackups\\DJS_Apple-reference-layout-20261020\\after\\fixture-TXUserInfoPanel-1080x1920.png",
+              "native_size": [
+                1080,
+                1920
+              ],
+              "sha256": "e5b712e02a3b6a643e1aa9c69da85525c82c7bcec643b4799a3420b6d8686bde",
+              "fitted_rectangle": [
+                582,
+                268,
+                540,
+                960
+              ]
+            }
+          ]
+        },
+        {
+          "id": "history",
+          "label": "提现记录",
+          "note": "两侧记录和存档状态不同；比较余额主卡和记录列表的结构。",
+          "images": [
+            {
+              "column": "reference",
+              "source": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-cash-history.png",
+              "native_size": [
+                1080,
+                1920
+              ],
+              "sha256": "f10e30d2206c955c26299127c64a58a15c841908d012f9509b6bd04846e11ec6",
+              "fitted_rectangle": [
+                24,
+                1358,
+                540,
+                960
+              ]
+            },
+            {
+              "column": "current",
+              "source": "E:\\CodexCacheBackups\\DJS_Apple-reference-layout-20261020\\after\\fixture-LocalCashHistory-1080x1920.png",
+              "native_size": [
+                1080,
+                1920
+              ],
+              "sha256": "92ab8cc4fcc5cad402718f4512ec536c62ef81bd9f722839194a58f43f7a7d3f",
+              "fitted_rectangle": [
+                582,
+                1358,
+                540,
+                960
+              ]
+            }
+          ]
+        },
+        {
+          "id": "reward",
+          "label": "通关奖励",
+          "note": "均为普通结算：参考单现金，新版现金＋钻石；奖励数量和金额不同。",
+          "images": [
+            {
+              "column": "reference",
+              "source": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-level3-reward.png",
+              "native_size": [
+                1080,
+                1920
+              ],
+              "sha256": "a72a697c78d80330408daddbe27b52c4f33ae3b12fc71e98232cd8cc33f44a75",
+              "fitted_rectangle": [
+                24,
+                2448,
+                540,
+                960
+              ]
+            },
+            {
+              "column": "current",
+              "source": "E:\\CodexCacheBackups\\DJS_Apple-reference-layout-20261020\\after\\fixture-LocalSuccess-1080x1920.png",
+              "native_size": [
+                1080,
+                1920
+              ],
+              "sha256": "0c2742988b55a04a75524c63624d913f3363ee1b84dfcf69cedda49040523d66",
+              "fitted_rectangle": [
+                582,
+                2448,
+                540,
+                960
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

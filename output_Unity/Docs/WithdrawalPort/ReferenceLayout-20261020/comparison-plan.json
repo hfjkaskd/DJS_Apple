@@ -1,0 +1,109 @@
+{
+  "status": "prepared-awaiting-ready",
+  "scope": "参考 APK 的已保存原图与 Unity 工程静态预览比较。所有预览均使用合成数据，不是安装后手机实拍。不同存档数值、奖励状态不能用于断言功能一致。",
+  "figures": [
+    {
+      "title": "钱包布局重排对比",
+      "output": "wallet-layout-comparison.png",
+      "columns": [
+        {
+          "id": "reference",
+          "label": "参考 APK 原界面",
+          "subtitle": "已保存的 APK 设备原图",
+          "header_color": "#f5e6ca"
+        },
+        {
+          "id": "previous",
+          "label": "上一版 · 仅放大",
+          "subtitle": "Unity 合成数据预览，非实拍",
+          "header_color": "#dce6f2"
+        },
+        {
+          "id": "current",
+          "label": "本轮 · 按参考重排",
+          "subtitle": "Unity 合成数据预览，非实拍",
+          "header_color": "#dcebdc"
+        }
+      ],
+      "rows": [
+        {
+          "id": "cash-wallet",
+          "label": "现金钱包",
+          "note": "比较金额卡、条件进度、主按钮、独立统计板和历史入口的分区。",
+          "sources": {
+            "reference": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-cash-wallet.png",
+            "previous": "E:/CodexCacheBackups/DJS_Apple-modal-size-20261020/after/fixture-TXPanel-1080x1920.png",
+            "current": "E:/CodexCacheBackups/DJS_Apple-reference-layout-20261020/after/fixture-TXPanel-1080x1920.png"
+          }
+        },
+        {
+          "id": "diamond-wallet",
+          "label": "钻石钱包",
+          "note": "比较钻石余额条、现金等值主卡、兑换率、档位总面板和条件区。",
+          "sources": {
+            "reference": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-wallet.png",
+            "previous": "E:/CodexCacheBackups/DJS_Apple-modal-size-20261020/after/fixture-TXCoinPanel-1080x1920.png",
+            "current": "E:/CodexCacheBackups/DJS_Apple-reference-layout-20261020/after/fixture-TXCoinPanel-1080x1920.png"
+          }
+        }
+      ],
+      "notes": [
+        "中列、右列是 Unity 合成数据预览，不是安装后的手机实拍。",
+        "保持苹果树美术；存档数值不同，仅比较界面结构。",
+        "本图不代表已完成新版本打包、安装或手机流程验证。"
+      ]
+    },
+    {
+      "title": "流程页面布局对比",
+      "output": "flow-layout-comparison.png",
+      "columns": [
+        {
+          "id": "reference",
+          "label": "参考 APK 原界面",
+          "subtitle": "已保存的 APK 设备原图",
+          "header_color": "#f5e6ca"
+        },
+        {
+          "id": "current",
+          "label": "本轮 · 按参考重排",
+          "subtitle": "Unity 合成数据预览，非实拍",
+          "header_color": "#dcebdc"
+        }
+      ],
+      "rows": [
+        {
+          "id": "account",
+          "label": "收款账户",
+          "note": "参考使用无错误提示的账户页；比较渠道选择、字段和确认区。",
+          "sources": {
+            "reference": "C:/Projects/DJS_Apple/apk-comparison/reference/06-account.png",
+            "current": "E:/CodexCacheBackups/DJS_Apple-reference-layout-20261020/after/fixture-TXUserInfoPanel-1080x1920.png"
+          }
+        },
+        {
+          "id": "history",
+          "label": "提现记录",
+          "note": "两侧记录和存档状态不同；比较余额主卡和记录列表的结构。",
+          "sources": {
+            "reference": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-cash-history.png",
+            "current": "E:/CodexCacheBackups/DJS_Apple-reference-layout-20261020/after/fixture-LocalCashHistory-1080x1920.png"
+          }
+        },
+        {
+          "id": "reward",
+          "label": "通关奖励",
+          "note": "均为普通结算：参考单现金，新版现金＋钻石；奖励数量和金额不同。",
+          "sources": {
+            "reference": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-level3-reward.png",
+            "current": "E:/CodexCacheBackups/DJS_Apple-reference-layout-20261020/after/fixture-LocalSuccess-1080x1920.png"
+          }
+        }
+      ],
+      "notes": [
+        "右列是 Unity 合成数据预览，不是安装后的手机实拍。",
+        "奖励页均为普通结算；参考单现金，新版双币，不比较奖励数量或金额。",
+        "本图不代表已完成新版本打包、安装或手机流程验证。"
+      ]
+    }
+  ]
+}

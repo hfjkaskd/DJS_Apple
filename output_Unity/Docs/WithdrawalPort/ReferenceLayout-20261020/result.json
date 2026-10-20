@@ -1,0 +1,53 @@
+{
+  "generatedUtc": "2026-10-20T12:15:49.2824240Z",
+  "request": "Recompose the page layout and hierarchy to follow the reference APK, retaining orchard artwork.",
+  "implementationCommit": "c27e9a5",
+  "scope": "Saved Unity prefab layouts. Existing runtime flow and test-payment status preserved. No APK was built or installed during this change.",
+  "authoredPrefabs": [
+    "TXPanel",
+    "TXCoinPanel",
+    "TXUserInfoPanel",
+    "LocalCashHistory",
+    "LocalCashHistoryRow",
+    "LocalWithdrawalConditions",
+    "SuccessPanel",
+    "LocalSuccess",
+    "LocalLuckyReward"
+  ],
+  "compositions": {
+    "account": "Channel cards, validation block, form fields, confirm action and separate bottom close Button.",
+    "diamond": "Diamond balance strip, cash equivalent, exchange rate, framed two-by-two tier grid, conditions/progress and primary action.",
+    "cash": "Separate withdrawal card, three-column statistics card and full-width history Button.",
+    "conditions": "Content-driven four/seven-row layout with a stable top edge and action below the visible rows.",
+    "history": "Balance summary with compact two-band record rows.",
+    "reward": "Borderless translucent orchard background, centered reward group, primary action and ordinary claim below."
+  },
+  "validation": {
+    "layoutWarnings": "21 coverage-measurement warnings: borderless reward pages and retained source pages have no CashWalletPanel frame.",
+    "playModeCasesPassed": 7,
+    "playModeWarnings": [
+      "Existing FreeCoinUI missing-script warning from the resource catalog scan."
+    ],
+    "conditionHeights": [
+      1528,
+      1192,
+      1528
+    ],
+    "resolutions": [
+      "1080x1920",
+      "1080x2400",
+      "720x1600"
+    ],
+    "pointerHitChecks": 5,
+    "auditedPagePrefabs": 24,
+    "layoutErrors": 0,
+    "renders": 105,
+    "savedPreviewPngs": 19
+  },
+  "comparison": {
+    "related": "Reference APK / recomposed account, history and ordinary settlement. Reward item count and amounts differ and are labeled.",
+    "limitation": "New images are Unity saved-prefab previews with synthetic fixture data, not fresh phone screenshots. Art intentionally differs from the reference; pixel parity is not claimed.",
+    "evidenceRoot": "E:/CodexCacheBackups/DJS_Apple-reference-layout-20261020",
+    "wallet": "Reference APK / previous enlarged version / recomposed version, 1080x1920 source images."
+  }
+}
