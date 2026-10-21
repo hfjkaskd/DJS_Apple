@@ -1,0 +1,47 @@
+{
+  "generatedUtc": "2026-10-21T11:22:30.9210328Z",
+  "implementationCommit": "1a92931",
+  "objective": "根据参考APK重排信息分区、模块大小、间距和操作位置；适配现有苹果树素材。",
+  "changed": [
+    "现金钱包金额卡、进度、主按钮、三列统计和历史入口重排，统计标题与数字独立。",
+    "钻石钱包的余额、金额、档位和条件分区按参考重排，缩短进度条文字以适配实际行高。",
+    "四/七任务条件页固定主卡和按钮位置，紧凑列表，上下页切换不跳位。",
+    "账户、账户确认、记录和结算重排；单币/双币奖励和广告图标隐藏保持居中。",
+    "验证、阶段进度、激活提示和奖励序列清理插画替换后的留白，修正标题截断、正文和按钮间距。"
+  ],
+  "validation": {
+    "prefabAudits": 24,
+    "renders": 105,
+    "savedPngs": 25,
+    "resolutions": [
+      "1080x1920",
+      "1080x2400",
+      "720x1600"
+    ],
+    "staticErrors": 0,
+    "textOverflowWarnings": 0,
+    "playModeCases": 7,
+    "playModePassed": true,
+    "evidence": "Unity saved Prefab camera render and isolated Play-mode, synthetic data; not a device capture."
+  },
+  "knownWarnings": [
+    "Coverage measurement is unavailable on pages without a visible CashWalletPanel Image, including full-screen rewards; their render and component audits still run.",
+    "Existing missing-script warning for legacy FreeCoinUI remains in the isolated Play-mode report."
+  ],
+  "limits": [
+    "No APK was built or installed in this turn.",
+    "Reference painted edges are manually estimated; current geometry comes from camera RectTransform measurements. This is not proof of pixel-identical rendering.",
+    "LocalDiamondUnlockGuide keeps its existing live-HUD target geometry; original fixed HUD positions are not copied.",
+    "Test-only disclosure and no-payment behavior are preserved; accounting and flow conditions are not changed by this layout pass."
+  ],
+  "sources": [
+    "C:/Projects/DJS_Apple/apk-comparison/reference",
+    "C:/Projects/com.nut.sort.relax/Assets/Resources/prefabs/panels"
+  ],
+  "figures": [
+    "E:/CodexCacheBackups/DJS_Apple-layout-geometry-20261021/comparison/cash-conditions-account-screenshot-comparison.png",
+    "E:/CodexCacheBackups/DJS_Apple-layout-geometry-20261021/comparison/cash-conditions-layout-wireframes.png",
+    "E:/CodexCacheBackups/DJS_Apple-layout-geometry-20261021/comparison/diamond-layout-wireframes.png"
+  ],
+  "fullEvidenceDirectory": "E:/CodexCacheBackups/DJS_Apple-layout-geometry-20261021"
+}

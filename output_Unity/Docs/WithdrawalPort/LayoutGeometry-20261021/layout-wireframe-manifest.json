@@ -1,0 +1,891 @@
+{
+  "generatedUtc": "2026-10-21T11:19:28.652784+00:00",
+  "scope": "Geometry-only evidence. Current coordinates are actual camera-rendered RectTransform bounds from this measurement run; references are evidenced manual visible-edge estimates. No UI modifications and no expected current coordinate tests.",
+  "source_measurements": [
+    {
+      "path": "E:\\CodexCacheBackups\\DJS_Apple-layout-geometry-20261021\\after\\measurements-TXPanel-1080x1920.json",
+      "sha256": "87fc2261b241295a55c65ad6d05eea424d35a0631e26aa97be32d6c7956e4da1",
+      "generatedUtc": "2026-10-21T11:13:56.6367236Z"
+    },
+    {
+      "path": "E:\\CodexCacheBackups\\DJS_Apple-layout-geometry-20261021\\after\\measurements-LocalWithdrawalConditions--diamond-1080x1920.json",
+      "sha256": "b960d9dfb9af5026e1071eafa7db40a5ba3d8403f893777da2138fe7d8713977",
+      "generatedUtc": "2026-10-21T11:13:55.9919118Z"
+    },
+    {
+      "path": "E:\\CodexCacheBackups\\DJS_Apple-layout-geometry-20261021\\after\\measurements-TXCoinPanel-1080x1920.json",
+      "sha256": "711b0fa949e0981437ac51b063b9f226010288a566ff8ce32fbfb7abbc88fe92",
+      "generatedUtc": "2026-10-21T11:13:56.4294196Z"
+    }
+  ],
+  "source_pngs": [
+    {
+      "path": "E:\\CodexCacheBackups\\DJS_Apple-reference-layout-20261020\\after\\fixture-TXPanel-1080x1920.png",
+      "sha256": "1a50adc46689cef144fe02e87e1fbf303acbf6010ad26c5328ac46eb1ee69045",
+      "size": [
+        1080,
+        1920
+      ],
+      "role": "previous synthetic Unity preview; manually estimated boundaries, not current camera capture"
+    },
+    {
+      "path": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-cash-wallet.png",
+      "sha256": "d7e21556030900dd9fb5fc1becbbbfac805f636038f06ccde5eed271a8bcce6a",
+      "size": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "path": "E:\\CodexCacheBackups\\DJS_Apple-reference-layout-20261020\\after\\fixture-LocalWithdrawalConditions--diamond-1080x1920.png",
+      "sha256": "07e9b57c4d9ea112f920c460bb3ee4dcf1eb741cc33d77bd6bd1298b48aa23f4",
+      "size": [
+        1080,
+        1920
+      ],
+      "role": "previous synthetic Unity preview; manually estimated boundaries, not current camera capture"
+    },
+    {
+      "path": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-diamond-requirements.png",
+      "sha256": "26a48cb0cce500f8934e8a1fee482986454125e163dc9103e9e557a524d1bcf6",
+      "size": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "path": "E:\\CodexCacheBackups\\DJS_Apple-reference-layout-20261020\\after\\fixture-TXCoinPanel-1080x1920.png",
+      "sha256": "491ca1078e12a37be28b0cd2e4b4304da4e44df7fd68ad8e4c260ee6798a6004",
+      "size": [
+        1080,
+        1920
+      ],
+      "role": "previous synthetic Unity preview; manually estimated boundaries, not current camera capture"
+    },
+    {
+      "path": "C:\\Projects\\DJS_Apple\\apk-comparison\\reference\\APK-diamond-wallet.png",
+      "sha256": "9709559a4d7a896c9e6acdd26b1d16686381a301cd92072038f9c4e493c39694",
+      "size": [
+        1080,
+        1920
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "path": "E:\\CodexCacheBackups\\DJS_Apple-layout-geometry-20261021\\comparison\\cash-conditions-layout-wireframes.png",
+      "sha256": "eacdc2d616511d35df72cc11e918a017d424f1a91dca4b317903ac758847da98"
+    },
+    {
+      "path": "E:\\CodexCacheBackups\\DJS_Apple-layout-geometry-20261021\\comparison\\diamond-layout-wireframes.png",
+      "sha256": "d8403bf8c0e87d93cf800390226fbef0a7c695f2a6645994e8fc938784867b6b"
+    }
+  ],
+  "deltas": [
+    {
+      "page": "TXPanel",
+      "key": "mainCard",
+      "label": "主卡",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-cash-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 49.0,
+        "y": 214.0,
+        "w": 982.0,
+        "h": 1032.0,
+        "uncertaintyPx": 5.0
+      },
+      "actual": {
+        "x": 48.0,
+        "y": 214.0,
+        "w": 984.0,
+        "h": 1032.0
+      },
+      "actual_minus_reference": {
+        "x": -1.0,
+        "y": 0.0,
+        "w": 2.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 52,
+        "y": 210,
+        "w": 976,
+        "h": 1041
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "TXPanel",
+      "key": "titlePlate",
+      "label": "标题",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-cash-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 155.0,
+        "y": 123.0,
+        "w": 770.0,
+        "h": 161.0,
+        "uncertaintyPx": 5.0
+      },
+      "actual": {
+        "x": 156.0,
+        "y": 124.0,
+        "w": 768.0,
+        "h": 160.0
+      },
+      "actual_minus_reference": {
+        "x": 1.0,
+        "y": 1.0,
+        "w": -2.0,
+        "h": -1.0
+      },
+      "previous_estimate": {
+        "x": 164,
+        "y": 120,
+        "w": 752,
+        "h": 155
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "TXPanel",
+      "key": "amountCard",
+      "label": "金额卡",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-cash-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 115.0,
+        "y": 292.0,
+        "w": 850.0,
+        "h": 328.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 115.0,
+        "y": 292.0,
+        "w": 850.0,
+        "h": 328.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 117,
+        "y": 336,
+        "w": 846,
+        "h": 308
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "TXPanel",
+      "key": "progressTrack",
+      "label": "进度",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-cash-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 120.0,
+        "y": 714.0,
+        "w": 840.0,
+        "h": 73.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 120.0,
+        "y": 714.0,
+        "w": 840.0,
+        "h": 73.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 122,
+        "y": 720,
+        "w": 836,
+        "h": 72
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "TXPanel",
+      "key": "action",
+      "label": "主按钮",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-cash-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 206.0,
+        "y": 998.0,
+        "w": 668.0,
+        "h": 192.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 206.0,
+        "y": 998.0,
+        "w": 668.0,
+        "h": 192.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 201,
+        "y": 1026,
+        "w": 677,
+        "h": 176
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "TXPanel",
+      "key": "stats",
+      "label": "统计",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-cash-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 58.0,
+        "y": 1256.0,
+        "w": 964.0,
+        "h": 330.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 58.0,
+        "y": 1256.0,
+        "w": 964.0,
+        "h": 330.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 59,
+        "y": 1281,
+        "w": 962,
+        "h": 297
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "TXPanel",
+      "key": "history",
+      "label": "历史",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-cash-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 33.0,
+        "y": 1610.0,
+        "w": 1013.0,
+        "h": 119.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 33.0,
+        "y": 1610.0,
+        "w": 1013.0,
+        "h": 119.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 46,
+        "y": 1611,
+        "w": 988,
+        "h": 121
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "LocalWithdrawalConditions",
+      "key": "mainCard",
+      "label": "主卡",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-requirements.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 49.0,
+        "y": 214.0,
+        "w": 981.0,
+        "h": 1030.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 49.0,
+        "y": 214.0,
+        "w": 981.0,
+        "h": 1030.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 50,
+        "y": 118,
+        "w": 980,
+        "h": 1187
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "LocalWithdrawalConditions",
+      "key": "titlePlate",
+      "label": "标题",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-requirements.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 155.0,
+        "y": 124.0,
+        "w": 768.0,
+        "h": 160.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 155.0,
+        "y": 124.0,
+        "w": 768.0,
+        "h": 160.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 162,
+        "y": 198,
+        "w": 755,
+        "h": 140
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "LocalWithdrawalConditions",
+      "key": "row[0]",
+      "label": "条件 1",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-requirements.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 120.0,
+        "y": 442.0,
+        "w": 840.0,
+        "h": 76.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 120.0,
+        "y": 442.0,
+        "w": 840.0,
+        "h": 76.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 120,
+        "y": 633.2,
+        "w": 840,
+        "h": 104
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "LocalWithdrawalConditions",
+      "key": "row[1]",
+      "label": "条件 2",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-requirements.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 120.0,
+        "y": 524.0,
+        "w": 840.0,
+        "h": 76.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 120.0,
+        "y": 524.0,
+        "w": 840.0,
+        "h": 76.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 120,
+        "y": 745.2,
+        "w": 840,
+        "h": 104
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "LocalWithdrawalConditions",
+      "key": "row[2]",
+      "label": "条件 3",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-requirements.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 120.0,
+        "y": 606.0,
+        "w": 840.0,
+        "h": 76.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 120.0,
+        "y": 606.0,
+        "w": 840.0,
+        "h": 76.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 120,
+        "y": 857.2,
+        "w": 840,
+        "h": 104
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "LocalWithdrawalConditions",
+      "key": "row[3]",
+      "label": "条件 4",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-requirements.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 120.0,
+        "y": 688.0,
+        "w": 840.0,
+        "h": 76.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 120.0,
+        "y": 688.0,
+        "w": 840.0,
+        "h": 76.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 120,
+        "y": 969.2,
+        "w": 840,
+        "h": 104
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "LocalWithdrawalConditions",
+      "key": "action",
+      "label": "主按钮",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-requirements.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 182.0,
+        "y": 1067.0,
+        "w": 716.0,
+        "h": 138.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 182.0,
+        "y": 1067.0,
+        "w": 716.0,
+        "h": 138.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 112,
+        "y": 1108,
+        "w": 856,
+        "h": 139
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "TXCoinPanel",
+      "key": "balanceCard",
+      "label": "余额",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 17.0,
+        "y": 268.0,
+        "w": 1048.0,
+        "h": 108.0,
+        "uncertaintyPx": 5.0
+      },
+      "actual": {
+        "x": 18.0,
+        "y": 267.0,
+        "w": 1044.0,
+        "h": 110.0
+      },
+      "actual_minus_reference": {
+        "x": 1.0,
+        "y": -1.0,
+        "w": -4.0,
+        "h": 2.0
+      },
+      "previous_estimate": {
+        "x": 18,
+        "y": 268,
+        "w": 1045,
+        "h": 108
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "TXCoinPanel",
+      "key": "amountCard",
+      "label": "金额卡",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 97.0,
+        "y": 390.0,
+        "w": 885.0,
+        "h": 271.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 97.0,
+        "y": 390.0,
+        "w": 885.0,
+        "h": 271.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 99,
+        "y": 422,
+        "w": 882,
+        "h": 241
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "TXCoinPanel",
+      "key": "tierCard",
+      "label": "档位区",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 68.0,
+        "y": 800.0,
+        "w": 945.0,
+        "h": 587.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 68.0,
+        "y": 800.0,
+        "w": 945.0,
+        "h": 587.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 71,
+        "y": 801,
+        "w": 938,
+        "h": 576
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "TXCoinPanel",
+      "key": "tier[0]",
+      "label": "档位 1",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 126.0,
+        "y": 884.0,
+        "w": 366.0,
+        "h": 218.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 126.0,
+        "y": 884.0,
+        "w": 368.0,
+        "h": 220.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 2.0,
+        "h": 2.0
+      },
+      "previous_estimate": {
+        "x": 126,
+        "y": 900,
+        "w": 368,
+        "h": 208
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "TXCoinPanel",
+      "key": "tier[1]",
+      "label": "档位 2",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 583.0,
+        "y": 884.0,
+        "w": 365.0,
+        "h": 219.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 586.0,
+        "y": 884.0,
+        "w": 368.0,
+        "h": 220.0
+      },
+      "actual_minus_reference": {
+        "x": 3.0,
+        "y": 0.0,
+        "w": 3.0,
+        "h": 1.0
+      },
+      "previous_estimate": {
+        "x": 586,
+        "y": 900,
+        "w": 368,
+        "h": 208
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "TXCoinPanel",
+      "key": "tier[2]",
+      "label": "档位 3",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 126.0,
+        "y": 1140.0,
+        "w": 366.0,
+        "h": 221.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 126.0,
+        "y": 1140.0,
+        "w": 368.0,
+        "h": 220.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 2.0,
+        "h": -1.0
+      },
+      "previous_estimate": {
+        "x": 126,
+        "y": 1140,
+        "w": 368,
+        "h": 208
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "TXCoinPanel",
+      "key": "tier[3]",
+      "label": "档位 4",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 583.0,
+        "y": 1140.0,
+        "w": 365.0,
+        "h": 221.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 586.0,
+        "y": 1140.0,
+        "w": 368.0,
+        "h": 220.0
+      },
+      "actual_minus_reference": {
+        "x": 3.0,
+        "y": 0.0,
+        "w": 3.0,
+        "h": -1.0
+      },
+      "previous_estimate": {
+        "x": 586,
+        "y": 1140,
+        "w": 368,
+        "h": 208
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "TXCoinPanel",
+      "key": "conditions",
+      "label": "条件",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 62.0,
+        "y": 1396.0,
+        "w": 946.0,
+        "h": 278.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 64.0,
+        "y": 1395.0,
+        "w": 944.0,
+        "h": 278.0
+      },
+      "actual_minus_reference": {
+        "x": 2.0,
+        "y": -1.0,
+        "w": -2.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 71,
+        "y": 1396,
+        "w": 938,
+        "h": 277
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    },
+    {
+      "page": "TXCoinPanel",
+      "key": "action",
+      "label": "主按钮",
+      "reference": {
+        "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-wallet.png",
+        "kind": "manual estimate of visible artwork; not a RectTransform",
+        "note": "Measured from the original full 1080x1920 PNG; visible edge, not its original Unity component bounds.",
+        "x": 158.0,
+        "y": 1684.0,
+        "w": 764.0,
+        "h": 171.0,
+        "uncertaintyPx": 3.0
+      },
+      "actual": {
+        "x": 158.0,
+        "y": 1684.0,
+        "w": 764.0,
+        "h": 171.0
+      },
+      "actual_minus_reference": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 0.0,
+        "h": 0.0
+      },
+      "previous_estimate": {
+        "x": 178,
+        "y": 1706,
+        "w": 724,
+        "h": 145
+      },
+      "previous_provenance": "Manual previous-PNG visible boundary estimate, approx +/-5px. Conditions rows and diamond option controls use positions derived from authoring code at git c27e9a5 and checked against that PNG; they are not a previous real-camera measurement.",
+      "note": "Different boundary types: visible reference artwork versus actual Unity control rectangle. No pass/fail threshold is applied."
+    }
+  ]
+}
