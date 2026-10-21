@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using FruitApkEarning;
+using TMPro;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -46,7 +47,7 @@ public static class ApkEarningFlowAnimationValidation
         public bool passed;
         public int assertions, playFrames;
         public int warmupFrames, verificationFrames;
-        public int pointerHitChecks;
+        public int pointerHitChecks, conditionVisibleRowChecks, conditionTextOverlapChecks;
         public float largestPlayFrameDelta;
         public float conditionSevenRowsHeight, conditionFourRowsHeight, conditionRestoredHeight;
         public string isolatedScenePath;
@@ -364,31 +365,30 @@ public static class ApkEarningFlowAnimationValidation
         Button action = page.GetButton("action");
         Require(card != null && action != null, "Conditions retain their existing card and action Button bindings.");
         Rect sevenRows = fixture.ScreenBounds(card.rectTransform);
+        Rect sevenRowAction = fixture.ScreenBounds((RectTransform)action.transform);
         report.conditionSevenRowsHeight = sevenRows.height;
         Require(sevenRows.height > 0 && fixture.Contains((RectTransform)action.transform),
             "Seven-row cash conditions have a visible card and an action inside the viewport.");
+        AuditConditionRows(page, 7, sevenRows, sevenRowAction);
         SetConditionRows(page, true);
         yield return SettleFrames();
         Canvas.ForceUpdateCanvases();
         Rect fourRows = fixture.ScreenBounds(card.rectTransform);
         report.conditionFourRowsHeight = fourRows.height;
-        Require(fourRows.height > sevenRows.height * .5f && fourRows.height < sevenRows.height * .85f,
-            "Real layout frames shrink the card meaningfully for four diamond rows without collapsing it.");
-        Require(Mathf.Abs(fourRows.yMax - sevenRows.yMax) < 1,
-            "Changing row count preserves the top-aligned card origin.");
-        Require(fixture.Contains((RectTransform)action.transform),
-            "The four-row diamond action stays inside the viewport after content shrink.");
+        Rect fourRowAction = fixture.ScreenBounds((RectTransform)action.transform);
+        Require(SameRect(fourRows, sevenRows) && SameRect(fourRowAction, sevenRowAction),
+            "Changing to four diamond rows keeps the reference card and action position and size unchanged.");
+        AuditConditionRows(page, 4, fourRows, fourRowAction);
         SetConditionRows(page, false);
         yield return SettleFrames();
         Canvas.ForceUpdateCanvases();
         Rect restored = fixture.ScreenBounds(card.rectTransform);
         report.conditionRestoredHeight = restored.height;
-        Require(Mathf.Abs(restored.height - sevenRows.height) < 1 &&
-                Mathf.Abs(restored.yMax - sevenRows.yMax) < 1,
-            "Restoring all seven rows restores the card height and top position within one screen pixel.");
-        Require(fixture.Contains((RectTransform)action.transform),
-            "The restored seven-row action remains inside the viewport.");
-        report.cases.Add("conditions-four-seven-row-layout-reflow");
+        Rect restoredAction = fixture.ScreenBounds((RectTransform)action.transform);
+        Require(SameRect(restored, sevenRows) && SameRect(restoredAction, sevenRowAction),
+            "Restoring seven rows preserves the reference card and action within one screen pixel.");
+        AuditConditionRows(page, 7, restored, restoredAction);
+        report.cases.Add("conditions-four-seven-row-fixed-reference-layout");
 
         page = fixture.Show("TXPanel");
         int historyClicks = 0;
@@ -440,6 +440,70 @@ public static class ApkEarningFlowAnimationValidation
             page.SetText(key + ".Status", "In progress");
         }
     }
+
+    private static void AuditConditionRows(ApkEarningPageView page, int count, Rect card, Rect action)
+    {
+        Require(Contains(card, action) && fixture.Contains((RectTransform)page.GetButton("action").transform),
+            "Conditions action remains wholly inside the fixed card and screen.");
+        var visibleText = new List<Rect>();
+        var visibleKeys = new List<string>();
+        Rect previous = default;
+        for (int i = 0; i < 7; i++)
+        {
+            string key = "rows[" + i + "]";
+            GameObject row = page.GetObject(key + ".Root");
+            Require(row.activeInHierarchy == (i < count),
+                "Conditions show exactly the expected active task rows: " + key + ".");
+            if (i >= count) continue;
+            Rect rowBounds = fixture.ScreenBounds((RectTransform)row.transform);
+            Require(Contains(card, rowBounds) && fixture.Contains((RectTransform)row.transform),
+                "The complete conditions row is inside the card and viewport: " + key + ".");
+            Require(rowBounds.yMin >= action.yMax + 1,
+                "The conditions row leaves visible space above the fixed action: " + key + ".");
+            if (i > 0)
+                Require(previous.yMin >= rowBounds.yMax + 1,
+                    "Successive conditions rows remain separate after actual layout frames: " + key + ".");
+            previous = rowBounds;
+            report.conditionVisibleRowChecks++;
+            foreach (string field in new[] { ".Name", ".Value", ".Status" })
+            {
+                TMP_Text text = page.GetText(key + field);
+                Require(text != null && text.isActiveAndEnabled && !string.IsNullOrWhiteSpace(text.text),
+                    "Each visible task retains its name, value and status: " + key + field + ".");
+                text.ForceMeshUpdate();
+                Require(!text.isTextOverflowing && !text.isTextTruncated && !text.canvasRenderer.cull,
+                    "Task text remains fully rendered without clipping or ellipsis: " + key + field + ".");
+                Rect bounds = fixture.TextScreenBounds(text);
+                Require(bounds.width > 0 && bounds.height > 0 && Contains(rowBounds, bounds),
+                    "The actual task glyphs fit wholly within their row: " + key + field + ".");
+                for (int earlier = 0; earlier < visibleText.Count; earlier++)
+                {
+                    report.conditionTextOverlapChecks++;
+                    Require(!PositiveOverlap(bounds, visibleText[earlier]),
+                        "Actual task text does not overlap: " + key + field + " / " + visibleKeys[earlier] + ".");
+                }
+                visibleText.Add(bounds);
+                visibleKeys.Add(key + field);
+            }
+        }
+        TMP_Text footer = page.GetText("TestMode");
+        Require(footer != null && footer.isActiveAndEnabled && !string.IsNullOrWhiteSpace(footer.text),
+            "The conditions test disclosure remains visible in the fixed footer.");
+        footer.ForceMeshUpdate();
+        Rect footerBounds = fixture.TextScreenBounds(footer);
+        Require(footerBounds.width > 0 && footerBounds.height > 0 && Contains(card, footerBounds) &&
+                !PositiveOverlap(footerBounds, action) && !footer.isTextOverflowing && !footer.isTextTruncated,
+            "The test disclosure fits inside the card without covering the fixed action.");
+    }
+
+    private static bool SameRect(Rect a, Rect b) => Mathf.Abs(a.x - b.x) < 1 &&
+        Mathf.Abs(a.y - b.y) < 1 && Mathf.Abs(a.width - b.width) < 1 && Mathf.Abs(a.height - b.height) < 1;
+
+    private static bool Contains(Rect outer, Rect inner) => inner.xMin >= outer.xMin - 1 &&
+        inner.yMin >= outer.yMin - 1 && inner.xMax <= outer.xMax + 1 && inner.yMax <= outer.yMax + 1;
+
+    private static bool PositiveOverlap(Rect a, Rect b) => Mathf.Min(a.xMax, b.xMax) > Mathf.Max(a.xMin, b.xMin) &&
+        Mathf.Min(a.yMax, b.yMax) > Mathf.Max(a.yMin, b.yMin);
 
     private static IEnumerator Drain(IEnumerator routine, float maximumSeconds, Action observe = null)
     {
@@ -690,6 +754,20 @@ public static class ApkEarningFlowAnimationValidation
             for (int i = 1; i < corners.Length; i++)
             {
                 Vector2 point = camera.WorldToScreenPoint(corners[i]);
+                min = Vector2.Min(min, point); max = Vector2.Max(max, point);
+            }
+            return Rect.MinMaxRect(min.x, min.y, max.x, max.y);
+        }
+        public Rect TextScreenBounds(TMP_Text text)
+        {
+            Bounds bounds = text.textBounds;
+            Vector3 a = bounds.min, b = bounds.max;
+            var corners = new[] { new Vector3(a.x, a.y, 0), new Vector3(a.x, b.y, 0),
+                new Vector3(b.x, b.y, 0), new Vector3(b.x, a.y, 0) };
+            Vector2 min = camera.WorldToScreenPoint(text.transform.TransformPoint(corners[0])), max = min;
+            for (int i = 1; i < corners.Length; i++)
+            {
+                Vector2 point = camera.WorldToScreenPoint(text.transform.TransformPoint(corners[i]));
                 min = Vector2.Min(min, point); max = Vector2.Max(max, point);
             }
             return Rect.MinMaxRect(min.x, min.y, max.x, max.y);

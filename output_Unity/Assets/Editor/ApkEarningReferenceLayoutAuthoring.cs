@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using FruitApkEarning;
 using TMPro;
 using UnityEditor;
@@ -24,6 +25,7 @@ public static partial class ApkEarningReferenceLayoutAuthoring
         Edit("TXCoinPanel", DiamondWallet);
         ApplyRelatedPages();
         ApplyConditionPage();
+        ApplyFollowupPages();
         AssetDatabase.SaveAssets();
         Debug.Log("[ReferenceLayout] Authored distinct wallet, account, history and reward compositions.");
     }
@@ -150,6 +152,9 @@ public static partial class ApkEarningReferenceLayoutAuthoring
         if (button == null) throw new InvalidOperationException("Missing button: " + key);
         var image = button.GetComponent<Image>();
         Panel(v, image, x, y, w, h, "CashWalletButton", 2);
+        // Keep the sliced end caps proportional when the reference uses a
+        // shorter action row than the source artwork's natural height.
+        image.pixelsPerUnitMultiplier = image.sprite.rect.height / h / image.pixelsPerUnit;
         button.targetGraphic = image;
         button.transform.SetAsLastSibling();
         foreach (var label in button.GetComponentsInChildren<TMP_Text>(true))
@@ -233,7 +238,7 @@ public static partial class ApkEarningReferenceLayoutAuthoring
                 slot.FullProgressPixelsPerUnit = fill.pixelsPerUnitMultiplier;
             }
         var label = v.GetText(labelKey);
-        CenterText(label, track.rectTransform, 42);
+        CenterText(label, track.rectTransform, Mathf.Min(42, height * .56f));
     }
 
     private static void CashWallet(ApkEarningPageView v)
@@ -249,55 +254,86 @@ public static partial class ApkEarningReferenceLayoutAuthoring
                 PrefabUtility.UnpackPrefabInstance(nested, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
         }
         Prepare(v);
-        Panel(v, v.GetImage("main/PlayerInfoPos/PlayerInfo/Image"), 58, 1280, 964, 300, ppu: 4);
-        Panel(v, v.GetImage("main/Image (1)"), 116, 335, 848, 310, ppu: 5);
-        Panel(v, v.GetImage("main/Image"), 48, 205, 984, 1050, ppu: 2);
-        Header(v, "main/Title1", "StageLabel", 160, 115, 760, 165);
+        Panel(v, v.GetImage("main/PlayerInfoPos/PlayerInfo/Image"), 58, 1256, 964, 330, ppu: 4);
+        Panel(v, v.GetImage("main/Image (1)"), 115, 292, 850, 328, ppu: 5);
+        Panel(v, v.GetImage("main/Image"), 48, 214, 984, 1032, ppu: 2);
+        Header(v, "main/Title1", "StageLabel", 156, 124, 768, 160);
         var previousTitle = v.GetText("Title");
         if (previousTitle != null && previousTitle != v.GetText("StageLabel")) previousTitle.enabled = false;
-        Text(v, "TestMode", 220, 282, 640, 36, 27);
-        Text(v, "labels[0].Text", 220, 353, 640, 65, 42);
-        Icon(v, v.GetImage("goldImage"), 198, 458, 155, 145);
-        Text(v, "GoldCount", 350, 445, 570, 155, 112);
-        Progress(v, "main/Progress", "Progress", "ProgressValue", 120, 718, 840, 76);
-        Text(v, "Tip", 150, 838, 780, 110, 46);
-        Button(v, "TXBtn", 198, 1020, 684, 185, 72);
-        CenterText(v.GetText("TXText"), (RectTransform)v.GetButton("TXBtn").transform, 72);
-        Text(v, "Stats.Time", 160, 1296, 760, 62, 36);
-        Text(v, "Stats.PassCount", 98, 1370, 280, 160, 38);
-        Text(v, "Stats.ChallengeTimes", 400, 1370, 280, 160, 38);
-        Text(v, "Stats.GoldGetCount", 702, 1370, 280, 160, 38);
+        // Keep the status in the card footer so the reference's amount and
+        // progress sections do not move to make room for an extra heading row.
+        Text(v, "TestMode", 220, 1190, 640, 24, 21);
+        Text(v, "labels[0].Text", 220, 319, 640, 70, 42);
+        Icon(v, v.GetImage("goldImage"), 202, 455, 108, 100);
+        Text(v, "GoldCount", 306, 434, 470, 132, 112);
+        Progress(v, "main/Progress", "Progress", "ProgressValue", 120, 714, 840, 73);
+        Text(v, "Tip", 150, 836, 780, 100, 44);
+        Button(v, "TXBtn", 206, 998, 668, 192, 78);
+        CenterText(v.GetText("TXText"), (RectTransform)v.GetButton("TXBtn").transform, 78);
+        Text(v, "Stats.Time", 160, 1263, 760, 65, 36);
+        StatsColumn(v, "Stats.PassCount", "Stats.PlayersCaption", "Players cleared\ntoday", 98);
+        StatsColumn(v, "Stats.ChallengeTimes", "Stats.AttemptsCaption", "Average attempts", 400);
+        StatsColumn(v, "Stats.GoldGetCount", "Stats.AmountCaption", "Average\nwithdrawal amount", 702);
         var divider = v.ArtworkRoot.Find("CashStatsDivider");
         if (divider != null) divider.gameObject.SetActive(false);
         var history = v.GetButton("HistoryButton");
-        Panel(v, history.GetComponent<Image>(), 45, 1610, 990, 124, ppu: 6);
+        Panel(v, history.GetComponent<Image>(), 33, 1610, 1013, 119, ppu: 6);
         history.targetGraphic = history.GetComponent<Image>();
         history.transform.SetAsLastSibling();
         CenterText(v.GetText("HistoryCaption"), (RectTransform)history.transform, 46);
         CloseButton(v, "Close", 916, 165);
     }
 
+    private static void StatsColumn(ApkEarningPageView v, string valueKey, string captionKey,
+        string caption, float x)
+    {
+        TMP_Text value = v.GetText(valueKey);
+        TMP_Text label = v.GetText(captionKey);
+        if (label == null)
+        {
+            var node = new GameObject(captionKey, typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            node.layer = v.gameObject.layer;
+            label = node.GetComponent<TextMeshProUGUI>();
+            label.font = value.font;
+            label.fontSharedMaterial = value.fontSharedMaterial;
+            label.color = value.color;
+            var slots = new List<ApkEarningPageView.TextSlot>(v.Texts) {
+                new ApkEarningPageView.TextSlot { Key = captionKey, Target = label }
+            };
+            v.Texts = slots.ToArray();
+        }
+        label.text = caption;
+        label.enableAutoSizing = true;
+        label.enableWordWrapping = true;
+        Text(v, captionKey, x, 1354, 280, 90, 34);
+        Text(v, valueKey, x, 1480, 280, 82, 56);
+        value.enableAutoSizing = true;
+        value.enableWordWrapping = false;
+        value.fontSizeMin = 36;
+        value.text = "--";
+    }
+
     private static void DiamondWallet(ApkEarningPageView v)
     {
         Prepare(v);
-        Panel(v, v.GetImage("main/Image (1)"), 28, 274, 1024, 104, ppu: 6);
-        Panel(v, v.GetImage("main/Image (2)"), 70, 800, 940, 578, ppu: 5);
-        Panel(v, v.GetImage("main/Image (3)"), 98, 421, 884, 243, ppu: 5);
-        Panel(v, v.GetImage("TXProgress"), 70, 1395, 940, 278, ppu: 6);
-        Panel(v, v.GetImage("bg"), 40, 190, 1000, 1695, ppu: 2);
-        Header(v, "Title", "labels[0].Text", 160, 105, 760, 165);
-        Icon(v, v.GetImage("CoinIcon"), 204, 290, 82, 76);
-        Text(v, "CoinValue", 335, 287, 470, 80, 58);
-        Text(v, "TestMode", 220, 382, 640, 32, 26);
-        Icon(v, v.GetImage("main/Image"), 208, 475, 140, 128);
-        Text(v, "GoldValue", 370, 455, 480, 175, 110);
-        Text(v, "TipValue", 230, 700, 620, 65, 40);
+        Panel(v, v.GetImage("main/Image (1)"), 18, 267, 1044, 110, ppu: 6);
+        Panel(v, v.GetImage("main/Image (2)"), 68, 800, 945, 587, ppu: 5);
+        Panel(v, v.GetImage("main/Image (3)"), 97, 390, 885, 271, ppu: 5);
+        Panel(v, v.GetImage("TXProgress"), 64, 1395, 944, 278, ppu: 6);
+        Panel(v, v.GetImage("bg"), 34, 108, 1012, 1798, ppu: 2);
+        Header(v, "Title", "labels[0].Text", 160, 108, 760, 162);
+        Icon(v, v.GetImage("CoinIcon"), 180, 294, 58, 56);
+        Text(v, "CoinValue", 350, 287, 380, 70, 56);
+        Text(v, "TestMode", 220, 1855, 640, 24, 21);
+        Icon(v, v.GetImage("main/Image"), 222, 455, 96, 100);
+        Text(v, "GoldValue", 380, 437, 410, 150, 110);
+        Text(v, "TipValue", 230, 684, 620, 76, 40);
         Text(v, "labels[1].Text", 130, 818, 820, 60, 40);
         for (int i = 0; i < 4; i++)
         {
             var option = v.GetButton("options[" + i + "]");
             Panel(v, option.GetComponent<Image>(), i % 2 == 0 ? 126 : 586,
-                i < 2 ? 900 : 1140, 368, 208, ppu: 6);
+                i < 2 ? 884 : 1140, 368, 220, ppu: 6);
             option.transform.SetAsLastSibling();
             option.targetGraphic = option.GetComponent<Image>();
             CenterText(v.GetText("amounts[" + i + "]"), (RectTransform)option.transform, 72);
@@ -315,9 +351,9 @@ public static partial class ApkEarningReferenceLayoutAuthoring
         Text(v, "TXTip", 115, 1417, 850, 58, 38);
         Text(v, "IitemTip", 120, 1475, 840, 108, 37);
         v.GetText("TXTip").alignment = v.GetText("IitemTip").alignment = TextAlignmentOptions.Left;
-        Progress(v, "main/TXProgress/Bar", "TipBar", "TipBarValue", 110, 1590, 860, 64);
-        Button(v, "TXBtn", 175, 1700, 730, 155, 68);
-        CenterText(v.GetText("labels[2].Text"), (RectTransform)v.GetButton("TXBtn").transform, 68);
+        Progress(v, "main/TXProgress/Bar", "TipBar", "TipBarValue", 104, 1597, 860, 52);
+        Button(v, "TXBtn", 158, 1684, 764, 171, 72);
+        CenterText(v.GetText("labels[2].Text"), (RectTransform)v.GetButton("TXBtn").transform, 72);
         CloseButton(v, "Close", 928, 211, 108);
     }
 }

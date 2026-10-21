@@ -196,9 +196,9 @@ namespace FruitApkEarning
                 long sample=early!=null?early.AmountCents:state.CurrentLevel<=2?
                     (state.CurrentLevel==1?Service.Rules.EarlyFirstCents:Service.Rules.EarlySecondCents):simulatedCashCents;
                 page.SetText("Stats.Time","Simulated stats");
-                page.SetText("Stats.PassCount","Players today\n"+players.ToString("N0",CultureInfo.InvariantCulture));
-                page.SetText("Stats.ChallengeTimes","Avg. attempts\n"+attempts.ToString(CultureInfo.InvariantCulture));
-                page.SetText("Stats.GoldGetCount","Avg. amount\n"+Money(sample));
+                page.SetText("Stats.PassCount",players.ToString("N0",CultureInfo.InvariantCulture));
+                page.SetText("Stats.ChallengeTimes",attempts.ToString(CultureInfo.InvariantCulture));
+                page.SetText("Stats.GoldGetCount",Money(sample));
             }
             else if(panel=="TXCoinPanel")
             {

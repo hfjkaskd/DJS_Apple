@@ -142,7 +142,7 @@ public static class ApkEarningValidation
         Directory.CreateDirectory(output);
         var report = new Report {
             generatedUtc = DateTime.UtcNow.ToString("O"),
-            scope = "Read-only saved-prefab layout previews and cross-resolution validation. Every Panels prefab whose root PageView has FitWidth enabled, including variants and LocalRewardVideoTest, is rendered in all existing fixture states at 1080x1920, 1080x2400 and 720x1600. Nine representative default-state 1080x2400 PNGs are saved. At 1080x1920, cash, diamond, account, history, reward, withdrawal conditions, verification and account confirmation default states plus diamond withdrawal conditions are saved for equal-resolution layout comparisons. Other renders still run layout, camera rendering and all existing audits without GPU readback or PNG encoding. Modal coverage measures visible CashWalletPanel Image rectangles, not alpha pixels; absent frames are reported explicitly. Synthetic preview data and production RefreshLayout are reused unchanged. These are layout previews, not live gameplay captures or proof of reference-pixel parity. No authoring, save mutation, Service, Host, ad network or payment operation is run."
+            scope = "Read-only saved-prefab layout previews and cross-resolution validation. Every Panels prefab whose root PageView has FitWidth enabled, including variants and LocalRewardVideoTest, is rendered in all existing fixture states at 1080x1920, 1080x2400 and 720x1600. Nine representative default-state 1080x2400 PNGs are saved. At 1080x1920, cash, diamond, account, history, reward, withdrawal conditions, verification, account confirmation, stage progress, earning sequence and diamond unlock default states plus diamond withdrawal conditions and early reward are saved for equal-resolution layout comparisons. Other renders still run layout, camera rendering and all existing audits without GPU readback or PNG encoding. Modal coverage measures visible CashWalletPanel Image rectangles, not alpha pixels; absent frames are reported explicitly. Synthetic preview data and production RefreshLayout are reused unchanged. These are layout previews, not live gameplay captures or proof of reference-pixel parity. No authoring, save mutation, Service, Host, ad network or payment operation is run."
         };
         var paths = new List<string>();
         foreach (string guid in AssetDatabase.FindAssets("t:Prefab", new[] { PanelFolder.TrimEnd('/') }))
@@ -162,7 +162,8 @@ public static class ApkEarningValidation
         };
         var standardScreenshots = new HashSet<string>(StringComparer.Ordinal) {
             "TXPanel", "TXCoinPanel", "TXUserInfoPanel", "LocalCashHistory", "LocalSuccess",
-            "LocalWithdrawalConditions", "LocalWithdrawalVerification", "TXUserInfoSurePanel"
+            "LocalWithdrawalConditions", "LocalWithdrawalVerification", "TXUserInfoSurePanel",
+            "TXProgress0Panel", "LocalEarningSequence", "LocalDiamondUnlockGuide"
         };
         var requiredScreenshots = new HashSet<string>(screenshots, StringComparer.Ordinal);
         requiredScreenshots.UnionWith(standardScreenshots);
@@ -181,14 +182,16 @@ public static class ApkEarningValidation
                         ((size.y == 2400 && string.IsNullOrEmpty(state) && screenshots.Contains(name)) ||
                          (size.y == 1920 && ((string.IsNullOrEmpty(state) && standardScreenshots.Contains(name)) ||
                           (name == "LocalWithdrawalConditions" && state == "diamond") ||
+                          (name == "LocalEarningSequence" && (state == "activating" || state == "activated" || state == "summary")) ||
                           (name == "LocalSuccess" && state == "early-reward")))),
                         true, output);
             }
         File.WriteAllText(Path.Combine(output, "enlarged-modal-fixtures-report.json"), JsonUtility.ToJson(report, true));
         if (report.errors.Count > 0)
             throw new InvalidOperationException("Modal layout validation found " + report.errors.Count + " errors. See " + output);
+        int savedImages = report.renders.FindAll(render => !string.IsNullOrEmpty(render.image)).Count;
         Debug.Log("[ApkEarningValidation] Modal layouts passed " + report.pages.Count + " prefab audits and " +
-            report.renders.Count + " static renders, with nineteen representative PNGs. " + output);
+            report.renders.Count + " static renders, with " + savedImages + " representative PNGs. " + output);
     }
 
     [MenuItem("Tools/Apk Earning/Validate and Render Saved Fixtures")]
@@ -463,6 +466,8 @@ public static class ApkEarningValidation
             if (measureModal)
             {
                 MeasureModalBounds(instance, camera, size, item);
+                ApkEarningLayoutMeasurements.Capture(instance.GetComponent<ApkEarningPageView>(), name, state,
+                    camera, size, outputDirectory ?? Output);
                 AuditModalTextOverlaps(instance.GetComponent<ApkEarningPageView>(), name, camera, size, item);
                 if (name == "TXCoinPanel")
                     AuditDiamondOptionOverlaps(instance.GetComponent<ApkEarningPageView>(), camera, size, item);
@@ -618,6 +623,9 @@ public static class ApkEarningValidation
             AuditTextPair(page, "TestMode", "labels[0].Text", camera, size, item);
             foreach (string key in new[] { "Stats.PassCount", "Stats.ChallengeTimes", "Stats.GoldGetCount" })
                 AuditTextPair(page, "Stats.Time", key, camera, size, item);
+            AuditTextPair(page, "Stats.PlayersCaption", "Stats.PassCount", camera, size, item);
+            AuditTextPair(page, "Stats.AttemptsCaption", "Stats.ChallengeTimes", camera, size, item);
+            AuditTextPair(page, "Stats.AmountCaption", "Stats.GoldGetCount", camera, size, item);
             AuditButtonTextPair(page, "TXBtn", "Stats.Time", camera, size, item);
         }
         else if (name == "LocalWithdrawalConditions")
@@ -758,8 +766,8 @@ public static class ApkEarningValidation
                 page.SetText("Tip", "Clear level 22\nto review withdrawal"); page.SetText("TXText", "Withdraw");
                 page.SetText("ProgressValue", "6 / 22"); page.SetText("ProgressTipValue", "16"); page.SetProgress("Progress", 6f / 22);
                 page.SetText("Stats.Time", "Simulated stats");
-                page.SetText("Stats.PassCount", "Players today\n13,110"); page.SetText("Stats.ChallengeTimes", "Avg. attempts\n8");
-                page.SetText("Stats.GoldGetCount", "Avg. amount\n$32,500.00"); page.SetVisible("Level1", false); page.SetVisible("Level2", false);
+                page.SetText("Stats.PassCount", "13,110"); page.SetText("Stats.ChallengeTimes", "8");
+                page.SetText("Stats.GoldGetCount", "$32,500.00"); page.SetVisible("Level1", false); page.SetVisible("Level2", false);
                 break;
             case "TXCoinPanel": PreviewDiamonds(page, state == "target-reached"); break;
             case "LocalWithdrawalConditions": PreviewConditions(page, state); break;

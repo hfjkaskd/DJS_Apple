@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>Saved content-driven requirements layout; row visibility remains owned by the Host.</summary>
+/// <summary>Saved reference requirements composition; row visibility remains owned by the Host.</summary>
 public static partial class ApkEarningReferenceLayoutAuthoring
 {
     private static void ApplyConditionPage() => Edit("LocalWithdrawalConditions", Conditions);
@@ -35,25 +35,22 @@ public static partial class ApkEarningReferenceLayoutAuthoring
             if (legacy != null && legacy != view.GetText("title")) legacy.gameObject.SetActive(false);
         }
 
+        // The reference keeps the body and action stationary as four diamond
+        // requirements become seven cash requirements. Only the rows change.
         RectTransform card = background.rectTransform;
-        ConditionParent(card, view.ArtworkRoot);
-        card.anchorMin = card.anchorMax = new Vector2(.5f, .94f);
-        card.pivot = new Vector2(.5f, 1);
-        card.anchoredPosition = Vector2.zero;
-        card.sizeDelta = new Vector2(984, 0);
+        ConditionPosition(card, view.ArtworkRoot, 49, 214, 981, 1030);
+        ConditionDisableLayouts(card);
         ConditionImage(background, "CashWalletPanel", 4);
-        card.SetAsLastSibling();
-        ConditionNaturalElement(card);
-        var cardLayout = ConditionVertical(card, new RectOffset(60, 60, 72, 56), 16);
-        var cardFit = ConditionEnsure<ContentSizeFitter>(card.gameObject);
-        cardFit.enabled = true;
-        cardFit.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
-        cardFit.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+        card.SetAsFirstSibling();
+        Transform previousHeaderSlot = card.Find("ReferenceConditionHeader");
+        if (previousHeaderSlot != null) previousHeaderSlot.gameObject.SetActive(false);
 
-        RectTransform headerSlot = ConditionContainer(card, "ReferenceConditionHeader");
-        ConditionFixedElement(headerSlot, 160);
-        ConditionParent(heading.rectTransform, headerSlot);
-        ConditionCentered(heading.rectTransform, new Vector2(0, 0), new Vector2(760, 148));
+        ConditionPosition(inset.rectTransform, view.ArtworkRoot, 64, 322, 952, 910);
+        ConditionDisableLayouts(inset.rectTransform);
+        ConditionImage(inset, "CashWalletInset", 5);
+        inset.transform.SetSiblingIndex(1);
+
+        ConditionPosition(heading.rectTransform, view.ArtworkRoot, 155, 124, 768, 160);
         ConditionImage(heading, "CashWalletHeader", 1);
         heading.type = Image.Type.Simple;
         CenterText(view.GetText("title"), heading.rectTransform, 48);
@@ -61,39 +58,24 @@ public static partial class ApkEarningReferenceLayoutAuthoring
         title.fontSharedMaterial = AssetDatabase.LoadAssetAtPath<Material>(ArtFolder + "CashWalletOutlined.mat");
         title.color = new Color32(255, 250, 222, 255);
         title.enableWordWrapping = false;
+        // Retain the existing orchard materials, without adding a decorative
+        // layer to the reference's title/body hierarchy.
         Transform apple = heading.transform.Find("OrchardAppleAccent");
-        if (apple != null)
-        {
-            apple.gameObject.SetActive(true);
-            var appleRect = (RectTransform)apple;
-            appleRect.anchorMin = appleRect.anchorMax = new Vector2(.025f, .85f);
-            appleRect.pivot = new Vector2(.5f, .5f);
-            appleRect.anchoredPosition = Vector2.zero;
-            appleRect.sizeDelta = new Vector2(100, 122);
-            appleRect.localScale = Vector3.one;
-        }
+        if (apple != null) apple.gameObject.SetActive(false);
+        heading.transform.SetAsLastSibling();
 
-        ConditionText(view.GetText("TestMode"), card, 40, 26, TextAlignmentOptions.Center);
-        ConditionText(view.GetText("subtitle"), card, 70, 44, TextAlignmentOptions.Center);
-        ConditionText(view.GetText("notice"), card, 100, 33, TextAlignmentOptions.Center);
+        ConditionPageText(view.GetText("subtitle"), view.ArtworkRoot, 260, 285, 560, 44, 36);
+        ConditionPageText(view.GetText("notice"), view.ArtworkRoot, 120, 352, 840, 64, 32);
+        // This test-only disclosure fits below the action, so it does not push
+        // the reference's subtitle, notice or task block down the page.
+        ConditionPageText(view.GetText("TestMode"), view.ArtworkRoot, 120, 1208, 840, 26, 21);
 
         RectTransform rows = (RectTransform)requirements.transform;
-        ConditionParent(rows, card);
+        ConditionPosition(rows, view.ArtworkRoot, 120, 442, 840, 568);
         rows.gameObject.SetActive(true);
-        ConditionNaturalElement(rows);
-        ConditionVertical(rows, new RectOffset(12, 12, 12, 12), 8);
-        // The parent layout consumes this group's preferred height. A second
-        // ContentSizeFitter here would fight the parent's driven RectTransform.
+        ConditionVertical(rows, new RectOffset(), 6);
         foreach (ContentSizeFitter fitter in rows.GetComponents<ContentSizeFitter>()) fitter.enabled = false;
-        ConditionParent(inset.rectTransform, rows);
-        ConditionImage(inset, "CashWalletInset", 5);
-        var insetElement = ConditionEnsure<LayoutElement>(inset.gameObject);
-        insetElement.enabled = true;
-        insetElement.ignoreLayout = true;
-        inset.rectTransform.anchorMin = Vector2.zero;
-        inset.rectTransform.anchorMax = Vector2.one;
-        inset.rectTransform.offsetMin = inset.rectTransform.offsetMax = Vector2.zero;
-        inset.transform.SetAsFirstSibling();
+        rows.SetAsLastSibling();
 
         for (int i = 0; i < 7; i++)
         {
@@ -106,29 +88,29 @@ public static partial class ApkEarningReferenceLayoutAuthoring
             bool savedActive = rowObject.activeSelf;
             RectTransform row = (RectTransform)rowObject.transform;
             ConditionParent(row, rows);
-            ConditionFixedElement(row, 104);
+            ConditionFixedElement(row, 76);
             foreach (ContentSizeFitter fitter in row.GetComponents<ContentSizeFitter>()) fitter.enabled = false;
             var horizontal = ConditionEnsure<HorizontalLayoutGroup>(rowObject);
             ConditionDisableOtherLayouts(row, horizontal);
             horizontal.enabled = true;
-            horizontal.padding = new RectOffset(20, 20, 8, 8);
-            horizontal.spacing = 24;
+            horizontal.padding = new RectOffset(14, 14, 6, 6);
+            horizontal.spacing = 20;
             horizontal.childAlignment = TextAnchor.MiddleLeft;
             horizontal.childControlWidth = horizontal.childControlHeight = true;
             horizontal.childForceExpandWidth = horizontal.childForceExpandHeight = false;
             horizontal.childScaleWidth = horizontal.childScaleHeight = false;
 
             RectTransform labels = ConditionContainer(row, "ReferenceConditionLabelStack");
-            var labelElement = ConditionFixedElement(labels, 88);
+            var labelElement = ConditionFixedElement(labels, 64);
             labelElement.flexibleWidth = 1;
-            ConditionVertical(labels, new RectOffset(), 8);
-            ConditionText(name, labels, 40, 34, TextAlignmentOptions.Left);
-            ConditionText(value, labels, 40, 29, TextAlignmentOptions.Left);
+            ConditionVertical(labels, new RectOffset(), 4);
+            ConditionText(name, labels, 32, 30, TextAlignmentOptions.Left);
+            ConditionText(value, labels, 28, 27, TextAlignmentOptions.Left);
             name.enableWordWrapping = value.enableWordWrapping = false;
             name.fontStyle = FontStyles.Bold;
-            ConditionText(status, row, 88, 31, TextAlignmentOptions.Center);
+            ConditionText(status, row, 64, 27, TextAlignmentOptions.Center);
             var statusElement = status.GetComponent<LayoutElement>();
-            statusElement.minWidth = statusElement.preferredWidth = 210;
+            statusElement.minWidth = statusElement.preferredWidth = 206;
             statusElement.flexibleWidth = 0;
             labels.SetAsFirstSibling();
             status.transform.SetAsLastSibling();
@@ -138,23 +120,19 @@ public static partial class ApkEarningReferenceLayoutAuthoring
             rowObject.SetActive(savedActive);
         }
 
-        ConditionParent((RectTransform)action.transform, card);
-        ConditionFixedElement((RectTransform)action.transform, 150);
+        ConditionPosition((RectTransform)action.transform, view.ArtworkRoot, 182, 1067, 716, 138);
+        ConditionDisableLayouts((RectTransform)action.transform);
         var actionImage = action.GetComponent<Image>();
         if (actionImage == null) throw new InvalidOperationException("Requirements action Button must own its Image.");
         ConditionImage(actionImage, "CashWalletButton", 2);
+        actionImage.pixelsPerUnitMultiplier = actionImage.sprite.rect.height / 138 / actionImage.pixelsPerUnit;
         action.targetGraphic = actionImage;
-        CenterText(view.GetText("actionCaption"), (RectTransform)action.transform, 49);
+        CenterText(view.GetText("actionCaption"), (RectTransform)action.transform, 48);
         action.transform.SetAsLastSibling();
 
-        ConditionParent((RectTransform)close.transform, card);
-        var closeElement = ConditionEnsure<LayoutElement>(close.gameObject);
-        closeElement.enabled = true;
-        closeElement.ignoreLayout = true;
         RectTransform closeRect = (RectTransform)close.transform;
-        closeRect.anchorMin = closeRect.anchorMax = closeRect.pivot = Vector2.one;
-        closeRect.anchoredPosition = new Vector2(-18, -18);
-        closeRect.sizeDelta = new Vector2(108, 108);
+        ConditionPosition(closeRect, view.ArtworkRoot, 921, 162, 114, 118);
+        ConditionDisableLayouts(closeRect);
         var closeImage = close.GetComponent<Image>();
         if (closeImage == null) throw new InvalidOperationException("Requirements close Button must own its Image.");
         ConditionImage(closeImage, "CashWalletClose", 1);
@@ -162,18 +140,11 @@ public static partial class ApkEarningReferenceLayoutAuthoring
         close.targetGraphic = closeImage;
         close.transform.SetAsLastSibling();
 
-        headerSlot.SetSiblingIndex(0);
-        view.GetText("TestMode").transform.SetSiblingIndex(1);
-        view.GetText("subtitle").transform.SetSiblingIndex(2);
-        view.GetText("notice").transform.SetSiblingIndex(3);
-        rows.SetSiblingIndex(4);
-        action.transform.SetSiblingIndex(5);
-        // 1920-high reference: 728 fixed units + (12*2 + N*104 + (N-1)*8).
-        // Four rows yield 1192 (62.1%); seven yield 1528 (79.6%). Longer screens
-        // retain this content height instead of stretching blank areas.
-        cardLayout.enabled = true;
-        LayoutRebuilder.ForceRebuildLayoutImmediate(card);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(card);
+        // Four rows end at 764; seven end at 1010, leaving a 57-unit
+        // separation before the fixed action. Long screens retain these
+        // dimensions rather than stretching the content or whitespace.
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rows);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rows);
     }
 
     private static T ConditionEnsure<T>(GameObject node) where T : Component
@@ -207,11 +178,29 @@ public static partial class ApkEarningReferenceLayoutAuthoring
         rect.localRotation = Quaternion.identity;
     }
 
-    private static void ConditionCentered(RectTransform rect, Vector2 position, Vector2 size)
+    private static void ConditionPosition(RectTransform rect, RectTransform parent,
+        float x, float y, float width, float height)
     {
-        rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(.5f, .5f);
-        rect.anchoredPosition = position;
-        rect.sizeDelta = size;
+        ConditionParent(rect, parent);
+        rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0, 1);
+        rect.anchoredPosition = new Vector2(x, -y);
+        rect.sizeDelta = new Vector2(width, height);
+    }
+
+    private static void ConditionDisableLayouts(RectTransform rect)
+    {
+        foreach (LayoutGroup layout in rect.GetComponents<LayoutGroup>()) layout.enabled = false;
+        foreach (ContentSizeFitter fitter in rect.GetComponents<ContentSizeFitter>()) fitter.enabled = false;
+        foreach (LayoutElement element in rect.GetComponents<LayoutElement>()) element.enabled = false;
+    }
+
+    private static void ConditionPageText(TMP_Text text, RectTransform parent,
+        float x, float y, float width, float height, float size)
+    {
+        ConditionText(text, parent, height, size, TextAlignmentOptions.Center);
+        ConditionPosition(text.rectTransform, parent, x, y, width, height);
+        ConditionDisableLayouts(text.rectTransform);
+        text.transform.SetAsLastSibling();
     }
 
     private static void ConditionImage(Image image, string sprite, float ppu)
