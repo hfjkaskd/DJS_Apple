@@ -26,8 +26,10 @@ public static partial class ApkEarningReferenceLayoutAuthoring
         ApplyRelatedPages();
         ApplyConditionPage();
         ApplyFollowupPages();
+        ApplyAuxiliaryPages();
+        ApplyGuidePages();
         AssetDatabase.SaveAssets();
-        Debug.Log("[ReferenceLayout] Authored distinct wallet, account, history and reward compositions.");
+        Debug.Log("[ReferenceLayout] Authored every reachable earning page and toast; compact gameplay HUD retained.");
     }
 
     public static void ApplyAndValidate()
@@ -39,6 +41,13 @@ public static partial class ApkEarningReferenceLayoutAuthoring
     public static void ApplyValidateAndAnimate()
     {
         ApplyAndValidate();
+        ApkEarningFlowAnimationValidation.Run();
+    }
+
+    public static void ApplyValidateAllAndAnimate()
+    {
+        Apply();
+        ApkEarningValidation.ValidateAllFlowLayouts();
         ApkEarningFlowAnimationValidation.Run();
     }
 

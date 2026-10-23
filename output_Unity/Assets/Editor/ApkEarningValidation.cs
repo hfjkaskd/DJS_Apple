@@ -12,7 +12,7 @@ using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
 /// <summary>Saved-prefab fixtures and separately labelled captures of the actual running game.</summary>
-public static class ApkEarningValidation
+public static partial class ApkEarningValidation
 {
     private const string PanelFolder = "Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/";
     private const string CorePath = "Assets/res/local/coreplay/CorePlayUI.prefab";
@@ -22,7 +22,7 @@ public static class ApkEarningValidation
     private static readonly string[] Pages = {
         "TXPanel", "TXCoinPanel", "LocalWithdrawalConditions", "LocalCashHistory", "LocalEarningSequence",
         "LocalLuckyReward", "TXUserInfoPanel", "TXUserInfoSurePanel", "LocalSuccess", "LocalEarningRecovery",
-        "TXRecordGuidePanel", "TXGuideLoadingPanel", "TXProgress0Panel", "TXChannelPanel",
+        "TXRecordGuidePanel", "TXGuideLoadingPanel", "TXProgress0Panel", "TXChannelPanel", "LocalRewardVideoTest",
         "LocalWithdrawalVerification", "TXGuideTargetCompletePanel", "LocalDiamondUnlockGuide", "Tip",
         // Retained source/alternate pages are also checked so a later route cannot restore old artwork.
         "NewbieGuidePanel", "RewardPanel", "SuccessPanel", "LocalUserLevel", "TXLevelPanel", "TXTooFastHintPanel"
@@ -801,7 +801,7 @@ public static class ApkEarningValidation
                 page.SetText("tip", "$1.50"); break;
             case "LocalDiamondUnlockGuide":
                 page.SetText("title", "Diamond rewards unlocked"); page.SetText("diamondAmount", "102");
-                page.SetText("body", "Diamond rewards are unlocked. Tap here to review withdrawal requirements."); break;
+                page.SetText("body", "Diamond rewards are unlocked. Tap to continue playing."); break;
             case "LocalEarningRecovery":
                 page.SetText("title", "Local save unavailable");
                 page.SetText("body", "Preview save error.\nYour last saved rewards are preserved. Retry saving, or return to the game and recover them on restart."); break;
@@ -826,6 +826,7 @@ public static class ApkEarningValidation
                 page.SetProgress("LevelPregress", 22f / 51); page.SetProgress("VideoPregress", 0); break;
             case "Tip": page.SetText("content", "Reward video unavailable. Use Claim to collect."); break;
         }
+        ApplyAllFlowVariant(page, name, state);
     }
 
     private static void PreviewDiamonds(ApkEarningPageView page, bool reached)

@@ -33,10 +33,10 @@ RectTransform:
   - {fileID: 224977153420339851}
   m_Father: {fileID: 224709867586078768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.44010416}
-  m_AnchorMax: {x: 0.5, y: 0.44010416}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 740, y: 70}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -106}
+  m_SizeDelta: {x: 830, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222985305603660343
 CanvasRenderer:
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 4.142857
+  m_PixelsPerUnitMultiplier: 4.833333
 --- !u!1 &1703437598541787
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,8 +110,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 9, y: 0}
-  m_SizeDelta: {x: 0, y: 54}
+  m_AnchoredPosition: {x: 10, y: 0}
+  m_SizeDelta: {x: 810, y: 44}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &222336590748365959
 CanvasRenderer:
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 6.2972393
+  m_PixelsPerUnitMultiplier: 7.72843
 --- !u!1 &1709254077376921
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,21 +303,21 @@ MonoBehaviour:
   - Key: Progress
     Target: {fileID: 114256069497284392}
     ResizeWidthWithProgress: 1
-    FullProgressWidth: 722
-    FullProgressHeight: 54
-    FullProgressPixelsPerUnit: 6.2972393
+    FullProgressWidth: 810
+    FullProgressHeight: 44
+    FullProgressPixelsPerUnit: 7.72843
   - Key: OriginalWithdrawalLoadingPanel.Progress
     Target: {fileID: 114256069497284392}
     ResizeWidthWithProgress: 1
-    FullProgressWidth: 722
-    FullProgressHeight: 54
-    FullProgressPixelsPerUnit: 6.2972393
+    FullProgressWidth: 810
+    FullProgressHeight: 44
+    FullProgressPixelsPerUnit: 7.72843
   - Key: source:114587765826080250:Progress
     Target: {fileID: 114256069497284392}
     ResizeWidthWithProgress: 1
-    FullProgressWidth: 722
-    FullProgressHeight: 54
-    FullProgressPixelsPerUnit: 6.2972393
+    FullProgressWidth: 810
+    FullProgressHeight: 44
+    FullProgressPixelsPerUnit: 7.72843
   - Key: backdrop
     Target: {fileID: 114061268324235159}
     ResizeWidthWithProgress: 0
@@ -387,24 +387,24 @@ MonoBehaviour:
   - Key: main/Progress/Bar
     Target: {fileID: 114256069497284392}
     ResizeWidthWithProgress: 1
-    FullProgressWidth: 722
-    FullProgressHeight: 54
-    FullProgressPixelsPerUnit: 6.2972393
+    FullProgressWidth: 810
+    FullProgressHeight: 44
+    FullProgressPixelsPerUnit: 7.72843
   - Key: path:main/Progress/Bar
     Target: {fileID: 114256069497284392}
     ResizeWidthWithProgress: 1
-    FullProgressWidth: 722
-    FullProgressHeight: 54
-    FullProgressPixelsPerUnit: 6.2972393
+    FullProgressWidth: 810
+    FullProgressHeight: 44
+    FullProgressPixelsPerUnit: 7.72843
   - Key: Bar
     Target: {fileID: 114256069497284392}
     ResizeWidthWithProgress: 1
-    FullProgressWidth: 722
-    FullProgressHeight: 54
-    FullProgressPixelsPerUnit: 6.2972393
+    FullProgressWidth: 810
+    FullProgressHeight: 44
+    FullProgressPixelsPerUnit: 7.72843
   Inputs: []
   ArtworkRoot: {fileID: 224709867586078768}
-  ReferenceWidth: 1000
+  ReferenceWidth: 1080
   MinimumReferenceHeight: 1920
   FitWidth: 1
   EmphasisColor: {r: 0.20784314, g: 0.43137255, b: 0.11372549, a: 1}
@@ -528,10 +528,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224709867586078768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.37760416}
-  m_AnchorMax: {x: 0.5, y: 0.6223958}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 900, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 16}
+  m_SizeDelta: {x: 984, y: 460}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222589667821646929
 CanvasRenderer:
@@ -555,7 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -570,7 +570,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1.5
+  m_PixelsPerUnitMultiplier: 3
 --- !u!114 &7747399509430811671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,10 +657,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224709867586078768}
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
-  m_AnchorMin: {x: 0.5, y: 0.515625}
-  m_AnchorMax: {x: 0.5, y: 0.515625}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 740, y: 110}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 76}
+  m_SizeDelta: {x: 860, y: 138}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222002669891404536
 CanvasRenderer:
@@ -717,12 +717,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44
+  m_fontSize: 54
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 33
-  m_fontSizeMax: 44
+  m_fontSizeMin: 43.2
+  m_fontSizeMax: 54
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -791,10 +791,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224709867586078768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5859375}
-  m_AnchorMax: {x: 0.5, y: 0.5859375}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 760, y: 40}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -165}
+  m_SizeDelta: {x: 620, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4118521831836168278
 CanvasRenderer:
@@ -851,12 +851,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 23
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 24
+  m_fontSizeMin: 18.4
+  m_fontSizeMax: 23
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -867,7 +867,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 1
   m_linkedTextComponent: {fileID: 0}
