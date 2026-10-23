@@ -1,0 +1,1504 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "scope": "22 reachable earning surfaces; current before/after saved-Prefab camera previews. Original screenshot copies are byte-for-byte, overview thumbnails preserve aspect ratio and do not crop. No phone captures were made for this gallery.",
+  "allPagesAfterOverview": "all-pages-after-overview.png",
+  "groups": [
+    {
+      "id": "01-wallets",
+      "label": "钱包与条件",
+      "pages": [
+        "TXPanel",
+        "TXCoinPanel",
+        "LocalWithdrawalConditions",
+        "LocalCashHistory"
+      ],
+      "overview": "01-wallets-overview.png"
+    },
+    {
+      "id": "02-account",
+      "label": "账户与确认",
+      "pages": [
+        "TXUserInfoPanel",
+        "TXChannelPanel",
+        "TXUserInfoSurePanel",
+        "LocalWithdrawalVerification"
+      ],
+      "overview": "02-account-overview.png"
+    },
+    {
+      "id": "03-guide",
+      "label": "引导与阶段",
+      "pages": [
+        "TXRecordGuidePanel",
+        "TXGuideLoadingPanel",
+        "TXGuideTargetCompletePanel",
+        "TXProgress0Panel",
+        "TXTooFastHintPanel"
+      ],
+      "overview": "03-guide-overview.png"
+    },
+    {
+      "id": "04-rewards",
+      "label": "奖励与过场",
+      "pages": [
+        "LocalSuccess",
+        "LocalLuckyReward",
+        "LocalRewardVideoTest",
+        "LocalEarningSequence"
+      ],
+      "overview": "04-rewards-overview.png"
+    },
+    {
+      "id": "05-hud-support",
+      "label": "主界面与辅助页",
+      "pages": [
+        "ApkEarningTop",
+        "LocalDiamondUnlockGuide",
+        "LocalUserLevel",
+        "LocalEarningRecovery",
+        "Tip"
+      ],
+      "overview": "05-hud-support-overview.png"
+    }
+  ],
+  "cards": [
+    {
+      "page": "TXPanel",
+      "label": "现金钱包",
+      "group": "01-wallets",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXPanel-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXPanel-1080x1920.png",
+          "reference": {
+            "image": "images/apk-APK-cash-wallet.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-cash-wallet.png",
+            "note": "同类界面；金额与关卡可能不同"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "early-reward",
+          "label": "早期奖励",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXPanel--early-reward-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXPanel--early-reward-1080x1920.png",
+          "reference": {
+            "image": "images/apk-04-cash-wallet.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/04-cash-wallet.png",
+            "note": "早期奖励钱包；金额可能不同"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [
+        {
+          "name": "04-cash-wallet.png",
+          "image": "images/apk-04-cash-wallet.png"
+        },
+        {
+          "name": "09-second-wallet.png",
+          "image": "images/apk-09-second-wallet.png"
+        },
+        {
+          "name": "APK-cash-wallet.png",
+          "image": "images/apk-APK-cash-wallet.png"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "page": "TXCoinPanel",
+      "label": "钻石钱包",
+      "group": "01-wallets",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXCoinPanel-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXCoinPanel-1080x1920.png",
+          "reference": {
+            "image": "images/apk-APK-diamond-wallet.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-wallet.png",
+            "note": "同类界面；余额可能不同"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "target-reached",
+          "label": "金额达标",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXCoinPanel--target-reached-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXCoinPanel--target-reached-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "tier-1000",
+          "label": "$1,000 档",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXCoinPanel--tier-1000-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXCoinPanel--tier-1000-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "tier-1500",
+          "label": "$1,500 档",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXCoinPanel--tier-1500-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXCoinPanel--tier-1500-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "tier-2000",
+          "label": "$2,000 档",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXCoinPanel--tier-2000-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXCoinPanel--tier-2000-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [
+        {
+          "name": "APK-diamond-wallet.png",
+          "image": "images/apk-APK-diamond-wallet.png"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "page": "LocalWithdrawalConditions",
+      "label": "提现条件",
+      "group": "01-wallets",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalWithdrawalConditions-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalWithdrawalConditions-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "diamond",
+          "label": "钻石条件",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalWithdrawalConditions--diamond-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalWithdrawalConditions--diamond-1080x1920.png",
+          "reference": {
+            "image": "images/apk-APK-diamond-requirements.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-requirements.png",
+            "note": "钻石四项条件；进度数据可能不同"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "ready",
+          "label": "条件完成",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalWithdrawalConditions--ready-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalWithdrawalConditions--ready-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [
+        {
+          "name": "APK-diamond-requirements.png",
+          "image": "images/apk-APK-diamond-requirements.png"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "page": "LocalCashHistory",
+      "label": "提现历史",
+      "group": "01-wallets",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalCashHistory-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalCashHistory-1080x1920.png",
+          "reference": {
+            "image": "images/apk-APK-cash-history.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-cash-history.png",
+            "note": "同类界面；历史数据可能不同"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "no-prior-records",
+          "label": "无既往记录（含当前奖励）",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalCashHistory--no-prior-records-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalCashHistory--no-prior-records-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [
+        {
+          "name": "APK-cash-history.png",
+          "image": "images/apk-APK-cash-history.png"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "page": "TXUserInfoPanel",
+      "label": "账户资料",
+      "group": "02-account",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXUserInfoPanel-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXUserInfoPanel-1080x1920.png",
+          "reference": {
+            "image": "images/apk-06-account.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/06-account.png",
+            "note": "参考为 Venmo 手机账户"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "email",
+          "label": "邮箱账户",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXUserInfoPanel--email-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXUserInfoPanel--email-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "invalid",
+          "label": "输入校验错误",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXUserInfoPanel--invalid-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXUserInfoPanel--invalid-1080x1920.png",
+          "reference": {
+            "image": "images/apk-07-confirm.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/07-confirm.png",
+            "note": "姓名校验错误；参考包含系统键盘和短提示"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "zelle",
+          "label": "Zelle 账户",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXUserInfoPanel--zelle-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXUserInfoPanel--zelle-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [
+        {
+          "name": "06-account.png",
+          "image": "images/apk-06-account.png"
+        },
+        {
+          "name": "07-confirm.png",
+          "image": "images/apk-07-confirm.png"
+        }
+      ],
+      "notes": "Visual inspection: 06-account is account form; 07-confirm is missing-name error over account form, not confirmation page."
+    },
+    {
+      "page": "TXChannelPanel",
+      "label": "其他账户资料",
+      "group": "02-account",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXChannelPanel-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXChannelPanel-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "invalid",
+          "label": "输入校验错误",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXChannelPanel--invalid-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXChannelPanel--invalid-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [],
+      "notes": ""
+    },
+    {
+      "page": "TXUserInfoSurePanel",
+      "label": "确认账户",
+      "group": "02-account",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXUserInfoSurePanel-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXUserInfoSurePanel-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "other",
+          "label": "其他账户",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXUserInfoSurePanel--other-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXUserInfoSurePanel--other-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "phone",
+          "label": "手机账户",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXUserInfoSurePanel--phone-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXUserInfoSurePanel--phone-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [],
+      "notes": "07-confirm.png filename is misleading: it shows account name error and keyboard; not this confirmation page."
+    },
+    {
+      "page": "LocalWithdrawalVerification",
+      "label": "提现确认流程",
+      "group": "02-account",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalWithdrawalVerification-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalWithdrawalVerification-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "checking",
+          "label": "核对中",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalWithdrawalVerification--checking-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalWithdrawalVerification--checking-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [],
+      "notes": ""
+    },
+    {
+      "page": "TXRecordGuidePanel",
+      "label": "首次提现引导",
+      "group": "03-guide",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXRecordGuidePanel-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-5d757488-fixture-TXRecordGuidePanel-1080x1920.png",
+          "reference": {
+            "image": "images/apk-01-welcome.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/01-welcome.png",
+            "note": "同类界面；测试数据可能不同"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [
+        {
+          "name": "01-welcome.png",
+          "image": "images/apk-01-welcome.png"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "page": "TXGuideLoadingPanel",
+      "label": "提现加载",
+      "group": "03-guide",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXGuideLoadingPanel-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXGuideLoadingPanel-1080x1920.png",
+          "reference": {
+            "image": "images/apk-05-account.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/05-account.png",
+            "note": "视觉核对：文件名为 account，内容实际是提现加载"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [
+        {
+          "name": "05-account.png",
+          "image": "images/apk-05-account.png"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "page": "TXGuideTargetCompletePanel",
+      "label": "早期奖励达标",
+      "group": "03-guide",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXGuideTargetCompletePanel-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXGuideTargetCompletePanel-1080x1920.png",
+          "reference": {
+            "image": "images/apk-03-target-complete.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/03-target-complete.png",
+            "note": "早期奖励达标；金额可能不同"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [
+        {
+          "name": "03-target-complete.png",
+          "image": "images/apk-03-target-complete.png"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "page": "TXProgress0Panel",
+      "label": "阶段进度",
+      "group": "03-guide",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXProgress0Panel-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXProgress0Panel-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "reviewing",
+          "label": "阶段复核中",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXProgress0Panel--reviewing-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-TXProgress0Panel--reviewing-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [],
+      "notes": ""
+    },
+    {
+      "page": "TXTooFastHintPanel",
+      "label": "条件复核",
+      "group": "03-guide",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-TXTooFastHintPanel-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-1b12772f-fixture-TXTooFastHintPanel-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [],
+      "notes": ""
+    },
+    {
+      "page": "LocalSuccess",
+      "label": "关卡结算",
+      "group": "04-rewards",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalSuccess-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalSuccess-1080x1920.png",
+          "reference": {
+            "image": "images/apk-APK-level3-reward.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-level3-reward.png",
+            "note": "普通关卡奖励；数据可能不同"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "early-reward",
+          "label": "早期奖励",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalSuccess--early-reward-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalSuccess--early-reward-1080x1920.png",
+          "reference": {
+            "image": "images/apk-02-first-reward.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/02-first-reward.png",
+            "note": "第一笔关卡奖励"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [
+        {
+          "name": "02-first-reward.png",
+          "image": "images/apk-02-first-reward.png"
+        },
+        {
+          "name": "08-second-reward.png",
+          "image": "images/apk-08-second-reward.png"
+        },
+        {
+          "name": "APK-level3-reward.png",
+          "image": "images/apk-APK-level3-reward.png"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "page": "LocalLuckyReward",
+      "label": "幸运奖励",
+      "group": "04-rewards",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalLuckyReward-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalLuckyReward-1080x1920.png",
+          "reference": {
+            "image": "images/apk-APK-lucky-reward.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-lucky-reward.png",
+            "note": "幸运奖励；数据可能不同"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [
+        {
+          "name": "11-lucky-reward.png",
+          "image": "images/apk-11-lucky-reward.png"
+        },
+        {
+          "name": "APK-lucky-reward.png",
+          "image": "images/apk-APK-lucky-reward.png"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "page": "LocalRewardVideoTest",
+      "label": "测试视频",
+      "group": "04-rewards",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalRewardVideoTest-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalRewardVideoTest-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "complete",
+          "label": "视频完成",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalRewardVideoTest--complete-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalRewardVideoTest--complete-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [],
+      "notes": "No ad network/payment; source APK has no verified equivalent test-video page."
+    },
+    {
+      "page": "LocalEarningSequence",
+      "label": "激活与领取过场",
+      "group": "04-rewards",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalEarningSequence-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalEarningSequence-1080x1920.png",
+          "reference": {
+            "image": "images/apk-10-activation.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/10-activation.png",
+            "note": "激活评估消息；其他过场状态未采集"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "activated",
+          "label": "激活完成",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalEarningSequence--activated-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalEarningSequence--activated-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "activating",
+          "label": "激活中",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalEarningSequence--activating-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalEarningSequence--activating-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "bonuses",
+          "label": "奖励介绍",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalEarningSequence--bonuses-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalEarningSequence--bonuses-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "diamond-preview",
+          "label": "钻石奖励预告",
+          "width": 1080,
+          "height": 1920,
+          "before": null,
+          "beforeMissingReason": "修改前未采集此状态；保留空栏，不用默认过场代替。",
+          "after": "images/after-fixture-LocalEarningSequence--diamond-preview-1080x1920.png",
+          "reference": {
+            "image": "images/apk-APK-diamond-unlock.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-unlock.png",
+            "note": "钻石奖励预告过场；非货币卡点击引导"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "receipt",
+          "label": "领取过场",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalEarningSequence--receipt-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalEarningSequence--receipt-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "summary",
+          "label": "历史摘要",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalEarningSequence--summary-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalEarningSequence--summary-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [
+        {
+          "name": "10-activation.png",
+          "image": "images/apk-10-activation.png"
+        },
+        {
+          "name": "APK-diamond-unlock.png",
+          "image": "images/apk-APK-diamond-unlock.png"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "page": "ApkEarningTop",
+      "label": "游戏顶部货币栏",
+      "group": "05-hud-support",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-GameplayHUD-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-GameplayHUD-1080x1920.png",
+          "reference": {
+            "image": "images/apk-APK-level4-hud.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-level4-hud.png",
+            "note": "参考 APK 旧 HUD；当前紧凑布局为既定设计差异"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 720,
+          "height": 1600,
+          "before": "images/before-fixture-GameplayHUD-720x1600.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-GameplayHUD-720x1600.png",
+          "reference": {
+            "image": "images/apk-APK-level4-hud.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-level4-hud.png",
+            "note": "参考 APK 旧 HUD；当前紧凑布局为既定设计差异"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 2400,
+          "before": "images/before-fixture-GameplayHUD-1080x2400.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-GameplayHUD-1080x2400.png",
+          "reference": {
+            "image": "images/apk-APK-level4-hud.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-level4-hud.png",
+            "note": "参考 APK 旧 HUD；当前紧凑布局为既定设计差异"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [
+        {
+          "name": "APK-level4-hud.png",
+          "image": "images/apk-APK-level4-hud.png"
+        }
+      ],
+      "notes": "Actual active HUD is CompactHud=1, ReferenceViewportTop=132, ReferenceSettingsY=-64. Source LocalMainPanelTop is not this live prefab. Preserve compact single-row HUD and prior removal of task/ribbon; do not restore tall source HUD."
+    },
+    {
+      "page": "LocalDiamondUnlockGuide",
+      "label": "钻石解锁引导",
+      "group": "05-hud-support",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalDiamondUnlockGuide-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalDiamondUnlockGuide-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [],
+      "notes": "Must align highlight to current compact HUD. Original source NewbieGuidePanel position is for tall HUD; copying absolute source coordinates would point to the wrong area. Visually inspected APK-diamond-unlock.png: it is a diamond preview message, not the card guide."
+    },
+    {
+      "page": "LocalUserLevel",
+      "label": "账户等级",
+      "group": "05-hud-support",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalUserLevel-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-950d5cc5-fixture-LocalUserLevel-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [],
+      "notes": ""
+    },
+    {
+      "page": "LocalEarningRecovery",
+      "label": "存档错误恢复",
+      "group": "05-hud-support",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-LocalEarningRecovery-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-LocalEarningRecovery-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [],
+      "notes": "Local recovery page is custom; no source APK screenshot verified."
+    },
+    {
+      "page": "Tip",
+      "label": "短提示",
+      "group": "05-hud-support",
+      "states": [
+        {
+          "state": "representative",
+          "label": "默认展示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-Tip-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-Tip-1080x1920.png",
+          "reference": {
+            "image": "images/apk-07-confirm.png",
+            "source": "C:/Projects/DJS_Apple/apk-comparison/reference/07-confirm.png",
+            "note": "仅上下文参考：原图是姓名错误提示，含账户页和系统键盘"
+          },
+          "beforeErrors": 0,
+          "afterErrors": 0
+        },
+        {
+          "state": "service-unavailable",
+          "label": "服务未接入提示",
+          "width": 1080,
+          "height": 1920,
+          "before": "images/before-fixture-Tip--service-unavailable-1080x1920.png",
+          "beforeMissingReason": null,
+          "after": "images/after-fixture-Tip--service-unavailable-1080x1920.png",
+          "reference": null,
+          "beforeErrors": 0,
+          "afterErrors": 0
+        }
+      ],
+      "references": [
+        {
+          "name": "07-confirm.png",
+          "image": "images/apk-07-confirm.png"
+        }
+      ],
+      "notes": "If a page already has notice field, message updates inline instead of creating Tip. Reference shows name-error toast over account form with OS keyboard, so use as contextual reference only."
+    }
+  ],
+  "counts": {
+    "runtimeSurfaces": 22,
+    "availableImageStates": 49,
+    "pairedImageStates": 48,
+    "afterOnlyImageStates": 1,
+    "beforeRenders": 142,
+    "afterRenders": 145
+  },
+  "limitations": [
+    "A missing reference is not replaced with a concept or unrelated page.",
+    "APK balances, level and background differ from synthetic fixture values.",
+    "The compact HUD is an intentional retained design choice; the source HUD is taller.",
+    "Timed animation coverage belongs to the separate Play-mode report, not these static default frames.",
+    "Four source-only retained page renders are excluded from the 22 reachable-surface gallery.",
+    "New diamond-preview state has no before capture; its before column is intentionally blank."
+  ],
+  "imageProvenance": {
+    "images/apk-APK-cash-wallet.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-cash-wallet.png",
+      "sha256": "d7e21556030900dd9fb5fc1becbbbfac805f636038f06ccde5eed271a8bcce6a"
+    },
+    "images/before-fixture-TXPanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXPanel-1080x1920.png",
+      "sha256": "46c4852f3f8e31a2362ce47621b864e534bccc136038a194c158e385fd22a12d"
+    },
+    "images/after-fixture-TXPanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXPanel-1080x1920.png",
+      "sha256": "46c4852f3f8e31a2362ce47621b864e534bccc136038a194c158e385fd22a12d"
+    },
+    "images/apk-04-cash-wallet.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/04-cash-wallet.png",
+      "sha256": "925d11eafc3b7b133ed75503b5dc997c7940c3043e006445856583643c984c80"
+    },
+    "images/before-fixture-TXPanel--early-reward-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXPanel--early-reward-1080x1920.png",
+      "sha256": "d01e6a2239d6af674bf0552f6cf96c4d1aec9dc86e170276adb9b793d5eafd0e"
+    },
+    "images/after-fixture-TXPanel--early-reward-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXPanel--early-reward-1080x1920.png",
+      "sha256": "d01e6a2239d6af674bf0552f6cf96c4d1aec9dc86e170276adb9b793d5eafd0e"
+    },
+    "images/apk-09-second-wallet.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/09-second-wallet.png",
+      "sha256": "44fd2701448389137c9d6648dce7f0a1d69e570122447a697ffc066ce67eeee4"
+    },
+    "images/apk-APK-diamond-wallet.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-wallet.png",
+      "sha256": "9709559a4d7a896c9e6acdd26b1d16686381a301cd92072038f9c4e493c39694"
+    },
+    "images/before-fixture-TXCoinPanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXCoinPanel-1080x1920.png",
+      "sha256": "19fec6b9dc54d19eb366daebb1b536891c38c6cfb1a40213a6d84afb336d74d1"
+    },
+    "images/after-fixture-TXCoinPanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXCoinPanel-1080x1920.png",
+      "sha256": "19fec6b9dc54d19eb366daebb1b536891c38c6cfb1a40213a6d84afb336d74d1"
+    },
+    "images/before-fixture-TXCoinPanel--target-reached-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXCoinPanel--target-reached-1080x1920.png",
+      "sha256": "01cf326f95bf7e4990a50b199bbf39a1ff9cb89b6d927faa6395cb07fde36f73"
+    },
+    "images/after-fixture-TXCoinPanel--target-reached-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXCoinPanel--target-reached-1080x1920.png",
+      "sha256": "01cf326f95bf7e4990a50b199bbf39a1ff9cb89b6d927faa6395cb07fde36f73"
+    },
+    "images/before-fixture-TXCoinPanel--tier-1000-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXCoinPanel--tier-1000-1080x1920.png",
+      "sha256": "967010802f52064c229acf289fc2665dce0572541e6828381aed539aaceceb20"
+    },
+    "images/after-fixture-TXCoinPanel--tier-1000-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXCoinPanel--tier-1000-1080x1920.png",
+      "sha256": "967010802f52064c229acf289fc2665dce0572541e6828381aed539aaceceb20"
+    },
+    "images/before-fixture-TXCoinPanel--tier-1500-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXCoinPanel--tier-1500-1080x1920.png",
+      "sha256": "8e829a64197a873a2eeba11cb591697da88abe590ab90fd7b22c05bf1728efb9"
+    },
+    "images/after-fixture-TXCoinPanel--tier-1500-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXCoinPanel--tier-1500-1080x1920.png",
+      "sha256": "8e829a64197a873a2eeba11cb591697da88abe590ab90fd7b22c05bf1728efb9"
+    },
+    "images/before-fixture-TXCoinPanel--tier-2000-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXCoinPanel--tier-2000-1080x1920.png",
+      "sha256": "152d3f3d2a21752c3bfab3e3d1af2b306b3a46346625f53e29330cc344e6ed6b"
+    },
+    "images/after-fixture-TXCoinPanel--tier-2000-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXCoinPanel--tier-2000-1080x1920.png",
+      "sha256": "152d3f3d2a21752c3bfab3e3d1af2b306b3a46346625f53e29330cc344e6ed6b"
+    },
+    "images/before-fixture-LocalWithdrawalConditions-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalWithdrawalConditions-1080x1920.png",
+      "sha256": "749236d652c8b41d6cd8f73f18775ad84a7a7ca14ec5634b37681623f8962082"
+    },
+    "images/after-fixture-LocalWithdrawalConditions-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalWithdrawalConditions-1080x1920.png",
+      "sha256": "749236d652c8b41d6cd8f73f18775ad84a7a7ca14ec5634b37681623f8962082"
+    },
+    "images/apk-APK-diamond-requirements.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-requirements.png",
+      "sha256": "26a48cb0cce500f8934e8a1fee482986454125e163dc9103e9e557a524d1bcf6"
+    },
+    "images/before-fixture-LocalWithdrawalConditions--diamond-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalWithdrawalConditions--diamond-1080x1920.png",
+      "sha256": "a1d3f05189111c42a8d3bb98fad1be84f49ea04a96081901af5df8c91c490a40"
+    },
+    "images/after-fixture-LocalWithdrawalConditions--diamond-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalWithdrawalConditions--diamond-1080x1920.png",
+      "sha256": "a1d3f05189111c42a8d3bb98fad1be84f49ea04a96081901af5df8c91c490a40"
+    },
+    "images/before-fixture-LocalWithdrawalConditions--ready-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalWithdrawalConditions--ready-1080x1920.png",
+      "sha256": "f78eb4ee90f9f776ed8b91512fc76d14edcbfd68c7aea5f4af4dc88cd8676d12"
+    },
+    "images/after-fixture-LocalWithdrawalConditions--ready-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalWithdrawalConditions--ready-1080x1920.png",
+      "sha256": "f78eb4ee90f9f776ed8b91512fc76d14edcbfd68c7aea5f4af4dc88cd8676d12"
+    },
+    "images/apk-APK-cash-history.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-cash-history.png",
+      "sha256": "f10e30d2206c955c26299127c64a58a15c841908d012f9509b6bd04846e11ec6"
+    },
+    "images/before-fixture-LocalCashHistory-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalCashHistory-1080x1920.png",
+      "sha256": "0d2a716cdd3e84d7515d4c8ae451ebacf551de4e71499f9ba5465a77bc74c128"
+    },
+    "images/after-fixture-LocalCashHistory-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalCashHistory-1080x1920.png",
+      "sha256": "0d2a716cdd3e84d7515d4c8ae451ebacf551de4e71499f9ba5465a77bc74c128"
+    },
+    "images/before-fixture-LocalCashHistory--no-prior-records-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalCashHistory--no-prior-records-1080x1920.png",
+      "sha256": "f2df59f9b3f9db143733ec65bdb688ca9d4b0e9f68cf0d7d6035b55086bcadb1"
+    },
+    "images/after-fixture-LocalCashHistory--no-prior-records-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalCashHistory--no-prior-records-1080x1920.png",
+      "sha256": "f2df59f9b3f9db143733ec65bdb688ca9d4b0e9f68cf0d7d6035b55086bcadb1"
+    },
+    "images/apk-06-account.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/06-account.png",
+      "sha256": "04c019b902a156777e57973d1c9a361473f296e3951dcc030a8296b981a1a8e9"
+    },
+    "images/before-fixture-TXUserInfoPanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXUserInfoPanel-1080x1920.png",
+      "sha256": "6f5160689085684d2815f2f6b12bcb050489c31576304b67b4d56930df52405a"
+    },
+    "images/after-fixture-TXUserInfoPanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXUserInfoPanel-1080x1920.png",
+      "sha256": "6f5160689085684d2815f2f6b12bcb050489c31576304b67b4d56930df52405a"
+    },
+    "images/before-fixture-TXUserInfoPanel--email-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXUserInfoPanel--email-1080x1920.png",
+      "sha256": "98c32004d28fe0a401d19379f884312555525e11fe3132d9fe07d1f237216c67"
+    },
+    "images/after-fixture-TXUserInfoPanel--email-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXUserInfoPanel--email-1080x1920.png",
+      "sha256": "98c32004d28fe0a401d19379f884312555525e11fe3132d9fe07d1f237216c67"
+    },
+    "images/apk-07-confirm.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/07-confirm.png",
+      "sha256": "b161f8e2592943178a6a94d094741e5d753d1b1929c44a067908757e86fa01d8"
+    },
+    "images/before-fixture-TXUserInfoPanel--invalid-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXUserInfoPanel--invalid-1080x1920.png",
+      "sha256": "4316c768d89184f6e61b4c809ba8ebd6f1aaa821b4629c5750774ef8b44e1abc"
+    },
+    "images/after-fixture-TXUserInfoPanel--invalid-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXUserInfoPanel--invalid-1080x1920.png",
+      "sha256": "4316c768d89184f6e61b4c809ba8ebd6f1aaa821b4629c5750774ef8b44e1abc"
+    },
+    "images/before-fixture-TXUserInfoPanel--zelle-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXUserInfoPanel--zelle-1080x1920.png",
+      "sha256": "6f5160689085684d2815f2f6b12bcb050489c31576304b67b4d56930df52405a"
+    },
+    "images/after-fixture-TXUserInfoPanel--zelle-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXUserInfoPanel--zelle-1080x1920.png",
+      "sha256": "6f5160689085684d2815f2f6b12bcb050489c31576304b67b4d56930df52405a"
+    },
+    "images/before-fixture-TXChannelPanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXChannelPanel-1080x1920.png",
+      "sha256": "63a7ac78bf995ab56dfa42ff1ee018fd9c83141e38f5726a88e1668796469a7d"
+    },
+    "images/after-fixture-TXChannelPanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXChannelPanel-1080x1920.png",
+      "sha256": "76c236d92f0234dde5119f6358ab62d9e09df6f9651357ca7bcf574ba50408c3"
+    },
+    "images/before-fixture-TXChannelPanel--invalid-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXChannelPanel--invalid-1080x1920.png",
+      "sha256": "d6d7ed73f931e8ff92e23ffc279832362ce5c2e2e9cb601a02971198c4d64862"
+    },
+    "images/after-fixture-TXChannelPanel--invalid-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXChannelPanel--invalid-1080x1920.png",
+      "sha256": "e1b2a781ae05dcbe2ad8a8d64b803ed1e3735fa2959b0a8b294f8917bdad72cc"
+    },
+    "images/before-fixture-TXUserInfoSurePanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXUserInfoSurePanel-1080x1920.png",
+      "sha256": "9c6b5d9e6070eacd58b787692c64312e8d1f47da5156af13fe77a1b07c8f72b4"
+    },
+    "images/after-fixture-TXUserInfoSurePanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXUserInfoSurePanel-1080x1920.png",
+      "sha256": "9c6b5d9e6070eacd58b787692c64312e8d1f47da5156af13fe77a1b07c8f72b4"
+    },
+    "images/before-fixture-TXUserInfoSurePanel--other-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXUserInfoSurePanel--other-1080x1920.png",
+      "sha256": "3cad8c40ec4ccbcfc75b08a69c3895fb55f6e36aaf85120d24adf38b5fa6c958"
+    },
+    "images/after-fixture-TXUserInfoSurePanel--other-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXUserInfoSurePanel--other-1080x1920.png",
+      "sha256": "3cad8c40ec4ccbcfc75b08a69c3895fb55f6e36aaf85120d24adf38b5fa6c958"
+    },
+    "images/before-fixture-TXUserInfoSurePanel--phone-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXUserInfoSurePanel--phone-1080x1920.png",
+      "sha256": "e9aa02e35e51aea0110e21f932fa91a8cf66ee44cf6f6f39bb219d6108fdebb5"
+    },
+    "images/after-fixture-TXUserInfoSurePanel--phone-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXUserInfoSurePanel--phone-1080x1920.png",
+      "sha256": "e9aa02e35e51aea0110e21f932fa91a8cf66ee44cf6f6f39bb219d6108fdebb5"
+    },
+    "images/before-fixture-LocalWithdrawalVerification-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalWithdrawalVerification-1080x1920.png",
+      "sha256": "b4fdfafa81ea9113c4feabc7fc5b12b500da759f8b715054a421addb6d4ef14a"
+    },
+    "images/after-fixture-LocalWithdrawalVerification-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalWithdrawalVerification-1080x1920.png",
+      "sha256": "b4fdfafa81ea9113c4feabc7fc5b12b500da759f8b715054a421addb6d4ef14a"
+    },
+    "images/before-fixture-LocalWithdrawalVerification--checking-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalWithdrawalVerification--checking-1080x1920.png",
+      "sha256": "9bd0c639d5bc49a39465330aa8e434d13551506bbc9137840278ed3434a93ff4"
+    },
+    "images/after-fixture-LocalWithdrawalVerification--checking-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalWithdrawalVerification--checking-1080x1920.png",
+      "sha256": "9bd0c639d5bc49a39465330aa8e434d13551506bbc9137840278ed3434a93ff4"
+    },
+    "images/apk-01-welcome.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/01-welcome.png",
+      "sha256": "641dadea8f10e8ba217cdbc801e11a116ac9187897bca18cc54233178d4a787e"
+    },
+    "images/before-fixture-TXRecordGuidePanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXRecordGuidePanel-1080x1920.png",
+      "sha256": "f5b50de1385cfe842264bab963c7bdeb5beb880884cb424c0a26f4f6830b7a43"
+    },
+    "images/after-5d757488-fixture-TXRecordGuidePanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXRecordGuidePanel-1080x1920.png",
+      "sha256": "a236bb89f16fae45f87cafd9c87c9b3cd0201915371393a2a5b8121329fd8b7a"
+    },
+    "images/apk-05-account.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/05-account.png",
+      "sha256": "0bd76cd5e4f1f30465001b4cee31a885e484d851589398613825486514296e7b"
+    },
+    "images/before-fixture-TXGuideLoadingPanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXGuideLoadingPanel-1080x1920.png",
+      "sha256": "bdc34fecc87e0d3243fd31be96695dd5d24403081a6d3f46ea58b813512fa00d"
+    },
+    "images/after-fixture-TXGuideLoadingPanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXGuideLoadingPanel-1080x1920.png",
+      "sha256": "6734b45aaa57c0cde947982f0603e6db7d6f70f6677528cb9f8a7741582778b7"
+    },
+    "images/apk-03-target-complete.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/03-target-complete.png",
+      "sha256": "8bd4d79e2c31eeab8c7f2ac0b271bbefc07c64d73c83928f3d1b88deb7a3df16"
+    },
+    "images/before-fixture-TXGuideTargetCompletePanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXGuideTargetCompletePanel-1080x1920.png",
+      "sha256": "69d19babb634d9ab5bacbba9345ff75be1f4eb088ba3cf4323867c83fca2279a"
+    },
+    "images/after-fixture-TXGuideTargetCompletePanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXGuideTargetCompletePanel-1080x1920.png",
+      "sha256": "010dd0a87afaeb591735502ffb2428d9d56dc8b49acca7f0546c38655b6e7acc"
+    },
+    "images/before-fixture-TXProgress0Panel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXProgress0Panel-1080x1920.png",
+      "sha256": "07624d705f3cf376770c62b3cb2fff021133dff4ee6eb7443593f670936c5675"
+    },
+    "images/after-fixture-TXProgress0Panel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXProgress0Panel-1080x1920.png",
+      "sha256": "07624d705f3cf376770c62b3cb2fff021133dff4ee6eb7443593f670936c5675"
+    },
+    "images/before-fixture-TXProgress0Panel--reviewing-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXProgress0Panel--reviewing-1080x1920.png",
+      "sha256": "07624d705f3cf376770c62b3cb2fff021133dff4ee6eb7443593f670936c5675"
+    },
+    "images/after-fixture-TXProgress0Panel--reviewing-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXProgress0Panel--reviewing-1080x1920.png",
+      "sha256": "07624d705f3cf376770c62b3cb2fff021133dff4ee6eb7443593f670936c5675"
+    },
+    "images/before-fixture-TXTooFastHintPanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-TXTooFastHintPanel-1080x1920.png",
+      "sha256": "dc55eff3f7da64655e9ef0c9d54a4b1a0b1bbc68493cff77b65a6cf406fd9a3c"
+    },
+    "images/after-1b12772f-fixture-TXTooFastHintPanel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-TXTooFastHintPanel-1080x1920.png",
+      "sha256": "babe20053be9a32e426a2eeec1ab7177ecb9514012991a59eab4eb44f314d4bb"
+    },
+    "images/apk-APK-level3-reward.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-level3-reward.png",
+      "sha256": "a72a697c78d80330408daddbe27b52c4f33ae3b12fc71e98232cd8cc33f44a75"
+    },
+    "images/before-fixture-LocalSuccess-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalSuccess-1080x1920.png",
+      "sha256": "5fd1fc06b092b284048b56b7425af13ff590d8567f3b6755465e972d827a8338"
+    },
+    "images/after-fixture-LocalSuccess-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalSuccess-1080x1920.png",
+      "sha256": "5fd1fc06b092b284048b56b7425af13ff590d8567f3b6755465e972d827a8338"
+    },
+    "images/apk-02-first-reward.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/02-first-reward.png",
+      "sha256": "b3d15d0765eef93e6f7738c9e22ca3e464459fa774d5456cbe88e3d78012ea40"
+    },
+    "images/before-fixture-LocalSuccess--early-reward-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalSuccess--early-reward-1080x1920.png",
+      "sha256": "9b2ed30a54497f7dd9afa116cdd5f994bcba08827581f9488025c26decd6f0f9"
+    },
+    "images/after-fixture-LocalSuccess--early-reward-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalSuccess--early-reward-1080x1920.png",
+      "sha256": "9b2ed30a54497f7dd9afa116cdd5f994bcba08827581f9488025c26decd6f0f9"
+    },
+    "images/apk-08-second-reward.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/08-second-reward.png",
+      "sha256": "113687855abfe467bc36d9f514aad0411922dcf58cffda61f0ff08088680b193"
+    },
+    "images/apk-APK-lucky-reward.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-lucky-reward.png",
+      "sha256": "4ebfaedc72a7b4f6091e71219bb4a0d12d8d34e86b4bc950c0c093355aaa8bff"
+    },
+    "images/before-fixture-LocalLuckyReward-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalLuckyReward-1080x1920.png",
+      "sha256": "5686b44687eb264a4ea5ec517dbad16d1eeff5817337a16aa148804017d7aa41"
+    },
+    "images/after-fixture-LocalLuckyReward-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalLuckyReward-1080x1920.png",
+      "sha256": "5686b44687eb264a4ea5ec517dbad16d1eeff5817337a16aa148804017d7aa41"
+    },
+    "images/apk-11-lucky-reward.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/11-lucky-reward.png",
+      "sha256": "4313caba5114156ee45c873ec9b4ee88220efc08e4988c59028d3296e73db637"
+    },
+    "images/before-fixture-LocalRewardVideoTest-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalRewardVideoTest-1080x1920.png",
+      "sha256": "78013ecffb15d1d9e7d6e5c442316c9ff4d4c51eaf01f89e9ef1be571529a2ad"
+    },
+    "images/after-fixture-LocalRewardVideoTest-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalRewardVideoTest-1080x1920.png",
+      "sha256": "ac0f0be66f832a57ebaf7b7385c12684e7161bb9ce7b284ba2a25c1c64247340"
+    },
+    "images/before-fixture-LocalRewardVideoTest--complete-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalRewardVideoTest--complete-1080x1920.png",
+      "sha256": "ec7444b28848565786c6522c155c12b9500514b5929311190e26a30007b95a2a"
+    },
+    "images/after-fixture-LocalRewardVideoTest--complete-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalRewardVideoTest--complete-1080x1920.png",
+      "sha256": "28c21a008f139e4a8673d8dd80ff64b6cb1de8b17b14cc25ecb36a0feafcffea"
+    },
+    "images/apk-10-activation.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/10-activation.png",
+      "sha256": "9aab5d909fb63ca8475534b7c5989ca750a538549a9387e1a19c77139ece946e"
+    },
+    "images/before-fixture-LocalEarningSequence-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalEarningSequence-1080x1920.png",
+      "sha256": "078b54aabdc8c8865fc90f9ed6021ae1eaf13c0fffc8429b459b55cc35df4116"
+    },
+    "images/after-fixture-LocalEarningSequence-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalEarningSequence-1080x1920.png",
+      "sha256": "078b54aabdc8c8865fc90f9ed6021ae1eaf13c0fffc8429b459b55cc35df4116"
+    },
+    "images/before-fixture-LocalEarningSequence--activated-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalEarningSequence--activated-1080x1920.png",
+      "sha256": "8b27adb8feada0722544bfc4d32cbc13a62518a47726d83422f35850525ba59a"
+    },
+    "images/after-fixture-LocalEarningSequence--activated-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalEarningSequence--activated-1080x1920.png",
+      "sha256": "8b27adb8feada0722544bfc4d32cbc13a62518a47726d83422f35850525ba59a"
+    },
+    "images/before-fixture-LocalEarningSequence--activating-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalEarningSequence--activating-1080x1920.png",
+      "sha256": "00082dd78a1b04a859cf309fc19fdabcba5c5c58df5d85afe820e2abb34f4697"
+    },
+    "images/after-fixture-LocalEarningSequence--activating-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalEarningSequence--activating-1080x1920.png",
+      "sha256": "00082dd78a1b04a859cf309fc19fdabcba5c5c58df5d85afe820e2abb34f4697"
+    },
+    "images/before-fixture-LocalEarningSequence--bonuses-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalEarningSequence--bonuses-1080x1920.png",
+      "sha256": "25a205087f539837d7f3fa96689ca3f92b2f1fb8eec8443e978027b9c0378d4b"
+    },
+    "images/after-fixture-LocalEarningSequence--bonuses-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalEarningSequence--bonuses-1080x1920.png",
+      "sha256": "25a205087f539837d7f3fa96689ca3f92b2f1fb8eec8443e978027b9c0378d4b"
+    },
+    "images/apk-APK-diamond-unlock.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-unlock.png",
+      "sha256": "52508fcc3d92f806e4850dc33dac898614c8bb28d8ec4af31a3da918ef36a55f"
+    },
+    "images/after-fixture-LocalEarningSequence--diamond-preview-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalEarningSequence--diamond-preview-1080x1920.png",
+      "sha256": "f6d420be3dd2a8f2f7207d88c133b95d2aa4dc46c4822f495ac00b850b092904"
+    },
+    "images/before-fixture-LocalEarningSequence--receipt-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalEarningSequence--receipt-1080x1920.png",
+      "sha256": "5aaa515942b5a9cf4eb8299d222e347416e9160eabb2efbc760529d67731ed7a"
+    },
+    "images/after-fixture-LocalEarningSequence--receipt-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalEarningSequence--receipt-1080x1920.png",
+      "sha256": "5aaa515942b5a9cf4eb8299d222e347416e9160eabb2efbc760529d67731ed7a"
+    },
+    "images/before-fixture-LocalEarningSequence--summary-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalEarningSequence--summary-1080x1920.png",
+      "sha256": "5a6ce00c49983f0942137c4a297fa378ea9a410135c3e9596154f17e60618949"
+    },
+    "images/after-fixture-LocalEarningSequence--summary-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalEarningSequence--summary-1080x1920.png",
+      "sha256": "5a6ce00c49983f0942137c4a297fa378ea9a410135c3e9596154f17e60618949"
+    },
+    "images/apk-APK-level4-hud.png": {
+      "source": "C:/Projects/DJS_Apple/apk-comparison/reference/APK-level4-hud.png",
+      "sha256": "cee23a3e214854fa9f8d6013db5781a829417e9eeada6780274f1276e033c78e"
+    },
+    "images/before-fixture-GameplayHUD-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-GameplayHUD-1080x1920.png",
+      "sha256": "c54444ffdf0a627ebd868a373efa0e859b733788c372187db103ed64498436c3"
+    },
+    "images/after-fixture-GameplayHUD-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-GameplayHUD-1080x1920.png",
+      "sha256": "c54444ffdf0a627ebd868a373efa0e859b733788c372187db103ed64498436c3"
+    },
+    "images/before-fixture-GameplayHUD-720x1600.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-GameplayHUD-720x1600.png",
+      "sha256": "41c253cfd2d5d22ce2d89aeeb7c1582105c504be61fccb22a5c1f820a0eb0322"
+    },
+    "images/after-fixture-GameplayHUD-720x1600.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-GameplayHUD-720x1600.png",
+      "sha256": "41c253cfd2d5d22ce2d89aeeb7c1582105c504be61fccb22a5c1f820a0eb0322"
+    },
+    "images/before-fixture-GameplayHUD-1080x2400.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-GameplayHUD-1080x2400.png",
+      "sha256": "7b2e3fee5ed48e39b9932c1482f5d203fa6d09b01aa9b65348bf889735bca7f0"
+    },
+    "images/after-fixture-GameplayHUD-1080x2400.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-GameplayHUD-1080x2400.png",
+      "sha256": "7b2e3fee5ed48e39b9932c1482f5d203fa6d09b01aa9b65348bf889735bca7f0"
+    },
+    "images/before-fixture-LocalDiamondUnlockGuide-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalDiamondUnlockGuide-1080x1920.png",
+      "sha256": "71ac6b3599417bb4466debf31fd640e34b56b06f1c90a48b81bdd7b8209c8670"
+    },
+    "images/after-fixture-LocalDiamondUnlockGuide-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalDiamondUnlockGuide-1080x1920.png",
+      "sha256": "e1e04629c60e82a189e9954b8d9215beb1a8c543d87d282519497d864d8396e3"
+    },
+    "images/before-fixture-LocalUserLevel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalUserLevel-1080x1920.png",
+      "sha256": "12baa73a02c6e27e9eed86d33c3cf1be1e86d3e5bf539b29a0fc26fe68f1f1d7"
+    },
+    "images/after-950d5cc5-fixture-LocalUserLevel-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalUserLevel-1080x1920.png",
+      "sha256": "333d1a5878ebc1955c861d6395e4e206680dd73ee46b4bb06dd4ad8ca3055f8e"
+    },
+    "images/before-fixture-LocalEarningRecovery-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-LocalEarningRecovery-1080x1920.png",
+      "sha256": "464123b0f74f050d234fc7a91683e9cfedfb016bdefa8e760789ff30dce9c0d1"
+    },
+    "images/after-fixture-LocalEarningRecovery-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-LocalEarningRecovery-1080x1920.png",
+      "sha256": "0f7e18e8c2ff548f273e000a6b10993ba34c0cc01e66f423f144a42f6ff9e842"
+    },
+    "images/before-fixture-Tip-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-Tip-1080x1920.png",
+      "sha256": "4b96317c569a0d93daa7fb3a2a77f71fce86036ef488450aa07bdfbc65a15d75"
+    },
+    "images/after-fixture-Tip-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-Tip-1080x1920.png",
+      "sha256": "cf4f446a62dc0a9b26a3211a66a291b151a6bdf2d4583e4a57a2edbbf8eaa863"
+    },
+    "images/before-fixture-Tip--service-unavailable-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/before/fixture-Tip--service-unavailable-1080x1920.png",
+      "sha256": "77ea0d5ffe1795164ca6d2784d76f36ffd81d9d6f2cf970e52cf2761ace35fa7"
+    },
+    "images/after-fixture-Tip--service-unavailable-1080x1920.png": {
+      "source": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/after/fixture-Tip--service-unavailable-1080x1920.png",
+      "sha256": "90a8c646ef9590c929dc404bf656c69be714648c3bf50412e285ee9dbd185d80"
+    }
+  }
+}

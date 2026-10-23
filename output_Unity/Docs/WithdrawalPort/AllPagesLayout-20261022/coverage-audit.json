@@ -1,0 +1,599 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "scope": "Read-only reachability and reference-layout coverage audit for earning UI. No project mutation, Unity execution, device interaction, APK build, accounting or rule change.",
+  "project": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity",
+  "methodology": [
+    "Followed all literal and conditional Host.Show routes, direct Resources-loaded rows/items/toast, TopView HUD, external settlement/settings entry points.",
+    "Compared reachable assets with Edit(name, recipe) in ApkEarningReference*Layout*.cs.",
+    "Catalog membership alone does not imply a live runtime route.",
+    "Screen images listed as reference are existing APK captures. Prior game/fixture captures are separated; none were newly collected."
+  ],
+  "counts": {
+    "mainRuntimePages": 20,
+    "toastOverlays": 1,
+    "gameplayHUD": 1,
+    "totalRuntimeSurfaces": 22,
+    "mainPagesCoveredByReferenceRecipe": 11,
+    "mainPagesMissingReferenceRecipe": 9,
+    "totalSurfacesMissingReferenceRecipe": 11,
+    "referenceRecipePrefabTargets": 15
+  },
+  "runtimeSurfaces": [
+    {
+      "page": "ApkEarningTop",
+      "label": "Gameplay currency HUD",
+      "kind": "hud",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/res/local/withdrawal/ApkEarningTop.prefab",
+      "runtimeEntry": "CorePlayUI/ApkEarningFrame/ApkEarningTop; TopView.OnEnable",
+      "states": [
+        "cash and diamond balances",
+        "diamond visible but disabled before level 4",
+        "diamond unlocked",
+        "local-save-unavailable dashes"
+      ],
+      "referenceLayoutCovered": false,
+      "referenceScreenshots": [
+        "C:/Projects/DJS_Apple/apk-comparison/reference/APK-level4-hud.png"
+      ],
+      "notes": "Actual active HUD is CompactHud=1, ReferenceViewportTop=132, ReferenceSettingsY=-64. Source LocalMainPanelTop is not this live prefab. Preserve compact single-row HUD and prior removal of task/ribbon; do not restore tall source HUD."
+    },
+    {
+      "page": "TXRecordGuidePanel",
+      "label": "First-run withdrawal introduction",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXRecordGuidePanel.prefab",
+      "runtimeEntry": "ShowInitialPage: !WelcomeShown && CurrentLevel==1",
+      "states": [
+        "first launch guide",
+        "start to queued first reward or close"
+      ],
+      "referenceLayoutCovered": false,
+      "referenceScreenshots": [
+        "C:/Projects/DJS_Apple/apk-comparison/reference/01-welcome.png"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "TXPanel",
+      "label": "Cash wallet",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXPanel.prefab",
+      "runtimeEntry": "ShowWallet(diamonds=false)",
+      "states": [
+        "unarchived reward #1 ($0.40)",
+        "unarchived reward #2 ($0.60)",
+        "ordinary level progress before first cash gate",
+        "next-stage gate",
+        "after second gate first unmet requirement",
+        "unknown cash target awaiting account update",
+        "requirements complete"
+      ],
+      "referenceLayoutCovered": true,
+      "referenceScreenshots": [
+        "C:/Projects/DJS_Apple/apk-comparison/reference/04-cash-wallet.png",
+        "C:/Projects/DJS_Apple/apk-comparison/reference/09-second-wallet.png",
+        "C:/Projects/DJS_Apple/apk-comparison/reference/APK-cash-wallet.png"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "TXCoinPanel",
+      "label": "Diamond wallet",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXCoinPanel.prefab",
+      "runtimeEntry": "ShowWallet(diamonds=true)",
+      "states": [
+        "tier 0 $500",
+        "tier 1 $1000",
+        "tier 2 $1500",
+        "tier 3 $2000",
+        "below selected balance target",
+        "target reached"
+      ],
+      "referenceLayoutCovered": true,
+      "referenceScreenshots": [
+        "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-wallet.png"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "TXGuideLoadingPanel",
+      "label": "Withdrawal account loading",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXGuideLoadingPanel.prefab",
+      "runtimeEntry": "BeginWithdrawal with earlyOrdinal>0 -> LoadAccount",
+      "states": [
+        "progress 0%",
+        "mid-progress",
+        "100% -> account"
+      ],
+      "referenceLayoutCovered": false,
+      "referenceScreenshots": [
+        "C:/Projects/DJS_Apple/apk-comparison/reference/05-account.png"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "LocalWithdrawalConditions",
+      "label": "Withdrawal requirements",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalConditions.prefab",
+      "runtimeEntry": "BeginWithdrawal (non-early), stage back, non-early confirmation",
+      "states": [
+        "cash seven rows incomplete",
+        "cash seven rows eligible",
+        "cash unknown target",
+        "daily requirement waived by login",
+        "diamond four rows for each tier incomplete",
+        "diamond four rows eligible",
+        "secondLevel first incomplete / View next stage",
+        "other incomplete / Continue playing"
+      ],
+      "referenceLayoutCovered": true,
+      "referenceScreenshots": [
+        "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-requirements.png"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "TXProgress0Panel",
+      "label": "Next-stage progress",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXProgress0Panel.prefab",
+      "runtimeEntry": "ConditionsAction with FirstIncomplete==secondLevel",
+      "states": [
+        "first-pass row/content entrance",
+        "first pass only first two rows -> review",
+        "resumed second/third/fourth rows",
+        "resumed final Continue button"
+      ],
+      "referenceLayoutCovered": true,
+      "referenceScreenshots": [],
+      "notes": ""
+    },
+    {
+      "page": "TXTooFastHintPanel",
+      "label": "Requirements review",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXTooFastHintPanel.prefab",
+      "runtimeEntry": "StageSequence(first pass) -> ShowRequirementsReview",
+      "states": [
+        "level progress and test-video progress",
+        "Continue -> resumed stage"
+      ],
+      "referenceLayoutCovered": false,
+      "referenceScreenshots": [],
+      "notes": ""
+    },
+    {
+      "page": "LocalUserLevel",
+      "label": "Account level",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalUserLevel.prefab",
+      "runtimeEntry": "GameSettingUI account-level Button -> AfterClose -> OpenAccountLevel",
+      "states": [
+        "account level number",
+        "awaiting account update and empty progress",
+        "close or continue -> gameplay"
+      ],
+      "referenceLayoutCovered": false,
+      "referenceScreenshots": [],
+      "notes": ""
+    },
+    {
+      "page": "TXUserInfoPanel",
+      "label": "Payment account entry",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoPanel.prefab",
+      "runtimeEntry": "LoadAccount or eligible requirements",
+      "states": [
+        "Venmo name + country code + phone",
+        "Zelle name + country code + phone",
+        "PayPal name + email",
+        "missing-name error",
+        "invalid account error",
+        "channel switch preserves values",
+        "other-channel entry"
+      ],
+      "referenceLayoutCovered": true,
+      "referenceScreenshots": [
+        "C:/Projects/DJS_Apple/apk-comparison/reference/06-account.png",
+        "C:/Projects/DJS_Apple/apk-comparison/reference/07-confirm.png"
+      ],
+      "notes": "Visual inspection: 06-account is account form; 07-confirm is missing-name error over account form, not confirmation page."
+    },
+    {
+      "page": "TXChannelPanel",
+      "label": "Other payment account entry",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXChannelPanel.prefab",
+      "runtimeEntry": "TXUserInfoPanel.ChannelInfoBtn",
+      "states": [
+        "freeform multiline test account",
+        "empty-input validation error",
+        "filled -> confirmation"
+      ],
+      "referenceLayoutCovered": false,
+      "referenceScreenshots": [],
+      "notes": ""
+    },
+    {
+      "page": "TXUserInfoSurePanel",
+      "label": "Payment account confirmation",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXUserInfoSurePanel.prefab",
+      "runtimeEntry": "ConfirmAccount or TXChannelPanel.SureBtn",
+      "states": [
+        "Venmo details",
+        "Zelle details",
+        "PayPal details",
+        "other-channel freeform details",
+        "re-enter route returns correct form",
+        "early reward confirm -> verification",
+        "ordinary confirm -> requirements with no-service notice"
+      ],
+      "referenceLayoutCovered": true,
+      "referenceScreenshots": [],
+      "notes": "07-confirm.png filename is misleading: it shows account name error and keyboard; not this confirmation page."
+    },
+    {
+      "page": "LocalWithdrawalVerification",
+      "label": "Early reward verification",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalWithdrawalVerification.prefab",
+      "runtimeEntry": "TXUserInfoSurePanel.GetBtn with earlyOrdinal>0",
+      "states": [
+        "reward #1/#2 amount",
+        "three sequential row/content reveals",
+        "submit button disabled before ready",
+        "ready confirm test request",
+        "close archives early reward without paid status"
+      ],
+      "referenceLayoutCovered": true,
+      "referenceScreenshots": [],
+      "notes": ""
+    },
+    {
+      "page": "LocalCashHistory",
+      "label": "Cash withdrawal history",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalCashHistory.prefab",
+      "runtimeEntry": "TXPanel.HistoryButton",
+      "states": [
+        "zero records plus current reward #3",
+        "unsubmitted early reward action row",
+        "submitted pending-not-paid row",
+        "mixed #1/#2/current balance #3",
+        "scrolling if needed"
+      ],
+      "referenceLayoutCovered": true,
+      "referenceScreenshots": [
+        "C:/Projects/DJS_Apple/apk-comparison/reference/APK-cash-history.png"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "LocalSuccess",
+      "label": "Level settlement",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalSuccess.prefab",
+      "runtimeEntry": "settlement queue LDNJKLHLHAH -> Open rewards -> ShowReward",
+      "states": [
+        "early reward #1 cash only; Withdraw, no ad/no secondary Claim",
+        "early reward #2 cash only",
+        "normal cash reward; Claim and Claim 10X",
+        "normal cash + diamond reward",
+        "cash-only/diamond-only dynamic item occupancy",
+        "long amounts"
+      ],
+      "referenceLayoutCovered": true,
+      "referenceScreenshots": [
+        "C:/Projects/DJS_Apple/apk-comparison/reference/02-first-reward.png",
+        "C:/Projects/DJS_Apple/apk-comparison/reference/08-second-reward.png",
+        "C:/Projects/DJS_Apple/apk-comparison/reference/APK-level3-reward.png"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "LocalLuckyReward",
+      "label": "Lucky reward",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalLuckyReward.prefab",
+      "runtimeEntry": "TopView pending lucky reward -> ShowReward",
+      "states": [
+        "cash-only item",
+        "diamond-only item",
+        "cash and diamond items",
+        "Claim or test video 10X",
+        "long amount strings"
+      ],
+      "referenceLayoutCovered": true,
+      "referenceScreenshots": [
+        "C:/Projects/DJS_Apple/apk-comparison/reference/11-lucky-reward.png",
+        "C:/Projects/DJS_Apple/apk-comparison/reference/APK-lucky-reward.png"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "LocalRewardVideoTest",
+      "label": "Local test reward video",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalRewardVideoTest.prefab",
+      "runtimeEntry": "non-early reward MoreGetBtn -> ShowTestVideo",
+      "states": [
+        "countdown with disabled Complete",
+        "completed with enabled Complete",
+        "Cancel returns unclaimed ordinary reward"
+      ],
+      "referenceLayoutCovered": false,
+      "referenceScreenshots": [],
+      "notes": "No ad network/payment; source APK has no verified equivalent test-video page."
+    },
+    {
+      "page": "LocalEarningSequence",
+      "label": "Activation, receipt and bonus sequence",
+      "kind": "sequence",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningSequence.prefab",
+      "runtimeEntry": "ClaimReward receipt; activation resume; diamond unlock preview",
+      "states": [
+        "activation step 0 assessment / message layout 0",
+        "step 1 activating / layout 1",
+        "step 2 five bonus rows reveal/pulse",
+        "step 3 receipt / cash icon flight to HUD",
+        "step 4 activated / layout 2",
+        "step 5 history summary / layout 3",
+        "ordinary reward receipt",
+        "diamond preview / layout 3",
+        "resume at any saved activation step"
+      ],
+      "referenceLayoutCovered": true,
+      "referenceScreenshots": [
+        "C:/Projects/DJS_Apple/apk-comparison/reference/10-activation.png",
+        "C:/Projects/DJS_Apple/apk-comparison/reference/APK-diamond-unlock.png"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "TXGuideTargetCompletePanel",
+      "label": "Early cash target complete",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/TXGuideTargetCompletePanel.prefab",
+      "runtimeEntry": "Receipt finished with earlyOrdinal>0",
+      "states": [
+        "first reward amount",
+        "second reward amount",
+        "Withdraw -> cash wallet"
+      ],
+      "referenceLayoutCovered": false,
+      "referenceScreenshots": [
+        "C:/Projects/DJS_Apple/apk-comparison/reference/03-target-complete.png"
+      ],
+      "notes": ""
+    },
+    {
+      "page": "LocalDiamondUnlockGuide",
+      "label": "Diamond unlock guide",
+      "kind": "guide",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalDiamondUnlockGuide.prefab",
+      "runtimeEntry": "StartDiamondGuide preview finishes",
+      "states": [
+        "diamond balance highlight",
+        "title/body/continue",
+        "continue saves guide-complete and returns gameplay"
+      ],
+      "referenceLayoutCovered": false,
+      "referenceScreenshots": [],
+      "notes": "Must align highlight to current compact HUD. Original source NewbieGuidePanel position is for tall HUD; copying absolute source coordinates would point to the wrong area. Visually inspected APK-diamond-unlock.png: it is a diamond preview message, not the card guide."
+    },
+    {
+      "page": "LocalEarningRecovery",
+      "label": "Local save error and recovery",
+      "kind": "modal",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/LocalEarningRecovery.prefab",
+      "runtimeEntry": "Any initialization/save/claim/archive/activation failure",
+      "states": [
+        "short error",
+        "long error text",
+        "retry remains error",
+        "retry succeeds and resumes original route",
+        "return without discarding persisted state"
+      ],
+      "referenceLayoutCovered": false,
+      "referenceScreenshots": [],
+      "notes": "Local recovery page is custom; no source APK screenshot verified."
+    },
+    {
+      "page": "Tip",
+      "label": "Transient notice overlay",
+      "kind": "toast",
+      "prefab": "C:/Projects/DJS_Apple/FruitsHarvestMaster-source/output_Unity/Assets/ApkEarningReference/Resources/ApkEarningReference/Panels/Tip.prefab",
+      "runtimeEntry": "Notice if current page lacks notice text binding",
+      "states": [
+        "short availability message",
+        "long no-service message",
+        "shown over any current earning page",
+        "auto-dismiss"
+      ],
+      "referenceLayoutCovered": false,
+      "referenceScreenshots": [
+        "C:/Projects/DJS_Apple/apk-comparison/reference/07-confirm.png"
+      ],
+      "notes": "If a page already has notice field, message updates inline instead of creating Tip. Reference shows name-error toast over account form with OS keyboard, so use as contextual reference only."
+    }
+  ],
+  "missingReferenceLayout": [
+    "ApkEarningTop",
+    "TXRecordGuidePanel",
+    "TXGuideLoadingPanel",
+    "TXTooFastHintPanel",
+    "LocalUserLevel",
+    "TXChannelPanel",
+    "LocalRewardVideoTest",
+    "TXGuideTargetCompletePanel",
+    "LocalDiamondUnlockGuide",
+    "LocalEarningRecovery",
+    "Tip"
+  ],
+  "coveredReferenceRecipeTargets": [
+    "Item_Big",
+    "LocalCashHistory",
+    "LocalCashHistoryRow",
+    "LocalEarningSequence",
+    "LocalLuckyItem",
+    "LocalLuckyReward",
+    "LocalSuccess",
+    "LocalWithdrawalConditions",
+    "LocalWithdrawalVerification",
+    "SuccessPanel",
+    "TXCoinPanel",
+    "TXPanel",
+    "TXProgress0Panel",
+    "TXUserInfoPanel",
+    "TXUserInfoSurePanel"
+  ],
+  "componentsAndRetainedSources": [
+    {
+      "prefab": "Item_Big",
+      "classification": "runtime child",
+      "referenceLayoutCovered": true,
+      "note": "Runtime-created standard reward item for LocalSuccess; cash/diamond icon and amount."
+    },
+    {
+      "prefab": "LocalLuckyItem",
+      "classification": "runtime child",
+      "referenceLayoutCovered": true,
+      "note": "Runtime-created reward item for LocalLuckyReward; cash/diamond icon and amount."
+    },
+    {
+      "prefab": "LocalCashHistoryRow",
+      "classification": "runtime child",
+      "referenceLayoutCovered": true,
+      "note": "Runtime-created ready-action or pending-not-paid history row; current cash row."
+    },
+    {
+      "prefab": "PlayerInfo",
+      "classification": "runtime dependency",
+      "referenceLayoutCovered": false,
+      "note": "Nested source prefab still referenced by TXPanel; its bound child texts are positioned by wallet recipe."
+    },
+    {
+      "prefab": "SuccessPanel",
+      "classification": "runtime dependency",
+      "referenceLayoutCovered": true,
+      "note": "Prefab base of LocalSuccess variant. Not opened by runtime directly; changes can affect LocalSuccess."
+    },
+    {
+      "prefab": "LocalCashHistoryEntry",
+      "classification": "retained source only",
+      "referenceLayoutCovered": false,
+      "note": "Authoring source for wallet history control; no direct runtime Show/Load or retained prefab GUID dependency found."
+    },
+    {
+      "prefab": "LocalMainPanelTop",
+      "classification": "retained source only",
+      "referenceLayoutCovered": false,
+      "note": "Source-only HUD template; actual game uses res/local/withdrawal/ApkEarningTop."
+    },
+    {
+      "prefab": "NewbieGuidePanel",
+      "classification": "retained source only",
+      "referenceLayoutCovered": false,
+      "note": "Source-only diamond-guide template; runtime uses separately authored LocalDiamondUnlockGuide."
+    },
+    {
+      "prefab": "TXLevelPanel",
+      "classification": "retained source only",
+      "referenceLayoutCovered": false,
+      "note": "Retained source/alternate, no runtime route; runtime uses LocalWithdrawalVerification."
+    },
+    {
+      "prefab": "RewardPanel",
+      "classification": "retained source only",
+      "referenceLayoutCovered": false,
+      "note": "Retained source/alternate, no runtime route; runtime uses LocalSuccess/LocalLuckyReward."
+    }
+  ],
+  "legacyWithdrawalSystem": {
+    "catalogKeys": [
+      "res/local/withdrawal/withdrawalhost",
+      "res/local/withdrawal/withdrawalhud"
+    ],
+    "status": "Retained legacy system, no active CorePlayUI reference or current entry point found.",
+    "evidence": "WithdrawalHud script GUID occurs only in WithdrawalHud prefab, whose prefab GUID is not referenced by any scene/prefab. Actual CorePlayUI references ApkEarningTop; old WithdrawalHost.Open only called by old WithdrawalHud."
+  },
+  "validationCoverage": {
+    "previousReport": "E:/CodexCacheBackups/DJS_Apple-layout-geometry-20261021/after/enlarged-modal-fixtures-report.json",
+    "previousRenders": 105,
+    "previousDistinctPages": 24,
+    "runtimeSurfacesNotInPreviousModalRenderReport": [
+      "ApkEarningTop",
+      "Tip"
+    ],
+    "notes": [
+      "LocalRewardVideoTest missing from general Validation.Pages list, but included by dynamically enumerated FitWidth modal fixtures and FlowPrefabValidation. Add to general audit list for consistency.",
+      "Previous modal render report excludes Tip toast and active HUD; these need their own visual audit.",
+      "Fixture default-state screenshots are not enough: all four diamond choices, all account channels/error states, cash seven rows/diamond four rows, sequence layouts and timed intermediate states, verification disabled/ready, reward one/two-item and early/ordinary branches should be represented.",
+      "Previous LocalDiamondUnlockGuide fixture body differs from runtime copy; runtime says continue playing, while fixture says review withdrawal requirements. Align evidence copy to actual runtime before making comparisons."
+    ]
+  },
+  "referenceSources": {
+    "directApkCaptureDirectory": "C:/Projects/DJS_Apple/apk-comparison/reference",
+    "directApkCaptures": [
+      "01-welcome.png",
+      "02-first-reward.png",
+      "03-target-complete.png",
+      "04-cash-wallet.png",
+      "05-account.png",
+      "06-account.png",
+      "07-confirm.png",
+      "08-second-reward.png",
+      "09-second-wallet.png",
+      "10-activation.png",
+      "11-lucky-reward.png",
+      "APK-cash-history.png",
+      "APK-cash-wallet.png",
+      "APK-diamond-requirements.png",
+      "APK-diamond-unlock.png",
+      "APK-diamond-wallet.png",
+      "APK-level3-reward.png",
+      "APK-level4-hud.png",
+      "APK-lucky-reward.png",
+      "current.png"
+    ],
+    "sourcePrefabDirectory": "C:/Projects/com.nut.sort.relax/Assets/Resources/prefabs/panels",
+    "importedCatalog": "Assets/ApkEarningReference/apk-earning-ui-import.json",
+    "catalogPrefabCount": 28,
+    "extractionEvidence": "E:/CodexCacheBackups/DJS_Apple-apk-reference-20261014",
+    "priorCurrentGameCaptures": [
+      "C:/Projects/DJS_Apple/apk-comparison/game",
+      "C:/Projects/DJS_Apple/flow-parity-audit-20261020",
+      "C:/Projects/DJS_Apple/replica-audit-20261019/actual",
+      "C:/Projects/DJS_Apple/orchard-full-flow-review/actual"
+    ],
+    "priorPrefabFixtures": [
+      "C:/Projects/DJS_Apple/orchard-full-flow-review/output/after",
+      "E:/CodexCacheBackups/DJS_Apple-layout-geometry-20261021/after",
+      "E:/CodexCacheBackups/DJS_Apple-layout-geometry-20261021/animation"
+    ],
+    "warnings": [
+      "Do not label old fixture renders, concept drawings, sprite crops or wireframes as reference APK captures.",
+      "No verified APK screenshots found in reference directory for requirements-review, account-level, other-channel entry, confirmation, verification, local video or recovery. Source prefab geometry can support layout but is different evidence from a live screenshot."
+    ],
+    "visualMappingCorrections": [
+      "05-account.png visually inspected: withdrawal loading overlay.",
+      "06-account.png visually inspected: Venmo account entry.",
+      "07-confirm.png visually inspected: account name validation error + toast + OS keyboard; not account confirmation.",
+      "10-activation.png visually inspected: activation assessment message.",
+      "APK-diamond-unlock.png visually inspected: extra diamond reward preview message; not LocalDiamondUnlockGuide card guide."
+    ]
+  },
+  "recommendations": [
+    "Finish the 9 uncovered primary pages and Tip overlay with explicit geometry recipes, retaining existing art.",
+    "Audit compact HUD and diamond highlight as one alignment pair; preserve gameplay space and prior removed task strip.",
+    "Publish a full contact sheet/index for all 22 runtime surfaces plus state variants; use source geometry where screenshots are absent and clearly label evidence.",
+    "Do not reintroduce retained source-only pages merely to claim all catalog pages have been redesigned.",
+    "Keep interaction hierarchy, standard Buttons, code event binding and saved-prefab layout; no accounting/eligibility changes."
+  ],
+  "uncategorizedPanelPrefabs": []
+}

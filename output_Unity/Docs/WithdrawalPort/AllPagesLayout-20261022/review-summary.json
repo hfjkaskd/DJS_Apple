@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-22",
+  "implementationCommit": "4dd8545",
+  "scope": "20 reachable earning-flow pages, the Tip toast and the actual compact gameplay HUD",
+  "layoutChanges": "Completed the 9 previously uncovered flow pages plus the toast. Reflowed content, actions, instructions and progress labels using existing orchard artwork. Retained the previously adjusted 11 pages and compact HUD after review.",
+  "implementation": "Static geometry and appearance are saved in prefabs. Runtime earning logic, state persistence and payment availability are unchanged.",
+  "validation": {
+    "prefabAudits": 34,
+    "renderChecks": 145,
+    "renderErrors": 0,
+    "screenSizes": ["1080x1920", "1080x2400", "720x1600"],
+    "playModeCases": 7,
+    "playModePassed": true,
+    "pairedGalleryItems": 48,
+    "afterOnlyGalleryItems": 1
+  },
+  "gallery": "E:/CodexCacheBackups/DJS_Apple-all-layout-20261022/gallery/index.html",
+  "limits": [
+    "Captures are real Unity camera renders of saved prefabs with explicit fixture values; they are not phone screenshots or a complete host navigation test.",
+    "No APK was built or installed in this pass.",
+    "Reference screenshots are mapped by visible content. Missing original APK views are marked missing; the new diamond-preview state has no before capture.",
+    "Orchard art and the compact HUD intentionally differ from the reference APK; pixel-identical reproduction is not claimed.",
+    "The reports retain legacy CorePlayUI font warnings, the pre-existing FreeCoinUI missing script warning, and absent-frame measurement warnings for borderless reward pages. No new render errors were reported."
+  ]
+}
