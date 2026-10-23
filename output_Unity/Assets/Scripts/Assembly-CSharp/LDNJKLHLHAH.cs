@@ -3,6 +3,7 @@ using System.Collections;
 using CorePlay;
 using Framework.Base.UtilModule;
 using FruitApkEarning;
+using FruitEarningVariants;
 using UnityEngine;
 
 /// <summary>胜利结算弹窗队列：直接显示奖励结算，结束后进入下一关。</summary>
@@ -26,11 +27,19 @@ public class LDNJKLHLHAH : global::FOLJNEPEKCA<LDNJKLHLHAH>
 		// A closing popup or an in-flight lucky reward may still own input. Wait
 		// for it instead of opening the old WinUI behind the reward page.
 		while (IsCurrentSettlement(finishedGeneration) &&
-			(MCCIJBJGMCK.IsLock() || ApkEarningHost.IsOpen))
+			(MCCIJBJGMCK.IsLock() || EarningVariantController.HasCommercialPanel ||
+			 (EarningVariantSelection.IsB && (EarningVariantController.Instance == null ||
+			  EarningVariantController.Instance.Runtime == null || !EarningVariantController.Instance.Runtime.Ready))))
 		{
 			yield return null;
 		}
 		if (!IsCurrentSettlement(finishedGeneration)) yield break;
+		if (EarningVariantSelection.IsB)
+		{
+			GameAudio.Play(DLMJOHCOJKN.Play_sfx_ui_panel_game_win);
+			EarningVariantController.Instance.ShowSettlement(() => ContinueAfterSettlement(finishedGeneration));
+			yield break;
+		}
 
 		ApkEarningService service = ApkEarningService.Instance;
 		if ((service.Available && service.State.PendingRewards.Count > 0) ||

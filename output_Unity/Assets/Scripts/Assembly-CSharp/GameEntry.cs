@@ -45,6 +45,7 @@ public class GameEntry : MonoBehaviour
 
 	private IEnumerator ProjectInit()
 	{
+		FruitEarningVariants.EarningVariantSelection.Initialize();
 		// 框架层
 		MCCIJBJGMCK.Init();
 		Timer.Instance.Init();
@@ -85,6 +86,16 @@ public class GameEntry : MonoBehaviour
 			mgrGlobalUI.Init();
 		}
 
+		var hostPrefab = Resources.Load<GameObject>(FruitEarningVariants.EarningVariantController.ResourcePath);
+		if (hostPrefab == null)
+		{
+			Debug.LogError("[A/B] The authored earning variant controller prefab is missing.");
+			yield break;
+		}
+		var earningHost = Instantiate(hostPrefab).GetComponent<FruitEarningVariants.EarningVariantController>();
+		var initialization = earningHost.InitializeAsync();
+		while (!initialization.IsCompleted) yield return null;
+		if (initialization.IsFaulted || !earningHost.Ready) yield break;
 		yield return null;
 		InitFinish = true;
 

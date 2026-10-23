@@ -9,8 +9,8 @@ using UnityEngine;
 public static class Framework2ReplicaAssetPreparation
 {
     private const string ResourceRoot = "Assets/Framework2Replica/Resources/Framework2Replica";
-    [Serializable] private sealed class AddressEntry { public string address, path, subAsset; }
-    [Serializable] private sealed class AddressCatalog { public AddressEntry[] entries; }
+    [Serializable] private sealed class AddressEntry { public string address = "", path = "", subAsset = ""; }
+    [Serializable] private sealed class AddressCatalog { public AddressEntry[] entries = Array.Empty<AddressEntry>(); }
 
     private sealed class ScriptBinding
     {

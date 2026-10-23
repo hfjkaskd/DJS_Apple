@@ -1,0 +1,67 @@
+{
+  "sourceRepository": "https://github.com/bizza-game/Mahjong-Slide-Zen_AndroidWZ-DJS",
+  "sourceCommit": "df1d9c11816bb87d972b40bb9def3447fe171e0a",
+  "variantA": "Existing FruitApkEarning flow; original default save names and economy retained.",
+  "variantB": "Original Framework2 runtime, 61 original prefabs and live legacy product configuration.",
+  "switching": "Use the persistent A / B button. Selection is saved, the current session is flushed and the Game scene reloads. Default selection remains A. No random cohort assignment or remote analytics is added.",
+  "storage": {
+    "a": "Original gameplay JSON filenames and fruit-apk-earning-v1.dat.",
+    "bGameplay": "Framework2Replica-*.json",
+    "bCommercial": "DJS.Apple.B. plus the original source savePrefix and keys.",
+    "qa": "Explicit pre-session storage profile uses TestProfiles/<profile> and separate PlayerPrefs prefixes; default player storage is not used by validation."
+  },
+  "unchangedBusinessRules": {
+    "stages": [
+      "Complete level 1",
+      "Complete level 2",
+      "3 successful ad callbacks, then original manual confirmation",
+      "Balance 200",
+      "Balance 3000"
+    ],
+    "ordinaryBalanceCap": 2999.5,
+    "configSha256": "74a89260e72fc83aeee7e3d1bd5bc8ceeb6543af08342cd19e1fc05359648537"
+  },
+  "hostAdaptations": [
+    "An Apple fruit triple reports one source elimination event; saved group counts prevent replayed callbacks from rewarding twice.",
+    "Only the selected variant receives gameplay events or owns the reward settlement.",
+    "Source commercial progression owns B's restored level number. Source settlement completion starts the next Apple board.",
+    "The source hint reward maps one-for-one to Apple's Magic prop in B's separate player asset save.",
+    "Original logical resource addresses load the original assets through a Resources catalog. Installed Spine and DOTween DLL script identifiers are mapped explicitly.",
+    "Single-Sprite selectors use the exact imported name of the same original PNG; multi-Sprite selectors retain exact source names.",
+    "B reserves space for the original source HUD while transforming the tree and fruit together. A prefab-authored background reuses the already loaded map Sprite to cover the full screen; it is disabled in A and cannot intercept input."
+  ],
+  "simulationBoundary": [
+    "Persistent visible TEST SIMULATION / NO CASH PAYMENT disclosure; full rules available before first B use and via Rules.",
+    "The rules disclose that 2999.5 is below the final 3000 requirement. Ordinary rewards cannot finish that target.",
+    "Only an explicit local ad simulator is connected. No real advertising SDK, ad revenue, payment service or external analytics is connected.",
+    "Orders and fictitious account details remain local. Processing and success-like states are labelled as simulated, without payment.",
+    "False certification, fabricated cashout claims and guaranteed-payment copy are replaced at the localization display boundary. The original configuration file and numeric rules remain byte-identical. See simulation-copy-overrides.json."
+  ],
+  "validation": {
+    "savedAssetsEntry": "Framework2ReplicaValidation.ValidateAssetsAndConfig",
+    "sourceRuntimeEntry": "Framework2ReplicaPlayValidation.Run",
+    "actualGameSwitchingEntry": "EarningVariantIntegrationValidation.RunWithSettlement",
+    "coverageNote": "The source test also uses a second, fresh namespace to run both original first-level guides through their original Buttons and fictitious account InputField, without seeding progression or history. Later-stage cases use labelled fixtures. Host tests load the real Apple Game scene but do not physically tap or clear fruit boards. Portrait renders are diagnostics, not phone screenshots or pixel-parity evidence.",
+    "verifiedResults": {
+      "savedAssets": "PASS: 61 prefabs, 109 Buttons, 1313 original layout nodes, 341 references and 35 source configuration assertions",
+      "sourcePlay": "PASS: 88 assertions, including both first-level guides, 3-ad manual confirmation, original slot reward, cap, settlement and persistence",
+      "hostPlay": "PASS: 99 assertions, 8 A/B switches, isolated balances/progress, single recovery of A pending settlement and B-only shared-Sprite backdrop",
+      "geometry": "PASS: 8 screen/safe-area profiles, shared tree/fruit transform, unchanged tray, effective B viewport and full-screen background coverage",
+      "physicalDevice": "Not run in this request",
+      "androidBuild": "Not built",
+      "obfuzBuild": "Not verified; package is not installed",
+      "existingWarning": "The pre-existing FreeCoinUI asset reports a missing script during catalog loading; it is outside the imported F2 interface path."
+    }
+  },
+  "dependencies": {
+    "rootCause": "The five recovered Plugins DLLs contained empty method bodies: Newtonsoft serialization returned null/default, Spine did not decode or animate, and DOTween creation returned null. Real implementations replace those stubs without changing business rules or A source APIs.",
+    "newtonsoft": "Official Unity com.unity.nuget.newtonsoft-json@3.2.1 AOT runtime (JSON.NET 13.0.2), with the same runtime DLL in Editor and Android.",
+    "spine": "Exact reference-commit Spine 4.2 runtime source compiled as spine-csharp.dll and spine-unity.dll for Unity 2022.3.62f3; original source is preserved unchanged. Imported skeleton data is version 4.2.43.",
+    "dotween": "Exact reference-commit DOTween 1.2.825 DLL and its nine original Modules source files compiled as DOTween.Modules.dll.",
+    "assetCompatibility": "All five original DLL .meta files and GUIDs were retained byte for byte. All 636 project runtime C# files compile against the restored libraries; no A API workaround was introduced.",
+    "verification": "Actual JSON list roundtrip passes, including decimal reward 0.1, stage 2 and Chinese text. All five imported Spine skeleton JSON files decode and execute AnimationState.Update/Apply and world-transform updates. Old and restored IL method-body audits are saved with the build tools. These checks do not claim device rendering or final A/B regression results.",
+    "reproducibility": "Tools/Framework2RuntimeDependencies/build.py --smoke --apply verifies pinned source hashes, compiles genuine runtime code without UNITY_EDITOR, runs dependency smoke tests and preserves original metas. The directory includes exact upstream source/DLLs, license notices, source-manifest.json, build-result.json and both IL audit reports.",
+    "obfuscation": "No Obfuz installation is present to validate. Keep precompiled third-party assemblies and DOTweenModuleUtils names out of future renaming; see serialization-compatibility.json for application DTO preservation."
+  },
+  "delivery": "Source integration only. No Android APK is built or installed for this request."
+}

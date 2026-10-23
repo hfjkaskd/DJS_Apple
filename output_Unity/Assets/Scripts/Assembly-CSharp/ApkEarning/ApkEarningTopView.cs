@@ -39,6 +39,11 @@ namespace FruitApkEarning
 
         private void OnEnable()
         {
+            if (FruitEarningVariants.EarningVariantSelection.IsB)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
             if (View == null) View = GetComponent<ApkEarningPageView>();
             owner = GetComponentInParent<CorePlay.CorePlayUI>();
             service = ApkEarningService.Instance;
@@ -68,6 +73,7 @@ namespace FruitApkEarning
         private void OnRectTransformDimensionsChange() { RefreshLayout(); }
         public void RefreshLayout()
         {
+            if (FruitEarningVariants.EarningVariantSelection.IsB) return;
             if (fittingLayout || ReferenceWidth <= 0) return;
             RectTransform rect = transform as RectTransform;
             RectTransform parent = transform.parent as RectTransform;

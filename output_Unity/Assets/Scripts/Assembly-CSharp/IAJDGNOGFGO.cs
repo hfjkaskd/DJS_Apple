@@ -9,6 +9,7 @@ public abstract class IAJDGNOGFGO<DataT, ModelT> : HAHGPHDEOLA where DataT : cla
 	protected DataT data;
 
 	private bool needSave;
+	private string loadedFilePath;
 
 	protected bool isFirstInit;
 
@@ -30,7 +31,11 @@ public abstract class IAJDGNOGFGO<DataT, ModelT> : HAHGPHDEOLA where DataT : cla
 
 	public virtual void Init()
 	{
-		string path = GetFilePath();
+		// A/B scene reloads reuse the singleton but must not reuse the other group's data.
+		data = null;
+		isFirstInit = false;
+		needSave = false;
+		string path = loadedFilePath = FruitEarningVariants.EarningVariantSelection.ModelFilePath(GetKey());
 		if (File.Exists(path))
 		{
 			try
@@ -65,7 +70,7 @@ public abstract class IAJDGNOGFGO<DataT, ModelT> : HAHGPHDEOLA where DataT : cla
 
 	private string GetFilePath()
 	{
-		return Path.Combine(Application.persistentDataPath, GetKey() + ".json");
+		return loadedFilePath ?? FruitEarningVariants.EarningVariantSelection.ModelFilePath(GetKey());
 	}
 
 	public bool TrySaveToDisk()

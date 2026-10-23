@@ -15,6 +15,7 @@ namespace FruitApkEarning
         public float ReceiptSeconds = 2, MessageSeconds = 3, BonusesSeconds = 5.5f, LoadingSeconds = 1.5f;
         private static bool requestedDiamonds, requestedRewards, requestedAccountLevel;
         private static Action requestedCompletion;
+        private static ApkEarningHost activeHost;
         private Action completion;
         private ApkEarningPageView page;
         private string panel;
@@ -54,6 +55,7 @@ namespace FruitApkEarning
         }
         protected override void BeforeOpen()
         {
+            activeHost=this;
             diamonds=requestedDiamonds; completion=requestedCompletion;requestedCompletion=null;
             earlyOrdinal=0;tier=0;channel=0;reward=null;opened=true;
             Service.Tick();Service.Changed+=OnChanged;
@@ -77,9 +79,26 @@ namespace FruitApkEarning
         }
         protected override void BeforeClose()
         {
+            if(activeHost==this)activeHost=null;
             opened=false;Service.Changed-=OnChanged;
             if(sequence!=null)StopCoroutine(sequence);sequence=null;
             ClearNotice();
+        }
+        private void OnDestroy()
+        {
+            // Scene reload does not invoke BaseUI.BeforeClose/AfterClose.
+            BeforeClose();
+            completion=null;
+        }
+        internal static void CancelSessionPresentation()
+        {
+            requestedCompletion=null;
+            var host=activeHost;
+            if(host==null)return;
+            host.completion=null;
+            host.BeforeClose();
+            if(host.page!=null)host.page.CancelPresentation();
+            host.gameObject.SetActive(false);
         }
         protected override void AfterClose(){var callback=completion;completion=null;callback?.Invoke();}
         private void OnChanged(){if(opened&&!busy)Refresh();}

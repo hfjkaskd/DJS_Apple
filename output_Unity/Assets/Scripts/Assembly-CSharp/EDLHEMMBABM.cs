@@ -359,7 +359,7 @@ public class EDLHEMMBABM : global::FOLJNEPEKCA<EDLHEMMBABM>
 
 	public void OnClick(CollectItem InCollectItem)
 	{
-		if (FruitApkEarning.ApkEarningHost.IsOpen) return;
+		if (FruitEarningVariants.EarningVariantController.BlocksGameplay) return;
 		if (InCollectItem == null || InCollectItem.Status != LECIONHKEJL.OnField)
 		{
 			return;

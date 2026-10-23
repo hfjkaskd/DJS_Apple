@@ -110,10 +110,12 @@ namespace MahjongSlide.Withdrawal
         // unlocks. Visible rows extending below it can only enlarge this inset.
         public float GetGameplayTopInset(float canvasHeight)
         {
-            if (sourceCanvas == null || headerGraphics == null || Screen.height <= 0) return 0f;
+            if (sourceCanvas == null || headerGraphics == null) return 0f;
+            Rect pixelViewport = sourceCanvas.pixelRect;
+            if (pixelViewport.height <= 0f) return 0f;
             RefreshCurrencyRows();
             Camera camera = sourceCanvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : sourceCanvas.worldCamera;
-            float bottom = Screen.height;
+            float bottom = pixelViewport.yMax;
             if (reservedProgressRegion != null)
             {
                 reservedProgressRegion.GetWorldCorners(graphicCorners);
@@ -128,7 +130,11 @@ namespace MahjongSlide.Withdrawal
             }
             var canvasRect = sourceCanvas.transform as RectTransform;
             float paddingScale = canvasRect != null && canvasRect.rect.height > 0f ? canvasHeight / canvasRect.rect.height : 1f;
-            return Mathf.Clamp01(1f - bottom / Screen.height) * canvasHeight + gameplayTopPadding * paddingScale;
+            // Match the coordinate space used by WorldToScreenPoint. Overlay
+            // has yMin=0 and the screen height; camera viewports and render
+            // targets can have another height/origin on every platform.
+            float bottomInViewport = bottom - pixelViewport.yMin;
+            return Mathf.Clamp01(1f - bottomInViewport / pixelViewport.height) * canvasHeight + gameplayTopPadding * paddingScale;
         }
 
         [System.Serializable]

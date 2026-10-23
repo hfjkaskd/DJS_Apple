@@ -116,6 +116,7 @@ namespace Apple.Framework2
             disposed = true;
             winPending = false;
             if (runtime != null) { runtime.HintGranted -= HandleHint; runtime.Shutdown(); }
+            if (root != null) root.GetComponentInChildren<WZSDK.UserDataManager>(true)?.Dispose();
             Save();
             if (root != null) { root.SetActive(false); UnityEngine.Object.Destroy(root); }
             runtime = null; root = null;

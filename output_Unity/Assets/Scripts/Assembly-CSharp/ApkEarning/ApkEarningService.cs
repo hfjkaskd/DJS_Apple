@@ -30,7 +30,7 @@ namespace FruitApkEarning
                 var config = Resources.Load<ApkEarningConfig>("ApkEarningConfig");
                 if (config == null || config.Rules == null) throw new InvalidOperationException("ApkEarningConfig is missing.");
                 config.Rules.Validate();
-                savePath = Path.Combine(Application.persistentDataPath, "fruit-apk-earning-v1.dat");
+                savePath = Path.Combine(FruitEarningVariants.EarningVariantSelection.SaveDirectory, "fruit-apk-earning-v1.dat");
                 bool recovered;
                 ApkEarningState saved = ApkEarningStorage.Load(savePath, config.Rules, out recovered);
                 if (saved == null) saved = MigrateLegacy(currentLevel);
@@ -140,6 +140,20 @@ namespace FruitApkEarning
             return Tick() || Available;
         }
 
+        // A scene switch is a new session, just like a process restart. Its next
+        // Init must run the existing persisted-reward recovery before gameplay.
+        public bool EndSession()
+        {
+            if (engine != null && (!Available || !Flush() || !string.IsNullOrEmpty(Error))) return false;
+            ApkEarningHost.CancelSessionPresentation();
+            Available = false;
+            engine = null;
+            savePath = null;
+            RecoveredFromBackup = false;
+            Error = "";
+            return true;
+        }
+
         public ApkRequirements GetRequirements(bool diamonds, int tier)
         {
             if (Available) {
@@ -168,7 +182,7 @@ namespace FruitApkEarning
         {
             // Read the old format without initializing its service: that initialization ticks and rewrites its file.
             // Keeping both old save copies untouched permits a safe return to the former flow.
-            string legacyPath = Path.Combine(Application.persistentDataPath, "fruit-withdrawal-simulation-v1.dat");
+            string legacyPath = Path.Combine(FruitEarningVariants.EarningVariantSelection.SaveDirectory, "fruit-withdrawal-simulation-v1.dat");
             bool recovered;
             var legacy = FruitWithdrawal.WithdrawalStorage.Load(legacyPath, out recovered);
             return new ApkEarningState {

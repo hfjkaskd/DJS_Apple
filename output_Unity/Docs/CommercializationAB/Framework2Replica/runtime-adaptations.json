@@ -92,7 +92,11 @@
     },
     {
       "target": "Assets/Framework2Replica/Runtime/Host/AppleF2Runtime.cs",
-      "sha256": "ee39335e40b25aa6a7b9db0256b6566f5be37970a7a7f2addf34d7cbde5c7e9d"
+      "sha256": "03decfb9f8203f72d9f7b78868e7b14c32e0cdac42ce404dd089cb84cbb507f1"
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/Host/Framework2SimulationCopy.cs",
+      "sha256": "851cc6e814099ca862f9a7760b9c2b979e58f7ea8458a1529c6aa03ff046a7b9"
     },
     {
       "target": "Assets/Framework2Replica/Runtime/Host/MahjongCashCounter.cs",
@@ -100,10 +104,10 @@
     },
     {
       "target": "Assets/Framework2Replica/Runtime/Host/MahjongFramework2CurrencyHud.cs",
-      "sha256": "829bad88ad30bb1e404bd94629ab6689f74a21ab07c4f3f4fcbc05502e13c11e",
+      "sha256": "72cda955b4e5ce8cd0b9a1a9ff596df5d30197562e102238d0822606d476a42c",
       "source": "Assets/Scripts/Withdrawal/Framework2/MahjongFramework2CurrencyHud.cs",
       "sourceSha256": "887977c2e4b4cdcf4d6478cedbf3d0970c3cd50785c6cac1480271a5dd03e9a9",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": false
     },
     {
       "target": "Assets/Framework2Replica/Runtime/Host/MahjongFramework2EconomySettings.cs",
@@ -120,18 +124,18 @@
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
-      "target": "Assets/Framework2Replica/Runtime/Host/MahjongFramework2Runtime.cs",
-      "sha256": "60ced7c544b98a817870824b12b62eac6bf9ecc8bb3e034e50fb54b4fadc72ee",
-      "source": "Assets/Scripts/Withdrawal/Framework2/MahjongFramework2Runtime.cs",
-      "sourceSha256": "2a3f7bb2ccdb7f2bafdbcaf3acd68b62d97e3af370fa6edf882400b439b1dfac",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": false
-    },
-    {
       "target": "Assets/Framework2Replica/Runtime/Host/MahjongFramework2Runtime.GameplayEvents.cs",
       "sha256": "f51c6f33f3fd62cce135233b83089816707ffaada17bfb2eeb99ccc5c95b9b81",
       "source": "Assets/Scripts/Withdrawal/Framework2/MahjongFramework2Runtime.GameplayEvents.cs",
       "sourceSha256": "194b9657d71ce724e4668b670735517157e976d889ba903a1dc1cbd0738e27e6",
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/Host/MahjongFramework2Runtime.cs",
+      "sha256": "e390141c925f5445a41c1b3f165241da1ead57de64c8bb0060d20f6ad06cb978",
+      "source": "Assets/Scripts/Withdrawal/Framework2/MahjongFramework2Runtime.cs",
+      "sourceSha256": "2a3f7bb2ccdb7f2bafdbcaf3acd68b62d97e3af370fa6edf882400b439b1dfac",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": false
     },
     {
       "target": "Assets/Framework2Replica/Runtime/Host/MahjongFramework2SourceDefaults.cs",
@@ -150,7 +154,7 @@
     },
     {
       "target": "Assets/Framework2Replica/Runtime/Runtime/AddressableAssetService.cs",
-      "sha256": "57f88ca5be5ba5348a44e7a083cef6501b8fd9a103e1cba04e656cff427f00bf",
+      "sha256": "0d9ca4e4110c649768ba07e825e42578da135b258ebc739a54f4e8075fcbc7c0",
       "source": "Assets/Scripts/Withdrawal/Framework2/Runtime/AddressableAssetService.cs",
       "sourceSha256": "6f94819ba5ddc70e5688b7baba7f0498c3524dd9e6862c9395427823b16ccbf1",
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": false
@@ -331,13 +335,6 @@
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/EffectRewardItem.cs",
-      "sha256": "52beae86bbcf3c0cb060d4f1ba29b26ecdd52b14de3f04e10e7b71b8fd633b9e",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/EffectRewardItem.cs",
-      "sourceSha256": "cb72fe769b0ff484bdf8ffa0a8609ae6aca8f0c2a5992b313ac699c6142a2e19",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/ELuckySpinRewardType.cs",
       "sha256": "96c41059e74cda3df47438460b6bf8ef581c5c3705d89232c17f40b326272162",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/ELuckySpinRewardType.cs",
@@ -363,6 +360,13 @@
       "sha256": "c41579aa6d886ab438815985120d8156bf32a221bbf6159d538d28bd4a472606",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/EUIType.cs",
       "sourceSha256": "c41579aa6d886ab438815985120d8156bf32a221bbf6159d538d28bd4a472606",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/EffectRewardItem.cs",
+      "sha256": "52beae86bbcf3c0cb060d4f1ba29b26ecdd52b14de3f04e10e7b71b8fd633b9e",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/EffectRewardItem.cs",
+      "sourceSha256": "cb72fe769b0ff484bdf8ffa0a8609ae6aca8f0c2a5992b313ac699c6142a2e19",
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
@@ -450,13 +454,6 @@
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/GameManagerWZ.cs",
-      "sha256": "7a3a96183930c4cad519fe5be37d11556903fda0aba1ad5af04c942271fedec9",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/GameManagerWZ.cs",
-      "sourceSha256": "353b219f88b7308728a67f5804e5224964a8de61ea8208474aa5a791750c2bc2",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": false
-    },
-    {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/GameManagerWZ.GameplayEvents.cs",
       "sha256": "6206947be12b4277a2243df81ceba01da963f49e2a2fddd9dd2c0268f44a34dc",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/GameManagerWZ.GameplayEvents.cs",
@@ -465,10 +462,17 @@
     },
     {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/GameManagerWZ.Mahjong.cs",
-      "sha256": "d36acf2e3ea58d868b764521a4d6dbe6b2fffeec960cefab01adbaf320c5c216",
+      "sha256": "e4a00c98fb220f30e0c98bbaf8aece01de5722ed7bd088394444dbbec22c2bf0",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/GameManagerWZ.Mahjong.cs",
       "sourceSha256": "5ff8567bbba84112e86b1e69d81fc523ceb10ed52d842042eca848c8e71bc982",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": false
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/GameManagerWZ.cs",
+      "sha256": "7a3a96183930c4cad519fe5be37d11556903fda0aba1ad5af04c942271fedec9",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/GameManagerWZ.cs",
+      "sourceSha256": "353b219f88b7308728a67f5804e5224964a8de61ea8208474aa5a791750c2bc2",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": false
     },
     {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/GamePlayerView.cs",
@@ -500,10 +504,10 @@
     },
     {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/HistoryModel.cs",
-      "sha256": "aa3e55347c13e95e1deb2c44bac6a845c5ba964391985c8b5f6783db01561105",
+      "sha256": "dc3a47687b6de7772426f7c8d85c0491d1f81993080d646421ab5174a8435ce4",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/HistoryModel.cs",
       "sourceSha256": "0502b7dab7090c44ba44f14803dab42ccdcdb4f7b8bdda3d30935e574a98181c",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": false
     },
     {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/IBaseView.cs",
@@ -562,13 +566,6 @@
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/ImageLocalizationManager.cs",
-      "sha256": "1fca2a50ea9875dd10512a1c835365575f734a6b89d7643093ebd1012ea95f28",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/ImageLocalizationManager.cs",
-      "sourceSha256": "501a19103b775e46abdcb9543bba1808153ecb547f8caa706f2558c5e1203539",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/IUnityObject.cs",
       "sha256": "e4d4ca7c895fb0fd405c92b1992f7c757123d27c48845d2898b139eb64bd1a2f",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/IUnityObject.cs",
@@ -583,45 +580,10 @@
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/kaiju_ui_1.cs",
-      "sha256": "8dddf1f79f502708fa9eb6e590046ac3da3c083417fcea2e0cf782731d7a232c",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/kaiju_ui_1.cs",
-      "sourceSha256": "5a79ed073be55b937d8720e6faa19b9edd656a2c8000ce625d9f7d2adc3b7c30",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/kaiju_ui_2.cs",
-      "sha256": "488c8fd68b7e03f4bfa14d0651a9ff0d5226083fea9a39c1288c94256a68e291",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/kaiju_ui_2.cs",
-      "sourceSha256": "40368969de5d60e739f0ada664cd6dcf7b45c8f12b5b510a1a113b2290127ad4",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/kaiju_ui_2_1.cs",
-      "sha256": "ff19d9a7ff3c253263327fa764dfcd3f0b34f4744dade9c31be8e88577157cbb",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/kaiju_ui_2_1.cs",
-      "sourceSha256": "31eabb83b4d6207f9416d667c154506c089f0fed8cc589c75c2d76cef0506194",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/kaiju_ui_3.cs",
-      "sha256": "40e02737c0ce9d1ab080e6edcd017cc7c3edabc12fc41fde668c565e8ab22ffe",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/kaiju_ui_3.cs",
-      "sourceSha256": "f193db37e485c4e4ac1a22f2b747852b562a62855007224441ad8d7b7ed153f9",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/kaiju_ui_4.cs",
-      "sha256": "fe13636a038f9044c603fd907e1d36598712315f1ddf6337e424cdd904e502ae",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/kaiju_ui_4.cs",
-      "sourceSha256": "8699ced69fcf6ac9d8acd7c7b6c4706cc3d9539d08f1f156ed91dbb333d78401",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/kaiju_ui_5.cs",
-      "sha256": "e9abf4df40a02ef6c8b7a321d5c5ac56c00115d74806418891b81731ceebc356",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/kaiju_ui_5.cs",
-      "sourceSha256": "6c46ff8f0c787446075b4e68f3f0ac9d50eb3af544ab064cecce970cd366d142",
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/ImageLocalizationManager.cs",
+      "sha256": "1fca2a50ea9875dd10512a1c835365575f734a6b89d7643093ebd1012ea95f28",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/ImageLocalizationManager.cs",
+      "sourceSha256": "501a19103b775e46abdcb9543bba1808153ecb547f8caa706f2558c5e1203539",
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
@@ -672,10 +634,10 @@
     },
     {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/LocalizationManager.cs",
-      "sha256": "b7388b1508c610be50eb61a5e4c10a0c7931c8c14bd5b4e1a0a4efc87dc18829",
+      "sha256": "0966738d984eb51496f9de9f3116cffb16eaa4944151fb874a68216a731113c8",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/LocalizationManager.cs",
       "sourceSha256": "e115261171a880cc62947aef9da3db96cbb091125912427949cf13b9fbbc2af6",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": false
     },
     {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/LocalizedImage.cs",
@@ -846,24 +808,6 @@
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/SafeArea.cs",
-      "sha256": "f53f8024916f7a64f24de106a76791801fb288dcb5c24867b8863567353020e7"
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/SettingsView.cs",
-      "sha256": "0eeec82d5535c0539db4ecb6d8b1932ab1fd717bcc46fb81f4706f33649ba8b2",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/SettingsView.cs",
-      "sourceSha256": "348de50e21efa18b004bfe6301afc814c27d439557dbf20621387c140b072dc7",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": false
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/ShakeEffect.cs",
-      "sha256": "4035eea577d64d4d18f38ef2d08d569263d75121bd4483d07dec266e5b30088e",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/ShakeEffect.cs",
-      "sourceSha256": "78c3712f324f9b0e3dd55e96497be22dc256336e7c062ab01b325c1c65c64ff1",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/SHoleMask.cs",
       "sha256": "0f6cd44903a9be2cb6ae2153ffa3bf4f10646f8d0b9c90c1bcc6c6b573a748d2",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/SHoleMask.cs",
@@ -875,34 +819,6 @@
       "sha256": "4ed1284e6e844621be80bc2202a560b3026c71501a272fd128b5e2945f62030a",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/SHoleMaskEnum.cs",
       "sourceSha256": "f3792a9fd8063843199ca1656c5493c4cc67450b350628ea00433e7daca68aaa",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/SingleTon.cs",
-      "sha256": "604f738ddba72f9ad3a15fb6f2a40a25a0a74964c26abb9858bd1d46a2bbdfc6",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/SingleTon.cs",
-      "sourceSha256": "248e22b319806d224b707522b74881b820d6505c8820e4356c07e098e9c35a77",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/SlotView.cs",
-      "sha256": "b0f7d18617bd686c0106ababa1f44d2dff0d153b773ea3b9ebdd9e977e719fcd",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/SlotView.cs",
-      "sourceSha256": "0e581b90c726b1c551a302f738d7c2780358365a0694a3e21e46b56e37d042c2",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/SoundManager.cs",
-      "sha256": "47b0ae6dad45b8cf3e060ee0663b0e9b6847593b8a7fc78291a1480f3a05c642",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/SoundManager.cs",
-      "sourceSha256": "3d6721fa2ebe07591f2c5a60a4e8933c77d79ee0bb8442cfa1e7d6e903a6f4aa",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": false
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/SplashScreen.cs",
-      "sha256": "c50a6540212a8ff3af2b64b53433fabb41d900bb6cd08ae6e564c2029422d407",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/SplashScreen.cs",
-      "sourceSha256": "51e7cfd6c0ad7b1a1cb8fcedf8bccd4e2aae51a3d3a418419330f3be2c25e35e",
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
@@ -934,6 +850,52 @@
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/SafeArea.cs",
+      "sha256": "f53f8024916f7a64f24de106a76791801fb288dcb5c24867b8863567353020e7"
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/SettingsView.cs",
+      "sha256": "0eeec82d5535c0539db4ecb6d8b1932ab1fd717bcc46fb81f4706f33649ba8b2",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/SettingsView.cs",
+      "sourceSha256": "348de50e21efa18b004bfe6301afc814c27d439557dbf20621387c140b072dc7",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": false
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/ShakeEffect.cs",
+      "sha256": "4035eea577d64d4d18f38ef2d08d569263d75121bd4483d07dec266e5b30088e",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/ShakeEffect.cs",
+      "sourceSha256": "78c3712f324f9b0e3dd55e96497be22dc256336e7c062ab01b325c1c65c64ff1",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/SingleTon.cs",
+      "sha256": "604f738ddba72f9ad3a15fb6f2a40a25a0a74964c26abb9858bd1d46a2bbdfc6",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/SingleTon.cs",
+      "sourceSha256": "248e22b319806d224b707522b74881b820d6505c8820e4356c07e098e9c35a77",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/SlotView.cs",
+      "sha256": "b0f7d18617bd686c0106ababa1f44d2dff0d153b773ea3b9ebdd9e977e719fcd",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/SlotView.cs",
+      "sourceSha256": "0e581b90c726b1c551a302f738d7c2780358365a0694a3e21e46b56e37d042c2",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/SoundManager.cs",
+      "sha256": "47b0ae6dad45b8cf3e060ee0663b0e9b6847593b8a7fc78291a1480f3a05c642",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/SoundManager.cs",
+      "sourceSha256": "3d6721fa2ebe07591f2c5a60a4e8933c77d79ee0bb8442cfa1e7d6e903a6f4aa",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": false
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/SplashScreen.cs",
+      "sha256": "c50a6540212a8ff3af2b64b53433fabb41d900bb6cd08ae6e564c2029422d407",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/SplashScreen.cs",
+      "sourceSha256": "51e7cfd6c0ad7b1a1cb8fcedf8bccd4e2aae51a3d3a418419330f3be2c25e35e",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/SuccessMessage.cs",
       "sha256": "ea5dcdce569870cfdede27bd0e10893da6a700fdeecc15f7d5946a1377a4abdd",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/SuccessMessage.cs",
@@ -952,13 +914,6 @@
       "sha256": "16f7f49e3b00fff384da47c87565ae1d33bea02fb11fbc1f3c934772317e12aa",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/TextMarquee.cs",
       "sourceSha256": "28e69f24fd69105cad4ee92c55b581e641b9148b7013eb7f9f88cc0d6aa88f64",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/timingActions.cs",
-      "sha256": "83081c156c296a97dac3c39a5e0e1fdb51827e53527115b7ffca4851782f5eb2",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/timingActions.cs",
-      "sourceSha256": "e384d53ed45168f505c4eebe9a1dff44d58867781acd3176085f045f3c3ff8c3",
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
@@ -991,14 +946,14 @@
     },
     {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/UIManager.cs",
-      "sha256": "643eeb60ced8609215d759539a8fc1d7e69144208d5078ded662a9f8fa2ce33d",
+      "sha256": "e2db273386c9237ad28ced9626c4ec3d6d3b00de7e0ff35a33cd2b49fd8190a7",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/UIManager.cs",
       "sourceSha256": "9253137338e22767036997ea4ea0924b1073321c18ab869d31595705bec1f489",
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": false
     },
     {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/UserDataManager.cs",
-      "sha256": "8dc6b77bf3d6be52a45555eca1da47336a7cdfcc6ba310bc52588ce1fc2a66b5",
+      "sha256": "c2b41c676fc96f6e34a1ed92c019e3508f00b2e450a61be54b165a3fffe8e31d",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/UserDataManager.cs",
       "sourceSha256": "5c1230667effb3ac429b70e6d4d790890151ef8801e120ead2b5aad59e67145f",
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": false
@@ -1081,38 +1036,10 @@
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawalTaskPresentation.cs",
-      "sha256": "84c9fa1a578158ae464655d72e071a78d94382b085f7033b7dbaa7d183aa8195",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawalTaskPresentation.cs",
-      "sourceSha256": "0e379e433c47f6fbdb3b69f3d97f5cd0f6809f1c20fabca3ad6206b6af94cc08",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawApiResponse.cs",
-      "sha256": "55320a2ff0c6e21d38defc6bb62d92deb2f6105a4527a585b7469b7caf45411a",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawApiResponse.cs",
-      "sourceSha256": "8f8a54aa0513c23f2ecb8127277df58eb332a9952a9f901d5877f1953b74ab10",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawApiService.cs",
-      "sha256": "edb0addd13a8193c798560e04464cbec4b036c3a15b3859a28dacb1d66e2978c",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawApiService.cs",
-      "sourceSha256": "631e6c8c6f55c59deb6b988edc837d0ae151220d71c7f5d868c41d51421dd6b5",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/WithDrawConfirm.cs",
       "sha256": "b1adcb95a5779518e97b233042a42129e6e031bec26f61890fe1c3e133f32622",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithDrawConfirm.cs",
       "sourceSha256": "039d14a7f8544ea678f368101b604d03f667f319b24600e5e9a345b4ce69fa60",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawConstants.cs",
-      "sha256": "a6f68a32cf5c5f2f2a98b577bde79d016cabcae7b12d84ee4e1b05e12641f80b",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawConstants.cs",
-      "sourceSha256": "8839f989ccf7dc487a971876d413e0e3e55e3291640c1ae2e870656286b47c7a",
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
@@ -1127,13 +1054,6 @@
       "sha256": "1c0375fa4ff2f35185366c01fa8cc3683947d946dd1df150a5b4a3ed82bd3d73",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithDrawDateNow.cs",
       "sourceSha256": "2b9ef472bb30e61eee33b3bc1fe7fb7cb5f07202e5b83cd1eccc2a6fa3ba8f92",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawFeedbackView.cs",
-      "sha256": "e707c7d226805019950e0edc18b71f415b712c3b7cea2847dfd7181542f0af0f",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawFeedbackView.cs",
-      "sourceSha256": "d5023153f801d7eaf754ba7a8e127f44c04d4adabecf4a36af1016e42ccc7366",
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
@@ -1162,27 +1082,6 @@
       "sha256": "b3b4837ec0d386884bca7c853f31ea71448bfcd643d4520dc26bf93a71797371",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithDrawMethod.cs",
       "sourceSha256": "ab4aeff8b9112335ee50ab9ce5acc6b2f10a8739cdab0ad4597eebb81799711f",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawMissionStateItem.cs",
-      "sha256": "98b04fd5194a8370c6ca34a139d2130829d151f87f1fef1174a3ab98140da055",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawMissionStateItem.cs",
-      "sourceSha256": "bbf866ec782a66d93fb37e782ad15e58d5d1a5c3d46360f564f6b6cb7f949f7d",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawMissionView.cs",
-      "sha256": "d8dd675e844f7ec2991aa38199a3a2102f1243df35c3d3624caa43488b495f3d",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawMissionView.cs",
-      "sourceSha256": "d9a9e6acc4281b8a6b4acdaf057ef44a7907ad14598299f2adc84af1ca714ed9",
-      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
-    },
-    {
-      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawOrderData.cs",
-      "sha256": "97270c8291d584366e6fc1ae89eb3c96bb0c993e09288b5f4fba3be343aa6370",
-      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawOrderData.cs",
-      "sourceSha256": "668d1e722b85c69325507c480680f89d93435d59e5e15738b71d98caf5414746",
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
@@ -1228,6 +1127,55 @@
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawApiResponse.cs",
+      "sha256": "55320a2ff0c6e21d38defc6bb62d92deb2f6105a4527a585b7469b7caf45411a",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawApiResponse.cs",
+      "sourceSha256": "8f8a54aa0513c23f2ecb8127277df58eb332a9952a9f901d5877f1953b74ab10",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawApiService.cs",
+      "sha256": "edb0addd13a8193c798560e04464cbec4b036c3a15b3859a28dacb1d66e2978c",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawApiService.cs",
+      "sourceSha256": "631e6c8c6f55c59deb6b988edc837d0ae151220d71c7f5d868c41d51421dd6b5",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawConstants.cs",
+      "sha256": "a6f68a32cf5c5f2f2a98b577bde79d016cabcae7b12d84ee4e1b05e12641f80b",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawConstants.cs",
+      "sourceSha256": "8839f989ccf7dc487a971876d413e0e3e55e3291640c1ae2e870656286b47c7a",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawFeedbackView.cs",
+      "sha256": "e707c7d226805019950e0edc18b71f415b712c3b7cea2847dfd7181542f0af0f",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawFeedbackView.cs",
+      "sourceSha256": "d5023153f801d7eaf754ba7a8e127f44c04d4adabecf4a36af1016e42ccc7366",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawMissionStateItem.cs",
+      "sha256": "98b04fd5194a8370c6ca34a139d2130829d151f87f1fef1174a3ab98140da055",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawMissionStateItem.cs",
+      "sourceSha256": "bbf866ec782a66d93fb37e782ad15e58d5d1a5c3d46360f564f6b6cb7f949f7d",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawMissionView.cs",
+      "sha256": "d8dd675e844f7ec2991aa38199a3a2102f1243df35c3d3624caa43488b495f3d",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawMissionView.cs",
+      "sourceSha256": "d9a9e6acc4281b8a6b4acdaf057ef44a7907ad14598299f2adc84af1ca714ed9",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawOrderData.cs",
+      "sha256": "97270c8291d584366e6fc1ae89eb3c96bb0c993e09288b5f4fba3be343aa6370",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawOrderData.cs",
+      "sourceSha256": "668d1e722b85c69325507c480680f89d93435d59e5e15738b71d98caf5414746",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawView.cs",
       "sha256": "96ff63215aa4e5b712897a0fd530de5361abae1e944a1a6f51a712e0809d31d8",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawView.cs",
@@ -1235,10 +1183,66 @@
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     },
     {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/WithdrawalTaskPresentation.cs",
+      "sha256": "84c9fa1a578158ae464655d72e071a78d94382b085f7033b7dbaa7d183aa8195",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/WithdrawalTaskPresentation.cs",
+      "sourceSha256": "0e379e433c47f6fbdb3b69f3d97f5cd0f6809f1c20fabca3ad6206b6af94cc08",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
       "target": "Assets/Framework2Replica/Runtime/WZSDK/YarnCoveMgr.cs",
       "sha256": "35225e4905edad0270d26578c7642e59813f80f9bd383c55a5ed162168234976",
       "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/YarnCoveMgr.cs",
       "sourceSha256": "1854e283dc1882cd5b3ac7de61ea18ada0f83478894882773b8b33eb8a55e85b",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/kaiju_ui_1.cs",
+      "sha256": "8dddf1f79f502708fa9eb6e590046ac3da3c083417fcea2e0cf782731d7a232c",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/kaiju_ui_1.cs",
+      "sourceSha256": "5a79ed073be55b937d8720e6faa19b9edd656a2c8000ce625d9f7d2adc3b7c30",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/kaiju_ui_2.cs",
+      "sha256": "488c8fd68b7e03f4bfa14d0651a9ff0d5226083fea9a39c1288c94256a68e291",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/kaiju_ui_2.cs",
+      "sourceSha256": "40368969de5d60e739f0ada664cd6dcf7b45c8f12b5b510a1a113b2290127ad4",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/kaiju_ui_2_1.cs",
+      "sha256": "ff19d9a7ff3c253263327fa764dfcd3f0b34f4744dade9c31be8e88577157cbb",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/kaiju_ui_2_1.cs",
+      "sourceSha256": "31eabb83b4d6207f9416d667c154506c089f0fed8cc589c75c2d76cef0506194",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/kaiju_ui_3.cs",
+      "sha256": "40e02737c0ce9d1ab080e6edcd017cc7c3edabc12fc41fde668c565e8ab22ffe",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/kaiju_ui_3.cs",
+      "sourceSha256": "f193db37e485c4e4ac1a22f2b747852b562a62855007224441ad8d7b7ed153f9",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/kaiju_ui_4.cs",
+      "sha256": "fe13636a038f9044c603fd907e1d36598712315f1ddf6337e424cdd904e502ae",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/kaiju_ui_4.cs",
+      "sourceSha256": "8699ced69fcf6ac9d8acd7c7b6c4706cc3d9539d08f1f156ed91dbb333d78401",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/kaiju_ui_5.cs",
+      "sha256": "e9abf4df40a02ef6c8b7a321d5c5ac56c00115d74806418891b81731ceebc356",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/kaiju_ui_5.cs",
+      "sourceSha256": "6c46ff8f0c787446075b4e68f3f0ac9d50eb3af544ab064cecce970cd366d142",
+      "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
+    },
+    {
+      "target": "Assets/Framework2Replica/Runtime/WZSDK/timingActions.cs",
+      "sha256": "83081c156c296a97dac3c39a5e0e1fdb51827e53527115b7ffca4851782f5eb2",
+      "source": "Assets/Scripts/Withdrawal/Framework2/WZSDK/timingActions.cs",
+      "sourceSha256": "e384d53ed45168f505c4eebe9a1dff44d58867781acd3176085f045f3c3ff8c3",
       "bodyIdenticalAfterRemovingFrameworkBuildSwitch": true
     }
   ],
@@ -1254,6 +1258,15 @@
     "Replace editor-specific locale bypass with the same CultureInfo locale reader in Editor and Player.",
     "Copy native safe-area adapter and cash animation counter without business changes.",
     "Add facade settlement duplicate guard and advertisement callback lifetime/once-only guard; source progression increments only in PrepareHostCompletion.",
-    "Guard partial-init CloseAllViews during disposal; release host references and resource cache without altering saved balances."
-  ]
+    "Guard partial-init CloseAllViews during disposal; release host references and resource cache without altering saved balances.",
+    "Override display copy at LocalizationManager.GetText through Framework2SimulationCopy: explicitly simulated rewards/ads/payment/account input. Original ProductConfig JSON and all business values remain unchanged.",
+    "Cancel factory initialization on the Unity synchronization context; source startup awaits check the host cancellation token. Runtime/UI/data shutdown gates discard stale presentations and callbacks; singleton cleanup checks instance ownership.",
+    "Resource cache generations discard late in-flight loads on disposal. Only a matching request may remove its in-flight key, preserving a new session request.",
+    "A session EndSession flushes and cancels presentation before clearing its in-memory engine, so returning to A uses its existing persisted-reward recovery. Host destruction unsubscribes observers without advancing levels.",
+    "Declare the original HistoryModel JSON property spellings explicitly (DateTime, Money, Status, ID, Stage); preserve the nine source JSON DTO contracts with a narrow Unity linker descriptor. This keeps the original local schema and business rules unchanged. Obfuz is not installed and no obfuscated build is claimed; see serialization-compatibility.json.",
+    "Adapt the source currency HUD top-inset coordinate normalization to sourceCanvas.pixelRect.height and pixelRect.yMin, matching WorldToScreenPoint for the active camera viewport or render target. Full-screen Overlay remains algebraically equivalent; original prefab layout, reserved progress-region policy, padding, economy and task requirements are unchanged. See host-layout-adaptations.json."
+  ],
+  "sourceBackedRuntimeFileCount": 173,
+  "sourceBodyUnchangedCount": 154,
+  "runtimeFileCount": 181
 }

@@ -1,0 +1,49 @@
+{
+    "passed": true,
+    "generatedUtc": "2026-10-23T06:05:40.0524927Z",
+    "storageNamespace": "DJS.Apple.F2Validation.ed5fbc539c014cc1bfd4c28fb4dd2945.",
+    "firstTwoLevelsStorageNamespace": "DJS.Apple.F2Validation.aed63593caad4bd996cb5baa09a37efd.FirstTwo.",
+    "firstTwoLevelsCompletedThroughSourceButtons": true,
+    "scope": "Production B facade, source prefabs, real Play-mode frames and standard Button pointer events. All data uses a new DJS.Apple.F2Validation GUID namespace. A and the formal B profile are never loaded. Stage 3, stage 5 and level 4 in the main fixture are explicitly API-seeded; a second fresh namespace separately runs the first two source level-completion events and original UI Buttons without seeded progression/history. Ad callbacks are simulated locally, never a live ad or payment service. Captures are 1080x1920 no-notch portrait diagnostics of actual instances with safe-area adapters temporarily paused; they are not phone screenshots, physical viewport captures, or 1:1 pixel-parity evidence.",
+    "limitations": "Does not verify physical touch, the Apple game board, or actual host A/B switching. The fresh first-two-level case reports completed gameplay through the real facade OnWin event rather than solving a board. Source HUD is rendered on an isolated camera background, without replacement UI or artwork.",
+    "assertions": 88,
+    "playFrames": 43196,
+    "pointerClicks": 11,
+    "screenWidth": 640,
+    "screenHeight": 480,
+    "captureWidth": 1080,
+    "captureHeight": 1920,
+    "syntheticHistoryJson": "[{\"DateTime\":\"10/23/2026\",\"Money\":0.1,\"Status\":2,\"ID\":\"qa-local-only\",\"Stage\":2}]",
+    "syntheticOrderJson": "[{\"orderNo\":\"qa-order-only\",\"withdrawType\":\"qa-simulation\",\"orderStatus\":3,\"walletFrozen\":0,\"senderBatchId\":null,\"senderItemId\":null,\"payoutBatchId\":null,\"batchStatus\":null,\"timeCreated\":null,\"payoutItemId\":null,\"transactionId\":null,\"transactionStatus\":null,\"receiver\":\"test@example.invalid\",\"amount\":\"0.30\",\"currency\":\"USD\",\"errorName\":null,\"errorMessage\":null,\"lastQueryTime\":null,\"successTime\":null,\"createTime\":null,\"updateTime\":null,\"clientQueuedPlaceholder\":true,\"localStatusText\":\"Local test review\",\"clientSortAnchorTime\":\"2026-10-23T12:00:00Z\",\"IsFirstAdWithdraw\":false,\"IsWalletWithdraw\":false,\"CanClientRetry\":false,\"RequiresNewReceiver\":false,\"RequiresReceiverInput\":false,\"IsPending\":true}]",
+    "syntheticWalletJson": "{\"id\":7,\"afDeviceId\":null,\"appIndex\":0,\"balance\":12.34,\"frozenBalance\":0.3,\"totalIncomeAmount\":0.0,\"totalWithdrawAmount\":0.0,\"currency\":\"USD\",\"status\":1,\"payPalAccountExists\":0,\"payPalAccountTip\":null,\"luckySuccessRewardAmount\":20.5,\"createTime\":null,\"updateTime\":null}",
+    "elapsedSeconds": 12.3485483,
+    "cases": [
+        "real JSON serializer: synthetic source history, order and wallet DTO round-trips",
+        "production initialization, one HUD, five source task requirements, OnBegin and OnTriple",
+        "failed/duplicate ad callbacks, three successful ads, original mission Button, local review, feedback Button advances stage 4",
+        "original stage 4 slot draw Button, 50 reward, progress confirmation Button",
+        "ordinary reward cap 2999.5 remains below final target 3000",
+        "original settlement non-ad Button, duplicate OnWin guard, one next-level callback",
+        "dispose/recreate persistence, one HUD, local order restoration, stale callback rejected",
+        "fresh namespace: two real OnWin events, original guide Buttons, dummy-account InputField/Confirm, original verification timer/Continue, naturally created 0.1 pending history and local queue"
+    ],
+    "apiSetups": [
+        "Seed stage 3 / level 4 / balance 0.1 / zero ads / dummy email, with original GameScene.setHistory and EnsureQueuedFirstAdOrder side effects from completed stage 2; first two tutorials are not exercised.",
+        "Seed stage 5 to exercise ordinary reward cap, not a claimed natural route to the final stage.",
+        "Reset source lucky-spin test counter and seed balance 123.45 before level 4 completion."
+    ],
+    "screenshots": [
+        "C:\\Projects\\DJS_Apple\\FruitsHarvestMaster-source\\output_Unity\\Docs\\CommercializationAB\\Framework2Replica\\PlayValidation\\01-source-hud.png",
+        "C:\\Projects\\DJS_Apple\\FruitsHarvestMaster-source\\output_Unity\\Docs\\CommercializationAB\\Framework2Replica\\PlayValidation\\02-source-ad-mission.png",
+        "C:\\Projects\\DJS_Apple\\FruitsHarvestMaster-source\\output_Unity\\Docs\\CommercializationAB\\Framework2Replica\\PlayValidation\\03-source-local-review.png",
+        "C:\\Projects\\DJS_Apple\\FruitsHarvestMaster-source\\output_Unity\\Docs\\CommercializationAB\\Framework2Replica\\PlayValidation\\04-source-stage4-slot.png",
+        "C:\\Projects\\DJS_Apple\\FruitsHarvestMaster-source\\output_Unity\\Docs\\CommercializationAB\\Framework2Replica\\PlayValidation\\05-source-stage4-progress.png",
+        "C:\\Projects\\DJS_Apple\\FruitsHarvestMaster-source\\output_Unity\\Docs\\CommercializationAB\\Framework2Replica\\PlayValidation\\06-source-settlement.png",
+        "C:\\Projects\\DJS_Apple\\FruitsHarvestMaster-source\\output_Unity\\Docs\\CommercializationAB\\Framework2Replica\\PlayValidation\\07-first-level-source-guide.png",
+        "C:\\Projects\\DJS_Apple\\FruitsHarvestMaster-source\\output_Unity\\Docs\\CommercializationAB\\Framework2Replica\\PlayValidation\\08-second-level-source-verification.png"
+    ],
+    "errors": [],
+    "warnings": [
+        "The referenced script on this Behaviour (Game Object 'FreeCoinUI') is missing!"
+    ]
+}

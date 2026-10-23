@@ -1,0 +1,1741 @@
+{
+    "generatedUtc": "2026-10-23T06:21:25.2930832Z",
+    "profile": "f2-host-check-132bcf42121b418eb4650dace58049ed",
+    "saveDirectory": "C:/Users/pc/AppData/LocalLow/Flyfox/Triple Harvest\\TestProfiles\\f2-host-check-132bcf42121b418eb4650dace58049ed",
+    "scope": "Actual Assets/Game.unity in Unity Play mode. A -> B -> A -> B via the saved host's standard Button.onClick handlers. All game/A/B storage uses a dedicated QA profile. No fruit is clicked and no level is completed. The B balance marker is explicit test setup using original GameManagerWZ.AddCoin(12.34, rewardLevel: 3), not earned gameplay. Portrait screenshots render the actual live scene instances and gameplay camera into a temporary RenderTexture, restoring camera/canvas state afterwards. They are no-notch diagnostic actual-instance renders with safe-area adapters temporarily paused, not phone captures, viewport/pixel parity proof, prefab fixtures or mockups. The optional settlement scenario creates an explicitly labelled QA reward through the production service, without clearing the fruit board.",
+    "passed": true,
+    "productionFilesUnchanged": true,
+    "productionSelectionUnchanged": true,
+    "includeSettlement": true,
+    "pendingSettlementRestoredOnce": true,
+    "assertions": 99,
+    "playFrames": 1587,
+    "switchCount": 8,
+    "screenWidth": 640,
+    "screenHeight": 480,
+    "captureWidth": 1080,
+    "captureHeight": 1920,
+    "elapsedSeconds": 29.6322212,
+    "states": [
+        {
+            "name": "A-initial",
+            "activeVariant": "A",
+            "controllerInstanceId": -1308,
+            "gameplayLevel": 1,
+            "runtimeLevel": 0,
+            "stage": 0,
+            "aCashCents": 0,
+            "aDiamonds": 0,
+            "bBalanceMinorUnits": 0,
+            "aHudActive": true,
+            "aSettingsActive": true,
+            "bRuntimeReady": false,
+            "testDisclosureVisible": true,
+            "bBackdropActive": false,
+            "controllerCount": 1,
+            "bRuntimeCount": 0
+        },
+        {
+            "name": "B-initial",
+            "activeVariant": "B",
+            "controllerInstanceId": -7384,
+            "gameplayLevel": 1,
+            "runtimeLevel": 1,
+            "stage": 1,
+            "aCashCents": 0,
+            "aDiamonds": 0,
+            "bBalanceMinorUnits": 0,
+            "aHudActive": false,
+            "aSettingsActive": false,
+            "bRuntimeReady": true,
+            "testDisclosureVisible": true,
+            "bBackdropActive": true,
+            "controllerCount": 1,
+            "bRuntimeCount": 1
+        },
+        {
+            "name": "B-marker-fixture",
+            "activeVariant": "B",
+            "controllerInstanceId": -7384,
+            "gameplayLevel": 1,
+            "runtimeLevel": 1,
+            "stage": 1,
+            "aCashCents": 0,
+            "aDiamonds": 0,
+            "bBalanceMinorUnits": 1234,
+            "aHudActive": false,
+            "aSettingsActive": false,
+            "bRuntimeReady": true,
+            "testDisclosureVisible": true,
+            "bBackdropActive": true,
+            "controllerCount": 1,
+            "bRuntimeCount": 1
+        },
+        {
+            "name": "A-restored",
+            "activeVariant": "A",
+            "controllerInstanceId": -14948,
+            "gameplayLevel": 1,
+            "runtimeLevel": 0,
+            "stage": 0,
+            "aCashCents": 0,
+            "aDiamonds": 0,
+            "bBalanceMinorUnits": 0,
+            "aHudActive": true,
+            "aSettingsActive": true,
+            "bRuntimeReady": false,
+            "testDisclosureVisible": true,
+            "bBackdropActive": false,
+            "controllerCount": 1,
+            "bRuntimeCount": 0
+        },
+        {
+            "name": "B-restored",
+            "activeVariant": "B",
+            "controllerInstanceId": -20902,
+            "gameplayLevel": 1,
+            "runtimeLevel": 1,
+            "stage": 1,
+            "aCashCents": 0,
+            "aDiamonds": 0,
+            "bBalanceMinorUnits": 1234,
+            "aHudActive": false,
+            "aSettingsActive": false,
+            "bRuntimeReady": true,
+            "testDisclosureVisible": true,
+            "bBackdropActive": true,
+            "controllerCount": 1,
+            "bRuntimeCount": 1
+        },
+        {
+            "name": "A-settlement-restored-twice",
+            "activeVariant": "A",
+            "controllerInstanceId": -49822,
+            "gameplayLevel": 1,
+            "runtimeLevel": 0,
+            "stage": 0,
+            "aCashCents": 40,
+            "aDiamonds": 0,
+            "bBalanceMinorUnits": 0,
+            "aHudActive": true,
+            "aSettingsActive": true,
+            "bRuntimeReady": false,
+            "testDisclosureVisible": true,
+            "bBackdropActive": false,
+            "controllerCount": 1,
+            "bRuntimeCount": 0
+        }
+    ],
+    "checks": [
+        "The QA storage profile is selected in the empty scene before the gameplay host exists.",
+        "Game/A storage uses the unique isolated QA directory.",
+        "B PlayerPrefs uses the same isolated QA namespace.",
+        "The original Game scene begins loading through SceneManager.",
+        "The explicit simulation disclosure is acknowledged through its standard Button.",
+        "The actual CorePlayUI uses its authored variant bindings.",
+        "Exactly one active scene controller exists in A-initial.",
+        "Only A enables the original A HUD and level/settings row in A-initial.",
+        "Only B instantiates its original framework runtime in A-initial.",
+        "Only B enables the authored non-blocking full-screen map backdrop in A-initial.",
+        "The global test disclosure and its buttons remain visible in A-initial.",
+        "A accounting initializes successfully inside the QA profile.",
+        "Standard Button is actionable: OpenSelector",
+        "The saved selector panel opens through its standard Button handler.",
+        "Standard Button is actionable: ChooseB",
+        "Standard Button is actionable: AcknowledgeSimulationRules",
+        "The explicit simulation disclosure is acknowledged through its standard Button.",
+        "The actual CorePlayUI uses its authored variant bindings.",
+        "Exactly one active scene controller exists in B-initial.",
+        "Only A enables the original A HUD and level/settings row in B-initial.",
+        "Only B instantiates its original framework runtime in B-initial.",
+        "Only B enables the authored non-blocking full-screen map backdrop in B-initial.",
+        "B reuses the same loaded Sprite for its field and backdrop in B-initial.",
+        "The global test disclosure and its buttons remain visible in B-initial.",
+        "B exposes the original source GameManager instance.",
+        "The actual CorePlayUI uses its authored variant bindings.",
+        "Exactly one active scene controller exists in B-marker-fixture.",
+        "Only A enables the original A HUD and level/settings row in B-marker-fixture.",
+        "Only B instantiates its original framework runtime in B-marker-fixture.",
+        "Only B enables the authored non-blocking full-screen map backdrop in B-marker-fixture.",
+        "B reuses the same loaded Sprite for its field and backdrop in B-marker-fixture.",
+        "The global test disclosure and its buttons remain visible in B-marker-fixture.",
+        "The explicit 12.34 test marker is saved by the original F2 money code.",
+        "The B fixture marker does not clear a game level or advance the task stage.",
+        "Standard Button is actionable: OpenSelector",
+        "The saved selector panel opens through its standard Button handler.",
+        "Standard Button is actionable: ChooseA",
+        "The explicit simulation disclosure is acknowledged through its standard Button.",
+        "Switching away disposes the previous B runtime.",
+        "The actual CorePlayUI uses its authored variant bindings.",
+        "Exactly one active scene controller exists in A-restored.",
+        "Only A enables the original A HUD and level/settings row in A-restored.",
+        "Only B instantiates its original framework runtime in A-restored.",
+        "Only B enables the authored non-blocking full-screen map backdrop in A-restored.",
+        "The global test disclosure and its buttons remain visible in A-restored.",
+        "A balances and level are unchanged after a B session.",
+        "Standard Button is actionable: OpenSelector",
+        "The saved selector panel opens through its standard Button handler.",
+        "Standard Button is actionable: ChooseB",
+        "The explicit simulation disclosure is acknowledged through its standard Button.",
+        "The actual CorePlayUI uses its authored variant bindings.",
+        "Exactly one active scene controller exists in B-restored.",
+        "Only A enables the original A HUD and level/settings row in B-restored.",
+        "Only B instantiates its original framework runtime in B-restored.",
+        "Only B enables the authored non-blocking full-screen map backdrop in B-restored.",
+        "B reuses the same loaded Sprite for its field and backdrop in B-restored.",
+        "The global test disclosure and its buttons remain visible in B-restored.",
+        "Returning to B restores its independent balance marker, task stage and game level.",
+        "All three basic host-button reloads completed: A -> B -> A -> B.",
+        "Standard Button is actionable: OpenSelector",
+        "The saved selector panel opens through its standard Button handler.",
+        "Standard Button is actionable: ChooseA",
+        "The explicit simulation disclosure is acknowledged through its standard Button.",
+        "The isolated A session starts the settlement fixture with no pending rewards.",
+        "Explicit QA setup creates an isolated A run checkpoint; the fruit board is not cleared.",
+        "Explicit QA setup records one pending settlement using the production service.",
+        "Exactly one QA settlement is pending before opening the real settlement page.",
+        "Standard Button is actionable: OpenSelector",
+        "The saved selector panel opens through its standard Button handler.",
+        "Standard Button is actionable: ChooseB",
+        "The explicit simulation disclosure is acknowledged through its standard Button.",
+        "The old real A settlement host is destroyed when the B scene takes over.",
+        "B's independent balance survives the A pending-settlement switch.",
+        "Standard Button is actionable: OpenSelector",
+        "The saved selector panel opens through its standard Button handler.",
+        "Standard Button is actionable: ChooseA",
+        "The explicit simulation disclosure is acknowledged through its standard Button.",
+        "Returning to A resolves its already-recorded pending reward and leaves no pending queue.",
+        "A restored settlement is credited exactly once, with the expected single history record.",
+        "Recovering the recorded A settlement does not invent an ad completion.",
+        "The old settlement modal and its next-level callback do not resume after switching back to A.",
+        "Standard Button is actionable: OpenSelector",
+        "The saved selector panel opens through its standard Button handler.",
+        "Standard Button is actionable: ChooseB",
+        "The explicit simulation disclosure is acknowledged through its standard Button.",
+        "Standard Button is actionable: OpenSelector",
+        "The saved selector panel opens through its standard Button handler.",
+        "Standard Button is actionable: ChooseA",
+        "The explicit simulation disclosure is acknowledged through its standard Button.",
+        "A second reload preserves the resolved settlement without duplicate money, records, ads or stale callbacks.",
+        "The actual CorePlayUI uses its authored variant bindings.",
+        "Exactly one active scene controller exists in A-settlement-restored-twice.",
+        "Only A enables the original A HUD and level/settings row in A-settlement-restored-twice.",
+        "Only B instantiates its original framework runtime in A-settlement-restored-twice.",
+        "Only B enables the authored non-blocking full-screen map backdrop in A-settlement-restored-twice.",
+        "The global test disclosure and its buttons remain visible in A-settlement-restored-twice.",
+        "Production save files remain byte-identical outside the QA profile.",
+        "The production A/B selection preference remains unchanged.",
+        "All requested real host-button scene reloads completed."
+    ],
+    "clicks": [
+        "OpenSelector",
+        "ChooseB",
+        "AcknowledgeSimulationRules",
+        "OpenSelector",
+        "ChooseA",
+        "OpenSelector",
+        "ChooseB",
+        "OpenSelector",
+        "ChooseA",
+        "OpenSelector",
+        "ChooseB",
+        "OpenSelector",
+        "ChooseA",
+        "OpenSelector",
+        "ChooseB",
+        "OpenSelector",
+        "ChooseA"
+    ],
+    "screenshots": [
+        "01-A-initial.png",
+        "02-B-initial.png",
+        "03-B-marker-fixture.png",
+        "04-A-restored.png",
+        "05-B-restored.png",
+        "06-A-pending-settlement-fixture.png",
+        "07-A-restored-settlement-fixture.png",
+        "08-A-second-settlement-restore.png"
+    ],
+    "captureDiagnostics": [
+        {
+            "screenshot": "01-A-initial.png",
+            "phase": "original-viewport",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.7628971,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -47.5,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 1.7727272510528565,
+                "y": 1.7727272510528565,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": 490.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "TestOverlay",
+                    "camera": "<none>",
+                    "renderMode": 0,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 0.5925925970077515,
+                    "planeDistance": 100.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 810.0
+                    },
+                    "position": {
+                        "x": 320.0,
+                        "y": 240.0,
+                        "z": 0.0
+                    },
+                    "scale": {
+                        "x": 0.5925925970077515,
+                        "y": 0.5925925970077515,
+                        "z": 0.5925925970077515
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Main Camera",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.20512820780277253,
+                    "planeDistance": 500.0,
+                    "rectSize": {
+                        "x": 3120.0,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 490.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        },
+        {
+            "screenshot": "01-A-initial.png",
+            "phase": "temporary-portrait-projection",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.7628971,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -47.5,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 0.801369845867157,
+                "y": 0.801369845867157,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": -9.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "TestOverlay",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 1.0,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 1920.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.8205128312110901,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1316.25,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        },
+        {
+            "screenshot": "02-B-initial.png",
+            "phase": "original-viewport",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.750971700000001,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -480.22314453125,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 1.7272727489471436,
+                "y": 1.7272727489471436,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": 490.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "SourceCanvas",
+                    "camera": "<none>",
+                    "renderMode": 0,
+                    "sortingOrder": 300,
+                    "scaleFactor": 0.5333333611488342,
+                    "planeDistance": 100.0,
+                    "rectSize": {
+                        "x": 1199.9998779296875,
+                        "y": 899.9999389648438
+                    },
+                    "position": {
+                        "x": 320.0,
+                        "y": 240.0,
+                        "z": 0.0
+                    },
+                    "scale": {
+                        "x": 0.5333333611488342,
+                        "y": 0.5333333611488342,
+                        "z": 0.5333333611488342
+                    }
+                },
+                {
+                    "name": "TestOverlay",
+                    "camera": "<none>",
+                    "renderMode": 0,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 0.5925925970077515,
+                    "planeDistance": 100.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 810.0
+                    },
+                    "position": {
+                        "x": 320.0,
+                        "y": 240.0,
+                        "z": 0.0
+                    },
+                    "scale": {
+                        "x": 0.5925925970077515,
+                        "y": 0.5925925970077515,
+                        "z": 0.5925925970077515
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Main Camera",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.20512820780277253,
+                    "planeDistance": 500.0,
+                    "rectSize": {
+                        "x": 3120.0,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 490.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        },
+        {
+            "screenshot": "02-B-initial.png",
+            "phase": "temporary-portrait-projection",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.750971700000001,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -202.5941162109375,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 0.7024147510528565,
+                "y": 0.7024147510528565,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": -9.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "SourceCanvas",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 300,
+                    "scaleFactor": 0.8999999761581421,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1200.0,
+                        "y": 2133.33349609375
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 0.8999999761581421,
+                        "y": 0.8999999761581421,
+                        "z": 0.8999999761581421
+                    }
+                },
+                {
+                    "name": "TestOverlay",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 1.0,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 1920.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.8205128312110901,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1316.25,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        },
+        {
+            "screenshot": "03-B-marker-fixture.png",
+            "phase": "original-viewport",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.755750199999998,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -480.22314453125,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 1.7272727489471436,
+                "y": 1.7272727489471436,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": 490.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "SourceCanvas",
+                    "camera": "<none>",
+                    "renderMode": 0,
+                    "sortingOrder": 300,
+                    "scaleFactor": 0.5333333611488342,
+                    "planeDistance": 100.0,
+                    "rectSize": {
+                        "x": 1199.9998779296875,
+                        "y": 899.9999389648438
+                    },
+                    "position": {
+                        "x": 320.0,
+                        "y": 240.0,
+                        "z": 0.0
+                    },
+                    "scale": {
+                        "x": 0.5333333611488342,
+                        "y": 0.5333333611488342,
+                        "z": 0.5333333611488342
+                    }
+                },
+                {
+                    "name": "TestOverlay",
+                    "camera": "<none>",
+                    "renderMode": 0,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 0.5925925970077515,
+                    "planeDistance": 100.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 810.0
+                    },
+                    "position": {
+                        "x": 320.0,
+                        "y": 240.0,
+                        "z": 0.0
+                    },
+                    "scale": {
+                        "x": 0.5925925970077515,
+                        "y": 0.5925925970077515,
+                        "z": 0.5925925970077515
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Main Camera",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.20512820780277253,
+                    "planeDistance": 500.0,
+                    "rectSize": {
+                        "x": 3120.0,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 490.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        },
+        {
+            "screenshot": "03-B-marker-fixture.png",
+            "phase": "temporary-portrait-projection",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.755750199999998,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -202.5941162109375,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 0.7024147510528565,
+                "y": 0.7024147510528565,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": -9.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "SourceCanvas",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 300,
+                    "scaleFactor": 0.8999999761581421,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1200.0,
+                        "y": 2133.33349609375
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 0.8999999761581421,
+                        "y": 0.8999999761581421,
+                        "z": 0.8999999761581421
+                    }
+                },
+                {
+                    "name": "TestOverlay",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 1.0,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 1920.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.8205128312110901,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1316.25,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        },
+        {
+            "screenshot": "04-A-restored.png",
+            "phase": "original-viewport",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.750565600000005,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -47.5,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 1.7727272510528565,
+                "y": 1.7727272510528565,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": 490.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "TestOverlay",
+                    "camera": "<none>",
+                    "renderMode": 0,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 0.5925925970077515,
+                    "planeDistance": 100.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 810.0
+                    },
+                    "position": {
+                        "x": 320.0,
+                        "y": 240.0,
+                        "z": 0.0
+                    },
+                    "scale": {
+                        "x": 0.5925925970077515,
+                        "y": 0.5925925970077515,
+                        "z": 0.5925925970077515
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Main Camera",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.20512820780277253,
+                    "planeDistance": 500.0,
+                    "rectSize": {
+                        "x": 3120.0,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 490.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        },
+        {
+            "screenshot": "04-A-restored.png",
+            "phase": "temporary-portrait-projection",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.750565600000005,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -47.5,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 0.801369845867157,
+                "y": 0.801369845867157,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": -9.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "TestOverlay",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 1.0,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 1920.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.8205128312110901,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1316.25,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        },
+        {
+            "screenshot": "05-B-restored.png",
+            "phase": "original-viewport",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.765915100000001,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -480.22314453125,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 1.7272727489471436,
+                "y": 1.7272727489471436,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": 490.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "SourceCanvas",
+                    "camera": "<none>",
+                    "renderMode": 0,
+                    "sortingOrder": 300,
+                    "scaleFactor": 0.5333333611488342,
+                    "planeDistance": 100.0,
+                    "rectSize": {
+                        "x": 1199.9998779296875,
+                        "y": 899.9999389648438
+                    },
+                    "position": {
+                        "x": 320.0,
+                        "y": 240.0,
+                        "z": 0.0
+                    },
+                    "scale": {
+                        "x": 0.5333333611488342,
+                        "y": 0.5333333611488342,
+                        "z": 0.5333333611488342
+                    }
+                },
+                {
+                    "name": "TestOverlay",
+                    "camera": "<none>",
+                    "renderMode": 0,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 0.5925925970077515,
+                    "planeDistance": 100.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 810.0
+                    },
+                    "position": {
+                        "x": 320.0,
+                        "y": 240.0,
+                        "z": 0.0
+                    },
+                    "scale": {
+                        "x": 0.5925925970077515,
+                        "y": 0.5925925970077515,
+                        "z": 0.5925925970077515
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Main Camera",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.20512820780277253,
+                    "planeDistance": 500.0,
+                    "rectSize": {
+                        "x": 3120.0,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 490.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        },
+        {
+            "screenshot": "05-B-restored.png",
+            "phase": "temporary-portrait-projection",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.765915100000001,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -202.5941162109375,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 0.7024147510528565,
+                "y": 0.7024147510528565,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": -9.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "SourceCanvas",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 300,
+                    "scaleFactor": 0.8999999761581421,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1200.0,
+                        "y": 2133.33349609375
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 0.8999999761581421,
+                        "y": 0.8999999761581421,
+                        "z": 0.8999999761581421
+                    }
+                },
+                {
+                    "name": "TestOverlay",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 1.0,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 1920.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.8205128312110901,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1316.25,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        },
+        {
+            "screenshot": "06-A-pending-settlement-fixture.png",
+            "phase": "original-viewport",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.7612766999999964,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -47.5,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 1.7727272510528565,
+                "y": 1.7727272510528565,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": 490.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "TestOverlay",
+                    "camera": "<none>",
+                    "renderMode": 0,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 0.5925925970077515,
+                    "planeDistance": 100.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 810.0
+                    },
+                    "position": {
+                        "x": 320.0,
+                        "y": 240.0,
+                        "z": 0.0
+                    },
+                    "scale": {
+                        "x": 0.5925925970077515,
+                        "y": 0.5925925970077515,
+                        "z": 0.5925925970077515
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Main Camera",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.20512820780277253,
+                    "planeDistance": 500.0,
+                    "rectSize": {
+                        "x": 3120.0,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 490.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        },
+        {
+            "screenshot": "06-A-pending-settlement-fixture.png",
+            "phase": "temporary-portrait-projection",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.7612766999999964,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -47.5,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 0.801369845867157,
+                "y": 0.801369845867157,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": -9.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "TestOverlay",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 1.0,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 1920.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.8205128312110901,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1316.25,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        },
+        {
+            "screenshot": "07-A-restored-settlement-fixture.png",
+            "phase": "original-viewport",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.7667114999999997,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -47.5,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 1.7727272510528565,
+                "y": 1.7727272510528565,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": 490.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "TestOverlay",
+                    "camera": "<none>",
+                    "renderMode": 0,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 0.5925925970077515,
+                    "planeDistance": 100.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 810.0
+                    },
+                    "position": {
+                        "x": 320.0,
+                        "y": 240.0,
+                        "z": 0.0
+                    },
+                    "scale": {
+                        "x": 0.5925925970077515,
+                        "y": 0.5925925970077515,
+                        "z": 0.5925925970077515
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Main Camera",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.20512820780277253,
+                    "planeDistance": 500.0,
+                    "rectSize": {
+                        "x": 3120.0,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 490.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        },
+        {
+            "screenshot": "07-A-restored-settlement-fixture.png",
+            "phase": "temporary-portrait-projection",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.7667114999999997,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -47.5,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 0.801369845867157,
+                "y": 0.801369845867157,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": -9.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "TestOverlay",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 1.0,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 1920.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.8205128312110901,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1316.25,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        },
+        {
+            "screenshot": "08-A-second-settlement-restore.png",
+            "phase": "original-viewport",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.766107599999998,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -47.5,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 1.7727272510528565,
+                "y": 1.7727272510528565,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": 490.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "TestOverlay",
+                    "camera": "<none>",
+                    "renderMode": 0,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 0.5925925970077515,
+                    "planeDistance": 100.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 810.0
+                    },
+                    "position": {
+                        "x": 320.0,
+                        "y": 240.0,
+                        "z": 0.0
+                    },
+                    "scale": {
+                        "x": 0.5925925970077515,
+                        "y": 0.5925925970077515,
+                        "z": 0.5925925970077515
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Main Camera",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.20512820780277253,
+                    "planeDistance": 500.0,
+                    "rectSize": {
+                        "x": 3120.0,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 490.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        },
+        {
+            "screenshot": "08-A-second-settlement-restore.png",
+            "phase": "temporary-portrait-projection",
+            "backgroundSprite": "Map1002",
+            "backgroundTexture": "Map1002",
+            "backgroundReady": true,
+            "coreIsOpening": true,
+            "inputLocked": false,
+            "fruitChildCount": 9,
+            "liveFruitCount": 9,
+            "waitedSeconds": 2.766107599999998,
+            "backgroundColor": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "fieldPosition": {
+                "x": 0.0,
+                "y": -47.5,
+                "z": 0.0
+            },
+            "fieldScale": {
+                "x": 0.801369845867157,
+                "y": 0.801369845867157,
+                "z": 1.0
+            },
+            "trayPosition": {
+                "x": -1.6410256624221802,
+                "y": -723.6923217773438,
+                "z": -9.0
+            },
+            "trayScale": {
+                "x": 0.8205128312110901,
+                "y": 0.8205128312110901,
+                "z": 0.8205128312110901
+            },
+            "rootCanvases": [
+                {
+                    "name": "TestOverlay",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 30000,
+                    "scaleFactor": 1.0,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1080.0,
+                        "y": 1920.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    }
+                },
+                {
+                    "name": "Canvas",
+                    "camera": "Framework2 transient portrait capture",
+                    "renderMode": 1,
+                    "sortingOrder": 0,
+                    "scaleFactor": 0.8205128312110901,
+                    "planeDistance": 1.0,
+                    "rectSize": {
+                        "x": 1316.25,
+                        "y": 2340.0
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -9.0
+                    },
+                    "scale": {
+                        "x": 0.8205128312110901,
+                        "y": 0.8205128312110901,
+                        "z": 0.8205128312110901
+                    }
+                }
+            ]
+        }
+    ],
+    "errors": [],
+    "warnings": [
+        "The referenced script on this Behaviour (Game Object 'FreeCoinUI') is missing!"
+    ]
+}

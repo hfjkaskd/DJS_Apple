@@ -29,10 +29,13 @@ namespace CorePlay
 		[Header("Gameplay presentation area")]
 		[Tooltip("Shared authored coordinate system for the tree artwork and its fruit layer.")]
 		[SerializeField] public RectTransform m_FieldPresentationRoot;
+		[Tooltip("Optional authored full-screen backdrop for the reserved B field; shares the loaded map sprite.")]
+		[SerializeField] public Image m_FieldBackdrop;
 
 		private readonly Vector3[] fieldCorners = new Vector3[4];
+		private RectTransform fieldLayoutTarget;
 
-		private static string m_CurrentMapAbPath;
+		private string m_CurrentMapAbPath;
 
 		[SerializeField]
 		private CanvasGroup m_GameAreaGroup;
@@ -413,6 +416,7 @@ namespace CorePlay
 			if (mapSprite != null && m_BgImg != null)
 			{
 				m_BgImg.sprite = mapSprite;
+				if (m_FieldBackdrop != null) m_FieldBackdrop.sprite = mapSprite;
 			}
 			if (isSwitch)
 			{
@@ -437,15 +441,30 @@ namespace CorePlay
 		}
 
 		/// <summary>Fit the complete authored scene once; tree and fruit keep the same relative coordinates.</summary>
-		public void FitGameField()
+		public void FitGameField(RectTransform layoutTarget = null)
 		{
 			if (m_FieldPresentationRoot == null || m_FieldPresentationRoot.parent == null) return;
+			// B supplies its authored reserved viewport once. Later board restores
+			// and level starts reuse it; A never supplies one and keeps full coverage.
+			if (layoutTarget != null) fieldLayoutTarget = layoutTarget;
 			Canvas canvas = m_FieldPresentationRoot.GetComponentInParent<Canvas>();
-			RectTransform screen = canvas != null ? canvas.rootCanvas.transform as RectTransform : null;
+			RectTransform fullCanvas = canvas != null ? canvas.rootCanvas.transform as RectTransform : null;
+			RectTransform screen = fieldLayoutTarget != null ? fieldLayoutTarget :
+				fullCanvas;
 			if (screen == null) return;
-			// The full canvas owns background coverage. Safe-area offsets apply to
-			// the controls only; they must not stretch the tree independently.
-			Transform parent = m_FieldPresentationRoot.parent;
+			// Always transform the complete artwork and its fruit layer together.
+			// The separate collection tray and bottom controls keep their layout.
+			FitArtwork(m_FieldPresentationRoot, screen);
+			if (m_FieldBackdrop != null && m_FieldBackdrop.gameObject.activeSelf && fullCanvas != null)
+			{
+				if (m_BgImg != null && m_FieldBackdrop.sprite != m_BgImg.sprite) m_FieldBackdrop.sprite = m_BgImg.sprite;
+				FitArtwork(m_FieldBackdrop.rectTransform, fullCanvas);
+			}
+		}
+
+		private void FitArtwork(RectTransform presentation, RectTransform screen)
+		{
+			Transform parent = presentation.parent;
 			screen.GetWorldCorners(fieldCorners);
 			Vector3 corner = parent.InverseTransformPoint(fieldCorners[0]);
 			var viewport = new FieldLayoutBounds(corner.x, corner.y, corner.x, corner.y);
@@ -457,11 +476,11 @@ namespace CorePlay
 				viewport.MaxX = Mathf.Max(viewport.MaxX, corner.x);
 				viewport.MaxY = Mathf.Max(viewport.MaxY, corner.y);
 			}
-			Rect artwork = m_FieldPresentationRoot.rect;
+			Rect artwork = presentation.rect;
 			FieldLayoutFit fit = FieldLayoutGeometry.Cover(
 				new FieldLayoutBounds(artwork.xMin, artwork.yMin, artwork.xMax, artwork.yMax), viewport);
-			m_FieldPresentationRoot.localScale = new Vector3(fit.Scale, fit.Scale, 1f);
-			m_FieldPresentationRoot.localPosition = new Vector3(fit.X, fit.Y, m_FieldPresentationRoot.localPosition.z);
+			presentation.localScale = new Vector3(fit.Scale, fit.Scale, 1f);
+			presentation.localPosition = new Vector3(fit.X, fit.Y, presentation.localPosition.z);
 		}
 
 		/// <summary>把配置坐标（已按 1080 画布单位）转换为世界坐标。</summary>

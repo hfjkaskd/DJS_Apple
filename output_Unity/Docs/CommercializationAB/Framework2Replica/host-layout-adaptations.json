@@ -1,0 +1,32 @@
+{
+  "scope": "Apple host layout integration only. No source Framework 2 prefab layout, economy values or progression requirements are changed.",
+  "changes": [
+    {
+      "component": "CorePlayUI",
+      "reason": "The current map belongs to one instantiated UI. A/B scene reloads must not reuse a previous instance's sprite-path cache.",
+      "adaptation": "The map-path cache is an instance field. The shared tree/fruit presentation root can retain an explicitly supplied layout target; A uses its existing full root Canvas by default."
+    },
+    {
+      "component": "EarningVariantGameplayView",
+      "reason": "B's source HUD requires reserved space above the Apple gameplay field.",
+      "adaptation": "The authored FieldViewport is passed to CorePlayUI. The tree image and fruit layer are transformed together; collection tray and bottom buttons remain independent. Public RefreshLayout is also called by the same normal low-frequency LateUpdate path."
+    },
+    {
+      "component": "MahjongFramework2CurrencyHud.GetGameplayTopInset",
+      "reason": "WorldToScreenPoint is expressed in the active Canvas camera/viewport pixels. The physical Screen height may differ from a camera viewport or render target.",
+      "adaptation": "Normalize the HUD lower edge using sourceCanvas.pixelRect.height after subtracting pixelRect.yMin. Full-screen Overlay remains algebraically equivalent because yMin is zero and pixelRect.height equals Screen.height. Camera sub-rectangles and render targets now use their actual pixel extent on every platform."
+    },
+    {
+      "component": "EarningVariantIntegrationValidation",
+      "reason": "A batch Editor can complete several frames before intro or currency-counting animations finish.",
+      "adaptation": "Wait at least 2.75 seconds of real elapsed time and check loaded background/board state before capture. Re-run the normal RefreshLayout path before the temporary portrait render and after restoring the original canvas projection. Effects and game state are not hidden or replaced."
+    },
+    {
+      "component": "CorePlayUI.VariantBBackdrop",
+      "reason": "The reserved B gameplay viewport is smaller than the full Canvas. The only original tree background moved with that viewport, exposing camera clear color at the top and sides.",
+      "adaptation": "Author one disabled-by-default, non-raycasting Image behind the shared Game root in the gameplay prefab. B enables it and fits it to the full root Canvas using the existing Cover calculation; A leaves it disabled. ChangeGameBg reuses the exact already-loaded map Sprite for both layers, with no extra texture asset or load. The foreground tree and fruit remain together within the reserved field; source B layouts and business rules are unchanged.",
+      "cost": "One additional background UI quad while B is active; the Sprite/texture reference is shared. No additional full-size texture allocation."
+    }
+  ],
+  "captureLimit": "Portrait images remain no-notch diagnostic renders of actual running instances, not hardware screenshots or proof of pixel parity. Safe-area adapters are temporarily paused only by the diagnostic capture utility and restored afterwards."
+}

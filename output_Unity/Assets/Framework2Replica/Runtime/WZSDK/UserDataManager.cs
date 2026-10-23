@@ -102,6 +102,9 @@ namespace WZSDK
 
 		private bool isInitialized;
 
+		private bool disposed;
+		private bool IsDisposed => disposed || this == null;
+
 		private bool facadePayTypeHandlersRegistered;
 
 		public bool IsInitialized
@@ -117,6 +120,7 @@ namespace WZSDK
 
 		public Task InitializeAsync()
 		{
+			if (IsDisposed) return Task.CompletedTask;
 			lock (initializationLock)
 			{
 				if (isInitialized)
@@ -189,7 +193,7 @@ namespace WZSDK
 					imageLocalizationTask,
 					payRegionTask);
 
-				if (this == null)
+				if (IsDisposed)
 				{
 					return;
 				}
@@ -203,7 +207,7 @@ namespace WZSDK
 					imageLocalizationManager != null
 						? imageLocalizationManager.InitializeAsync()
 						: Task.CompletedTask);
-				if (this == null)
+				if (IsDisposed)
 				{
 					return;
 				}
@@ -211,6 +215,7 @@ namespace WZSDK
 				LoadPayRegionFromCSV(await payRegionTask);
 				GetLanguageData();
 				await ApplyLanguageAsync();
+				if (IsDisposed) return;
 
 				Task<Sprite> multipleCoinTask = imageLocalizationManager != null
 					? imageLocalizationManager.GetSpriteAsync("1001")
@@ -232,7 +237,7 @@ namespace WZSDK
 					multipleCoinTask,
 					singleCoinTask);
 
-				if (this == null)
+				if (IsDisposed)
 				{
 					return;
 				}
@@ -1270,7 +1275,7 @@ namespace WZSDK
 				Task<Sprite> multipleCoinTask = imageManager.GetSpriteAsync("1001");
 				Task<Sprite> singleCoinTask = imageManager.GetSpriteAsync("1002");
 				await Task.WhenAll(multipleCoinTask, singleCoinTask);
-				if (this == null)
+				if (IsDisposed)
 				{
 					return;
 				}
@@ -1367,12 +1372,13 @@ namespace WZSDK
 
 		public void Dispose()
 		{
+			disposed = true;
 			UnregisterFacadePayTypeHandlers();
 		}
 
 		protected override void OnDestroy()
 		{
-			UnregisterFacadePayTypeHandlers();
+			Dispose();
 			base.OnDestroy();
 		}
 
