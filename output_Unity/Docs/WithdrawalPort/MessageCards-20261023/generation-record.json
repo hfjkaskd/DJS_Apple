@@ -1,0 +1,41 @@
+{
+  "dateUtc": "2026-10-23",
+  "scope": "Four explanation message screens in LocalEarningSequence: Assessment, Activating, Activated, Summary. Summary's diamond preview variant is also verified.",
+  "generator": "Built-in image_gen.imagegen",
+  "mode": "Image edit; transparent_background=true; referenced_image_paths contains the approved concept",
+  "approvedConcept": "approved-concept.png",
+  "savedAsset": "Assets/Resources/OrchardEarning/Messages/OrchardMessageBoard.png",
+  "originalGeneratedAsset": "C:/Users/pc/.codex/generated_images/01a0a207-4e93-7ed2-952e-9872c49f4ddc/exec-d526e7ce-23d6-426a-a37e-124f92898887.png",
+  "finalPrompt": "Edit the supplied approved mobile-game concept into ONE production-ready transparent UI sprite. Extract ONLY the complete central illustrated sign: the same chunky green apple-emblem banknote bundles and few gold coin stacks, glossy red apples and green leaves perched on its top, and the same thick rounded orange-gold polished wooden frame with recessed ivory panel. Remove the full orchard/background/sky/trees/ground entirely to genuinely transparent alpha. Remove ALL text from the ivory panel including the large English paragraph and the small TEST MODE footer, reconstruct the smooth clean ivory panel under it. Retain the approved artwork's exact shapes, proportions, perspective, sculpted depth, upper-left highlights, warm material colors and close composition. Do not redesign it or add objects. Do not add lettering, icons, shadows cast onto a background, floor, checkerboard or a second asset. The output is a tightly framed landscape UI sprite around 1792x1024, overall art aspect approximately 1.79:1, with only about 2% transparent margin outside all leaf tips, the money stack and bottom wooden edge. The upper cash/fruit illustration takes roughly the top 42% of the sprite; the plaque takes the lower 58%, and its ivory interior is a large blank unobstructed text-safe area. Soft baked contact shadows within the object are retained. No text anywhere. Real transparent background. This must match the approved screenshot rather than being a new visual direction.",
+  "actualImage": {
+    "width": 1659,
+    "height": 948,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "nontransparentBoundingBox": [
+      18,
+      16,
+      1641,
+      905
+    ]
+  },
+  "integration": "Shared sprite loaded from Resources when the page opens. Four separate TMP message layouts and an inline test disclosure are saved in the prefab. Existing activation timing and reward/receipt steps are unchanged.",
+  "validation": {
+    "layoutRenders": 15,
+    "resolutions": [
+      "1080x1920",
+      "1080x2400",
+      "720x1600"
+    ],
+    "messageStateChecks": 18,
+    "groupSwitchChecks": 9,
+    "animationRegressionCases": 7,
+    "result": "pass"
+  },
+  "captureProvenance": "Actual saved Unity prefab rendered by fixture camera using explicit synthetic preview text. Not phone captures, not running reference APK captures. Comparison sheets contain complete source images scaled uniformly.",
+  "visualComparison": "Uses approved cash/apple illustration and broad beveled plaque. Illustration details, background sharpness/dimming and footer size differ from the generated concept; not a pixel-identical reconstruction.",
+  "buildStatus": "No APK built or installed for this change."
+}
