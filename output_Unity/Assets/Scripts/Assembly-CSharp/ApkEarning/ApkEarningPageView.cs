@@ -27,11 +27,13 @@ namespace FruitApkEarning
             public float FullProgressPixelsPerUnit;
         }
         [Serializable] public sealed class InputSlot { public string Key; public TMP_InputField Target; }
+        [Serializable] public sealed class ResourceImageSlot { public Image Target; public string Path; }
         public TextSlot[] Texts = Array.Empty<TextSlot>();
         public ButtonSlot[] Buttons = Array.Empty<ButtonSlot>();
         public ObjectSlot[] Objects = Array.Empty<ObjectSlot>();
         public ImageSlot[] Images = Array.Empty<ImageSlot>();
         public InputSlot[] Inputs = Array.Empty<InputSlot>();
+        public ResourceImageSlot[] ResourceImages = Array.Empty<ResourceImageSlot>();
         public RectTransform ArtworkRoot;
         public float ReferenceWidth = 1080;
         public float MinimumReferenceHeight = 1800;
@@ -76,6 +78,7 @@ namespace FruitApkEarning
         public AnimationCurve ReceiptFlightCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
         private readonly Dictionary<Button, UnityAction> listeners = new Dictionary<Button, UnityAction>();
         private bool fitting;
+        private bool resourceImagesLoaded;
         private int presentationVersion;
         private PresentationKind presentationKind;
         private VerificationVisual[] verificationVisuals;
@@ -517,12 +520,44 @@ namespace FruitApkEarning
         private void OnDestroy(){CancelPresentation();Unbind();}
         private void OnEnable(){RefreshLayout();}
         private void OnRectTransformDimensionsChange(){RefreshLayout();}
+        private void LoadResourceImages()
+        {
+            if (resourceImagesLoaded) return;
+            resourceImagesLoaded = true;
+            if (ResourceImages == null || ResourceImages.Length == 0) return;
+            // Cache only for this load pass. Duplicate slots share the same Sprite,
+            // while the prefab stores paths instead of holding large artwork assets.
+            var loaded = new Dictionary<string, Sprite>(StringComparer.Ordinal);
+            foreach (ResourceImageSlot slot in ResourceImages)
+            {
+                if (slot == null || slot.Target == null)
+                {
+                    Debug.LogError(name + ": resource artwork has no Image target.", this);
+                    continue;
+                }
+                Sprite sprite = null;
+                if (string.IsNullOrWhiteSpace(slot.Path))
+                    Debug.LogError(name + ": resource artwork has an empty path.", this);
+                else if (!loaded.TryGetValue(slot.Path, out sprite))
+                {
+                    sprite = Resources.Load<Sprite>(slot.Path);
+                    loaded.Add(slot.Path, sprite);
+                    if (sprite == null)
+                        Debug.LogError(name + ": missing resource artwork Sprite at " + slot.Path, this);
+                }
+                slot.Target.overrideSprite = null;
+                slot.Target.sprite = sprite;
+                if (sprite == null) slot.Target.enabled = false;
+            }
+        }
         public void RefreshLayout()
         {
-            if(fitting||!FitWidth||ArtworkRoot==null||ArtworkRoot==transform||ReferenceWidth<=0)return;
+            if(fitting)return;
             fitting=true;
             try
             {
+                LoadResourceImages();
+                if(!FitWidth||ArtworkRoot==null||ArtworkRoot==transform||ReferenceWidth<=0)return;
                 var rect=transform as RectTransform;
                 if(rect==null||rect.rect.width<=0||rect.rect.height<=0)return;
                 float scale=rect.rect.width/ReferenceWidth;

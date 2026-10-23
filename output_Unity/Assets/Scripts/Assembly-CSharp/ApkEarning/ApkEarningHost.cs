@@ -116,10 +116,15 @@ namespace FruitApkEarning
             page.RefreshLayout();
             page.Bind("Close",Close);page.Bind("CloseBtn",Close);page.Bind("close",Close);page.Bind("closeButton",Close);
             page.SetText("TestMode","TEST MODE · NO CASH PAYMENT");
-            var localTestMode=page.GetText("TestMode");
-            bool hasLocalTestMode=localTestMode!=null&&localTestMode.isActiveAndEnabled;
-            if(GlobalTestModeCaption!=null)GlobalTestModeCaption.gameObject.SetActive(!hasLocalTestMode);
+            RefreshTestDisclosure();
             return page;
+        }
+        private void RefreshTestDisclosure()
+        {
+            var local=page.GetText("TestMode");
+            var message=page.GetText("MessageDisclosure");
+            bool visible=(local!=null&&local.isActiveAndEnabled)||(message!=null&&message.isActiveAndEnabled);
+            if(GlobalTestModeCaption!=null)GlobalTestModeCaption.gameObject.SetActive(!visible);
         }
         private void ShowWallet()
         {
@@ -574,6 +579,7 @@ namespace FruitApkEarning
             page.SetVisible("messageGroup",message>=0);page.SetVisible("receiptGroup",receipt);page.SetVisible("bonusesGroup",bonuses);
             for(int i=0;i<4;i++)page.SetVisible("messageLayouts["+i+"].Root",i==message);
             for(int i=0;i<5;i++)page.SetVisible("flightIcons["+i+"]",false);
+            RefreshTestDisclosure();
         }
         private void SetMessage(int index,string title,string body){page.SetText("messageLayouts["+index+"].Title",title);page.SetText("messageLayouts["+index+"].Body",body);}
         private void ShowRecovery(Action retry)

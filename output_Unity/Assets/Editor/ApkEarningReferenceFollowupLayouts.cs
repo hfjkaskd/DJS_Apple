@@ -90,23 +90,7 @@ public static partial class ApkEarningReferenceLayoutAuthoring
         // title/body labels at the same baseline. Other message styles retain
         // their existing distinct title and body bindings.
         view.GetText("messageLayouts[0].Title").gameObject.SetActive(false);
-        // Original banners reserve most of their image for baked illustrations.
-        // Reflow only the existing visual children into compact text cards;
-        // keep message roots and the receipt flight origin unchanged.
-        string[] messages = { "Assessment", "Activating", "Activated", "Summary" };
-        foreach (string message in messages)
-        {
-            string path = "Message/" + message;
-            FollowupPlace(view, path + "/Artwork", new Rect(60, 716, 960, 488));
-            if (message == "Assessment")
-                FollowupPlace(view, path + "/Body", new Rect(150, 800, 780, 320), 56);
-            else
-            {
-                FollowupPlace(view, path + "/Title", new Rect(140, 786, 800, 104),
-                    message == "Summary" ? 55 : 66);
-                FollowupPlace(view, path + "/Body", new Rect(140, 928, 800, 172), 44);
-            }
-        }
+        IllustratedMessageCards(view);
         // The imported avatar and player ribbon are intentionally hidden.
         // Compact their vacant area instead of introducing replacement decoration.
         FollowupPlace(view, "Bonuses", new Rect(40, 270, 1000, 1380));
