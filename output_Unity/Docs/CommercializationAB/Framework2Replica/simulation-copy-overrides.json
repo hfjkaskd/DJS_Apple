@@ -1,0 +1,453 @@
+{
+  "purpose": "Display-only deviations required to make a local simulation transparent. Original economic config remains byte-identical. No UI nodes, transforms or art changed.",
+  "scope": "Source key override and exact default-English alias match, so original literal bindings and all five existing locales use the same explicit English test copy.",
+  "configSha256Unchanged": "74a89260e72fc83aeee7e3d1bd5bc8ceeb6543af08342cd19e1fc05359648537",
+  "reason": "Remove fake official certification, fabricated other-player payout/approval/percentile claims, promises of bank transfers or instant payments, and requests for real account details. Local order review and simulated success are labeled as test states.",
+  "overrides": [
+    {
+      "key": "3044",
+      "sourceEnglish": "Watch {0} more times for immediate arrival.",
+      "displayEnglish": "Complete {0} more simulated checks. No payment will arrive."
+    },
+    {
+      "key": "1031",
+      "sourceEnglish": "Congrats <color=#EB2F2F>{0} successfully withdrew {1}</color>",
+      "displayEnglish": "Demo record: {0} +{1} (no payment)"
+    },
+    {
+      "key": "order.account.email.desc",
+      "sourceEnglish": "Email address",
+      "displayEnglish": "Test email"
+    },
+    {
+      "key": "order.account.email.holder",
+      "sourceEnglish": "Enter your email address",
+      "displayEnglish": "test@example.invalid"
+    },
+    {
+      "key": "order.account.email.err",
+      "sourceEnglish": "Please enter a valid email address.",
+      "displayEnglish": "Use a dummy email in a valid format."
+    },
+    {
+      "key": "order.account.phone.desc",
+      "sourceEnglish": "Phone number",
+      "displayEnglish": "Test phone"
+    },
+    {
+      "key": "order.account.phone.holder",
+      "sourceEnglish": "Enter your account phone number",
+      "displayEnglish": "Enter a dummy phone number"
+    },
+    {
+      "key": "order.account.phone.err",
+      "sourceEnglish": "Please enter a valid phone number.",
+      "displayEnglish": "Use a dummy number in a valid format."
+    },
+    {
+      "key": "2002",
+      "sourceEnglish": "Withdrawal method",
+      "displayEnglish": "Test account method"
+    },
+    {
+      "key": "2004",
+      "sourceEnglish": "Enter phone number",
+      "displayEnglish": "Enter a dummy phone number"
+    },
+    {
+      "key": "2005",
+      "sourceEnglish": "Enter your account details",
+      "displayEnglish": "Enter dummy account details"
+    },
+    {
+      "key": "2007",
+      "sourceEnglish": "If none of our supported withdrawal methods are available, please enter your contact information.",
+      "displayEnglish": "Use fictitious details for this local test. No account is contacted and no payment is sent."
+    },
+    {
+      "key": "2012",
+      "sourceEnglish": "After 2 automatic withdrawal verifications, proceed with a withdrawal of [[money:200]]–[[money:1000]].",
+      "displayEnglish": "After 2 simulated checks, preview a test request of [[money:200]]–[[money:1000]]. No payment is sent."
+    },
+    {
+      "key": "2013",
+      "sourceEnglish": "Withdrawal completed",
+      "displayEnglish": "Test request recorded"
+    },
+    {
+      "key": "2038",
+      "sourceEnglish": "--officially verified, real cash withdrawals--",
+      "displayEnglish": "LOCAL SIMULATION · NO CASH PAYMENT"
+    },
+    {
+      "key": "2040",
+      "sourceEnglish": "Initiating your withdrawal",
+      "displayEnglish": "Preparing test request"
+    },
+    {
+      "key": "2047",
+      "sourceEnglish": "Match tiles to earn cash",
+      "displayEnglish": "Match fruit to collect test rewards"
+    },
+    {
+      "key": "2050",
+      "sourceEnglish": "watch videos to earn diamonds",
+      "displayEnglish": "Simulate ads to collect diamonds"
+    },
+    {
+      "key": "2052",
+      "sourceEnglish": "Verification completed",
+      "displayEnglish": "Test check completed"
+    },
+    {
+      "key": "2054",
+      "sourceEnglish": "Confirm Account Information",
+      "displayEnglish": "Confirm Dummy Details"
+    },
+    {
+      "key": "2055",
+      "sourceEnglish": "Transferred to bank",
+      "displayEnglish": "Recorded locally"
+    },
+    {
+      "key": "2056",
+      "sourceEnglish": "Cash has been transferred to the platform",
+      "displayEnglish": "Test request saved on this device"
+    },
+    {
+      "key": "2057",
+      "sourceEnglish": "Reach [[money:3000]] to be credited; {0} remaining",
+      "displayEnglish": "Test target: [[money:3000]]; {0} remaining"
+    },
+    {
+      "key": "2058",
+      "sourceEnglish": "Withdrawal successful",
+      "displayEnglish": "Test request recorded"
+    },
+    {
+      "key": "2060",
+      "sourceEnglish": "Congrats! You're the 6th lucky user! Claim your cash reward: {0}",
+      "displayEnglish": "Simulated reward preview: {0}"
+    },
+    {
+      "key": "2062",
+      "sourceEnglish": "This is your <color=#FFEB3B>#{0}</color> withdrawal",
+      "displayEnglish": "This is your test request <color=#FFEB3B>#{0}</color>"
+    },
+    {
+      "key": "2064",
+      "sourceEnglish": "Withdrawal review: Approved",
+      "displayEnglish": "Local check: Completed"
+    },
+    {
+      "key": "2065",
+      "sourceEnglish": "Real-name verification: Verified",
+      "displayEnglish": "Identity check: Simulated"
+    },
+    {
+      "key": "2066",
+      "sourceEnglish": "Account verification: Completed",
+      "displayEnglish": "Account check: Simulated"
+    },
+    {
+      "key": "2067",
+      "sourceEnglish": "Your withdrawal request has been submitted. Due to high demand, funds will be credited within 10 days of approval.",
+      "displayEnglish": "Saved on this device for testing. No payment will be sent."
+    },
+    {
+      "key": "2071",
+      "sourceEnglish": "Required: Official Verification",
+      "displayEnglish": "Required: Simulated Check"
+    },
+    {
+      "key": "2072",
+      "sourceEnglish": "Check Verification Progress",
+      "displayEnglish": "Check Test Progress"
+    },
+    {
+      "key": "2073",
+      "sourceEnglish": "Final step, cash out soon",
+      "displayEnglish": "Final test step · no payment"
+    },
+    {
+      "key": "2074",
+      "sourceEnglish": "Your withdrawal progress is ahead of 99% of users, cash out soon",
+      "displayEnglish": "This is a local test flow. No payment will be sent."
+    },
+    {
+      "key": "2075",
+      "sourceEnglish": "User Verification: Checked in for {0} days",
+      "displayEnglish": "Test check: Checked in for {0} days"
+    },
+    {
+      "key": "2076",
+      "sourceEnglish": "Cash out soon",
+      "displayEnglish": "Test progress · no payment"
+    },
+    {
+      "key": "2090",
+      "sourceEnglish": "Average Withdrawal Amount",
+      "displayEnglish": "Average Test Amount"
+    },
+    {
+      "key": "2102",
+      "sourceEnglish": "Congratulations to <color=#00FF00>{0}</color> for withdrawing <color=#E60000>{1}</color>",
+      "displayEnglish": "Demo record: <color=#00FF00>{0}</color> · <color=#E60000>{1}</color> (no payment)"
+    },
+    {
+      "key": "2109",
+      "sourceEnglish": "96.12% of users reached the goal within 15 minutes and withdrew [[money:3000]].",
+      "displayEnglish": "This target is a simulation. No payment will be sent."
+    },
+    {
+      "key": "3003",
+      "sourceEnglish": "Play games and complete tasks to earn money",
+      "displayEnglish": "Play and complete tasks to collect test rewards"
+    },
+    {
+      "key": "3004",
+      "sourceEnglish": "Once a certain amount of money has been collected, the payment can be withdrawn.",
+      "displayEnglish": "Reach the target to preview a local request. No real payment is available."
+    },
+    {
+      "key": "3005",
+      "sourceEnglish": "Can't wait? Don't worry, you can withdraw any amount instantly from your Lucky Wallet.",
+      "displayEnglish": "The Lucky Wallet is a local simulation. Its balance cannot be paid out."
+    },
+    {
+      "key": "3007",
+      "sourceEnglish": "Link withdrawal account",
+      "displayEnglish": "Test account"
+    },
+    {
+      "key": "3008",
+      "sourceEnglish": "Enter your withdrawal account",
+      "displayEnglish": "Enter dummy account details"
+    },
+    {
+      "key": "3010",
+      "sourceEnglish": "Only the correct account can withdraw funds.",
+      "displayEnglish": "Use fictitious details. No payment is sent."
+    },
+    {
+      "key": "3011",
+      "sourceEnglish": "Cash withdrawal records",
+      "displayEnglish": "Local test records"
+    },
+    {
+      "key": "3014",
+      "sourceEnglish": "Withdraw anytime, instant arrival",
+      "displayEnglish": "Local simulation · no payment"
+    },
+    {
+      "key": "3016",
+      "sourceEnglish": "Withdrawing",
+      "displayEnglish": "Saving test request"
+    },
+    {
+      "key": "3017",
+      "sourceEnglish": "Confirm account information",
+      "displayEnglish": "Confirm dummy account details"
+    },
+    {
+      "key": "3018",
+      "sourceEnglish": "Account information has been confirmed.",
+      "displayEnglish": "Dummy details saved locally."
+    },
+    {
+      "key": "3023",
+      "sourceEnglish": "Complete the task and make payment immediately.",
+      "displayEnglish": "Complete the test task. No payment is sent."
+    },
+    {
+      "key": "3025",
+      "sourceEnglish": "Withdrawing...",
+      "displayEnglish": "Saving test request..."
+    },
+    {
+      "key": "3029",
+      "sourceEnglish": "In queue",
+      "displayEnglish": "Test queue"
+    },
+    {
+      "key": "3030",
+      "sourceEnglish": "Under review",
+      "displayEnglish": "Local review"
+    },
+    {
+      "key": "3031",
+      "sourceEnglish": "Withdrawal in progress",
+      "displayEnglish": "Local review · no payment"
+    },
+    {
+      "key": "3032",
+      "sourceEnglish": "success",
+      "displayEnglish": "Simulated result · no payment"
+    },
+    {
+      "key": "3033",
+      "sourceEnglish": "Withdrawal failed",
+      "displayEnglish": "Test request failed"
+    },
+    {
+      "key": "3034",
+      "sourceEnglish": "Your account details are incorrect. Enter the correct details and submit again.",
+      "displayEnglish": "Check the dummy account format and submit the local test again."
+    },
+    {
+      "key": "3037",
+      "sourceEnglish": "Your account",
+      "displayEnglish": "Your test account"
+    },
+    {
+      "key": "3040",
+      "sourceEnglish": "{0} is available to withdraw",
+      "displayEnglish": "Test balance: {0}"
+    },
+    {
+      "key": "3041",
+      "sourceEnglish": "Only {0}% left to withdraw",
+      "displayEnglish": "{0}% left in this test"
+    },
+    {
+      "key": "3042",
+      "sourceEnglish": "Watch ads and complete active verification",
+      "displayEnglish": "Simulate ads to complete the test check"
+    },
+    {
+      "key": "3043",
+      "sourceEnglish": "{0} successful verifications: withdrawal amount +{1}",
+      "displayEnglish": "{0} test checks: simulated amount +{1}"
+    },
+    {
+      "key": "3045",
+      "sourceEnglish": "3 successful authentications: Funds will be withdrawn immediately.",
+      "displayEnglish": "3 simulated ad checks. No funds will be transferred."
+    },
+    {
+      "key": "3046",
+      "sourceEnglish": "The transfer has been initiated. Please check your order later.",
+      "displayEnglish": "The local request is saved. No transfer has started."
+    },
+    {
+      "key": "3047",
+      "sourceEnglish": "Cashing out transfers your full wallet balance to the selected account.",
+      "displayEnglish": "A test request reserves this wallet balance locally. No money is transferred."
+    },
+    {
+      "key": "3055",
+      "sourceEnglish": "With the bonus increase, reach [[money:3000]] to cash out. 55% of users have successfully withdrawn.",
+      "displayEnglish": "Simulated target: [[money:3000]]. No cash is paid."
+    },
+    {
+      "key": "3059",
+      "sourceEnglish": "Congratulations on passing the verification!",
+      "displayEnglish": "Simulated check completed!"
+    },
+    {
+      "key": "3063",
+      "sourceEnglish": "Withdrawable earnings",
+      "displayEnglish": "Simulated earnings"
+    },
+    {
+      "key": "3068",
+      "sourceEnglish": "55% of users can cash out directly",
+      "displayEnglish": "Local simulation · no payment"
+    },
+    {
+      "key": "3072",
+      "sourceEnglish": "The transfer has started. Please check your selected account.",
+      "displayEnglish": "Test request saved. No transfer has started."
+    },
+    {
+      "key": "3074",
+      "sourceEnglish": "A [[money:handlingFee]] handling fee will be charged for cash out.",
+      "displayEnglish": "Displayed test fee: [[money:handlingFee]]. No real fee is charged."
+    },
+    {
+      "key": "3075",
+      "sourceEnglish": "Cash outs over [[money:feeFreeThreshold]] are fee-free.",
+      "displayEnglish": "Test requests over [[money:feeFreeThreshold]] display no fee."
+    },
+    {
+      "key": "3076",
+      "sourceEnglish": "Cashing out transfers your full balance to the selected account.",
+      "displayEnglish": "A test request reserves the balance locally. No money is transferred."
+    },
+    {
+      "key": "3079",
+      "sourceEnglish": "The above gameplay can earn balance.",
+      "displayEnglish": "This gameplay collects simulated balance."
+    },
+    {
+      "key": "3084",
+      "sourceEnglish": "Watch ads to complete active verification. Watch {0} times for direct payout.",
+      "displayEnglish": "Simulate {0} ads to complete the test check. No payout."
+    },
+    {
+      "key": "3085",
+      "sourceEnglish": "{0} successful authentications: Funds will be transferred immediately.",
+      "displayEnglish": "{0} simulated checks. No funds will be transferred."
+    },
+    {
+      "key": "3086",
+      "sourceEnglish": "Withdrawal account: {0}",
+      "displayEnglish": "Dummy account: {0}"
+    },
+    {
+      "key": "3087",
+      "sourceEnglish": "{0} successful authentications: Funds will arrive immediately.",
+      "displayEnglish": "{0} simulated checks. No payment will arrive."
+    },
+    {
+      "key": "3090",
+      "sourceEnglish": "Withdrawal account not found",
+      "displayEnglish": "Check dummy account format"
+    },
+    {
+      "key": "3091",
+      "sourceEnglish": "Insufficient withdrawal balance",
+      "displayEnglish": "Insufficient test balance"
+    },
+    {
+      "key": "3095",
+      "sourceEnglish": "You just won {0}! Reach {1} to trigger the cash-out prize draw!",
+      "displayEnglish": "Test reward: {0}! Reach {1} to preview the prize draw."
+    },
+    {
+      "key": "3096",
+      "sourceEnglish": "Extra Cash Rewards",
+      "displayEnglish": "Extra Test Rewards"
+    },
+    {
+      "key": "static.email",
+      "sourceEnglish": "Enter email",
+      "displayEnglish": "Enter a dummy email"
+    },
+    {
+      "key": "payment.account.email",
+      "sourceEnglish": "Enter your email",
+      "displayEnglish": "test@example.invalid"
+    },
+    {
+      "key": "payment.account.phone",
+      "sourceEnglish": "Enter phone number",
+      "displayEnglish": "Enter a dummy phone number"
+    },
+    {
+      "key": "payment.account.account",
+      "sourceEnglish": "Enter account details",
+      "displayEnglish": "Enter dummy account details"
+    },
+    {
+      "key": "payment.account.pix",
+      "sourceEnglish": "Enter your Pix key",
+      "displayEnglish": "Enter a dummy Pix key"
+    },
+    {
+      "key": "payment.account.invalid",
+      "sourceEnglish": "Enter valid account details",
+      "displayEnglish": "Check the dummy account format"
+    }
+  ]
+}

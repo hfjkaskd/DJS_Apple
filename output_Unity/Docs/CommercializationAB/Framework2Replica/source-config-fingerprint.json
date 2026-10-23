@@ -1,0 +1,80 @@
+{
+  "sourceRepository": "https://github.com/bizza-game/Mahjong-Slide-Zen_AndroidWZ-DJS",
+  "sourceCommit": "df1d9c11816bb87d972b40bb9def3447fe171e0a",
+  "sourcePath": "Assets/AddressableAssets/GameContent/WithdrawalFramework2/Data/MahjongLegacyFrameworkConfig.asset",
+  "sourceSha256": "aebb1c8df3ed2d41423d1f7c56c8e41fbfe937088f08f855e7f8baf9c3618af6",
+  "exportPath": "Assets/Framework2Replica/Resources/Framework2Replica/ProductConfig.json",
+  "exportSha256": "74a89260e72fc83aeee7e3d1bd5bc8ceeb6543af08342cd19e1fc05359648537",
+  "exportBytes": 278808,
+  "retainedRoots": [
+    "currencyDatabase",
+    "localizationDatabase",
+    "economy",
+    "sourceDefaults",
+    "iaaMode",
+    "hudBalanceAnimationSeconds",
+    "timedRewardStartLevel",
+    "useMahjongInGameRewardTrigger",
+    "inGameRewardTriggerDelaySeconds",
+    "inGameRewardProgressRatio",
+    "inGameRewardForcedProgressRatio",
+    "inGameRewardMinimumRoundSeconds",
+    "gameplayGuideWithdrawalStage",
+    "guideRewardDelaySeconds",
+    "linearLevelTitleFormat",
+    "refusalsBeforeAd",
+    "refuseInterstitialLevelRange",
+    "refuseInterstitialPercent"
+  ],
+  "omittedMahjongHostRoots": [
+    "notifications",
+    "gameplay",
+    "gameplayTables",
+    "tilePool",
+    "boardLayouts",
+    "flow",
+    "playerTracking",
+    "introduction",
+    "linearLevels"
+  ],
+  "economyCanonicalSha256": "79bcf053e5d59aa2a5f21889a0e3c6bd510ba5321c62a66e216934a29da9bf57",
+  "stageRequirements": [
+    {
+      "Id": 1,
+      "Stage": 1,
+      "Type": 1,
+      "Value": 1,
+      "AutoNextStage": 1
+    },
+    {
+      "Id": 2,
+      "Stage": 2,
+      "Type": 1,
+      "Value": 2,
+      "AutoNextStage": 1
+    },
+    {
+      "Id": 3,
+      "Stage": 3,
+      "Type": 4,
+      "Value": 3,
+      "AutoNextStage": 0
+    },
+    {
+      "Id": 4,
+      "Stage": 4,
+      "Type": 2,
+      "Value": 200,
+      "AutoNextStage": 1
+    },
+    {
+      "Id": 5,
+      "Stage": 5,
+      "Type": 2,
+      "Value": 3000,
+      "AutoNextStage": 1
+    }
+  ],
+  "normalCoinHardCap": 2999.5,
+  "note": "Live inline product data, not the retired Integration economy asset. Packed arrays decoded little-endian; scalar types match source DTOs. No gameplay/withdrawal values redesigned. Local simulation, not payment confirmation."
+}
