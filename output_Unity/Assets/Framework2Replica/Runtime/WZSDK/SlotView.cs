@@ -100,6 +100,8 @@ namespace WZSDK
 
 		private float currentLotteryPanel1RewardAmount;
 
+		internal float AppleSkinRewardAmount => currentLotteryPanel1RewardAmount;
+
 		private bool hasPendingOpenConfig;
 
 		private Action rewardEffectFinishAction;

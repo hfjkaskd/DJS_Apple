@@ -31,6 +31,7 @@ namespace WZSDK
 		private float nextRefreshTime;
 
 		private float targetCoinOverride;
+		internal float AppleSkinTargetAmount => GetTargetCoin(GameManagerWZ.instance);
 		private float analyticsCurrent = float.NaN;
 		private float analyticsTarget = float.NaN;
 

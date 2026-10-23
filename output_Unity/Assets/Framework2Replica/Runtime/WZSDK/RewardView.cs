@@ -132,6 +132,9 @@ namespace WZSDK
 
 		private bool _isEventsBound;
 
+		[SerializeField] private Framework2AppleRewardPresenter appleSkin;
+		public void ConfigureAppleSkin(Framework2AppleRewardPresenter presenter) { appleSkin = presenter; }
+
 		private List<LevelRewardStatic.RewardItem> rewards;
 
 		private bool hasCustomRewards;
@@ -563,6 +566,11 @@ namespace WZSDK
 		private async Task<Sprite> GetRewardIconAsync(
 			ELuckySpinRewardType type)
 		{
+			if (appleSkin != null && !GameDefines.ifIAA)
+			{
+				Sprite skinSprite = appleSkin.ResolveRewardSprite(type, true);
+				if (skinSprite != null) return skinSprite;
+			}
 			switch (type)
 			{
 				case ELuckySpinRewardType.Money:

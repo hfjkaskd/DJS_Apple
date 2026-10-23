@@ -27,9 +27,11 @@ namespace WZSDK
 		private bool baseInteractable = true;
 
 		private bool interactionBlocked;
+		private bool appleSkin;
 
 		private void Awake()
 		{
+			appleSkin = GetComponent<Framework2AppleSkinMarker>() != null;
 			dateTxt = FindText("ContentA");
 			moneyTxt = FindText("ContentB");
 			dateTitle = FindText("titleA");
@@ -71,7 +73,7 @@ namespace WZSDK
 			if (dateTitle != null)
 			{
 				dateTitle.text = order != null
-					? order.WithdrawType
+					? appleSkin ? "ID: " + order.OrderNo : order.WithdrawType
 					: string.Empty;
 			}
 			if (statusTitle != null)

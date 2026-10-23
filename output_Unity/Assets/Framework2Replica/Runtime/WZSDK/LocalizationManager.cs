@@ -334,6 +334,7 @@ namespace WZSDK
 		public void ApplyFont(Text text)
 		{
 			if (text == null || Framework2Host.Settings == null || Framework2Host.Settings.currencyDatabase == null) return;
+			if (text.font != null && text.GetComponentInParent<Framework2AppleSkinMarker>(true) != null) return;
 			Font font = Framework2Host.Settings.currencyDatabase.Resolve(Framework2Host.Region?.Invoke()).NativeFont;
 			if (font != null && text.font != font) text.font = font;
 		}

@@ -19,6 +19,8 @@ namespace WZSDK
 
 		private bool isEventsBound;
 
+		internal double AppleSkinSavedAmount { get; private set; }
+
 		private void Awake()
 		{
 			ResolveReferencesIfNeeded();
@@ -26,6 +28,7 @@ namespace WZSDK
 
 		public override void InitView()
 		{
+			RefreshAppleSkinSavedAmount();
 			ResolveReferencesIfNeeded();
 			BindEvents();
 			ApplyLocalizedTexts();
@@ -49,7 +52,7 @@ namespace WZSDK
 			generateMoreBtn = FindByPath<Button>(
 				"RewardMessage/Panel/Bottom/GenerateMoreBtn");
 			closeBtn = FindByPath<Button>(
-				"RewardMessage/Panel/close");
+				"RewardMessage/Panel/bg/close");
 			continueBtn = FindByPath<Button>(
 				"RewardMessage/Panel/continuebtn");
 			isReferencesResolved =
@@ -112,8 +115,22 @@ namespace WZSDK
 
 		internal override void RefreshRuntimeGmPresentation()
 		{
+			RefreshAppleSkinSavedAmount();
 			ApplyLocalizedTexts();
 			RefreshGameplayWithdrawPrompt();
+		}
+
+		private void RefreshAppleSkinSavedAmount()
+		{
+			AppleSkinSavedAmount = 0d;
+			// One cache read on opening/explicit GM refresh, never in a frame loop.
+			var orders = WithdrawApiService.GetCachedOrders();
+			for (int i = orders.Count - 1; i >= 0; --i)
+			{
+				if (orders[i] == null || !orders[i].IsFirstAdWithdraw) continue;
+				AppleSkinSavedAmount = orders[i].GetAmountValue();
+				break;
+			}
 		}
 
 		private void ApplyLocalizedTexts()

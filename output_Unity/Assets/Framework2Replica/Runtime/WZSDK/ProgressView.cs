@@ -88,6 +88,9 @@ namespace WZSDK
 
 		private float openRewardAmount;
 
+		internal float AppleSkinRewardAmount { get; private set; }
+		internal float AppleSkinProgress => displayedProgressValue;
+
 		private float targetCoinValue;
 
 		private float displayedProgressValue = -1f;
@@ -229,6 +232,7 @@ namespace WZSDK
 				Mathf.Clamp01(currentCoin / targetCoinValue);
 			ApplyProgressVisualState(displayedProgressValue);
 			ApplyStaticTexts(currentCoin, targetCoinValue);
+			AppleSkinRewardAmount = openRewardAmount > 0f ? openRewardAmount : currentCoin;
 			MahjongProductAnalytics.Track("f2_stage4_progress_presented", "reward_amount", openRewardAmount, "current", currentCoin, "target", targetCoinValue, "start_fill", displayedProgressValue, "end_fill", targetProgressValue, "description_key", DescriptionTextId);
 			openRewardAmount = 0f;
 		}

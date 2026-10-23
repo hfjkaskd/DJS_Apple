@@ -65,6 +65,9 @@ namespace WZSDK
 		private Dictionary<int, ConfLuckySpin> spinData;
 		private Dictionary<int, float> angles;
 		private bool mIsEventsBound;
+
+		[SerializeField] private Framework2AppleRewardPresenter appleSkin;
+		public void ConfigureAppleSkin(Framework2AppleRewardPresenter presenter) { appleSkin = presenter; }
 		private bool mIsInitialized;
 		private LuckySpinOpenData mOpenData;
 		private bool mHasAutoStartedSpin;
@@ -340,6 +343,11 @@ namespace WZSDK
 
 		private (string, Sprite) GetItemInfoFromCache(ELuckySpinRewardType type, float count)
 		{
+			if (appleSkin != null && !GameDefines.ifIAA)
+			{
+				Sprite skinSprite = appleSkin.ResolveRewardSprite(type, false);
+				if (skinSprite != null) return (GetLocalizedTextStatic(GetLocalizationKey(type)), skinSprite);
+			}
 			(string name, Sprite sprite) item;
 			if (s_SpriteCache != null && s_SpriteCacheUsesIaa == GameDefines.ifIAA &&
 				s_SpriteCache.TryGetValue(type, out item))

@@ -103,6 +103,8 @@ namespace WZSDK
 
 		private bool isRetryWithdrawSubmitting;
 
+		private Framework2AppleSkinPresenter appleSkin;
+
 		protected override void OnAwake()
 		{
 			BindUi();
@@ -198,6 +200,7 @@ namespace WZSDK
 			{
 				return;
 			}
+			appleSkin = GetComponent<Framework2AppleSkinPresenter>();
 
 			toggleA = FindComponent<Toggle>(
 				"PanelA/PanelB/ToggleA");
@@ -331,6 +334,8 @@ namespace WZSDK
 		private void ApplyRegionalInputPresentation()
 		{
 			bool isBrazilian = IsBrazilianPaymentMethod();
+			appleSkin?.SetAccountChannel(Framework2Host.PaymentChannel != null
+				? Framework2Host.PaymentChannel.InputKind : WaterSort.WaterSortAccountInputKind.Email);
 			if (nameObj != null)
 			{
 				nameObj.SetActive(
@@ -460,6 +465,7 @@ namespace WZSDK
 
 		private void ShowPixKeyError(string message)
 		{
+			appleSkin?.SetAccountError(!string.IsNullOrEmpty(message));
 			if (pixKeyErrorText == null)
 			{
 				return;
@@ -565,6 +571,7 @@ namespace WZSDK
 
 		public void OnInputValueChangeEmail(string value)
 		{
+			appleSkin?.SetAccountError(false);
 			string sanitized = SanitizeReceiverInput(value);
 			if (emailInputField != null &&
 				emailInputField.text != sanitized)
@@ -597,6 +604,7 @@ namespace WZSDK
 				}
 				else if (panelE != null)
 				{
+					appleSkin?.SetAccountError(true);
 					panelE.SetActive(true);
 					StartCoroutine(DelayedAction());
 				}
@@ -651,6 +659,7 @@ namespace WZSDK
 		{
 			yield return new WaitForSeconds(2f);
 			panelE?.SetActive(false);
+			appleSkin?.SetAccountError(false);
 		}
 
 		public void OnButtonClickQues()

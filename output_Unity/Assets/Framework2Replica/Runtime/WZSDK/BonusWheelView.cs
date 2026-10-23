@@ -22,6 +22,8 @@ namespace WZSDK
 		private bool mHasAutoStartedSpin;
 		private LuckySpinOpenData mOpenData;
 
+		internal float AppleSkinBalanceBeforeSpin { get; private set; }
+
 		private string analyticsSpinId;
 
 		public void Awake()
@@ -133,6 +135,7 @@ namespace WZSDK
 
 		public void OnEnableView()
 		{
+			AppleSkinBalanceBeforeSpin = GameManagerWZ.instance != null ? GameManagerWZ.instance.currentCoin : 0f;
 			if (mExitBtn != null)
 			{
 				mExitBtn.gameObject.SetActive(mOpenData == null || !mOpenData.IsMandatory);

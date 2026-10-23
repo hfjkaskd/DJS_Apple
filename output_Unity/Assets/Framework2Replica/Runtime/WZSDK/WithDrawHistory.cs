@@ -26,6 +26,8 @@ namespace WZSDK
 
 		private GameObject content;
 
+		private Framework2AppleSkinPresenter appleSkin;
+
 		private readonly List<HistoryItem> historyItems =
 			new List<HistoryItem>();
 
@@ -43,6 +45,7 @@ namespace WZSDK
 
 		protected override void OnAwake()
 		{
+			appleSkin = GetComponent<Framework2AppleSkinPresenter>();
 			moneyText = Find<Text>("Panel/PanelA/Num");
 			content = Find("Panel/Scroll View/Viewport/Content");
 			Button closeButton = Find<Button>("Panel/bg/close");
@@ -155,6 +158,7 @@ namespace WZSDK
 
 			List<WithdrawOrderData> sortedOrders =
 				SortOrdersForDisplay(orders);
+			appleSkin?.SetHistoryEmpty(sortedOrders.Count == 0);
 			double totalAmount = sortedOrders
 				.Where(order => order != null)
 				.Sum(order => order.GetAmountValue());

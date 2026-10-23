@@ -59,8 +59,11 @@ namespace WZSDK
 		private bool completionActionsVisible;
 		private bool isClosing;
 
+		private Framework2AppleSkinPresenter appleSkin;
+
 		protected override void OnAwake()
 		{
+			appleSkin = GetComponent<Framework2AppleSkinPresenter>();
 			continueButton = FindByPath<Button>("PanelA/Continue", "Continue");
 			closeButton = FindByPath<Button>("PanelA/close", "close");
 			continueRoot = continueButton != null
@@ -182,6 +185,7 @@ namespace WZSDK
 
 		private void ResetProgressFlow()
 		{
+			appleSkin?.SetVerificationState(false, false, IsWithdrawButtonFlow());
 			isClosing = false;
 			if (showCompletionActionsCoroutine != null)
 			{
@@ -269,6 +273,7 @@ namespace WZSDK
 			ApplyProcessStateContents();
 			RefreshProcessStateLines();
 			RefreshMoneyText();
+			appleSkin?.SetVerificationState(completionActionsVisible, false, IsWithdrawButtonFlow());
 		}
 
 		private int ResolveCurrentlyVisibleStateCount()
@@ -621,6 +626,7 @@ namespace WZSDK
 
 		private void HandleWithdrawSubmitError(string error)
 		{
+			appleSkin?.SetVerificationState(false, true);
 			Framework2BusinessAnalytics.Withdraw("process_submit_error", dataModel, "failed");
 			isSubmitCompleted = true;
 			isSubmitSuccessful = false;
@@ -692,6 +698,7 @@ namespace WZSDK
 				return;
 			}
 			completionActionsVisible = true;
+			appleSkin?.SetVerificationState(true, false, IsWithdrawButtonFlow());
 			UpdateLastVisibleStateTextIfNeeded();
 			if (Dec != null && IsWithdrawButtonFlow())
 			{

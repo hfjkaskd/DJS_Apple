@@ -35,10 +35,14 @@ namespace WZSDK
 
 		private bool _isEventsBound;
 
+		private Framework2AppleSkinPresenter appleSkin;
+
 		private GameManagerWZ GM => GameManagerWZ.instance;
 
 		public override void InitView()
 		{
+			if (appleSkin == null) appleSkin = GetComponent<Framework2AppleSkinPresenter>();
+			appleSkin?.SetGemCosts(gemAmounts);
 			if (WTGroup != null)
 			{
 				toggles = WTGroup.GetComponentsInChildren<Toggle>();

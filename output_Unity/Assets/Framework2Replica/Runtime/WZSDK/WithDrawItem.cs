@@ -21,8 +21,11 @@ namespace WZSDK
 		private Color originalStateColor;
 		private int presentationVersion;
 
+		private Framework2AppleSkinPresenter appleSkin;
+
 		private void Awake()
 		{
+			appleSkin = GetComponent<Framework2AppleSkinPresenter>();
 			originalBackground = transform.Find("PanelA")?.GetComponent<Image>();
 			originalMoneyText = transform.Find("PanelA/TextUp")?.GetComponent<Text>();
 			originalStateText = transform.Find("PanelA/TextDown")?.GetComponent<Text>();
@@ -34,6 +37,7 @@ namespace WZSDK
 		public void ResetStyle()
 		{
 			presentationVersion++;
+			appleSkin?.SetTaskComplete(false);
 			if (originalBackground != null) originalBackground.sprite = originalSprite;
 			if (originalMoneyText != null) originalMoneyText.color = originalMoneyColor;
 			if (originalStateText != null) originalStateText.color = originalStateColor;
@@ -49,9 +53,9 @@ namespace WZSDK
 			Text stateText = transform.Find("PanelA/TextDown")
 				?.GetComponent<Text>();
 
-			Task<Sprite> completedTask =
-				AddressableAssetService.LoadAsync<Sprite>(
-					CompletedSpritePath);
+			Task<Sprite> completedTask = appleSkin != null
+				? Task.FromResult(Framework2AppleSkinAssets.LoadSprite("inset"))
+				: AddressableAssetService.LoadAsync<Sprite>(CompletedSpritePath);
 
 			double money = 0.0;
 			List<HistoryModel> history =
@@ -78,7 +82,7 @@ namespace WZSDK
 			}
 			if (moneyText != null)
 			{
-				moneyText.color = completedColor;
+				moneyText.color = appleSkin != null ? originalMoneyColor : completedColor;
 				GameManagerWZ manager = GameManagerWZ.instance;
 				moneyText.text = manager != null
 					? manager.FormatRegionalValue(money)
@@ -86,7 +90,7 @@ namespace WZSDK
 			}
 			if (stateText != null)
 			{
-				stateText.color = completedColor;
+				stateText.color = appleSkin != null ? originalStateColor : completedColor;
 				stateText.text = LocalizationManager.Instance != null
 					? LocalizationManager.Instance.GetText("2013")
 					: "Withdrawal completed";
@@ -95,7 +99,8 @@ namespace WZSDK
 			Sprite completed = await completedTask;
 			if (this != null && version == presentationVersion && headPic != null && completed != null)
 			{
-				headPic.sprite = completed;
+				if (appleSkin != null) appleSkin.SetTaskComplete(true);
+				else headPic.sprite = completed;
 			}
 		}
 	}

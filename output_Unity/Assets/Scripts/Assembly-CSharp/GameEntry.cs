@@ -86,7 +86,10 @@ public class GameEntry : MonoBehaviour
 			mgrGlobalUI.Init();
 		}
 
-		var hostPrefab = Resources.Load<GameObject>(FruitEarningVariants.EarningVariantController.ResourcePath);
+		string hostPath = FruitEarningVariants.EarningVariantSelection.IsB
+			? "EarningVariants/EarningVariantControllerApple"
+			: FruitEarningVariants.EarningVariantController.ResourcePath;
+		var hostPrefab = Resources.Load<GameObject>(hostPath);
 		if (hostPrefab == null)
 		{
 			Debug.LogError("[A/B] The authored earning variant controller prefab is missing.");

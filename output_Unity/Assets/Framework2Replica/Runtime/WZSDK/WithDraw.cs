@@ -45,8 +45,11 @@ namespace WZSDK
 
 		private Button CashOut;
 
+		private Framework2AppleSkinPresenter appleSkin;
+
 		protected override void OnAwake()
 		{
+			appleSkin = GetComponent<Framework2AppleSkinPresenter>();
 			titleContent = Find<Text>("Panel/title");
 			moneyContent = Find<Text>(
 				"Panel/PanelA/PanelD/PanelE/content");
@@ -161,6 +164,7 @@ namespace WZSDK
 
 			bool unlocked =
 				gameManager.currentLv >= GameDefines.LuckyWalletUnlockLevel;
+			appleSkin?.SetLuckyUnlocked(unlocked);
 			MahjongProductAnalytics.State("f2_lucky_wallet_entry_state", "withdraw_wallet_entry", "unlocked", unlocked, "unlock_level", GameDefines.LuckyWalletUnlockLevel, "level", gameManager.currentLv);
 			if (!unlocked)
 			{
