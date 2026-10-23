@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "status": "design_only_not_loaded_by_game",
+  "date": "2026-10-23",
+  "experiment": {
+    "id": "orchard-flow-ab-v1",
+    "enabled": false,
+    "defaultVariant": "A",
+    "existingPlayers": "A",
+    "newPlayerWeights": {
+      "A": 50,
+      "B": 50
+    },
+    "assignment": "persist_before_first_business_event",
+    "revenuePhaseRequiresNewExperimentId": true
+  },
+  "source": {
+    "repository": "bizza-game/Mahjong-Slide-Zen_AndroidWZ-DJS",
+    "commit": "df1d9c11816bb87d972b40bb9def3447fe171e0a",
+    "mainInspiration": "Framework5 five-level summary",
+    "supportingInspiration": [
+      "Framework4 lucky reward cadence",
+      "Framework1 ad protection",
+      "fixed framework assignment and isolated saves"
+    ]
+  },
+  "variantA": {
+    "preserveExistingFlow": true,
+    "preserveExistingAssets": true,
+    "preserveExistingSave": "fruit-apk-earning-v1.dat",
+    "runtimeChanged": false
+  },
+  "variantB": {
+    "id": "B",
+    "name": "果园丰收单",
+    "rulesVersion": "orchard-b-v1",
+    "mode": "explicit_simulation",
+    "realPayment": false,
+    "currency": {
+      "cashStorageUnit": "integer minor units (100=1 test cash)",
+      "diamondStorageUnit": "integer diamonds",
+      "displayEqualsLedger": true
+    },
+    "progression": {
+      "count": "unique actual wins, not attempts/display levels",
+      "firstWinCashMinor": 2000,
+      "secondWinCashMinor": 3000,
+      "subsequentWinCashMinor": 1000,
+      "summaryEveryWins": 5,
+      "summaryBonusCashMinor": 2000,
+      "firstFiveCashMinorWithoutExtras": 10000
+    },
+    "lucky": {
+      "minimumTriplesInCurrentLevel": 8,
+      "minimumActiveSecondsSinceLevelStart": 45,
+      "condition": "AND",
+      "maximumPerUniqueLevel": 1,
+      "maximumPerUtcDay": 10,
+      "suppressOnFinalTriple": true,
+      "baseCashMinor": 200,
+      "optionalRewardedMultiplier": 3,
+      "presentation": "nonblocking claim badge"
+    },
+    "diamonds": {
+      "perUniqueTriple": 1,
+      "perUniqueWin": 5,
+      "dailyTasks": [
+        {
+          "kind": "wins",
+          "required": 3,
+          "diamonds": 10
+        },
+        {
+          "kind": "triples",
+          "required": 30,
+          "diamonds": 10
+        },
+        {
+          "kind": "active_seconds",
+          "required": 300,
+          "diamonds": 10
+        }
+      ],
+      "signinCycleDays": [
+        10,
+        15,
+        20,
+        25,
+        30,
+        40,
+        60
+      ],
+      "signinResetsOnMiss": false,
+      "exchange": {
+        "cost": 500,
+        "cashMinor": 5000,
+        "maximumPerUtcDay": 1
+      }
+    },
+    "order": {
+      "eligibility": "at least one completed 5-win milestone and positive unreserved cash",
+      "amount": "all available unreserved cash captured on confirm",
+      "maxActive": 1,
+      "conditionsVisibleBeforeConfirm": true,
+      "parallel": true,
+      "postSubmitWins": 10,
+      "postSubmitActiveSeconds": 1200,
+      "elapsedSeconds": 172800,
+      "start": "atomic confirmation",
+      "ruleSnapshot": true,
+      "completeRequiresConfirmation": true,
+      "completionStatus": "SimulatedCompleted",
+      "completionCashPayment": false,
+      "cancelRefundsReserved": true,
+      "cancelResetsProgress": true
+    },
+    "activeTime": {
+      "requiresForeground": true,
+      "requiresInteractiveGameplay": true,
+      "excludes": [
+        "ads",
+        "modal panels",
+        "pause",
+        "background"
+      ],
+      "idleGraceSeconds": 15,
+      "lastActivity": "accepted fruit selection or valid gameplay action",
+      "unitScale": 1
+    },
+    "ads": {
+      "modeBeforeSdk": "test_only_no_revenue_measurement",
+      "firstRewardedActualLevel": 3,
+      "rewardedLevelGateAppliesTo": ["settlement_multiplier", "lucky_multiplier", "revive", "prop"],
+      "earlyLevels": "No ads on actual levels 1-2; existing free resources remain available, otherwise restart.",
+      "firstAutomaticAdMinWins": 3,
+      "firstAutomaticAdMinActiveSeconds": 150,
+      "automaticOpportunityEveryNormalSettlementClaims": 2,
+      "sharedInterstitialCooldownSeconds": 90,
+      "rewardedProtectionSeconds": 30,
+      "skipNextAutomaticAfterRewarded": true,
+      "maxAutomaticPerUtcDay": 8,
+      "maxRewardedPerUtcDay": 12,
+      "onlySafeTransitionNodes": true,
+      "baseRewardOnCancelOrFailure": true,
+      "rewardedRequiresExplicitTap": true,
+      "ordinaryRewardMultiplier": 3,
+      "multiplierAppliesTo": "ordinary settlement or lucky base only; never milestone/signin/tasks",
+      "normalSettlementOpportunityCounter": "increment once after successful ordinary settlement claim",
+      "automaticExposureCounter": "increment on deduplicated SDK impression callback",
+      "rewardedCompletionCounter": "increment on deduplicated valid reward callback",
+      "automaticOpportunityResolution": "one request at a safe transition; do not re-request at the same node after fail/cancel; consume that opportunity"
+    },
+    "saves": {
+      "business": "fruit-orchard-earning-b-v1.dat",
+      "assignment": "fruit-earning-experiment-v1.dat",
+      "migrateA": false
+    },
+    "assets": {
+      "config": "OrchardEarning/B/OrchardBConfig",
+      "prefabs": "OrchardEarning/B/Panels/",
+      "lazyLoadLargeArt": true
+    }
+  },
+  "sources": [
+    {
+      "title": "参考包内分组",
+      "url": "https://github.com/bizza-game/Mahjong-Slide-Zen_AndroidWZ-DJS/blob/df1d9c11816bb87d972b40bb9def3447fe171e0a/Assets/AddressableAssets/GameContent/GameConfig/MahjongGameConfig.asset#L15",
+      "note": "F4/F5 各50%，远端配置可覆盖；不是线上分组统计。"
+    },
+    {
+      "title": "参考F5五关汇总与建单",
+      "url": "https://github.com/bizza-game/Mahjong-Slide-Zen_AndroidWZ-DJS/blob/df1d9c11816bb87d972b40bb9def3447fe171e0a/Assets/Scripts/Withdrawal/Framework5/NativeRuntime/UI/ExtractReward/Sandwisp_ExtractReward_Panel.cs#L41",
+      "note": "普通小记录与五关余额汇总分开；创建时保存条件。"
+    },
+    {
+      "title": "参考F5条件状态",
+      "url": "https://github.com/bizza-game/Mahjong-Slide-Zen_AndroidWZ-DJS/blob/df1d9c11816bb87d972b40bb9def3447fe171e0a/Assets/Scripts/Withdrawal/Framework5/NativeRuntime/Gameplay/Rewards/Sandwisp_UserInfoManager.cs#L152",
+      "note": "关卡→时长→等待→关卡→用户等级，条件完成与付款并非同一状态。"
+    },
+    {
+      "title": "参考F5结果页缺口",
+      "url": "https://github.com/bizza-game/Mahjong-Slide-Zen_AndroidWZ-DJS/blob/df1d9c11816bb87d972b40bb9def3447fe171e0a/Assets/Scripts/Withdrawal/Framework5/NativeRuntime/UI/ExtractReward/Sandwisp_ExtractGoldPanel.cs#L49",
+      "note": "条件齐全分支直接返回，不能据此声称完整真实支付闭环。"
+    },
+    {
+      "title": "参考F4领奖计次广告",
+      "url": "https://github.com/bizza-game/Mahjong-Slide-Zen_AndroidWZ-DJS/blob/df1d9c11816bb87d972b40bb9def3447fe171e0a/Assets/Scripts/Withdrawal/Framework4/NativeRuntime/Gameplay/RecoveredGameSession.Awards.cs#L161",
+      "note": "普通领取计数触发广告机会；新B另设保护与上限。"
+    },
+    {
+      "title": "参考F1广告保护",
+      "url": "https://github.com/bizza-game/Mahjong-Slide-Zen_AndroidWZ-DJS/blob/df1d9c11816bb87d972b40bb9def3447fe171e0a/Assets/Scripts/Slide/Models/MahjongMonetizationRuntime.cs#L304",
+      "note": "激励后保护；结算激励后跳过下一次开局广告。仅借鉴机制。"
+    },
+    {
+      "title": "参考分组持久化",
+      "url": "https://github.com/bizza-game/Mahjong-Slide-Zen_AndroidWZ-DJS/blob/df1d9c11816bb87d972b40bb9def3447fe171e0a/Assets/Scripts/Withdrawal/Product/MahjongGameConfiguration.cs#L186",
+      "note": "启动选择与复用固定分组。"
+    },
+    {
+      "title": "参考完整存档域",
+      "url": "https://github.com/bizza-game/Mahjong-Slide-Zen_AndroidWZ-DJS/blob/df1d9c11816bb87d972b40bb9def3447fe171e0a/Assets/Scripts/Withdrawal/Core/MahjongFrameworkSaveScope.cs#L31",
+      "note": "实际按玩法、关卡集、框架隔离；旧文档描述有滞后。"
+    }
+  ]
+}
