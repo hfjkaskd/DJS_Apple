@@ -1,0 +1,34 @@
+{
+  "tool": "built-in image_gen",
+  "purpose": "Reusable layered sprites for approved Framework2 B Apple reskin",
+  "referenceBoards": [
+    "ReskinPreview-AllUI-20261023/board-03.png",
+    "ReskinPreview-AllUI-20261023/board-08.png"
+  ],
+  "assets": [
+    {
+      "name": "Chrome.png",
+      "prompt": "Transparent production 3x3 atlas matching approved glossy Apple casual-game UI: ivory popup body with restrained orange rim; pale inset; blue glazed primary button; blue warm-rim title; ivory secondary; mint selected card; orange X; rounded inset progress track; round green fill. Blank reusable components, no text except X."
+    },
+    {
+      "name": "Icons.png",
+      "prompt": "Transparent 4x4 production atlas in approved polished 3D Apple style: banknotes, banknote pile, wallet, chest; lock, check, error, purple diamond; blue green gold empty badges, apple leaves; pointer, back arrow, video, burst. Warm top-left light, no labels."
+    },
+    {
+      "name": "Wheels.png",
+      "prompt": "Transparent pair of frontal rotating glossy gold-rim discs, exactly six pastel sectors and eight gold/cream sectors, blank interiors and center hub, no pointer. Separate Unity reward icons overlay."
+    },
+    {
+      "name": "Receipt.png",
+      "prompt": "Transparent upright cream paper record scroll with three orange-brown lines and green check, no letters/numbers, soft glossy 3D Apple-game materials."
+    },
+    {
+      "name": "Methods.png",
+      "prompt": "Transparent horizontal four-icon production atlas matching approved Apple UI: gray classical bank, gray debit card, blue smartphone, round ivory sliding-switch knob. No text, brands or numbers. Soft rounded 3D, generous alpha gutters."
+    }
+  ],
+  "notes": [
+    "Generated assets are copied into Assets/Framework2AppleSkin/Resources/Framework2AppleSkin. Unity Sprite sub-rects and nine-slice borders are configured by Framework2AppleSkin.cs. PNG alpha is preserved.",
+    "Reference images contain illustrative gameplay backgrounds and sample data. Implementation preserves source gameplay and uses live values."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "implementation": "Framework2 B Apple skin",
+  "date": "2026-10-23",
+  "authoredPrefabs": 35,
+  "activeBusinessTemplates": 24,
+  "hostPanels": 4,
+  "reservedTemplates": 3,
+  "actualCapturedStates": 45,
+  "validation": {
+    "visualCoverage": {
+      "passed": true,
+      "assertions": 2119
+    },
+    "sourceWorkflow": {
+      "passed": true,
+      "assertions": 88
+    },
+    "hostABSwitches": {
+      "passed": true,
+      "assertions": 99,
+      "completedSwitches": 8
+    },
+    "sourceProductConfigSha256": "74A89260E72FC83AEEE7E3D1BD5BC8CEEB6543AF08342CD19E1FC05359648537"
+  },
+  "preserved": [
+    "A host prefab unchanged; B uses its own host skin prefab on the existing scene reload path.",
+    "Stage chain, reward and target configuration, A/B save isolation, original ad simulation callbacks, local no-payment behavior."
+  ],
+  "scopeLimits": [
+    "Screens are live Unity offscreen captures with explicitly synthetic QA states, not phone screenshots.",
+    "Approved art uses illustrative backgrounds and sample data; gameplay background, avatar, live values and localization follow source data.",
+    "NoticeView retains the original timed-toast behavior. Optional/unused branches have not been newly connected.",
+    "No pixel-parity metric is claimed; the comparison page shows approved artwork beside actual implementation."
+  ],
+  "reports": {
+    "visual": "ActualCaptures/capture-manifest.json",
+    "workflow": "WorkflowChecks/framework2-play-validation.json",
+    "ab": "ABSwitchChecks/host-integration.json",
+    "comparison": "index.html",
+    "assetPrompts": "art-generation.json"
+  }
+}
