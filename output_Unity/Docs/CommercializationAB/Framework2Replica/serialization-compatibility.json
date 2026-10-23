@@ -1,0 +1,11 @@
+{
+  "scope": "Compatibility at the original serialization boundary only; no economy, source JSON product configuration, progression, or payout rule changes.",
+  "historyWireNames": ["DateTime", "Money", "Status", "ID", "Stage"],
+  "historyChange": "HistoryModel now declares JsonProperty with the exact original implicit property spelling, preserving existing local JSON schema under future member renaming.",
+  "linkerChange": "Assets/Framework2Replica/link.xml preserves only the nine source JSON DTO types and their members in Assembly-CSharp against managed stripping.",
+  "otherDtos": "WithdrawOrderData, UserWalletData, LuckyRewardConfigData and request/response DTOs already declare stable JsonProperty names. Read-only computed order properties are not used as storage keys or decision inputs during deserialization.",
+  "verification": "Framework2ReplicaPlayValidation runs real JSON round-trips on fixed QA-only history/order/wallet values, plus production SPlayerPrefs round-trip after creating the unique DJS.Apple.F2Validation.<guid>. namespace. Its dedicated test key is deleted in a finally block.",
+  "obfuzStatus": "No Obfuz package, assembly or configuration is currently installed in this Unity project. No obfuscated build has been verified, and no substitute Obfuz assembly or attribute was created. link.xml does not prevent Obfuz renaming.",
+  "obfuzIntegrationRequirement": "When real Obfuz is installed, configure its supported exclusions or real ObfuzIgnore attributes for JSON DTO serialization contracts and call boundaries, plus the JsonUtility product/address-map schemas. Keep the restored precompiled third-party runtime assemblies outside application-level renaming; DOTween core invokes its preserved module initializer by name. Verify a real obfuscated IL2CPP build before claiming compatibility.",
+  "configurationSha256Unchanged": "74a89260e72fc83aeee7e3d1bd5bc8ceeb6543af08342cd19e1fc05359648537"
+}

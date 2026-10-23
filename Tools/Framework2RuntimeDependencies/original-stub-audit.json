@@ -1,0 +1,322 @@
+[
+  {
+    "name": "Newtonsoft.Json.dll",
+    "identity": "Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed",
+    "bytes": 316416,
+    "sha256": "e8adcaee4ee8fa82bc051ab7fe4649bfade138ec03f5c4ef17636a1f413f7435",
+    "methodsWithBody": 3418,
+    "methodsWithAtMostThreeInstructions": 2875,
+    "references": [
+      "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+      "System.Numerics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+      "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+      "System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+      "System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+      "System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+      "System.Runtime.Serialization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+      "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    ],
+    "samples": [
+      {
+        "method": "System.String Newtonsoft.Json.JsonConvert::SerializeObject(System.Object)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "System.String Newtonsoft.Json.JsonConvert::SerializeObject(System.Object,Newtonsoft.Json.Formatting)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "System.String Newtonsoft.Json.JsonConvert::SerializeObject(System.Object,Newtonsoft.Json.JsonConverter[])",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "System.String Newtonsoft.Json.JsonConvert::SerializeObject(System.Object,Newtonsoft.Json.Formatting,Newtonsoft.Json.JsonConverter[])",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "System.String Newtonsoft.Json.JsonConvert::SerializeObject(System.Object,Newtonsoft.Json.JsonSerializerSettings)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "System.String Newtonsoft.Json.JsonConvert::SerializeObject(System.Object,System.Type,Newtonsoft.Json.JsonSerializerSettings)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "System.String Newtonsoft.Json.JsonConvert::SerializeObject(System.Object,Newtonsoft.Json.Formatting,Newtonsoft.Json.JsonSerializerSettings)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "System.String Newtonsoft.Json.JsonConvert::SerializeObject(System.Object,System.Type,Newtonsoft.Json.Formatting,Newtonsoft.Json.JsonSerializerSettings)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "System.Object Newtonsoft.Json.JsonConvert::DeserializeObject(System.String)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "System.Object Newtonsoft.Json.JsonConvert::DeserializeObject(System.String,Newtonsoft.Json.JsonSerializerSettings)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "System.Object Newtonsoft.Json.JsonConvert::DeserializeObject(System.String,System.Type)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "T Newtonsoft.Json.JsonConvert::DeserializeObject(System.String)",
+        "instructions": 4,
+        "leadingIL": [
+          "IL_0000: ldloca.s V_0",
+          "IL_0002: initobj T",
+          "IL_0008: ldloc.0",
+          "IL_0009: ret"
+        ]
+      },
+      {
+        "method": "T Newtonsoft.Json.JsonConvert::DeserializeObject(System.String,Newtonsoft.Json.JsonConverter[])",
+        "instructions": 4,
+        "leadingIL": [
+          "IL_0000: ldloca.s V_0",
+          "IL_0002: initobj T",
+          "IL_0008: ldloc.0",
+          "IL_0009: ret"
+        ]
+      },
+      {
+        "method": "T Newtonsoft.Json.JsonConvert::DeserializeObject(System.String,Newtonsoft.Json.JsonSerializerSettings)",
+        "instructions": 4,
+        "leadingIL": [
+          "IL_0000: ldloca.s V_0",
+          "IL_0002: initobj T",
+          "IL_0008: ldloc.0",
+          "IL_0009: ret"
+        ]
+      },
+      {
+        "method": "System.Object Newtonsoft.Json.JsonConvert::DeserializeObject(System.String,System.Type,Newtonsoft.Json.JsonConverter[])",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "System.Object Newtonsoft.Json.JsonConvert::DeserializeObject(System.String,System.Type,Newtonsoft.Json.JsonSerializerSettings)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "spine-csharp.dll",
+    "identity": "spine-csharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "bytes": 71680,
+    "sha256": "8635cddf19fe24dc0f052ed70ffd6de313774a9bcff1d31caf5611d327229ec4",
+    "methodsWithBody": 1088,
+    "methodsWithAtMostThreeInstructions": 996,
+    "references": [
+      "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+      "System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+      "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+    ],
+    "samples": [
+      {
+        "method": "System.Boolean Spine.AnimationState::Apply(Spine.Skeleton)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldc.i4.0",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "Spine.SkeletonData Spine.SkeletonJson::ReadSkeletonData(System.String)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "Spine.SkeletonData Spine.SkeletonJson::ReadSkeletonData(System.IO.TextReader)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "spine-unity.dll",
+    "identity": "spine-unity, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "bytes": 69120,
+    "sha256": "52fe4a3a300106595095248de3b9ef1bc7941a4d3051ff6f80081723a59f4bb5",
+    "methodsWithBody": 626,
+    "methodsWithAtMostThreeInstructions": 560,
+    "references": [
+      "spine-csharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+      "UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+    ],
+    "samples": [
+      {
+        "method": "Spine.SkeletonData Spine.Unity.SkeletonDataAsset::GetSkeletonData(System.Boolean)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "Spine.SkeletonData Spine.Unity.SkeletonDataAsset::ReadSkeletonData(System.Byte[],Spine.AttachmentLoader,System.Single)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "Spine.SkeletonData Spine.Unity.SkeletonDataAsset::ReadSkeletonData(System.String,Spine.AttachmentLoader,System.Single)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "System.Void Spine.Unity.SkeletonGraphic::Initialize(System.Boolean)",
+        "instructions": 1,
+        "leadingIL": [
+          "IL_0000: ret"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "DOTween.dll",
+    "identity": "DOTween, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "bytes": 84480,
+    "sha256": "022c1b66c84888e5997bc940ec510ac1de20b4427208a4999a2dfd592b12d336",
+    "methodsWithBody": 800,
+    "methodsWithAtMostThreeInstructions": 711,
+    "references": [
+      "UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    ],
+    "samples": [
+      {
+        "method": "DG.Tweening.IDOTweenInit DG.Tweening.DOTween::Init(System.Nullable`1<System.Boolean>,System.Nullable`1<System.Boolean>,System.Nullable`1<DG.Tweening.LogBehaviour>)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "DG.Tweening.IDOTweenInit DG.Tweening.DOTween::Init(DG.Tweening.Core.DOTweenSettings,System.Nullable`1<System.Boolean>,System.Nullable`1<System.Boolean>,System.Nullable`1<DG.Tweening.LogBehaviour>)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "DG.Tweening.Sequence DG.Tweening.DOTween::Sequence()",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      },
+      {
+        "method": "DG.Tweening.Sequence DG.Tweening.DOTween::Sequence(System.Object)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "DOTween.Modules.dll",
+    "identity": "DOTween.Modules, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "bytes": 26112,
+    "sha256": "df9a92f3593e52506874030dc10462455b670afced5c2de275d4dee6fbfe7f80",
+    "methodsWithBody": 101,
+    "methodsWithAtMostThreeInstructions": 100,
+    "references": [
+      "DOTween, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+      "UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+    ],
+    "samples": [
+      {
+        "method": "DG.Tweening.Core.TweenerCore`3<UnityEngine.Vector2,UnityEngine.Vector2,DG.Tweening.Plugins.Options.VectorOptions> DG.Tweening.DOTweenModuleUI::DOAnchorPos(UnityEngine.RectTransform,UnityEngine.Vector2,System.Single,System.Boolean)",
+        "instructions": 2,
+        "leadingIL": [
+          "IL_0000: ldnull",
+          "IL_0001: ret"
+        ]
+      }
+    ]
+  }
+]

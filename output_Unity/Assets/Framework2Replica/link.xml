@@ -1,0 +1,15 @@
+<linker>
+  <!-- Source JSON DTOs use runtime serialization. Preserve constructors and
+       accessors under IL2CPP stripping; this is not an Obfuz exclusion rule. -->
+  <assembly fullname="Assembly-CSharp">
+    <type fullname="WZSDK.HistoryModel" preserve="all" />
+    <type fullname="WZSDK.WithdrawOrderData" preserve="all" />
+    <type fullname="WZSDK.UserWalletData" preserve="all" />
+    <type fullname="WZSDK.LuckyRewardConfigData" preserve="all" />
+    <type fullname="WZSDK.ClientWithdrawRequest" preserve="all" />
+    <type fullname="WZSDK.LuckyRewardConfigRequest" preserve="all" />
+    <type fullname="WZSDK.WalletBalanceRequest" preserve="all" />
+    <type fullname="WZSDK.WalletIncomeRequest" preserve="all" />
+    <type fullname="WZSDK.WithdrawApiResponse`1" preserve="all" />
+  </assembly>
+</linker>
