@@ -66,9 +66,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 76
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 64
     m_MaxSize: 76
@@ -147,7 +147,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 48
     m_FontStyle: 0
     m_BestFit: 0
@@ -185,8 +185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.04, g: 0.16, b: 0.4, a: 0.85}
-  m_EffectDistance: {x: 1.5, y: -1.5}
+  m_EffectColor: {r: 0.019607844, g: 0.18039216, b: 0.5137255, a: 1}
+  m_EffectDistance: {x: 1.4, y: -1.4}
   m_UseGraphicAlpha: 1
 --- !u!1 &1618682377417806
 GameObject:
@@ -254,9 +254,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 39
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 27
     m_MaxSize: 39
@@ -333,9 +333,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 36
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 24
     m_MaxSize: 36
@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 114589667821646929}
   - component: {fileID: 3428901840040472731}
   - component: {fileID: 712700404869161207}
+  - component: {fileID: 8268707819160671402}
   m_Layer: 5
   m_Name: historyItemBlue
   m_TagString: Untagged
@@ -424,7 +425,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: -3401448470344470075, guid: fd4326344e6fb7c4684b2dd0c1c433c7, type: 3}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -521,6 +522,70 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &8268707819160671402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709254077376921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c1215f6083d49a4d9a6e6de0e6a163f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlasResourcePath: Framework2AppleSkin/Reference
+  uvPatches:
+  - serializedVersion: 2
+    x: 0.5305024
+    y: 0.4590861
+    width: 0.009569378
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.5382775
+    y: 0.4590861
+    width: 0.0005980861
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.7099282
+    y: 0.4590861
+    width: 0.009569378
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.5305024
+    y: 0.61636555
+    width: 0.009569378
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.5382775
+    y: 0.61636555
+    width: 0.0005980861
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.7099282
+    y: 0.61636555
+    width: 0.009569378
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.5305024
+    y: 0.63655686
+    width: 0.009569378
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.5382775
+    y: 0.63655686
+    width: 0.0005980861
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.7099282
+    y: 0.63655686
+    width: 0.009569378
+    height: 0.017003188
+  borderWidth: 46
+  borderHeight: 46
+  cornerRadius: 40
+  proportionalCaps: 0
+  capAspect: 0.5
 --- !u!1 &1724804207875695
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,9 +652,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 35
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 23
     m_MaxSize: 35
@@ -741,9 +806,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 38
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 26
     m_MaxSize: 38

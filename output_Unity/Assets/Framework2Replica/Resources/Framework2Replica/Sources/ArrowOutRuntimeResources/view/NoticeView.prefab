@@ -107,7 +107,7 @@ MonoBehaviour:
   bonusWheel: {fileID: 0}
   feedback: {fileID: 0}
   clearIcon: {fileID: 21300000, guid: 6a34f46e77b15144999634df1289c645, type: 2}
-  undoIcon: {fileID: 21300000, guid: 626fd4ca3fbbc4149a988650f5e47dd5, type: 2}
+  undoIcon: {fileID: 21300000, guid: 00801e242bffec84da63a9872eea273f, type: 2}
 --- !u!1 &1724804207875695
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,9 +174,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 41
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 32
     m_MaxSize: 41
@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 224099118695303065}
   - component: {fileID: 222243736805655561}
   - component: {fileID: 114061268324235159}
+  - component: {fileID: 4234241683354628924}
   m_Layer: 5
   m_Name: Bg
   m_TagString: Untagged
@@ -254,7 +255,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: -4421038736489061555, guid: fd4326344e6fb7c4684b2dd0c1c433c7, type: 3}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -263,3 +264,67 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4234241683354628924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730242686860875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c1215f6083d49a4d9a6e6de0e6a163f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlasResourcePath: Framework2AppleSkin/Reference
+  uvPatches:
+  - serializedVersion: 2
+    x: 0.5316986
+    y: 0.37938362
+    width: 0.016746411
+    height: 0.02922423
+  - serializedVersion: 2
+    x: 0.5550239
+    y: 0.37938362
+    width: 0.0005980861
+    height: 0.02922423
+  - serializedVersion: 2
+    x: 0.548445
+    y: 0.37938362
+    width: -0.016746411
+    height: 0.02922423
+  - serializedVersion: 2
+    x: 0.5316986
+    y: 0.40754518
+    width: 0.016746411
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.5550239
+    y: 0.40754518
+    width: 0.0005980861
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.548445
+    y: 0.40754518
+    width: -0.016746411
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.5316986
+    y: 0.40860787
+    width: 0.016746411
+    height: 0.02922423
+  - serializedVersion: 2
+    x: 0.5550239
+    y: 0.40860787
+    width: 0.0005980861
+    height: 0.02922423
+  - serializedVersion: 2
+    x: 0.548445
+    y: 0.40860787
+    width: -0.016746411
+    height: 0.02922423
+  borderWidth: 80
+  borderHeight: 80
+  cornerRadius: 50
+  proportionalCaps: 1
+  capAspect: 0.5090909

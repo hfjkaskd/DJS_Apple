@@ -144,7 +144,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
@@ -239,9 +239,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 41
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 29
     m_MaxSize: 41
@@ -332,7 +332,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
@@ -373,6 +373,7 @@ GameObject:
   - component: {fileID: 114919942235722503}
   - component: {fileID: 114107629493147155}
   - component: {fileID: 3102777893807768923}
+  - component: {fileID: 350464440227151012}
   m_Layer: 5
   m_Name: WithDrawItem
   m_TagString: Untagged
@@ -430,7 +431,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: -3401448470344470075, guid: fd4326344e6fb7c4684b2dd0c1c433c7, type: 3}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -487,6 +488,70 @@ MonoBehaviour:
     TaskNumber: {fileID: 7277373321511850423}
     TaskNormalTint: {r: 1, g: 1, b: 1, a: 1}
     TaskCompletedTint: {r: 0.85, g: 1, b: 0.77, a: 1}
+--- !u!114 &350464440227151012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099118695303065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c1215f6083d49a4d9a6e6de0e6a163f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlasResourcePath: Framework2AppleSkin/Reference
+  uvPatches:
+  - serializedVersion: 2
+    x: 0.5305024
+    y: 0.4590861
+    width: 0.009569378
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.5382775
+    y: 0.4590861
+    width: 0.0005980861
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.7099282
+    y: 0.4590861
+    width: 0.009569378
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.5305024
+    y: 0.61636555
+    width: 0.009569378
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.5382775
+    y: 0.61636555
+    width: 0.0005980861
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.7099282
+    y: 0.61636555
+    width: 0.009569378
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.5305024
+    y: 0.63655686
+    width: 0.009569378
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.5382775
+    y: 0.63655686
+    width: 0.0005980861
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.7099282
+    y: 0.63655686
+    width: 0.009569378
+    height: 0.017003188
+  borderWidth: 46
+  borderHeight: 46
+  cornerRadius: 40
+  proportionalCaps: 0
+  capAspect: 0.5
 --- !u!1 &1161607090078389
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +619,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
@@ -803,9 +868,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 41
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 29
     m_MaxSize: 41
@@ -842,6 +907,7 @@ GameObject:
   - component: {fileID: 114964469411310401}
   - component: {fileID: 114208575754630950}
   - component: {fileID: 2252600791332961866}
+  - component: {fileID: 1172948769799206913}
   m_Layer: 5
   m_Name: WithDrawItem2
   m_TagString: Untagged
@@ -899,7 +965,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: -3401448470344470075, guid: fd4326344e6fb7c4684b2dd0c1c433c7, type: 3}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -956,6 +1022,70 @@ MonoBehaviour:
     TaskNumber: {fileID: 4419799217645270635}
     TaskNormalTint: {r: 1, g: 1, b: 1, a: 1}
     TaskCompletedTint: {r: 0.85, g: 1, b: 0.77, a: 1}
+--- !u!114 &1172948769799206913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336590748365959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c1215f6083d49a4d9a6e6de0e6a163f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlasResourcePath: Framework2AppleSkin/Reference
+  uvPatches:
+  - serializedVersion: 2
+    x: 0.5305024
+    y: 0.4590861
+    width: 0.009569378
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.5382775
+    y: 0.4590861
+    width: 0.0005980861
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.7099282
+    y: 0.4590861
+    width: 0.009569378
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.5305024
+    y: 0.61636555
+    width: 0.009569378
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.5382775
+    y: 0.61636555
+    width: 0.0005980861
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.7099282
+    y: 0.61636555
+    width: 0.009569378
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.5305024
+    y: 0.63655686
+    width: 0.009569378
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.5382775
+    y: 0.63655686
+    width: 0.0005980861
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.7099282
+    y: 0.63655686
+    width: 0.009569378
+    height: 0.017003188
+  borderWidth: 46
+  borderHeight: 46
+  cornerRadius: 40
+  proportionalCaps: 0
+  capAspect: 0.5
 --- !u!1 &1372920208702427
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,9 +1229,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 62
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 50
     m_MaxSize: 62
@@ -1202,6 +1332,7 @@ GameObject:
   - component: {fileID: 114094320201520353}
   - component: {fileID: 114026196548002408}
   - component: {fileID: 1069915530915372715}
+  - component: {fileID: 6797243284436179418}
   m_Layer: 5
   m_Name: WithDrawItem1
   m_TagString: Untagged
@@ -1259,7 +1390,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: -3401448470344470075, guid: fd4326344e6fb7c4684b2dd0c1c433c7, type: 3}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1316,6 +1447,70 @@ MonoBehaviour:
     TaskNumber: {fileID: 4777378220413578875}
     TaskNormalTint: {r: 1, g: 1, b: 1, a: 1}
     TaskCompletedTint: {r: 0.85, g: 1, b: 0.77, a: 1}
+--- !u!114 &6797243284436179418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589667821646929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c1215f6083d49a4d9a6e6de0e6a163f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlasResourcePath: Framework2AppleSkin/Reference
+  uvPatches:
+  - serializedVersion: 2
+    x: 0.5305024
+    y: 0.4590861
+    width: 0.009569378
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.5382775
+    y: 0.4590861
+    width: 0.0005980861
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.7099282
+    y: 0.4590861
+    width: 0.009569378
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.5305024
+    y: 0.61636555
+    width: 0.009569378
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.5382775
+    y: 0.61636555
+    width: 0.0005980861
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.7099282
+    y: 0.61636555
+    width: 0.009569378
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.5305024
+    y: 0.63655686
+    width: 0.009569378
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.5382775
+    y: 0.63655686
+    width: 0.0005980861
+    height: 0.017003188
+  - serializedVersion: 2
+    x: 0.7099282
+    y: 0.63655686
+    width: 0.009569378
+    height: 0.017003188
+  borderWidth: 46
+  borderHeight: 46
+  cornerRadius: 40
+  proportionalCaps: 0
+  capAspect: 0.5
 --- !u!1 &1618682377417806
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,7 +1579,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 68
     m_FontStyle: 0
     m_BestFit: 0
@@ -1409,8 +1604,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.04, g: 0.16, b: 0.4, a: 0.85}
-  m_EffectDistance: {x: 1.5, y: -1.5}
+  m_EffectColor: {r: 0.019607844, g: 0.18039216, b: 0.5137255, a: 1}
+  m_EffectDistance: {x: 1.4, y: -1.4}
   m_UseGraphicAlpha: 1
 --- !u!114 &114089843903986396
 MonoBehaviour:
@@ -1492,7 +1687,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
@@ -1530,6 +1725,7 @@ GameObject:
   - component: {fileID: 222641631609468814}
   - component: {fileID: 114533803739292891}
   - component: {fileID: 114601984538237284}
+  - component: {fileID: 8139485682078822487}
   m_Layer: 5
   m_Name: Continue
   m_TagString: Untagged
@@ -1586,7 +1782,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 8636877481111216802, guid: fd4326344e6fb7c4684b2dd0c1c433c7, type: 3}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1639,6 +1835,70 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8139485682078822487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632457200066912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c1215f6083d49a4d9a6e6de0e6a163f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlasResourcePath: Framework2AppleSkin/Reference
+  uvPatches:
+  - serializedVersion: 2
+    x: 0.033492822
+    y: 0.30393198
+    width: 0.020334927
+    height: 0.03188098
+  - serializedVersion: 2
+    x: 0.059808612
+    y: 0.30393198
+    width: 0.0005980861
+    height: 0.03188098
+  - serializedVersion: 2
+    x: 0.053827748
+    y: 0.30393198
+    width: -0.020334927
+    height: 0.03188098
+  - serializedVersion: 2
+    x: 0.033492822
+    y: 0.33475026
+    width: 0.020334927
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.059808612
+    y: 0.33475026
+    width: 0.0005980861
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.053827748
+    y: 0.33475026
+    width: -0.020334927
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.033492822
+    y: 0.33581296
+    width: 0.020334927
+    height: 0.03188098
+  - serializedVersion: 2
+    x: 0.059808612
+    y: 0.33581296
+    width: 0.0005980861
+    height: 0.03188098
+  - serializedVersion: 2
+    x: 0.053827748
+    y: 0.33581296
+    width: -0.020334927
+    height: 0.03188098
+  borderWidth: 80
+  borderHeight: 80
+  cornerRadius: 50
+  proportionalCaps: 1
+  capAspect: 0.56666666
 --- !u!1 &1634108722742392
 GameObject:
   m_ObjectHideFlags: 0
@@ -1707,9 +1967,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 70
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 58
     m_MaxSize: 70
@@ -1732,8 +1992,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.04, g: 0.16, b: 0.4, a: 0.85}
-  m_EffectDistance: {x: 1.5, y: -1.5}
+  m_EffectColor: {r: 0.019607844, g: 0.18039216, b: 0.5137255, a: 1}
+  m_EffectDistance: {x: 1.4, y: -1.4}
   m_UseGraphicAlpha: 1
 --- !u!114 &114190181876552715
 MonoBehaviour:
@@ -1815,9 +2075,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 44
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 32
     m_MaxSize: 44
@@ -1908,9 +2168,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 62
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 50
     m_MaxSize: 62
@@ -2090,9 +2350,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 62
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 50
     m_MaxSize: 62
@@ -2114,6 +2374,7 @@ GameObject:
   - component: {fileID: 224875609422105747}
   - component: {fileID: 222371939378208658}
   - component: {fileID: 114694121525821480}
+  - component: {fileID: 5702814076174571254}
   m_Layer: 5
   m_Name: PanelA
   m_TagString: Untagged
@@ -2177,7 +2438,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: -4147214026715712772, guid: fd4326344e6fb7c4684b2dd0c1c433c7, type: 3}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2186,6 +2447,70 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5702814076174571254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724804207875695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c1215f6083d49a4d9a6e6de0e6a163f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlasResourcePath: Framework2AppleSkin/Reference
+  uvPatches:
+  - serializedVersion: 2
+    x: 0.016746411
+    y: 0.2571732
+    width: 0.025119618
+    height: 0.046758767
+  - serializedVersion: 2
+    x: 0.04186603
+    y: 0.2571732
+    width: 0.0005980861
+    height: 0.046758767
+  - serializedVersion: 2
+    x: 0.041866027
+    y: 0.2571732
+    width: -0.025119618
+    height: 0.046758767
+  - serializedVersion: 2
+    x: 0.016746411
+    y: 0.51115835
+    width: 0.025119618
+    height: 0.0021253985
+  - serializedVersion: 2
+    x: 0.025119618
+    y: 0.51753455
+    width: 0.0017942584
+    height: 0.0031880978
+  - serializedVersion: 2
+    x: 0.041866027
+    y: 0.51115835
+    width: -0.025119618
+    height: 0.0021253985
+  - serializedVersion: 2
+    x: 0.016746411
+    y: 0.30393198
+    width: 0.025119618
+    height: -0.046758767
+  - serializedVersion: 2
+    x: 0.04186603
+    y: 0.30393198
+    width: 0.0005980861
+    height: -0.046758767
+  - serializedVersion: 2
+    x: 0.041866027
+    y: 0.30393198
+    width: -0.025119618
+    height: -0.046758767
+  borderWidth: 126
+  borderHeight: 126
+  cornerRadius: 92
+  proportionalCaps: 0
+  capAspect: 0.5
 --- !u!1 &1730242686860875
 GameObject:
   m_ObjectHideFlags: 0
@@ -2447,9 +2772,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 41
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 29
     m_MaxSize: 41
@@ -2603,9 +2928,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 67
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 55
     m_MaxSize: 67
@@ -2683,9 +3008,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 76
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 64
     m_MaxSize: 76
@@ -2708,8 +3033,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.04, g: 0.16, b: 0.4, a: 0.85}
-  m_EffectDistance: {x: 1.5, y: -1.5}
+  m_EffectColor: {r: 0.019607844, g: 0.18039216, b: 0.5137255, a: 1}
+  m_EffectDistance: {x: 1.4, y: -1.4}
   m_UseGraphicAlpha: 1
 --- !u!1 &2335232481974257602
 GameObject:
@@ -2777,9 +3102,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 67
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 55
     m_MaxSize: 67
@@ -2801,6 +3126,7 @@ GameObject:
   - component: {fileID: 1715604817344207105}
   - component: {fileID: 1322819434068666944}
   - component: {fileID: 3057420147192381233}
+  - component: {fileID: 8643647511443326354}
   m_Layer: 0
   m_Name: AppleHeader
   m_TagString: Untagged
@@ -2856,7 +3182,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 8144661843146654139, guid: fd4326344e6fb7c4684b2dd0c1c433c7, type: 3}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2865,6 +3191,70 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8643647511443326354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6324379510307938327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c1215f6083d49a4d9a6e6de0e6a163f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlasResourcePath: Framework2AppleSkin/Reference
+  uvPatches:
+  - serializedVersion: 2
+    x: 0.20873205
+    y: 0.6726886
+    width: -0.017942583
+    height: 0.03134963
+  - serializedVersion: 2
+    x: 0.06399521
+    y: 0.6726886
+    width: 0.0005980861
+    height: 0.03134963
+  - serializedVersion: 2
+    x: 0.19078948
+    y: 0.6726886
+    width: 0.017942583
+    height: 0.03134963
+  - serializedVersion: 2
+    x: 0.20873205
+    y: 0.7029756
+    width: -0.017942583
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.06399521
+    y: 0.7029756
+    width: 0.0005980861
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.19078948
+    y: 0.7029756
+    width: 0.017942583
+    height: 0.0010626992
+  - serializedVersion: 2
+    x: 0.20873205
+    y: 0.70403826
+    width: -0.017942583
+    height: 0.03134963
+  - serializedVersion: 2
+    x: 0.06399521
+    y: 0.70403826
+    width: 0.0005980861
+    height: 0.03134963
+  - serializedVersion: 2
+    x: 0.19078948
+    y: 0.70403826
+    width: 0.017942583
+    height: 0.03134963
+  borderWidth: 80
+  borderHeight: 80
+  cornerRadius: 50
+  proportionalCaps: 1
+  capAspect: 0.5084746
 --- !u!1 &7531570631547599941
 GameObject:
   m_ObjectHideFlags: 0
@@ -2931,9 +3321,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 33
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 21
     m_MaxSize: 33
@@ -3010,9 +3400,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 20350879d42ae854a8d906e2a7e3c062, type: 3}
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
     m_FontSize: 67
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 55
     m_MaxSize: 67

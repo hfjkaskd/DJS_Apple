@@ -348,6 +348,8 @@ namespace WZSDK
 			foreach (Text text in texts)
 			{
 				ApplyFont(text);
+                Framework2AppleCaption caption=text.GetComponent<Framework2AppleCaption>();
+                if(caption!=null){caption.Apply();continue;}
 				LocalizedText localized = text.GetComponent<LocalizedText>();
 				if (localized != null || string.IsNullOrWhiteSpace(text.text)) continue;
 				if (staticTextKeys.TryGetValue(NormalizeStaticText(text.text), out string key)) text.text = GetText(key);

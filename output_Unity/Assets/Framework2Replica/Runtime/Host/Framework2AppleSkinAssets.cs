@@ -6,6 +6,15 @@ public static class Framework2AppleSkinAssets
 {
     private static readonly Dictionary<string, Sprite> Sprites = new Dictionary<string, Sprite>();
     private static readonly HashSet<string> Loaded = new HashSet<string>();
+    private static readonly Dictionary<string,Sprite> ReferenceAtlases=new Dictionary<string,Sprite>();
+    public static Sprite LoadReferenceAtlas(string path)
+    {
+        if(string.IsNullOrEmpty(path))return null;
+        if(ReferenceAtlases.TryGetValue(path,out Sprite sprite))return sprite;
+        sprite=Resources.Load<Sprite>(path);
+        if(sprite==null){Debug.LogError("Missing Framework 2 reference atlas: "+path);return null;}
+        ReferenceAtlases[path]=sprite;return sprite;
+    }
     public static Sprite LoadSprite(string key)
     {
         if (string.IsNullOrEmpty(key)) return null;

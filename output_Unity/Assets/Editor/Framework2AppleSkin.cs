@@ -17,7 +17,7 @@ public static partial class Framework2AppleSkin
     private static readonly Dictionary<string, Sprite> SkinSprites = new Dictionary<string, Sprite>();
     private static Font cachedSkinFont;
     static Font SkinFont => cachedSkinFont != null ? cachedSkinFont :
-        cachedSkinFont = AssetDatabase.LoadAssetAtPath<Font>("Assets/Framework2Replica/Resources/Framework2Replica/External/Assets/Font/Roboto-Bold.ttf");
+        cachedSkinFont = AssetDatabase.LoadAssetAtPath<Font>("Assets/ApkEarningReference/Visuals/Font/Vagron.ttf");
     static readonly Color Brown = new Color32(91, 38, 18, 255);
     static Sprite SkinSprite(string key)
     {
@@ -32,7 +32,7 @@ public static partial class Framework2AppleSkin
         if (Hash(Config) != ExpectedConfigHash) throw new InvalidOperationException("Source product rules changed before skin authoring.");
         string originalHost = "Assets/Resources/EarningVariants/EarningVariantController.prefab";
         string originalHash = Hash(originalHost);
-        ImportArt();
+        ImportArt(); ImportReferenceArt();
         string[] names = {
             "GamePlayerView", "WithDraw", "WithDrawmethod", "WithDrawConfirm", "WithDrawQues", "WithDrawProcess1",
             "WithDrawHistory", "PayPalErrorView", "WithdrawMissionView", "WithdrawFeedbackView", "SlotView", "ProgressView",
@@ -49,11 +49,14 @@ public static partial class Framework2AppleSkin
             GameObject root = PrefabUtility.LoadPrefabContents(path);
             try
             {
+                foreach (var surface in root.GetComponentsInChildren<Framework2ReferenceSurface>(true)) Object.DestroyImmediate(surface);
+                foreach (var cutout in root.GetComponentsInChildren<Framework2ReferenceCutout>(true)) Object.DestroyImmediate(cutout);
                 if (root.GetComponent<Framework2AppleSkinMarker>() == null) root.AddComponent<Framework2AppleSkinMarker>();
                 foreach (Text text in root.GetComponentsInChildren<Text>(true))
                 { text.font = SkinFont; text.raycastTarget = false; }
                 ApplyAccounts(root, name); ApplyRewards(root, name); ApplyNavigation(root, name);
-                FinalizePrefab(root);
+                ApplyReferenceAlignment(root, name);
+                FinalizePrefab(root); RefFinish(root); AlignReferenceIllustrations(root,name);
                 PrefabUtility.SaveAsPrefabAsset(root, path);
                 paths.Add(path);
             }
@@ -63,7 +66,7 @@ public static partial class Framework2AppleSkin
         GameObject host = PrefabUtility.LoadPrefabContents(originalHost);
         try
         {
-            ApplyHost(host); FinalizePrefab(host);
+            ApplyHost(host); AlignReferenceHost(host); AlignHostPages(host); FinalizePrefab(host); RefFinish(host);
             PrefabUtility.SaveAsPrefabAsset(host, bHost); paths.Add(bHost);
         }
         finally { PrefabUtility.UnloadPrefabContents(host); }

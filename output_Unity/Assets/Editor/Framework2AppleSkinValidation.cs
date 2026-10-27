@@ -64,7 +64,7 @@ public static class Framework2AppleSkinValidation
         public string scope = "Actual Game.unity and production B UI APIs in an isolated QA save profile. " +
             "Every balance/stage/account/history setup is explicitly synthetic. No real advertisement, payment, or user account is used. " +
             "Each PNG is an offscreen 1080x1920 render of real live scene/prefab instances after animation settling, " +
-            "with safe-area adapters temporarily paused by Framework2ActualCapture. No mockup pixels replace UI. " +
+            "with safe-area adapters temporarily paused by Framework2ActualCapture. Reusable control surfaces and sprite contours use the approved artwork; text, values, controls and the gameplay scene remain live. " +
             "This is visual coverage, not physical-device evidence or a full end-to-end playthrough. Original workflow tests remain separate.";
         public string approvalManifest = "../ReskinPreview-AllUI-20261023/coverage.json";
         public bool passed, productionFilesUnchanged, productionSelectionUnchanged;
@@ -194,6 +194,20 @@ public static class Framework2AppleSkinValidation
             CorePlayUI.Instance != null && CorePlayUI.Instance.IsOpening && CorePlayUI.Instance.m_BgImg.sprite != null,
             "B game scene, original fruit background, and runtime", 60);
         var host = EarningVariantController.Instance;
+        // Use the actual fourth gameplay board for visual comparisons. The prior
+        // fixture changed only B's commercial level and left the first tutorial
+        // backdrop and locked tools behind it. This is isolated QA progress.
+        JEFOMCDAPGK.Instance.SetWinCount(3);
+        JEFOMCDAPGK.Instance.MarkNewItemPopShown(POJCEPBNNIP.Undo);
+        JEFOMCDAPGK.Instance.MarkNewItemPopShown(POJCEPBNNIP.Shuffle);
+        JEFOMCDAPGK.Instance.MarkNewItemPopShown(POJCEPBNNIP.Magic);
+        JEFOMCDAPGK.Instance.MarkNewItemPopShown(POJCEPBNNIP.Extra);
+        JEFOMCDAPGK.Instance.MainLevelData.Reset(false);
+        bool boardReady=false;
+        Framework.Base.UtilModule.CoroutineManager.Instance.StartCor(EDLHEMMBABM.Instance.ParseConfig(
+            PLMIHDHFAAL.Instance.GetMainLevelConfig(),false,()=>boardReady=true));
+        yield return Until(()=>boardReady,"native fourth gameplay board",30);
+        CorePlayUI.Instance.UpdateBehavior();
         // Capture the requested commercial template without the native first-board tutorial overlay.
         // Gameplay itself is unchanged; the fixture does not claim a completed real playthrough.
         if (NewPlayerGuider.Instance != null) NewPlayerGuider.Instance.gameObject.SetActive(false);
@@ -411,6 +425,30 @@ public static class Framework2AppleSkinValidation
         double beginning = Time.realtimeSinceStartupAsDouble;
         yield return Seconds(settle);
         Require(shownRoot != null && shownRoot.gameObject.activeInHierarchy, "Capture target remains visible: " + template + " / " + state);
+        Require(Object.FindObjectOfType<NewItemPop>()==null,"No unrelated native unlock modal covers the requested UI.");
+        if(template=="WithDrawmethod")
+            Require(shownRoot.Find("PanelA/Panel/ques").gameObject.activeInHierarchy,"Account help remains visible and reachable.");
+        if(template=="WithDrawConfirm")
+        {
+            var icon=shownRoot.Find("PanelA/method");
+            Require(icon.gameObject.activeInHierarchy && icon.GetComponent<Image>().enabled && icon.GetSiblingIndex()==icon.parent.childCount-1,
+                "Confirmation provider icon is enabled above the account card.");
+        }
+        if(id==39)
+        {
+            RectTransform a=shownRoot.Find("Card/ChooseA") as RectTransform;
+            RectTransform b=shownRoot.Find("Card/ChooseB") as RectTransform;
+            RectTransform confirm=shownRoot.Find("Card/NavConfirmSwitch") as RectTransform;
+            Require(a.position.y>b.position.y && b.position.y>confirm.position.y,
+                "Selector choices and confirmation occupy separate vertical rows.");
+            Require(a.anchoredPosition.sqrMagnitude>1 && confirm.anchoredPosition.sqrMagnitude>1,
+                "Saved host layout is expressed in nonzero canvas coordinates.");
+            RectTransform overlay=EarningVariantController.Instance.transform.Find("TestOverlay") as RectTransform;
+            RectTransform close=shownRoot.Find("Card/Close") as RectTransform;
+            Bounds closeBounds=RectTransformUtility.CalculateRelativeRectTransformBounds(overlay,close);
+            Require(closeBounds.max.x<=overlay.rect.xMax+1 && closeBounds.min.x>=overlay.rect.xMin-1,
+                "Selector close button stays inside its live canvas viewport.");
+        }
         if (shownRoot.GetComponent<BaseView>() != null)
             Require((shownRoot.localScale - Vector3.one).sqrMagnitude < .001f,
                 "Source opening tween reached its final scale before capture: " + template);

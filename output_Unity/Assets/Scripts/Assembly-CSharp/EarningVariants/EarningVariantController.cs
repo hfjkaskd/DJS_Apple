@@ -27,6 +27,7 @@ namespace FruitEarningVariants
         public bool Ready { get; private set; }
         public string InitializationError { get; private set; }
         private bool switching, paused;
+        private Framework2AppleVariantSelector appleSelector;
         private readonly CancellationTokenSource lifetime = new CancellationTokenSource();
         private Action<bool> adCompleted;
         private bool LocalPanel => switching || !Ready || SelectorPanel.activeSelf || RulesPanel.activeSelf || AdPanel.activeSelf || ErrorPanel.activeSelf;
@@ -38,6 +39,8 @@ namespace FruitEarningVariants
         private void Awake()
         {
             Instance = this;
+            appleSelector=GetComponent<Framework2AppleVariantSelector>();
+            if(appleSelector!=null)appleSelector.Bind(ConfirmAppleSelection);
             OpenSelectorButton.onClick.AddListener(OpenSelector);
             ChooseAButton.onClick.AddListener(ChooseA);
             ChooseBButton.onClick.AddListener(ChooseB);
@@ -137,8 +140,10 @@ namespace FruitEarningVariants
             RulesPanel.SetActive(false);
             if (EarningVariantSelection.IsB) { PlayerPrefs.SetInt(EarningVariantSelection.PreferenceKey(DisclosureKey), 1); PlayerPrefs.Save(); }
         }
-        private void ChooseA() { Select(false); }
-        private void ChooseB() { Select(true); }
+        private void ChooseA() { if(appleSelector!=null)appleSelector.Choose(false);else Select(false); }
+        private void ChooseB() { if(appleSelector!=null)appleSelector.Choose(true);else Select(true); }
+        private void ConfirmAppleSelection(bool useB)
+        {if(useB==EarningVariantSelection.IsB)CloseSelector();else Select(useB);}
         private void RefreshSelection()
         {
             CurrentVariantText.text = "Active: " + EarningVariantSelection.Label + "\nSeparate progress and balances. Switching reloads the saved game.";
@@ -146,6 +151,11 @@ namespace FruitEarningVariants
             OpenSelectorButton.interactable = canSwitch;
             ChooseAButton.interactable = canSwitch && EarningVariantSelection.IsB;
             ChooseBButton.interactable = canSwitch && !EarningVariantSelection.IsB;
+            if(appleSelector!=null)
+            {
+                ChooseAButton.interactable=ChooseBButton.interactable=canSwitch;
+                appleSelector.ResetSelection(EarningVariantSelection.IsB,canSwitch);
+            }
         }
         private void Select(bool useB)
         {

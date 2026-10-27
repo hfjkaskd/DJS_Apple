@@ -61,7 +61,7 @@ public static partial class Framework2AppleSkin
         presenter.enabled = page != Framework2AppleRewardPresenter.Page.Other;
         presenter.ConfigurePropIcons(
             AssetDatabase.LoadAssetAtPath<Sprite>("Assets/res/local/boxreward/sprite/Magic.asset"),
-            AssetDatabase.LoadAssetAtPath<Sprite>("Assets/res/local/boxreward/sprite/Undo.asset"));
+            AssetDatabase.LoadAssetAtPath<Sprite>("Assets/res/local/pops/newitempop/sprite/IconUndo.asset"));
         WZSDK.RewardView reward = root.GetComponent<WZSDK.RewardView>();
         if (reward != null) reward.ConfigureAppleSkin(presenter);
         WZSDK.ChallangeSuccessView challenge = root.GetComponent<WZSDK.ChallangeSuccessView>();

@@ -340,6 +340,13 @@ public static class EarningVariantIntegrationValidation
         Require(previous.SelectorPanel.activeInHierarchy, "The saved selector panel opens through its standard Button handler.");
         yield return null;
         Click(toB ? previous.ChooseBButton : previous.ChooseAButton, toB ? "ChooseB" : "ChooseA");
+        var selector=previous.GetComponent<Framework2AppleVariantSelector>();
+        if(selector!=null)
+        {
+            Require(EarningVariantController.Instance==previous && EarningVariantSelection.IsB!=toB,
+                "Choosing an Apple selector card keeps the current session until confirmation.");
+            Click(selector.ConfirmButton,"Confirm selected variant");
+        }
         yield return WaitForHost(toB, previousId);
         yield return SettleFrames(6);
         report.switchCount++;
