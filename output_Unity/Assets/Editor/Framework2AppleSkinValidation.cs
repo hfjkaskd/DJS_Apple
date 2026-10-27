@@ -50,6 +50,17 @@ public static class Framework2AppleSkinValidation
         public bool viewVisible;
         public List<string> visibleText = new List<string>();
         public List<string> buttonPaths = new List<string>();
+        public string referenceAspectFile;
+        public Rect referencePhone;
+        public List<LayoutObservation> layout = new List<LayoutObservation>();
+    }
+
+    [Serializable] private sealed class LayoutObservation
+    {
+        public string path;
+        public Rect expected, actual;
+        public bool visible;
+        public float maxEdgeError;
     }
 
     [Serializable] private sealed class Omission
@@ -224,7 +235,7 @@ public static class Framework2AppleSkinValidation
         yield return Legacy(19, "WithDraw", "stage3 advertisement progress", ViewType.WithDraw, 3, 3, .2, Model(3, .2), 1);
         yield return Legacy(20, "WithDraw", "stage4 balance task", ViewType.WithDraw, 4, 4, 50, Model(4, 50));
         yield return Legacy(21, "WithDraw", "stage5 balance task", ViewType.WithDraw, 5, 5, 1234.5, Model(5, 1234.5));
-        yield return Legacy(22, "WithDraw", "Lucky wallet locked", ViewType.WithDraw, 2, 2, .1, Model(2, .1));
+        yield return Legacy(22, "WithDraw", "Lucky wallet unlocked", ViewType.WithDraw, 5, 6, 2700, Model(5, 2700));
 
         yield return Legacy(7, "WithDrawmethod", "default email", ViewType.WithDrawMethod, 2, 2, .1, Model(1, .1));
         var email = FindInput(shownRoot, "Email");
@@ -275,8 +286,12 @@ public static class Framework2AppleSkinValidation
         yield return Modern(30, "LuckySpinView", "lucky wheel", EUIType.LuckySpinView, 5, 5, 123.45);
         yield return Modern(31, "GameBalancView", "lucky wallet", EUIType.GameBalancView, 5, 5, 123.45);
         yield return Prepare(5, 5, 123.45);
-        yield return OpenModern(EUIType.NoticeView, "Local test notice. No payment is sent.");
-        yield return Capture(32, "NoticeView", "toast", "explicit QA notice string", .75);
+        WithdrawApiService.ClearWalletAndOrdersForTesting();
+        yield return OpenModern(EUIType.GameBalancView);
+        Click(FindButton(shownRoot,"With"),"source insufficient-wallet notice");
+        yield return Until(()=>UIManager.instance.HasActiveView(EUIType.NoticeView),"source insufficient notice");
+        shownRoot=UIManager.instance.GetView<NoticeView>(EUIType.NoticeView).transform;
+        yield return Capture(32, "NoticeView", "amount notice", "Original wallet withdrawal Button, with an explicitly empty QA wallet; original configured minimum and automatic dismissal duration", .75);
         yield return Modern(43, "SettingsView", "settings", EUIType.SettingsView, 5, 5, 123.45);
         yield return Modern(44, "UserLevelView", "player level", EUIType.UserLevelView, 5, 5, 123.45);
 
@@ -326,6 +341,9 @@ public static class Framework2AppleSkinValidation
         report.notCaptured.Add(new Omission { approvalId = 46, reason = "Shared-components presentation board is not a standalone runtime page. Components are present within their actual owning pages, but no fabricated component montage is counted as a runtime screen." });
         report.activeTemplatesCaptured = CountActiveTemplates();
         report.hostPanelsCaptured = 4;
+        foreach(var capture in report.screenshots)
+            foreach(var box in capture.layout)
+                if(box.visible)Require(box.maxEdgeError<=.5f,"Live layout within half a reference pixel: "+capture.approvalId+"/"+box.path+" ("+box.maxEdgeError+")");
         Require(report.activeTemplatesCaptured == 24, "All 24 current business templates have an actual runtime capture.");
         Require(HashFile(ConfigPath) == ExpectedConfigHash, "Original business ProductConfig remains byte-identical after all fixtures.");
         WriteIndex();
@@ -474,9 +492,41 @@ public static class Framework2AppleSkinValidation
             if (ui == null) return;
             ui.GetComponent<EarningVariantGameplayView>()?.RefreshLayout();
             ui.FitGameField();
+            Tutorial.instance?.RefreshPresentationLayout();
         };
         if (!Framework2ActualCapture.TryCapturePortrait(Path.Combine(output, file), out string error, fit, fit))
             throw new InvalidOperationException("Actual-instance capture failed: " + error);
+        var layouts=Framework2ReferenceLayoutAudit.Read();
+        string suffix=id==2?"#stage1":id==8?"#invalid":id==18?"#stage2":id==21?"#late":id==22?"#unlocked":id==36?"#pix":id==37?"#phone":"";
+        string layoutKey=template+suffix;
+        var page=layouts.pages.Find(item=>item.template==layoutKey);
+        if(page!=null)
+        {
+            record.referencePhone=page.phone;
+            record.referenceAspectFile="ReferenceAspect/"+file;
+            int width=Mathf.RoundToInt(page.phone.width*2),height=Mathf.RoundToInt(page.phone.height*2);
+            Action<Camera> inspect=camera=>
+            {
+                Vector3[] corners=new Vector3[4];
+                foreach(var box in page.boxes)
+                {
+                    var rect=shownRoot.Find(box.path) as RectTransform;
+                    if(rect==null)throw new InvalidOperationException("Live layout target missing: "+template+"/"+box.path);
+                    rect.GetWorldCorners(corners);
+                    Vector2 lo=RectTransformUtility.WorldToScreenPoint(camera,corners[0]);
+                    Vector2 hi=RectTransformUtility.WorldToScreenPoint(camera,corners[2]);
+                    float scale=width/page.phone.width;
+                    Rect actual=new Rect(page.phone.x+lo.x/scale,page.phone.y+(height-hi.y)/scale,
+                        (hi.x-lo.x)/scale,(hi.y-lo.y)/scale);
+                    float delta=Mathf.Max(Mathf.Abs(actual.xMin-box.reference.xMin),Mathf.Abs(actual.xMax-box.reference.xMax),
+                        Mathf.Abs(actual.yMin-box.reference.yMin),Mathf.Abs(actual.yMax-box.reference.yMax));
+                    record.layout.Add(new LayoutObservation {path=box.path,expected=box.reference,actual=actual,
+                        visible=rect.gameObject.activeInHierarchy,maxEdgeError=delta});
+                }
+            };
+            if(!Framework2ActualCapture.TryCapturePortrait(Path.Combine(output,record.referenceAspectFile),out error,fit,fit,width,height,inspect))
+                throw new InvalidOperationException("Reference-aspect live capture failed: "+error);
+        }
         report.screenshots.Add(record); report.captures++;
         WriteReport();
         Debug.Log("APPLE_SKIN_CAPTURE " + id + " " + template + " " + state);

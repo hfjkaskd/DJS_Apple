@@ -167,7 +167,7 @@ namespace WZSDK
 				// Legacy CSV fallback only; the host SO text resolves its economy token.
 				if (Framework2Host.Settings.localizationDatabase == null)
 					message = message.Replace("$0.10", FormatCoin(MinimumCashOutAmount));
-				UIManager.instance?.ShowView(EUIType.NoticeView, message);
+				UIManager.instance?.ShowView(EUIType.NoticeView, message, MinimumCashOutAmount);
 				return;
 			}
 			DataModel dataModel = CreateWithdrawData(GameManagerWZ.instance);

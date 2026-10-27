@@ -70,6 +70,9 @@ namespace WZSDK
 
 		public float duration = 2f;
 
+        [SerializeField] private Framework2AppleNoticePresenter appleNotice;
+        public void ConfigureAppleNotice(Framework2AppleNoticePresenter value) {appleNotice=value;}
+
 		private Coroutine _hideCoroutine;
 
 		public override void InitView()
@@ -103,6 +106,7 @@ namespace WZSDK
 			}
 
 			StopHideCoroutine();
+            appleNotice?.Present(args);
 			_hideCoroutine = StartCoroutine(HideAfterDelay(duration));
 		}
 

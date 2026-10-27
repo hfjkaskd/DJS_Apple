@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 114703437598541787}
   - component: {fileID: 114884547391421755}
   - component: {fileID: 3562789651052913933}
-  - component: {fileID: 1031428082419462009}
+  - component: {fileID: 8620507831020854034}
   m_Layer: 5
   m_Name: LocalContentErrorTip
   m_TagString: Untagged
@@ -105,7 +105,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26ccf6621e98e542939e32bf3e46dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1031428082419462009
+  authoringFontMetrics:
+  - target: {fileID: 114061268324235159}
+    size: 53
+    min: 42
+    max: 53
+--- !u!114 &8620507831020854034
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,11 +242,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 53
+    m_FontSize: 72
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 42
-    m_MaxSize: 53
+    m_MinSize: 40
+    m_MaxSize: 72
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1

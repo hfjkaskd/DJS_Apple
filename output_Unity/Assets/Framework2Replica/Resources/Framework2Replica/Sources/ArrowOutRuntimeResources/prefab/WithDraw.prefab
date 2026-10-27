@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 143.57684, y: 92.754105}
-  m_SizeDelta: {x: 574.3073, y: 123.672134}
+  m_AnchoredPosition: {x: 143.57684, y: 104.28211}
+  m_SizeDelta: {x: 574.3073, y: 139.04282}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222231814100211528
 CanvasRenderer:
@@ -67,11 +67,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 43
+    m_FontSize: 58
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 39
-    m_MaxSize: 43
+    m_MinSize: 32
+    m_MaxSize: 58
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -115,7 +115,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 822, y: 77}
+  m_SizeDelta: {x: 821.5743, y: 87.74811}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222292246286975720
 CanvasRenderer:
@@ -147,11 +147,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 45
+    m_FontSize: 61
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 33
-    m_MaxSize: 45
+    m_MinSize: 34
+    m_MaxSize: 61
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -209,8 +209,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.534005, y: -118.295074}
-  m_SizeDelta: {x: 876.5743, y: 88.72131}
+  m_AnchoredPosition: {x: 4.534005, y: -132.99747}
+  m_SizeDelta: {x: 876.5743, y: 99.74811}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1061268324235159
 GameObject:
@@ -223,7 +223,6 @@ GameObject:
   - component: {fileID: 224000955326284023}
   - component: {fileID: 222397768327470545}
   - component: {fileID: 114571718729274231}
-  - component: {fileID: 114581786255902400}
   m_Layer: 5
   m_Name: AccountVerified
   m_TagString: Untagged
@@ -247,8 +246,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 158.69019, y: -69.90164}
-  m_SizeDelta: {x: 586.398, y: 123.672134}
+  m_AnchoredPosition: {x: 158.69019, y: -78.58942}
+  m_SizeDelta: {x: 586.398, y: 139.04282}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222397768327470545
 CanvasRenderer:
@@ -280,31 +279,20 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 43
+    m_FontSize: 58
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 39
-    m_MaxSize: 43
+    m_MinSize: 32
+    m_MaxSize: 58
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u60A8\u7684\u8D26\u53F7\u5DF2\u7ECF<color=\"#007730\">\u901A\u8FC7\u9A8C\u8BC1</color>"
---- !u!114 &114581786255902400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1061268324235159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e603d63ab008ecc9c9fa7413a75d57e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textId: 3018
+  m_Text: 'Local simulation.
+
+    Dummy details saved locally.'
 --- !u!1 &1099118695303065
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +331,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 940.05035, y: 443.60657}
+  m_SizeDelta: {x: 940.05035, y: 498.74057}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222719342369648492
 CanvasRenderer:
@@ -452,11 +440,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 66
+    m_FontSize: 89
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 54
-    m_MaxSize: 66
+    m_MinSize: 49
+    m_MaxSize: 89
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
@@ -529,8 +517,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 76.622955}
-  m_SizeDelta: {x: 940.05035, y: 290.36066}
+  m_AnchoredPosition: {x: 0, y: 86.14612}
+  m_SizeDelta: {x: 940.05035, y: 326.44836}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222693329660128220
 CanvasRenderer:
@@ -582,7 +570,7 @@ GameObject:
   - component: {fileID: 222699617135816954}
   - component: {fileID: 114264357844037074}
   - component: {fileID: 114499726237547504}
-  - component: {fileID: 2711813175084521992}
+  - component: {fileID: 2342068030696395874}
   m_Layer: 5
   m_Name: WithDraw
   m_TagString: Untagged
@@ -607,8 +595,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.534005, y: -48.393425}
-  m_SizeDelta: {x: 876.5743, y: 153.2459}
+  m_AnchoredPosition: {x: 4.534005, y: -54.40805}
+  m_SizeDelta: {x: 876.5743, y: 172.29219}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222699617135816954
 CanvasRenderer:
@@ -692,7 +680,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2711813175084521992
+--- !u!114 &2342068030696395874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -768,7 +756,7 @@ GameObject:
   - component: {fileID: 222328299215684997}
   - component: {fileID: 114633296557590524}
   - component: {fileID: 114132862189046193}
-  - component: {fileID: 5038658047518525731}
+  - component: {fileID: 4087455590347328069}
   m_Layer: 5
   m_Name: CashOut
   m_TagString: Untagged
@@ -793,8 +781,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 199.49623, y: -100.81967}
-  m_SizeDelta: {x: 492.69522, y: 112.91803}
+  m_AnchoredPosition: {x: 199.49623, y: -113.35016}
+  m_SizeDelta: {x: 492.69522, y: 126.95214}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222328299215684997
 CanvasRenderer:
@@ -878,7 +866,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5038658047518525731
+--- !u!114 &4087455590347328069
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -978,8 +966,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 188.91689, y: 75.27869}
-  m_SizeDelta: {x: 513.8539, y: 67.21311}
+  m_AnchoredPosition: {x: 188.91689, y: 84.634705}
+  m_SizeDelta: {x: 513.8539, y: 75.56675}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222492842699383957
 CanvasRenderer:
@@ -1011,11 +999,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 43
+    m_FontSize: 58
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 39
-    m_MaxSize: 43
+    m_MinSize: 32
+    m_MaxSize: 58
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1119,11 +1107,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 42
+    m_FontSize: 57
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 30
-    m_MaxSize: 42
+    m_MinSize: 31
+    m_MaxSize: 57
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
@@ -1180,7 +1168,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 853, y: 65}
+  m_SizeDelta: {x: 852.5743, y: 75.74811}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222279359913592680
 CanvasRenderer:
@@ -1243,7 +1231,7 @@ GameObject:
   - component: {fileID: 224354824845356902}
   - component: {fileID: 222770005084341472}
   - component: {fileID: 114123703392571528}
-  - component: {fileID: 916248040206301916}
+  - component: {fileID: 699764651064268264}
   m_Layer: 5
   m_Name: PanelC
   m_TagString: Untagged
@@ -1275,8 +1263,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.534005, y: -399.24588}
-  m_SizeDelta: {x: 940.05035, y: 239.27869}
+  m_AnchoredPosition: {x: -4.534005, y: -448.86646}
+  m_SizeDelta: {x: 940.05035, y: 269.01764}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222770005084341472
 CanvasRenderer:
@@ -1316,7 +1304,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &916248040206301916
+--- !u!114 &699764651064268264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1448,11 +1436,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 42
+    m_FontSize: 57
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 30
-    m_MaxSize: 42
+    m_MinSize: 31
+    m_MaxSize: 57
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
@@ -1507,8 +1495,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -308.31235, y: -5.3770447}
-  m_SizeDelta: {x: 226.70026, y: 209.70493}
+  m_AnchoredPosition: {x: -308.31235, y: -6.045349}
+  m_SizeDelta: {x: 226.70026, y: 235.76826}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222045458335737618
 CanvasRenderer:
@@ -1583,7 +1571,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 877, y: 89}
+  m_SizeDelta: {x: 876.5743, y: 99.74811}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222094320201520353
 CanvasRenderer:
@@ -1622,7 +1610,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1.1460674
+  m_PixelsPerUnitMultiplier: 1.0225757
 --- !u!1 &1618682377417806
 GameObject:
   m_ObjectHideFlags: 0
@@ -1635,7 +1623,7 @@ GameObject:
   - component: {fileID: 222900271049623953}
   - component: {fileID: 114472185465350827}
   - component: {fileID: 114518489005915545}
-  - component: {fileID: 1835562108903759966}
+  - component: {fileID: 3255271021130479677}
   m_Layer: 5
   m_Name: close
   m_TagString: Untagged
@@ -1659,8 +1647,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 474.5592, y: 596.8525}
-  m_SizeDelta: {x: 151.1335, y: 134.42622}
+  m_AnchoredPosition: {x: 474.5592, y: 671.0328}
+  m_SizeDelta: {x: 151.1335, y: 151.1335}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222900271049623953
 CanvasRenderer:
@@ -1744,7 +1732,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1835562108903759966
+--- !u!114 &3255271021130479677
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1877,11 +1865,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 48
+    m_FontSize: 65
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
-    m_MaxSize: 48
+    m_MinSize: 4
+    m_MaxSize: 65
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2105,11 +2093,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 36
+    m_FontSize: 49
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 100
+    m_MaxSize: 135
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
@@ -2152,8 +2140,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 123.92947, y: -2.6885376}
-  m_SizeDelta: {x: 655.9194, y: 174.7541}
+  m_AnchoredPosition: {x: 123.92947, y: -3.022705}
+  m_SizeDelta: {x: 655.9194, y: 196.47356}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222561126880652180
 CanvasRenderer:
@@ -2185,11 +2173,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 49
+    m_FontSize: 66
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 45
-    m_MaxSize: 49
+    m_MinSize: 36
+    m_MaxSize: 66
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2281,11 +2269,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 100
+    m_FontSize: 135
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 100
+    m_MaxSize: 135
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2334,7 +2322,7 @@ GameObject:
   - component: {fileID: 224799762105739359}
   - component: {fileID: 222829625606037309}
   - component: {fileID: 114574190619683098}
-  - component: {fileID: 9043134414679770988}
+  - component: {fileID: 5223329030403747571}
   m_Layer: 5
   m_Name: PanelB
   m_TagString: Untagged
@@ -2361,8 +2349,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.534005, y: -87.37705}
-  m_SizeDelta: {x: 940.05035, y: 319.93442}
+  m_AnchoredPosition: {x: -4.534005, y: -98.23677}
+  m_SizeDelta: {x: 940.05035, y: 359.69772}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222829625606037309
 CanvasRenderer:
@@ -2402,7 +2390,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9043134414679770988
+--- !u!114 &5223329030403747571
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2480,6 +2468,7 @@ GameObject:
   - component: {fileID: 114320256170494724}
   - component: {fileID: 4796441424636404761}
   - component: {fileID: 8249319796021296911}
+  - component: {fileID: 2742143254932572838}
   m_Layer: 5
   m_Name: WithDraw
   m_TagString: Untagged
@@ -2571,6 +2560,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26ccf6621e98e542939e32bf3e46dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  authoringFontMetrics:
+  - target: {fileID: 114967328832014496}
+    size: 100
+    min: 1
+    max: 100
+  - target: {fileID: 114571718729274231}
+    size: 43
+    min: 24
+    max: 43
+  - target: {fileID: 114689364072382846}
+    size: 106
+    min: 58
+    max: 106
+  - target: {fileID: 114693062532245359}
+    size: 45
+    min: 25
+    max: 45
+  - target: {fileID: 114009931292380359}
+    size: 36
+    min: 3
+    max: 80
+  - target: {fileID: 114431740505123533}
+    size: 42
+    min: 23
+    max: 42
+  - target: {fileID: 114121005239445321}
+    size: 66
+    min: 36
+    max: 66
+  - target: {fileID: 114194081240383615}
+    size: 43
+    min: 24
+    max: 43
+  - target: {fileID: 114150646884989824}
+    size: 43
+    min: 24
+    max: 43
+  - target: {fileID: 114601984538237284}
+    size: 48
+    min: 3
+    max: 48
+  - target: {fileID: 114408345039935966}
+    size: 36
+    min: 1
+    max: 100
+  - target: {fileID: 114386943702330414}
+    size: 46
+    min: 25
+    max: 46
+  - target: {fileID: 114275549183895104}
+    size: 49
+    min: 27
+    max: 49
+  - target: {fileID: 114232094423628703}
+    size: 74
+    min: 41
+    max: 74
+  - target: {fileID: 1017576658259504850}
+    size: 35
+    min: 19
+    max: 35
+  - target: {fileID: 5607125628146504084}
+    size: 43
+    min: 24
+    max: 43
+  - target: {fileID: 6185384466979108321}
+    size: 40
+    min: 22
+    max: 40
+  - target: {fileID: 6752043735411944869}
+    size: 76
+    min: 42
+    max: 76
+  - target: {fileID: 114433013960508438}
+    size: 42
+    min: 23
+    max: 42
 --- !u!114 &8249319796021296911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2596,10 +2662,17 @@ MonoBehaviour:
     PixMethods: {fileID: 0}
     PhoneMethod: {fileID: 0}
     InputLabel: {fileID: 0}
+    RegionalDescription: {fileID: 0}
+    PixDescription: 
+    PhoneDescription: 
     EmailLabel: 
     PhoneLabel: 
     PixLabel: 
     InputErrorBorder: {fileID: 0}
+    LayoutProfiles: {fileID: 2742143254932572838}
+    TaskCaption: {fileID: 114571718729274231}
+    TaskObjective: {fileID: 114194081240383615}
+    Remaining: {fileID: 5607125628146504084}
     EmptyHistory: {fileID: 0}
     GemCostLabels: []
     TaskBackground: {fileID: 0}
@@ -2607,6 +2680,2116 @@ MonoBehaviour:
     TaskNumber: {fileID: 0}
     TaskNormalTint: {r: 1, g: 1, b: 1, a: 1}
     TaskCompletedTint: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &2742143254932572838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709254077376921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 996284a3a7e28334796a72015a8ec4c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profiles:
+  - key: default
+    entries:
+    - target: {fileID: 224017697238300914}
+      position: {x: 0, y: -227.52551}
+      size: {x: 735.7964, y: 226.1657}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224089843903986396}
+      position: {x: 7.556675, y: -122.41814}
+      size: {x: 1070.0251, y: 1432.7456}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224220653531496868}
+      position: {x: 2, y: -316}
+      size: {x: 629.0096, y: 161.2426}
+      anchorMin: {x: 0.5, y: 1}
+      anchorMax: {x: 0.5, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114967328832014496}
+      font: 100
+      minFont: 1
+      maxFont: 100
+    - target: {fileID: 224919942235722503}
+      position: {x: -4.534005, y: 330.98236}
+      size: {x: 940.05035, y: 498.74057}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224632746491512912}
+      position: {x: 0, y: 0}
+      size: {x: 940.05035, y: 498.74057}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224436073260064126}
+      position: {x: 0, y: 86.14612}
+      size: {x: 940.05035, y: 326.44836}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224000955326284023}
+      position: {x: 158.69019, y: -78.58942}
+      size: {x: 586.398, y: 139.04282}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114571718729274231}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 224477046003934300}
+      position: {x: -308.31235, y: -6.045349}
+      size: {x: 226.70026, y: 235.76826}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224924050743934937}
+      position: {x: 158.69019, y: 66.49872}
+      size: {x: 586.398, y: 145.08817}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114689364072382846}
+      font: 106
+      minFont: 102
+      maxFont: 106
+    - target: {fileID: 224043919389829319}
+      position: {x: 4.534005, y: -132.99747}
+      size: {x: 876.5743, y: 99.74811}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224743393880019028}
+      position: {x: 0, y: 0}
+      size: {x: 876.5743, y: 99.74811}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224572839542275309}
+      position: {x: 0, y: 0}
+      size: {x: 852.5743, y: 75.74811}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224149520701623706}
+      position: {x: 0, y: 0}
+      size: {x: 821.5743, y: 87.74811}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114693062532245359}
+      font: 45
+      minFont: 33
+      maxFont: 45
+    - target: {fileID: 224370222726513266}
+      position: {x: 111, y: -352}
+      size: {x: 279.5728, y: 84.5462}
+      anchorMin: {x: 0, y: 1}
+      anchorMax: {x: 0, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114009931292380359}
+      font: 36
+      minFont: 3
+      maxFont: 80
+    - target: {fileID: 224799762105739359}
+      position: {x: -4.534005, y: -98.23677}
+      size: {x: 940.05035, y: 359.69772}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224552309709192268}
+      position: {x: -294.71033, y: 102.770775}
+      size: {x: 278.08563, y: 99.74811}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224964469411310401}
+      position: {x: 0, y: 0}
+      size: {x: 190, y: 75}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114431740505123533}
+      font: 42
+      minFont: 30
+      maxFont: 42
+    - target: {fileID: 224976365255789935}
+      position: {x: 4.534005, y: -54.40805}
+      size: {x: 876.5743, y: 172.29219}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224658330495870062}
+      position: {x: 0, y: 0}
+      size: {x: 830, y: 145}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114121005239445321}
+      font: 66
+      minFont: 54
+      maxFont: 66
+    - target: {fileID: 224085275382694935}
+      position: {x: 143.57684, y: 104.28211}
+      size: {x: 574.3073, y: 139.04282}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114194081240383615}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 224354824845356902}
+      position: {x: -4.534005, y: -448.86646}
+      size: {x: 940.05035, y: 269.01764}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224855482821919830}
+      position: {x: 188.91689, y: 84.634705}
+      size: {x: 513.8539, y: 75.56675}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114150646884989824}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 224641631609468814}
+      position: {x: 142.8047, y: -108}
+      size: {x: 550.2198, y: 122.09}
+      anchorMin: {x: 0.5, y: 1}
+      anchorMax: {x: 0.5, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114601984538237284}
+      font: 48
+      minFont: 3
+      maxFont: 48
+    - target: {fileID: 224690175861776792}
+      position: {x: -4, y: 78}
+      size: {x: 170, y: 84}
+      anchorMin: {x: 0.5, y: 0}
+      anchorMax: {x: 0.5, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224617365563186364}
+      position: {x: 0, y: 0}
+      size: {x: 0, y: 0}
+      anchorMin: {x: 0, y: 0}
+      anchorMax: {x: 1, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114408345039935966}
+      font: 36
+      minFont: 1
+      maxFont: 100
+    - target: {fileID: 224611579644537198}
+      position: {x: 199.49623, y: -113.35016}
+      size: {x: 492.69522, y: 126.95214}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224295428814336086}
+      position: {x: 0, y: 0}
+      size: {x: 430, y: 101}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114386943702330414}
+      font: 46
+      minFont: 34
+      maxFont: 46
+    - target: {fileID: 224824317463469755}
+      position: {x: 123.92947, y: -3.022705}
+      size: {x: 655.9194, y: 196.47356}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114275549183895104}
+      font: 49
+      minFont: 45
+      maxFont: 49
+    - target: {fileID: 224187454977326620}
+      position: {x: 188.91689, y: 3.022644}
+      size: {x: 513.8539, y: 99.74811}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114232094423628703}
+      font: 74
+      minFont: 70
+      maxFont: 74
+    - target: {fileID: 2181106419361139360}
+      position: {x: -330.98236, y: 7.5566406}
+      size: {x: 169.26952, y: 199.49622}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 6126658110876133566}
+      position: {x: -264.48364, y: -25.692749}
+      size: {x: 398.99243, y: 314.3577}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 7817761759654438981}
+      position: {x: 0, y: -631.73804}
+      size: {x: 912.8464, y: 66.49874}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 1017576658259504850}
+      font: 35
+      minFont: 31
+      maxFont: 35
+    - target: {fileID: 102542509383017408}
+      position: {x: 0, y: 0}
+      size: {x: 100, y: 100}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 5607125628146504084}
+      font: 43
+      minFont: 34
+      maxFont: 43
+    - target: {fileID: 6097054976511498692}
+      position: {x: 0, y: 0}
+      size: {x: 100, y: 100}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 6185384466979108321}
+      font: 40
+      minFont: 32
+      maxFont: 40
+    - target: {fileID: 2759852110381100205}
+      position: {x: -374.81107, y: 770.7809}
+      size: {x: 151.1335, y: 151.1335}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 7009435713877414055}
+      position: {x: -9.06801, y: 698.2368}
+      size: {x: 725.4408, y: 181.3602}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 2746339998882279388}
+      position: {x: -9.06801, y: 701.25946}
+      size: {x: 671.0328, y: 145.08817}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 6752043735411944869}
+      font: 76
+      minFont: 72
+      maxFont: 76
+    - target: {fileID: 224060945828524476}
+      position: {x: 474.5592, y: 671.0328}
+      size: {x: 151.1335, y: 151.1335}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224771092198208730}
+      position: {x: 0, y: -80}
+      size: {x: 1000, y: 150}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224056248600188076}
+      position: {x: 0, y: 0}
+      size: {x: 1000, y: 150}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224358105479016104}
+      position: {x: 0, y: 0}
+      size: {x: 950, y: 130}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114433013960508438}
+      font: 42
+      minFont: 30
+      maxFont: 42
+    visibility:
+    - target: {fileID: 328249798293438114}
+      visible: 0
+    - target: {fileID: 4199507069908039527}
+      visible: 0
+    - target: {fileID: 1002669891404536}
+      visible: 1
+  - key: stage1
+    entries:
+    - target: {fileID: 224017697238300914}
+      position: {x: 0, y: -227.52551}
+      size: {x: 735.7964, y: 226.1657}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224089843903986396}
+      position: {x: 0, y: -82.87937}
+      size: {x: 1059.9221, y: 1363.4241}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224220653531496868}
+      position: {x: 2, y: -316}
+      size: {x: 629.0096, y: 161.2426}
+      anchorMin: {x: 0.5, y: 1}
+      anchorMax: {x: 0.5, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114967328832014496}
+      font: 100
+      minFont: 1
+      maxFont: 100
+    - target: {fileID: 224919942235722503}
+      position: {x: -2.3346303, y: 336.18677}
+      size: {x: 924.51355, y: 424.9027}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224632746491512912}
+      position: {x: 0, y: 0}
+      size: {x: 924.51355, y: 424.9027}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224436073260064126}
+      position: {x: 0, y: 59.53305}
+      size: {x: 924.51355, y: 305.83655}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224000955326284023}
+      position: {x: 135.40855, y: -80.54474}
+      size: {x: 569.6498, y: 144.74707}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114571718729274231}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 224477046003934300}
+      position: {x: -305.83658, y: 3.5019531}
+      size: {x: 224.12451, y: 214.78598}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224924050743934937}
+      position: {x: 143.57976, y: 58.365753}
+      size: {x: 595.3307, y: 142.41245}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114689364072382846}
+      font: 106
+      minFont: 102
+      maxFont: 106
+    - target: {fileID: 224043919389829319}
+      position: {x: -1.1673152, y: -134.24126}
+      size: {x: 833.463, y: 81.71206}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224743393880019028}
+      position: {x: 0, y: 0}
+      size: {x: 833.463, y: 81.71206}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224572839542275309}
+      position: {x: 0, y: 0}
+      size: {x: 809.463, y: 57.71206}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224149520701623706}
+      position: {x: 0, y: 0}
+      size: {x: 778.463, y: 69.71206}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114693062532245359}
+      font: 45
+      minFont: 33
+      maxFont: 45
+    - target: {fileID: 224370222726513266}
+      position: {x: 111, y: -352}
+      size: {x: 279.5728, y: 84.5462}
+      anchorMin: {x: 0, y: 1}
+      anchorMax: {x: 0, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114009931292380359}
+      font: 36
+      minFont: 3
+      maxFont: 80
+    - target: {fileID: 224799762105739359}
+      position: {x: -2.3346303, y: -92.2179}
+      size: {x: 924.51355, y: 361.86768}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224552309709192268}
+      position: {x: -288.32684, y: 94.55253}
+      size: {x: 259.14395, y: 98.054474}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224964469411310401}
+      position: {x: 0, y: 0}
+      size: {x: 190, y: 75}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114431740505123533}
+      font: 42
+      minFont: 30
+      maxFont: 42
+    - target: {fileID: 224976365255789935}
+      position: {x: 2.3346303, y: -59.533073}
+      size: {x: 845.13617, y: 163.42412}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224658330495870062}
+      position: {x: 0, y: 0}
+      size: {x: 830, y: 145}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114121005239445321}
+      font: 66
+      minFont: 54
+      maxFont: 66
+    - target: {fileID: 224085275382694935}
+      position: {x: 155.2529, y: 94.55253}
+      size: {x: 557.9766, y: 93.38521}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114194081240383615}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 224354824845356902}
+      position: {x: -2.3346303, y: -427.23734}
+      size: {x: 924.51355, y: 233.46303}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224855482821919830}
+      position: {x: 188.91689, y: 84.634705}
+      size: {x: 513.8539, y: 75.56675}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114150646884989824}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 224641631609468814}
+      position: {x: 142.8047, y: -108}
+      size: {x: 550.2198, y: 122.09}
+      anchorMin: {x: 0.5, y: 1}
+      anchorMax: {x: 0.5, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114601984538237284}
+      font: 48
+      minFont: 3
+      maxFont: 48
+    - target: {fileID: 224690175861776792}
+      position: {x: -4, y: 78}
+      size: {x: 170, y: 84}
+      anchorMin: {x: 0.5, y: 0}
+      anchorMax: {x: 0.5, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224617365563186364}
+      position: {x: 0, y: 0}
+      size: {x: 0, y: 0}
+      anchorMin: {x: 0, y: 0}
+      anchorMax: {x: 1, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114408345039935966}
+      font: 36
+      minFont: 1
+      maxFont: 100
+    - target: {fileID: 224611579644537198}
+      position: {x: 199.49623, y: -113.35016}
+      size: {x: 492.69522, y: 126.95214}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224295428814336086}
+      position: {x: 0, y: 0}
+      size: {x: 430, y: 101}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114386943702330414}
+      font: 46
+      minFont: 34
+      maxFont: 46
+    - target: {fileID: 224824317463469755}
+      position: {x: 115.5642, y: -5.836609}
+      size: {x: 656.0311, y: 156.42023}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114275549183895104}
+      font: 49
+      minFont: 45
+      maxFont: 49
+    - target: {fileID: 224187454977326620}
+      position: {x: 188.91689, y: 3.022644}
+      size: {x: 513.8539, y: 99.74811}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114232094423628703}
+      font: 74
+      minFont: 70
+      maxFont: 74
+    - target: {fileID: 2181106419361139360}
+      position: {x: -335.01944, y: 3.5019226}
+      size: {x: 142.41245, y: 165.75874}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 6126658110876133566}
+      position: {x: -264.48364, y: -25.692749}
+      size: {x: 398.99243, y: 314.3577}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 7817761759654438981}
+      position: {x: -12.8404665, y: -591.82874}
+      size: {x: 828.79376, y: 58.365757}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 1017576658259504850}
+      font: 33
+      minFont: 29
+      maxFont: 33
+    - target: {fileID: 102542509383017408}
+      position: {x: 0, y: 0}
+      size: {x: 100, y: 100}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 5607125628146504084}
+      font: 43
+      minFont: 34
+      maxFont: 43
+    - target: {fileID: 6097054976511498692}
+      position: {x: 0, y: 0}
+      size: {x: 100, y: 100}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 6185384466979108321}
+      font: 40
+      minFont: 32
+      maxFont: 40
+    - target: {fileID: 2759852110381100205}
+      position: {x: -406.22568, y: 723.7354}
+      size: {x: 116.731514, y: 116.731514}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 7009435713877414055}
+      position: {x: -30.350193, y: 670.0389}
+      size: {x: 812.45135, y: 172.76263}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 2746339998882279388}
+      position: {x: -30.350193, y: 670.0389}
+      size: {x: 775.0972, y: 149.41634}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 6752043735411944869}
+      font: 76
+      minFont: 72
+      maxFont: 76
+    - target: {fileID: 224060945828524476}
+      position: {x: 464.59143, y: 628.01556}
+      size: {x: 135.40855, y: 144.74707}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224771092198208730}
+      position: {x: 0, y: -80}
+      size: {x: 1000, y: 150}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224056248600188076}
+      position: {x: 0, y: 0}
+      size: {x: 1000, y: 150}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224358105479016104}
+      position: {x: 0, y: 0}
+      size: {x: 950, y: 130}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114433013960508438}
+      font: 42
+      minFont: 30
+      maxFont: 42
+    visibility:
+    - target: {fileID: 328249798293438114}
+      visible: 0
+    - target: {fileID: 4199507069908039527}
+      visible: 0
+    - target: {fileID: 1002669891404536}
+      visible: 1
+  - key: stage2
+    entries:
+    - target: {fileID: 224017697238300914}
+      position: {x: 0, y: -227.52551}
+      size: {x: 735.7964, y: 226.1657}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224089843903986396}
+      position: {x: 23.762377, y: -66.83169}
+      size: {x: 1069.307, y: 1455.4456}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224220653531496868}
+      position: {x: 2, y: -316}
+      size: {x: 629.0096, y: 161.2426}
+      anchorMin: {x: 0.5, y: 1}
+      anchorMax: {x: 0.5, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114967328832014496}
+      font: 100
+      minFont: 1
+      maxFont: 100
+    - target: {fileID: 224919942235722503}
+      position: {x: -16.336634, y: 347.52478}
+      size: {x: 953.4654, y: 469.30695}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224632746491512912}
+      position: {x: 0, y: 0}
+      size: {x: 953.4654, y: 469.30695}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224436073260064126}
+      position: {x: 0, y: 68.31683}
+      size: {x: 953.4654, y: 332.67328}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224000955326284023}
+      position: {x: 161.8812, y: -72.77228}
+      size: {x: 564.35645, y: 127.72278}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114571718729274231}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 224477046003934300}
+      position: {x: -298.51486, y: 0}
+      size: {x: 237.62376, y: 249.50496}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224924050743934937}
+      position: {x: 158.9109, y: 63.86139}
+      size: {x: 570.29706, y: 169.30693}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114689364072382846}
+      font: 106
+      minFont: 102
+      maxFont: 106
+    - target: {fileID: 224043919389829319}
+      position: {x: -2.9702969, y: -147.02972}
+      size: {x: 858.41583, y: 98.019806}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224743393880019028}
+      position: {x: 0, y: 0}
+      size: {x: 858.41583, y: 98.0198}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224572839542275309}
+      position: {x: 0, y: 0}
+      size: {x: 834.41583, y: 74.0198}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224149520701623706}
+      position: {x: 0, y: 0}
+      size: {x: 803.41583, y: 86.0198}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114693062532245359}
+      font: 45
+      minFont: 33
+      maxFont: 45
+    - target: {fileID: 224370222726513266}
+      position: {x: 111, y: -352}
+      size: {x: 279.5728, y: 84.5462}
+      anchorMin: {x: 0, y: 1}
+      anchorMax: {x: 0, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114009931292380359}
+      font: 36
+      minFont: 3
+      maxFont: 80
+    - target: {fileID: 224799762105739359}
+      position: {x: -16.336634, y: -102.47524}
+      size: {x: 953.4654, y: 377.22772}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224552309709192268}
+      position: {x: -286.63367, y: 103.960396}
+      size: {x: 285.14853, y: 103.960396}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224964469411310401}
+      position: {x: 0, y: 0}
+      size: {x: 190, y: 75}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114431740505123533}
+      font: 42
+      minFont: 30
+      maxFont: 42
+    - target: {fileID: 224976365255789935}
+      position: {x: -1.4851494, y: -71.28715}
+      size: {x: 861.38617, y: 169.30693}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224658330495870062}
+      position: {x: 0, y: 0}
+      size: {x: 830, y: 145}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114121005239445321}
+      font: 66
+      minFont: 54
+      maxFont: 66
+    - target: {fileID: 224085275382694935}
+      position: {x: 166.33664, y: 99.50495}
+      size: {x: 549.50494, y: 95.04951}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114194081240383615}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 224354824845356902}
+      position: {x: -16.336634, y: -449.99997}
+      size: {x: 953.4654, y: 258.41583}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224855482821919830}
+      position: {x: 188.91689, y: 84.634705}
+      size: {x: 513.8539, y: 75.56675}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114150646884989824}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 224641631609468814}
+      position: {x: 142.8047, y: -108}
+      size: {x: 550.2198, y: 122.09}
+      anchorMin: {x: 0.5, y: 1}
+      anchorMax: {x: 0.5, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114601984538237284}
+      font: 48
+      minFont: 3
+      maxFont: 48
+    - target: {fileID: 224690175861776792}
+      position: {x: -4, y: 78}
+      size: {x: 170, y: 84}
+      anchorMin: {x: 0.5, y: 0}
+      anchorMax: {x: 0.5, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224617365563186364}
+      position: {x: 0, y: 0}
+      size: {x: 0, y: 0}
+      anchorMin: {x: 0, y: 0}
+      anchorMax: {x: 1, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114408345039935966}
+      font: 36
+      minFont: 1
+      maxFont: 100
+    - target: {fileID: 224611579644537198}
+      position: {x: 199.49623, y: -113.35016}
+      size: {x: 492.69522, y: 126.95214}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224295428814336086}
+      position: {x: 0, y: 0}
+      size: {x: 430, y: 101}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114386943702330414}
+      font: 46
+      minFont: 34
+      maxFont: 46
+    - target: {fileID: 224824317463469755}
+      position: {x: 117.32674, y: -10.396057}
+      size: {x: 647.5248, y: 190.09901}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114275549183895104}
+      font: 49
+      minFont: 45
+      maxFont: 49
+    - target: {fileID: 224187454977326620}
+      position: {x: 188.91689, y: 3.022644}
+      size: {x: 513.8539, y: 99.74811}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114232094423628703}
+      font: 74
+      minFont: 70
+      maxFont: 74
+    - target: {fileID: 2181106419361139360}
+      position: {x: -341.58417, y: 1.4851074}
+      size: {x: 145.54456, y: 184.15842}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 6126658110876133566}
+      position: {x: -264.48364, y: -25.692749}
+      size: {x: 398.99243, y: 314.3577}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 7817761759654438981}
+      position: {x: -4.4554462, y: -657.92084}
+      size: {x: 858.41583, y: 80.19802}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 1017576658259504850}
+      font: 33
+      minFont: 29
+      maxFont: 33
+    - target: {fileID: 102542509383017408}
+      position: {x: 0, y: 0}
+      size: {x: 100, y: 100}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 5607125628146504084}
+      font: 43
+      minFont: 34
+      maxFont: 43
+    - target: {fileID: 6097054976511498692}
+      position: {x: 0, y: 0}
+      size: {x: 100, y: 100}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 6185384466979108321}
+      font: 40
+      minFont: 32
+      maxFont: 40
+    - target: {fileID: 2759852110381100205}
+      position: {x: -377.22775, y: 781.1881}
+      size: {x: 148.51486, y: 148.51486}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 7009435713877414055}
+      position: {x: -19.30693, y: 705.44556}
+      size: {x: 757.4258, y: 181.18813}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 2746339998882279388}
+      position: {x: -19.30693, y: 705.44556}
+      size: {x: 709.901, y: 151.48515}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 6752043735411944869}
+      font: 76
+      minFont: 72
+      maxFont: 76
+    - target: {fileID: 224060945828524476}
+      position: {x: 451.48514, y: 665.34656}
+      size: {x: 154.45544, y: 154.45544}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224771092198208730}
+      position: {x: 0, y: -80}
+      size: {x: 1000, y: 150}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224056248600188076}
+      position: {x: 0, y: 0}
+      size: {x: 1000, y: 150}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224358105479016104}
+      position: {x: 0, y: 0}
+      size: {x: 950, y: 130}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114433013960508438}
+      font: 42
+      minFont: 30
+      maxFont: 42
+    visibility:
+    - target: {fileID: 328249798293438114}
+      visible: 0
+    - target: {fileID: 4199507069908039527}
+      visible: 0
+    - target: {fileID: 1002669891404536}
+      visible: 1
+  - key: late
+    entries:
+    - target: {fileID: 224017697238300914}
+      position: {x: 0, y: -227.52551}
+      size: {x: 735.7964, y: 226.1657}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224089843903986396}
+      position: {x: 12.21374, y: -97.70992}
+      size: {x: 1090.0763, y: 1590.8397}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224220653531496868}
+      position: {x: 2, y: -316}
+      size: {x: 629.0096, y: 161.2426}
+      anchorMin: {x: 0.5, y: 1}
+      anchorMax: {x: 0.5, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114967328832014496}
+      font: 100
+      minFont: 1
+      maxFont: 100
+    - target: {fileID: 224919942235722503}
+      position: {x: -4.5801525, y: 326.71756}
+      size: {x: 946.5649, y: 662.5954}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224632746491512912}
+      position: {x: 0, y: 0}
+      size: {x: 946.5649, y: 662.5954}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224436073260064126}
+      position: {x: 0, y: 169.46564}
+      size: {x: 946.5649, y: 323.66412}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224000955326284023}
+      position: {x: 146.56488, y: -67.17557}
+      size: {x: 598.47327, y: 128.24428}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114571718729274231}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 224477046003934300}
+      position: {x: -309.92368, y: -3.0534363}
+      size: {x: 222.90076, y: 232.06107}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224924050743934937}
+      position: {x: 151.14503, y: 64.12216}
+      size: {x: 607.6336, y: 146.56488}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114689364072382846}
+      font: 106
+      minFont: 102
+      maxFont: 106
+    - target: {fileID: 224043919389829319}
+      position: {x: -3.0534353, y: -41.221375}
+      size: {x: 879.3893, y: 97.70992}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224743393880019028}
+      position: {x: 0, y: 0}
+      size: {x: 879.38934, y: 97.70992}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224572839542275309}
+      position: {x: 0, y: 0}
+      size: {x: 855.38934, y: 73.70992}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224149520701623706}
+      position: {x: 0, y: 0}
+      size: {x: 824.38934, y: 85.70992}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114693062532245359}
+      font: 45
+      minFont: 33
+      maxFont: 45
+    - target: {fileID: 224370222726513266}
+      position: {x: 111, y: -352}
+      size: {x: 279.5728, y: 84.5462}
+      anchorMin: {x: 0, y: 1}
+      anchorMax: {x: 0, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114009931292380359}
+      font: 36
+      minFont: 3
+      maxFont: 80
+    - target: {fileID: 224799762105739359}
+      position: {x: -4.5801525, y: -175.57251}
+      size: {x: 946.5649, y: 341.98474}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224552309709192268}
+      position: {x: -303.8168, y: 111.45037}
+      size: {x: 277.86258, y: 106.87023}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224964469411310401}
+      position: {x: 0, y: 0}
+      size: {x: 190, y: 75}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114431740505123533}
+      font: 42
+      minFont: 30
+      maxFont: 42
+    - target: {fileID: 224976365255789935}
+      position: {x: -1.5267177, y: -48.85495}
+      size: {x: 882.44275, y: 170.99237}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224658330495870062}
+      position: {x: 0, y: 0}
+      size: {x: 830, y: 145}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114121005239445321}
+      font: 66
+      minFont: 54
+      maxFont: 66
+    - target: {fileID: 224085275382694935}
+      position: {x: 152.67175, y: 109.92365}
+      size: {x: 549.6183, y: 97.70992}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114194081240383615}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 224354824845356902}
+      position: {x: -4.5801525, y: -517.55725}
+      size: {x: 946.5649, y: 268.7023}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224855482821919830}
+      position: {x: 225.9542, y: 122.13742}
+      size: {x: 470.229, y: 85.496185}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114150646884989824}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 224641631609468814}
+      position: {x: 142.8047, y: -108}
+      size: {x: 550.2198, y: 122.09}
+      anchorMin: {x: 0.5, y: 1}
+      anchorMax: {x: 0.5, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114601984538237284}
+      font: 48
+      minFont: 3
+      maxFont: 48
+    - target: {fileID: 224690175861776792}
+      position: {x: -4, y: 78}
+      size: {x: 170, y: 84}
+      anchorMin: {x: 0.5, y: 0}
+      anchorMax: {x: 0.5, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224617365563186364}
+      position: {x: 0, y: 0}
+      size: {x: 0, y: 0}
+      anchorMin: {x: 0, y: 0}
+      anchorMax: {x: 1, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114408345039935966}
+      font: 36
+      minFont: 1
+      maxFont: 100
+    - target: {fileID: 224611579644537198}
+      position: {x: 206.10687, y: -100.76337}
+      size: {x: 473.28244, y: 146.56488}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224295428814336086}
+      position: {x: 0, y: 0}
+      size: {x: 430, y: 101}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114386943702330414}
+      font: 46
+      minFont: 34
+      maxFont: 46
+    - target: {fileID: 224824317463469755}
+      position: {x: 138.93129, y: -7.633606}
+      size: {x: 632.06104, y: 198.47328}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114275549183895104}
+      font: 49
+      minFont: 45
+      maxFont: 49
+    - target: {fileID: 224187454977326620}
+      position: {x: 225.9542, y: 38.16794}
+      size: {x: 470.229, y: 119.08397}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114232094423628703}
+      font: 85
+      minFont: 81
+      maxFont: 85
+    - target: {fileID: 2181106419361139360}
+      position: {x: -326.71756, y: -3.0534668}
+      size: {x: 170.99237, y: 201.52672}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 6126658110876133566}
+      position: {x: -242.7481, y: -10.687012}
+      size: {x: 473.28244, y: 351.14505}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 7817761759654438981}
+      position: {x: -1.5267172, y: -708.397}
+      size: {x: 867.17554, y: 76.33588}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 1017576658259504850}
+      font: 33
+      minFont: 29
+      maxFont: 33
+    - target: {fileID: 102542509383017408}
+      position: {x: 7.633588, y: 190.83969}
+      size: {x: 848.855, y: 79.38931}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 5607125628146504084}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 6097054976511498692}
+      position: {x: 1.5267172, y: 65.64885}
+      size: {x: 854.96185, y: 103.816795}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 6185384466979108321}
+      font: 40
+      minFont: 36
+      maxFont: 40
+    - target: {fileID: 2759852110381100205}
+      position: {x: -383.20612, y: 850.38165}
+      size: {x: 152.67175, y: 152.67175}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 7009435713877414055}
+      position: {x: -10.687023, y: 781.6794}
+      size: {x: 738.9313, y: 180.15266}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 2746339998882279388}
+      position: {x: -10.687023, y: 781.6794}
+      size: {x: 690.07635, y: 149.61832}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 6752043735411944869}
+      font: 76
+      minFont: 72
+      maxFont: 76
+    - target: {fileID: 224060945828524476}
+      position: {x: 444.2748, y: 737.40454}
+      size: {x: 158.77863, y: 158.77863}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224771092198208730}
+      position: {x: 0, y: -80}
+      size: {x: 1000, y: 150}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224056248600188076}
+      position: {x: 0, y: 0}
+      size: {x: 1000, y: 150}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224358105479016104}
+      position: {x: 0, y: 0}
+      size: {x: 950, y: 130}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114433013960508438}
+      font: 42
+      minFont: 30
+      maxFont: 42
+    visibility:
+    - target: {fileID: 328249798293438114}
+      visible: 1
+    - target: {fileID: 4199507069908039527}
+      visible: 1
+    - target: {fileID: 1002669891404536}
+      visible: 0
+  - key: unlocked
+    entries:
+    - target: {fileID: 224017697238300914}
+      position: {x: 0, y: -227.52551}
+      size: {x: 735.7964, y: 226.1657}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224089843903986396}
+      position: {x: 12.21374, y: -97.70992}
+      size: {x: 1090.0763, y: 1590.8397}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224220653531496868}
+      position: {x: 2, y: -316}
+      size: {x: 629.0096, y: 161.2426}
+      anchorMin: {x: 0.5, y: 1}
+      anchorMax: {x: 0.5, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114967328832014496}
+      font: 100
+      minFont: 1
+      maxFont: 100
+    - target: {fileID: 224919942235722503}
+      position: {x: -4.5801525, y: 326.71756}
+      size: {x: 946.5649, y: 662.5954}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224632746491512912}
+      position: {x: 0, y: 0}
+      size: {x: 946.5649, y: 662.5954}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224436073260064126}
+      position: {x: 0, y: 169.46564}
+      size: {x: 946.5649, y: 323.66412}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224000955326284023}
+      position: {x: 146.56488, y: -67.17557}
+      size: {x: 598.47327, y: 128.24428}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114571718729274231}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 224477046003934300}
+      position: {x: -309.92368, y: -3.0534363}
+      size: {x: 222.90076, y: 232.06107}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224924050743934937}
+      position: {x: 151.14503, y: 64.12216}
+      size: {x: 607.6336, y: 146.56488}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114689364072382846}
+      font: 106
+      minFont: 102
+      maxFont: 106
+    - target: {fileID: 224043919389829319}
+      position: {x: -3.0534353, y: -41.221375}
+      size: {x: 879.3893, y: 97.70992}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224743393880019028}
+      position: {x: 0, y: 0}
+      size: {x: 879.38934, y: 97.70992}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224572839542275309}
+      position: {x: 0, y: 0}
+      size: {x: 855.38934, y: 73.70992}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224149520701623706}
+      position: {x: 0, y: 0}
+      size: {x: 824.38934, y: 85.70992}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114693062532245359}
+      font: 45
+      minFont: 33
+      maxFont: 45
+    - target: {fileID: 224370222726513266}
+      position: {x: 111, y: -352}
+      size: {x: 279.5728, y: 84.5462}
+      anchorMin: {x: 0, y: 1}
+      anchorMax: {x: 0, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114009931292380359}
+      font: 36
+      minFont: 3
+      maxFont: 80
+    - target: {fileID: 224799762105739359}
+      position: {x: -4.5801525, y: -175.57251}
+      size: {x: 946.5649, y: 341.98474}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224552309709192268}
+      position: {x: -303.8168, y: 111.45037}
+      size: {x: 277.86258, y: 106.87023}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224964469411310401}
+      position: {x: 0, y: 0}
+      size: {x: 190, y: 75}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114431740505123533}
+      font: 42
+      minFont: 30
+      maxFont: 42
+    - target: {fileID: 224976365255789935}
+      position: {x: -1.5267177, y: -48.85495}
+      size: {x: 882.44275, y: 170.99237}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224658330495870062}
+      position: {x: 0, y: 0}
+      size: {x: 830, y: 145}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114121005239445321}
+      font: 66
+      minFont: 54
+      maxFont: 66
+    - target: {fileID: 224085275382694935}
+      position: {x: 152.67175, y: 109.92365}
+      size: {x: 549.6183, y: 97.70992}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114194081240383615}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 224354824845356902}
+      position: {x: -4.5801525, y: -517.55725}
+      size: {x: 946.5649, y: 268.7023}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224855482821919830}
+      position: {x: 225.9542, y: 122.13742}
+      size: {x: 470.229, y: 85.496185}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114150646884989824}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 224641631609468814}
+      position: {x: 142.8047, y: -108}
+      size: {x: 550.2198, y: 122.09}
+      anchorMin: {x: 0.5, y: 1}
+      anchorMax: {x: 0.5, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114601984538237284}
+      font: 48
+      minFont: 3
+      maxFont: 48
+    - target: {fileID: 224690175861776792}
+      position: {x: -4, y: 78}
+      size: {x: 170, y: 84}
+      anchorMin: {x: 0.5, y: 0}
+      anchorMax: {x: 0.5, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224617365563186364}
+      position: {x: 0, y: 0}
+      size: {x: 0, y: 0}
+      anchorMin: {x: 0, y: 0}
+      anchorMax: {x: 1, y: 1}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114408345039935966}
+      font: 36
+      minFont: 1
+      maxFont: 100
+    - target: {fileID: 224611579644537198}
+      position: {x: 206.10687, y: -100.76337}
+      size: {x: 473.28244, y: 146.56488}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224295428814336086}
+      position: {x: 0, y: 0}
+      size: {x: 430, y: 101}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114386943702330414}
+      font: 46
+      minFont: 34
+      maxFont: 46
+    - target: {fileID: 224824317463469755}
+      position: {x: 138.93129, y: -7.633606}
+      size: {x: 632.06104, y: 198.47328}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114275549183895104}
+      font: 49
+      minFont: 45
+      maxFont: 49
+    - target: {fileID: 224187454977326620}
+      position: {x: 225.9542, y: 38.16794}
+      size: {x: 470.229, y: 119.08397}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114232094423628703}
+      font: 85
+      minFont: 81
+      maxFont: 85
+    - target: {fileID: 2181106419361139360}
+      position: {x: -326.71756, y: -3.0534668}
+      size: {x: 170.99237, y: 201.52672}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 6126658110876133566}
+      position: {x: -242.7481, y: -10.687012}
+      size: {x: 473.28244, y: 351.14505}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 7817761759654438981}
+      position: {x: -1.5267172, y: -708.397}
+      size: {x: 867.17554, y: 76.33588}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 1017576658259504850}
+      font: 33
+      minFont: 29
+      maxFont: 33
+    - target: {fileID: 102542509383017408}
+      position: {x: 7.633588, y: 190.83969}
+      size: {x: 848.855, y: 79.38931}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 5607125628146504084}
+      font: 43
+      minFont: 39
+      maxFont: 43
+    - target: {fileID: 6097054976511498692}
+      position: {x: 1.5267172, y: 65.64885}
+      size: {x: 854.96185, y: 103.816795}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 6185384466979108321}
+      font: 40
+      minFont: 36
+      maxFont: 40
+    - target: {fileID: 2759852110381100205}
+      position: {x: -383.20612, y: 850.38165}
+      size: {x: 152.67175, y: 152.67175}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 7009435713877414055}
+      position: {x: -10.687023, y: 781.6794}
+      size: {x: 738.9313, y: 180.15266}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 2746339998882279388}
+      position: {x: -10.687023, y: 781.6794}
+      size: {x: 690.07635, y: 149.61832}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 6752043735411944869}
+      font: 76
+      minFont: 72
+      maxFont: 76
+    - target: {fileID: 224060945828524476}
+      position: {x: 444.2748, y: 737.40454}
+      size: {x: 158.77863, y: 158.77863}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224771092198208730}
+      position: {x: 0, y: -80}
+      size: {x: 1000, y: 150}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224056248600188076}
+      position: {x: 0, y: 0}
+      size: {x: 1000, y: 150}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 0}
+      font: 0
+      minFont: 0
+      maxFont: 0
+    - target: {fileID: 224358105479016104}
+      position: {x: 0, y: 0}
+      size: {x: 950, y: 130}
+      anchorMin: {x: 0.5, y: 0.5}
+      anchorMax: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
+      text: {fileID: 114433013960508438}
+      font: 42
+      minFont: 30
+      maxFont: 42
+    visibility:
+    - target: {fileID: 328249798293438114}
+      visible: 1
+    - target: {fileID: 4199507069908039527}
+      visible: 1
+    - target: {fileID: 1002669891404536}
+      visible: 0
+  fontScale: 1.35
+  minimumFontRatio: 0.55
 --- !u!1 &1709867586078768
 GameObject:
   m_ObjectHideFlags: 0
@@ -2641,8 +4824,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 158.69019, y: 59.147552}
-  m_SizeDelta: {x: 586.398, y: 129.04918}
+  m_AnchoredPosition: {x: 158.69019, y: 66.49872}
+  m_SizeDelta: {x: 586.398, y: 145.08817}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222215879266689626
 CanvasRenderer:
@@ -2674,11 +4857,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 106
+    m_FontSize: 143
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 102
-    m_MaxSize: 106
+    m_MinSize: 78
+    m_MaxSize: 143
     m_Alignment: 3
     m_AlignByGeometry: 1
     m_RichText: 1
@@ -2773,7 +4956,7 @@ GameObject:
   - component: {fileID: 224089843903986396}
   - component: {fileID: 222672306508523268}
   - component: {fileID: 114808113985169905}
-  - component: {fileID: 8938201711103900247}
+  - component: {fileID: 5202955603631101020}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -2798,6 +4981,8 @@ RectTransform:
   - {fileID: 224799762105739359}
   - {fileID: 224354824845356902}
   - {fileID: 7817761759654438981}
+  - {fileID: 102542509383017408}
+  - {fileID: 6097054976511498692}
   - {fileID: 2759852110381100205}
   - {fileID: 7009435713877414055}
   - {fileID: 2746339998882279388}
@@ -2806,8 +4991,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.556675, y: -108.88525}
-  m_SizeDelta: {x: 1070.0251, y: 1274.3606}
+  m_AnchoredPosition: {x: 7.556675, y: -122.41814}
+  m_SizeDelta: {x: 1070.0251, y: 1432.7456}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222672306508523268
 CanvasRenderer:
@@ -2847,7 +5032,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8938201711103900247
+--- !u!114 &5202955603631101020
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2997,7 +5182,7 @@ GameObject:
   - component: {fileID: 224919942235722503}
   - component: {fileID: 222107629493147155}
   - component: {fileID: 114833703512093738}
-  - component: {fileID: 478717294653429036}
+  - component: {fileID: 3937901541880551166}
   m_Layer: 5
   m_Name: PanelA
   m_TagString: Untagged
@@ -3022,8 +5207,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.534005, y: 294.39343}
-  m_SizeDelta: {x: 940.05035, y: 443.60657}
+  m_AnchoredPosition: {x: -4.534005, y: 330.98236}
+  m_SizeDelta: {x: 940.05035, y: 498.74057}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222107629493147155
 CanvasRenderer:
@@ -3063,7 +5248,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &478717294653429036
+--- !u!114 &3937901541880551166
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3138,7 +5323,7 @@ GameObject:
   - component: {fileID: 224056248600188076}
   - component: {fileID: 222992816746925483}
   - component: {fileID: 114695600491528212}
-  - component: {fileID: 1529795219652948460}
+  - component: {fileID: 7121277098389468480}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -3204,7 +5389,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1529795219652948460
+--- !u!114 &7121277098389468480
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3303,8 +5488,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 188.91689, y: 2.688507}
-  m_SizeDelta: {x: 513.8539, y: 88.72131}
+  m_AnchoredPosition: {x: 188.91689, y: 3.022644}
+  m_SizeDelta: {x: 513.8539, y: 99.74811}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222091882994760266
 CanvasRenderer:
@@ -3336,11 +5521,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 74
+    m_FontSize: 100
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 70
-    m_MaxSize: 74
+    m_MinSize: 55
+    m_MaxSize: 100
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3432,11 +5617,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 46
+    m_FontSize: 62
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 34
-    m_MaxSize: 46
+    m_MaxSize: 62
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
@@ -3484,7 +5669,7 @@ GameObject:
   - component: {fileID: 222571878917323452}
   - component: {fileID: 114534704304255049}
   - component: {fileID: 114651560128206891}
-  - component: {fileID: 5217524478661848266}
+  - component: {fileID: 3312016747277803977}
   m_Layer: 5
   m_Name: RecordBtn
   m_TagString: Untagged
@@ -3509,8 +5694,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -294.71033, y: 91.409836}
-  m_SizeDelta: {x: 278.08563, y: 88.72131}
+  m_AnchoredPosition: {x: -294.71033, y: 102.770775}
+  m_SizeDelta: {x: 278.08563, y: 99.74811}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222571878917323452
 CanvasRenderer:
@@ -3594,7 +5779,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5217524478661848266
+--- !u!114 &3312016747277803977
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3726,11 +5911,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 36
+    m_FontSize: 49
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
-    m_MaxSize: 80
+    m_MinSize: 4
+    m_MaxSize: 108
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3751,6 +5936,85 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textId: 3063
+--- !u!1 &328249798293438114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 102542509383017408}
+  - component: {fileID: 267609869579794872}
+  - component: {fileID: 5607125628146504084}
+  m_Layer: 0
+  m_Name: AppleRemaining
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &102542509383017408
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328249798293438114}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 224089843903986396}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &267609869579794872
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328249798293438114}
+  m_CullTransparentMesh: 1
+--- !u!114 &5607125628146504084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328249798293438114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.35686275, g: 0.14901961, b: 0.07058824, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
+    m_FontSize: 58
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 32
+    m_MaxSize: 58
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
 --- !u!1 &601678500045578721
 GameObject:
   m_ObjectHideFlags: 0
@@ -3785,8 +6049,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -330.98236, y: 6.721283}
-  m_SizeDelta: {x: 169.26952, y: 177.44263}
+  m_AnchoredPosition: {x: -330.98236, y: 7.5566406}
+  m_SizeDelta: {x: 169.26952, y: 199.49622}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4286988090399176083
 CanvasRenderer:
@@ -3860,8 +6124,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -561.9016}
-  m_SizeDelta: {x: 912.8464, y: 59.14754}
+  m_AnchoredPosition: {x: 0, y: -631.73804}
+  m_SizeDelta: {x: 912.8464, y: 66.49874}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6467602884792424205
 CanvasRenderer:
@@ -3893,11 +6157,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 35
+    m_FontSize: 47
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 31
-    m_MaxSize: 35
+    m_MinSize: 26
+    m_MaxSize: 47
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3939,8 +6203,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -264.48364, y: -22.852448}
-  m_SizeDelta: {x: 398.99243, y: 279.60657}
+  m_AnchoredPosition: {x: -264.48364, y: -25.692749}
+  m_SizeDelta: {x: 398.99243, y: 314.3577}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1501625903542932097
 CanvasRenderer:
@@ -3980,6 +6244,87 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4199507069908039527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6097054976511498692}
+  - component: {fileID: 1519245934994544874}
+  - component: {fileID: 6185384466979108321}
+  m_Layer: 0
+  m_Name: AppleOrdinaryCap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &6097054976511498692
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199507069908039527}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 224089843903986396}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1519245934994544874
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199507069908039527}
+  m_CullTransparentMesh: 1
+--- !u!114 &6185384466979108321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199507069908039527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.35686275, g: 0.14901961, b: 0.07058824, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
+    m_FontSize: 54
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 30
+    m_MaxSize: 54
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Simulation only. Ordinary rewards
+
+    cap at $2,999.50.'
 --- !u!1 &5029359988494947792
 GameObject:
   m_ObjectHideFlags: 0
@@ -4015,8 +6360,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 626.4262}
-  m_SizeDelta: {x: 785.8942, y: 145.18033}
+  m_AnchoredPosition: {x: -9.06801, y: 701.25946}
+  m_SizeDelta: {x: 671.0328, y: 145.08817}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4287438240287570856
 CanvasRenderer:
@@ -4048,11 +6393,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 73
+    m_FontSize: 103
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 69
-    m_MaxSize: 73
+    m_MinSize: 57
+    m_MaxSize: 103
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -4086,7 +6431,7 @@ GameObject:
   - component: {fileID: 7009435713877414055}
   - component: {fileID: 6209112424133873549}
   - component: {fileID: 8052453533908842020}
-  - component: {fileID: 7950658969040658233}
+  - component: {fileID: 4060168382540545943}
   m_Layer: 0
   m_Name: AppleHeader
   m_TagString: Untagged
@@ -4110,8 +6455,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 623.73773}
-  m_SizeDelta: {x: 828.2116, y: 161.31148}
+  m_AnchoredPosition: {x: -9.06801, y: 698.2368}
+  m_SizeDelta: {x: 725.4408, y: 181.3602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6209112424133873549
 CanvasRenderer:
@@ -4151,7 +6496,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7950658969040658233
+--- !u!114 &4060168382540545943
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4249,8 +6594,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -374.81107, y: 685.5738}
-  m_SizeDelta: {x: 151.1335, y: 134.42622}
+  m_AnchoredPosition: {x: -374.81107, y: 770.7809}
+  m_SizeDelta: {x: 151.1335, y: 151.1335}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &127579189953768009
 CanvasRenderer:

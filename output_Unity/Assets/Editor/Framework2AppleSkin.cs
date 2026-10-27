@@ -32,7 +32,7 @@ public static partial class Framework2AppleSkin
         if (Hash(Config) != ExpectedConfigHash) throw new InvalidOperationException("Source product rules changed before skin authoring.");
         string originalHost = "Assets/Resources/EarningVariants/EarningVariantController.prefab";
         string originalHash = Hash(originalHost);
-        ImportArt(); ImportReferenceArt();
+        ImportArt(); ImportReferenceArt(); Framework2ReferenceLayoutAudit.Begin();
         string[] names = {
             "GamePlayerView", "WithDraw", "WithDrawmethod", "WithDrawConfirm", "WithDrawQues", "WithDrawProcess1",
             "WithDrawHistory", "PayPalErrorView", "WithdrawMissionView", "WithdrawFeedbackView", "SlotView", "ProgressView",
@@ -49,14 +49,24 @@ public static partial class Framework2AppleSkin
             GameObject root = PrefabUtility.LoadPrefabContents(path);
             try
             {
+                // A detached stretch root has a zero rect in a prefab preview scene.
+                // Give authoring the actual design rect, so top-anchored parents are
+                // resolved at their live positions rather than at the canvas centre.
+                RectTransform rootRect=root.transform as RectTransform;
+                bool stretch=rootRect!=null && rootRect.anchorMin==Vector2.zero && rootRect.anchorMax==Vector2.one;
+                Vector2 savedSize=rootRect!=null?rootRect.sizeDelta:Vector2.zero;
+                if(stretch){rootRect.anchoredPosition=Vector2.zero;rootRect.sizeDelta=new Vector2(1200,2132);}
                 foreach (var surface in root.GetComponentsInChildren<Framework2ReferenceSurface>(true)) Object.DestroyImmediate(surface);
                 foreach (var cutout in root.GetComponentsInChildren<Framework2ReferenceCutout>(true)) Object.DestroyImmediate(cutout);
                 if (root.GetComponent<Framework2AppleSkinMarker>() == null) root.AddComponent<Framework2AppleSkinMarker>();
+                root.GetComponent<Framework2AppleSkinMarker>().RestoreAuthoringFonts();
                 foreach (Text text in root.GetComponentsInChildren<Text>(true))
                 { text.font = SkinFont; text.raycastTarget = false; }
                 ApplyAccounts(root, name); ApplyRewards(root, name); ApplyNavigation(root, name);
                 ApplyReferenceAlignment(root, name);
+                AuthorReferenceProfiles(root,name);
                 FinalizePrefab(root); RefFinish(root); AlignReferenceIllustrations(root,name);
+                if(stretch)rootRect.sizeDelta=savedSize;
                 PrefabUtility.SaveAsPrefabAsset(root, path);
                 paths.Add(path);
             }
@@ -70,6 +80,7 @@ public static partial class Framework2AppleSkin
             PrefabUtility.SaveAsPrefabAsset(host, bHost); paths.Add(bHost);
         }
         finally { PrefabUtility.UnloadPrefabContents(host); }
+        Framework2ReferenceLayoutAudit.Save();
         AssetDatabase.SaveAssets(); AssetDatabase.Refresh();
         if (Hash(originalHost) != originalHash || Hash(Config) != ExpectedConfigHash)
             throw new InvalidOperationException("A prefab or source rules were unexpectedly changed.");

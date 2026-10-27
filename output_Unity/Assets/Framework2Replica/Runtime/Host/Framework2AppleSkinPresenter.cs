@@ -26,10 +26,14 @@ public sealed class Framework2AppleSkinPresenter : MonoBehaviour
         public GameObject PixMethods;
         public GameObject PhoneMethod;
         public Text InputLabel;
+        public Text RegionalDescription;
+        public string PixDescription,PhoneDescription;
         public string EmailLabel;
         public string PhoneLabel;
         public string PixLabel;
         public Image InputErrorBorder;
+        public Framework2AppleLayoutProfiles LayoutProfiles;
+        public Text TaskCaption,TaskObjective,Remaining;
         public GameObject EmptyHistory;
         public Text[] GemCostLabels;
         public Image TaskBackground;
@@ -40,6 +44,7 @@ public sealed class Framework2AppleSkinPresenter : MonoBehaviour
     }
 
     [SerializeField] private Bindings bindings = new Bindings();
+    string accountLayout="default";
 
     // Called by the editor authoring pass; all references are then stored in the prefab.
     public void Configure(Bindings value)
@@ -49,6 +54,19 @@ public sealed class Framework2AppleSkinPresenter : MonoBehaviour
 
     public void SetLuckyUnlocked(bool unlocked)
     {
+        if(bindings.LayoutProfiles!=null)
+        {
+            var manager=WZSDK.GameManagerWZ.instance;
+            int stage=manager!=null?manager.currentStage:0;
+            bindings.LayoutProfiles.Apply(unlocked ? "unlocked" : stage>=5 ? "late" : stage==1 ? "stage1" : stage==2 ? "stage2" : "default");
+        }
+        if(bindings.TaskCaption!=null && bindings.TaskObjective!=null && WZSDK.GameManagerWZ.instance!=null)
+        {
+            var manager=WZSDK.GameManagerWZ.instance;
+            bindings.TaskCaption.text=manager.currentStage>=3?bindings.TaskObjective.text:"Local simulation.\nDummy details saved locally.";
+            if(bindings.Remaining!=null && manager.TryGetStageRequirement(manager.currentStage,out _,out int target))
+                bindings.Remaining.text="Remaining "+manager.FormatRegionalValue(Math.Max(0d,target-manager.GetCoin()));
+        }
         SetVisible(bindings.LockedIcon, !unlocked);
         SetVisible(bindings.WalletIcon, unlocked);
         SetVisible(bindings.LuckyTitle, unlocked);
@@ -58,6 +76,9 @@ public sealed class Framework2AppleSkinPresenter : MonoBehaviour
     {
         bool pix = inputKind == WaterSortAccountInputKind.Pix;
         bool phone = inputKind == WaterSortAccountInputKind.Phone;
+        accountLayout=pix?"pix":phone?"phone":"default";
+        if(bindings.LayoutProfiles!=null)bindings.LayoutProfiles.Apply(accountLayout);
+        if(bindings.RegionalDescription!=null)bindings.RegionalDescription.text=pix?bindings.PixDescription:bindings.PhoneDescription;
         SetVisible(bindings.StandardMethods, !pix && !phone);
         SetVisible(bindings.PixMethods, pix);
         SetVisible(bindings.PhoneMethod, phone);
@@ -65,8 +86,15 @@ public sealed class Framework2AppleSkinPresenter : MonoBehaviour
             bindings.InputLabel.text = pix ? bindings.PixLabel : phone ? bindings.PhoneLabel : bindings.EmailLabel;
     }
 
+    public void ConfigureLayout(Framework2AppleLayoutProfiles value) {bindings.LayoutProfiles=value;}
+    public void ConfigureTaskLabels(Text caption,Text objective,Text remaining)
+    {bindings.TaskCaption=caption;bindings.TaskObjective=objective;bindings.Remaining=remaining;}
+    public void ConfigureRegionalDescription(Text label,string pix,string phone)
+    {bindings.RegionalDescription=label;bindings.PixDescription=pix;bindings.PhoneDescription=phone;}
+
     public void SetAccountError(bool invalid)
     {
+        if(bindings.LayoutProfiles!=null)bindings.LayoutProfiles.Apply(accountLayout=="default" && invalid?"invalid":accountLayout);
         if (bindings.InputErrorBorder != null)
             bindings.InputErrorBorder.enabled = invalid;
     }

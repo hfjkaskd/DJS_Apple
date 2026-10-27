@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public static partial class Framework2AppleSkin
 {
     static Sprite referenceAtlas;
+    const float ReferenceFontScale=1.35f;
+    const float ReferenceMinimumFontRatio=.55f;
 
     static void ImportReferenceArt()
     {
@@ -103,9 +105,15 @@ public static partial class Framework2AppleSkin
 
     static void RefFinish(GameObject root)
     {
+        var marker=root.GetComponent<Framework2AppleSkinMarker>();
+        if(marker==null)marker=root.AddComponent<Framework2AppleSkinMarker>();
+        marker.RecordAuthoringFonts();
         foreach (Text text in root.GetComponentsInChildren<Text>(true))
         {
             text.font = SkinFont; text.fontStyle = FontStyle.Normal;
+            text.fontSize=Mathf.RoundToInt(text.fontSize*ReferenceFontScale);
+            text.resizeTextMinSize=Mathf.Min(Mathf.RoundToInt(text.resizeTextMinSize*ReferenceFontScale),Mathf.RoundToInt(text.fontSize*ReferenceMinimumFontRatio));
+            text.resizeTextMaxSize=Mathf.RoundToInt(text.resizeTextMaxSize*ReferenceFontScale);
             if(text.text=="CONFIRM" || text.text=="Confirm")
             {
                 NavLiteral(text.transform,"Confirm");
@@ -128,5 +136,6 @@ public static partial class Framework2AppleSkin
             if (key == "panel" || key == "title" || key == "button" || key == "secondary" || key == "close" || key == "selected" || key == "inset")
                 RefSurface(image, image.GetComponent<InputField>() != null ? "input" : key);
         }
+        root.GetComponent<Framework2AppleLayoutProfiles>()?.ConfigureFontScale(ReferenceFontScale,ReferenceMinimumFontRatio);
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 222703437598541787}
   - component: {fileID: 114884547391421755}
   - component: {fileID: 2833224016861114282}
-  - component: {fileID: 4066717436898291779}
+  - component: {fileID: 1868187793048904429}
   m_Layer: 5
   m_Name: priceItem
   m_TagString: Untagged
@@ -91,7 +91,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26ccf6621e98e542939e32bf3e46dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4066717436898291779
+  authoringFontMetrics:
+  - target: {fileID: 114061268324235159}
+    size: 31
+    min: 20
+    max: 31
+  - target: {fileID: 114044625135789424}
+    size: 52
+    min: 40
+    max: 52
+--- !u!114 &1868187793048904429
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,11 +231,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 52
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 40
-    m_MaxSize: 52
+    m_MinSize: 38
+    m_MaxSize: 70
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -301,11 +310,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 31
+    m_FontSize: 42
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 20
-    m_MaxSize: 31
+    m_MinSize: 23
+    m_MaxSize: 42
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1

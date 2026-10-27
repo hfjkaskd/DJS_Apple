@@ -25,7 +25,8 @@ public static class Framework2ActualCapture
     }
 
     public static bool TryCapturePortrait(string absolutePath, out string error,
-        Action beforeRender = null, Action afterRestore = null, int width = 1080, int height = 1920)
+        Action beforeRender = null, Action afterRestore = null, int width = 1080, int height = 1920,
+        Action<Camera> inspectLayout = null)
     {
         error = null;
         Camera renderCamera = null;
@@ -83,6 +84,7 @@ public static class Framework2ActualCapture
             Canvas.ForceUpdateCanvases();
             beforeRender?.Invoke();
             Canvas.ForceUpdateCanvases();
+            inspectLayout?.Invoke(renderCamera);
             renderCamera.Render();
             RenderTexture.active = target;
             pixels = new Texture2D(width, height, TextureFormat.RGBA32, false);

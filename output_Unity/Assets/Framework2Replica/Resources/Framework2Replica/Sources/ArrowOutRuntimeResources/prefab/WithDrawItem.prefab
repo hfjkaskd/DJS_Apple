@@ -144,11 +144,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 62
+    m_FontSize: 84
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 50
-    m_MaxSize: 62
+    m_MinSize: 46
+    m_MaxSize: 84
     m_Alignment: 3
     m_AlignByGeometry: 1
     m_RichText: 1
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 114587765826080250}
   - component: {fileID: 1393580285761871840}
   - component: {fileID: 5447419958817668008}
-  - component: {fileID: 4340630650260916223}
+  - component: {fileID: 5414444112363571776}
   m_Layer: 5
   m_Name: WithDrawItem
   m_TagString: Untagged
@@ -261,6 +261,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26ccf6621e98e542939e32bf3e46dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  authoringFontMetrics:
+  - target: {fileID: 114985305603660343}
+    size: 36
+    min: 3
+    max: 80
+  - target: {fileID: 114470112387431263}
+    size: 62
+    min: 50
+    max: 62
+  - target: {fileID: 114632457200066912}
+    size: 41
+    min: 29
+    max: 41
 --- !u!114 &5447419958817668008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,10 +299,17 @@ MonoBehaviour:
     PixMethods: {fileID: 0}
     PhoneMethod: {fileID: 0}
     InputLabel: {fileID: 0}
+    RegionalDescription: {fileID: 0}
+    PixDescription: 
+    PhoneDescription: 
     EmailLabel: 
     PhoneLabel: 
     PixLabel: 
     InputErrorBorder: {fileID: 0}
+    LayoutProfiles: {fileID: 0}
+    TaskCaption: {fileID: 0}
+    TaskObjective: {fileID: 0}
+    Remaining: {fileID: 0}
     EmptyHistory: {fileID: 0}
     GemCostLabels: []
     TaskBackground: {fileID: 114061268324235159}
@@ -297,7 +317,7 @@ MonoBehaviour:
     TaskNumber: {fileID: 0}
     TaskNormalTint: {r: 1, g: 1, b: 1, a: 1}
     TaskCompletedTint: {r: 0.85, g: 1, b: 0.77, a: 1}
---- !u!114 &4340630650260916223
+--- !u!114 &5414444112363571776
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -429,11 +449,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 36
+    m_FontSize: 49
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
-    m_MaxSize: 80
+    m_MinSize: 4
+    m_MaxSize: 108
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -453,8 +473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 2, y: -2}
+  m_EffectColor: {r: 0.019607844, g: 0.18039216, b: 0.5137255, a: 1}
+  m_EffectDistance: {x: 1.4, y: -1.4}
   m_UseGraphicAlpha: 1
 --- !u!1 &1730242686860875
 GameObject:
@@ -599,11 +619,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d1e85a090c9775945a4030db66245ae3, type: 3}
-    m_FontSize: 41
+    m_FontSize: 55
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 29
-    m_MaxSize: 41
+    m_MinSize: 30
+    m_MaxSize: 55
     m_Alignment: 3
     m_AlignByGeometry: 1
     m_RichText: 1

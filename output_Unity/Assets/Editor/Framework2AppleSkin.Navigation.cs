@@ -236,8 +236,15 @@ public static partial class Framework2AppleSkin
         NavImage(root.transform.Find("GuidePlane/GuideTextFather/GuideText/Bg"), "inset", true);
         NavStretch(root.transform.Find("GuidePlane/GuideTextFather/GuideText/Bg"), 0, 0, 0, 0);
         NavText(root, "GuidePlane/GuideTextFather/GuideText/GTContent", 0, 0, 720, 200, 51, Brown);
-        // Hand sprite, target follow and source spotlight shader remain unchanged.
-        NavRect(root, "GuidePlane/HandFather/Hander/Hand/HandImage", -65, -50, 225, 225);
+        NavRect(root, "GuidePlane/HandFather/Hander/Hand/HandImage", 160, -81, 219, 240);
+        Image hand=NavGet<Image>(root,"GuidePlane/HandFather/Hander/Hand/HandImage");
+        RefCutout(hand,9,new Rect(1130,151,73,80),new[]{P(1130,151),P(1140,152),P(1154,174),P(1165,171),P(1170,175),P(1179,176),P(1185,181),P(1190,181),P(1200,197),P(1203,217),P(1191,230),P(1175,228),P(1165,220),P(1150,213),P(1140,196),P(1136,180)});
+        Transform handRoot=root.transform.Find("GuidePlane/HandFather/Hander/Hand");
+        var caption=NavDecor(handRoot,"AppleCashGuideCaption","inset",-215,-341,668,238);
+        caption.color=new Color(.08f,.08f,.15f,.94f);
+        NavNewText(caption.transform,"Label","Tap <color=#ffe249>Cash</color> to view\nyour wallet.",0,0,610,190,47,Color.white);
+        root.GetComponent<WZSDK.Tutorial>().ConfigureAppleCaption(caption.gameObject);
+        caption.gameObject.SetActive(false);
     }
 
     private static void NavEffects(GameObject root)

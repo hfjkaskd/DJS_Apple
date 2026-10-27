@@ -74,6 +74,9 @@ namespace WZSDK
 		private RectTransform guideTarget;
 		private Vector2 targetHandOffset;
 		private int lastAdvanceFrame = -1;
+        [SerializeField] private GameObject appleCashGuideCaption;
+        public void ConfigureAppleCaption(GameObject value) {appleCashGuideCaption=value;}
+        public void RefreshPresentationLayout() {if(isShow && !IsClosing && currentStepCallback!=null)RefreshTargetPosition();}
 
 		private void Awake()
 		{
@@ -97,10 +100,7 @@ namespace WZSDK
 
 		private void LateUpdate()
 		{
-			if (isShow && !IsClosing && currentStepCallback != null)
-			{
-				RefreshTargetPosition();
-			}
+            RefreshPresentationLayout();
 		}
 
 		public override void InitView()
@@ -629,6 +629,7 @@ namespace WZSDK
 
 		private void ResetVisualState()
 		{
+            if(appleCashGuideCaption!=null)appleCashGuideCaption.SetActive(false);
 			guideTarget = null;
 			RestoreDefaultHandPosition();
 			if (mask != null)
@@ -655,6 +656,7 @@ namespace WZSDK
 
 		private void ShowTargetVisuals()
 		{
+            if(appleCashGuideCaption!=null)appleCashGuideCaption.SetActive(currentType==TYPE.TYPE19 || currentType==TYPE.TYPE3 && step==3);
 			if (mask != null)
 			{
 				mask.SetActive(false);

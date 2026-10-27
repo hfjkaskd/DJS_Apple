@@ -10,11 +10,20 @@ public static partial class Framework2AppleSkin
 
     static void RefBox(GameObject root, string path, float x, float y, float w, float h, int font=0)
     {
-        Transform target = root.transform.Find(path); if (target == null) return;
-        Vector3 canvas = new Vector3(((x+w*.5f-referencePhone.x)/referencePhone.width-.5f)*1200,
-            (.5f-(y+h*.5f-referencePhone.y)/referencePhone.height)*2132,0);
+        Transform target = root.transform.Find(path);
+        if (target == null) throw new System.InvalidOperationException("Missing reference layout target: "+root.name+"/"+path);
+        // One scale for BOTH axes. Mapping height independently to 2132 used to
+        // squash every panel, button and gap on the taller approval phone frames.
+        float scale = 1200f/referencePhone.width;
+        Vector3 canvas = new Vector3((x+w*.5f-referencePhone.center.x)*scale,
+            (referencePhone.center.y-y-h*.5f)*scale,0);
+        // HUD controls belong to a top-anchored parent and follow the viewport
+        // top; modal panels deliberately stay centred on narrower/taller screens.
+        if(root.name=="GamePlayerView")canvas.y=1066f-(y+h*.5f-referencePhone.y)*scale;
         Vector3 local = target.parent.InverseTransformPoint(root.transform.TransformPoint(canvas));
-        NavRect(target,local.x,local.y,w/referencePhone.width*1200,h/referencePhone.height*2132);
+        if(target.parent is RectTransform parentRect)local-=(Vector3)parentRect.rect.center;
+        NavRect(target,local.x,local.y,w*scale,h*scale);
+        Framework2ReferenceLayoutAudit.Record(root,path,referencePhone,new Rect(x,y,w,h));
         if(font>0 && target.GetComponent<Text>() is Text text)
         {
             text.fontSize=font; text.resizeTextMaxSize=font;
@@ -30,7 +39,8 @@ public static partial class Framework2AppleSkin
         RefBox(root,panel,x,y,w,h);
         RefBox(root,panel+"/AppleHeader",x+w*.5f-137,y-25,274,60);
         RefBox(root,panel+"/AppleHeaderText",x+w*.5f-130,y-23,260,54,73);
-        RefBox(root,panel+"/close",x+w-45,y-10,50,50);
+        string close=root.transform.Find(panel+"/close")!=null?panel+"/close":root.transform.Find(panel+"/ExitBtn")!=null?panel+"/ExitBtn":null;
+        if(close!=null)RefBox(root,close,x+w-45,y-10,50,50);
         RefBox(root,panel+"/AppleTestFooter",x+26,y+h-39,w-52,22,35);
         AccAddArt(root.transform.Find(panel),"AppleReferenceLeaf","leaf",0,0,100,100);
         RefBox(root,panel+"/AppleReferenceLeaf",x+28,y-43,50,50);
@@ -124,6 +134,8 @@ public static partial class Framework2AppleSkin
             case "WithDrawHistory":
                 RefPhone(21,78,401,813);
                 RefBox(root,"Panel",34,263,372,498);
+                AccFooter(root.transform.Find("Panel/bg"),1490);
+                AccHide(root,"Panel/AppleTestFooter");
                 RefAccountFrame(root,"Panel/bg",34,263,372,498);
                 RefBox(root,"Panel/PanelA",57,312,327,95);
                 RefBox(root,"Panel/PanelA/AppleTotalLabel",85,315,270,27,46);
@@ -131,6 +143,10 @@ public static partial class Framework2AppleSkin
                 RefBox(root,"Panel/PanelA/Num",188,340,170,57,112);
                 RefBox(root,"Panel/Scroll View",57,410,327,306);
                 RefBox(root,"Panel/Scroll View/Viewport",60,415,321,296);
+                var historyScroll=root.transform.Find("Panel/Scroll View").GetComponent<ScrollRect>();
+                historyScroll.horizontalScrollbar=null;historyScroll.verticalScrollbar=null;
+                historyScroll.horizontalScrollbarVisibility=ScrollRect.ScrollbarVisibility.Permanent;
+                historyScroll.verticalScrollbarVisibility=ScrollRect.ScrollbarVisibility.Permanent;
                 RefBox(root,"Panel/AppleEmptyState",57,410,327,306);
                 RefBox(root,"Panel/AppleEmptyState/Receipt",136,480,170,125);
                 RefBox(root,"Panel/AppleEmptyState/Label",80,610,280,44,62);
@@ -182,26 +198,28 @@ public static partial class Framework2AppleSkin
             case "LuckySuccessView": AlignLuckySuccess(root); break;
             case "GameBalancView": AlignWallet(root); break;
             case "GamePlayerView": AlignHud(root); break;
+            case "NoticeView": AlignNotice(root); break;
             case "SettingsView": AlignSettings(root); break;
             case "UserLevelView": AlignUserLevel(root); break;
             case "ReStartView": AlignRestart(root); break;
             case "WithdrawView":
-                // Optional and regional pages retain the source entry/visibility policy.
-                AlignOptionalFrame(root,"Plane",1120,1500); break;
-            case "WithDrawContinue": AlignOptionalFrame(root,"Panel",1120,1470); break;
+                AlignDiamond(root); break;
+            case "WithDrawContinue": AlignContinue(root); break;
         }
     }
 
     static void AlignWithdraw(GameObject root)
     {
         RefPhone(21,81,397,793); RefAccountFrame(root,"Panel",45,281,354,474);
+        RefBox(root,"Panel/AppleHeader",99,257,240,60);
+        RefBox(root,"Panel/AppleHeaderText",108,262,222,48,76);
         RefBox(root,"Panel/PanelA",65,326,311,165); RefBox(root,"Panel/PanelA/PanelD",65,326,311,165);
         RefBox(root,"Panel/PanelA/PanelD/PanelE",65,326,311,108);
         RefBox(root,"Panel/PanelA/PanelD/PanelE/Image",81,343,75,78);
         RefBox(root,"Panel/PanelA/PanelD/PanelE/content",176,334,194,48,106);
         RefBox(root,"Panel/PanelA/PanelD/PanelE/AccountVerified",176,383,194,46,43);
         RefBox(root,"Panel/PanelA/PanelD/Process",77,436,290,33);
-        AccProgress(root,"Panel/PanelA/PanelD/Process","Background","Fill","num",877,89);
+        AccProgress(root,"Panel/PanelA/PanelD/Process","Background","Fill","num",290*1200f/397,33*1200f/397);
         RefBox(root,"Panel/PanelB",65,491,311,119);
         RefBox(root,"Panel/PanelB/RecordBtn",77,500,92,33);
         RefBox(root,"Panel/PanelB/withdrawProcess",173,493,190,46,43);
@@ -288,11 +306,10 @@ public static partial class Framework2AppleSkin
         RefBox(root,"SkinAwardLabel",660,469,355,33,54);
         RefBox(root,"SkinTargetInset",641,517,397,161);
         RefBox(root,"SkinTargetLabel",668,522,345,35,53);
-        RefBox(root,"ProgressRoot/BG/Progress/Count",667,554,344,33,54);
         RefBox(root,"ProgressRoot/BG",657,594,307,35);
+        RefBox(root,"ProgressRoot/BG/Progress/Count",667,554,344,33,54);
         RefBox(root,"SkinProgressPercent",973,594,55,35,54);
         RefBox(root,"dec",662,639,365,31,43);
-        RefBox(root,"bg/Panel/content",662,639,365,31,43);
         RefBox(root,"continuebtn",645,679,389,65);
         RefBox(root,"bg/close",1016,289,61,61);
     }
@@ -302,7 +319,6 @@ public static partial class Framework2AppleSkin
         RefPhone(428,99,400,770); RefRewardFrame(root,447,267,362,466);
         RefBox(root,"SkinCashPile",497,322,254,112);
         RefBox(root,"SkinIncreaseArrow",649,319,78,98);
-        root.transform.Find("SkinIncreaseArrow").localRotation=Quaternion.Euler(0,0,-135);
         RefBox(root,"SkinTargetLabel",480,432,297,29,49);
         RefBox(root,"SkinTargetAmount",480,457,297,49,109);
         RefBox(root,"bg/Panel/Dec",480,505,297,25,46);
@@ -424,37 +440,67 @@ public static partial class Framework2AppleSkin
         RefBox(root,"Plane/Bg/SpecialRoot/Special2/SkinSpecialWheel",253,502,96,96);
         RefBox(root,"Plane/Bg/SpecialRoot/Special1/SpecialTxt1",64,594,142,27,49);
         RefBox(root,"Plane/Bg/SpecialRoot/Special2/SpecialTxt2",229,594,142,27,49);
-        RefBox(root,"Plane/Bg/Content",59,646,321,25,40);
-        for(int i=1;i<=4;i++) RefBox(root,"Plane/LevelProgressTxt/Dec"+i,59,669+(i-1)*18,321,23,37);
+        AccHide(root,"Plane/Bg/Content"); // The balance card already carries the same simulation caption.
+        for(int i=1;i<=4;i++) RefBox(root,"Plane/LevelProgressTxt/Dec"+i,59,646+(i-1)*17,321,17,29);
         RefBox(root,"Plane/ExitBtn",357,247,51,51);
+    }
+
+    static void AlignNotice(GameObject root)
+    {
+        RefPhone(432,101,397,769);RefRewardFrame(root,454,320,357,292);
+        RefBox(root,"SkinHeading",519,296,228,59);
+        RefBox(root,"SkinHeading/SkinHeadingText",527,301,212,48,77);
+        RefBox(root,"Bg",432,101,397,769);
+        RefBox(root,"Bg/NoticeText",496,373,276,43,54);
+        RefBox(root,"SkinNoticeValue",500,419,272,80);
+        RefBox(root,"SkinNoticeValue/Money",510,423,78,72);
+        RefBox(root,"SkinNoticeValue/Amount",601,427,170,63,113);
+        RefBox(root,"SkinNoticeConfirm",482,515,299,62);
+        RefBox(root,"SkinNoticeClose",762,309,51,51);
+        RefBox(root,"SkinTestFooter",482,584,299,18,25);
+        var presenter=root.GetComponent<Framework2AppleNoticePresenter>();if(presenter==null)presenter=root.AddComponent<Framework2AppleNoticePresenter>();
+        RectTransform body=root.transform.Find("Bg/NoticeText") as RectTransform;
+        presenter.Configure(root.transform.Find("SkinNoticeConfirm").GetComponent<Button>(),root.transform.Find("SkinNoticeClose").GetComponent<Button>(),
+            root.transform.Find("SkinNoticeValue").gameObject,root.transform.Find("SkinNoticeValue/Amount").GetComponent<Text>(),body.GetComponent<Text>(),
+            body.anchoredPosition+new Vector2(0,-80),new Vector2(body.sizeDelta.x,300));
+        root.GetComponent<WZSDK.NoticeView>().ConfigureAppleNotice(presenter);
+        root.transform.Find("Bg").SetAsLastSibling();
     }
 
     static void AlignHud(GameObject root)
     {
         const string p="Area/TopButtons/";
-        NavRect(root,p+"LV",-444,72,170,170);
-        NavRect(root,p+"LV/NavLevelNumber",0,0,140,140);
-        NavRect(root,p+"CurMoney",35,72,729,144);
-        NavRect(root,p+"CurMoney/Bg1",0,0,729,144);
+        RefPhone(33,58,525,831);
+        RefBox(root,p+"LV",57,67,78,78);
+        RefBox(root,p+"LV/NavLevelNumber",66,78,60,57,102);
+        RefBox(root,p+"CurMoney",143,74,321,64);
+        RefBox(root,p+"CurMoney/Bg1",143,74,321,64);
         NavImage(root.transform.Find(p+"CurMoney/Bg1"),"panel",true);
-        NavRect(root,p+"CurMoney/Bg1/MoneyIcon",-280,0,124,124);
-        NavRect(root,p+"CurMoney/Bg1/MoneyIcon/MoneyIcon",0,0,124,124);
-        NavRect(root,p+"CurMoney/Bg1/CoinTxt",-50,0,340,100);
-        NavRect(root,p+"CurMoney/CoinBtn",255,0,220,134);
+        RefBox(root,p+"CurMoney/Bg1/MoneyIcon",162,83,50,46);
+        RefBox(root,p+"CurMoney/Bg1/MoneyIcon/MoneyIcon",162,83,50,46);
+        RefBox(root,p+"CurMoney/Bg1/CoinTxt",215,83,136,46,73);
+        RefBox(root,p+"CurMoney/CoinBtn",357,74,107,64);
+        RefBox(root,p+"CurMoney/CoinBtn/Text",365,84,91,44,65);
         NavImage(root.transform.Find(p+"CurMoney/CoinBtn"),"title",true);
         NavDecor(root.transform.Find(p+"LV"),"NavLevelLeaf","leaf",-51,62,69,65);
-        NavRect(root,p+"Setting",503,72,160,160);
+        RefBox(root,p+"LV/NavLevelLeaf",49,61,36,32);
+        RefBox(root,p+"Setting",475,73,66,64);
         var presenter=root.GetComponent<Framework2AppleNavigationPresenter>();
-        presenter.PrimaryTaskPosition=new Vector2(0,-79); presenter.SecondaryTaskPosition=new Vector2(0,-225);
         foreach(string n in new[]{"NavEarlyTaskRoot","NavAdTaskRoot","NavBalanceTaskRoot"})
-        {NavRect(root,p+n,0,-79,1050,94);NavImage(root.transform.Find(p+n),"panel",true);}
-        NavRect(root,p+"NavEarlyTaskRoot/NavTrack",-335,0,275,66);
-        NavRect(root,p+"NavEarlyTaskRoot/NavFill",-335,0,257,48);
-        NavRect(root,p+"NavEarlyTaskRoot/NavObjective",125,0,630,78);
-        NavRect(root,p+"NavBalanceTaskRoot/NavTrack",-345,0,285,66);
-        NavRect(root,p+"NavBalanceTaskRoot/NavFill",-345,0,267,48);
-        NavRect(root,p+"NavBalanceTaskRoot/NavBalanceCount",92,0,590,74);
-        NavRect(root,p+"NavBalanceTaskRoot/NavPercent",457,0,125,74);
+        {RefBox(root,p+n,72,147,458,46);NavImage(root.transform.Find(p+n),"panel",true);}
+        presenter.PrimaryTaskPosition=((RectTransform)root.transform.Find(p+"NavEarlyTaskRoot")).anchoredPosition;
+        presenter.SecondaryTaskPosition=presenter.PrimaryTaskPosition-new Vector2(0,146);
+        RefBox(root,p+"NavEarlyTaskRoot/NavTrack",86,158,119,26);
+        RefBox(root,p+"NavEarlyTaskRoot/NavFill",88,160,115,22);
+        RefBox(root,p+"NavEarlyTaskRoot/NavObjective",211,153,299,34,49);
+        RefBox(root,p+"NavBalanceTaskRoot/NavTrack",86,158,119,26);
+        RefBox(root,p+"NavBalanceTaskRoot/NavFill",88,160,115,22);
+        RefBox(root,p+"NavBalanceTaskRoot/NavBalanceCount",211,153,244,34,45);
+        RefBox(root,p+"NavBalanceTaskRoot/NavPercent",465,153,53,34,46);
+        RefBox(root,p+"NavAdTaskRoot/NavTrack",86,158,235,26);
+        RefBox(root,p+"NavAdTaskRoot/NavFill",88,160,231,22);
+        RefBox(root,p+"NavAdTaskRoot/NavCount",93,154,221,33,49);
+        RefBox(root,p+"NavAdTaskRoot/NavObjective",327,153,185,34,43);
     }
 
     static void AlignSettings(GameObject root)
@@ -522,10 +568,76 @@ public static partial class Framework2AppleSkin
         RefBox(root,"Plane/NavTestFooter",905,612,264,24,34);
     }
 
-    static void AlignOptionalFrame(GameObject root,string path,float w,float h)
+    static void AlignDiamond(GameObject root)
     {
-        Transform panel=root.transform.Find(path); if(panel==null)return;
-        NavRect(panel,0,-20,w,h);
+        RefPhone(27,146,414,722);
+        NavRect(root.transform.Find("Plane"),0,0,1200,2132);
+        RefAccountFrame(root,"Plane/Bg",40,315,387,520);
+        RefBox(root,"Plane/Bg/AppleHeader",93,350,284,46);
+        RefBox(root,"Plane/Bg/AppleHeaderText",89,353,291,42,83);
+        // This optional page has an illustration and an inset title, not a floating blue tab.
+        root.transform.Find("Plane/Bg/AppleHeader").gameObject.SetActive(false);
+        root.transform.Find("Plane/Bg/AppleReferenceLeaf").gameObject.SetActive(false);
+        AccAddArt(root.transform.Find("Plane/Bg"),"AppleDiamondHero","diamond",0,0,100,100);
+        RefBox(root,"Plane/Bg/AppleDiamondHero",178,265,109,92);
+        root.transform.Find("Plane/Bg/AppleHeaderText").GetComponent<Text>().color=Brown;
+        RefBox(root,"Plane/Bg/ExitBtn",373,291,54,54);
+        RefBox(root,"Plane/Bg/Bg2",149,401,171,39);
+        NavImage(root.transform.Find("Plane/Bg/Bg2"),"inset",true);
+        RefBox(root,"Plane/Bg/Bg2/CurGem",213,401,76,39,78);
+        foreach(Image gem in root.transform.Find("Plane/Bg/Bg2").GetComponentsInChildren<Image>(true))
+            if(gem.name=="GemIcon")RefBox(root,"Plane/Bg/Bg2/"+gem.name,165,404,36,32);
+        string group="Plane/Bg/WithdrawalTask/WTGroup";
+        RefBox(root,"Plane/Bg/WithdrawalTask",63,452,340,209);
+        RefBox(root,group,63,452,340,209);
+        for(int i=0;i<4;i++)
+        {
+            string p=group+"/WTToggleItem"+(i+1);
+            float x=63+i%2*179,y=452+i/2*113;
+            RefBox(root,p,x,y,161,96); RefBox(root,p+"/Bg",x,y,161,96);
+            RefBox(root,p+"/Checkmark",x,y,161,96);
+            RefBox(root,p+"/AppleExchangeDiamond",x+27,y+9,39,35);
+            RefBox(root,p+"/AppleGemCost",x+68,y+9,90,36,68);
+            RefBox(root,p+"/AppleExchangeMoney",x+20,y+50,42,37);
+            RefBox(root,p+"/WTTI2Label",x+61,y+49,99,39,65);
+        }
+        RefBox(root,"Plane/Bg/Bg2/mark",70,662,329,24,42);
+        RefBox(root,"Plane/Bg/BottomBg",71,690,327,32);
+        RefBox(root,"Plane/Bg/BottomBg/Process",71,690,327,32);
+        AccProgress(root,"Plane/Bg/BottomBg/Process","Background","Fill Area/Fill","num",327*1200f/414,32*1200f/414);
+        RefBox(root,"Plane/Bg/BottomBg/Process/Fill Area",74,693,321,26);
+        RefBox(root,"Plane/Bg/Withdraw",71,739,327,59);
+        RefBox(root,"Plane/Bg/AppleTestFooter",74,801,322,24,33);
+    }
+
+    static void AlignContinue(GameObject root)
+    {
+        RefPhone(1230,146,415,722);
+        RefAccountFrame(root,"PanelA",1247,316,383,515);
+        root.transform.Find("PanelA/AppleHeader").gameObject.SetActive(false);
+        root.transform.Find("PanelA/AppleReferenceLeaf").gameObject.SetActive(false);
+        RefBox(root,"PanelA/AppleHeaderText",1295,354,292,40,82);
+        root.transform.Find("PanelA/AppleHeaderText").GetComponent<Text>().color=Brown;
+        AccAddArt(root.transform.Find("PanelA"),"AppleContinueHero","cashpile",0,0,100,100);
+        RefBox(root,"PanelA/AppleContinueHero",1331,264,195,88);
+        RefBox(root,"PanelA/ContentA",1277,398,323,77,49);
+        NavDecor(root.transform.Find("PanelA"),"AppleContinueDescriptionInset","inset",0,0,100,100);
+        RefBox(root,"PanelA/AppleContinueDescriptionInset",1277,398,323,77);
+        root.transform.Find("PanelA/AppleContinueDescriptionInset").SetAsFirstSibling();
+        RefBox(root,"PanelA/PanelC",1277,486,323,226);
+        string[] names={"WithDrawItem","WithDrawItem1","WithDrawItem2"};
+        for(int i=0;i<3;i++)
+        {
+            string p="PanelA/PanelC/"+names[i];float y=486+i*78;
+            RefBox(root,p,1277,y,323,70);
+            RefBox(root,p+"/headPic",1292,y+9,52,52);
+            RefBox(root,p+"/headPic/AppleTaskNumber",1292,y+9,52,52,79);
+            RefBox(root,p+"/PanelA",1366,y+5,217,60);
+            RefBox(root,p+"/PanelA/TextUp",1367,y+2,216,31,64);
+            RefBox(root,p+"/PanelA/TextDown",1367,y+32,216,30,44);
+        }
+        RefBox(root,"PanelA/Continue",1278,723,320,59);
+        RefBox(root,"PanelA/AppleTestFooter",1289,794,298,22,34);
     }
 
     static void AlignReferenceHost(GameObject root)

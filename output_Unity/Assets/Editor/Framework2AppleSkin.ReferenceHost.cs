@@ -12,7 +12,7 @@ public static partial class Framework2AppleSkin
         RefBox(root,card+"/Title",x+w*.5f-124,y-23,248,52,73);
         RefBox(root,card+"/NavReferenceLeaf",x+31,y-42,49,49);
         RefBox(root,card+"/NavTestFooter",x+30,y+h-39,w-60,22,34);
-        RefBox(root,card+"/Close",x+w-45,y-11,50,50);
+        if(root.transform.Find(card+"/Close")!=null)RefBox(root,card+"/Close",x+w-45,y-11,50,50);
     }
     static void AlignHostPages(GameObject root)
     {

@@ -468,10 +468,20 @@ public static partial class Framework2AppleSkin
 
     private static void RewardNotice(GameObject root)
     {
-        // NoticeView is the source timed toast, not an invented confirmation dialog.
-        RewardContainer(root, "Bg", 0, 120, 1000, 190);
-        RewardImage(root, "Bg", "secondary", true);
-        RewardText(root, "Bg/NoticeText", 0, 0, 920, 140, 41);
+        RewardFrame(root,"Notice",900,0);RewardFooter(root,-400);
+        var scrim=RewardNewImage(root,"SkinNoticeScrim","inset",0,0,1200,2132,false);
+        scrim.sprite=null;scrim.color=new Color(0,0,0,.5f);scrim.raycastTarget=false;
+        NavStretch(scrim.transform,0,0,0,0);scrim.transform.SetAsFirstSibling();
+        RewardContainer(root,"Bg",0,0,1200,2132);RewardHideImage(root,"Bg");
+        RewardText(root,"Bg/NoticeText",0,180,940,140,54);
+        NavNode(root.transform,"SkinNoticeValue");
+        NavDecor(root.transform.Find("SkinNoticeValue"),"Money","money",0,0,100,100);
+        NavNewText(root.transform.Find("SkinNoticeValue"),"Amount","",0,0,100,100,113,Brown);
+        var primary=NavNode(root.transform,"SkinNoticeConfirm");if(primary.GetComponent<Button>()==null)primary.gameObject.AddComponent<Button>();
+        NavButton(root,"SkinNoticeConfirm",0,-240,930,180,false,76);
+        NavNewText(primary,"Label","Confirm",0,0,850,145,76,Color.white);
+        var exit=NavNode(root.transform,"SkinNoticeClose");if(exit.GetComponent<Button>()==null)exit.gameObject.AddComponent<Button>();
+        NavImage(exit,"close",false);NavButtonTarget(exit);
     }
 
     private static void RewardFrame(GameObject root, string title, float height, float y)
