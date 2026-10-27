@@ -1,0 +1,28 @@
+{
+  "states": 45,
+  "visibleBoundsMeasured": 799,
+  "maxReferencePixelError": 6.103515625e-05,
+  "productConfigSha256": "74a89260e72fc83aeee7e3d1bd5bc8ceeb6543af08342cd19e1fc05359648537",
+  "productionFilesUnchanged": true,
+  "fullPixelParity": false,
+  "apkBuilt": false,
+  "physicalDeviceTested": false,
+  "workflowAssertions": 88,
+  "abAssertions": 107,
+  "abSwitchCount": 8,
+  "productionSelectionUnchanged": true,
+  "remainingDifferences": [
+    "The source game scene, live accounts, dates, balances and regional localization remain dynamic.",
+    "The source verification states and conditional paths remain unchanged, even where the art board simplifies them.",
+    "The notice retains its original automatic dismissal timer; Confirm and Close optionally dismiss the same notice.",
+    "Reference phones have different aspect ratios. Native captures use uniform scale and real viewport cropping.",
+    "Geometry measurements are against the recorded control rectangles, not an all-pixel image equality test."
+  ],
+  "changes": [
+    "Uniform scaling replaces independent width/height scaling.",
+    "Design-size authoring resolves detached stretch roots and top anchors correctly.",
+    "Stage and regional layouts are serialized in prefabs and selected by existing presentation state.",
+    "Optional exchange, continued-task, notice and tutorial interfaces are included.",
+    "Input error spacing, font fitting, wallet paragraphs and source-following guide placement are corrected."
+  ]
+}
