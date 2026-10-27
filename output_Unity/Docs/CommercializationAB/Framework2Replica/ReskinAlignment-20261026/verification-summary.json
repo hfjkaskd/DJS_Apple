@@ -1,0 +1,28 @@
+{
+  "actualStates": 45,
+  "authoredPrefabs": 35,
+  "captureAssertions": 2224,
+  "workflowAssertions": 88,
+  "abAssertions": 107,
+  "abSwitchCount": 8,
+  "productConfigSha256": "74a89260e72fc83aeee7e3d1bd5bc8ceeb6543af08342cd19e1fc05359648537",
+  "productionFilesUnchanged": true,
+  "productionSelectionUnchanged": true,
+  "pixelPerfectClaim": false,
+  "physicalDeviceTested": false,
+  "apkBuilt": false,
+  "changes": [
+    "Measured reference rectangles authored into saved prefabs.",
+    "Approved frame/button/input artwork reused with authored UI UV patches.",
+    "Rounded font, account cards, provider icon, help control, header spacing and footers corrected.",
+    "Reward, wheel, wallet, history, settings and host layouts revised.",
+    "B's selector now stages a choice and switches only on confirmation; A's original selector is unchanged.",
+    "Overlay canvas design resolution aligned with the 1200x2132 business canvas."
+  ],
+  "remainingReferenceDifferences": [
+    "Reference phone frames use different aspect ratios; live captures preserve a real 1080x1920 viewport.",
+    "Underlying fruit boards, live balances, names and dates are source-driven rather than reference-image placeholders.",
+    "NoticeView preserves the source timed-toast behavior instead of introducing the approval sheet's manual confirmation step.",
+    "Lucky-spin reward types retain the source definitions; Undo uses the main game's actual Undo icon."
+  ]
+}
