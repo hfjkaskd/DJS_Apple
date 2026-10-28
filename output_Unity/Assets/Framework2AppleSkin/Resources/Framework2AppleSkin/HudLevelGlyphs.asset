@@ -1,0 +1,1028 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4dbcf2563afa842b6f7c9ad4c663b7, type: 3}
+  m_Name: HudLevelGlyphs
+  m_EditorClassIdentifier: 
+  atlas: {fileID: 2800000, guid: 006d9eac8e335814dbebc5cab27248e0, type: 3}
+  glyphs:
+  - character: 32
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -1}
+    advance: 7
+  - character: 33
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -2}
+    advance: 10
+  - character: 34
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: 17}
+    advance: 12
+  - character: 35
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -1}
+    advance: 23
+  - character: 36
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -5}
+    advance: 22
+  - character: 37
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -2}
+    advance: 28
+  - character: 38
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -2}
+    advance: 25
+  - character: 39
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: 17}
+    advance: 6
+  - character: 40
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -10}
+    advance: 13
+  - character: 41
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -10}
+    advance: 13
+  - character: 42
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: 9}
+    advance: 17
+  - character: 43
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: 1}
+    advance: 21
+  - character: 44
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -8}
+    advance: 9
+  - character: 45
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: 8}
+    advance: 15
+  - character: 46
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -2}
+    advance: 11
+  - character: 47
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -2, y: -4}
+    advance: 14
+  - character: 48
+    uv:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.03125
+      width: 0.05078125
+      height: 0.546875
+    size: {x: 26, y: 35}
+    bearing: {x: -2, y: -4}
+    advance: 22
+  - character: 49
+    uv:
+      serializedVersion: 2
+      x: 0.0625
+      y: 0.03125
+      width: 0.03515625
+      height: 0.53125
+    size: {x: 18, y: 34}
+    bearing: {x: 0, y: -3}
+    advance: 22
+  - character: 50
+    uv:
+      serializedVersion: 2
+      x: 0.10546875
+      y: 0.03125
+      width: 0.05078125
+      height: 0.53125
+    size: {x: 26, y: 34}
+    bearing: {x: -2, y: -3}
+    advance: 22
+  - character: 51
+    uv:
+      serializedVersion: 2
+      x: 0.1640625
+      y: 0.03125
+      width: 0.048828125
+      height: 0.546875
+    size: {x: 25, y: 35}
+    bearing: {x: -2, y: -4}
+    advance: 22
+  - character: 52
+    uv:
+      serializedVersion: 2
+      x: 0.22070312
+      y: 0.03125
+      width: 0.05078125
+      height: 0.53125
+    size: {x: 26, y: 34}
+    bearing: {x: -2, y: -3}
+    advance: 22
+  - character: 53
+    uv:
+      serializedVersion: 2
+      x: 0.27929688
+      y: 0.03125
+      width: 0.05078125
+      height: 0.546875
+    size: {x: 26, y: 35}
+    bearing: {x: 0, y: -3}
+    advance: 26
+  - character: 54
+    uv:
+      serializedVersion: 2
+      x: 0.33789062
+      y: 0.03125
+      width: 0.05078125
+      height: 0.546875
+    size: {x: 26, y: 35}
+    bearing: {x: -2, y: -4}
+    advance: 22
+  - character: 55
+    uv:
+      serializedVersion: 2
+      x: 0.39648438
+      y: 0.03125
+      width: 0.05078125
+      height: 0.53125
+    size: {x: 26, y: 34}
+    bearing: {x: -2, y: -3}
+    advance: 22
+  - character: 56
+    uv:
+      serializedVersion: 2
+      x: 0.45507812
+      y: 0.03125
+      width: 0.05078125
+      height: 0.546875
+    size: {x: 26, y: 35}
+    bearing: {x: -2, y: -4}
+    advance: 22
+  - character: 57
+    uv:
+      serializedVersion: 2
+      x: 0.5136719
+      y: 0.03125
+      width: 0.048828125
+      height: 0.546875
+    size: {x: 25, y: 35}
+    bearing: {x: -2, y: -4}
+    advance: 22
+  - character: 58
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -2}
+    advance: 11
+  - character: 59
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -8}
+    advance: 10
+  - character: 60
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: 1}
+    advance: 19
+  - character: 61
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: 4}
+    advance: 22
+  - character: 62
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: 1}
+    advance: 20
+  - character: 63
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -2}
+    advance: 19
+  - character: 64
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -10}
+    advance: 34
+  - character: 65
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -1}
+    advance: 26
+  - character: 66
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 24
+  - character: 67
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -2}
+    advance: 25
+  - character: 68
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 25
+  - character: 69
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 21
+  - character: 70
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 21
+  - character: 71
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -2}
+    advance: 26
+  - character: 72
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 27
+  - character: 73
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 11
+  - character: 74
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -2}
+    advance: 21
+  - character: 75
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 24
+  - character: 76
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 21
+  - character: 77
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 33
+  - character: 78
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 27
+  - character: 79
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -2}
+    advance: 26
+  - character: 80
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 25
+  - character: 81
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -6}
+    advance: 26
+  - character: 82
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 24
+  - character: 83
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -2}
+    advance: 23
+  - character: 84
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -1}
+    advance: 24
+  - character: 85
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -2}
+    advance: 25
+  - character: 86
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -1}
+    advance: 25
+  - character: 87
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -1}
+    advance: 33
+  - character: 88
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -1}
+    advance: 24
+  - character: 89
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -1}
+    advance: 23
+  - character: 90
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -1}
+    advance: 23
+  - character: 91
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -8}
+    advance: 11
+  - character: 92
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -4}
+    advance: 16
+  - character: 93
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -8}
+    advance: 11
+  - character: 94
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: 12}
+    advance: 17
+  - character: 95
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -6}
+    advance: 17
+  - character: 96
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: 21}
+    advance: 13
+  - character: 97
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -2}
+    advance: 20
+  - character: 98
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -2}
+    advance: 21
+  - character: 99
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -2}
+    advance: 20
+  - character: 100
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -2}
+    advance: 21
+  - character: 101
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -2}
+    advance: 21
+  - character: 102
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -1}
+    advance: 14
+  - character: 103
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -9}
+    advance: 22
+  - character: 104
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -1}
+    advance: 21
+  - character: 105
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 10
+  - character: 106
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -3, y: -10}
+    advance: 10
+  - character: 107
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 20
+  - character: 108
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 10
+  - character: 109
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 33
+  - character: 110
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -1}
+    advance: 21
+  - character: 111
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -2}
+    advance: 21
+  - character: 112
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -9}
+    advance: 21
+  - character: 113
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -9}
+    advance: 21
+  - character: 114
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 1, y: -1}
+    advance: 14
+  - character: 115
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -2}
+    advance: 20
+  - character: 116
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -2}
+    advance: 13
+  - character: 117
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -2}
+    advance: 21
+  - character: 118
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -1}
+    advance: 19
+  - character: 119
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -1}
+    advance: 28
+  - character: 120
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -1}
+    advance: 19
+  - character: 121
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -10}
+    advance: 19
+  - character: 122
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -1}
+    advance: 19
+  - character: 123
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -8}
+    advance: 13
+  - character: 124
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 2, y: -7}
+    advance: 10
+  - character: 125
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -8}
+    advance: 13
+  - character: 126
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: 5}
+    advance: 25
+  - character: 163
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -1}
+    advance: 23
+  - character: 8364
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -2}
+    advance: 22
+  - character: 165
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -1}
+    advance: 20
+  - character: 8369
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -1}
+    advance: 28
+  - character: 8363
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: 0, y: -8}
+    advance: 22
+  - character: 8377
+    uv:
+      serializedVersion: 2
+      x: 0.5703125
+      y: 0.03125
+      width: 0
+      height: 0
+    size: {x: 0, y: 0}
+    bearing: {x: -1, y: -1}
+    advance: 20
+  ascent: 29
+  descent: -3

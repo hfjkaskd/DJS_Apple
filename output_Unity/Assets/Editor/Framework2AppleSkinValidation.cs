@@ -39,6 +39,7 @@ public static class Framework2AppleSkinValidation
     private static Dictionary<string, string> productionFiles;
     private static Transform shownRoot;
     private static AppleF2Runtime regionalRuntime;
+    private static bool HudOnly => Environment.GetEnvironmentVariable("DJS_APPLE_SKIN_VALIDATION_HUD_ONLY")=="1";
 
     [Serializable] private sealed class CaptureRecord
     {
@@ -72,6 +73,7 @@ public static class Framework2AppleSkinValidation
     [Serializable] private sealed class Report
     {
         public string generatedUtc, profile, productConfigSha256;
+        public string suite = "all-pages";
         public string scope = "Actual Game.unity and production B UI APIs in an isolated QA save profile. " +
             "Every balance/stage/account/history setup is explicitly synthetic. No real advertisement, payment, or user account is used. " +
             "Each PNG is an offscreen 1080x1920 render of real live scene/prefab instances after animation settling, " +
@@ -230,6 +232,30 @@ public static class Framework2AppleSkinValidation
         yield return Prepare(5, 5, 123.45);
         shownRoot = UIManager.instance.GetView<GamePlayerView>(EUIType.GamePlayerView).transform;
         yield return Capture(1, "GamePlayerView", "late cash HUD", "stage 5 / level 5 / balance 123.45");
+        if(HudOnly)
+        {
+            yield return Prepare(1, 1, 0);
+            shownRoot=UIManager.instance.GetView<GamePlayerView>(EUIType.GamePlayerView).transform;
+            yield return Capture(33,"GamePlayerView","early HUD","QA stage 1 / level 1 / zero balance");
+            yield return Prepare(3, 4, .1, 1);
+            shownRoot=UIManager.instance.GetView<GamePlayerView>(EUIType.GamePlayerView).transform;
+            yield return Capture(34,"GamePlayerView","advertisement HUD","QA stage 3 / level 4 / one of three simulated callbacks");
+            yield return Prepare(5, 5, 2999.5);
+            shownRoot=UIManager.instance.GetView<GamePlayerView>(EUIType.GamePlayerView).transform;
+            yield return Capture(47,"GamePlayerView","long balance HUD","QA stage 5 / level 5 / source cap 2999.50");
+            var binding=shownRoot.GetComponent<MahjongSlide.Withdrawal.MahjongFramework2CurrencyHud>();
+            Require(binding!=null && binding.HasRequiredBindings,"Authored HUD retains every source binding.");
+            Require(binding.CashButton.targetGraphic==binding.CashButton.GetComponent<Image>(),"Cash uses its own visible standard Button surface.");
+            Require(binding.SettingsButton.targetGraphic==binding.SettingsButton.GetComponent<Image>(),"Settings uses its own visible standard Button surface.");
+            Click(binding.CashButton,"approved HUD Cash entry");
+            yield return Until(()=>GameApp.viewManager.IsOpen((int)ViewType.WithDraw),"source wallet opened from HUD");
+            foreach(var capture in report.screenshots)
+                foreach(var box in capture.layout)
+                    if(box.visible)Require(box.maxEdgeError<=.5f,"Live HUD layout within half a reference pixel: "+capture.approvalId+"/"+box.path);
+            Require(HashFile(ConfigPath)==ExpectedConfigHash,"HUD authoring preserved original product rules.");
+            WriteIndex();
+            yield break;
+        }
         yield return Legacy(2, "WithDraw", "stage1", ViewType.WithDraw, 1, 2, 0, Model(1, 0));
         yield return Legacy(18, "WithDraw", "stage2", ViewType.WithDraw, 2, 2, .1, Model(2, .1));
         yield return Legacy(19, "WithDraw", "stage3 advertisement progress", ViewType.WithDraw, 3, 3, .2, Model(3, .2), 1);
@@ -444,6 +470,9 @@ public static class Framework2AppleSkinValidation
         yield return Seconds(settle);
         Require(shownRoot != null && shownRoot.gameObject.activeInHierarchy, "Capture target remains visible: " + template + " / " + state);
         Require(Object.FindObjectOfType<NewItemPop>()==null,"No unrelated native unlock modal covers the requested UI.");
+        if(HudOnly && template=="GamePlayerView")
+            foreach(var numerals in shownRoot.GetComponentsInChildren<Framework2AppleHudNumerals>())
+                Require(numerals.HasCompleteGlyphCoverage(),"Approved HUD typeface covers the entire current live value: "+numerals.transform.parent.name);
         if(template=="WithDrawmethod")
             Require(shownRoot.Find("PanelA/Panel/ques").gameObject.activeInHierarchy,"Account help remains visible and reachable.");
         if(template=="WithDrawConfirm")
@@ -526,6 +555,13 @@ public static class Framework2AppleSkinValidation
             };
             if(!Framework2ActualCapture.TryCapturePortrait(Path.Combine(output,record.referenceAspectFile),out error,fit,fit,width,height,inspect))
                 throw new InvalidOperationException("Reference-aspect live capture failed: "+error);
+        }
+        if(HudOnly && template=="GamePlayerView")
+        {
+            string cropPath=Path.Combine(output,"HudCrops",file);
+            if(!Framework2ActualCapture.TryCapturePortrait(cropPath,out error,fit,fit,1050,1662,null,new RectInt(0,1372,1050,290)))
+                throw new InvalidOperationException("Live HUD crop failed: "+error);
+            if(id==1)WriteHudComparison(cropPath);
         }
         report.screenshots.Add(record); report.captures++;
         WriteReport();
@@ -685,6 +721,7 @@ public static class Framework2AppleSkinValidation
     private static void EnsureReport()
     {
         if (report == null) report = new Report { generatedUtc = DateTime.UtcNow.ToString("O"), profile = SessionState.GetString(SessionPrefix + "Profile", "") };
+        if(HudOnly)report.suite="focused-hud-four-states";
         if (string.IsNullOrEmpty(output)) output = SessionState.GetString(SessionPrefix + "Output", "");
     }
 
@@ -729,13 +766,13 @@ public static class Framework2AppleSkinValidation
             if (!report.productionSelectionUnchanged) report.errors.Add("Production variant selection changed during QA.");
         }
         catch (Exception e) { report.errors.Add(e.ToString()); }
-        report.passed = report.errors.Count == 0 && report.activeTemplatesCaptured == 24 && report.hostPanelsCaptured == 4;
+        report.passed = report.errors.Count == 0 && (HudOnly ? report.captures==4 : report.activeTemplatesCaptured == 24 && report.hostPanelsCaptured == 4);
         for (int id = 1; id <= 46; id++)
         {
             bool accountedFor = false;
             foreach (var capture in report.screenshots) if (capture.approvalId == id) { accountedFor = true; break; }
             if (!accountedFor) foreach (var missing in report.notCaptured) if (missing.approvalId == id) { accountedFor = true; break; }
-            if (!accountedFor) report.notCaptured.Add(new Omission { approvalId = id, reason = "Run ended before this approval state was captured. No completeness claim is made for this state." });
+            if (!accountedFor) report.notCaptured.Add(new Omission { approvalId = id, reason = HudOnly ? "Outside this focused HUD-only check; see the previous full-page capture suite." : "Run ended before this approval state was captured. No completeness claim is made for this state." });
         }
         SessionState.SetBool(SessionPrefix + "Active", false);
         EditorApplication.update -= Watchdog;
@@ -745,5 +782,24 @@ public static class Framework2AppleSkinValidation
         WriteReport(); WriteIndex();
         Debug.Log("APPLE_SKIN_VALIDATION " + (report.passed ? "PASS" : "FAIL") + " captures=" + report.captures + " " + output);
         EditorApplication.Exit(report.passed ? 0 : 1);
+    }
+
+    private static void WriteHudComparison(string livePath)
+    {
+        // Plain diagnostic montage: unmodified approved crop above, actual live
+        // render below. No art, text, values or geometry are substituted in the live image.
+        var approved=new Texture2D(2,2,TextureFormat.RGBA32,false);
+        var live=new Texture2D(2,2,TextureFormat.RGBA32,false);
+        approved.LoadImage(File.ReadAllBytes(Path.Combine(output,"approved-hud.png")));
+        live.LoadImage(File.ReadAllBytes(livePath));
+        var comparison=new Texture2D(1050,596,TextureFormat.RGBA32,false);
+        for(int y=0;y<596;y++)for(int x=0;x<1050;x++)
+        {
+            Color color=y<290?live.GetPixel(x,y):y>=306?approved.GetPixelBilinear((x+.5f)/1050f,(y-306+.5f)/290f):new Color(.98f,.96f,.91f);
+            comparison.SetPixel(x,y,color);
+        }
+        comparison.Apply(false);
+        File.WriteAllBytes(Path.Combine(output,"HUD-comparison.png"),comparison.EncodeToPNG());
+        Object.DestroyImmediate(approved);Object.DestroyImmediate(live);Object.DestroyImmediate(comparison);
     }
 }

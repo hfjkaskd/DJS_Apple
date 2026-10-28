@@ -471,34 +471,34 @@ public static partial class Framework2AppleSkin
     {
         const string p="Area/TopButtons/";
         RefPhone(33,58,525,831);
-        RefBox(root,p+"LV",57,67,78,78);
+        RefBox(root,p+"LV",57,67,78,77);
         RefBox(root,p+"LV/NavLevelNumber",66,78,60,57,102);
-        RefBox(root,p+"CurMoney",143,74,321,64);
-        RefBox(root,p+"CurMoney/Bg1",143,74,321,64);
+        RefBox(root,p+"CurMoney",144,72,321,66);
+        RefBox(root,p+"CurMoney/Bg1",144,72,321,66);
         NavImage(root.transform.Find(p+"CurMoney/Bg1"),"panel",true);
-        RefBox(root,p+"CurMoney/Bg1/MoneyIcon",162,83,50,46);
-        RefBox(root,p+"CurMoney/Bg1/MoneyIcon/MoneyIcon",162,83,50,46);
+        RefBox(root,p+"CurMoney/Bg1/MoneyIcon",162,82,50,46);
+        RefBox(root,p+"CurMoney/Bg1/MoneyIcon/MoneyIcon",162,82,50,46);
         RefBox(root,p+"CurMoney/Bg1/CoinTxt",215,83,136,46,73);
-        RefBox(root,p+"CurMoney/CoinBtn",357,74,107,64);
+        RefBox(root,p+"CurMoney/CoinBtn",356,72,109,66);
         RefBox(root,p+"CurMoney/CoinBtn/Text",365,84,91,44,65);
         NavImage(root.transform.Find(p+"CurMoney/CoinBtn"),"title",true);
         NavDecor(root.transform.Find(p+"LV"),"NavLevelLeaf","leaf",-51,62,69,65);
-        RefBox(root,p+"LV/NavLevelLeaf",49,61,36,32);
-        RefBox(root,p+"Setting",475,73,66,64);
+        RefBox(root,p+"LV/NavLevelLeaf",49,61,38,35);
+        RefBox(root,p+"Setting",474,72,68,67);
         var presenter=root.GetComponent<Framework2AppleNavigationPresenter>();
         foreach(string n in new[]{"NavEarlyTaskRoot","NavAdTaskRoot","NavBalanceTaskRoot"})
-        {RefBox(root,p+n,72,147,458,46);NavImage(root.transform.Find(p+n),"panel",true);}
+        {RefBox(root,p+n,69,147,462,49);NavImage(root.transform.Find(p+n),"panel",true);}
         presenter.PrimaryTaskPosition=((RectTransform)root.transform.Find(p+"NavEarlyTaskRoot")).anchoredPosition;
         presenter.SecondaryTaskPosition=presenter.PrimaryTaskPosition-new Vector2(0,146);
         RefBox(root,p+"NavEarlyTaskRoot/NavTrack",86,158,119,26);
-        RefBox(root,p+"NavEarlyTaskRoot/NavFill",88,160,115,22);
+        RefBox(root,p+"NavEarlyTaskRoot/NavFill",86,158,119,26);
         RefBox(root,p+"NavEarlyTaskRoot/NavObjective",211,153,299,34,49);
         RefBox(root,p+"NavBalanceTaskRoot/NavTrack",86,158,119,26);
-        RefBox(root,p+"NavBalanceTaskRoot/NavFill",88,160,115,22);
-        RefBox(root,p+"NavBalanceTaskRoot/NavBalanceCount",211,153,244,34,45);
+        RefBox(root,p+"NavBalanceTaskRoot/NavFill",86,158,119,26);
+        RefBox(root,p+"NavBalanceTaskRoot/NavBalanceCount",208,153,190,34,46);
         RefBox(root,p+"NavBalanceTaskRoot/NavPercent",465,153,53,34,46);
         RefBox(root,p+"NavAdTaskRoot/NavTrack",86,158,235,26);
-        RefBox(root,p+"NavAdTaskRoot/NavFill",88,160,231,22);
+        RefBox(root,p+"NavAdTaskRoot/NavFill",86,158,235,26);
         RefBox(root,p+"NavAdTaskRoot/NavCount",93,154,221,33,49);
         RefBox(root,p+"NavAdTaskRoot/NavObjective",327,153,185,34,43);
     }

@@ -26,7 +26,7 @@ public static class Framework2ActualCapture
 
     public static bool TryCapturePortrait(string absolutePath, out string error,
         Action beforeRender = null, Action afterRestore = null, int width = 1080, int height = 1920,
-        Action<Camera> inspectLayout = null)
+        Action<Camera> inspectLayout = null, RectInt? pixelCrop = null)
     {
         error = null;
         Camera renderCamera = null;
@@ -87,8 +87,11 @@ public static class Framework2ActualCapture
             inspectLayout?.Invoke(renderCamera);
             renderCamera.Render();
             RenderTexture.active = target;
-            pixels = new Texture2D(width, height, TextureFormat.RGBA32, false);
-            pixels.ReadPixels(new Rect(0, 0, width, height), 0, 0, false);
+            RectInt crop = pixelCrop ?? new RectInt(0, 0, width, height);
+            if(crop.xMin<0 || crop.yMin<0 || crop.xMax>width || crop.yMax>height || crop.width<=0 || crop.height<=0)
+                throw new ArgumentOutOfRangeException(nameof(pixelCrop));
+            pixels = new Texture2D(crop.width, crop.height, TextureFormat.RGBA32, false);
+            pixels.ReadPixels(new Rect(crop.x,crop.y,crop.width,crop.height), 0, 0, false);
             pixels.Apply(false, false);
             string directory = Path.GetDirectoryName(Path.GetFullPath(absolutePath));
             Directory.CreateDirectory(directory);

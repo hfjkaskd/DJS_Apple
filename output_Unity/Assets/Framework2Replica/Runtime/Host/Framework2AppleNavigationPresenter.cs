@@ -23,12 +23,14 @@ public sealed class Framework2AppleNavigationPresenter : MonoBehaviour
     private float nextRefresh;
     private int lastLevel = -1, lastUserLevel = -1, lastObjectiveTarget = -1;
     private bool lastSecondaryVisible;
+    private string lastBalanceSource, formattedBalance;
 
     private void OnEnable()
     {
         nextRefresh = 0f;
         lastLevel = lastUserLevel = lastObjectiveTarget = -1;
         lastSecondaryVisible = false;
+        lastBalanceSource = formattedBalance = null;
     }
 
     private void LateUpdate()
@@ -79,7 +81,15 @@ public sealed class Framework2AppleNavigationPresenter : MonoBehaviour
         if (SourceProgressText != null)
         {
             if (ads) CopyText(AdCountText, SourceProgressText.text);
-            if (balance) CopyText(BalanceCountText, SourceProgressText.text);
+            if (balance)
+            {
+                if(lastBalanceSource != SourceProgressText.text)
+                {
+                    lastBalanceSource = SourceProgressText.text;
+                    formattedBalance = lastBalanceSource.Replace("/", " / ");
+                }
+                CopyText(BalanceCountText, formattedBalance);
+            }
         }
         if (balance && SourcePercentText != null) CopyText(BalancePercentText, SourcePercentText.text);
         bool secondary = SecondaryCurrencyRoot != null && SecondaryCurrencyRoot.activeSelf;

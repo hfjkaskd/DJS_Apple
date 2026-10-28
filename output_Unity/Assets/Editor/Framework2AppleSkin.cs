@@ -32,7 +32,7 @@ public static partial class Framework2AppleSkin
         if (Hash(Config) != ExpectedConfigHash) throw new InvalidOperationException("Source product rules changed before skin authoring.");
         string originalHost = "Assets/Resources/EarningVariants/EarningVariantController.prefab";
         string originalHash = Hash(originalHost);
-        ImportArt(); ImportReferenceArt(); Framework2ReferenceLayoutAudit.Begin();
+        ImportArt(); ImportReferenceArt(); ImportApprovedHud(); ImportApprovedHudGlyphs(); Framework2ReferenceLayoutAudit.Begin();
         string[] names = {
             "GamePlayerView", "WithDraw", "WithDrawmethod", "WithDrawConfirm", "WithDrawQues", "WithDrawProcess1",
             "WithDrawHistory", "PayPalErrorView", "WithdrawMissionView", "WithdrawFeedbackView", "SlotView", "ProgressView",
@@ -66,6 +66,7 @@ public static partial class Framework2AppleSkin
                 ApplyReferenceAlignment(root, name);
                 AuthorReferenceProfiles(root,name);
                 FinalizePrefab(root); RefFinish(root); AlignReferenceIllustrations(root,name);
+                if(name=="GamePlayerView")ApplyApprovedHudArtwork(root);
                 if(stretch)rootRect.sizeDelta=savedSize;
                 PrefabUtility.SaveAsPrefabAsset(root, path);
                 paths.Add(path);

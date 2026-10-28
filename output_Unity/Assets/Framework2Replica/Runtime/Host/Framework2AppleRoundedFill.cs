@@ -7,6 +7,8 @@ using UnityEngine.Sprites;
 [RequireComponent(typeof(Image))]
 public sealed class Framework2AppleRoundedFill : BaseMeshEffect
 {
+    [SerializeField] private bool minimumVisibleCap;
+    public void ConfigureMinimumCap(bool value) { minimumVisibleCap = value; graphic.SetVerticesDirty(); }
     private Image source;
     protected override void OnEnable() { source = GetComponent<Image>(); base.OnEnable(); }
     public override void ModifyMesh(VertexHelper vh)
@@ -18,6 +20,9 @@ public sealed class Framework2AppleRoundedFill : BaseMeshEffect
         if (amount <= 0) return;
         Rect bounds = source.GetPixelAdjustedRect();
         float width = bounds.width * amount;
+        // A small positive amount retains the approved end-cap diameter. The
+        // underlying fillAmount and the numeric progress are never changed.
+        if (minimumVisibleCap) width = Mathf.Min(bounds.width, Mathf.Max(bounds.height, width));
         float height = Mathf.Min(bounds.height, width);
         float left = source.fillOrigin == 1 ? bounds.xMax - width : bounds.xMin;
         float bottom = bounds.center.y - height * .5f;

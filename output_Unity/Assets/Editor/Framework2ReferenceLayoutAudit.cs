@@ -23,6 +23,7 @@ public static class Framework2ReferenceLayoutAudit
     static Document document;
     static string variant;
     public static void Begin() { document=new Document(); }
+    public static void BeginExisting() { document=Read(); variant=null; }
     public static void Variant(string value) { variant=value; }
     public static void Record(GameObject root,string path,Rect phone,Rect reference)
     {
