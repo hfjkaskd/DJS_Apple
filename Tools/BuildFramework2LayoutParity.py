@@ -68,6 +68,8 @@ def main():
     </style><header><h1>框架2 · 面板比例、位置和间距核对</h1><p>确认稿、上一版、本次原生运行图、本次参考画幅运行图。两种画幅均由同一批真实 Prefab 渲染，未把截图拉伸成效果图。</p><p>蓝线为标定边界，红线为运行时测得边界。数值用于确认布局映射没有被脚本或布局组件覆盖；不代表字体、游戏场景和所有美术像素完全相同。不同阶段和地区使用保存在 Prefab 中的布局配置。</p><p><a href="ActualCaptures/capture-manifest.json">运行与测量记录</a> · <a href="reference-layout.json">确认稿边界标定</a></p><input id="search" placeholder="搜索页面编号或名称"> <label><input type="checkbox" id="bounds" style="width:auto">显示控件边界</label></header><main>'''
     tail='''</main><script>document.querySelector('#search').oninput=e=>document.querySelectorAll('section').forEach(s=>s.hidden=!s.dataset.search.toLowerCase().includes(e.target.value.toLowerCase()));document.querySelector('#bounds').onchange=e=>document.body.classList.toggle('show-bounds',e.target.checked);</script></html>'''
     document=(header+'\n'.join(sections)+tail).replace('src="ActualCaptures/','src="'+CAPTURES+'/').replace('href="ActualCaptures/','href="'+CAPTURES+'/')
+    if (BASE/"ReskinHudParity-20261027/index.html").exists():
+        document=document.replace('<header>','<header><p style="padding:9px;background:#fff1c5;border:1px solid #d8b357"><b>顶部 HUD 已再次更新。</b> 本页保留上一轮全页截图；<a href="../ReskinHudParity-20261027/index.html">查看最新确认稿与运行图对比</a>。</p>',1)
     (OUT/"index.html").write_text(document,encoding="utf-8")
     # A compact, two-column delivery page; only HTML cropping, no altered PNGs.
     item=actual[7];x,y,w,h=PHONES[7];scale=330/w
