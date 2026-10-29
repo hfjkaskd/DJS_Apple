@@ -29,7 +29,7 @@
 
 重建：先运行 `Tools/ImportNutWithdrawal.py`，再执行 Unity 菜单 `Tools/Withdrawal/Build Imported Flow`。导入会覆盖对应页面；保留人工绑定时使用 `--preserve-panels`。运行时不依赖源导出目录。
 
-UI 构建完成后，在仓库根目录运行 `python Tools/MinimizeWithdrawalHudPatch.py`。该工具以 `9ab6eb0` 的原文为基线，保留 `Home.prefab` 与 `CorePlayUI.prefab` 原有 YAML 文本、文档顺序和布局参数，仅追加当前提现 HUD 的 PrefabInstance、stripped RectTransform 及根节点子引用，消除 Unity 保存产生的全文件重排。可重复执行；追加 `--check` 只检查是否已最小化。
+UI 构建完成后，在仓库根目录运行 `python Tools/MinimizeWithdrawalHudPatch.py`。该工具以 `9ab6eb0` 的原文为基线，保留 `CorePlayUI.prefab` 原有 YAML 文本、文档顺序和布局参数，仅追加当前提现 HUD 的 PrefabInstance、stripped RectTransform 及根节点子引用，消除 Unity 保存产生的全文件重排。可重复执行；追加 `--check` 只检查是否已最小化。
 
 ## 验证
 
@@ -39,4 +39,4 @@ UI 构建完成后，在仓库根目录运行 `python Tools/MinimizeWithdrawalHu
 
 2026-09-16 验证结果：10 项核心测试通过；主工程 Unity 批处理编译通过，最后的 UI 代码也使用主工程实际程序集引用编译通过。11 个页面在 1080×1920 和 1080×2340 下渲染，包含记录列表首尾共 24 张图，使用明确的合成样例覆盖长条件、大金额和终态文案，缺失引用、字体、绑定和文本溢出均为 0。钱包、规则和返回入口已在主工程 Play 中点验；完整状态转换由核心测试验证，未进行 Android/iOS 真机验收。
 
-入口：首页的现金／钻石栏；关卡内左下角带 TEST 标签的钱图标。关卡入口与水果、篮子、道具区域的静态坐标已核对。修改后退出并重新进入 Play，加载最终 Prefab 布局。
+入口：仅保留关卡内左下角带 TEST 标签的钱图标；首页现金／钻石测试栏与 ADS 按钮已移除。关卡入口与水果、篮子、道具区域的静态坐标已核对。修改后退出并重新进入 Play，加载最终 Prefab 布局。

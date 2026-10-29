@@ -12,9 +12,6 @@ public class HomeUI : BaseUI
 	private CommonCoinBtn m_CommonCoinBtn;
 
 	[SerializeField]
-	private GameObject m_NoADBtn;
-
-	[SerializeField]
 	private GameObject m_PlayBtn;
 
 	[SerializeField]
@@ -34,10 +31,6 @@ public class HomeUI : BaseUI
 		if (m_SettingBtn != null)
 		{
 			MCCIJBJGMCK.Get(m_SettingBtn).onClick = OnSettingBtnClick;
-		}
-		if (m_NoADBtn != null)
-		{
-			MCCIJBJGMCK.Get(m_NoADBtn).onClick = OnNoADBtnClick;
 		}
 		if (m_PlayBtn != null)
 		{
@@ -60,7 +53,6 @@ public class HomeUI : BaseUI
 	protected override void BeforeOpen()
 	{
 		RefreshPlayBtnState();
-		RefreshADBtnState();
 		if (m_CommonCoinBtn != null)
 		{
 			m_CommonCoinBtn.AddCurCommonCoinBtn();
@@ -82,11 +74,6 @@ public class HomeUI : BaseUI
 	private void OnSettingBtnClick(GameObject obj)
 	{
 		MgrUI.Instance.Open("pops/setting/HomeSettingUI");
-	}
-
-	private void OnNoADBtnClick(GameObject InGameObject)
-	{
-		MgrUI.Instance.Open("pops/removead/RemoveADUI");
 	}
 
 	private void OnPlayBtnClick(GameObject obj)
@@ -131,14 +118,6 @@ public class HomeUI : BaseUI
 		if (m_PlayBtnSuperHard != null)
 		{
 			m_PlayBtnSuperHard.SetActive(false);
-		}
-	}
-
-	private void RefreshADBtnState()
-	{
-		if (m_NoADBtn != null)
-		{
-			m_NoADBtn.SetActive(true);
 		}
 	}
 

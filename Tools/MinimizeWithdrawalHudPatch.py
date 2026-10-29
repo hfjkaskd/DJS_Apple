@@ -17,7 +17,6 @@ import subprocess
 
 REPOSITORY = Path(__file__).resolve().parents[1]
 PREFABS = (
-    "output_Unity/Assets/res/local/home/Home.prefab",
     "output_Unity/Assets/res/local/coreplay/CorePlayUI.prefab",
 )
 HUD = "output_Unity/Assets/res/local/withdrawal/WithdrawalHud.prefab"

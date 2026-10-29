@@ -328,7 +328,7 @@ public static class WithdrawalUIAuthoring
         hud.Rewards = Text("RewardCount", hr, 235, -121, 440, 42, "Rewards", 27);
         var label = Text("TestLabel", hr, -265, -121, 400, 42, "TEST / NO CASH VALUE", 26); label.color = Color.white;
         GameObject hudPrefab = PrefabUtility.SaveAsPrefabAsset(hudGo, "Assets/res/local/withdrawal/WithdrawalHud.prefab"); Object.DestroyImmediate(hudGo);
-        AttachHud("Assets/res/local/home/Home.prefab", hudPrefab); AttachHud("Assets/res/local/coreplay/CorePlayUI.prefab", hudPrefab);
+        AttachHud("Assets/res/local/coreplay/CorePlayUI.prefab", hudPrefab);
         var catalog = AssetDatabase.LoadAssetAtPath<GameResCatalog>("Assets/Resources/GameResCatalog.asset");
         catalog.entries.RemoveAll(e => e.key == "res/local/withdrawal/withdrawalhost");
         catalog.entries.Add(new GameResCatalog.Entry { key = "res/local/withdrawal/withdrawalhost", asset = hostPrefab });
